@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Periphery System",
+	"Description": "A periphery system for players to capture and interact with objects in the world, and logic for handling everything without complications",
+	"Category": "Base",
+	"CreatedBy": "Steve Erwin",
+	"CreatedByURL": "",
+	"DocsURL": "https://roninmo.github.io/PeripherySystem/",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "PeripherySystemComponent",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
