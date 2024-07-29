@@ -32,8 +32,8 @@ protected:
 	template<class T> T* GetMovementComp(void) const { return Cast<T>(GetMovementComponent()); }
 
 	/** Retrieves the advanced movement component */
-	// UFUNCTION(BlueprintCallable, Category="Movement", DisplayName="Get Character Movement Component")
-	// virtual UAdvancedMovementComponent* GetAdvancedCharacterMovementComponent() const;
+	UFUNCTION(BlueprintCallable, Category="Movement", DisplayName="Get Character Movement Component")
+	virtual UAdvancedMovementComponent* GetAdvancedCharacterMovementComponent() const;
 
 
 //-------------------------------------------------------------------------------------//

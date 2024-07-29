@@ -2,9 +2,10 @@
 
 
 #include "Sandbox/Characters/CharacterBase.h"
+#include "Sandbox/Characters/Components/Movement/AdvancedMovementComponent.h"
 
-ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
-	// : Super(ObjectInitializer.SetDefaultSubobjectClass<UAdvancedMovementComponent>(ACharacter::CharacterMovementComponentName))
+ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer.SetDefaultSubobjectClass<UAdvancedMovementComponent>(ACharacter::CharacterMovementComponentName))
 {
 	// Peripheries = CreateDefaultSubobject<UPlayerPeripheriesComponent>(TEXT("Peripheries"));
 	// Peripheries->GetPeripheryRadius()->SetupAttachment(RootComponent);
@@ -19,7 +20,7 @@ void ACharacterBase::BeginPlay()
 	Super::BeginPlay();
 }
 
-// UAdvancedMovementComponent* ACharacterBase::GetAdvancedCharacterMovementComponent() const
-// {
-// 	return GetMovementComp<UAdvancedMovementComponent>();
-// }
+UAdvancedMovementComponent* ACharacterBase::GetAdvancedCharacterMovementComponent() const
+{
+	return GetMovementComp<UAdvancedMovementComponent>();
+}
