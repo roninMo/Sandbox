@@ -6,6 +6,9 @@
 #include "GameFramework/Character.h"
 #include "CharacterBase.generated.h"
 
+class UAdvancedMovementComponent;
+
+
 UCLASS()
 class SANDBOX_API ACharacterBase : public ACharacter
 {
