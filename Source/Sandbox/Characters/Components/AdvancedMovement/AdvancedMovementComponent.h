@@ -7,7 +7,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "AdvancedMovementComponent.generated.h"
 
-DECLARE_LOG_CATEGORY_EXTERN(MovementLog, Log, All);
+DECLARE_LOG_CATEGORY_EXTERN(Movement, Log, All);
 
 // CMC network breakdown
 // First in tick the perform move function is called, which executes all the movement logic
@@ -75,7 +75,7 @@ You will also need to extend FCharacterNetworkMoveDataContainer so that it can s
 // FSavedMove_Character
 * Stores a bunch of information about where you were when you started and ended moving, and the physics and acceleration information
 * The breakdown of how this is used is this:
-	* the ClienData creates a new saved move
+	* the Client Data creates a new saved move
 	* It records the movement
 	* If multiple movements are close to the same then it combines multiple of these movements before sending it to the server
 	* It then calls PerformMovement, which is what the server does immediately
@@ -982,8 +982,7 @@ public:
 	{
 	public:
 		typedef FCharacterNetworkMoveData Super;
-		FVector MoveData_Time;
-		FVector_NetQuantize10 MoveData_Input;
+		FVector MoveData_InputAndTime;
 		
 		virtual void ClientFillNetworkMoveData(const FSavedMove_Character& ClientMove, ENetworkMoveType MoveType) override;
 		virtual bool Serialize(UCharacterMovementComponent& CharacterMovement, FArchive& Ar, UPackageMap* PackageMap, ENetworkMoveType MoveType) override;
@@ -1032,7 +1031,7 @@ public:
 			
 			// Custom saved move information and Other values values we want to pass across the network
 			float Time;
-			FVector PlayerInput;
+			FVector2D PlayerInput;
 		
 			// Without customizing the movement component these are the remaining flags for creating new functionality
 			uint8 SavedRequestToStartWallJumping : 1;
@@ -1069,7 +1068,7 @@ public:
 	FMCharacterNetworkMoveDataContainer CustomMoveDataContainer;
 
 	// Custom movement information
-	UPROPERTY(BlueprintReadWrite) FVector PlayerInput; // VelocityOriented input values (Acceleration)
+	UPROPERTY(BlueprintReadWrite) FVector2D PlayerInput; // VelocityOriented input values (Acceleration)
 	UPROPERTY(BlueprintReadWrite) uint8 WallJumpPressed : 1;
 	UPROPERTY(BlueprintReadWrite) uint8 AimPressed : 1;
 	UPROPERTY(BlueprintReadWrite) uint8 Mantling : 1;
@@ -1092,7 +1091,7 @@ public:
 	UFUNCTION(BlueprintCallable) void StartAiming();
 	UFUNCTION(BlueprintCallable) void StopAiming();
 
-	UFUNCTION(BlueprintCallable) void UpdatePlayerInput(const FVector& InputVector);
+	UFUNCTION(BlueprintCallable) void UpdatePlayerInput(const FVector2D& InputVector);
 	
 	UFUNCTION(BlueprintCallable) void StartWallJump();
 	UFUNCTION(BlueprintCallable) void StopWallJump();
@@ -1155,7 +1154,7 @@ public:
 	virtual void UpdateExternalMovementModeInformation(EMovementMode& MovementModeRef, uint8& CustomMovementModeRef);
 	
 	/** Returns the player's current input */
-	UFUNCTION(BlueprintCallable) virtual FVector GetPlayerInput() const;
+	UFUNCTION(BlueprintCallable) virtual FVector2D GetPlayerInput() const;
 
 	/** Returns the movement mode */
 	UFUNCTION(BlueprintCallable) virtual EMovementMode GetMovementMode() const;
@@ -1199,7 +1198,7 @@ public:
 	virtual void DebugGroundMovement(FString Message, FColor Color, bool DrawSphere = false);
 
 	/** Prints the input direction as a string for help with sensemaking of gaining momentum during strafing */
-	FString GetMovementDirection(const FVector& InputVector) const;
+	FString GetMovementDirection(const FVector2D& InputVector) const;
 
 	
 };

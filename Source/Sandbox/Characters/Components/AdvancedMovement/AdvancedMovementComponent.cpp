@@ -7,7 +7,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Logging/StructuredLog.h"
-DEFINE_LOG_CATEGORY(MovementLog);
+DEFINE_LOG_CATEGORY(Movement);
 
 namespace CharacterMovementConstants // @ref 5.4
 {
@@ -260,9 +260,6 @@ void UAdvancedMovementComponent::UpdateCharacterStateBeforeMovement(const float 
 		Time = GetWorld()->GetTimeSeconds(); // TODO: after a duration, have the server (uses the client's) and client time be in sync with each other and prevent cheating on the client side
 	}
 
-	// TODO: Fix this, I don't want to add extra input actions though. They do not update values if you don't enter a value, but this is already handled when they convert input into acceleration before sending it to the server
-	if (Acceleration.Equals(FVector::ZeroVector, 0.01)) PlayerInput = FVector::ZeroVector;
-
 	// Handle Strafe sway duration
 	if (IsStrafeSwaying() && StrafeSwayStartTime + StrafeSwayDuration <= Time)
 	{
@@ -277,12 +274,13 @@ void UAdvancedMovementComponent::UpdateCharacterStateBeforeMovement(const float 
 
 	if (bDebugNetworkReplication)
 	{
-		UE_LOGFMT(MovementLog, Log, "{0}::{1} -> WallJump {2}, AirStrafe: {3}, Sprinting: {4}, Mantling: {5}",
-			CharacterOwner->HasAuthority() ? "Server" : "Client", *GetNameSafe(CharacterOwner),
-			WallJumpPressed ? "true" : "false",
-			AirStrafeSwayPhysics ? "true" : "false",
+		UE_LOGFMT(Movement, Log, "{0}::{1} -> Time: ({2}), PlayerInput: ({3}) Sprinting: ({4}), WallJumping: ({5})",
+			CharacterOwner->HasAuthority() ? "Server" : "Client",
+			*GetNameSafe(CharacterOwner),
+			*FString::SanitizeFloat(Time),
+			*PlayerInput.ToString(),
 			SprintPressed ? "true" : "false",
-			Mantling ? "true" : "false"
+			WallJumpPressed ? "true" : "false"
 		);
 	}
 }
@@ -293,7 +291,7 @@ void UAdvancedMovementComponent::OnMovementModeChanged(EMovementMode PreviousMov
 	Super::OnMovementModeChanged(PreviousMovementMode, PreviousCustomMode);
 	if (bDebugMovementMode)
 	{
-		UE_LOGFMT(MovementLog, Warning, "{0}: Movement Mode Updated: {1}, previous movement mode: {2}",
+		UE_LOGFMT(Movement, Warning, "{0}: Movement Mode Updated: {1}, previous movement mode: {2}",
 			*GetNameSafe(CharacterOwner),
 			*UEnum::GetValueAsString(MovementMode), 
 			*UEnum::GetValueAsString(PreviousMovementMode)
@@ -418,7 +416,7 @@ void UAdvancedMovementComponent::PhysFalling(float deltaTime, int32 Iterations)
 		float timeTick = GetSimulationTimeStep(remainingTime, Iterations);
 		remainingTime -= timeTick;
 
-		// UE_LOGFMT(MovementLog, Log, "{0} Physics(Falling): {2}", CharacterOwner->HasAuthority() ? "Server" : "Client", Time);
+		// UE_LOGFMT(Movement, Log, "{0} Physics(Falling): {2}", CharacterOwner->HasAuthority() ? "Server" : "Client", Time);
 		
 		// save the current values
 		const FVector OldLocation = UpdatedComponent->GetComponentLocation();
@@ -555,7 +553,7 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 			
 			if (bDebugWallClimb)
 			{
-				UE_LOGFMT(MovementLog, Log, "{0}::WallClimb ({1}) ->  ({2})({3}) Adjusted: ({4}), Vel: ({5}), WallClimbVector: ({6}), PlayerInput: ({7}), Speed: ({8}), Acceleration: ({9}), Multiplier: ({10})",
+				UE_LOGFMT(Movement, Log, "{0}::WallClimb ({1}) ->  ({2})({3}) Adjusted: ({4}), Vel: ({5}), WallClimbVector: ({6}), PlayerInput: ({7}), Speed: ({8}), Acceleration: ({9}), Multiplier: ({10})",
 					CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"),
 					*FString::SanitizeFloat(WallClimbStartTime + WallClimbDuration - Time),
 					*FString::SanitizeFloat(Angle),
@@ -625,7 +623,7 @@ void UAdvancedMovementComponent::PhysMantling(float deltaTime, int32 Iterations)
 			
 			if (bDebugMantle)
 			{
-				UE_LOGFMT(MovementLog, Log, "{0}::Mantling ({1}) ->  ({2})({3}) Mantle/Location: ({4})({5}), Vector/Adjusted: ({6})({7}), Speed: ({8})",
+				UE_LOGFMT(Movement, Log, "{0}::Mantling ({1}) ->  ({2})({3}) Mantle/Location: ({4})({5}), Vector/Adjusted: ({6})({7}), Speed: ({8})",
 					CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"),
 					*FString::SanitizeFloat(Time - MantleStartTime),
 					*GetMovementDirection(PlayerInput),
@@ -692,7 +690,7 @@ void UAdvancedMovementComponent::PhysLedgeClimbing(float deltaTime, int32 Iterat
 			
 			if (bDebugLedgeClimb)
 			{
-				UE_LOGFMT(MovementLog, Log, "{0}::LedgeClimbing ({1}) ->  ({2})({3}) Ledge/Location: ({4})({5}), Vector/Adjusted: ({6})({7}), Speed: ({8})",
+				UE_LOGFMT(Movement, Log, "{0}::LedgeClimbing ({1}) ->  ({2})({3}) Ledge/Location: ({4})({5}), Vector/Adjusted: ({6})({7}), Speed: ({8})",
 					CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"),
 					*FString::SanitizeFloat(Time - LedgeClimbStartTime),
 					*GetMovementDirection(PlayerInput),
@@ -844,7 +842,7 @@ void UAdvancedMovementComponent::PhysWallRunning(float deltaTime, int32 Iteratio
 			if (bDebugWallRunning)
 			{
 				float AddedSpeed = Adjusted.Size2D();
-				UE_LOGFMT(MovementLog, Log, "{0}::WallRunning ({1}) ->  ({2})({3}) Adjusted: ({4}), Vel: ({5}), WallRunVector: ({6}), PlayerInput: ({7}), Angle: ({8}), SpeedCap: {9}, WallRunMultiplier: ({10})",
+				UE_LOGFMT(Movement, Log, "{0}::WallRunning ({1}) ->  ({2})({3}) Adjusted: ({4}), Vel: ({5}), WallRunVector: ({6}), PlayerInput: ({7}), Angle: ({8}), SpeedCap: {9}, WallRunMultiplier: ({10})",
 					CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"), *FString::SanitizeFloat(WallRunStartTime + WallRunDuration - Time),
 					WallRunNormal.Dot(UpdatedComponent->GetRightVector()) < 0 ? *FString("L") : *FString("R"),
 					*FString::SanitizeFloat(AddedSpeed),
@@ -980,7 +978,7 @@ void UAdvancedMovementComponent::CalcVelocity(float DeltaTime, float Friction, b
 		
 		float Duration = 0;
 		if (BaseCharacter->IsLocallyControlled()) Duration = PrevWallJumpTime + StrafeSwayDuration - Time;
-		UE_LOGFMT(MovementLog, Log, "({0}) Strafe Sway ->  ({1}) Vel: ({2}), AccelDir: ({3}), Input: ({4}), Rotation: ({5}), Adjusted: ({6})",
+		UE_LOGFMT(Movement, Log, "({0}) Strafe Sway ->  ({1}) Vel: ({2}), AccelDir: ({3}), Input: ({4}), Rotation: ({5}), Adjusted: ({6})",
 			Duration, *GetMovementDirection(Input), *Velocity.GetSafeNormal2D().ToString(), *AccelDir.ToString(), *Input.ToString(), *UpdatedComponent->GetComponentRotation().ToString(), *MovementVelocity.ToString());
 		*/
 	}
@@ -1018,7 +1016,7 @@ void UAdvancedMovementComponent::CalcVelocity(float DeltaTime, float Friction, b
 		float PrevSpeed = OldVelocity.Size2D();
 		float Speed = Velocity.Size2D();
 		// Velocity/AccelDir // Speed (+/- Adjusted) // Cap / AccelMultiplier
-		UE_LOGFMT(MovementLog, Log, "{0}::{1} ({2}) ->  ({3})({4}) Vel/AccelDir: ({5})({6}) Speed: ({7})({8}), Cap: ({9}), AccelMultiplier: ({10})",
+		UE_LOGFMT(Movement, Log, "{0}::{1} ({2}) ->  ({3})({4}) Vel/AccelDir: ({5})({6}) Speed: ({7})({8}), Cap: ({9}), AccelMultiplier: ({10})",
 			CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"),
 			IsStrafeSwaying() ? *FString("StrafeSway") : FString("AirStrafe"),
 			IsStrafeSwaying() ? *FString::SanitizeFloat(StrafeSwayStartTime + StrafeSwayDuration - Time) : *FString(""),
@@ -1072,7 +1070,7 @@ void UAdvancedMovementComponent::HandleFallingFunctionality(float deltaTime, flo
 	
 	// Apply gravity
 	Velocity = NewFallVelocity(Velocity, Gravity, GravityTime);
-	// UE_LOG(MovementLog, Log, TEXT("dt=(%.6f) OldLocation=(%s) OldVelocity=(%s) OldVelocityWithRootMotion=(%s) NewVelocity=(%s)"), timeTick, *(UpdatedComponent->GetComponentLocation()).ToString(), *OldVelocity.ToString(), *OldVelocityWithRootMotion.ToString(), *Velocity.ToString());
+	// UE_LOG(Movement, Log, TEXT("dt=(%.6f) OldLocation=(%s) OldVelocity=(%s) OldVelocityWithRootMotion=(%s) NewVelocity=(%s)"), timeTick, *(UpdatedComponent->GetComponentLocation()).ToString(), *OldVelocity.ToString(), *OldVelocityWithRootMotion.ToString(), *Velocity.ToString());
 
 	// Root motion and friction
 	ApplyRootMotionToVelocity(timeTick);
@@ -1499,7 +1497,7 @@ void UAdvancedMovementComponent::CalculateMantleJumpTrajectory(const FVector2D S
 
 	if (bDebugMantleJump)
 	{
-		UE_LOGFMT(MovementLog, Warning, "{0}::MantleJump ({1}) ->  ({2})({3}) Initial/Vel: ({4})({5}), AdditionalVelocity: ({6})",
+		UE_LOGFMT(Movement, Warning, "{0}::MantleJump ({1}) ->  ({2})({3}) Initial/Vel: ({4})({5}), AdditionalVelocity: ({6})",
 			CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"),
 			*FString::SanitizeFloat(Time),
 			*GetMovementDirection(PlayerInput),
@@ -1605,7 +1603,7 @@ void UAdvancedMovementComponent::CalculateWallJumpTrajectory(float DeltaTime, in
 			DebugPrevLocation = FVector();
 		}
 		
-		UE_LOGFMT(MovementLog, Warning, "{0}::WallJump ({1}) ->  ({2})({3}) Initial/Vel: ({4})({5}), Boost: ({6}), CapturedSpeed: ({7}), Wall/Prev Location: ({8})({9})",
+		UE_LOGFMT(Movement, Warning, "{0}::WallJump ({1}) ->  ({2})({3}) Initial/Vel: ({4})({5}), Boost: ({6}), CapturedSpeed: ({7}), Wall/Prev Location: ({8})({9})",
 			CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"),
 			*PrevState,
 			*GetMovementDirection(PlayerInput),
@@ -1679,7 +1677,7 @@ void UAdvancedMovementComponent::BaseSlidingFunctionality(float deltaTime, int32
 
 		if (bDebugSlide)
 		{
-			UE_LOGFMT(MovementLog, Warning, "SlopeAngle: {0}, Friction: {1}", SlopeAngle, SlidingFriction - SlopeAngle);
+			UE_LOGFMT(Movement, Warning, "SlopeAngle: {0}, Friction: {1}", SlopeAngle, SlidingFriction - SlopeAngle);
 		}
 	}
 }
@@ -1707,7 +1705,7 @@ void UAdvancedMovementComponent::GroundMovementPhysics(float deltaTime, int32 It
 		const float timeTick = GetSimulationTimeStep(remainingTime, Iterations);
 		remainingTime -= timeTick;
 
-		// UE_LOGFMT(MovementLog, Log, "{0} Physics(Walking): {2}", CharacterOwner->HasAuthority() ? "Server" : "Client", Time);
+		// UE_LOGFMT(Movement, Log, "{0} Physics(Walking): {2}", CharacterOwner->HasAuthority() ? "Server" : "Client", Time);
 		
 		// Save current values
 		UPrimitiveComponent* const OldBase = GetMovementBase();
@@ -2247,8 +2245,8 @@ void UAdvancedMovementComponent::MoveAutonomous(float ClientTimeStamp, float Del
 	FMCharacterNetworkMoveData* MoveData = static_cast<FMCharacterNetworkMoveData*>(GetCurrentNetworkMoveData());
 	if (MoveData)
 	{
-		PlayerInput = MoveData->MoveData_Input;
-		Time = MoveData->MoveData_Time.X;
+		PlayerInput = FVector2D(MoveData->MoveData_InputAndTime.X, MoveData->MoveData_InputAndTime.Y);
+		Time = MoveData->MoveData_InputAndTime.Z;
 	}
 	
 	Super::MoveAutonomous(ClientTimeStamp, DeltaTime, CompressedFlags, NewAccel);
@@ -2272,8 +2270,7 @@ void UAdvancedMovementComponent::FMCharacterNetworkMoveData::ClientFillNetworkMo
 {
 	Super::ClientFillNetworkMoveData(ClientMove, MoveType);
 	const FMSavedMove& SavedMove = static_cast<const FMSavedMove&>(ClientMove);
-	MoveData_Input = SavedMove.PlayerInput;
-	MoveData_Time = FVector_NetQuantize10(SavedMove.Time, 0, 0);
+	MoveData_InputAndTime = FVector(SavedMove.PlayerInput.X, SavedMove.PlayerInput.Y, SavedMove.Time);
 }
 
 
@@ -2295,7 +2292,7 @@ void UAdvancedMovementComponent::FMSavedMove::Clear()
 	SavedRequestToStartAiming = 0;
 	SavedRequestToStartMantling = 0;
 	SavedRequestToStartSprinting = 0;
-	PlayerInput = FVector::ZeroVector;
+	PlayerInput = FVector2D::ZeroVector;
 }
 
 
@@ -2321,8 +2318,7 @@ bool UAdvancedMovementComponent::FMCharacterNetworkMoveData::Serialize(UCharacte
 	bool bLocalSuccess = true;
 
 	// Save move values
-	MoveData_Time.NetSerialize(Ar, PackageMap, bLocalSuccess); // TODO: Learn how to serialize things
-	SerializeOptionalValue<FVector_NetQuantize10>(bIsSaving, Ar, MoveData_Input, FVector_NetQuantize10::ZeroVector);
+	MoveData_InputAndTime.NetSerialize(Ar, PackageMap, bLocalSuccess); // TODO: Learn how to serialize things
 	
 	return !Ar.IsError();
 }
@@ -2409,7 +2405,7 @@ void UAdvancedMovementComponent::StartSprinting() { SprintPressed = true; }
 void UAdvancedMovementComponent::StopSprinting() { SprintPressed = false; }
 void UAdvancedMovementComponent::StartAiming() { AimPressed = true; }
 void UAdvancedMovementComponent::StopAiming() { AimPressed = false; }
-void UAdvancedMovementComponent::UpdatePlayerInput(const FVector& InputVector) { PlayerInput = InputVector; }
+void UAdvancedMovementComponent::UpdatePlayerInput(const FVector2D& InputVector) { PlayerInput = InputVector; }
 void UAdvancedMovementComponent::StartWallJump() { WallJumpPressed = true; }
 void UAdvancedMovementComponent::StopWallJump() { WallJumpPressed = false; }
 void UAdvancedMovementComponent::DisableStrafeSwayPhysics() { AirStrafeSwayPhysics = false; }
@@ -2447,11 +2443,11 @@ bool UAdvancedMovementComponent::DoJump(bool bReplayingMoves)
 				float ForwardVelocity = GetMaxSpeed() / FVector::DotProduct(Velocity, UpdatedComponent->GetForwardVector());
 				const FVector ForwardVector = UpdatedComponent->GetForwardVector() * SlideJumpSpeed;
 				Velocity += ForwardVector;
-				//UE_LOG(MovementLog, Warning, TEXT("%s() %s: Slide Jump Calculations, MaxSpeed: %f, ForwardVelocity: %f, ForwardVector: %s, new Velocity: %s"), *FString(__FUNCTION__), *GetNameSafe(CharacterOwner), GetMaxSpeed(), ForwardVelocity, *ForwardVector.ToCompactString(), *Velocity.ToCompactString());
+				//UE_LOG(Movement, Warning, TEXT("%s() %s: Slide Jump Calculations, MaxSpeed: %f, ForwardVelocity: %f, ForwardVector: %s, new Velocity: %s"), *FString(__FUNCTION__), *GetNameSafe(CharacterOwner), GetMaxSpeed(), ForwardVelocity, *ForwardVector.ToCompactString(), *Velocity.ToCompactString());
 			}
 
 			Velocity.Z = FMath::Max<FVector::FReal>(Velocity.Z + 1.f, JumpZVelocity);
-			//UE_LOG(MovementLog, Warning, TEXT("%s() %s: Go, do a crime. new velocity: %s"), *FString(__FUNCTION__), *GetNameSafe(CharacterOwner), *Velocity.ToCompactString());
+			//UE_LOG(Movement, Warning, TEXT("%s() %s: Go, do a crime. new velocity: %s"), *FString(__FUNCTION__), *GetNameSafe(CharacterOwner), *Velocity.ToCompactString());
 			SetMovementMode(MOVE_Falling);
 			return true;
 		}
@@ -2782,7 +2778,7 @@ void UAdvancedMovementComponent::UpdateExternalMovementModeInformation(EMovement
 // Utility																		//
 //------------------------------------------------------------------------------//
 #pragma region Utility
-FVector UAdvancedMovementComponent::GetPlayerInput() const
+FVector2D UAdvancedMovementComponent::GetPlayerInput() const
 {
 	return PlayerInput;
 }
@@ -2874,7 +2870,7 @@ void UAdvancedMovementComponent::DebugGroundMovement(FString Message, FColor Col
 }
 
 
-FString UAdvancedMovementComponent::GetMovementDirection(const FVector& InputVector) const
+FString UAdvancedMovementComponent::GetMovementDirection(const FVector2D& InputVector) const
 {
 	const float Forwards = InputVector.X;
 	const float Sideways = InputVector.Y;
