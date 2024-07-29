@@ -7,6 +7,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "AdvancedMovementComponent.generated.h"
 
+DECLARE_LOG_CATEGORY_EXTERN(MovementLog, Log, All);
+
 // CMC network breakdown
 // First in tick the perform move function is called, which executes all the movement logic
 // Then it creates a saved move, and uses SetMoveFor to read the safe values and store them in the saved values
