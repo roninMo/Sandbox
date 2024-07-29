@@ -3,21 +3,19 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
-#include "CharacterBase.generated.h"
+#include "Sandbox/Characters/Components/Camera/CharacterCameraLogic.h"
+#include "PlayerCharacter.generated.h"
 
-class UAdvancedMovementComponent;
-
-/*
- * The universal class for characters, npc's, and enemies in the game
+/**
+ * 
  */
 UCLASS()
-class SANDBOX_API ACharacterBase : public ACharacter
+class SANDBOX_API APlayerCharacter : public ACharacterCameraLogic
 {
 	GENERATED_BODY()
-
+	
 public:
-	ACharacterBase(const FObjectInitializer& ObjectInitializer);
+	APlayerCharacter(const FObjectInitializer& ObjectInitializer);
 	
 //----------------------------------------------------------------------//
 // Initialization functions and components								//
@@ -30,14 +28,8 @@ protected:
 // Movement																			//
 //----------------------------------------------------------------------------------//
 protected:
-	/** Templated convenience version for retrieving the movement component. */
-	template<class T> T* GetMovementComp(void) const { return Cast<T>(GetMovementComponent()); }
 
-	/** Retrieves the advanced movement component */
-	UFUNCTION(BlueprintCallable, Category="Movement", DisplayName="Get Character Movement Component")
-	virtual UAdvancedMovementComponent* GetAdvancedCharacterMovementComponent() const;
-
-
+	
 //-------------------------------------------------------------------------------------//
 // Peripheries																		   //
 //-------------------------------------------------------------------------------------//

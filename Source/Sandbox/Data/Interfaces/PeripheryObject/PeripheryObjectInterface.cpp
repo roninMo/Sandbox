@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Sandbox/Data/Interfaces/PeripheryObjectInterface.h"
+#include "Sandbox/Data/Interfaces/PeripheryObject/PeripheryObjectInterface.h"
 
 // Add default functionality here for any IPeripheryObjectInterface functions that are not pure virtual.
 void IPeripheryObjectInterface::WithinPlayerRadiusPeriphery_Implementation(AActor* SourceCharacter, EPeripheryType PeripheryType)

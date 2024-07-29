@@ -3,7 +3,7 @@
 
 #include "CoreMinimal.h"
 #include "Sandbox/Data/Enums/MovementTypes.h"
-#include "Sandbox/Data/Structs//MovementInformation.h"
+#include "Sandbox/Data/Structs/MovementInformation.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "AdvancedMovementComponent.generated.h"
 

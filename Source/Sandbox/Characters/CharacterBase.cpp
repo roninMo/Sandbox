@@ -2,7 +2,7 @@
 
 
 #include "Sandbox/Characters/CharacterBase.h"
-#include "Sandbox/Characters/Components/Movement/AdvancedMovementComponent.h"
+#include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 
 ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.SetDefaultSubobjectClass<UAdvancedMovementComponent>(ACharacter::CharacterMovementComponentName))

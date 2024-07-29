@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Sandbox/Data/Interfaces/InventoryItemInterface.h"
+#include "Sandbox/Data/Interfaces/InventoryItem/InventoryItemInterface.h"
 
 // Add default functionality here for any IInventoryItemInterface functions that are not pure virtual.
 F_Item IInventoryItemInterface::GetItem_Implementation() const

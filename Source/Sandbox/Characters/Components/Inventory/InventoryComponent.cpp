@@ -4,8 +4,7 @@
 #include "Sandbox/Characters/Components/Inventory/InventoryComponent.h"
 
 #include "GameFramework/Character.h"
-#include "Sandbox/Data/Interfaces/InventoryInterface.h"
-#include "Sandbox/Data/Interfaces/InventoryItemInterface.h"
+#include "Sandbox/Data/Interfaces/InventoryItem/InventoryItemInterface.h"
 #include "Sandbox/World/Props/Items/ItemBase.h"
 #include "Engine/PackageMapClient.h"
 #include "Logging/StructuredLog.h"

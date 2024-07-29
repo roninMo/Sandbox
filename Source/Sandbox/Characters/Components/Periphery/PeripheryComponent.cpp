@@ -3,7 +3,7 @@
 
 #include "Sandbox/Characters/Components/Periphery/PeripheryComponent.h"
 
-#include "Sandbox/Data/Interfaces/PeripheryObjectInterface.h"
+#include "Sandbox/Data/Interfaces/PeripheryObject/PeripheryObjectInterface.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"

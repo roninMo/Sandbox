@@ -6,7 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "Sandbox/Data/Enums/InventoryTypes.h"
 #include "Sandbox/Data/Structs/InventoryInformation.h"
-#include "Sandbox/Data/Interfaces/InventoryInterface.h"
+#include "Sandbox/Data/Interfaces/Inventory/InventoryInterface.h"
 #include "InventoryComponent.generated.h"
 
 

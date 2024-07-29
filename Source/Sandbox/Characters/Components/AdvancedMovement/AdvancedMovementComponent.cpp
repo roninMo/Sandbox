@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Sandbox/Characters/Components/Movement/AdvancedMovementComponent.h"
+#include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 #include "GameFramework/Character.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/KismetMathLibrary.h"

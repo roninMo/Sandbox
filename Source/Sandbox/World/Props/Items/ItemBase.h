@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Sandbox/Data/Interfaces/InventoryItemInterface.h"
+#include "Sandbox/Data/Interfaces/InventoryItem/InventoryItemInterface.h"
 #include "ItemBase.generated.h"
 
 /*
