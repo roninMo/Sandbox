@@ -11,7 +11,7 @@
 APlayerCharacter::APlayerCharacter(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	Peripheries = CreateDefaultSubobject<UPlayerPeripheriesComponent>(TEXT("Peripheries"));
-	Peripheries->GetPeripheryRadius()->SetupAttachment(RootComponent);
+	Peripheries->GetPeripheryRadius()->SetupAttachment(RootComponent); 
 	Peripheries->GetItemDetection()->SetupAttachment(RootComponent);
 	Peripheries->GetPeripheryCone()->SetupAttachment(CameraArm);
 
