@@ -6,6 +6,9 @@
 #include "Sandbox/Characters/Components/Camera/CharacterCameraLogic.h"
 #include "PlayerCharacter.generated.h"
 
+class UPlayerPeripheriesComponent;
+
+
 /**
  * 
  */
@@ -34,8 +37,8 @@ protected:
 // Peripheries																		   //
 //-------------------------------------------------------------------------------------//
 protected:
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-	// TObjectPtr<UPlayerPeripheriesComponent> Peripheries;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	TObjectPtr<UPlayerPeripheriesComponent> Peripheries;
 
 	
 //-------------------------------------------------------------------------------------//
@@ -48,8 +51,6 @@ protected:
 // Inventory																		//
 //----------------------------------------------------------------------------------//
 protected:
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-	// TObjectPtr<UInventoryComponent> Inventory;
 	
 	
 //-------------------------------------------------------------------------------------//

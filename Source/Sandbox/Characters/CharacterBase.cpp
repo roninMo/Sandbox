@@ -4,21 +4,17 @@
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 
+
 ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.SetDefaultSubobjectClass<UAdvancedMovementComponent>(ACharacter::CharacterMovementComponentName))
 {
-	// Peripheries = CreateDefaultSubobject<UPlayerPeripheriesComponent>(TEXT("Peripheries"));
-	// Peripheries->GetPeripheryRadius()->SetupAttachment(RootComponent);
-	// Peripheries->GetItemDetection()->SetupAttachment(RootComponent);
-	// Peripheries->GetPeripheryCone()->SetupAttachment(CameraArm);
-	//
-	// Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
 }
 
 void ACharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
 }
+
 
 UAdvancedMovementComponent* ACharacterBase::GetAdvancedCharacterMovementComponent() const
 {

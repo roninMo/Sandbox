@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "CharacterBase.generated.h"
 
+class UInventoryComponent;
 class UAdvancedMovementComponent;
 
 /*
@@ -42,8 +43,6 @@ protected:
 // Peripheries																		   //
 //-------------------------------------------------------------------------------------//
 protected:
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-	// TObjectPtr<UPlayerPeripheriesComponent> Peripheries;
 
 	
 //-------------------------------------------------------------------------------------//
@@ -56,8 +55,8 @@ protected:
 // Inventory																		//
 //----------------------------------------------------------------------------------//
 protected:
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-	// TObjectPtr<UInventoryComponent> Inventory;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	TObjectPtr<UInventoryComponent> Inventory;
 	
 	
 //-------------------------------------------------------------------------------------//

@@ -6,6 +6,7 @@
 #include "Sandbox/Data/Interfaces/PeripheryObject/PeripheryObjectInterface.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Logging/StructuredLog.h"
 
@@ -29,12 +30,11 @@ UPlayerPeripheriesComponent::UPlayerPeripheriesComponent(const FObjectInitialize
 	PeripheryRadius->SetCastHiddenShadow(false);
 
 	PeripheryRadius->SetGenerateOverlapEvents(true);
-	PeripheryRadius->SetCollisionObjectType(PeripheryRadiusChannel);
+	PeripheryRadius->SetCollisionObjectType(ECC_GameTraceChannel1);
 	PeripheryRadius->SetCollisionResponseToAllChannels(ECR_Ignore);
 	PeripheryRadius->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	PeripheryRadius->SetCollisionResponseToChannel(ECC_WorldDynamic, ECollisionResponse::ECR_Overlap);
 	PeripheryRadius->SetCollisionResponseToChannel(ECC_Pawn, ECollisionResponse::ECR_Overlap);
-	PeripheryRadius->SetCollisionResponseToChannel(PeripheryRadiusChannel, ECollisionResponse::ECR_Overlap);
 
 	PeripheryCone = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Periphery Cone"));
 	// PeripheryCone->SetupAttachment(GetOwner()->GetRootComponent());
@@ -43,12 +43,11 @@ UPlayerPeripheriesComponent::UPlayerPeripheriesComponent(const FObjectInitialize
 	PeripheryCone->SetCastHiddenShadow(false);
 	
 	PeripheryCone->SetGenerateOverlapEvents(true);
-	PeripheryCone->SetCollisionObjectType(PeripheryConeChannel);
+	PeripheryCone->SetCollisionObjectType(ECC_GameTraceChannel1);
 	PeripheryCone->SetCollisionResponseToAllChannels(ECR_Ignore);
 	PeripheryCone->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	PeripheryCone->SetCollisionResponseToChannel(ECC_WorldDynamic, ECollisionResponse::ECR_Overlap);
 	PeripheryCone->SetCollisionResponseToChannel(ECC_Pawn, ECollisionResponse::ECR_Overlap);
-	PeripheryCone->SetCollisionResponseToChannel(PeripheryConeChannel, ECollisionResponse::ECR_Overlap);
 
 	ItemDetection = CreateDefaultSubobject<USphereComponent>(TEXT("Item Detection"));
 	// ItemDetection->SetupAttachment(GetOwner()->GetRootComponent());
@@ -57,11 +56,10 @@ UPlayerPeripheriesComponent::UPlayerPeripheriesComponent(const FObjectInitialize
 	ItemDetection->SetCastHiddenShadow(false);
 
 	ItemDetection->SetGenerateOverlapEvents(true);
-	ItemDetection->SetCollisionObjectType(ItemDetectionChannel);
+	ItemDetection->SetCollisionObjectType(ECC_GameTraceChannel1);
 	ItemDetection->SetCollisionResponseToChannels(ECR_Ignore);
 	ItemDetection->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	ItemDetection->SetCollisionResponseToChannel(ECC_WorldDynamic, ECollisionResponse::ECR_Overlap);
-	ItemDetection->SetCollisionResponseToChannel(ItemDetectionChannel, ECollisionResponse::ECR_Overlap);
 
 	/** Periphery Values */
 	bCone = false;
@@ -72,20 +70,17 @@ UPlayerPeripheriesComponent::UPlayerPeripheriesComponent(const FObjectInitialize
 	ActivationPhase = EHandlePeripheryLogic::Server;
 	
 	/** Periphery Radius */
-	PeripheryRadiusChannel = ECC_Pawn;
 	ValidPeripheryRadiusObjects = APawn::StaticClass();
 	PeripheryRadius->ShapeColor = FColor(116, 134, 29, 255);
 	PeripheryRadius->SetSphereRadius(1340);
 	
 	/** Item Detection */
-	ItemDetectionChannel = ECC_GameTraceChannel1;
 	ValidItemDetectionObjects = AActor::StaticClass();
 	ItemDetection->ShapeColor = FColor(150,255,108,255);
 	ItemDetection->SetSphereRadius(100);
 	ItemDetection->SetRelativeLocation(FVector(0, 0, -79));
 
 	/** Periphery Cone */
-	PeripheryConeChannel = ECC_Pawn;
 	ValidPeripheryConeObjects = APawn::StaticClass();
 
 	/** Periphery Trace */
@@ -476,6 +471,32 @@ bool UPlayerPeripheriesComponent::GetCharacter()
 	
 }
 
+
+void UPlayerPeripheriesComponent::AdjustPeripheryConeInEditor(USpringArmComponent* CameraArm)
+{
+	if (!PeripheryCone || !CameraArm) return;
+
+	FVector Location;
+	#if WITH_EDITOR
+	Location = CameraArm->GetRelativeLocation() + CameraArm->SocketOffset + CameraArm->TargetOffset;
+	PeripheryCone->SetRelativeLocation(Location, false);
+	#else
+	Location = CameraArm->GetRelativeLocation() + FVector(CameraArm->TargetArmLength, 0, 0);
+	PeripheryCone->SetRelativeLocation(Location, false);
+	#endif
+}
+
+
+void UPlayerPeripheriesComponent::SetUnusedPeripheryComponentsVisibility()
+{
+	if (!IsPlayingInEditor(this)) return;
+
+	if (PeripheryRadius) PeripheryRadius->SetVisibility(bRadius);
+	if (ItemDetection) ItemDetection->SetVisibility(bItemDetection);
+	if (PeripheryCone) PeripheryCone->SetVisibility(bCone);
+}
+
+
 bool UPlayerPeripheriesComponent::ActivatePeripheryLogic(const EHandlePeripheryLogic HandlePeripheryLogic) const
 {
 	if (EHandlePeripheryLogic::ServerAndClient == HandlePeripheryLogic) return true;
@@ -508,10 +529,12 @@ USphereComponent* UPlayerPeripheriesComponent::GetItemDetection()
 
 bool UPlayerPeripheriesComponent::IsPlayingInEditor(UObject* WorldContextObject) const
 {
+	if (!WorldContextObject || !WorldContextObject->GetWorld()) return false;
 	return WorldContextObject->GetWorld()->IsEditorWorld();
 }
 
 bool UPlayerPeripheriesComponent::IsPlayingInGame(UObject* WorldContextObject) const
 {
+	if (!WorldContextObject || !WorldContextObject->GetWorld()) return false;
 	return WorldContextObject->GetWorld()->IsGameWorld();
 }

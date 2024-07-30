@@ -7,6 +7,7 @@
 #include "Sandbox/Data/Enums/PeripheryTypes.h"
 #include "PeripheryComponent.generated.h"
 
+class USpringArmComponent;
 DECLARE_LOG_CATEGORY_EXTERN(PeripheryLog, Log, All);
 
 
@@ -69,9 +70,6 @@ protected:
 
 
 	/**** Periphery Radius ****/
-	/** The collision channel for the periphery radius sphere */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Peripheries|Radius", meta = (EditCondition = "bRadius", EditConditionHides)) TEnumAsByte<ECollisionChannel> PeripheryRadiusChannel;
-
 	/** A reference to the classes the periphery radius searches for. You can also override IsValidObjectInRadius() for custom logic to search for different things */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Peripheries|Radius", meta = (EditCondition = "bRadius", EditConditionHides)) TSubclassOf<AActor> ValidPeripheryRadiusObjects;
 
@@ -80,9 +78,6 @@ protected:
 
 	
 	/**** Item Detection ****/
-	/** The collision channel for the item detection sphere */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Peripheries|Item Detection", meta = (EditCondition = "bItemDetection", EditConditionHides)) TEnumAsByte<ECollisionChannel> ItemDetectionChannel;
-	
 	/** A reference to the classes the item detection sphere searches for. You can also override IsValidItemDetected() for custom logic to search for different things */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Peripheries|Item Detection", meta = (EditCondition = "bItemDetection", EditConditionHides)) TSubclassOf<AActor> ValidItemDetectionObjects;
 	
@@ -91,9 +86,6 @@ protected:
 
 	
 	/**** Periphery Cone ****/
-	/** The collision channel for the periphery cone */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Peripheries|Cone", meta = (EditCondition = "bCone", EditConditionHides)) TEnumAsByte<ECollisionChannel> PeripheryConeChannel;
-	
 	/** A reference to the classes the periphery cone searches for. You can also override IsValidObjectInCone() for custom logic to search for different things */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Peripheries|Cone", meta = (EditCondition = "bCone", EditConditionHides)) TSubclassOf<AActor> ValidPeripheryConeObjects;
 
@@ -288,10 +280,16 @@ protected:
 	
 	/** Helper function for determining the type of overlay that should be used */
 	UFUNCTION() virtual EPeripheryType FindPeripheryType(TScriptInterface<IPeripheryObjectInterface> PeripheryObject) const;
-	virtual bool GetCharacter(); 
+	virtual bool GetCharacter();
 
-
+	
 public:
+	/** Adjusts the periphery cone while in editor */
+	UFUNCTION(BlueprintCallable) virtual void AdjustPeripheryConeInEditor(USpringArmComponent* CameraArm);
+
+	/** Hides unused periphery objects in editor */
+	UFUNCTION(BlueprintCallable) virtual void SetUnusedPeripheryComponentsVisibility();
+
 	/** Used for networking. Determines whether the logic should be activated based on the argument passed in and if it's the client or server character */
 	UFUNCTION(BlueprintCallable, Category = "Peripheries|Utilities") virtual bool ActivatePeripheryLogic(const EHandlePeripheryLogic HandlePeripheryLogic) const;
 	UFUNCTION(BlueprintCallable, Category = "Peripheries|Utilities") virtual TScriptInterface<IPeripheryObjectInterface> GetTracedObject() const;
