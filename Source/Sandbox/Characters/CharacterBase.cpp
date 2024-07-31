@@ -10,13 +10,36 @@ ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer)
 {
 }
 
-void ACharacterBase::BeginPlay()
+
+
+
+#pragma region Character Initialization
+void ACharacterBase::InitCharacterGlobals(UDataAsset* Data)
 {
-	Super::BeginPlay();
 }
 
+void ACharacterBase::InitCharacterComponents(const bool bCalledFromPossessedBy)
+{
+}
+
+void ACharacterBase::InitAbilitySystemAndAttributes(const bool bCalledFromPossessedBy)
+{
+}
+
+void ACharacterBase::InitCharacterInformation()
+{
+}
 
 UAdvancedMovementComponent* ACharacterBase::GetAdvancedCharacterMovementComponent() const
 {
 	return GetMovementComp<UAdvancedMovementComponent>();
+}
+#pragma endregion
+
+
+
+
+void ACharacterBase::BeginPlay()
+{
+	Super::BeginPlay();
 }
