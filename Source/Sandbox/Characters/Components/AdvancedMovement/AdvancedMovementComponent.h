@@ -327,6 +327,9 @@ protected:
 	
 protected:
 	/** Used to determine whether they're trying to perform multiple wall jumps before landing on the ground  */
+	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Jump") FVector PrevWallJumpLocation;
+	
+	/** Used to determine whether they're trying to perform multiple wall jumps before landing on the ground  */
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Jump") FVector PrevWallJumpNormal;
 
 	/** The location of the player the last time they were on the ground */
@@ -334,7 +337,10 @@ protected:
 
 	/** The current amount of wall jumps the player has done while in air */
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Jump") int32 CurrentWallJumpCount;
-	
+
+	/** The time the player previously wall jumped */
+	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantle Jumping") float PrevWallJumpTime;
+
 
 //----------------------------------------------------------------------------------------------------------------------------------//
 // Mantle Jumping																													//
@@ -1170,6 +1176,15 @@ public:
 	
 	/** Returns the ledge climb normal */
 	UFUNCTION(BlueprintCallable) virtual FVector GetLedgeClimbNormal() const;
+
+	/** Returns the wall jump location */
+	UFUNCTION(BlueprintCallable) virtual FVector GetWallJumpLocation() const;
+	
+	/** Returns the wall jump normal */
+	UFUNCTION(BlueprintCallable) virtual FVector GetWallJumpNormal() const;
+	
+	/** Returns the previous wall jump time */
+	UFUNCTION(BlueprintCallable) virtual float GetPreviousWallJumpTime() const;
 
 	
 //------------------------------------------------------------------------------//

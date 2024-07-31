@@ -1582,6 +1582,8 @@ void UAdvancedMovementComponent::CalculateWallJumpTrajectory(float DeltaTime, in
 	const FVector RedirectedVelocity = FVector(WallJump.X, WallJump.Y, 0) * FMath::Max(CurrentSpeed, Speed);
 	Velocity = RedirectedVelocity + (WallJump * FVector(Boost.X, Boost.X, Boost.Y));
 	PrevWallJumpNormal = Wall.ImpactNormal;
+	PrevWallJumpLocation = Wall.Location;
+	PrevWallJumpTime = Time;
 	
 	SetMovementMode(MOVE_Falling);
 	EnableStrafeSwayPhysics();
@@ -1635,6 +1637,8 @@ void UAdvancedMovementComponent::ResetWallJumpInformation(const EMovementMode Pr
 	if (PrevMode == MOVE_Falling)
 	{
 		PrevWallJumpNormal = FVector::ZeroVector;
+		PrevWallJumpLocation = FVector::ZeroVector;
+		PrevWallJumpTime = 0;
 	}
 	else if (PrevMode == MOVE_Walking)
 	{
@@ -2811,6 +2815,21 @@ FVector UAdvancedMovementComponent::GetLedgeClimbLocation() const
 FVector UAdvancedMovementComponent::GetLedgeClimbNormal() const
 {
 	return LedgeClimbNormal;
+}
+
+FVector UAdvancedMovementComponent::GetWallJumpLocation() const
+{
+	return PrevWallJumpLocation;
+}
+
+FVector UAdvancedMovementComponent::GetWallJumpNormal() const
+{
+	return PrevWallJumpNormal;
+}
+
+float UAdvancedMovementComponent::GetPreviousWallJumpTime() const
+{
+	return PrevWallJumpTime;
 }
 
 
