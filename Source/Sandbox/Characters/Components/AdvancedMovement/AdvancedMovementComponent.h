@@ -633,7 +633,7 @@ protected:
 	
 	/** The initial boost once you enter the slide movement mode */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Sliding", meta=(UIMin = "0.0", UIMax = "1000", EditCondition = "bUseSliding", EditConditionHides))
-	float SlideEnterImpulse;
+	float SlideEnterBoost;
 
 	/** How much the character's able to rotate while sliding */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Sliding", meta=(UIMin = "0", UIMax = "1", EditCondition = "bUseSliding", EditConditionHides))
@@ -653,7 +653,7 @@ protected:
 	
 	/** The multiplier added to the slide jump for forward movement */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Sliding", meta=(UIMin = "0", UIMax = "640", EditCondition = "bUseSliding", EditConditionHides))
-	float SlideJumpSpeed;
+	float SlideJumpBoost;
 	
 	/** sliding information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Sliding|Debug", meta=(EditCondition = "bUseSliding", EditConditionHides))
@@ -666,6 +666,9 @@ protected:
 protected:
 	/** The physics channel for tracing against objects in the world */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)") TEnumAsByte<ETraceTypeQuery> MovementChannel;
+	
+	/** land movement and information */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement: Debugging") bool bDebugWallJump;
 	
 	/** land movement and information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement: Debugging") bool bDebugGroundMovement;
