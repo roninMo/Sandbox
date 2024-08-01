@@ -3,24 +3,45 @@
 
 #include "Sandbox/AI/Controllers/AIControllerBase.h"
 
+#include "BrainComponent.h"
 #include "Sandbox/AI/Characters/Npc.h"
 #include "Logging/StructuredLog.h"
 #include "BehaviorTree/BlackboardComponent.h"
-#include "Perception/AISenseConfig_Prediction.h"
-#include "Perception/AISenseConfig_Team.h"
-#include "Perception/AISense_Sight.h"
+#include "Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Sandbox/AI/Components/Perception/AIPerceptionComponentBase.h"
 
 DEFINE_LOG_CATEGORY(AIInformationLog);
 
 
-AAIControllerBase::AAIControllerBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+AAIControllerBase::AAIControllerBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer.DoNotCreateDefaultSubobject(TEXT("ActionsComp")))
 {
+	MinNetUpdateFrequency = 33;
+	NetUpdateFrequency = 66;
+	bReplicates = false;
+	
+	PerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponentBase>(TEXT("Perception"));
+	PerceptionComponent->SetIsReplicated(false);
+	SetPerceptionComponent(*PerceptionComponent);
+	
+	PerceptionStimuli = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>(TEXT("Stimuli Perception Source"));
+	PerceptionStimuli->SetIsReplicated(false);
+	
+	// Base AI Configuration
+	bStartAILogicOnPossess = 1;
+	bAllowStrafe = 1;
+	//bWantsPlayerState = 1; // this might be useful later for specific situations
 }
 
 
 void AAIControllerBase::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
+	GetCharacterInformation();
+
+	if (BehaviorTree) StartBehaviorTree(BehaviorTree, false);
+	
+	// InitSenses();
+	// UAIPerceptionSystem::GetCurrent(GetWorld())->UpdateListener(*PerceptionComponent);
 }
 
 
@@ -38,87 +59,82 @@ void AAIControllerBase::Tick(float DeltaSeconds)
 
 void AAIControllerBase::StartBehaviorTree(UBehaviorTree* BTAsset, bool bSaveValues)
 {
+	if (!BTAsset) return;
+
+	ANpc* SelfActor = AICharacter;
+	FVector SpawnLocation = AICharacter->GetActorLocation();
+	FRotator SpawnRotation = AICharacter->GetActorRotation();
+
+	if (bSaveValues && Blackboard)
+	{
+		SelfActor = GetSelfActor();
+		SpawnLocation = GetSpawnLocation();
+		SpawnRotation = GetSpawnRotation();
+	}
+
+	// Handle if there's already another behavior tree 
+	UBrainComponent* Tree = GetBrainComponent();
+	if (Tree)
+	{
+		CleanupBrainComponent();
+		Tree->DestroyComponent();
+	}
+	
+	// Update the values of this behavior tree
+	BehaviorTree = BTAsset;
+	RunBehaviorTree(BTAsset);
+	SetSelfActor(SelfActor);
+	SetSpawnLocation(SpawnLocation);
+	SetSpawnRotation(SpawnRotation);
 }
 
 
 // void AAIControllerBase::SetDynamicBehaviorSubTree(const FGameplayTag& BehaviorTreeTag, UBehaviorTree* BTAsset)
 // {
+// 	if (!BrainComponent || !BTAsset || !BehaviorTreeTag.IsValid()) return;
+//
+// 	UBehaviorTreeComponent* BehaviorTreeComponent = Cast<UBehaviorTreeComponent>(BrainComponent);
+// 	if (BehaviorTreeComponent)
+// 	{
+// 		BehaviorTreeComponent->SetDynamicSubtree(BehaviorTreeTag, BTAsset);
+// 	}
 // }
 
 
 
 
 #pragma region Senses
-void AAIControllerBase::AddSenses()
-{
-	if (!GetCharacter()) return;
-	
-	// Sight
-	AddSightSense(AICharacter->GetSenseConfig());
-	PerceptionComponent->SetDominantSense(UAISense_Sight::StaticClass());
-	
-	// Team
-	UAISenseConfig_Team* TeamConfig = NewObject<UAISenseConfig_Team>(this, UAISenseConfig_Team::StaticClass(), TEXT("UAISenseConfig_Team"));
-	PerceptionComponent->ConfigureSense(*TeamConfig);
-
-	// Prediction
-	UAISenseConfig_Prediction* PredictionConfig = NewObject<UAISenseConfig_Prediction>(this, UAISenseConfig_Prediction::StaticClass(), TEXT("UAISenseConfig_Prediction"));
-	PerceptionComponent->ConfigureSense(*PredictionConfig);
-	PerceptionComponent->ConfigureSense(*PredictionConfig);
-
-	// Hearing
-	AddHearingSense(AICharacter->GetSenseConfig().HearingRange);
-	
-	PerceptionComponent->RequestStimuliListenerUpdate();
-}
-
-
-void AAIControllerBase::AdjustSenses(F_AISenseConfigurations& UpdatedSenses)
-{
-}
-
-
-void AAIControllerBase::AddSightSense(F_AISenseConfigurations& UpdatedSenses)
-{
-}
-
-
-void AAIControllerBase::AddHearingSense(float HearingDistance)
-{
-}
-
-
 void AAIControllerBase::OnPerceptionUpdated_Implementation(TArray<AActor*>& Actors)
 {
 }
 
 
-void AAIControllerBase::OnTargetPerceptionUpdated(FActorPerceptionUpdateInfo UpdateInformation)
+void AAIControllerBase::OnTargetPerceptionUpdated_Implementation(FActorPerceptionUpdateInfo UpdateInformation)
 {
 }
 
 
-void AAIControllerBase::OnTargetPerceptionForgotten(AActor* Actor)
+void AAIControllerBase::OnTargetPerceptionForgotten_Implementation(AActor* Actor)
 {
 }
 
 
-void AAIControllerBase::OnSenseSightUpdated(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target)
+void AAIControllerBase::OnSenseSightUpdated_Implementation(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target)
 {
 }
 
 
-void AAIControllerBase::OnSenseTeamUpdated(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target)
+void AAIControllerBase::OnSenseTeamUpdated_Implementation(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target)
 {
 }
 
 
-void AAIControllerBase::OnSensePredictionSenseUpdated(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target)
+void AAIControllerBase::OnSenseHearingUpdated_Implementation(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target)
 {
 }
 
 
-void AAIControllerBase::OnSenseHearingUpdated(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target)
+void AAIControllerBase::OnSensePredictionSenseUpdated_Implementation(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target)
 {
 }
 #pragma endregion 
@@ -156,9 +172,9 @@ bool AAIControllerBase::GetCharacter()
 	AICharacter = Cast<ANpc>(GetPawn());
 	if (!AICharacter)
 	{
-		UE_LOGFMT(AIInformationLog, Error, "{0}::{1}() Failed to find the character!",
+		UE_LOGFMT(AIInformationLog, Error, "{0}::{1}() Failed to cast {2} to an npc character!",
 			GetPawn() ? *UEnum::GetValueAsString(GetPawn()->GetLocalRole()) : *FString(""),
-			*GetNameSafe(GetPawn())
+			*FString(__FUNCTION__), *GetName()
 		);
 		return false;
 	}
@@ -177,4 +193,4 @@ UAttributeSet* AAIControllerBase::GetAttributeSet() const
 {
 	return nullptr;
 }
-#pragma endregion 
+#pragma endregion

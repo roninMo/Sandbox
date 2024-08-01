@@ -5,9 +5,11 @@
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 
 
-ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer)
-	: Super(ObjectInitializer.SetDefaultSubobjectClass<UAdvancedMovementComponent>(ACharacter::CharacterMovementComponentName))
+ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Super(
+	ObjectInitializer.SetDefaultSubobjectClass<UAdvancedMovementComponent>(ACharacter::CharacterMovementComponentName)
+)
 {
+	
 }
 
 

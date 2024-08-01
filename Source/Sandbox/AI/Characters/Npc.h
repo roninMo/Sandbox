@@ -8,6 +8,7 @@
 #include "Sandbox/Data/Structs/NpcInformation.h"
 #include "Npc.generated.h"
 
+
 class AAIControllerBase;
 
 class UDataTable;

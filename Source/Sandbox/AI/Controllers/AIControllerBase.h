@@ -30,7 +30,7 @@ class SANDBOX_API AAIControllerBase : public AAIController
 
 protected:
 	// UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	// TObjectPtr<UAIPerceptionComponent> AIPerception; // @ref PerceptionComponent
+	// TObjectPtr<UAIPerceptionComponent> PerceptionComponent; // @ref AIController
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<UAIPerceptionStimuliSourceComponent> PerceptionStimuli;
@@ -73,10 +73,10 @@ protected:
 	virtual void Tick(float DeltaSeconds) override;
 
 	/** Starts another behavior tree during play, and if save values is set to true, saves the current behavior tree's values */
-	UFUNCTION(BlueprintCallable) virtual void StartBehaviorTree(UBehaviorTree* BTAsset, bool bSaveValues = true);
+	UFUNCTION(BlueprintCallable, Category = "AI") virtual void StartBehaviorTree(UBehaviorTree* BTAsset, bool bSaveValues = true);
 
 	/** Sets the behavior tree's dynamic behavior sub tree */
-	// UFUNCTION(BlueprintCallable) virtual void SetDynamicBehaviorSubTree(const FGameplayTag& BehaviorTreeTag, UBehaviorTree* BTAsset);
+	// UFUNCTION(BlueprintCallable, Category = "AI") virtual void SetDynamicBehaviorSubTree(const FGameplayTag& BehaviorTreeTag, UBehaviorTree* BTAsset);
 
 	
 //--------------------------------------------------------------------------------------//
@@ -84,61 +84,44 @@ protected:
 //--------------------------------------------------------------------------------------//
 protected:
 	/**
-	 * Adds the character's senses. The blueprint values of this component handle what values are added and the configuration of it's senses. The reason it's handled here is to adjust this during runtime
-	 *
-	 * @note Having the senses configured here isn't actually required, the only configuration that's different is the GenericAgentInterface that's required on character components for reference
-	 */
-	UFUNCTION(BlueprintCallable) virtual void AddSenses();
-
-	/** Edit a specific sense */
-	UFUNCTION(BlueprintCallable) virtual void AdjustSenses(F_AISenseConfigurations& UpdatedSenses);
-
-	/** Adds sight config */
-	UFUNCTION(BlueprintCallable) virtual void AddSightSense(F_AISenseConfigurations& UpdatedSenses);
-
-	/** Adds sense config */
-	UFUNCTION(BlueprintCallable) virtual void AddHearingSense(float HearingDistance);
-
-	
-	/**
 	 * Routes each of the senses to the perception sense functions
 	 * 
 	 * @note Bind this to the AIPerception's OnPerceptionUpdated in the blueprint
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AI|Perception") void OnPerceptionUpdated(UPARAM(ref) TArray<AActor*>& Actors);
-	virtual void OnPerceptionUpdated_Implementation(UPARAM(ref) TArray<AActor*>& Actors);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AI|Events") void OnPerceptionUpdated(UPARAM(ref) TArray<AActor*>& Actors);
+	virtual void OnPerceptionUpdated_Implementation(TArray<AActor*>& Actors);
 	
 	/**
 	 * Returns Perception information when it senses something
 	 * 
 	 * @note Bind this to the AIPerception's OnPerceptionInfoUpdated in the blueprint
 	 */
-	UFUNCTION(BlueprintCallable) virtual void OnTargetPerceptionUpdated(FActorPerceptionUpdateInfo UpdateInformation);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AI|Events") void OnTargetPerceptionUpdated(FActorPerceptionUpdateInfo UpdateInformation);
+	virtual void OnTargetPerceptionUpdated_Implementation(FActorPerceptionUpdateInfo UpdateInformation);
 
 	/**
 	 * Forgets a character once it's successfully unsensed
 	 * 
 	 * @note this doesn't work unless OnTargetPerceptionUpdated delegate binding is linked to AIPerception's OnPerceptionInfoUpdated in the blueprint
 	 */
-	UFUNCTION(BlueprintCallable) virtual void OnTargetPerceptionForgotten(AActor* Actor);
-	UFUNCTION(BlueprintImplementableEvent, Category="AI Perception", meta = (DisplayName = "On Target Perception Forgotten"))
-	void BP_OnTargetPerceptionForgotten(AActor* Actor);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AI|Events") void OnTargetPerceptionForgotten(AActor* Actor);
+	virtual void OnTargetPerceptionForgotten_Implementation(AActor* Actor);
 
-	UFUNCTION(BlueprintCallable) virtual void OnSenseSightUpdated(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target);
-	UFUNCTION(BlueprintImplementableEvent, Category="AI Perception", meta = (DisplayName = "Sight Sense Updated"))
-	void BP_OnSenseSightUpdated(FActorPerceptionUpdateInfo UpdateInformation);
+	/** Sight sense updated */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AI|Events") void OnSenseSightUpdated(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target);
+	virtual void OnSenseSightUpdated_Implementation(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target);
 
-	UFUNCTION(BlueprintCallable) virtual void OnSenseTeamUpdated(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target);
-	UFUNCTION(BlueprintImplementableEvent, Category="AI Perception", meta = (DisplayName = "Team Sense Updated"))
-	void BP_OnSenseTeamUpdated(FActorPerceptionUpdateInfo UpdateInformation);
+	/** Team sense updated */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AI|Events") void OnSenseTeamUpdated(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target);
+	virtual void OnSenseTeamUpdated_Implementation(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target);
 	
-	UFUNCTION(BlueprintCallable) virtual void OnSensePredictionSenseUpdated(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target);
-	UFUNCTION(BlueprintImplementableEvent, Category="AI Perception", meta = (DisplayName = "Prediction Sense Updated"))
-	void BP_OnSensePredictionUpdated(FActorPerceptionUpdateInfo UpdateInformation);
+	/** Hearing sense updated */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AI|Events") void OnSenseHearingUpdated(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target);
+	virtual void OnSenseHearingUpdated_Implementation(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target);
 	
-	UFUNCTION(BlueprintCallable) virtual void OnSenseHearingUpdated(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target);
-	UFUNCTION(BlueprintImplementableEvent, Category="AI Perception", meta = (DisplayName = "Hearing Sense Updated"))
-	void BP_OnSenseHearingUpdated(FActorPerceptionUpdateInfo UpdateInformation);
+	/** Prediction sense updated */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AI|Events") void OnSensePredictionSenseUpdated(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target);
+	virtual void OnSensePredictionSenseUpdated_Implementation(FActorPerceptionUpdateInfo UpdateInformation, AActor* Target);
 	
 	// TODO: I don't know if keeping track of the actors during individual senses is necessary, sense each target might activate multiple senses and how that overlaps with each of these delegate bindings (learn how the perception component stores this information)
 	// UAIPerceptionComponent::GetPerceivedHostileActors(TArray<AActor*>& OutActors) const;
@@ -154,13 +137,13 @@ protected:
 //--------------------------------------------------------------------------------------//
 public:
 	/** Blackboard get and set functions */
-	UFUNCTION(BlueprintCallable) virtual ANpc* GetSelfActor() const;
-	UFUNCTION(BlueprintCallable) virtual FVector GetSpawnLocation() const;
-	UFUNCTION(BlueprintCallable) virtual FRotator GetSpawnRotation() const;
+	UFUNCTION(BlueprintCallable, Category = "AI|Character") virtual ANpc* GetSelfActor() const;
+	UFUNCTION(BlueprintCallable, Category = "AI|Character") virtual FVector GetSpawnLocation() const;
+	UFUNCTION(BlueprintCallable, Category = "AI|Character") virtual FRotator GetSpawnRotation() const;
 	
-	UFUNCTION(BlueprintCallable) virtual void SetSelfActor(ANpc* SelfActor);
-	UFUNCTION(BlueprintCallable) virtual void SetSpawnLocation(FVector SpawnLocation);
-	UFUNCTION(BlueprintCallable) virtual void SetSpawnRotation(FRotator SpawnRotation);
+	UFUNCTION(BlueprintCallable, Category = "AI|Character") virtual void SetSelfActor(ANpc* SelfActor);
+	UFUNCTION(BlueprintCallable, Category = "AI|Character") virtual void SetSpawnLocation(FVector SpawnLocation);
+	UFUNCTION(BlueprintCallable, Category = "AI|Character") virtual void SetSpawnRotation(FRotator SpawnRotation);
 	
 	/** Retrieved owner attitude toward given Other character */
 	virtual ETeamAttitude::Type GetTeamAttitudeTowards(const AActor& Other) const override;

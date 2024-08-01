@@ -11,6 +11,20 @@
 
 ANpc::ANpc(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
+	PrimaryActorTick.bCanEverTick = true;
+	SpawnCollisionHandlingMethod = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+	// Periphery Radius
+	PeripheryRadius = CreateDefaultSubobject<USphereComponent>(TEXT("Periphery Radius"));
+	PeripheryRadius->SetupAttachment(RootComponent);
+	PeripheryRadius->InitSphereRadius(1340.0f);
+	PeripheryRadius->SetHiddenInGame(true);
+	
+	// Inventory
+	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
+	Inventory->SetIsReplicated(false);
+
+	AIControllerClass = AAIControllerBase::StaticClass();
 }
 
 
@@ -71,13 +85,16 @@ void ANpc::InitCharacterInformation()
 	// if (BaseAttributeSet) MoveSpeed = BaseAttributeSet->GetMoveSpeed();
 
 	// Init the periphery
-	PeripheryRadius->OnComponentBeginOverlap.AddDynamic(this, &ANpc::PeripheryEnterRadius);
-	PeripheryRadius->OnComponentEndOverlap.AddDynamic(this, &ANpc::PeripheryExitRadius);
-	PeripheryRadius->SetGenerateOverlapEvents(true);
-	PeripheryRadius->SetCollisionObjectType(ECC_GameTraceChannel1);
-	PeripheryRadius->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-	PeripheryRadius->SetCollisionResponseToAllChannels(ECR_Ignore);
-	PeripheryRadius->SetCollisionResponseToChannel(ECC_Pawn, ECollisionResponse::ECR_Overlap);
+	if (PeripheryRadius)
+	{
+		PeripheryRadius->OnComponentBeginOverlap.AddDynamic(this, &ANpc::PeripheryEnterRadius);
+		PeripheryRadius->OnComponentEndOverlap.AddDynamic(this, &ANpc::PeripheryExitRadius);
+		PeripheryRadius->SetGenerateOverlapEvents(true);
+		PeripheryRadius->SetCollisionObjectType(ECC_GameTraceChannel1);
+		PeripheryRadius->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+		PeripheryRadius->SetCollisionResponseToAllChannels(ECR_Ignore);
+		PeripheryRadius->SetCollisionResponseToChannel(ECC_Pawn, ECollisionResponse::ECR_Overlap);
+	}
 }
 #pragma endregion
 
