@@ -243,6 +243,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "5", EditCondition = "bUseBhopping", EditConditionHides))
 	float AirStrafeRotationRate;
 
+	
 	/** The raw strafe sway duration of inhibited movement after performing a wall jump */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe|Air Strafe Sway", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "1", EditCondition = "bUseBhopping", EditConditionHides))
 	float StrafeSwayDuration;
@@ -255,6 +256,24 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe|Air Strafe Sway", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "5.5", EditCondition = "bUseBhopping", EditConditionHides))
 	float StrafeSwayRotationRate;
 
+	
+	/** The strafe lurch duration of influenced movement after performing a mantle jump */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe|Air Strafe Lurch", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "1", EditCondition = "bUseBhopping", EditConditionHides))
+	float StrafeLurchDuration;
+	
+	/** The duration of the strafe lurch where the player has influence of their movement without the strength decaying */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe|Air Strafe Lurch", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "1", EditCondition = "bUseBhopping", EditConditionHides))
+	float StrafeLurchStrengthDropoff;
+
+	/** The strength of the strafe lurch */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe|Air Strafe Lurch", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "1", EditCondition = "bUseBhopping", EditConditionHides))
+	float StrafeLurchStrength;
+
+	/** The friction of strafe lurching */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe|Air Strafe Lurch", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "1", EditCondition = "bUseBhopping", EditConditionHides))
+	float StrafeLurchFriction;
+
+	
 	/** air strafing */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= "Character Movement (General Settings)|Air Strafe|Debug", meta=(EditCondition = "bUseBhopping", EditConditionHides))
 	bool bDebugAirStrafe;
@@ -267,6 +286,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= "Character Movement (General Settings)|Air Strafe|Debug", meta=(EditCondition = "bUseBhopping", EditConditionHides))
 	bool bDebugStrafeSway;
 
+	/** strafe lurch physics */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= "Character Movement (General Settings)|Air Strafe|Debug", meta=(EditCondition = "bUseBhopping", EditConditionHides))
+	bool bDebugStrafeLurch;
+
 	
 protected:
 	/** Whether Air Strafe Sway physics are enabled. If this is true, the player doesn't slow down if they press inputs in the opposite direction of the player's current movement. */
@@ -274,6 +297,12 @@ protected:
 	
 	/** The time strafe sway was previously activated during different physics logic. */
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe") float StrafeSwayStartTime;
+
+	/** Whether Air Strafe Lurch physics are enabled. If this is true, the player has directional influence of their movement, with added friction while turning */
+	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe") bool AirStrafeLurchPhysics;
+	
+	/** The time strafe lurch was previously activated during different physics logic. */
+	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe") float StrafeLurchStartTime;
 
 	
 //----------------------------------------------------------------------------------------------------------------------------------//
@@ -351,7 +380,7 @@ protected:
 	bool bUseMantleJumping;
 	
 	/** The duration after a ledge climb that is valid for mantle jumping */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantle Jump", meta=(UIMin = "0", UIMax = "1", EditCondition = "bUseMantleJumping", EditConditionHides))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantle Jump", meta=(UIMin = "0", UIMax = "0.25", EditCondition = "bUseMantleJumping", EditConditionHides))
 	float MantleJumpDuration;
 	
 	/** An additional velocity multiplier to adjust the mantle jump's velocity */
@@ -655,10 +684,19 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Sliding", meta=(UIMin = "0", UIMax = "640", EditCondition = "bUseSliding", EditConditionHides))
 	float SlideJumpBoost;
 	
+	/** The delay between multiple slides */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Sliding", meta=(UIMin = "0.0", UIMax = "2", EditCondition = "bUseSliding", EditConditionHides))
+	float SlideDuration;
+	
 	/** sliding information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Sliding|Debug", meta=(EditCondition = "bUseSliding", EditConditionHides))
 	bool bDebugSlide;
+
 	
+protected:
+	/** The previous time the player was sliding */
+	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Sliding") float PrevSlideTime;
+
 	
 //----------------------------------------------------------------------------------------------------------------------------------//
 // Other																															//
@@ -730,6 +768,9 @@ public:
 
 	/** If the player is strafe swaying */
 	UFUNCTION(BlueprintCallable) virtual bool IsStrafeSwaying();
+
+	/** If the player is strafe lurching */
+	UFUNCTION(BlueprintCallable) virtual bool IsStrafeLurching();
 
 	
 //------------------------------------------------------------------------------//
@@ -1108,6 +1149,9 @@ public:
 	UFUNCTION(BlueprintCallable) void DisableStrafeSwayPhysics();
 	UFUNCTION(BlueprintCallable) void EnableStrafeSwayPhysics();
 
+	UFUNCTION(BlueprintCallable) void DisableStrafeLurchPhysics();
+	UFUNCTION(BlueprintCallable) void EnableStrafeLurchPhysics();
+	
 	
 //------------------------------------------------------------------------------//
 // Jump Logic																	//
