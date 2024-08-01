@@ -263,14 +263,14 @@ protected:
 	
 	/** The duration of the strafe lurch where the player has influence of their movement without the strength decaying */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe|Air Strafe Lurch", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "1", EditCondition = "bUseBhopping", EditConditionHides))
-	float StrafeLurchStrengthDropoff;
+	float StrafeLurchFullStrengthDuration;
 
 	/** The strength of the strafe lurch */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe|Air Strafe Lurch", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "1", EditCondition = "bUseBhopping", EditConditionHides))
 	float StrafeLurchStrength;
 
 	/** The friction of strafe lurching */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe|Air Strafe Lurch", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "1", EditCondition = "bUseBhopping", EditConditionHides))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe|Air Strafe Lurch", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "5", EditCondition = "bUseBhopping", EditConditionHides))
 	float StrafeLurchFriction;
 
 	
@@ -383,6 +383,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantle Jump", meta=(UIMin = "0", UIMax = "0.25", EditCondition = "bUseMantleJumping", EditConditionHides))
 	float MantleJumpDuration;
 	
+	/** The mantle jump's velocity */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantle Jump", meta=(EditCondition = "bUseMantleJumping", EditConditionHides))
+	float MantleJumpZVelocity;
+
 	/** An additional velocity multiplier to adjust the mantle jump's velocity */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantle Jump", meta=(EditCondition = "bUseMantleJumping", EditConditionHides))
 	FVector2D MantleJumpBoost;

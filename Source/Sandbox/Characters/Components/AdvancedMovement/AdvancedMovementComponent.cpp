@@ -44,7 +44,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 
 	// Strafe Lurching
 	StrafeLurchDuration = 0.45;
-	StrafeLurchStrengthDropoff = 0.1;
+	StrafeLurchFullStrengthDuration = 0.1;
 	StrafeLurchStrength = 1;
 	StrafeLurchFriction = 3;
 	
@@ -73,6 +73,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	// Mantle Jumping
 	bUseMantleJumping = true;
 	MantleJumpDuration = 0.1;
+	MantleJumpZVelocity = 340;
 	MantleJumpBoost = FVector2D(690, 330);
 	
 	// Wall Climbing
@@ -466,7 +467,6 @@ void UAdvancedMovementComponent::CalcVelocity(float DeltaTime, float Friction, b
 		
 		// Update the acceleration based on the character's air control
 		Acceleration = GetFallingLateralAcceleration(DeltaTime);
-
 		
 		/**** Air Strafe calculations ****/
 		ProjVelocity = Velocity.X * AccelDir.X + Velocity.Y * AccelDir.Y; // Strafing subtracts from this value, neutral defaults to the player speed, and negative values add to speed 
@@ -487,25 +487,56 @@ void UAdvancedMovementComponent::CalcVelocity(float DeltaTime, float Friction, b
 
 		
 		/**** Strafe Lurch influence ****/
-		AirStrafeLurchVelocity = AccelDir * BaseSpeed;
-
+		if (AccelDir.IsNearlyZero()) AirStrafeLurchVelocity = Velocity;
+		else AirStrafeLurchVelocity = AccelDir * BaseSpeed;
+		
 		// Apply friction
+		FVector FrictionVector = OldVelocity - AirStrafeLurchVelocity;
+		FVector Friction = FrictionVector * (StrafeLurchFriction * 10) * DeltaTime;
+		AirStrafeLurchVelocity += Friction;
 		
 		// Apply input acceleration
-		if (!Acceleration.IsNearlyZero())
-		{
-			const float MaxInputSpeed = FMath::Max(GetMaxSpeed() * AnalogInputModifier, GetMinAnalogSpeed());
-			const float NewMaxInputSpeed = IsExceedingMaxSpeed(MaxInputSpeed) ? Velocity.Size() : MaxInputSpeed;
-			AirStrafeLurchVelocity += Acceleration * DeltaTime;
-			AirStrafeLurchVelocity = Velocity.GetClampedToMaxSize(NewMaxInputSpeed);
-		}
+		// if (!Acceleration.IsNearlyZero())
+		// {
+		// 	const float MaxInputSpeed = FMath::Max(GetMaxSpeed() * AnalogInputModifier, GetMinAnalogSpeed());
+		// 	const float NewMaxInputSpeed = IsExceedingMaxSpeed(MaxInputSpeed) ? Velocity.Size() : MaxInputSpeed;
+		// 	AirStrafeLurchVelocity += Acceleration * DeltaTime;
+		// 	AirStrafeLurchVelocity = Velocity.GetClampedToMaxSize(NewMaxInputSpeed);
+		// }
+		
+		Velocity = AirStrafeLurchVelocity;
 
 
 		/**** Velocity calculations ****/
-		// The influence of the strafe lurch (0-1) and it doesn't depreciate until after the initial drop off
-		float StrafeLurchInfluence = Time + StrafeLurchStrengthDropoff / StrafeLurchStartTime + StrafeLurchDuration;
-		float LurchStrength = StrafeLurchStrength * StrafeLurchInfluence;
-		Velocity = (AirStrafeVelocity * 1 - LurchStrength) + (AirStrafeLurchVelocity * LurchStrength);
+		float LurchStrength;
+		float Duration = StrafeLurchStartTime + StrafeLurchDuration - Time;
+		if (StrafeLurchStartTime + StrafeLurchFullStrengthDuration > Time) LurchStrength = 1;
+		else LurchStrength = UKismetMathLibrary::MapRangeClamped(Duration, 0, StrafeLurchDuration - StrafeLurchFullStrengthDuration, 0, 1);
+
+		FVector AirStrafeInfluence = AirStrafeVelocity * 1 - LurchStrength;
+		FVector AirStrafeLurchInfluence = AirStrafeLurchVelocity * LurchStrength;
+		// Velocity = AirStrafeLurchVelocity;
+
+		if (bDebugStrafeLurch)
+		{
+			float PrevSpeed = OldVelocity.Size2D();
+			float Speed = Velocity.Size2D();
+			// Velocity/AccelDir // Speed (+/- Adjusted) // Proj/Added Velocity / AccelMultiplier
+			UE_LOGFMT(Movement, Log, "{0}::{1} ({2}) ->  ({3})({4}) Vel/AccelDir: ({5})({6}) Speed: ({7})({8}), AirStrafe/Lurch Vel: ({9})({10}), Proj/Add Vel: ({11})({12})",
+				CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"), *FString("StrafeLurch"),
+				*FString::SanitizeFloat(StrafeLurchStartTime + StrafeLurchDuration - Time),
+				*GetMovementDirection(PlayerInput), Speed - PrevSpeed > 0 ? *FString("+") : *FString("-"),
+				*Velocity.ToString(), *FVector2D(AccelDir.X, AccelDir.Y).ToString(),
+				FMath::CeilToInt(Speed), FMath::CeilToInt(Speed - PrevSpeed),
+				*AirStrafeVelocity.ToString(), *AirStrafeLurchVelocity.ToString(),
+				FMath::CeilToInt(ProjVelocity), *AddedVelocity.ToString()
+			);
+
+			// UE_LOGFMT(Movement, Log, "StrafeLurchTime: {0}, Strength: {1}, AirStrafeInfluence: {2}, StrafeLurchInfluence: {3}",
+			// 	*FString::SanitizeFloat(Duration), *FString::SanitizeFloat(LurchStrength),
+			// 	*AirStrafeInfluence.ToString(), *AirStrafeLurchInfluence.ToString()
+			// );
+		}
 	}
 	
 	//--------------------------------------------------------------------------------------------------------------//
@@ -532,10 +563,10 @@ void UAdvancedMovementComponent::CalcVelocity(float DeltaTime, float Friction, b
 	}
 	
 	// MovementInput, Gain/Lose Speed, AddedVelocity, Velocity, AirSpeedCap, AirAccelMultiplier
-	if (bDebugAirStrafe || bDebugStrafeSway || bDebugStrafeLurch)
+	if (bDebugAirStrafe || bDebugStrafeSway)
 	{
 		if (IsStrafeSwaying() && !bDebugStrafeSway) return;
-		else if (IsStrafeLurching() && !bDebugStrafeLurch) return;
+		else if (IsStrafeLurching()) return;
 		else if (!bDebugAirStrafe) return;
 
 		float PrevSpeed = OldVelocity.Size2D();
@@ -543,7 +574,7 @@ void UAdvancedMovementComponent::CalcVelocity(float DeltaTime, float Friction, b
 		// Velocity/AccelDir // Speed (+/- Adjusted) // Proj/Added Velocity / AccelMultiplier
 		UE_LOGFMT(Movement, Log, "{0}::{1} ({2}) ->  ({3})({4}) Vel/AccelDir: ({5})({6}) Speed: ({7})({8}), ProjVel: ({9}), Added Vel: ({10})",
 			CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"),
-			IsStrafeSwaying() ? *FString("StrafeSway") : FString("AirStrafe"),
+			IsStrafeSwaying() ? *FString("StrafeSway") : *FString("AirStrafe"),
 			IsStrafeSwaying() ? *FString::SanitizeFloat(StrafeSwayStartTime + StrafeSwayDuration - Time) : *FString(""),
 			*GetMovementDirection(PlayerInput),
 			Speed - PrevSpeed > 0 ? *FString("+") : *FString("-"),
@@ -1553,6 +1584,7 @@ void UAdvancedMovementComponent::CalculateMantleJumpTrajectory(const FVector2D S
 	const FVector OldVelocity = Velocity;
 
 	const FVector AddedVelocity = AccelDir * FVector(SpeedBoost.X, SpeedBoost.X, SpeedBoost.Y);
+	Velocity.Z = FMath::Max<FVector::FReal>(Velocity.Z + 1.f, MantleJumpZVelocity);
 	Velocity += AddedVelocity;
 
 	if (bDebugMantleJump)
@@ -2494,13 +2526,6 @@ bool UAdvancedMovementComponent::DoJump(bool bReplayingMoves)
 		// Don't jump if we can't move up/down.
 		if (!bConstrainToPlane || FMath::Abs(PlaneConstraintNormal.Z) != 1.f)
 		{
-			// Mantle Jumping
-			if (IsMantleJump())
-			{
-				CalculateMantleJumpTrajectory(MantleJumpBoost);
-				EnableStrafeLurchPhysics();
-			}
-			
 			// Jump forward boost for slide jumps
 			if (IsSliding())
 			{
@@ -2511,7 +2536,16 @@ bool UAdvancedMovementComponent::DoJump(bool bReplayingMoves)
 				//UE_LOG(Movement, Warning, TEXT("%s() %s: Slide Jump Calculations, MaxSpeed: %f, ForwardVelocity: %f, ForwardVector: %s, new Velocity: %s"), *FString(__FUNCTION__), *GetNameSafe(CharacterOwner), GetMaxSpeed(), ForwardVelocity, *ForwardVector.ToCompactString(), *Velocity.ToCompactString());
 			}
 
-			Velocity.Z = FMath::Max<FVector::FReal>(Velocity.Z + 1.f, JumpZVelocity);
+			// Mantle Jumping
+			if (IsMantleJump())
+			{
+				CalculateMantleJumpTrajectory(MantleJumpBoost);
+				EnableStrafeLurchPhysics();
+			}
+			else
+			{
+				Velocity.Z = FMath::Max<FVector::FReal>(Velocity.Z + 1.f, JumpZVelocity);
+			}
 			
 			if (bDebugWallJump)
 			{
