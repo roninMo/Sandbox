@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "Perception/AIPerceptionComponent.h"
-#include "Sandbox/Data/Structs/AISenseInformation.h"
 // #include "GameplayTagContainer.h"
 #include "AIControllerBase.generated.h"
 

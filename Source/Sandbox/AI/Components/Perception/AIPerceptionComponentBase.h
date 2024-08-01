@@ -36,19 +36,19 @@ protected:
 	UFUNCTION(BlueprintCallable) virtual void InitSenses();
 
 	/** Adjust sight config */
-	UFUNCTION(BlueprintCallable) virtual void AdjustSightSense(F_AISenseConfigurations& UpdatedSenses);
+	UFUNCTION(BlueprintCallable) virtual void AdjustSightSense(const F_AISightSenseConfig& Information);
 
 	/** Adjust team config */
-	UFUNCTION(BlueprintCallable) virtual void AdjustTeamSense(F_AISenseConfigurations& UpdatedSenses);
+	UFUNCTION(BlueprintCallable) virtual void AdjustTeamSense();
 
 	/** Adjust hearing config */
-	UFUNCTION(BlueprintCallable) virtual void AdjustHearingSense(float HearingDistance);
+	UFUNCTION(BlueprintCallable) virtual void AdjustHearingSense(const F_AIHearingSenseConfig& Information);
 
 	/** Adjust prediction config */
-	UFUNCTION(BlueprintCallable) virtual void AdjustPredictionSense(float HearingDistance);
+	UFUNCTION(BlueprintCallable) virtual void AdjustPredictionSense();
 
 	/** Adjust damage sense config */
-	UFUNCTION(BlueprintCallable) virtual void AdjustDamageSense(float HearingDistance);
+	UFUNCTION(BlueprintCallable) virtual void AdjustDamageSense();
 
 	
 //--------------------------------------------------------------------------------------//
