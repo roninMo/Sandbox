@@ -441,6 +441,12 @@ bool ACharacterCameraLogic::IsRotationOrientedToCamera() const
 }
 
 
+UTargetLockSpringArm* ACharacterCameraLogic::GetCameraArm() const
+{
+	return CameraArm;
+}
+
+
 FVector ACharacterCameraLogic::GetCameraLocation()
 {
 	if (FollowCamera) return FollowCamera->GetComponentLocation();

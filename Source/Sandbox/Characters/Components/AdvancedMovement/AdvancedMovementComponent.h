@@ -494,6 +494,14 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(EditCondition = "bUseMantling", EditConditionHides)) 
 	UCurveFloat* MantleSpeedAdjustments;
 	
+	/** The speed at which the player transitions to the mantle location */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(UIMin = "0", UIMax = "10", EditCondition = "bUseMantling", EditConditionHides)) 
+	float MantleRotationSpeed;
+
+	/** The curve that adjusts the speed to allow for smooth interpolations and adjustments. To make things less complicated these are a value between 0-10 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(EditCondition = "bUseMantling", EditConditionHides)) 
+	UCurveFloat* MantleRotationSpeedAdjustments;
+	
 	/** The offset for when the player is mantling on a ledge */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(UIMin = "-100", UIMax = "50", EditCondition = "bUseMantling", EditConditionHides)) 
 	float MantleLedgeLocationOffset;
@@ -809,12 +817,6 @@ public:
 //------------------------------------------------------------------------------//
 protected:
 	/**
-	 * Updates the character state in PerformMovement right before doing the actual position change
-	 * This handles updating the movement mode updates from player inputs
-	 */
-	virtual void UpdateCharacterStateBeforeMovement(float DeltaSeconds) override;
-
-	/**
 	 * Called after MovementMode has changed. Base implementation does special handling for starting certain modes, then notifies the CharacterOwner.
 	 * This updates the character's state information, and handles the enter and exit logic for different movement modes
 	 */
@@ -825,6 +827,15 @@ protected:
 	 * This handles updating this component's movement values for a specific movement mode once it's been updated
 	 */
 	virtual void OnMovementUpdated(float DeltaSeconds, const FVector& OldLocation, const FVector& OldVelocity) override;
+	
+	/**
+	 * Updates the character state in PerformMovement right before doing the actual position change
+	 * This handles updating the movement mode updates from player inputs
+	 */
+	virtual void UpdateCharacterStateBeforeMovement(float DeltaSeconds) override;
+
+	/** Update the character state in PerformMovement after the position change. Some rotation updates happen after this. */
+	virtual void UpdateCharacterStateAfterMovement(float DeltaSeconds) override;
 
 	
 //------------------------------------------------------------------------------//

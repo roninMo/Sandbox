@@ -259,6 +259,9 @@ public:
 	/** Checks if the character's rotation is oriented towards the camera, and returns true if so */
 	UFUNCTION(BlueprintCallable, Category = "Camera|Orientation") virtual bool IsRotationOrientedToCamera() const;
 
+	/** Returns the player's camera arm */
+	UFUNCTION(BlueprintCallable, Category = "Camera|Utilities") virtual UTargetLockSpringArm* GetCameraArm() const;
+	
 	/** Returns player's camera location */
 	UFUNCTION(BlueprintCallable, Category = "Camera|Utilities") virtual FVector GetCameraLocation();
 

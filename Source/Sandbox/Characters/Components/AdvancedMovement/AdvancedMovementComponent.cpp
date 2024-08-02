@@ -46,7 +46,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	StrafeLurchDuration = 0.45;
 	StrafeLurchFullStrengthDuration = 0.1;
 	StrafeLurchStrength = 1;
-	StrafeLurchFriction = 3;
+	StrafeLurchFriction = 2;
 	
 	// Sliding
 	bUseSliding = true;
@@ -73,10 +73,10 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 
 	// Mantle Jumping
 	bUseMantleJumping = true;
-	MantleJumpDuration = 0.1;
-	MantleJumpBoost = FVector2D(690, 450);
+	MantleJumpDuration = 0.2;
+	MantleJumpBoost = FVector2D(450, 450);
 	SuperGlideDuration = 0.05;
-	SuperGlideBoost = FVector2D(100);
+	SuperGlideBoost = FVector2D(450, 100);
 	
 	// Wall Climbing
 	bUseWallClimbing = true;
@@ -92,6 +92,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	// Mantling
 	bUseMantling = true;
 	MantleSpeed = 200.0;
+	MantleRotationSpeed = 1;
 	MantleLedgeLocationOffset = -55;
 	MantleSurfaceTraceFromLedgeOffset = 10;
 	MantleTraceDistance = 64;
@@ -245,46 +246,6 @@ bool UAdvancedMovementComponent::IsStrafeLurching() { return AirStrafeLurchPhysi
 // Update Movement Mode Logic													//
 //------------------------------------------------------------------------------//
 #pragma region Update Movement Mode
-void UAdvancedMovementComponent::UpdateCharacterStateBeforeMovement(const float DeltaSeconds)
-{
-	Super::UpdateCharacterStateBeforeMovement(DeltaSeconds);
-	if (CharacterOwner->IsLocallyControlled() && GetWorld())
-	{
-		Time = GetWorld()->GetTimeSeconds(); // TODO: after a duration, have the server (uses the client's) and client time be in sync with each other and prevent cheating on the client side
-	}
-
-	// Handle Strafe sway duration
-	if (IsStrafeSwaying() && StrafeSwayStartTime + StrafeSwayDuration <= Time)
-	{
-		DisableStrafeSwayPhysics();
-	}
-
-	// Handle Strafe lurch duration
-	if (IsStrafeLurching() && StrafeLurchStartTime + StrafeLurchDuration <= Time)
-	{
-		DisableStrafeLurchPhysics();
-	}
-	
-	// Slide
-	if (!IsSliding() && CanSlide() && Velocity.Size2D() > SlideEnterThreshold && WalkingStartTime + WalkingDurationToSlide <= Time)
-	{
-		SetMovementMode(MOVE_Custom, MOVE_Custom_Slide);
-	}
-
-	if (bDebugNetworkReplication)
-	{
-		UE_LOGFMT(Movement, Log, "{0}::{1} -> Time: ({2}), PlayerInput: ({3}) Sprinting: ({4}), WallJumping: ({5})",
-			CharacterOwner->HasAuthority() ? "Server" : "Client",
-			*GetNameSafe(CharacterOwner),
-			*FString::SanitizeFloat(Time),
-			*PlayerInput.ToString(),
-			SprintPressed ? "true" : "false",
-			WallJumpPressed ? "true" : "false"
-		);
-	}
-}
-
-
 void UAdvancedMovementComponent::OnMovementModeChanged(EMovementMode PreviousMovementMode, uint8 PreviousCustomMode)
 {
 	Super::OnMovementModeChanged(PreviousMovementMode, PreviousCustomMode);
@@ -329,6 +290,52 @@ void UAdvancedMovementComponent::OnMovementModeChanged(EMovementMode PreviousMov
 void UAdvancedMovementComponent::OnMovementUpdated(float DeltaSeconds, const FVector& OldLocation, const FVector& OldVelocity)
 {
 	Super::OnMovementUpdated(DeltaSeconds, OldLocation, OldVelocity);
+}
+
+
+void UAdvancedMovementComponent::UpdateCharacterStateBeforeMovement(const float DeltaSeconds)
+{
+	Super::UpdateCharacterStateBeforeMovement(DeltaSeconds);
+	if (CharacterOwner->IsLocallyControlled() && GetWorld())
+	{
+		Time = GetWorld()->GetTimeSeconds(); // TODO: after a duration, have the server (uses the client's) and client time be in sync with each other and prevent cheating on the client side
+	}
+
+	// Handle Strafe sway duration
+	if (IsStrafeSwaying() && StrafeSwayStartTime + StrafeSwayDuration <= Time)
+	{
+		DisableStrafeSwayPhysics();
+	}
+
+	// Handle Strafe lurch duration
+	if (IsStrafeLurching() && StrafeLurchStartTime + StrafeLurchDuration <= Time)
+	{
+		DisableStrafeLurchPhysics();
+	}
+	
+	// Slide
+	if (!IsSliding() && CanSlide() && Velocity.Size2D() > SlideEnterThreshold && WalkingStartTime + WalkingDurationToSlide <= Time)
+	{
+		SetMovementMode(MOVE_Custom, MOVE_Custom_Slide);
+	}
+
+	if (bDebugNetworkReplication)
+	{
+		UE_LOGFMT(Movement, Log, "{0}::{1} -> Time: ({2}), PlayerInput: ({3}) Sprinting: ({4}), WallJumping: ({5})",
+			CharacterOwner->HasAuthority() ? "Server" : "Client",
+			*GetNameSafe(CharacterOwner),
+			*FString::SanitizeFloat(Time),
+			*PlayerInput.ToString(),
+			SprintPressed ? "true" : "false",
+			WallJumpPressed ? "true" : "false"
+		);
+	}
+}
+
+
+void UAdvancedMovementComponent::UpdateCharacterStateAfterMovement(float DeltaSeconds)
+{
+	Super::UpdateCharacterStateAfterMovement(DeltaSeconds);
 }
 #pragma endregion 
 
@@ -613,7 +620,8 @@ void UAdvancedMovementComponent::PhysWalking(float deltaTime, int32 Iterations)
 		Velocity = FVector::ZeroVector;
 		return;
 	}
-	
+
+	// null safety check
 	if (!UpdatedComponent->IsQueryCollisionEnabled())
 	{
 		SetMovementMode(MOVE_Walking);
@@ -757,7 +765,7 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 			return;
 		}
 		
-		// if they stop climbing the wall wall transition to air
+		// if they stop climbing the wall transition to air
 		if (PlayerInput.IsNearlyZero())
 		{
 			SetMovementMode(MOVE_Falling);
@@ -881,17 +889,34 @@ void UAdvancedMovementComponent::PhysMantling(float deltaTime, int32 Iterations)
 		float timeTick = GetSimulationTimeStep(remainingTime, Iterations);
 		remainingTime -= timeTick;
 
+		// Save the current values
+		FVector Adjusted;
+		const FVector OldLocation = UpdatedComponent->GetComponentLocation();
+
 		// The player is transitioning to the ledge
 		if (!UpdatedComponent->GetComponentLocation().Equals(MantleLedgeLocation, 0.1))
 		{
-			// save the current values
-			FVector Adjusted;
-			const FVector OldLocation = UpdatedComponent->GetComponentLocation();
+	
+			// Find the interp rotation
+			const FRotator MantleRotation = (-LedgeClimbNormal).Rotation();
+			const FRotator PlayerRotation = UpdatedComponent->GetComponentRotation();
+			FRotator TargetRotation = FRotator(0, MantleRotation.Yaw, 0);
+			
+			// Use speed adjustments to create your own ease in transitions
+			const float CurrentPercent = (MantleLedgeLocation - OldLocation).Size() / (MantleLedgeLocation - MantleStartLocation).Size();; // 0-1
+			const float InterpSpeedAdjustments = MantleRotationSpeedAdjustments ? FMath::Clamp(MantleRotationSpeedAdjustments->GetFloatValue(CurrentPercent * 10), 0.1, 10) : 1;
+			
+			// UKismetMathLibrary::RInterpTo();
+			FRotator Delta = (TargetRotation - PlayerRotation).GetNormalized();
+			FRotator AdjustedRotation = Delta * timeTick * MantleRotationSpeed * InterpSpeedAdjustments;
+			
+			// UE_LOGFMT(Movement, Log, "MantleRotation: {0}, PlayerRotation: {1}, TargetRotation: {2}, AdjustedRotation: {3}",
+			// 	MantleRotation.Yaw, PlayerRotation.Yaw, TargetRotation.Yaw, AdjustedRotation.Yaw);
 			
 			// Interp the character to the target location
 			Adjusted = MantleAndClimbInterp(timeTick, MantleStartLocation, MantleLedgeLocation, OldLocation, MantleSpeed, MantleSpeedAdjustments);
 			FHitResult Hit;
-			SafeMoveUpdatedComponent(Adjusted, UpdatedComponent->GetComponentRotation(), false, Hit);
+			SafeMoveUpdatedComponent(Adjusted, (PlayerRotation + AdjustedRotation).GetNormalized(), false, Hit);
 
 			// TODO: Error handling
 			
@@ -948,14 +973,14 @@ void UAdvancedMovementComponent::PhysLedgeClimbing(float deltaTime, int32 Iterat
 		float timeTick = GetSimulationTimeStep(remainingTime, Iterations);
 		remainingTime -= timeTick;
 
+		// Save the current values
+		FVector Adjusted;
+		const FVector OldLocation = UpdatedComponent->GetComponentLocation();
+		
 		// The player is transitioning to the ledge
 		const float CharacterHeightOffset = CharacterOwner->GetCapsuleComponent() ? CharacterOwner->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() + LedgeClimbOffset : 90 + LedgeClimbOffset;
 		if (!UpdatedComponent->GetComponentLocation().Equals(LedgeClimbLocation + FVector(0, 0, CharacterHeightOffset), 0.1))
 		{
-			// save the current values
-			FVector Adjusted;
-			const FVector OldLocation = UpdatedComponent->GetComponentLocation();
-			
 			// Interp the character to the target location
 			Adjusted = MantleAndClimbInterp(timeTick, LedgeClimbStartLocation, LedgeClimbLocation + FVector(0, 0, CharacterHeightOffset), OldLocation, CurrentClimbSpeed, CurrentClimbSpeedAdjustments);
 			FHitResult Hit;
@@ -2192,7 +2217,7 @@ FVector UAdvancedMovementComponent::MantleAndClimbInterp(const float DeltaTime, 
 	const FVector MovementVector = TargetLocation - CurrentLocation;
 	const FVector MovementDirection = MovementVector.GetSafeNormal();
 
-	// Use speed adjustments to create your own ease transitions
+	// Use speed adjustments to create your own ease in transitions
 	const float CurrentPercent = MovementVector.Size() / (TargetLocation - StartLocation).Size(); // 0-1
 	const float InterpSpeedAdjustments = SpeedAdjustments ? FMath::Clamp(SpeedAdjustments->GetFloatValue(CurrentPercent * 10), 0.1, 10) : 1;
 
@@ -2247,13 +2272,14 @@ void UAdvancedMovementComponent::ExitLedgeClimb()
 	LedgeClimbStartLocation = FVector();
 	LedgeClimbLocation = FVector();
 	LedgeClimbNormal = FVector();
-
+	
 	// Revert the collisions for traditional movement
 	if (CharacterOwner->GetCapsuleComponent())
 	{
 		CharacterOwner->GetCapsuleComponent()->SetCollisionResponseToChannels(CapturedCollisionResponsesOutsideOfLedgeClimbing);
 	}
-
+	
+	// Default speed for safety precautions
 	CurrentClimbSpeed = 340;
 	CurrentClimbSpeedAdjustments = nullptr;
 	ClimbType = EClimbType::None;
