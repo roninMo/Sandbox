@@ -87,6 +87,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	WallClimbMultiplier = FVector2D(0.64, 1);
 	WallClimbAcceptableAngle = 45;
 	WallClimbFriction = 2.5;
+	WallClimbGravityLimit = -30;
 	WallClimbAddSpeedThreshold = -10;
 
 	// Mantling
@@ -777,12 +778,12 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 		FVector WallClimbVector = FVector();
 		if (!HasAnimRootMotion() && !CurrentRootMotion.HasOverrideVelocity())
 		{
-			if (Velocity.Z < 0)
+			if (Velocity.Z < WallClimbGravityLimit)
 			{
 				ApplyVelocityBraking(timeTick, WallClimbFriction, GetMaxBrakingDeceleration());
 				Adjusted = Velocity * timeTick;
 			}
-			if (Velocity.Z > WallClimbAddSpeedThreshold)
+			if (Velocity.Z > WallClimbGravityLimit + WallClimbAddSpeedThreshold)
 			{
 				// if they aren't climbing don't add vertical speed, however add a multiplier for how much speed should be added, and limit it to their input
 				WallClimbVector = FVector( AccelDir.X * WallClimbMultiplier.X, AccelDir.Y * WallClimbMultiplier.X, 1 * WallClimbMultiplier.Y);
@@ -2205,7 +2206,8 @@ bool UAdvancedMovementComponent::CheckIfSafeToMantleLedge()
 	// If in walking or in air, just use a normal ledge climb
 	// If falling quickly through the air, use a slow ledge climb type
 	// If walking and it's an object close to the ground, use a quick ledge climb type
-	ClimbType = EClimbType::Normal;
+	if (UpdatedComponent->GetComponentLocation().Z > MantleLedgeLocation.Z) ClimbType = EClimbType::Fast;
+	else ClimbType = EClimbType::Normal;
 	
 	return true;
 }

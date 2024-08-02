@@ -455,6 +455,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Climbing", meta=(UIMin = "0", UIMax = "5", EditCondition = "bUseWallClimbing", EditConditionHides))
 	float WallClimbFriction;
 
+	/** When should we add gravity to wall climbing? The default is 0, and this value represents the player's Z velocity) */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Climbing", meta=(UIMin = "-100", UIMax = "100", EditCondition = "bUseWallClimbing", EditConditionHides))
+	float WallClimbGravityLimit;
+
 	/** If the player was previously falling, what speed do we start adding velocity from? */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Climbing", meta=(UIMin = "-100", UIMax = "0", ClampMax = "0", EditCondition = "bUseWallClimbing", EditConditionHides))
 	float WallClimbAddSpeedThreshold;
