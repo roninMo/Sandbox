@@ -73,7 +73,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	// Mantle Jumping
 	bUseMantleJumping = true;
 	MantleJumpDuration = 0.1;
-	MantleJumpZVelocity = 340;
+	MantleJumpZVelocity = 450;
 	MantleJumpBoost = FVector2D(690, 330);
 	
 	// Wall Climbing
@@ -313,7 +313,8 @@ void UAdvancedMovementComponent::OnMovementModeChanged(EMovementMode PreviousMov
 	ResetWallJumpInformation(PreviousMovementMode, PreviousCustomMode);
 	ResetWallClimbInformation(PreviousMovementMode, PreviousCustomMode);
 	ResetWallRunInformation(PreviousMovementMode, PreviousCustomMode);
-	HandleInAirLogic();
+	ResetFallingStateInformation(PreviousMovementMode, PreviousCustomMode);
+	ResetGroundStateInformation(PreviousMovementMode, PreviousCustomMode);
 
 	// Update player state
 	// if (CharacterOwner && CharacterOwner->GetLocalRole() == ROLE_Authority)
@@ -504,18 +505,17 @@ void UAdvancedMovementComponent::CalcVelocity(float DeltaTime, float Friction, b
 		// 	AirStrafeLurchVelocity = Velocity.GetClampedToMaxSize(NewMaxInputSpeed);
 		// }
 		
-		Velocity = AirStrafeLurchVelocity;
-
 
 		/**** Velocity calculations ****/
 		float LurchStrength;
 		float Duration = StrafeLurchStartTime + StrafeLurchDuration - Time;
 		if (StrafeLurchStartTime + StrafeLurchFullStrengthDuration > Time) LurchStrength = 1;
 		else LurchStrength = UKismetMathLibrary::MapRangeClamped(Duration, 0, StrafeLurchDuration - StrafeLurchFullStrengthDuration, 0, 1);
+		LurchStrength = FMath::Clamp(LurchStrength * StrafeLurchStrength, 0, 1);
 
-		FVector AirStrafeInfluence = AirStrafeVelocity * 1 - LurchStrength;
+		FVector AirStrafeInfluence = AirStrafeVelocity * (1 - LurchStrength);
 		FVector AirStrafeLurchInfluence = AirStrafeLurchVelocity * LurchStrength;
-		// Velocity = AirStrafeLurchVelocity;
+		Velocity = AirStrafeInfluence + AirStrafeLurchInfluence;
 
 		if (bDebugStrafeLurch)
 		{
@@ -2981,7 +2981,7 @@ FVector UAdvancedMovementComponent::ComputeSlideVector(const FVector& Delta, con
 }
 
 
-void UAdvancedMovementComponent::HandleInAirLogic()
+void UAdvancedMovementComponent::ResetFallingStateInformation(EMovementMode PrevMode, uint8 PrevCustomMode)
 {
 // 	BaseAbilitySystem = BaseAbilitySystem ? BaseAbilitySystem : GetAbilitySystem();
 // 	if (!BaseAbilitySystem) return;
@@ -3002,6 +3002,18 @@ void UAdvancedMovementComponent::HandleInAirLogic()
 // 			BaseAbilitySystem->RemoveReplicatedLooseGameplayTag(InAirTag);
 // 		}
 // 	}
+}
+
+
+void UAdvancedMovementComponent::ResetGroundStateInformation(EMovementMode PrevMode, uint8 PrevCustomMode)
+{
+	if (IsMovingOnGround())
+	{
+		if (IsStrafeLurching())
+		{
+			DisableStrafeLurchPhysics();
+		}
+	}
 }
 
 

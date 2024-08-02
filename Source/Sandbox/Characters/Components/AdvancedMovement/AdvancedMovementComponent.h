@@ -265,7 +265,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe|Air Strafe Lurch", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "1", EditCondition = "bUseBhopping", EditConditionHides))
 	float StrafeLurchFullStrengthDuration;
 
-	/** The strength of the strafe lurch */
+	/** The strength of the strafe lurch (0-1). This affects the overall influence of strafe lurching, once the duration calculation is done */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe|Air Strafe Lurch", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "1", EditCondition = "bUseBhopping", EditConditionHides))
 	float StrafeLurchStrength;
 
@@ -1258,7 +1258,10 @@ public:
 	// UBaseAbilitySystem* GetAbilitySystem() const;
 
 	/** Logic to do once the in air state has been updated */
-	virtual void HandleInAirLogic();
+	virtual void ResetFallingStateInformation(EMovementMode PrevMode, uint8 PrevCustomMode);
+	
+	/** Logic to do once the moving on ground state has been updated */
+	virtual void ResetGroundStateInformation(EMovementMode PrevMode, uint8 PrevCustomMode);
 	
 	/** Util function for printing debug messages */
 	virtual void DebugGroundMovement(FString Message, FColor Color, bool DrawSphere = false);
