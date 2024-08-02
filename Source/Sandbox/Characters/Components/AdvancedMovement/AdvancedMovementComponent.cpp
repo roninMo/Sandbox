@@ -87,7 +87,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	WallClimbMultiplier = FVector2D(0.64, 1);
 	WallClimbAcceptableAngle = 45;
 	WallClimbFriction = 2.5;
-	WallClimbGravityLimit = -30;
+	WallClimbGravityLimit = -45;
 	WallClimbAddSpeedThreshold = -10;
 
 	// Mantling
