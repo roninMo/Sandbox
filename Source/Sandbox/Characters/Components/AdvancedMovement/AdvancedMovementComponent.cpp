@@ -57,7 +57,8 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	SlideAngleFrictionMultiplier = 3.4;
 	SlideBrakingFriction = 2;
 	SlideJumpBoost = 100;
-	SlideDuration = 1.5;
+	SlideDelay = 1.5;
+	WalkingDurationToSlide = 0.2;
 
 	// Wall Jumping
 	bUseWallJumping = true;
@@ -73,8 +74,9 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	// Mantle Jumping
 	bUseMantleJumping = true;
 	MantleJumpDuration = 0.1;
-	MantleJumpZVelocity = 450;
-	MantleJumpBoost = FVector2D(690, 330);
+	MantleJumpBoost = FVector2D(690, 450);
+	SuperGlideDuration = 0.05;
+	SuperGlideBoost = FVector2D(100);
 	
 	// Wall Climbing
 	bUseWallClimbing = true;
@@ -92,8 +94,8 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	MantleSpeed = 200.0;
 	MantleLedgeLocationOffset = -55;
 	MantleSurfaceTraceFromLedgeOffset = 10;
-	MantleTraceDistance = 45;
-	MantleSecondTraceDistance = 90;
+	MantleTraceDistance = 64;
+	MantleSecondTraceDistance = 100;
 	MantleTraceHeightOffset = 10;
 	ClimbLocationSpaceOffset = 2.0;
 	MantleLocationSpaceOffset = 2.0;
@@ -264,7 +266,7 @@ void UAdvancedMovementComponent::UpdateCharacterStateBeforeMovement(const float 
 	}
 	
 	// Slide
-	if (IsCrouching() && !IsSliding() && CanSlide() && Velocity.Size2D() > SlideEnterThreshold)
+	if (!IsSliding() && CanSlide() && Velocity.Size2D() > SlideEnterThreshold && WalkingStartTime + WalkingDurationToSlide <= Time)
 	{
 		SetMovementMode(MOVE_Custom, MOVE_Custom_Slide);
 	}
@@ -636,7 +638,15 @@ void UAdvancedMovementComponent::PhysSlide(float deltaTime, int32 Iterations)
 		Velocity = FVector::ZeroVector;
 		return;
 	}
-
+	
+	// if the player presses away or isn't pressing anything from the wall then return to the falling state
+	if (PlayerInput.X < -0.1 || PlayerInput.IsNearlyZero(0.1))
+	{
+		SetMovementMode(MOVE_Walking);
+		StartNewPhysics(deltaTime, Iterations);
+		return;
+	}
+	
 	// check if they're still sliding
 	if (!CanSlide())
 	{
@@ -747,8 +757,8 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 			return;
 		}
 		
-		// if they move away or let go of the wall wall transition to air
-		if (PlayerInput.X <= 0.0)
+		// if they stop climbing the wall wall transition to air
+		if (PlayerInput.IsNearlyZero())
 		{
 			SetMovementMode(MOVE_Falling);
 			StartNewPhysics(deltaTime, Iterations);
@@ -767,7 +777,7 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 			if (Velocity.Z > WallClimbAddSpeedThreshold)
 			{
 				// if they aren't climbing don't add vertical speed, however add a multiplier for how much speed should be added, and limit it to their input
-				WallClimbVector = FVector(AccelDir.X * WallClimbMultiplier.X, AccelDir.Y * WallClimbMultiplier.X, UKismetMathLibrary::MapRangeClamped(PlayerInput.X, 0, 1, 0, WallClimbMultiplier.Y));
+				WallClimbVector = FVector( AccelDir.X * WallClimbMultiplier.X, AccelDir.Y * WallClimbMultiplier.X, 1 * WallClimbMultiplier.Y);
 				Velocity = FVector(Velocity + WallClimbVector * WallClimbAcceleration).GetClampedToSize(0, WallClimbSpeed);
 				Adjusted = Velocity * timeTick;
 			}
@@ -789,16 +799,19 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 				return;
 			}
 			
-			// if they're trying to transition to mantling
-			if (PlayerInput.X > 0.1 && CheckIfSafeToMantleLedge())
+			// if they're trying to transition to mantling/ledge climbing
+			if (CheckIfSafeToMantleLedge())
 			{
-				SetMovementMode(MOVE_Custom, MOVE_Custom_Mantling);
+				FVector Location = UpdatedComponent->GetComponentLocation();
+				if (Location.Z <= MantleLedgeLocation.Z) SetMovementMode(MOVE_Custom, MOVE_Custom_Mantling);
+				else SetMovementMode(MOVE_Custom, MOVE_Custom_LedgeClimbing);
 				StartNewPhysics(deltaTime, Iterations);
 				return;
 			}
 			
 			// transition out of wall climbing if they aren't trying to climb the wall
-			const float Angle = 180 - UKismetMathLibrary::DegAcos(Hit.Normal.Dot(UpdatedComponent->GetForwardVector()));
+			const FVector ForwardVector = bOrientRotationToMovement ? AccelDir : UpdatedComponent->GetForwardVector();
+			const float Angle = 180 - UKismetMathLibrary::DegAcos(Hit.Normal.Dot(ForwardVector));
 			if (Angle > WallClimbAcceptableAngle)
 			{
 				SetMovementMode(MOVE_Falling);
@@ -852,7 +865,8 @@ void UAdvancedMovementComponent::PhysMantling(float deltaTime, int32 Iterations)
 	}
 
 	// if the player presses away from the wall then return to the falling state
-	if (PlayerInput.X < -0.1)
+	const float PlayerAngle = -LedgeClimbNormal.Dot(Acceleration.GetSafeNormal());
+	if (!PlayerInput.IsNearlyZero(0.1) && PlayerAngle <= 0.34)
 	{
 		SetMovementMode(MOVE_Falling);
 		StartNewPhysics(deltaTime, Iterations);
@@ -883,7 +897,7 @@ void UAdvancedMovementComponent::PhysMantling(float deltaTime, int32 Iterations)
 			
 			if (bDebugMantle)
 			{
-				UE_LOGFMT(Movement, Log, "{0}::Mantling ({1}) ->  ({2})({3}) Mantle/Location: ({4})({5}), Vector/Adjusted: ({6})({7}), Speed: ({8})",
+				UE_LOGFMT(Movement, Log, "{0}::Mantling ({1}) ->  ({2})({3}) Mantle/Location: ({4})({5}), Vector/Adjusted: ({6})({7}), Speed: ({8}), PlayerAngle: ({9})",
 					CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"),
 					*FString::SanitizeFloat(Time - MantleStartTime),
 					*GetMovementDirection(PlayerInput),
@@ -892,14 +906,15 @@ void UAdvancedMovementComponent::PhysMantling(float deltaTime, int32 Iterations)
 					*OldLocation.ToString(),
 					*(MantleLedgeLocation - OldLocation).GetSafeNormal().ToString(),
 					*Adjusted.ToString(),
-					Adjusted.Size()
+					Adjusted.Size(),
+					*FString::SanitizeFloat(PlayerAngle)
 				);
 			}
 		}
 		else
 		{
 			// if the player presses forward, climb up on the ledge.
-			if (bUseLedgeClimbing && PlayerInput.X > 0.1)
+			if (bUseLedgeClimbing && !PlayerInput.IsNearlyZero(0.1) && PlayerAngle > 0.64)
 			{
 				SetMovementMode(MOVE_Custom, MOVE_Custom_LedgeClimbing);
 				StartNewPhysics(deltaTime, Iterations);
@@ -1254,7 +1269,8 @@ void UAdvancedMovementComponent::FallingMovementPhysics(float deltaTime, float& 
 
 	// Wall jump and wall movement both need the player's input for calculations
 	const FRotator CharacterRotation(0, UpdatedComponent->GetComponentRotation().Yaw, 0);
-	FVector AccelDir = (FVector(UKismetMathLibrary::GetForwardVector(CharacterRotation) * PlayerInput.X) + FVector(UKismetMathLibrary::GetRightVector(CharacterRotation) * PlayerInput.Y)).GetSafeNormal();
+	// FVector AccelDir = (FVector(UKismetMathLibrary::GetForwardVector(CharacterRotation) * PlayerInput.X) + FVector(UKismetMathLibrary::GetRightVector(CharacterRotation) * PlayerInput.Y)).GetSafeNormal(); // Walls adjust this
+	FVector AccelDir = Acceleration.GetSafeNormal();
 
 	
 	// Check if the player is trying to wall jump
@@ -1288,8 +1304,7 @@ void UAdvancedMovementComponent::FallingMovementPhysics(float deltaTime, float& 
 		}
 		
 		// Wall Climb
-		const float Angle = 180 - UKismetMathLibrary::DegAcos(Hit.Normal.Dot(UpdatedComponent->GetForwardVector()));
-		if (CanWallClimb() && Angle < WallClimbAcceptableAngle)
+		if (CanWallClimb() && TryingToClimbWall(Hit.Normal))
 		{
 			PrevWallClimbLocation = Hit.Location;
 			PrevWallClimbNormal = Hit.ImpactNormal;
@@ -1299,6 +1314,7 @@ void UAdvancedMovementComponent::FallingMovementPhysics(float deltaTime, float& 
 		
 		// Wall Run
 		const float Speed = Velocity.Size2D();
+		const float Angle = 180 - UKismetMathLibrary::DegAcos(Hit.Normal.Dot(UpdatedComponent->GetForwardVector()));
 		if (CanWallRun(Hit) && Speed > WallRunSpeedThreshold && Angle > 90 - WallRunAcceptableAngleRadius && Angle < 90 + WallRunAcceptableAngleRadius)
 		{
 			WallRunWall = Hit.GetComponent();
@@ -1583,8 +1599,7 @@ void UAdvancedMovementComponent::CalculateMantleJumpTrajectory(const FVector2D S
 	const FVector AccelDir = Acceleration.GetSafeNormal();
 	const FVector OldVelocity = Velocity;
 
-	const FVector AddedVelocity = AccelDir * FVector(SpeedBoost.X, SpeedBoost.X, SpeedBoost.Y);
-	Velocity.Z = FMath::Max<FVector::FReal>(Velocity.Z + 1.f, MantleJumpZVelocity);
+	const FVector AddedVelocity = AccelDir * FVector(SpeedBoost.X, SpeedBoost.X, 0) + FVector(0, 0, SpeedBoost.Y);
 	Velocity += AddedVelocity;
 
 	if (bDebugMantleJump)
@@ -1664,7 +1679,6 @@ void UAdvancedMovementComponent::CalculateWallJumpTrajectory(float DeltaTime, in
 		{
 			WallJump = FVector(WallJump.X, WallJump.Y, 0.5);
 		}
-
 	}
 	
 	
@@ -1990,7 +2004,8 @@ bool UAdvancedMovementComponent::CanSlide() const
 {
 	if (!bUseSliding) return false;
 	if (!CharacterOwner->GetCapsuleComponent() || IsFalling()) return false;
-	if (PrevSlideTime + SlideDuration > Time) return false;
+	if (PrevSlideTime + SlideDelay > Time) return false;
+	if (!IsCrouching()) return false;
 	return true;
 }
 
@@ -1998,6 +2013,7 @@ bool UAdvancedMovementComponent::CanSlide() const
 void UAdvancedMovementComponent::EnterSlide(EMovementMode PrevMode, ECustomMovementMode PrevCustomMode)
 {
 	Velocity += Velocity.GetSafeNormal2D() * SlideEnterBoost;
+	SlideStartTime = Time;
 }
 
 
@@ -2013,13 +2029,20 @@ void UAdvancedMovementComponent::ExitSlide()
 //------------------------------------------------------------------------------//
 // WallClimb Logic																//
 //------------------------------------------------------------------------------//
-#pragma region Wall Running
+#pragma region Wall Climbing
 bool UAdvancedMovementComponent::CanWallClimb() const
 {
 	if (!bUseWallClimbing) return false;
 	if (WallClimbInterval + PrevWallClimbTime > Time) return false;
-	if (PlayerInput.X < 0.1) return false;
+	if (PlayerInput.IsNearlyZero(0.1)) return false;
 	return true;
+}
+
+bool UAdvancedMovementComponent::TryingToClimbWall(FVector WallNormal) const
+{
+	const float PlayerAngle = 180 - UKismetMathLibrary::DegAcos(WallNormal.Dot(UpdatedComponent->GetForwardVector()));
+	if (bOrientRotationToMovement) return WallClimbAcceptableAngle * 0.64 > PlayerAngle;
+	else return WallClimbAcceptableAngle > PlayerAngle;
 }
 
 
@@ -2070,74 +2093,49 @@ bool UAdvancedMovementComponent::CheckIfSafeToMantleLedge()
 	CharacterActors.AddUnique(CharacterOwner);
 	
 	// Search for a wall
-	const FVector InitialTraceStart = UpdatedComponent->GetComponentLocation() - FVector(0, 0, MantleTraceHeightOffset);
-	const FVector InitialTraceEnd = InitialTraceStart + UpdatedComponent->GetForwardVector() * MantleTraceDistance;
+	FVector InitialTraceStart = UpdatedComponent->GetComponentLocation() - FVector(0, 0, MantleTraceHeightOffset);
+	FVector InitialTraceEnd = InitialTraceStart + UpdatedComponent->GetForwardVector() * MantleTraceDistance;
+	// if (MantleWallNormal.IsNearlyZero()) InitialTraceEnd = InitialTraceStart + UpdatedComponent->GetForwardVector() * MantleTraceDistance;
+	// else InitialTraceEnd = InitialTraceStart + (-MantleWallNormal * MantleTraceDistance);
+	
 	FHitResult Wall;
 	UKismetSystemLibrary::LineTraceSingleForObjects(
-		GetWorld(),
-		InitialTraceStart,
-		InitialTraceEnd,
-		MantleObjects,
-		false,
-		CharacterActors,
+		GetWorld(), InitialTraceStart, InitialTraceEnd,
+		MantleObjects,false, CharacterActors,
 		bDebugMantleAndClimbTrace ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
-		Wall,
-		true,
-		FColor::Emerald,
-		FColor::Red,
-		TraceDuration
+		Wall,true, FColor::Emerald, FColor::Red, TraceDuration
 	);
-
 	if (!Wall.IsValidBlockingHit())
 	{
 		return false;
 	}
 
 	// Search for a valid ledge
-	const FVector LedgeSurfaceEnd = Wall.Location + (UpdatedComponent->GetForwardVector() * MantleSurfaceTraceFromLedgeOffset);
+	const FVector LedgeSurfaceEnd = Wall.Location + (-Wall.Normal * MantleSurfaceTraceFromLedgeOffset);
 	const FVector LedgeSurfaceStart = LedgeSurfaceEnd + FVector(0, 0, MantleSecondTraceDistance);
 	FHitResult Ledge;
 	UKismetSystemLibrary::LineTraceSingleForObjects(
-		GetWorld(),
-		LedgeSurfaceStart,
-		LedgeSurfaceEnd,
-		MantleObjects,
-		false,
-		CharacterActors,
+		GetWorld(), LedgeSurfaceStart, LedgeSurfaceEnd,
+		MantleObjects, false, CharacterActors,
 		bDebugMantleAndClimbTrace ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
-		Ledge,
-		true,
-		FColor::Emerald,
-		FColor::Red,
-		TraceDuration
+		Ledge, true, FColor::Emerald, FColor::Red, TraceDuration
 	);
-	
 	if (!Ledge.IsValidBlockingHit() || LedgeSurfaceStart.Equals(Ledge.ImpactPoint, 1))
 	{
 		return false;
 	}
 	
 	// Check if the player is able to climb to it, and if they have to crouch
-	FVector FrontOfLedgeMidpoint = Ledge.Location - (UpdatedComponent->GetForwardVector() * (MantleSurfaceTraceFromLedgeOffset + CharacterRadius + ClimbLocationSpaceOffset)) + FVector(0, 0, MantleTraceHeightOffset + CharacterHemisphereHeight);
+	FVector FrontOfLedgeMidpoint = Ledge.Location - (-Wall.Normal * (MantleSurfaceTraceFromLedgeOffset + CharacterRadius + ClimbLocationSpaceOffset)) + FVector(0, 0, MantleTraceHeightOffset + CharacterHemisphereHeight);
 	FVector ClimbStart = FrontOfLedgeMidpoint + (FVector(0, 0, CharacterHalfHeightNoHemisphere * 2)) - FVector(0, 0, MantleTraceHeightOffset);
 	FVector ClimbEnd = FVector(ClimbStart.X, ClimbStart.Y, UpdatedComponent->GetComponentLocation().Z + MantleTraceHeightOffset - CharacterHalfHeightNoHemisphere);
 	FHitResult ClimbSpace;
 	UKismetSystemLibrary::SphereTraceSingleForObjects(
-		GetWorld(),
-		ClimbStart,
-		ClimbEnd,
-		CharacterRadius,
-		MantleObjects,
-		false,
-		CharacterActors,
+		GetWorld(), ClimbStart, ClimbEnd, CharacterRadius,
+		MantleObjects, false, CharacterActors,
 		bDebugMantleAndClimbTrace ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
-		ClimbSpace,
-		true,
-		FColor::Emerald,
-		FColor::Red,
-		TraceDuration
+		ClimbSpace, true, FColor::Turquoise, FColor::Red, TraceDuration
 	);
-
 	if (ClimbSpace.IsValidBlockingHit())
 	{
 		return false;
@@ -2148,21 +2146,11 @@ bool UAdvancedMovementComponent::CheckIfSafeToMantleLedge()
 	FVector LedgeWalkEnd = LedgeWalkStart + FVector(0, 0, CharacterHalfHeightNoHemisphere * 2) - FVector(0, 0, MantleTraceHeightOffset);
 	FHitResult LedgeRoom;
 	UKismetSystemLibrary::SphereTraceSingleForObjects(
-		GetWorld(),
-		LedgeWalkStart,
-		LedgeWalkEnd,
-		CharacterRadius,
-		MantleObjects,
-		false,
-		CharacterActors,
+		GetWorld(), LedgeWalkStart, LedgeWalkEnd, CharacterRadius,
+		MantleObjects, false, CharacterActors,
 		bDebugMantleAndClimbTrace ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
-		LedgeRoom,
-		true,
-		FColor::Emerald,
-		FColor::Red,
-		TraceDuration
+		LedgeRoom, true, FColor::Emerald, FColor::Red,TraceDuration
 	);
-
 	if (LedgeRoom.IsValidBlockingHit())
 	{
 		return false;
@@ -2170,9 +2158,9 @@ bool UAdvancedMovementComponent::CheckIfSafeToMantleLedge()
 
 	// Calculate the mantle location
 	LedgeClimbLocation = Ledge.Location;
-	LedgeClimbNormal = Ledge.Normal;
+	LedgeClimbNormal = Wall.Normal;
 	MantleLedgeLocation = LedgeClimbLocation
-		- UpdatedComponent->GetForwardVector() * (MantleSurfaceTraceFromLedgeOffset + CharacterRadius + ClimbLocationSpaceOffset + MantleLocationSpaceOffset)
+		- -Wall.Normal * (MantleSurfaceTraceFromLedgeOffset + CharacterRadius + ClimbLocationSpaceOffset + MantleLocationSpaceOffset)
 		+ FVector(0, 0, MantleLedgeLocationOffset);
 	if (bDebugMantleAndClimbTrace)
 	{
@@ -2520,27 +2508,32 @@ bool UAdvancedMovementComponent::DoJump(bool bReplayingMoves)
 {
 	if (CharacterOwner && CharacterOwner->CanJump())
 	{
+		FVector AccelDir = Acceleration.GetSafeNormal();
 		FVector OldVelocity = Velocity;
-		FVector OldLocation = UpdatedComponent->GetComponentLocation();
 		
 		// Don't jump if we can't move up/down.
 		if (!bConstrainToPlane || FMath::Abs(PlaneConstraintNormal.Z) != 1.f)
 		{
-			// Jump forward boost for slide jumps
+			// Unreal handles movement logic with client information, and we need to find a way to either make this frame dependent or challenging so it isn't easy to accomplish
+
+			// Jump forward boost for jumps while sliding
 			if (IsSliding())
 			{
-				// Add the boost based on how fast the character is walking through it's forward movement speed
-				float ForwardVelocity = GetMaxSpeed() / FVector::DotProduct(Velocity, UpdatedComponent->GetForwardVector());
-				const FVector ForwardVector = UpdatedComponent->GetForwardVector() * SlideJumpBoost;
+				const FVector ForwardVector = Velocity.GetSafeNormal() * SlideJumpBoost;
 				Velocity += ForwardVector;
-				//UE_LOG(Movement, Warning, TEXT("%s() %s: Slide Jump Calculations, MaxSpeed: %f, ForwardVelocity: %f, ForwardVector: %s, new Velocity: %s"), *FString(__FUNCTION__), *GetNameSafe(CharacterOwner), GetMaxSpeed(), ForwardVelocity, *ForwardVector.ToCompactString(), *Velocity.ToCompactString());
 			}
-
+			
 			// Mantle Jumping
 			if (IsMantleJump())
 			{
 				CalculateMantleJumpTrajectory(MantleJumpBoost);
 				EnableStrafeLurchPhysics();
+
+				// Super glide input (in order for jumps to work while crouching, you need to adjust the CanJump() function to allow jumping while crouching)
+				if (bWantsToCrouch) // CanSlide()
+				{
+					Velocity += AccelDir * FVector(SuperGlideBoost.X, SuperGlideBoost.X, 0) + FVector(0, 0, SuperGlideBoost.Y);
+				}
 			}
 			else
 			{
@@ -3009,11 +3002,14 @@ void UAdvancedMovementComponent::ResetGroundStateInformation(EMovementMode PrevM
 {
 	if (IsMovingOnGround())
 	{
+		WalkingStartTime = Time;
+		
 		if (IsStrafeLurching())
 		{
 			DisableStrafeLurchPhysics();
 		}
 	}
+
 }
 
 

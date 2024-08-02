@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Perception/AISightTargetInterface.h"
 #include "CharacterBase.generated.h"
 
 class UInventoryComponent;
@@ -13,7 +14,7 @@ class UAdvancedMovementComponent;
  * The universal class for characters, npc's, and enemies in the game
  */
 UCLASS()
-class SANDBOX_API ACharacterBase : public ACharacter
+class SANDBOX_API ACharacterBase : public ACharacter, public IAISightTargetInterface
 {
 	GENERATED_BODY()
 
@@ -39,6 +40,19 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="Movement", DisplayName="Get Character Movement Component")
 	virtual UAdvancedMovementComponent* GetAdvancedCharacterMovementComponent() const;
 
+	/**
+	 * Customizable event to check if the character can jump in the current state.
+	 * Default implementation returns true if the character is on the ground and not crouching,
+	 * has a valid CharacterMovementComponent and CanEverJump() returns true.
+	 * Default implementation also allows for 'hold to jump higher' functionality: 
+	 * As well as returning true when on the ground, it also returns true when GetMaxJumpTime is more
+	 * than zero and IsJumping returns true.
+	 * 
+	 *
+	 * @Return Whether the character can jump in the current state. 
+	 */
+	virtual bool CanJumpInternal_Implementation() const override;
+
 	
 //--------------------------------------------------------------------------------------------------------------------------//
 // OnRepPlayerState/PossessedBy -> Or AI PossessedBy -> To this initialization loop											//
@@ -61,7 +75,14 @@ protected:
 // Peripheries																		   //
 //-------------------------------------------------------------------------------------//
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Periphery") FVector AISightTraceOffset = FVector(0, 0, 34);
 
+
+protected:
+	/** This calculates whether an ai character has sensed this player, and uses the default logic with an offset for accurate traces  */
+	virtual UAISense_Sight::EVisibilityResult CanBeSeenFrom(const FCanBeSeenFromContext& Context, FVector& OutSeenLocation, int32& OutNumberOfLoSChecksPerformed, int32& OutNumberOfAsyncLosCheckRequested, float& OutSightStrength, int32* UserData, const FOnPendingVisibilityQueryProcessedDelegate* Delegate) override;
+	virtual bool IsTraceConsideredVisible(const FHitResult* HitResult, const AActor* TargetActor);
+	
 	
 //-------------------------------------------------------------------------------------//
 // Camera																			   //

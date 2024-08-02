@@ -171,6 +171,12 @@ public:
 //----------------------------------------------------------------------------------------------------------------------------------//
 // Bhop																																//
 //----------------------------------------------------------------------------------------------------------------------------------//
+
+
+
+
+
+	
 	// AirStrafeSpeedGainMultiplier just determines how much velocity is added during strafing
 	// AirStrafeRotationRate Calculations (How much speed you're able to attain before drag starts to be added during normal (90-180) strafing rotations)
 	// The default values for decent bhop movement is 0.064 gain and 3.4 strafe
@@ -215,6 +221,11 @@ public:
 	// FLAG_Custom_2 = 0x40, // Aiming
 	// FLAG_Custom_1 = 0x20, // Mantling
 	// FLAG_Custom_0 = 0x10, // Sprinting
+
+
+
+
+
 
 
 
@@ -380,17 +391,21 @@ protected:
 	bool bUseMantleJumping;
 	
 	/** The duration after a ledge climb that is valid for mantle jumping */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantle Jump", meta=(UIMin = "0", UIMax = "0.25", EditCondition = "bUseMantleJumping", EditConditionHides))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantle Jump", meta=(UIMin = "0", UIMax = "0.2", EditCondition = "bUseMantleJumping", EditConditionHides))
 	float MantleJumpDuration;
 	
-	/** The mantle jump's velocity */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantle Jump", meta=(EditCondition = "bUseMantleJumping", EditConditionHides))
-	float MantleJumpZVelocity;
-
 	/** An additional velocity multiplier to adjust the mantle jump's velocity */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantle Jump", meta=(EditCondition = "bUseMantleJumping", EditConditionHides))
 	FVector2D MantleJumpBoost;
 
+	/** The duration after a ledge climb that is valid for mantle jumping */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantle Jump", meta=(UIMin = "0", UIMax = "0.164", EditCondition = "bUseMantleJumping", EditConditionHides))
+	float SuperGlideDuration;
+
+	/** The velocity multiplier to adjust the super glide's velocity */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantle Jump", meta=(EditCondition = "bUseMantleJumping", EditConditionHides))
+	FVector2D SuperGlideBoost;
+	
 	/** Mantle Jump information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantle Jump|Debug", meta=(EditCondition = "bUseMantleJumping", EditConditionHides))
 	bool bDebugMantleJump;
@@ -529,7 +544,7 @@ protected:
 
 	/** The mantle ledge location */
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling") FVector MantleLedgeLocation;
-
+	
 
 //----------------------------------------------------------------------------------------------------------------------------------//
 // Ledge Climbing																													//
@@ -690,7 +705,11 @@ protected:
 	
 	/** The delay between multiple slides */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Sliding", meta=(UIMin = "0.0", UIMax = "2", EditCondition = "bUseSliding", EditConditionHides))
-	float SlideDuration;
+	float SlideDelay;
+	
+	/** The duration the player needs to be walking before they're allowed to slide. (This is to prevent bunny hopping speed boosts) */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Sliding", meta=(UIMin = "0.0", UIMax = "2", EditCondition = "bUseSliding", EditConditionHides))
+	float WalkingDurationToSlide;
 	
 	/** sliding information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Sliding|Debug", meta=(EditCondition = "bUseSliding", EditConditionHides))
@@ -698,6 +717,9 @@ protected:
 
 	
 protected:
+	/** The time the player started sliding */
+	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Sliding") float SlideStartTime;
+	
 	/** The previous time the player was sliding */
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Sliding") float PrevSlideTime;
 
@@ -723,7 +745,12 @@ protected:
 	
 	/** The physics channel for tracing against objects in the world */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)") float TraceDuration;
-	
+
+
+protected:
+	/** The time the player started walking */
+	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Sliding") float WalkingStartTime;
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 // Bhop Character Movement Component																																 						 //
@@ -775,7 +802,7 @@ public:
 
 	/** If the player is strafe lurching */
 	UFUNCTION(BlueprintCallable) virtual bool IsStrafeLurching();
-
+	
 	
 //------------------------------------------------------------------------------//
 // Update Movement Mode Logic													//
@@ -937,6 +964,9 @@ protected:
 public:
 	/** Returns true if current movement state and wall is valid for climbing, and if the player trying to climb the wall */
 	UFUNCTION(BlueprintCallable) virtual bool CanWallClimb() const;
+
+	/** Returns true if the player is facing the wall in first/third person orientations and trying to climb the wall */
+	UFUNCTION(BlueprintCallable) virtual bool TryingToClimbWall(FVector WallNormal) const;
 
 	
 protected:
