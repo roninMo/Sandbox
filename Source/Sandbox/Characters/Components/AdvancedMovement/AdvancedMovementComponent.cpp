@@ -418,7 +418,7 @@ void UAdvancedMovementComponent::CalcVelocity(float DeltaTime, float Friction, b
 	
 	
 	//--------------------------------------------------------------------------------------------------------------------------------------//
-	// Air Strafing																															//
+	// Air Movement Logic																													//
 	//--------------------------------------------------------------------------------------------------------------------------------------//
 	// Do not update velocity when using root motion or when SimulatedProxy and not simulating root motion - SimulatedProxy are repped their Velocity
 	if (!HasValidData() || HasAnimRootMotion() || DeltaTime < MIN_TICK_TIME || (CharacterOwner && CharacterOwner->GetLocalRole() == ROLE_SimulatedProxy && !bWasSimulatingRootMotion))
@@ -461,7 +461,7 @@ void UAdvancedMovementComponent::CalcVelocity(float DeltaTime, float Friction, b
 	}
 
 	//------------------------------------------------------------------------------------------------------------------//
-	// AirStrafe Sway ->  Air influence during specific movement actions (Mantle jumps, ledge jumps, etc.)				//
+	// AirStrafe Lurch ->  Air influence during specific movement actions (Mantle jumps, ledge jumps, etc.)				//
 	//------------------------------------------------------------------------------------------------------------------//
 	else if (IsStrafeLurching())
 	{
@@ -1213,7 +1213,7 @@ void UAdvancedMovementComponent::HandleFallingFunctionality(float deltaTime, flo
 			}
 		}
 	}
-	
+
 	if (bNotifyApex && (Velocity.Z < 0.f))
 	{
 		// Just passed jump apex since now going down
@@ -2532,7 +2532,7 @@ bool UAdvancedMovementComponent::DoJump(bool bReplayingMoves)
 				// Super glide input (in order for jumps to work while crouching, you need to adjust the CanJump() function to allow jumping while crouching)
 				if (bWantsToCrouch) // CanSlide()
 				{
-					Velocity += AccelDir * FVector(SuperGlideBoost.X, SuperGlideBoost.X, 0) + FVector(0, 0, SuperGlideBoost.Y);
+						Velocity += AccelDir * FVector(SuperGlideBoost.X, SuperGlideBoost.X, 0) + FVector(0, 0, SuperGlideBoost.Y);
 				}
 			}
 			else
@@ -2868,6 +2868,10 @@ float UAdvancedMovementComponent::GetMaxSpeed() const
 			if (SprintPressed) return MaxWalkSpeedCrouched * CrouchSprintSpeedMultiplier;
 			else return MaxWalkSpeedCrouched;
 		}
+	}
+	if (IsFalling())
+	{
+		// air strafing movement technically doesn't have a limit. This is for handling third person speeds that inhibit other logic
 	}
 	
 	return Super::GetMaxSpeed();
