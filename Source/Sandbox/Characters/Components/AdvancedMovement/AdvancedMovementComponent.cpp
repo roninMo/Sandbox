@@ -53,7 +53,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	SlideEnterThreshold = 600;
 	SlideEnterBoost = 450;
 	SlidingRotationRate = 1;
-	SlidingFriction = 1;
+	SlidingFriction = 0.64;
 	SlideAngleFrictionMultiplier = 3.4;
 	SlideBrakingFriction = 2;
 	SlideJumpBoost = 100;
@@ -395,15 +395,15 @@ void UAdvancedMovementComponent::CalcVelocity(float DeltaTime, float Friction, b
 			float FloorAngle = CurrentFloor.HitResult.ImpactNormal.Dot(UpdatedComponent->GetForwardVector()) * SlideAngleFrictionMultiplier;
 			float FrictionCalc = FMath::Clamp(SlidingFriction - FloorAngle, 0, SlidingFriction * 3);
 			
-			UE_LOGFMT(Movement, Log, "{0}::Sliding ({1}) ->  ({2})({3}) Initial/Vel: ({4})({5}), Boost: ({6}), Friction/FloorAngle: ({7})({8})",
+			UE_LOGFMT(Movement, Log, "{0}::Sliding ({1}) ->  ({2})({3}) Accel/Vel: ({4})({5}), Input: ({6}), Friction/FloorAngle: ({7})({8})",
 				CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"), *FString::SanitizeFloat(Time),
 				*GetMovementDirection(PlayerInput),
-				*FString::SanitizeFloat(Velocity.Size2D()),
-				*OldVelocity.ToString(),
-				*Velocity.ToString(),
-				*FString::SanitizeFloat(SlideEnterBoost),
-				*FString::SanitizeFloat(FrictionCalc),
-				*FString::SanitizeFloat(FloorAngle)
+				FMath::CeilToInt(Velocity.Size2D()),
+				*FVector2D(Acceleration.X, Acceleration.Y).ToString(),
+				*FVector2D(Velocity.X, Velocity.Y).ToString(),
+				*PlayerInput.ToString(),
+				FMath::CeilToInt(FrictionCalc),
+				FMath::CeilToInt(FloorAngle)
 			);
 		}
 		
@@ -648,8 +648,8 @@ void UAdvancedMovementComponent::PhysSlide(float deltaTime, int32 Iterations)
 		return;
 	}
 	
-	// if the player presses away or isn't pressing anything from the wall then return to the falling state
-	if (PlayerInput.X < -0.1 || PlayerInput.IsNearlyZero(0.1))
+	// if the player stops crouching or presses away from the slide then stop sliding
+	if (PlayerInput.X < -0.1 || !bWantsToCrouch)
 	{
 		SetMovementMode(MOVE_Walking);
 		StartNewPhysics(deltaTime, Iterations);
@@ -1416,8 +1416,7 @@ void UAdvancedMovementComponent::FallingMovementPhysics(float deltaTime, float& 
 			FVector VelocityWithGravity = NewFallVelocity(Velocity, Gravity* GravityFactor, timeTick);
 			Velocity.Z = VelocityWithGravity.Z;
 
-			// TODO: Factor gravity based on the slope angle to allow the player to control while wall sliding
-			float SlopeAngle = Hit.Normal.Dot(UpdatedComponent->GetForwardVector()); 
+			// TODO: Factor gravity based on the floor angle to allow the player to control while wall sliding
 			
 			// Move in deflected direction.
 			SafeMoveUpdatedComponent( Delta, PawnRotation, true, Hit);
