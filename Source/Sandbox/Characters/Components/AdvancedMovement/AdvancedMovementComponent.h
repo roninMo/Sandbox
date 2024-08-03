@@ -215,12 +215,14 @@ public:
 	
 
 
-	// FLAG_Reserved_1 = 0x04, // Reserved for future use (be a rebel and use these anyways)
-	// FLAG_Reserved_2 = 0x08, // Reserved for future use (be a rebel and use these anyways)
-	// FLAG_Custom_3 = 0x80, // WallJumping
-	// FLAG_Custom_2 = 0x40, // Aiming
-	// FLAG_Custom_1 = 0x20, // Mantling
-	// FLAG_Custom_0 = 0x10, // Sprinting
+
+
+
+
+
+
+
+
 
 
 
