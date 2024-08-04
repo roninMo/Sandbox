@@ -68,7 +68,7 @@ void ANpc::InitCharacterInformation()
 	// GetCharacterMovement()->GravityScale = PreservedGravity;
 
 	// Add the character information
-	CharacterInformation = GetNPCCharacterInformationFromTable(Id);
+	SetNpcInformation(GetNPCCharacterInformationFromTable(Id));
 	
 	// Load the inventory items
 	for (const FS_Item ItemInformation : CharacterInformation.InventoryItems)
@@ -168,7 +168,7 @@ FName ANpc::GetId() const
 void ANpc::AddSavedItemToInventory(FS_Item Information)
 {
 	if (!Inventory || !Information.IsValid()) return;
-	Inventory->TryAddItem_Implementation(Information.ItemName, nullptr, EItemType::Inv_None);
+	Inventory->TryAddItem(Information.ItemName, nullptr, EItemType::Inv_None);
 }
 
 

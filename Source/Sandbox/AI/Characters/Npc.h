@@ -73,7 +73,7 @@ protected:
 	virtual void InitCharacterInformation() override;
 
 	/** Blueprint logic for character information initialization logic */
-	// UFUNCTION(BlueprintImplementableEvent, Category = "AI", DisplayName = "Init Character Information (Blueprint)") void BP_InitCharacterInformation();
+	// UFUNCTION(BlueprintImplementableEvent, DisplayName = "Init Character Information (Blueprint)") void BP_InitCharacterInformation();
 
 	
 //----------------------------------------------------------------------------------------------------------------------//
