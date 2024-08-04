@@ -44,7 +44,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 
 	// Strafe Lurching
 	StrafeLurchDuration = 0.45;
-	StrafeLurchFullStrengthDuration = 0.1;
+	StrafeLurchFullStrengthDuration = 0.123;
 	StrafeLurchStrength = 1;
 	StrafeLurchFriction = 1.64;
 	
@@ -337,6 +337,19 @@ void UAdvancedMovementComponent::UpdateCharacterStateBeforeMovement(const float 
 void UAdvancedMovementComponent::UpdateCharacterStateAfterMovement(float DeltaSeconds)
 {
 	Super::UpdateCharacterStateAfterMovement(DeltaSeconds);
+	if (CharacterOwner->IsLocallyControlled() && GetWorld())
+	{
+		Time = GetWorld()->GetTimeSeconds(); // TODO: after a duration, have the server (uses the client's) and client time be in sync with each other and prevent cheating on the client side
+	}
+}
+
+void UAdvancedMovementComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	if (CharacterOwner->IsLocallyControlled() && GetWorld())
+	{
+		Time = GetWorld()->GetTimeSeconds(); // TODO: after a duration, have the server (uses the client's) and client time be in sync with each other and prevent cheating on the client side
+	}
 }
 #pragma endregion 
 
@@ -2202,7 +2215,7 @@ bool UAdvancedMovementComponent::CheckIfSafeToMantleLedge()
 	// If in walking or in air, just use a normal ledge climb
 	// If falling quickly through the air, use a slow ledge climb type
 	// If walking and it's an object close to the ground, use a quick ledge climb type
-	if (UpdatedComponent->GetComponentLocation().Z > MantleLedgeLocation.Z) ClimbType = EClimbType::Fast;
+	if (UpdatedComponent->GetComponentLocation().Z > MantleLedgeLocation.Z && IsMovingOnGround()) ClimbType = EClimbType::Fast;
 	else ClimbType = EClimbType::Normal;
 	
 	return true;

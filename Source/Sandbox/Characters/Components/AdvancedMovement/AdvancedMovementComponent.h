@@ -787,6 +787,9 @@ protected:
 	/** Update the character state in PerformMovement after the position change. Some rotation updates happen after this. */
 	virtual void UpdateCharacterStateAfterMovement(float DeltaSeconds) override;
 
+	/** Function called every frame on the Component. Override this function to implement custom logic to be executed every frame. */
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	
 	
 //------------------------------------------------------------------------------//
 // Physics Functions															//
