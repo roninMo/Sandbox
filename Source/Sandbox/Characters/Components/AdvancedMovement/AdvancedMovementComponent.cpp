@@ -2186,7 +2186,7 @@ bool UAdvancedMovementComponent::CheckIfSafeToMantleLedge()
 		bDebugMantleAndClimbTrace ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
 		LedgeRoom, true, FColor::Emerald, FColor::Red,TraceDuration
 	);
-	if (LedgeRoom.IsValidBlockingHit())
+	if (LedgeRoom.bBlockingHit)
 	{
 		return false;
 	}
