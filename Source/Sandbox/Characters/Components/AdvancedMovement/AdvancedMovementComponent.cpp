@@ -46,7 +46,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	StrafeLurchDuration = 0.45;
 	StrafeLurchFullStrengthDuration = 0.1;
 	StrafeLurchStrength = 1;
-	StrafeLurchFriction = 2;
+	StrafeLurchFriction = 1.64;
 	
 	// Sliding
 	bUseSliding = true;
@@ -483,9 +483,6 @@ void UAdvancedMovementComponent::CalcVelocity(float DeltaTime, float Friction, b
 		ProjVelocity = Velocity.X * AccelDir.X + Velocity.Y * AccelDir.Y; // Strafing subtracts from this value, neutral defaults to the player speed, and negative values add to speed 
 		AirSpeedCap = (GetMaxAcceleration() / 100) * AirStrafeSpeedGainMultiplier; // How much speed is gained during air strafing?
 		AirAccelerationMultiplier = AirStrafeRotationRate; // Drag is added to the equation if the accelerationMultiplier / 10 isn't the same as the player's velocity 
-		
-		// Update the acceleration based on the character's air control
-		Acceleration = GetFallingLateralAcceleration(DeltaTime);
 		
 		// Add strafing momentum to the character's velocity 
 		AddSpeed = Acceleration.GetClampedToMaxSize2D(AirSpeedCap).Size2D() - ProjVelocity;
