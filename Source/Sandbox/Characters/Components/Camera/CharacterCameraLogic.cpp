@@ -87,6 +87,7 @@ void ACharacterCameraLogic::SetCameraStyle_Implementation(const FName Style)
 	{
 		CameraStyle = Style;
 		Server_SetCameraStyle(Style);
+		OnCameraStyleSet();
 	}
 }
 

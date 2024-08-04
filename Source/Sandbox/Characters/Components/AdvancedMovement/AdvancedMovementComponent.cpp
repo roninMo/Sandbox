@@ -2899,6 +2899,7 @@ float UAdvancedMovementComponent::GetMaxSpeed() const
 	if (IsFalling())
 	{
 		// air strafing movement technically doesn't have a limit. This is for handling third person speeds that inhibit other logic
+		if (SprintPressed) return MaxWalkSpeed * SprintSpeedMultiplier;
 	}
 	
 	return Super::GetMaxSpeed();

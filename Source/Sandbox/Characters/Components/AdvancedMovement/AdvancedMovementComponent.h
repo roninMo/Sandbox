@@ -123,12 +123,24 @@ You will also need to extend FCharacterNetworkMoveDataContainer so that it can s
 				- The only downside to this is hacking, but (I don't know (potentially (I always think I'm lying or doing something bad)) another way of handling this)
 			- Even if they were hacking to exploit things like this, I don't think they'd gain much from doing something like this (other than be incomphrehensibly rude because they don't get the gravity of things or they're just like thirsty or something hoeish)
 			- Either way, the client and the server need to be in sync with what moves they calculate to help facilitate building up the character movement, and everything else is just what you want to focus on
+
 			
 				
 
+/*
+	// AirStrafeSpeedGainMultiplier just determines how much velocity is added during strafing
+	// AirStrafeRotationRate Calculations (How much speed you're able to attain before drag starts to be added during normal (90-180) strafing rotations)
+	// The default values for decent bhop movement is 0.064 gain and 3.4 strafe
+	// decreasing the strafe at higher speeds should help with preventing misuse, right now between 2000-3000 you'll get drag if you don't slow down your turns
+	// Adding more strafe and less gain at beginning speeds should make it easier
+	// Speed and acceleration affect these values. For strafing the acceleration is set to 6400
+	
+
+	- Frame combinations for things like slide boosting out of ledge jumps, and other scenarios, and check that this is safe with different frame rates
+	- Extra strafing if they press the jump input? Or figure out a good way of handling strafing during different states
+	
 
 */
-
 
 
 
@@ -171,74 +183,6 @@ public:
 //----------------------------------------------------------------------------------------------------------------------------------//
 // Bhop																																//
 //----------------------------------------------------------------------------------------------------------------------------------//
-
-
-
-
-
-	
-	// AirStrafeSpeedGainMultiplier just determines how much velocity is added during strafing
-	// AirStrafeRotationRate Calculations (How much speed you're able to attain before drag starts to be added during normal (90-180) strafing rotations)
-	// The default values for decent bhop movement is 0.064 gain and 3.4 strafe
-	// decreasing the strafe at higher speeds should help with preventing misuse, right now between 2000-3000 you'll get drag if you don't slow down your turns
-	// Adding more strafe and less gain at beginning speeds should make it easier
-	// Speed and acceleration affect these values. For strafing the acceleration is set to 6400
-	
-	
-/*
-
-	- Movement
-	- Bhopping
-	- Wall Jumping
-	- Wall Running
-	- Wall Climbing
-	- Mantling
-	- Sliding
-	- Ledge Climbing
-	- Ledge Jumping
-
-
-	- Frame combinations for things like slide boosting out of ledge jumps, and other scenarios, and check that this is safe with different frame rates
-
-
-	- Things that don't need specific inputs to be achieved
-
-		- Wall Jumping
-		- Wall Running
-		- Wall Climbing
-		- Mantling
-		- Sliding
-		- Ledge Climbing
-
-	- Wall jumps need AirStrafeSwayPhysics, and add StrafeLurching during ledge jumps
-	- Why don't we allow extra strafing if they press the jump input? Or figure out a good way of handling strafing during different states
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
-	
-	
 protected:
 	/** Uses bunny hopping and air strafing physics */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)")
