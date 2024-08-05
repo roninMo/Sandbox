@@ -421,6 +421,9 @@ protected:
 	/** The previous wall normal of the wall the player started climbing */
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Climbing") FVector PrevWallClimbNormal;
 
+	/** The current duration of the wall climb. This is reset on the ground and after intervals */
+	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Climbing") float CurrentWallClimbDuration;
+
 	/** When the player had began climbing */
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Climbing") float WallClimbStartTime;
 	
@@ -1030,7 +1033,7 @@ public:
 	{
 	public:
 		typedef FCharacterNetworkMoveData Super;
-		FVector MoveData_InputAndTime;
+		FVector2D MoveData_Input;
 		
 		virtual void ClientFillNetworkMoveData(const FSavedMove_Character& ClientMove, ENetworkMoveType MoveType) override;
 		virtual bool Serialize(UCharacterMovementComponent& CharacterMovement, FArchive& Ar, UPackageMap* PackageMap, ENetworkMoveType MoveType) override;
@@ -1078,7 +1081,6 @@ public:
 			virtual void PrepMoveFor(ACharacter* Character) override;
 			
 			// Custom saved move information and Other values values we want to pass across the network
-			float Time;
 			FVector2D PlayerInput;
 		
 			// Without customizing the movement component these are the remaining flags for creating new functionality
@@ -1114,6 +1116,7 @@ public:
 	UAdvancedMovementComponent();
 	friend class FMSavedMove;
 	FMCharacterNetworkMoveDataContainer CustomMoveDataContainer;
+	UPROPERTY(BlueprintReadWrite) float Time; // Replicating this across the server actually fixed some of the client calculations, however I don't think that's safe 
 
 	// Custom movement information
 	UPROPERTY(BlueprintReadWrite) FVector2D PlayerInput; // VelocityOriented input values (Acceleration)
@@ -1121,7 +1124,6 @@ public:
 	UPROPERTY(BlueprintReadWrite) uint8 AimPressed : 1;
 	UPROPERTY(BlueprintReadWrite) uint8 Mantling : 1;
 	UPROPERTY(BlueprintReadWrite) uint8 SprintPressed : 1;
-	UPROPERTY(BlueprintReadWrite) float Time;
 
 	
 	

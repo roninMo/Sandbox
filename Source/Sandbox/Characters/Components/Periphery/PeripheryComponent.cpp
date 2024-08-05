@@ -49,17 +49,17 @@ UPlayerPeripheriesComponent::UPlayerPeripheriesComponent(const FObjectInitialize
 	PeripheryCone->SetCollisionResponseToChannel(ECC_WorldDynamic, ECollisionResponse::ECR_Overlap);
 	PeripheryCone->SetCollisionResponseToChannel(ECC_Pawn, ECollisionResponse::ECR_Overlap);
 
-	ItemDetection = CreateDefaultSubobject<USphereComponent>(TEXT("Item Detection"));
-	// ItemDetection->SetupAttachment(GetOwner()->GetRootComponent());
-	ItemDetection->SetHiddenInGame(true);
-	ItemDetection->SetOnlyOwnerSee(true);
-	ItemDetection->SetCastHiddenShadow(false);
+	ItemDetectionRadius = CreateDefaultSubobject<USphereComponent>(TEXT("Item Detection"));
+	// ItemDetectionRadius->SetupAttachment(GetOwner()->GetRootComponent());
+	ItemDetectionRadius->SetHiddenInGame(true);
+	ItemDetectionRadius->SetOnlyOwnerSee(true);
+	ItemDetectionRadius->SetCastHiddenShadow(false);
 
-	ItemDetection->SetGenerateOverlapEvents(true);
-	ItemDetection->SetCollisionObjectType(ECC_GameTraceChannel1);
-	ItemDetection->SetCollisionResponseToChannels(ECR_Ignore);
-	ItemDetection->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-	ItemDetection->SetCollisionResponseToChannel(ECC_WorldDynamic, ECollisionResponse::ECR_Overlap);
+	ItemDetectionRadius->SetGenerateOverlapEvents(true);
+	ItemDetectionRadius->SetCollisionObjectType(ECC_GameTraceChannel1);
+	ItemDetectionRadius->SetCollisionResponseToChannels(ECR_Ignore);
+	ItemDetectionRadius->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	ItemDetectionRadius->SetCollisionResponseToChannel(ECC_WorldDynamic, ECollisionResponse::ECR_Overlap);
 
 	/** Periphery Values */
 	bCone = false;
@@ -76,9 +76,9 @@ UPlayerPeripheriesComponent::UPlayerPeripheriesComponent(const FObjectInitialize
 	
 	/** Item Detection */
 	ValidItemDetectionObjects = AActor::StaticClass();
-	ItemDetection->ShapeColor = FColor(150,255,108,255);
-	ItemDetection->SetSphereRadius(100);
-	ItemDetection->SetRelativeLocation(FVector(0, 0, -79));
+	ItemDetectionRadius->ShapeColor = FColor(150,255,108,255);
+	ItemDetectionRadius->SetSphereRadius(100);
+	ItemDetectionRadius->SetRelativeLocation(FVector(0, 0, -79));
 
 	/** Periphery Cone */
 	ValidPeripheryConeObjects = APawn::StaticClass();
@@ -105,11 +105,11 @@ void UPlayerPeripheriesComponent::InitPeripheryInformation()
 		ConfigurePeripheryCollision(PeripheryRadius, bRadius);
 	}
 
-	if (ItemDetection && ActivatePeripheryLogic(ActivationPhase))
+	if (ItemDetectionRadius && ActivatePeripheryLogic(ActivationPhase))
 	{
-		ItemDetection->OnComponentBeginOverlap.AddDynamic(this, &UPlayerPeripheriesComponent::OnEnterItemDetection);
-		ItemDetection->OnComponentEndOverlap.AddDynamic(this, &UPlayerPeripheriesComponent::OnExitItemDetection);
-		ConfigurePeripheryCollision(ItemDetection, bItemDetection);
+		ItemDetectionRadius->OnComponentBeginOverlap.AddDynamic(this, &UPlayerPeripheriesComponent::OnEnterItemDetection);
+		ItemDetectionRadius->OnComponentEndOverlap.AddDynamic(this, &UPlayerPeripheriesComponent::OnExitItemDetection);
+		ConfigurePeripheryCollision(ItemDetectionRadius, bItemDetection);
 	}
 
 	// The cone, the cone of shame!
@@ -492,7 +492,7 @@ void UPlayerPeripheriesComponent::SetUnusedPeripheryComponentsVisibility()
 	if (!IsPlayingInEditor(this)) return;
 
 	if (PeripheryRadius) PeripheryRadius->SetVisibility(bRadius);
-	if (ItemDetection) ItemDetection->SetVisibility(bItemDetection);
+	if (ItemDetectionRadius) ItemDetectionRadius->SetVisibility(bItemDetection);
 	if (PeripheryCone) PeripheryCone->SetVisibility(bCone);
 }
 
@@ -524,7 +524,7 @@ UStaticMeshComponent* UPlayerPeripheriesComponent::GetPeripheryCone()
 
 USphereComponent* UPlayerPeripheriesComponent::GetItemDetection()
 {
-	return ItemDetection;
+	return ItemDetectionRadius;
 }
 
 bool UPlayerPeripheriesComponent::IsPlayingInEditor(UObject* WorldContextObject) const

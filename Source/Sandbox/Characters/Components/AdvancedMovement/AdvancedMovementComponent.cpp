@@ -297,10 +297,6 @@ void UAdvancedMovementComponent::OnMovementUpdated(float DeltaSeconds, const FVe
 void UAdvancedMovementComponent::UpdateCharacterStateBeforeMovement(const float DeltaSeconds)
 {
 	Super::UpdateCharacterStateBeforeMovement(DeltaSeconds);
-	if (CharacterOwner->IsLocallyControlled() && GetWorld())
-	{
-		Time = GetWorld()->GetTimeSeconds(); // TODO: after a duration, have the server (uses the client's) and client time be in sync with each other and prevent cheating on the client side
-	}
 
 	// Handle Strafe sway duration
 	if (IsStrafeSwaying() && StrafeSwayStartTime + StrafeSwayDuration <= Time)
@@ -337,19 +333,12 @@ void UAdvancedMovementComponent::UpdateCharacterStateBeforeMovement(const float 
 void UAdvancedMovementComponent::UpdateCharacterStateAfterMovement(float DeltaSeconds)
 {
 	Super::UpdateCharacterStateAfterMovement(DeltaSeconds);
-	if (CharacterOwner->IsLocallyControlled() && GetWorld())
-	{
-		Time = GetWorld()->GetTimeSeconds(); // TODO: after a duration, have the server (uses the client's) and client time be in sync with each other and prevent cheating on the client side
-	}
 }
 
 void UAdvancedMovementComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	if (CharacterOwner->IsLocallyControlled() && GetWorld())
-	{
-		Time = GetWorld()->GetTimeSeconds(); // TODO: after a duration, have the server (uses the client's) and client time be in sync with each other and prevent cheating on the client side
-	}
+	Time += DeltaTime;
 }
 #pragma endregion 
 
@@ -2067,7 +2056,7 @@ void UAdvancedMovementComponent::ExitSlide()
 bool UAdvancedMovementComponent::CanWallClimb() const
 {
 	if (!bUseWallClimbing) return false;
-	if (WallClimbInterval + PrevWallClimbTime > Time) return false;
+	if (CurrentWallClimbDuration <= 0) return false;
 	if ((bOrientRotationToMovement && PlayerInput.IsNearlyZero(0.1)) || (!bOrientRotationToMovement && PlayerInput.X <= 0.1)) return false;
 	return true;
 }
@@ -2102,6 +2091,12 @@ void UAdvancedMovementComponent::ResetWallClimbInformation(const EMovementMode P
 		WallClimbStartTime = 0;
 		PrevWallClimbTime = 0;
 		PrevWallClimbLocation = FVector();
+	}
+
+	// Reset wall climb duration
+	if (IsMovingOnGround())
+	{
+		CurrentWallClimbDuration = WallClimbDuration;
 	}
 }
 #pragma endregion 
@@ -2366,8 +2361,7 @@ void UAdvancedMovementComponent::MoveAutonomous(float ClientTimeStamp, float Del
 	FMCharacterNetworkMoveData* MoveData = static_cast<FMCharacterNetworkMoveData*>(GetCurrentNetworkMoveData());
 	if (MoveData)
 	{
-		PlayerInput = FVector2D(MoveData->MoveData_InputAndTime.X, MoveData->MoveData_InputAndTime.Y);
-		Time = MoveData->MoveData_InputAndTime.Z;
+		PlayerInput = MoveData->MoveData_Input;
 	}
 	
 	Super::MoveAutonomous(ClientTimeStamp, DeltaTime, CompressedFlags, NewAccel);
@@ -2391,7 +2385,7 @@ void UAdvancedMovementComponent::FMCharacterNetworkMoveData::ClientFillNetworkMo
 {
 	Super::ClientFillNetworkMoveData(ClientMove, MoveType);
 	const FMSavedMove& SavedMove = static_cast<const FMSavedMove&>(ClientMove);
-	MoveData_InputAndTime = FVector(SavedMove.PlayerInput.X, SavedMove.PlayerInput.Y, SavedMove.Time);
+	MoveData_Input = SavedMove.PlayerInput;
 }
 
 
@@ -2439,7 +2433,7 @@ bool UAdvancedMovementComponent::FMCharacterNetworkMoveData::Serialize(UCharacte
 	bool bLocalSuccess = true;
 
 	// Save move values
-	MoveData_InputAndTime.NetSerialize(Ar, PackageMap, bLocalSuccess); // TODO: Learn how to serialize things
+	MoveData_Input.NetSerialize(Ar, PackageMap, bLocalSuccess); // TODO: Learn how to serialize things
 	
 	return !Ar.IsError();
 }
@@ -2465,7 +2459,6 @@ void UAdvancedMovementComponent::FMSavedMove::SetMoveFor(ACharacter* Character, 
 	// Set our saved cmc values to the current(safe) values of the cmc
 	UAdvancedMovementComponent* CharacterMovement = Cast<UAdvancedMovementComponent>(Character->GetCharacterMovement());
 	PlayerInput = CharacterMovement->PlayerInput;
-	Time = CharacterMovement->Time;
 	SavedRequestToStartWallJumping = CharacterMovement->WallJumpPressed;
 	SavedRequestToStartAiming = CharacterMovement->AimPressed;
 	SavedRequestToStartMantling = CharacterMovement->Mantling;
@@ -2482,7 +2475,6 @@ void UAdvancedMovementComponent::FMSavedMove::PrepMoveFor(ACharacter* Character)
 	CharacterMovement->AimPressed = SavedRequestToStartAiming;
 	CharacterMovement->Mantling = SavedRequestToStartMantling;
 	CharacterMovement->SprintPressed = SavedRequestToStartSprinting;
-	CharacterMovement->Time = Time;
 }
 
 

@@ -60,7 +60,7 @@ protected:
 
 	/** Item detection, for finding and interacting with items the player can pickup */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Peripheries|Item Detection", meta = (EditCondition = "bItemDetection", EditConditionHides))
-	TObjectPtr<USphereComponent>		ItemDetection;
+	TObjectPtr<USphereComponent>		ItemDetectionRadius;
 
 	// TODO: Investigate third person physics updates to render overlaps when the character isn't moving, and bUseControllerRotation is on.
 	// The camera logic isn't updating on the client/server for the character's components unless the character is actually moving, so it doesn't activate the overlap functions
