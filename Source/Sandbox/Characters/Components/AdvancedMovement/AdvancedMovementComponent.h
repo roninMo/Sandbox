@@ -946,6 +946,8 @@ protected:
 	/** Reset wall climb information based on specific states and movement modes */
 	virtual void ResetWallClimbInformation(EMovementMode PrevMode, uint8 PrevCustomMode);
 
+	/** Reset's the wall climb duration using the wall climb interval */
+	virtual void ResetWallClimbInterval();
 	
 //------------------------------------------------------------------------------//
 // Mantle Logic																	//

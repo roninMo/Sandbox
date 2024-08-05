@@ -309,6 +309,9 @@ void UAdvancedMovementComponent::UpdateCharacterStateBeforeMovement(const float 
 	{
 		DisableStrafeLurchPhysics();
 	}
+
+	// Wall climb duration
+	ResetWallClimbInterval();
 	
 	// Slide
 	if (!IsSliding() && CanSlide() && Velocity.Size2D() > SlideEnterThreshold && WalkingStartTime + WalkingDurationToSlide <= Time)
@@ -732,8 +735,10 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 	}
 
 	// Wall climb duration
-	if (WallClimbDuration != 0 && WallClimbStartTime + WallClimbDuration < Time)
+	if (WallClimbDuration != 0 && WallClimbStartTime + CurrentWallClimbDuration <= Time)
 	{
+		CurrentWallClimbDuration = 0.0;
+		UE_LOGFMT(Movement, Warning, "Finished the wall climb duration at {0}", Time);
 		SetMovementMode(MOVE_Falling);
 		StartNewPhysics(deltaTime, Iterations);
 		return;
@@ -836,7 +841,7 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 			{
 				UE_LOGFMT(Movement, Log, "{0}::WallClimb ({1}) ->  ({2})({3}) Adjusted: ({4}), Vel: ({5}), WallClimbVector: ({6}), PlayerInput: ({7}), Speed: ({8}), Acceleration: ({9}), Multiplier: ({10})",
 					CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"),
-					*FString::SanitizeFloat(WallClimbStartTime + WallClimbDuration - Time),
+					*FString::SanitizeFloat(WallClimbStartTime + CurrentWallClimbDuration - Time),
 					*FString::SanitizeFloat(Angle),
 					*FString::SanitizeFloat(Adjusted.Size2D()),
 					*Adjusted.ToString(),
@@ -2078,6 +2083,13 @@ void UAdvancedMovementComponent::EnterWallClimb(EMovementMode PrevMode, ECustomM
 void UAdvancedMovementComponent::ExitWallClimb()
 {
 	PrevWallClimbTime = Time;
+
+	// If they stopped climbing before the duration is finished adjust the current duration to the remaining duration
+	if (WallClimbStartTime + WallClimbDuration >= Time)
+	{
+		CurrentWallClimbDuration = WallClimbStartTime + CurrentWallClimbDuration - Time;
+		UE_LOGFMT(Movement, Warning, "Updated the wall climb duration to {0}", CurrentWallClimbDuration);
+	}
 	
 	// This prevents the wall jump from being redirected if they wall jump out of a wall climb or a mantle 
 	PreviousGroundLocation = UpdatedComponent->GetComponentLocation() + PrevWallClimbNormal * 100;
@@ -2094,9 +2106,20 @@ void UAdvancedMovementComponent::ResetWallClimbInformation(const EMovementMode P
 	}
 
 	// Reset wall climb duration
-	if (IsMovingOnGround())
+	if (CurrentWallClimbDuration != WallClimbDuration && IsMovingOnGround())
 	{
 		CurrentWallClimbDuration = WallClimbDuration;
+		UE_LOGFMT(Movement, Warning, "Player is moving on ground, reset wall climb duration to {0}", CurrentWallClimbDuration);
+	}
+}
+
+void UAdvancedMovementComponent::ResetWallClimbInterval()
+{
+	if (CurrentWallClimbDuration != 0) return;
+	if (WallClimbInterval + PrevWallClimbTime < Time)
+	{
+		CurrentWallClimbDuration = WallClimbDuration;
+		UE_LOGFMT(Movement, Warning, "Wall climb interval finished, reset wall climb duration to {0}", CurrentWallClimbDuration);
 	}
 }
 #pragma endregion 
