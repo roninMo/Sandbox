@@ -580,7 +580,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Running", meta=(EditCondition = "bUseWallRunning", EditConditionHides))
 	FVector2D WallRunMultiplier;
 	
-	/** How quickly the character should be moving before they're allowed to wall run */
+	/** How quickly the character should be moving alongside the wall before they're allowed to wall run */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Running", meta=(UIMin = "0", UIMax = "1000", EditCondition = "bUseWallRunning", EditConditionHides))
 	float WallRunSpeedThreshold;
 
@@ -602,7 +602,7 @@ protected:
 
 	/** Wall run trace information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Wall Running|Debug", meta=(EditCondition = "bUseWallRunning", EditConditionHides))
-	bool bDebugWallTraces;
+	bool bDebugWallRunTraces;
 
 	
 protected:

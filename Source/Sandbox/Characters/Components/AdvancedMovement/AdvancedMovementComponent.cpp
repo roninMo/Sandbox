@@ -118,7 +118,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	bUseWallRunning = true;
 	WallRunDuration = 2;
 	WallRunSpeed = 740;
-	WallRunAcceleration = 7.4;
+	WallRunAcceleration = 34;
 	WallRunMultiplier = FVector2D(1, 0);
 	WallRunSpeedThreshold = 600;
 	WallRunAcceptableAngleRadius = 30;
@@ -1106,7 +1106,7 @@ void UAdvancedMovementComponent::PhysWallRunning(float deltaTime, int32 Iteratio
 				WallRunMultiplier.Y
 			);
 			
-			if (bDebugWallTraces)
+			if (bDebugWallRunTraces)
 			{
 				DrawDebugLine(GetWorld(), OldLocation, OldLocation + WallRunNormal * 50, FColor::Emerald, false, TraceDuration);
 				DrawDebugLine(GetWorld(), OldLocation, OldLocation + WallRunDirection * 100 + FVector(0, 0, 2), FColor::Cyan, false, TraceDuration);
@@ -1349,9 +1349,7 @@ void UAdvancedMovementComponent::FallingMovementPhysics(float deltaTime, float& 
 		}
 		
 		// Wall Run
-		const float Speed = Velocity.Size2D();
-		const float Angle = 180 - UKismetMathLibrary::DegAcos(Hit.Normal.Dot(UpdatedComponent->GetForwardVector()));
-		if (CanWallRun(Hit) && Speed > WallRunSpeedThreshold && Angle > 90 - WallRunAcceptableAngleRadius && Angle < 90 + WallRunAcceptableAngleRadius)
+		if (CanWallRun(Hit))
 		{
 			WallRunWall = Hit.GetComponent();
 			WallRunNormal = Hit.Normal;
@@ -1359,6 +1357,7 @@ void UAdvancedMovementComponent::FallingMovementPhysics(float deltaTime, float& 
 			SetMovementMode(MOVE_Custom, MOVE_Custom_WallRunning);
 			StartNewPhysics(deltaTime, Iterations);
 		}
+
 
 		
 		// If we've changed physics mode, abort.
@@ -2069,7 +2068,7 @@ bool UAdvancedMovementComponent::CanWallClimb() const
 {
 	if (!bUseWallClimbing) return false;
 	if (WallClimbInterval + PrevWallClimbTime > Time) return false;
-	if (PlayerInput.IsNearlyZero(0.1)) return false;
+	if ((bOrientRotationToMovement && PlayerInput.IsNearlyZero(0.1)) || (!bOrientRotationToMovement && PlayerInput.X <= 0.1)) return false;
 	return true;
 }
 
@@ -2317,7 +2316,17 @@ bool UAdvancedMovementComponent::CanWallRun(const FHitResult& Wall) const
 			return false;
 		}
 	}
+
+	// Only factor in speed that's perpendicular to the wall
+	const FVector WallRunDirection = Wall.Normal.RotateAngleAxis(UpdatedComponent->GetRightVector().Dot(Wall.Normal) <= 0 ? 90 : -90, UpdatedComponent->GetUpVector());
+	const FVector WallRunMovementVector = FVector(FMath::Clamp(WallRunDirection.X + (Wall.Normal.X / 2), -1, 1), FMath::Clamp(WallRunDirection.Y + (Wall.Normal.Y / 2), -1, 1), 0);
+	const float PerpendicularSpeed = (Velocity * WallRunMovementVector).Size();
+	if (WallRunSpeedThreshold >= PerpendicularSpeed) return false;
 	
+	// Check that the player is trying to run alongside the wall
+	const float Angle = 180 - UKismetMathLibrary::DegAcos(Wall.Normal.Dot(UpdatedComponent->GetForwardVector()));
+	if (90 - WallRunAcceptableAngleRadius > Angle) return false;
+	if (90 + WallRunAcceptableAngleRadius < Angle) return false;
 	return true;
 }
 
