@@ -88,7 +88,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	WallClimbAcceptableAngle = 45;
 	WallClimbFriction = 2.5;
 	WallClimbGravityLimit = -45;
-	WallClimbAddSpeedThreshold = -10;
+	WallClimbJumpInterval = 0.1;
 
 	// Mantling
 	bUseMantling = true;
@@ -733,12 +733,20 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 		Velocity = FVector::ZeroVector;
 		return;
 	}
-
+	
+	// if the character landed on the ground
+	FFindFloorResult FloorResult;
+	FindFloor(UpdatedComponent->GetComponentLocation(), FloorResult, false);
+	if (FloorResult.IsWalkableFloor() && IsValidLandingSpot(UpdatedComponent->GetComponentLocation(), FloorResult.HitResult))
+	{
+		SetMovementMode(MOVE_Walking);
+		return;
+	}
+	
 	// Wall climb duration
 	if (WallClimbDuration != 0 && WallClimbStartTime + CurrentWallClimbDuration <= Time)
 	{
 		CurrentWallClimbDuration = 0.0;
-		UE_LOGFMT(Movement, Warning, "Finished the wall climb duration at {0}", Time);
 		SetMovementMode(MOVE_Falling);
 		StartNewPhysics(deltaTime, Iterations);
 		return;
@@ -777,7 +785,7 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 			StartNewPhysics(deltaTime, Iterations);
 			return;
 		}
-		
+
 		// Move forwards, up, and sideways if they're also moving to the side
 		FVector WallClimbVector = FVector();
 		if (!HasAnimRootMotion() && !CurrentRootMotion.HasOverrideVelocity())
@@ -787,7 +795,7 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 				ApplyVelocityBraking(timeTick, WallClimbFriction, GetMaxBrakingDeceleration());
 				Adjusted = Velocity * timeTick;
 			}
-			if (Velocity.Z > WallClimbGravityLimit + WallClimbAddSpeedThreshold)
+			else
 			{
 				// if they aren't climbing don't add vertical speed, however add a multiplier for how much speed should be added, and limit it to their input
 				WallClimbVector = FVector( AccelDir.X * WallClimbMultiplier.X, AccelDir.Y * WallClimbMultiplier.X, 1 * WallClimbMultiplier.Y);
@@ -801,16 +809,7 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 		SafeMoveUpdatedComponent(Adjusted, PawnRotation, true, Hit); // Moves based on adjusted, updates velocity, and handles returning colliding information for handling the different movement scenarios
 		if (Hit.IsValidBlockingHit())
 		{
-			float LastMoveTimeSlice = timeTick;
 			float subTimeTickRemaining = timeTick * (1.f - Hit.Time);
-			
-			// if the character just landed on the ground
-			if (Hit.bBlockingHit && IsValidLandingSpot(UpdatedComponent->GetComponentLocation(), Hit))
-			{
-				remainingTime += subTimeTickRemaining;
-				ProcessLanded(Hit, remainingTime, Iterations);
-				return;
-			}
 			
 			// if they're trying to transition to mantling/ledge climbing
 			if (CheckIfSafeToMantleLedge())
@@ -818,7 +817,7 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 				FVector Location = UpdatedComponent->GetComponentLocation();
 				if (Location.Z <= MantleLedgeLocation.Z) SetMovementMode(MOVE_Custom, MOVE_Custom_Mantling);
 				else SetMovementMode(MOVE_Custom, MOVE_Custom_LedgeClimbing);
-				StartNewPhysics(deltaTime, Iterations);
+				StartNewPhysics(subTimeTickRemaining, Iterations);
 				return;
 			}
 			
@@ -828,15 +827,15 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 			if (Angle > WallClimbAcceptableAngle)
 			{
 				SetMovementMode(MOVE_Falling);
-				StartNewPhysics(timeTick, Iterations);
+				StartNewPhysics(subTimeTickRemaining, Iterations);
 				return;
 			}
 
 			// Handle moving up and alongside the wall
-			HandleImpact(Hit, LastMoveTimeSlice, Adjusted);
+			HandleImpact(Hit, subTimeTickRemaining, Adjusted);
 			FVector Delta = ComputeSlideVector(Adjusted, 1.f - Hit.Time, Hit.Normal, Hit);
 			SafeMoveUpdatedComponent(Delta, PawnRotation, true, Hit);
-			
+
 			if (bDebugWallClimb)
 			{
 				UE_LOGFMT(Movement, Log, "{0}::WallClimb ({1}) ->  ({2})({3}) Adjusted: ({4}), Vel: ({5}), WallClimbVector: ({6}), PlayerInput: ({7}), Speed: ({8}), Acceleration: ({9}), Multiplier: ({10})",
@@ -1123,7 +1122,7 @@ void UAdvancedMovementComponent::PhysWallRunning(float deltaTime, int32 Iteratio
 			WallRunWall = Hit.GetComponent();
 			
 			// if the character just landed on the ground
-			if (Hit.bBlockingHit && IsValidLandingSpot(UpdatedComponent->GetComponentLocation(), Hit))
+			if (IsValidLandingSpot(UpdatedComponent->GetComponentLocation(), Hit))
 			{
 				remainingTime += subTimeTickRemaining;
 				ProcessLanded(Hit, remainingTime, Iterations);
@@ -1351,7 +1350,6 @@ void UAdvancedMovementComponent::FallingMovementPhysics(float deltaTime, float& 
 			SetMovementMode(MOVE_Custom, MOVE_Custom_WallRunning);
 			StartNewPhysics(deltaTime, Iterations);
 		}
-
 
 		
 		// If we've changed physics mode, abort.
@@ -2062,6 +2060,7 @@ bool UAdvancedMovementComponent::CanWallClimb() const
 {
 	if (!bUseWallClimbing) return false;
 	if (CurrentWallClimbDuration <= 0) return false;
+	if (JumpStartTime + WallClimbJumpInterval > Time) return false;
 	if ((bOrientRotationToMovement && PlayerInput.IsNearlyZero(0.1)) || (!bOrientRotationToMovement && PlayerInput.X <= 0.1)) return false;
 	return true;
 }
@@ -2088,7 +2087,6 @@ void UAdvancedMovementComponent::ExitWallClimb()
 	if (WallClimbStartTime + WallClimbDuration >= Time)
 	{
 		CurrentWallClimbDuration = WallClimbStartTime + CurrentWallClimbDuration - Time;
-		UE_LOGFMT(Movement, Warning, "Updated the wall climb duration to {0}", CurrentWallClimbDuration);
 	}
 	
 	// This prevents the wall jump from being redirected if they wall jump out of a wall climb or a mantle 
@@ -2109,7 +2107,6 @@ void UAdvancedMovementComponent::ResetWallClimbInformation(const EMovementMode P
 	if (CurrentWallClimbDuration != WallClimbDuration && IsMovingOnGround())
 	{
 		CurrentWallClimbDuration = WallClimbDuration;
-		UE_LOGFMT(Movement, Warning, "Player is moving on ground, reset wall climb duration to {0}", CurrentWallClimbDuration);
 	}
 }
 
@@ -2119,7 +2116,6 @@ void UAdvancedMovementComponent::ResetWallClimbInterval()
 	if (WallClimbInterval + PrevWallClimbTime < Time)
 	{
 		CurrentWallClimbDuration = WallClimbDuration;
-		UE_LOGFMT(Movement, Warning, "Wall climb interval finished, reset wall climb duration to {0}", CurrentWallClimbDuration);
 	}
 }
 #pragma endregion 
@@ -2575,7 +2571,8 @@ bool UAdvancedMovementComponent::DoJump(bool bReplayingMoves)
 		// Don't jump if we can't move up/down.
 		if (!bConstrainToPlane || FMath::Abs(PlaneConstraintNormal.Z) != 1.f)
 		{
-			// Unreal handles movement logic with client information, and we need to find a way to either make this frame dependent or challenging so it isn't easy to accomplish
+			// We need to find a way to either make this frame dependent or challenging so it isn't easy to accomplish
+			JumpStartTime = Time;
 
 			// Jump forward boost for jumps while sliding
 			if (IsSliding())

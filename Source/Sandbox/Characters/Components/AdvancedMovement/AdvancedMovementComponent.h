@@ -405,10 +405,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Climbing", meta=(UIMin = "-100", UIMax = "100", EditCondition = "bUseWallClimbing", EditConditionHides))
 	float WallClimbGravityLimit;
 
-	/** If the player was previously falling, what speed do we start adding velocity from? */
+	/** Interval between when a player jumps and when they're able to transition to wall climbing. This prevents errors when jumping while already on a wall */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Climbing", meta=(UIMin = "-100", UIMax = "0", ClampMax = "0", EditCondition = "bUseWallClimbing", EditConditionHides))
-	float WallClimbAddSpeedThreshold;
-
+	float WallClimbJumpInterval;
+	
 	/** Wall climbing information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Wall Climbing|Debug", meta=(EditCondition = "bUseWallClimbing", EditConditionHides))
 	bool bDebugWallClimb;
@@ -709,6 +709,9 @@ protected:
 
 
 protected:
+	/** The time the player previously started a jump */
+	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Sliding") float JumpStartTime;
+	
 	/** The time the player started walking */
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Sliding") float WalkingStartTime;
 
