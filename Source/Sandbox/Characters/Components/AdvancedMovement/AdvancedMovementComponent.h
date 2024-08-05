@@ -1039,6 +1039,8 @@ public:
 	public:
 		typedef FCharacterNetworkMoveData Super;
 		FVector2D MoveData_Input;
+		FVector_NetQuantize10 MoveData_LedgeClimbLocation;
+		FVector_NetQuantize10 MoveData_MantleLocation;
 		
 		virtual void ClientFillNetworkMoveData(const FSavedMove_Character& ClientMove, ENetworkMoveType MoveType) override;
 		virtual bool Serialize(UCharacterMovementComponent& CharacterMovement, FArchive& Ar, UPackageMap* PackageMap, ENetworkMoveType MoveType) override;
@@ -1087,6 +1089,8 @@ public:
 			
 			// Custom saved move information and Other values values we want to pass across the network
 			FVector2D PlayerInput;
+			FVector_NetQuantize10 LedgeClimbLocation;
+			FVector_NetQuantize10 MantleLocation;
 		
 			// Without customizing the movement component these are the remaining flags for creating new functionality
 			uint8 SavedRequestToStartWallJumping : 1;
@@ -1121,10 +1125,12 @@ public:
 	UAdvancedMovementComponent();
 	friend class FMSavedMove;
 	FMCharacterNetworkMoveDataContainer CustomMoveDataContainer;
-	UPROPERTY(BlueprintReadWrite) float Time; // Replicating this across the server actually fixed some of the client calculations, however I don't think that's safe 
+	UPROPERTY(BlueprintReadWrite) float Time; // Replicating this across the server actually fixed some of the client calculations (in addition to the current logic), however I don't think that's safe 
 
 	// Custom movement information
 	UPROPERTY(BlueprintReadWrite) FVector2D PlayerInput; // VelocityOriented input values (Acceleration)
+	UPROPERTY(BlueprintReadWrite) FVector_NetQuantize10 Client_LedgeClimbLocation = FVector_NetQuantize10::ZeroVector;
+	UPROPERTY(BlueprintReadWrite) FVector_NetQuantize10 Client_MantleLocation = FVector_NetQuantize10::ZeroVector;
 	UPROPERTY(BlueprintReadWrite) uint8 WallJumpPressed : 1;
 	UPROPERTY(BlueprintReadWrite) uint8 AimPressed : 1;
 	UPROPERTY(BlueprintReadWrite) uint8 Mantling : 1;

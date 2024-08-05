@@ -814,8 +814,18 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 			// if they're trying to transition to mantling/ledge climbing
 			if (CheckIfSafeToMantleLedge())
 			{
-				FVector Location = UpdatedComponent->GetComponentLocation();
-				if (Location.Z <= MantleLedgeLocation.Z) SetMovementMode(MOVE_Custom, MOVE_Custom_Mantling);
+				// Client replication for mantle/ledge climbing
+				if (CharacterOwner->IsLocallyControlled())
+				{
+					Client_LedgeClimbLocation = LedgeClimbLocation;
+					Client_MantleLocation = MantleLedgeLocation;
+					
+					UE_LOGFMT(LogTemp, Log, "{0}::WallClimbing() sending the mantle and ledge climb locations to the server (mantle/ledge): ({1})({2})", 
+						CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"), *Client_MantleLocation.ToString(), *Client_LedgeClimbLocation.ToString()
+					);
+				}
+				
+				if (UpdatedComponent->GetComponentLocation().Z <= MantleLedgeLocation.Z) SetMovementMode(MOVE_Custom, MOVE_Custom_Mantling);
 				else SetMovementMode(MOVE_Custom, MOVE_Custom_LedgeClimbing);
 				StartNewPhysics(subTimeTickRemaining, Iterations);
 				return;
@@ -900,7 +910,6 @@ void UAdvancedMovementComponent::PhysMantling(float deltaTime, int32 Iterations)
 		// The player is transitioning to the ledge
 		if (!UpdatedComponent->GetComponentLocation().Equals(MantleLedgeLocation, 0.1))
 		{
-	
 			// Find the interp rotation
 			const FRotator MantleRotation = (-LedgeClimbNormal).Rotation();
 			const FRotator PlayerRotation = UpdatedComponent->GetComponentRotation();
@@ -1316,7 +1325,6 @@ void UAdvancedMovementComponent::FallingMovementPhysics(float deltaTime, float& 
 		// Compute impact deflection based on final velocity, not integration step.
 		// This allows us to compute a new velocity from the deflected vector, and ensures the full gravity effect is included in the slide result.
 		Adjusted = Velocity * timeTick;
-
 		
 		// See if we can convert a normally invalid landing spot (based on the hit result) to a usable one.
 		if (!Hit.bStartPenetrating && ShouldCheckForValidLandingSpot(timeTick, Adjusted, Hit))
@@ -2296,6 +2304,11 @@ void UAdvancedMovementComponent::ExitLedgeClimb()
 	LedgeClimbStartLocation = FVector();
 	LedgeClimbLocation = FVector();
 	LedgeClimbNormal = FVector();
+
+	// Reset ledge climb network information
+	Client_LedgeClimbLocation = FVector_NetQuantize10::ZeroVector;
+	Client_MantleLocation = FVector_NetQuantize10::ZeroVector;
+	UE_LOGFMT(LogTemp, Log, "{0}::ExitLedgeClimb() resetting the mantle and ledge climb locations", CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"));
 	
 	// Revert the collisions for traditional movement
 	if (CharacterOwner->GetCapsuleComponent())
@@ -2381,6 +2394,22 @@ void UAdvancedMovementComponent::MoveAutonomous(float ClientTimeStamp, float Del
 	if (MoveData)
 	{
 		PlayerInput = MoveData->MoveData_Input;
+		
+		if (!MoveData->MoveData_MantleLocation.IsNearlyZero())
+		{
+			UE_LOGFMT(LogTemp, Log, "{0}::MoveAutonomous() updating the mantle location (prev/current): ({1})({2})", 
+				CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"), *Client_MantleLocation.ToString(), *MoveData->MoveData_MantleLocation.ToString()
+			);
+			Client_MantleLocation = MoveData->MoveData_MantleLocation;
+		}
+
+		if (!MoveData->MoveData_LedgeClimbLocation.IsNearlyZero())
+		{
+			UE_LOGFMT(LogTemp, Log, "{0}::MoveAutonomous() updating the ledge location (prev/current): ({1})({2})", 
+				CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"), *Client_LedgeClimbLocation.ToString(), *MoveData->MoveData_LedgeClimbLocation.ToString()
+			);
+			Client_LedgeClimbLocation = MoveData->MoveData_LedgeClimbLocation;
+		}
 	}
 	
 	Super::MoveAutonomous(ClientTimeStamp, DeltaTime, CompressedFlags, NewAccel);
@@ -2405,6 +2434,8 @@ void UAdvancedMovementComponent::FMCharacterNetworkMoveData::ClientFillNetworkMo
 	Super::ClientFillNetworkMoveData(ClientMove, MoveType);
 	const FMSavedMove& SavedMove = static_cast<const FMSavedMove&>(ClientMove);
 	MoveData_Input = SavedMove.PlayerInput;
+	MoveData_LedgeClimbLocation = SavedMove.LedgeClimbLocation;
+	MoveData_MantleLocation = SavedMove.MantleLocation;
 }
 
 
@@ -2427,6 +2458,8 @@ void UAdvancedMovementComponent::FMSavedMove::Clear()
 	SavedRequestToStartMantling = 0;
 	SavedRequestToStartSprinting = 0;
 	PlayerInput = FVector2D::ZeroVector;
+	LedgeClimbLocation = FVector_NetQuantize10::ZeroVector;
+	MantleLocation = FVector_NetQuantize10::ZeroVector;
 }
 
 
@@ -2453,6 +2486,8 @@ bool UAdvancedMovementComponent::FMCharacterNetworkMoveData::Serialize(UCharacte
 
 	// Save move values
 	MoveData_Input.NetSerialize(Ar, PackageMap, bLocalSuccess); // TODO: Learn how to serialize things
+	SerializeOptionalValue<FVector_NetQuantize10>(bIsSaving, Ar, MoveData_LedgeClimbLocation, FVector_NetQuantize10::ZeroVector);
+	SerializeOptionalValue<FVector_NetQuantize10>(bIsSaving, Ar, MoveData_MantleLocation, FVector_NetQuantize10::ZeroVector);
 	
 	return !Ar.IsError();
 }
@@ -2478,6 +2513,8 @@ void UAdvancedMovementComponent::FMSavedMove::SetMoveFor(ACharacter* Character, 
 	// Set our saved cmc values to the current(safe) values of the cmc
 	UAdvancedMovementComponent* CharacterMovement = Cast<UAdvancedMovementComponent>(Character->GetCharacterMovement());
 	PlayerInput = CharacterMovement->PlayerInput;
+	LedgeClimbLocation = CharacterMovement->Client_LedgeClimbLocation;
+	MantleLocation = CharacterMovement->Client_MantleLocation;
 	SavedRequestToStartWallJumping = CharacterMovement->WallJumpPressed;
 	SavedRequestToStartAiming = CharacterMovement->AimPressed;
 	SavedRequestToStartMantling = CharacterMovement->Mantling;
@@ -2489,7 +2526,9 @@ void UAdvancedMovementComponent::FMSavedMove::PrepMoveFor(ACharacter* Character)
 {
 	Super::PrepMoveFor(Character);
 	UAdvancedMovementComponent* CharacterMovement = Cast<UAdvancedMovementComponent>(Character->GetCharacterMovement());
-	CharacterMovement->PlayerInput = PlayerInput; 
+	CharacterMovement->PlayerInput = PlayerInput;
+	CharacterMovement->Client_LedgeClimbLocation = LedgeClimbLocation;
+	CharacterMovement->Client_MantleLocation = MantleLocation;
 	CharacterMovement->WallJumpPressed = SavedRequestToStartWallJumping;
 	CharacterMovement->AimPressed = SavedRequestToStartAiming;
 	CharacterMovement->Mantling = SavedRequestToStartMantling;
