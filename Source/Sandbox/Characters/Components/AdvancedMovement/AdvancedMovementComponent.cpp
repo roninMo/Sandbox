@@ -46,7 +46,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	StrafeLurchDuration = 0.45;
 	StrafeLurchFullStrengthDuration = 0.123;
 	StrafeLurchStrength = 1;
-	StrafeLurchFriction = 1.64;
+	StrafeLurchFriction = 0.54;
 	
 	// Sliding
 	bUseSliding = true;
