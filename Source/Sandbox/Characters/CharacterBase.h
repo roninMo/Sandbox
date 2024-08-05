@@ -32,14 +32,16 @@ protected:
 //----------------------------------------------------------------------------------//
 // Movement																			//
 //----------------------------------------------------------------------------------//
-protected:
+public:
 	/** Templated convenience version for retrieving the movement component. */
 	template<class T> T* GetMovementComp(void) const { return Cast<T>(GetMovementComponent()); }
 
 	/** Retrieves the advanced movement component */
 	UFUNCTION(BlueprintCallable, Category="Movement", DisplayName="Get Character Movement Component")
-	virtual UAdvancedMovementComponent* GetAdvancedCharacterMovementComponent() const;
+	virtual UAdvancedMovementComponent* GetAdvancedMovementComp() const;
 
+
+protected:
 	/**
 	 * Customizable event to check if the character can jump in the current state.
 	 * Default implementation returns true if the character is on the ground and not crouching,
@@ -96,6 +98,16 @@ protected:
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	TObjectPtr<UInventoryComponent> Inventory;
+
+	
+public:
+	/** Templated convenience version for retrieving the movement component. */
+	template<class T> T* GetInventory(void) const { return Cast<T>(GetInventory()); }
+
+	/** Retrieves the advanced movement component */
+	UFUNCTION(BlueprintCallable, Category="Movement", DisplayName="Get Inventory")
+	virtual UInventoryComponent* GetInventoryComponent() const;
+
 	
 	
 //-------------------------------------------------------------------------------------//

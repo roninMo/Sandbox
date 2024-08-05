@@ -3001,6 +3001,16 @@ float UAdvancedMovementComponent::GetPreviousWallJumpTime() const
 	return PrevWallJumpTime;
 }
 
+float UAdvancedMovementComponent::GetMaxWalkSpeed() const
+{
+	return MaxWalkSpeed;
+}
+
+void UAdvancedMovementComponent::SetMaxWalkSpeed(float Speed)
+{
+	MaxWalkSpeed = Speed;
+}
+
 
 FVector UAdvancedMovementComponent::ComputeSlideVector(const FVector& Delta, const float HitTime, const FVector& Normal, const FHitResult& Hit) const
 {

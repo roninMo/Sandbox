@@ -1231,6 +1231,12 @@ public:
 	/** Returns the previous wall jump time */
 	UFUNCTION(BlueprintCallable) virtual float GetPreviousWallJumpTime() const;
 
+	/** Returns the player's walk speed */
+	UFUNCTION(BlueprintCallable) virtual float GetMaxWalkSpeed() const;
+
+	/** Set's the player's walk speed. This isn't net relevant, and should only be used with ai */
+	UFUNCTION(BlueprintCallable) virtual void SetMaxWalkSpeed(float Speed);
+
 	
 //------------------------------------------------------------------------------//
 // Utility																		//

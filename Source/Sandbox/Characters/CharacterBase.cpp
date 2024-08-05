@@ -70,8 +70,13 @@ bool ACharacterBase::IsTraceConsideredVisible(const FHitResult* HitResult, const
 	return (HitResultActor ? HitResultActor->IsOwnedBy(TargetActor) : false);
 }
 
+UInventoryComponent* ACharacterBase::GetInventoryComponent() const
+{
+	return Inventory;
+}
 
-UAdvancedMovementComponent* ACharacterBase::GetAdvancedCharacterMovementComponent() const
+
+UAdvancedMovementComponent* ACharacterBase::GetAdvancedMovementComp() const
 {
 	return GetMovementComp<UAdvancedMovementComponent>();
 }
