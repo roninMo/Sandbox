@@ -229,13 +229,13 @@ void UAdvancedMovementComponent::InitializeComponent()
 
 #pragma region Conditional Checks
 bool UAdvancedMovementComponent::IsCustomMovementMode(ECustomMovementMode InCustomMovementMode) const { return MovementMode == MOVE_Custom && CustomMovementMode == InCustomMovementMode; }
-bool UAdvancedMovementComponent::IsMovingOnGround() const { return ((MovementMode == MOVE_Walking) || (MovementMode == MOVE_NavWalking) || IsSliding()) && UpdatedComponent; }
+bool UAdvancedMovementComponent::IsRunning() const { return SprintPressed && IsMovingOnGround(); }
+bool UAdvancedMovementComponent::IsMovingOnGround() const { return (MovementMode == MOVE_Walking || MovementMode == MOVE_NavWalking || IsSliding()) && UpdatedComponent; }
 bool UAdvancedMovementComponent::IsSliding() const { return MovementMode == MOVE_Custom && CustomMovementMode == MOVE_Custom_Slide; }
-bool UAdvancedMovementComponent::IsRunning() const { return MovementMode == MOVE_Walking && SprintPressed; }
 bool UAdvancedMovementComponent::IsWallClimbing() const { return MovementMode == MOVE_Custom && CustomMovementMode == MOVE_Custom_WallClimbing; }
-bool UAdvancedMovementComponent::IsWallRunning() const { return MovementMode == MOVE_Custom && CustomMovementMode == MOVE_Custom_WallRunning; }
 bool UAdvancedMovementComponent::IsMantling() const { return MovementMode == MOVE_Custom_Mantling; }
 bool UAdvancedMovementComponent::IsLedgeClimbing() const { return MovementMode == MOVE_Custom && CustomMovementMode == MOVE_Custom_LedgeClimbing; }
+bool UAdvancedMovementComponent::IsWallRunning() const { return MovementMode == MOVE_Custom && CustomMovementMode == MOVE_Custom_WallRunning; }
 bool UAdvancedMovementComponent::IsAiming() const { return AimPressed; }
 bool UAdvancedMovementComponent::IsStrafeSwaying() { return AirStrafeSwayPhysics; }
 bool UAdvancedMovementComponent::IsStrafeLurching() { return AirStrafeLurchPhysics; }

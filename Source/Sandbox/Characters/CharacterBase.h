@@ -10,6 +10,109 @@
 class UInventoryComponent;
 class UAdvancedMovementComponent;
 
+
+/*
+//----------------------------------------------------------------------------------//
+// Combat																			//
+//----------------------------------------------------------------------------------//
+	- Stephen Ulibarri has content on combat for fps and melee combat, and teaches you a lot of different things and how to handle multiplayer
+		- Check that client side prediction helps with combat and all melee attacks except for a few edge case scenarios
+		- Understanding Gameplay Ability tasks helps with handling this safely and a lot of this isn't as complicated once everything settles out
+		- Ai Attack reactions and behavior based on current senses 
+
+
+//----------------------------------------------------------------------------------//
+// CMC																				//
+//----------------------------------------------------------------------------------//
+	- Add Mantling -> Add valid animations for mantling and everything else that needs to be completed
+	- Add break fall on high landings
+
+
+
+//----------------------------------------------------------------------------------//
+// Player interaction																//
+//----------------------------------------------------------------------------------//
+	- The player peripheries already gives us a construct for handling and updating information within the player's range and is probably how we'll handle the player interaction
+	- There needs to be some construct in place for handling player and npc interaction with precedence between different situations (whether it's during a quest or passing by)
+		- And this logic does not need to be conditional it needs to be fun
+	- Should there be subsystems in place for handling objectives and other logic for this?
+
+
+//----------------------------------------------------------------------------------//
+// Animations																		//
+//----------------------------------------------------------------------------------//
+	- Add aim offsets, and a blend layer for mixing these with different equipped weapon
+		- For ranged weapons and bows
+		
+	- Add animations for ranged and some for testing melee combat (or create a good workflow for handling this to quickly build combat (this is literally all that's required at this point)))
+
+
+
+//----------------------------------------------------------------------------------//
+// Hud																				//
+//----------------------------------------------------------------------------------//
+	- We need a ui to be created and constructed and each section of the hud needs an intuitive way of handling things
+
+	- I really like how remnant 2 had made their minimap (actually their inventory system in general was kinda awesome (and the combat was very fluid) let's also create this!
+
+	- Quest information and interaction hud
+
+	- Settings
+		- General settings
+		- Controller/Keybind Input mappings
+		- Graphics
+
+	- Equipment
+		- Equipment information
+			- Information section for equipment interaction
+			- Equipping armaments and armor
+	- CharacterStats
+		- Skills/Abilities perhaps
+		- Information section for the character's stats and other information
+	- Inventory
+		- Create a subclass of the inventory container widget to handle both the player's inventory and any components or other players that they interact with
+	
+
+//----------------------------------------------------------------------------------//
+// Game configuration																//
+//----------------------------------------------------------------------------------//
+	- An autosave function that captures the necessary information and player stats during specific events
+
+	- Subclass the game mode and game state, prototype multiple modes -> a team based arena and a coop campaign esqe mode with objectives -> Do this after reading the game state classes
+		- this is ready, but I haven't created the modes yet
+
+	- We need automation TDD so I feel safe building this out without breaking other things
+
+		
+//----------------------------------------------------------------------------------//
+// Player																			//
+//----------------------------------------------------------------------------------//
+	- We need skill trees, I want abilities that affect the player and their armaments tied to tags so it's not chained together in unnecessary ways.
+	-		Thinking about this is if I activate a armor or a weapon buff, I want that to add a tag through an effect that is registered by my armaments and my character individually
+					(say to do more damage, or help the player block more regardless of the source) -> This makes things less complex and easier to implement
+
+
+	- Finally let's start learning AI in depth and how to go about this. A lot of this is already done (with some configuration that's been cleared away) this is going to be fun
+	- Refactor ai combat for multiplayer for handling calculations for all types of combat
+	- I think lots of enemies with gimmicks and let's play with attack patterns
+
+
+//----------------------------------------------------------------------------------//
+// Level Design																		//
+//----------------------------------------------------------------------------------//
+
+	- Landscapes, Modular kits for everything, create lighting, and learn good practices and design patterns to handle this
+	- Refactor some things for handling lighting, it's just about complete but we need a good way to handle multiple changes to the weather without it causing mayhem
+
+	
+
+
+
+
+
+*/
+	
+
 /*
  * The universal class for characters, npc's, and enemies in the game
  */

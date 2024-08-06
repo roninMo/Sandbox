@@ -39,7 +39,11 @@ enum class EMovementDirection : uint8
 	MD_Left								UMETA(DisplayName = "Left"),
 	MD_Right		                    UMETA(DisplayName = "Right"),
 	MD_Backward		                    UMETA(DisplayName = "Backward"),
-	MD_None                             UMETA(DisplayName = "None")
+	MD_ForwardLeft		                UMETA(DisplayName = "Forward Right"),
+	MD_ForwardRight						UMETA(DisplayName = "Forward Left"),
+	MD_BackwardLeft		                UMETA(DisplayName = "Backward Right"),
+	MD_BackwardRight					UMETA(DisplayName = "Backward Left"),
+	MD_Neutral                          UMETA(DisplayName = "Neutral")
 };
 
 

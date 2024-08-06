@@ -31,7 +31,7 @@ bool UBTTask_EnemyNode::GetCharacter(APawn* Pawn)
 	Enemy = Cast<AEnemy>(Pawn);
 	if (!Enemy)
 	{
-		UE_LOGFMT(EnemyTask, Error, "{0} {1}() {2} failed to get the player!", *UEnum::GetValueAsString(Enemy->GetLocalRole()), *FString(__FUNCTION__), *GetName());
+		UE_LOGFMT(EnemyTask, Error, "{0} {1}() {2} failed to get the character!", *UEnum::GetValueAsString(Enemy->GetLocalRole()), *FString(__FUNCTION__), *GetName());
 		return false;
 	}
 
