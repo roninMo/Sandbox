@@ -41,10 +41,64 @@ class UAdvancedMovementComponent;
 //----------------------------------------------------------------------------------//
 // Animations																		//
 //----------------------------------------------------------------------------------//
-	- Add aim offsets, and a blend layer for mixing these with different equipped weapon
-		- For ranged weapons and bows
+
+
+
+		Abp references
+			- Primary Layers
+				- BaseLayer(BasePoses, MovementLayer, WeaponLayer, OverlayLayer)
+				- AO Layer
+
+			- Additional layers
+				- Weapon Layers
+					- Guns, Melee Weapons, Bows 
+
+			- Ik Layers
+				- Pelvis(Layer)
+				- Feet(Layer)
+				- Arms(Layer)
+				- Head(Layer)
+
+		Slots
+			- DefaultGroup
+				- Overlay
+				- UpperBody
+				- LowerBody
+
+			- Layering Override Group
+				- Head
+				- Pelvis
+				- RightLeg
+				- LeftLeg
+				- RightArm
+				- LeftArm
+				
+
 		
-	- Add animations for ranged and some for testing melee combat (or create a good workflow for handling this to quickly build combat (this is literally all that's required at this point)))
+
+		Blending References
+			- FullBody
+			- UpperBody
+			- LowerBody
+			- RightArm
+			- LeftArm
+			- RightLeg
+			- LeftLeg
+
+			- QuickFeet
+			- SlowFeet
+			- QuickArms
+			- SlowArms
+
+		
+
+
+
+
+
+
+
+
 
 
 
