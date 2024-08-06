@@ -98,7 +98,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	MantleSurfaceTraceFromLedgeOffset = 10;
 	MantleTraceDistance = 64;
 	MantleSecondTraceDistance = 100;
-	MantleTraceHeightOffset = 10;
+	MantleTraceHeightOffset = 3.4;
 	ClimbLocationSpaceOffset = 2.0;
 	MantleLocationSpaceOffset = 2.0;
 	MantleObjects.Add(EObjectTypeQuery::ObjectTypeQuery1);
@@ -819,10 +819,6 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 				{
 					Client_LedgeClimbLocation = LedgeClimbLocation;
 					Client_MantleLocation = MantleLedgeLocation;
-					
-					UE_LOGFMT(LogTemp, Log, "{0}::WallClimbing() sending the mantle and ledge climb locations to the server (mantle/ledge): ({1})({2})", 
-						CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"), *Client_MantleLocation.ToString(), *Client_LedgeClimbLocation.ToString()
-					);
 				}
 				
 				if (UpdatedComponent->GetComponentLocation().Z <= MantleLedgeLocation.Z) SetMovementMode(MOVE_Custom, MOVE_Custom_Mantling);
@@ -989,6 +985,12 @@ void UAdvancedMovementComponent::PhysLedgeClimbing(float deltaTime, int32 Iterat
 		// Save the current values
 		FVector Adjusted;
 		const FVector OldLocation = UpdatedComponent->GetComponentLocation();
+
+		// If this is a crouched ledge climb
+		if (bCrouchedLedgeClimb)
+		{
+			bWantsToCrouch = true;
+		}
 		
 		// The player is transitioning to the ledge
 		const float CharacterHeightOffset = CharacterOwner->GetCapsuleComponent() ? CharacterOwner->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() + LedgeClimbOffset : 90 + LedgeClimbOffset;
@@ -2143,6 +2145,8 @@ bool UAdvancedMovementComponent::CheckIfSafeToMantleLedge()
 	float CharacterHalfHeight = CharacterOwner->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
 	float CharacterHalfHeightNoHemisphere = CharacterOwner->GetCapsuleComponent()->GetScaledCapsuleHalfHeight_WithoutHemisphere();
 	float CharacterHemisphereHeight = CharacterHalfHeight - CharacterHalfHeightNoHemisphere;
+	float CrouchHalfHeight = GetCrouchedHalfHeight();
+	float CrouchDifference = CharacterHalfHeight - CrouchHalfHeight;
 	
 	TArray<AActor*> CharacterActors; 
 	CharacterOwner->GetAllChildActors(CharacterActors); // TODO: Investigate if this includes player spawned actors
@@ -2183,7 +2187,7 @@ bool UAdvancedMovementComponent::CheckIfSafeToMantleLedge()
 	
 	// Check if the player is able to climb to it, and if they have to crouch
 	FVector FrontOfLedgeMidpoint = Ledge.Location - (-Wall.Normal * (MantleSurfaceTraceFromLedgeOffset + CharacterRadius + ClimbLocationSpaceOffset)) + FVector(0, 0, MantleTraceHeightOffset + CharacterHemisphereHeight);
-	FVector ClimbStart = FrontOfLedgeMidpoint + (FVector(0, 0, CharacterHalfHeightNoHemisphere * 2)) - FVector(0, 0, MantleTraceHeightOffset);
+	FVector ClimbStart = FrontOfLedgeMidpoint + (FVector(0, 0, (CharacterHalfHeightNoHemisphere - CrouchDifference) * 2)) - FVector(0, 0, MantleTraceHeightOffset);
 	FVector ClimbEnd = FVector(ClimbStart.X, ClimbStart.Y, UpdatedComponent->GetComponentLocation().Z + MantleTraceHeightOffset - CharacterHalfHeightNoHemisphere);
 	FHitResult ClimbSpace;
 	UKismetSystemLibrary::SphereTraceSingleForObjects(
@@ -2199,17 +2203,30 @@ bool UAdvancedMovementComponent::CheckIfSafeToMantleLedge()
 	
 	// Check if they're able to walk on the ledge
 	FVector LedgeWalkStart = Ledge.Location + FVector(0, 0, MantleTraceHeightOffset + CharacterHemisphereHeight);
-	FVector LedgeWalkEnd = LedgeWalkStart + FVector(0, 0, CharacterHalfHeightNoHemisphere * 2) - FVector(0, 0, MantleTraceHeightOffset);
+	FVector LedgeWalkEnd = LedgeWalkStart + FVector(0, 0, CharacterHalfHeightNoHemisphere * 2);
 	FHitResult LedgeRoom;
 	UKismetSystemLibrary::SphereTraceSingleForObjects(
 		GetWorld(), LedgeWalkStart, LedgeWalkEnd, CharacterRadius,
 		MantleObjects, false, CharacterActors,
 		bDebugMantleAndClimbTrace ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
-		LedgeRoom, true, FColor::Emerald, FColor::Red,TraceDuration
+		LedgeRoom, true, FColor::Emerald, FColor::Emerald,TraceDuration
 	);
-	if (LedgeRoom.bBlockingHit)
+	if (LedgeRoom.IsValidBlockingHit())
 	{
-		return false;
+		LedgeWalkEnd -= FVector(0, 0, CrouchDifference * 2);
+		UKismetSystemLibrary::SphereTraceSingleForObjects(
+			GetWorld(), LedgeWalkStart, LedgeWalkEnd, CharacterRadius,
+			MantleObjects, false, CharacterActors,
+			bDebugMantleAndClimbTrace ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
+			LedgeRoom, true, FColor::Emerald, FColor::Red,TraceDuration
+		);
+
+		if (LedgeRoom.IsValidBlockingHit())
+		{
+			return false;
+		}
+		
+		bCrouchedLedgeClimb = true;
 	}
 
 	// Calculate the mantle location
@@ -2305,10 +2322,16 @@ void UAdvancedMovementComponent::ExitLedgeClimb()
 	LedgeClimbLocation = FVector();
 	LedgeClimbNormal = FVector();
 
+	// handle un crouching
+	if (bCrouchedLedgeClimb)
+	{
+		UnCrouch(false);
+		bCrouchedLedgeClimb = false;
+	}
+
 	// Reset ledge climb network information
 	Client_LedgeClimbLocation = FVector_NetQuantize10::ZeroVector;
 	Client_MantleLocation = FVector_NetQuantize10::ZeroVector;
-	UE_LOGFMT(LogTemp, Log, "{0}::ExitLedgeClimb() resetting the mantle and ledge climb locations", CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"));
 	
 	// Revert the collisions for traditional movement
 	if (CharacterOwner->GetCapsuleComponent())
@@ -2395,21 +2418,8 @@ void UAdvancedMovementComponent::MoveAutonomous(float ClientTimeStamp, float Del
 	{
 		PlayerInput = MoveData->MoveData_Input;
 		
-		if (!MoveData->MoveData_MantleLocation.IsNearlyZero())
-		{
-			UE_LOGFMT(LogTemp, Log, "{0}::MoveAutonomous() updating the mantle location (prev/current): ({1})({2})", 
-				CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"), *Client_MantleLocation.ToString(), *MoveData->MoveData_MantleLocation.ToString()
-			);
-			Client_MantleLocation = MoveData->MoveData_MantleLocation;
-		}
-
-		if (!MoveData->MoveData_LedgeClimbLocation.IsNearlyZero())
-		{
-			UE_LOGFMT(LogTemp, Log, "{0}::MoveAutonomous() updating the ledge location (prev/current): ({1})({2})", 
-				CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"), *Client_LedgeClimbLocation.ToString(), *MoveData->MoveData_LedgeClimbLocation.ToString()
-			);
-			Client_LedgeClimbLocation = MoveData->MoveData_LedgeClimbLocation;
-		}
+		if (!MoveData->MoveData_MantleLocation.IsNearlyZero()) Client_MantleLocation = MoveData->MoveData_MantleLocation;
+		if (!MoveData->MoveData_LedgeClimbLocation.IsNearlyZero()) Client_LedgeClimbLocation = MoveData->MoveData_LedgeClimbLocation;
 	}
 	
 	Super::MoveAutonomous(ClientTimeStamp, DeltaTime, CompressedFlags, NewAccel);

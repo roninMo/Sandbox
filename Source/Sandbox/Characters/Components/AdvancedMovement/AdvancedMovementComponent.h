@@ -500,7 +500,7 @@ protected:
 	/** The time the player starts mantling */
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling") float MantleStartTime;
 
-	/** The mantle ledge location */
+	/** The mantle start location */
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling") FVector MantleStartLocation;
 
 	/** The mantle ledge location */
@@ -533,6 +533,9 @@ protected:
 
 
 protected:
+	/** True if the player has to crouch during a ledge climb */
+	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Ledge Climbing") bool bCrouchedLedgeClimb;
+	
 	/** The time the player starts ledge climbing */
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Ledge Climbing") float LedgeClimbStartTime;
 
