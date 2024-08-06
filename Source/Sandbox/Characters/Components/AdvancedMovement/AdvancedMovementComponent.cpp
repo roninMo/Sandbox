@@ -4,8 +4,8 @@
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 #include "GameFramework/Character.h"
 #include "Components/CapsuleComponent.h"
-#include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Logging/StructuredLog.h"
 
 
@@ -503,7 +503,7 @@ void UAdvancedMovementComponent::CalcVelocity(float DeltaTime, float Friction, b
 		if (AccelDir.IsNearlyZero()) AirStrafeLurchVelocity = Velocity;
 		else AirStrafeLurchVelocity = AccelDir * BaseSpeed;
 		
-		// Apply friction
+		// Apply friction (be careful because air strafing also creates friction)
 		FVector FrictionVector = OldVelocity - AirStrafeLurchVelocity;
 		FVector Friction = FrictionVector * (StrafeLurchFriction * 10) * DeltaTime;
 		AirStrafeLurchVelocity += Friction;
