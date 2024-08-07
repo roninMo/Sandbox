@@ -59,7 +59,7 @@ void UAnimInstanceBase::CalculateCharacterMovementValues(float DeltaTime)
 	CustomMovementMode = MovementComponent->CustomMovementMode;
 
 	APlayerCharacter* PlayerCharacter = Cast<APlayerCharacter>(Character);
-	if (PlayerCharacter)CameraStyle = PlayerCharacter->GetCameraStyle();
+	if (PlayerCharacter)CameraStyle = PlayerCharacter->Execute_GetCameraStyle(PlayerCharacter);
 
 	// Blendspace forwards and sideways values (converted into -1, 1) for handling multiple blendspaces
 	const float MaxWalkSpeed = MovementComponent->GetMaxWalkSpeed() * MovementComponent->SprintSpeedMultiplier;
