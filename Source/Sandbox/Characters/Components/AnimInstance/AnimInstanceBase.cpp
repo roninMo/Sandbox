@@ -7,6 +7,7 @@
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
+#include "Sandbox/Characters/Player/PlayerCharacter.h"
 
 DEFINE_LOG_CATEGORY(LogAnimationBlueprint);
 
@@ -42,6 +43,7 @@ void UAnimInstanceBase::CalculateCharacterMovementValues(float DeltaTime)
 	PreviousRotation = Rotation;
 	Rotation = Character->GetActorRotation();
 	Acceleration = MovementComponent->GetCurrentAcceleration();
+	Input = MovementComponent->GetPlayerInput();
 	
 	// This is the movement vector based on where the player is facing
 	DirectionalVelocity = UKismetMathLibrary::Quat_UnrotateVector(Rotation.Quaternion(), Velocity); // The speed of the forward vector direction
@@ -55,6 +57,9 @@ void UAnimInstanceBase::CalculateCharacterMovementValues(float DeltaTime)
 	bWalking = !bSprinting && MovementComponent->IsWalking();
 	MovementMode = MovementComponent->MovementMode;
 	CustomMovementMode = MovementComponent->CustomMovementMode;
+
+	APlayerCharacter* PlayerCharacter = Cast<APlayerCharacter>(Character);
+	if (PlayerCharacter)CameraStyle = PlayerCharacter->GetCameraStyle();
 
 	// Blendspace forwards and sideways values (converted into -1, 1) for handling multiple blendspaces
 	const float MaxWalkSpeed = MovementComponent->GetMaxWalkSpeed() * MovementComponent->SprintSpeedMultiplier;

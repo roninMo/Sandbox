@@ -105,7 +105,7 @@ protected:
 	/** The character's pitch */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") float Pitch;
 
-	/** The interp that handles player rotations. This is normally smoothed out to prevent any problems when the player's are moving around in third person */
+	/** The interp that handles player rotations. This is normally smoothed out to prevent any problems when the player's are moving around inSp third person */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") float TurnInPlaceInterp;
 
 	/**** Lean calculations ****/
