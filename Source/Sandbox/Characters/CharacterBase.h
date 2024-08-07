@@ -59,6 +59,15 @@ class UAdvancedMovementComponent;
 				- Arms(Layer)
 				- Head(Layer)
 
+
+	The general idea for creating animations is to have movement logic with different ways to blend certain actions into the current animations without having to create other logic
+	There's also a lot of things you have to account for. The animations could be random actions, combat, or inverse kinematics for things like feet and hand placement, and you have to create another blueprint for when the character has weapons equipped
+
+		- If you haven't created blueprints before I'd reference the documentation because there's a lot of things they've done to make things easier, I'm just combining everything here
+		- I have it so that there's an anim blueprint with logic to add actions both in blueprint and from montages, and another blueprint for handling weapons, and inverse kinematics for a bunch of things
+
+
+
 		Slots
 			- DefaultGroup
 				- Overlay

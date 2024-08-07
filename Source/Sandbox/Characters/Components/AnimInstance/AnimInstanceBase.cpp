@@ -49,6 +49,7 @@ void UAnimInstanceBase::CalculateCharacterMovementValues(float DeltaTime)
 	
 	// The essentials for character movement calculations
 	bIsAccelerating = Acceleration.Size() > 0 ? true : false;
+	bIsMoving = Velocity.IsNearlyZero(1);
 	bSprinting = MovementComponent->IsRunning();
 	bCrouching = Character->bIsCrouched;
 	bWalking = !bSprinting && MovementComponent->IsWalking();

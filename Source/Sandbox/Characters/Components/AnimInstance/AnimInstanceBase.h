@@ -46,7 +46,7 @@ public:
 //----------------------------------------------------------------------------------------------------------------------------------//
 protected:
 	/** The character's input */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector Input;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector2D Input;
 	
 	/** The character's acceleration */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector Acceleration;
@@ -125,6 +125,9 @@ protected:
 	/**** Character Movement State values ****/
 	/** Whether the player is accelerating */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") bool bIsAccelerating;
+	
+	/** Whether the player is moving */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") bool bIsMoving;
 	
 	/** Whether the player is sprinting */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") bool bSprinting;
