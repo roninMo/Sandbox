@@ -46,7 +46,7 @@ class UAdvancedMovementComponent;
 
 		Abp references
 			- Primary Layers
-				- BaseLayer(BasePoses, MovementLayer, WeaponLayer, OverlayLayer)
+				- Layer Blending(BasePoses, MovementLayer, WeaponLayer, OverlayLayer)
 				- AO Layer
 
 			- Additional layers
