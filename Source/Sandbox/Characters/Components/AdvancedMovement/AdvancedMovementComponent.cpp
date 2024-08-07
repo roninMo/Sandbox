@@ -2639,12 +2639,12 @@ bool UAdvancedMovementComponent::DoJump(bool bReplayingMoves)
 				// Super glide input (in order for jumps to work while crouching, you need to adjust the CanJump() function to allow jumping while crouching)
 				if (bWantsToCrouch) // CanSlide()
 				{
-						Velocity += AccelDir * FVector(SuperGlideBoost.X, SuperGlideBoost.X, 0) + FVector(0, 0, SuperGlideBoost.Y);
+					Velocity += AccelDir * FVector(SuperGlideBoost.X, SuperGlideBoost.X, 0) + FVector(0, 0, SuperGlideBoost.Y);
 				}
 			}
 			else
 			{
-				Velocity.Z = FMath::Max<FVector::FReal>(Velocity.Z + 1.f, JumpZVelocity);
+				Velocity.Z = FMath::Max<FVector::FReal>(Velocity.Z, JumpZVelocity);
 			}
 			
 			if (bDebugWallJump)
@@ -2965,9 +2965,6 @@ float UAdvancedMovementComponent::GetMaxSpeed() const
 	// Player input based movement logic
 	if (IsMovingOnGround())
 	{
-		if (SprintPressed) return MaxWalkSpeed * SprintSpeedMultiplier;
-		if (AimPressed) return MaxWalkSpeed * AimSpeedMultiplier;
-		// if (Character->bWalking) return MaxWalkSpeed * WalkSpeedMultiplier;
 		if (IsSliding()) return SlideSpeedLimit; // TODO: Investigate crouching logic and it's behavior during air movement, and perhaps refactor this into the normal walking movement logic with physics adjustments similar to air strafe lurches
 		if (IsWallRunning()) return WallRunSpeed;
 		if (IsCrouching())
@@ -2975,6 +2972,9 @@ float UAdvancedMovementComponent::GetMaxSpeed() const
 			if (SprintPressed) return MaxWalkSpeedCrouched * CrouchSprintSpeedMultiplier;
 			else return MaxWalkSpeedCrouched;
 		}
+		// if (AimPressed) return MaxWalkSpeed * AimSpeedMultiplier;
+		// if (Character->bWalking) return MaxWalkSpeed * WalkSpeedMultiplier;
+		if (SprintPressed) return MaxWalkSpeed * SprintSpeedMultiplier;
 	}
 	if (IsFalling())
 	{
