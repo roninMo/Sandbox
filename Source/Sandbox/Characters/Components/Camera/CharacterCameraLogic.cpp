@@ -118,19 +118,23 @@ bool ACharacterCameraLogic::IsAbleToActivateCameraTransition()
 
 void ACharacterCameraLogic::OnCameraStyleSet()
 {
+	// Camera rotations
+	if (!bPreventRotationAdjustments)
+	{
+		UpdateCameraRotation();
+	}
+
+	// Camera logic
 	if (CameraStyle == CameraStyle_FirstPerson)
 	{
-		SetRotationToCamera();
 		UpdateCameraArmSettings(CameraOffset_FirstPerson, 0, false);
 	}
 	else if (CameraStyle == CameraStyle_TargetLocking)
 	{
-		SetRotationToMovement();
 		UpdateCameraArmSettings(GetCameraOffset(Execute_GetCameraStyle(this), Execute_GetCameraOrientation(this)), TargetArmLength, true, CameraLag);
 	}
 	else if (CameraStyle == CameraStyle_ThirdPerson)
 	{
-		SetRotationToMovement();
 		UpdateCameraArmSettings(GetCameraOffset(Execute_GetCameraStyle(this), Execute_GetCameraOrientation(this)), TargetArmLength, true, CameraLag);
 	}
 
@@ -465,6 +469,31 @@ void ACharacterCameraLogic::SetTargetLockTransitionSpeed(const float Speed)
 {
 	TargetLockTransitionSpeed = Speed;
 	if (CameraArm) CameraArm->TargetLockTransitionSpeed = Speed;
+}
+
+
+void ACharacterCameraLogic::UpdateCameraRotation()
+{
+	if (CameraStyle == CameraStyle_FirstPerson)
+	{
+		SetRotationToCamera();
+	}
+	else if (CameraStyle == CameraStyle_ThirdPerson || CameraStyle == CameraStyle_TargetLocking)
+	{
+		SetRotationToMovement();
+	}
+}
+
+
+bool ACharacterCameraLogic::GetPreventRotationAdjustments() const
+{
+	return bPreventRotationAdjustments;
+}
+
+
+void ACharacterCameraLogic::SetPreventRotationAdjustments(const bool bPreventRotations)
+{
+	bPreventRotationAdjustments = bPreventRotations;
 }
 
 

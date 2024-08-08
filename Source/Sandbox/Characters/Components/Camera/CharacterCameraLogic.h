@@ -58,6 +58,9 @@ protected:
 	/** The target arm length of the camera arm. @remarks This overrides the value of the camera arm's target arm length */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera") float TargetArmLength;
 
+	/** Value for other components to prevent camera style adjustments from adjusting the camera rotation logic. While this is true, the other components have to handle the rotation and fixes once set to false */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera") bool bPreventRotationAdjustments;
+
 	
 	/**** Camera Transition Replication interval values ****/
 	/** This is true if the player has recently tried to transition between cameras, only edit this during the camera transition handles */
@@ -270,6 +273,16 @@ public:
 
 	/** Updates the target lock transition speed for the character and the camera arm */
 	UFUNCTION(BlueprintCallable, Category = "Camera|Target Locking") virtual void SetTargetLockTransitionSpeed(float Speed);
+
+	/** Updated camera rotation based on player's camera style */
+	UFUNCTION(BlueprintCallable, Category = "Camera|Utilities") virtual void UpdateCameraRotation();
+
+	/** Returns whether to prevent rotations */
+	UFUNCTION(BlueprintCallable, Category = "Camera|Utilities") virtual bool GetPreventRotationAdjustments() const;
+
+	/** Sets whether to prevent rotations */
+	UFUNCTION(BlueprintCallable, Category = "Camera|Utilities") virtual void SetPreventRotationAdjustments(bool bPreventRotations);
+	
 	
 public:
 	/** Internal function for returning a reference to the target lock characters array */

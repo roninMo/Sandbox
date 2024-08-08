@@ -7,6 +7,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Characters/Components/Camera/CharacterCameraLogic.h"
 
 
 DEFINE_LOG_CATEGORY(Movement);
@@ -85,6 +86,8 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	WallClimbSpeed = 400;
 	WallClimbAcceleration = 20;
 	WallClimbMultiplier = FVector2D(0.64, 1);
+	bRotateCharacterDuringWallClimb = true;
+	WallClimbRotationSpeed = 3;
 	WallClimbAcceptableAngle = 45;
 	WallClimbFriction = 2.5;
 	WallClimbGravityLimit = -45;
@@ -93,7 +96,9 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	// Mantling
 	bUseMantling = true;
 	MantleSpeed = 200.0;
-	MantleRotationSpeed = 1;
+	bPreventMovementRotationsDuringMantle = true;
+	bRotateCharacterDuringMantle = true;
+	MantleRotationSpeed = 6.4;
 	MantleLedgeLocationOffset = -55;
 	MantleSurfaceTraceFromLedgeOffset = 10;
 	MantleTraceDistance = 64;
@@ -108,6 +113,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	// Ledge Climbing
 	bUseLedgeClimbing = true;
 	LedgeClimbOffset = 3.4;
+	LedgeClimbRotationSpeed = 10;
 	CollisionResponsesDuringLedgeClimbing.SetResponse(ECC_Visibility, ECR_Ignore);
 	CollisionResponsesDuringLedgeClimbing.SetResponse(ECC_Camera, ECR_Ignore);
 	CollisionResponsesDuringLedgeClimbing.SetResponse(ECC_WorldStatic, ECR_Ignore);
@@ -763,9 +769,10 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 		// save the current values
 		const FVector OldLocation = UpdatedComponent->GetComponentLocation();
 		const FQuat PawnRotation = UpdatedComponent->GetComponentQuat();
+		FRotator AdjustedRotation = PawnRotation.Rotator();
 		FVector Adjusted;
 		bJustTeleported = false;
-
+		
 		RestorePreAdditiveRootMotionVelocity();
 		FVector AccelDir = Acceleration.GetSafeNormal();
 		const FVector OldVelocity = Velocity;
@@ -803,7 +810,7 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 				Adjusted = Velocity * timeTick;
 			}
 		}
-
+		
 		// check if they're wall climbing
 		FHitResult Hit(1.f);
 		SafeMoveUpdatedComponent(Adjusted, PawnRotation, true, Hit); // Moves based on adjusted, updates velocity, and handles returning colliding information for handling the different movement scenarios
@@ -836,11 +843,23 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 				StartNewPhysics(subTimeTickRemaining, Iterations);
 				return;
 			}
+			
+			// Find the interp rotation
+			if (bRotateCharacterDuringWallClimb)
+			{
+				const FRotator WallClimbRotation = (-PrevWallClimbNormal).Rotation();
+				FRotator TargetRotation = FRotator(0, WallClimbRotation.Yaw, 0);
+				if (!PawnRotation.Rotator().Equals(TargetRotation, 0.1))
+				{
+					FRotator DeltaRotation = (TargetRotation - PawnRotation.Rotator()).GetNormalized();
+					AdjustedRotation = (PawnRotation.Rotator() + DeltaRotation * timeTick * WallClimbRotationSpeed).GetNormalized();
+				}
+			}
 
 			// Handle moving up and alongside the wall
 			HandleImpact(Hit, subTimeTickRemaining, Adjusted);
 			FVector Delta = ComputeSlideVector(Adjusted, 1.f - Hit.Time, Hit.Normal, Hit);
-			SafeMoveUpdatedComponent(Delta, PawnRotation, true, Hit);
+			SafeMoveUpdatedComponent(Delta, AdjustedRotation.GetNormalized(), true, Hit);
 
 			if (bDebugWallClimb)
 			{
@@ -902,30 +921,28 @@ void UAdvancedMovementComponent::PhysMantling(float deltaTime, int32 Iterations)
 		// Save the current values
 		FVector Adjusted;
 		const FVector OldLocation = UpdatedComponent->GetComponentLocation();
-
+		const FRotator OldRotation = UpdatedComponent->GetComponentRotation();
+		
 		// The player is transitioning to the ledge
 		if (!UpdatedComponent->GetComponentLocation().Equals(MantleLedgeLocation, 0.1))
 		{
 			// Find the interp rotation
-			const FRotator MantleRotation = (-LedgeClimbNormal).Rotation();
-			const FRotator PlayerRotation = UpdatedComponent->GetComponentRotation();
-			FRotator TargetRotation = FRotator(0, MantleRotation.Yaw, 0);
-			
-			// Use speed adjustments to create your own ease in transitions
-			const float CurrentPercent = (MantleLedgeLocation - OldLocation).Size() / (MantleLedgeLocation - MantleStartLocation).Size();; // 0-1
-			const float InterpSpeedAdjustments = MantleRotationSpeedAdjustments ? FMath::Clamp(MantleRotationSpeedAdjustments->GetFloatValue(CurrentPercent * 10), 0.1, 10) : 1;
-			
-			// UKismetMathLibrary::RInterpTo();
-			FRotator Delta = (TargetRotation - PlayerRotation).GetNormalized();
-			FRotator AdjustedRotation = Delta * timeTick * MantleRotationSpeed * InterpSpeedAdjustments;
-			
-			// UE_LOGFMT(Movement, Log, "MantleRotation: {0}, PlayerRotation: {1}, TargetRotation: {2}, AdjustedRotation: {3}",
-			// 	MantleRotation.Yaw, PlayerRotation.Yaw, TargetRotation.Yaw, AdjustedRotation.Yaw);
+			FRotator AdjustedRotation = OldRotation;
+			if (bRotateCharacterDuringMantle)
+			{
+				const FRotator WallClimbRotation = (-LedgeClimbNormal).Rotation();
+				FRotator TargetRotation = FRotator(0, WallClimbRotation.Yaw, 0);
+				if (!OldRotation.Equals(TargetRotation, 0.1))
+				{
+					FRotator DeltaRotation = (TargetRotation - OldRotation).GetNormalized();
+					AdjustedRotation = (OldRotation + DeltaRotation * timeTick * MantleRotationSpeed).GetNormalized();
+				}
+			}
 			
 			// Interp the character to the target location
 			Adjusted = MantleAndClimbInterp(timeTick, MantleStartLocation, MantleLedgeLocation, OldLocation, MantleSpeed, MantleSpeedAdjustments);
 			FHitResult Hit;
-			SafeMoveUpdatedComponent(Adjusted, (PlayerRotation + AdjustedRotation).GetNormalized(), false, Hit);
+			SafeMoveUpdatedComponent(Adjusted, AdjustedRotation, false, Hit);
 
 			// TODO: Error handling
 			
@@ -985,6 +1002,7 @@ void UAdvancedMovementComponent::PhysLedgeClimbing(float deltaTime, int32 Iterat
 		// Save the current values
 		FVector Adjusted;
 		const FVector OldLocation = UpdatedComponent->GetComponentLocation();
+		const FRotator OldRotation = UpdatedComponent->GetComponentRotation();
 
 		// If this is a crouched ledge climb
 		if (bCrouchedLedgeClimb)
@@ -996,10 +1014,20 @@ void UAdvancedMovementComponent::PhysLedgeClimbing(float deltaTime, int32 Iterat
 		const float CharacterHeightOffset = CharacterOwner->GetCapsuleComponent() ? CharacterOwner->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() + LedgeClimbOffset : 90 + LedgeClimbOffset;
 		if (!UpdatedComponent->GetComponentLocation().Equals(LedgeClimbLocation + FVector(0, 0, CharacterHeightOffset), 0.1))
 		{
+			// Find the interp rotation
+			FRotator AdjustedRotation = OldRotation;
+			const FRotator WallClimbRotation = (-LedgeClimbNormal).Rotation();
+			FRotator TargetRotation = FRotator(0, WallClimbRotation.Yaw, 0);
+			if (!OldRotation.Equals(TargetRotation, 0.1))
+			{
+				FRotator DeltaRotation = (TargetRotation - OldRotation).GetNormalized();
+				AdjustedRotation = (OldRotation + DeltaRotation * timeTick * LedgeClimbRotationSpeed).GetNormalized();
+			}
+			
 			// Interp the character to the target location
 			Adjusted = MantleAndClimbInterp(timeTick, LedgeClimbStartLocation, LedgeClimbLocation + FVector(0, 0, CharacterHeightOffset), OldLocation, CurrentClimbSpeed, CurrentClimbSpeedAdjustments);
 			FHitResult Hit;
-			SafeMoveUpdatedComponent(Adjusted, UpdatedComponent->GetComponentRotation(), false, Hit);
+			SafeMoveUpdatedComponent(Adjusted, AdjustedRotation, false, Hit);
 
 			// TODO: Error handling
 			
@@ -2086,6 +2114,13 @@ bool UAdvancedMovementComponent::TryingToClimbWall(FVector WallNormal) const
 void UAdvancedMovementComponent::EnterWallClimb(EMovementMode PrevMode, ECustomMovementMode PrevCustomMode)
 {
 	WallClimbStartTime = Time;
+
+	// Prevent the camera and movement rotations from turning the player
+	if (bRotateCharacterDuringWallClimb)
+	{
+		RemoveCharacterCameraLogic();
+		Character->SetPreventRotationAdjustments(true);
+	}
 }
 
 
@@ -2093,6 +2128,13 @@ void UAdvancedMovementComponent::ExitWallClimb()
 {
 	PrevWallClimbTime = Time;
 
+	// Reset the camera style logic
+	if (bRotateCharacterDuringWallClimb)
+	{
+		Character->SetPreventRotationAdjustments(false);
+		ResetCharacterCameraLogic();
+	}
+	
 	// If they stopped climbing before the duration is finished adjust the current duration to the remaining duration
 	if (WallClimbStartTime + WallClimbDuration >= Time)
 	{
@@ -2280,6 +2322,13 @@ void UAdvancedMovementComponent::EnterMantle(EMovementMode PrevMode, ECustomMove
 {
 	MantleStartTime = Time;
 	MantleStartLocation = UpdatedComponent->GetComponentLocation();
+
+	// Prevent camera from rotating the character during a mantle
+	if (bPreventMovementRotationsDuringMantle)
+	{
+		RemoveCharacterCameraLogic();
+		Character->SetPreventRotationAdjustments(true);
+	}
 }
 
 
@@ -2288,6 +2337,13 @@ void UAdvancedMovementComponent::ExitMantle()
 	MantleStartTime = 0;
 	MantleStartLocation = FVector();
 	MantleLedgeLocation = FVector();
+	
+	// Reset the camera style logic
+	if (bPreventMovementRotationsDuringMantle)
+	{
+		Character->SetPreventRotationAdjustments(false);
+		ResetCharacterCameraLogic();
+	}
 	
 	// This prevents the wall jump from being redirected if they wall jump out of a wall climb or a mantle 
 	PreviousGroundLocation = UpdatedComponent->GetComponentLocation() + PrevWallClimbNormal * 100;
@@ -2312,6 +2368,10 @@ void UAdvancedMovementComponent::EnterLedgeClimb(EMovementMode PrevMode, ECustom
 		CurrentClimbSpeed = LedgeClimbVariations[ClimbType].InterpSpeed;
 		CurrentClimbSpeedAdjustments = LedgeClimbVariations[ClimbType].SpeedAdjustments;
 	}
+
+	// Remove character rotations
+	RemoveCharacterCameraLogic();
+	Character->SetPreventRotationAdjustments(true);
 }
 
 
@@ -2338,6 +2398,10 @@ void UAdvancedMovementComponent::ExitLedgeClimb()
 	{
 		CharacterOwner->GetCapsuleComponent()->SetCollisionResponseToChannels(CapturedCollisionResponsesOutsideOfLedgeClimbing);
 	}
+
+	// Give player control of camera rotations
+	Character->SetPreventRotationAdjustments(false);
+	ResetCharacterCameraLogic();
 	
 	// Default speed for safety precautions
 	CurrentClimbSpeed = 340;
@@ -2380,6 +2444,7 @@ bool UAdvancedMovementComponent::CanWallRun(const FHitResult& Wall) const
 	return true;
 }
 
+
 void UAdvancedMovementComponent::EnterWallRun(EMovementMode PrevMode, ECustomMovementMode PrevCustomMode)
 {
 	WallRunCurrentSpeed = WallRunSpeed > Velocity.Size2D() ? WallRunSpeed : Velocity.Size2D();
@@ -2387,9 +2452,11 @@ void UAdvancedMovementComponent::EnterWallRun(EMovementMode PrevMode, ECustomMov
 	WallRunStartTime = Time;
 }
 
+
 void UAdvancedMovementComponent::ExitWallRun()
 {
 }
+
 
 void UAdvancedMovementComponent::ResetWallRunInformation(EMovementMode PrevMode, uint8 PrevCustomMode)
 {
@@ -3027,6 +3094,12 @@ FVector2D UAdvancedMovementComponent::GetPlayerInput() const
 }
 
 
+bool UAdvancedMovementComponent::GetPreventControllerRotations() const
+{
+	return bPreventControllerRotations;
+}
+
+
 EMovementMode UAdvancedMovementComponent::GetMovementMode() const
 {
 	return MovementMode;
@@ -3132,6 +3205,29 @@ void UAdvancedMovementComponent::ResetGroundStateInformation(EMovementMode PrevM
 		}
 	}
 
+}
+
+
+void UAdvancedMovementComponent::RemoveCharacterCameraLogic()
+{
+	// Prevent the camera and movement rotations from turning the player
+	Character = Character ? Character : Cast<ACharacterCameraLogic>(CharacterOwner);
+	if (Character)
+	{
+		bPreventControllerRotations = true; // notify the character
+		bOrientRotationToMovement = false;
+		Character->bUseControllerRotationYaw = false;
+	}
+}
+
+void UAdvancedMovementComponent::ResetCharacterCameraLogic()
+{
+	// Reset the camera style logic
+	Character = Character ? Character : Cast<ACharacterCameraLogic>(CharacterOwner);
+	if (Character)
+	{
+		Character->UpdateCameraRotation();
+	}
 }
 
 

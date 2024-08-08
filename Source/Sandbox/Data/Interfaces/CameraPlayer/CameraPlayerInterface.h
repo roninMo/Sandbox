@@ -22,6 +22,7 @@ class SANDBOX_API ICameraPlayerInterface
 	GENERATED_BODY()
 
 public:
+	/** @note If you're having trouble referencing interface native event and blueprint functions in code, you need to prefix the function with "Execute_", and add an additional first argument referencing who's calling the function */
 	/** Returns the camera style. The default styles are "Fixed", "Spectator", "FirstPerson", "ThirdPerson", "TargetLocking", and "Aiming". You can also add your own in the BasePlayerCameraManager class */
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Camera|Style")
 	FName GetCameraStyle() const;

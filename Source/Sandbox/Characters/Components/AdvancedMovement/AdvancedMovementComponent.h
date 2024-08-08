@@ -7,6 +7,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "AdvancedMovementComponent.generated.h"
 
+class ACharacterCameraLogic;
 DECLARE_LOG_CATEGORY_EXTERN(Movement, Log, All);
 
 // CMC network breakdown
@@ -393,6 +394,14 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Climbing", meta=(EditCondition = "bUseWallClimbing", EditConditionHides))
 	FVector2D WallClimbMultiplier;
 
+	/** Allow the character movement component to handle rotations during mantling */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Wall Climbing")
+	bool bRotateCharacterDuringWallClimb;
+	
+	/** The speed at which the player transitions to the mantle location */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Climbing", meta=(UIMin = "0", UIMax = "10", EditCondition = "bUseMantling && bRotateCharacterDuringWallClimb", EditConditionHides)) 
+	float WallClimbRotationSpeed;
+
 	/** Up to what angle is wall climbing allowed? */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Climbing", meta=(UIMin = "0", UIMax = "45", EditCondition = "bUseWallClimbing", EditConditionHides))
 	float WallClimbAcceptableAngle;
@@ -447,13 +456,21 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(EditCondition = "bUseMantling", EditConditionHides)) 
 	UCurveFloat* MantleSpeedAdjustments;
 	
-	/** The speed at which the player transitions to the mantle location */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(UIMin = "0", UIMax = "10", EditCondition = "bUseMantling", EditConditionHides)) 
+	/** Prevent movements from rotating a character during mantling */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Mantling")
+	bool bPreventMovementRotationsDuringMantle;
+
+	/** Rotates the character towards the ledge while mantling */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Mantling")
+	bool bRotateCharacterDuringMantle;
+
+	/** The speed at which the player rotates during mantling */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(UIMin = "0", UIMax = "10", EditCondition = "bUseMantling && bRotateCharacterDuringMantle", EditConditionHides)) 
 	float MantleRotationSpeed;
 
 	/** The curve that adjusts the speed to allow for smooth interpolations and adjustments. To make things less complicated these are a value between 0-10 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(EditCondition = "bUseMantling", EditConditionHides)) 
-	UCurveFloat* MantleRotationSpeedAdjustments;
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(EditCondition = "bUseMantling", EditConditionHides)) 
+	// UCurveFloat* MantleRotationSpeedAdjustments;
 	
 	/** The offset for when the player is mantling on a ledge */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(UIMin = "-100", UIMax = "50", EditCondition = "bUseMantling", EditConditionHides)) 
@@ -523,6 +540,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Ledge Climbing", meta=(UIMin = "0.0", UIMax = "20", EditCondition = "bUseLedgeClimbing", EditConditionHides))
 	float LedgeClimbOffset;
 	
+	/** The speed at which the player rotates during ledge climbing */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Ledge Climbing", meta=(UIMin = "0", UIMax = "10", EditCondition = "bUseLedgeClimbing", EditConditionHides)) 
+	float LedgeClimbRotationSpeed;
+
 	/** When the player ledge climbs, they move through the ledge, so we need to adjust the collision to handle this. This also let's you decide the responses for other channels */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Ledge Climbing", meta=(EditCondition = "bUseLedgeClimbing", EditConditionHides)) 
 	FCollisionResponseContainer CollisionResponsesDuringLedgeClimbing;
@@ -558,8 +579,7 @@ protected:
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Ledge Climbing") UCurveFloat* CurrentClimbSpeedAdjustments;
 
 	/** When the player ledge climbs, they move through the ledge, so we need to adjust the collision to handle this. This also let's you decide the responses for other channels */
-	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Ledge Climbing") 
-	FCollisionResponseContainer CapturedCollisionResponsesOutsideOfLedgeClimbing;
+	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Ledge Climbing") FCollisionResponseContainer CapturedCollisionResponsesOutsideOfLedgeClimbing;
 
 	
 //----------------------------------------------------------------------------------------------------------------------------------//
@@ -718,6 +738,12 @@ protected:
 	/** The time the player started walking */
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Sliding") float WalkingStartTime;
 
+	/** Returns true if the player should prevent controller rotations during wall climbing */
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Character Movement (General Settings)") bool bPreventControllerRotations;
+	
+	/** A reference to the character */
+	UPROPERTY(BlueprintReadWrite, Category = "Character Movement (General Settings)") TObjectPtr<ACharacterCameraLogic> Character;
+	
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 // Bhop Character Movement Component																																 						 //
@@ -1223,6 +1249,9 @@ public:
 	/** Returns the player's current input */
 	UFUNCTION(BlueprintCallable) virtual FVector2D GetPlayerInput() const;
 
+	/** Returns whether controller rotations should rotate the character */
+	UFUNCTION(BlueprintCallable) virtual bool GetPreventControllerRotations() const;
+	
 	/** Returns the movement mode */
 	UFUNCTION(BlueprintCallable) virtual EMovementMode GetMovementMode() const;
 
@@ -1278,6 +1307,12 @@ public:
 	
 	/** Logic to do once the moving on ground state has been updated */
 	virtual void ResetGroundStateInformation(EMovementMode PrevMode, uint8 PrevCustomMode);
+
+	/** Prevent camera rotations or character movement from rotating the character */
+	virtual void RemoveCharacterCameraLogic();
+	
+	/** Reset character's camera logic */
+	virtual void ResetCharacterCameraLogic();
 	
 	/** Util function for printing debug messages */
 	virtual void DebugGroundMovement(FString Message, FColor Color, bool DrawSphere = false);
