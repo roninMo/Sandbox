@@ -740,6 +740,8 @@ protected:
 
 	/** Returns true if the player should prevent controller rotations during wall climbing */
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Character Movement (General Settings)") bool bPreventControllerRotations;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Character Movement (General Settings)") bool bPrevOrientationToMovement;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Character Movement (General Settings)") bool bPrevUseControllerRotationYaw;
 	
 	/** A reference to the character */
 	UPROPERTY(BlueprintReadWrite, Category = "Character Movement (General Settings)") TObjectPtr<ACharacterCameraLogic> Character;
@@ -1313,6 +1315,10 @@ public:
 	
 	/** Reset character's camera logic */
 	virtual void ResetCharacterCameraLogic();
+
+	/** Blueprint function to handle custom logic for resetting character's camera logic after specific movement modes (Wall Climb, Mantle, Ledge Climb) */
+	UFUNCTION(BlueprintImplementableEvent, Category="Components|Movement", DisplayName="Update Camera Logic After Climbing")
+	void UpdateCameraLogicAfterClimbing(EMovementMode Mode, uint8 CustomMode);
 	
 	/** Util function for printing debug messages */
 	virtual void DebugGroundMovement(FString Message, FColor Color, bool DrawSphere = false);

@@ -3228,6 +3228,9 @@ void UAdvancedMovementComponent::ResetCharacterCameraLogic()
 	{
 		Character->UpdateCameraRotation();
 	}
+
+	// Blueprint function logic
+	UpdateCameraLogicAfterClimbing(MovementMode, CustomMovementMode);
 }
 
 
