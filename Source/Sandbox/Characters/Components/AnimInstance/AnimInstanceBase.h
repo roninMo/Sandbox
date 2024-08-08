@@ -87,6 +87,9 @@ protected:
 	/** The character's rotation */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator Rotation;
 
+	/** The camera's rotation relative to the player's current rotation */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator RelativeRotation;
+
 	/** A smoothed version of the character rotation */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator SmoothedAimRotation;
 
@@ -119,7 +122,13 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector2D LeanAmount;
 
 	/** The player's lean interp speed */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") float LeanInterpSpeed = 6.4f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") float LeanInterpSpeed = 3.4;
+
+	/** The lean amount used for calculating the player's lean while wall running */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector2D WallRunLeanAmount;
+
+	/** The player's lean interp speed */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") float WallRunLeanInterpSpeed = 30;
 
 	
 	/**** Character Movement State values ****/
@@ -244,6 +253,13 @@ protected:
 	// Gameplay tags that can be mapped to blueprint variables. The variables will automatically update as the tags are added or removed
 	// UPROPERTY(EditDefaultsOnly, Category = "GameplayTags") FGameplayTagBlueprintPropertyMap GameplayTagPropertyMap;
 
+//------------------------------------------------------------------------------//
+// Captured Movement Values														//
+//------------------------------------------------------------------------------//
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Character|AnimBlueprint") float MaxWalkSpeed;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Character|AnimBlueprint") float MaxCrouchSpeed;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Character|AnimBlueprint") float MaxRunSpeed;
+	
 
 //------------------------------------------------------------------------------//
 // Movement Calculations														//

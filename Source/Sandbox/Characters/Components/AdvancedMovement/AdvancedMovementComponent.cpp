@@ -3129,6 +3129,16 @@ FVector UAdvancedMovementComponent::GetLedgeClimbNormal() const
 	return LedgeClimbNormal;
 }
 
+FVector UAdvancedMovementComponent::GetWallRunLocation() const
+{
+	return WallRunLocation;
+}
+
+FVector UAdvancedMovementComponent::GetWallRunNormal() const
+{
+	return WallRunNormal;
+}
+
 FVector UAdvancedMovementComponent::GetWallJumpLocation() const
 {
 	return PrevWallJumpLocation;

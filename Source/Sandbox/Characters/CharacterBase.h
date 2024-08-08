@@ -67,7 +67,6 @@ class UAdvancedMovementComponent;
 		- I have it so that there's an anim blueprint with logic to add actions both in blueprint and from montages, and another blueprint for handling weapons, and inverse kinematics for a bunch of things
 
 
-
 		Slots
 			- DefaultGroup
 				- Overlay
@@ -81,10 +80,8 @@ class UAdvancedMovementComponent;
 				- LeftLeg
 				- RightArm
 				- LeftArm
+
 				
-
-		
-
 		Blending References
 			- FullBody
 			- UpperBody
@@ -99,6 +96,28 @@ class UAdvancedMovementComponent;
 			- QuickArms
 			- SlowArms
 
+
+		Anim Curves are an interesting thing for handling things with animation and there's a lot of functionality that branches out from this. They return a value from a frame of an animation, and that can be used for calculations
+		There's using it for things like handling logic, adjusting calculations based on values, adjusting materials, using it for blending values, ik placement and logic, and the list goes on
+
+		Here's a list of the values we're using to enable certain logic during different animations to enable overlays and inverse kinematics during specific animations to prevent problems
+			- Layering_Pelvis
+			- Layering_Foot_l
+			- Layering_Foot_r
+			- Layering_Arm_l
+			- Layering_Arm_r
+			- Layering_Head
+
+			- IK_Enabled
+			- IK_Foot_l
+			- IK_Foot_r
+			- IK_Arm_l
+			- IK_Arm_r
+			- IK_Hand_l
+			- IK_Hand_r
+			- IK_Head
+			- IK_Pelvis
+			- IK_Spine
 		
 
 

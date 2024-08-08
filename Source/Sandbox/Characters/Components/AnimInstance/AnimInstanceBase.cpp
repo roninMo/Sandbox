@@ -35,15 +35,21 @@ void UAnimInstanceBase::NativeUpdateAnimation(float DeltaTime)
 
 void UAnimInstanceBase::CalculateCharacterMovementValues(float DeltaTime)
 {
+	// Movement component values
+	MaxWalkSpeed = MovementComponent->GetMaxWalkSpeed();
+	MaxCrouchSpeed = MovementComponent->MaxWalkSpeedCrouched;
+	MaxRunSpeed = MovementComponent->GetMaxWalkSpeed() * MovementComponent->SprintSpeedMultiplier;
+	
 	// The character's velocity, speed and rotation
+	Input = MovementComponent->GetPlayerInput();
+	Acceleration = MovementComponent->GetCurrentAcceleration();
+	Acceleration_N = Acceleration.GetSafeNormal();
 	Velocity = Character->GetVelocity(); 
 	Velocity_N = Velocity.GetSafeNormal();
 	Speed = Velocity.Size();
 	Speed_N = UKismetMathLibrary::MapRangeClamped(Speed, -MovementComponent->GetMaxSpeed(), MovementComponent->GetMaxSpeed(), -1, 1);
 	PreviousRotation = Rotation;
 	Rotation = Character->GetActorRotation();
-	Acceleration = MovementComponent->GetCurrentAcceleration();
-	Input = MovementComponent->GetPlayerInput();
 	
 	// This is the movement vector based on where the player is facing
 	DirectionalVelocity = UKismetMathLibrary::Quat_UnrotateVector(Rotation.Quaternion(), Velocity); // The speed of the forward vector direction
@@ -51,7 +57,7 @@ void UAnimInstanceBase::CalculateCharacterMovementValues(float DeltaTime)
 	
 	// The essentials for character movement calculations
 	bIsAccelerating = Acceleration.Size() > 0 ? true : false;
-	bIsMoving = Velocity.IsNearlyZero(1);
+	bIsMoving = !Velocity.IsNearlyZero(1);
 	bSprinting = MovementComponent->IsRunning();
 	bCrouching = Character->bIsCrouched;
 	bWalking = !bSprinting && MovementComponent->IsWalking();
@@ -62,16 +68,15 @@ void UAnimInstanceBase::CalculateCharacterMovementValues(float DeltaTime)
 	if (PlayerCharacter)CameraStyle = PlayerCharacter->Execute_GetCameraStyle(PlayerCharacter);
 
 	// Blendspace forwards and sideways values (converted into -1, 1) for handling multiple blendspaces
-	const float MaxWalkSpeed = MovementComponent->GetMaxWalkSpeed() * MovementComponent->SprintSpeedMultiplier;
 	WalkRunValues = FVector2D(
-		UKismetMathLibrary::MapRangeClamped(DirectionalVelocity.X, -MaxWalkSpeed, MaxWalkSpeed, -1, 1),
-		UKismetMathLibrary::MapRangeClamped(DirectionalVelocity.Y, -MaxWalkSpeed, MaxWalkSpeed, -1, 1)
+		UKismetMathLibrary::MapRangeClamped(DirectionalVelocity.X, -MaxRunSpeed, MaxRunSpeed, -1, 1),
+		UKismetMathLibrary::MapRangeClamped(DirectionalVelocity.Y, -MaxRunSpeed, MaxRunSpeed, -1, 1)
 	);
 
-	const float MaxCrouchSpeed = MovementComponent->MaxWalkSpeedCrouched * MovementComponent->CrouchSprintSpeedMultiplier;
+	const float MaxCrouchSprintSpeed = MaxCrouchSpeed * MovementComponent->CrouchSprintSpeedMultiplier;
 	CrouchWalkValues = FVector2D(
-		UKismetMathLibrary::MapRangeClamped(DirectionalVelocity.X, -MaxCrouchSpeed, MaxCrouchSpeed, -1, 1),
-		UKismetMathLibrary::MapRangeClamped(DirectionalVelocity.Y, -MaxCrouchSpeed, MaxCrouchSpeed, -1, 1)
+		UKismetMathLibrary::MapRangeClamped(DirectionalVelocity.X, -MaxCrouchSprintSpeed, MaxCrouchSprintSpeed, -1, 1),
+		UKismetMathLibrary::MapRangeClamped(DirectionalVelocity.Y, -MaxCrouchSprintSpeed, MaxCrouchSprintSpeed, -1, 1)
 	);
 }
 
@@ -81,7 +86,7 @@ void UAnimInstanceBase::CalculateYawAndLean(float DeltaTime)
 	// Offset yaw for strafing on the server (Looking up or down)
 	AimRotation = Character->GetBaseAimRotation(); // The current direction the character is facing in the world // GetBaseAimRotation: built in function to grab the offset of where the character is aiming
 	Yaw = AimRotation.Yaw; 
-	const FRotator RelativeRotation = UKismetMathLibrary::NormalizedDeltaRotator(Rotation, AimRotation); // The rotation relative to the character's current rotation
+	RelativeRotation = UKismetMathLibrary::NormalizedDeltaRotator(Rotation, AimRotation); // The rotation relative to the character's current rotation
 	SmoothedAimRotation = FMath::RInterpTo(SmoothedAimRotation, RelativeRotation, DeltaTime, 15.f);
 	Pitch = -AimRotation.Pitch;
 	
@@ -96,6 +101,17 @@ void UAnimInstanceBase::CalculateYawAndLean(float DeltaTime)
 		-LeanCalculation.Y * SpeedFactor
 	);
 	// UE_LOGFMT(LogTemp, Log, "LeanCalculation: {0}, LeanAmount: {1}, SpeedFactor: {2}", *LeanCalculation.ToString(), *LeanAmount.ToString(), SpeedFactor);
+
+	// Wall run calculations
+	if (CustomMovementMode != MOVE_Custom_WallRunning) WallRunLeanAmount = FVector2D::ZeroVector;
+	else
+	{
+		const FVector WallNormal = MovementComponent->GetWallRunNormal();
+		WallRunLeanAmount = FVector2D(
+			UKismetMathLibrary::FInterpTo(WallRunLeanAmount.X, WallNormal.X, DeltaTime, WallRunLeanInterpSpeed),
+			UKismetMathLibrary::FInterpTo(WallRunLeanAmount.Y, WallNormal.Y, DeltaTime, WallRunLeanInterpSpeed)
+		);
+	}
 	
 	// The spine rotation of the character (It's just a clamped value of the character's yaw rotation)
 	float YawClamped = UKismetMathLibrary::FClamp(Yaw, -90, 90);

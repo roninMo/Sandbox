@@ -1268,7 +1268,13 @@ public:
 	
 	/** Returns the ledge climb normal */
 	UFUNCTION(BlueprintCallable) virtual FVector GetLedgeClimbNormal() const;
-
+	
+	/** Returns the wall run location */
+	UFUNCTION(BlueprintCallable) virtual FVector GetWallRunLocation() const;
+	
+	/** Returns the wall run normal */
+	UFUNCTION(BlueprintCallable) virtual FVector GetWallRunNormal() const;
+	
 	/** Returns the wall jump location */
 	UFUNCTION(BlueprintCallable) virtual FVector GetWallJumpLocation() const;
 	
