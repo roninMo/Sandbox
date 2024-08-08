@@ -468,10 +468,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(UIMin = "0", UIMax = "10", EditCondition = "bUseMantling && bRotateCharacterDuringMantle", EditConditionHides)) 
 	float MantleRotationSpeed;
 
-	/** The curve that adjusts the speed to allow for smooth interpolations and adjustments. To make things less complicated these are a value between 0-10 */
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(EditCondition = "bUseMantling", EditConditionHides)) 
-	// UCurveFloat* MantleRotationSpeedAdjustments;
-	
+	/** The duration before the player is allowed to wall climb after transitioning out of mantling */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(UIMin = "0", UIMax = "1", EditCondition = "bUseMantling && bRotateCharacterDuringMantle", EditConditionHides)) 
+	float MantleToWallClimbInterval;
+
 	/** The offset for when the player is mantling on a ledge */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(UIMin = "-100", UIMax = "50", EditCondition = "bUseMantling", EditConditionHides)) 
 	float MantleLedgeLocationOffset;
@@ -516,6 +516,9 @@ protected:
 protected:
 	/** The time the player starts mantling */
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling") float MantleStartTime;
+
+	/** The previous time the player was mantling */
+	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling") float PrevMantleTime;
 
 	/** The mantle start location */
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling") FVector MantleStartLocation;

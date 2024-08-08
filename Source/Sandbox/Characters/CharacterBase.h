@@ -76,10 +76,9 @@ class UAdvancedMovementComponent;
 			- Layering Override Group
 				- Head
 				- Pelvis
-				- RightLeg
-				- LeftLeg
-				- RightArm
+				- Legs
 				- LeftArm
+				- RightArm
 
 				
 		Blending References
@@ -101,12 +100,20 @@ class UAdvancedMovementComponent;
 		There's using it for things like handling logic, adjusting calculations based on values, adjusting materials, using it for blending values, ik placement and logic, and the list goes on
 
 		Here's a list of the values we're using to enable certain logic during different animations to enable overlays and inverse kinematics during specific animations to prevent problems
+			
+			- Montage_Head
+			- Montage_Pelvis
+			- Montage_Spine
+			- Montage_Legs
+			- Montage_Arm_l
+			- Montage_Arm_r
+
+			- Layering_Head
 			- Layering_Pelvis
-			- Layering_Foot_l
-			- Layering_Foot_r
+			- Layering_Spine
+			- Layering_Legs
 			- Layering_Arm_l
 			- Layering_Arm_r
-			- Layering_Head
 
 			- IK_Enabled
 			- IK_Foot_l

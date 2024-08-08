@@ -99,6 +99,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	bPreventMovementRotationsDuringMantle = true;
 	bRotateCharacterDuringMantle = true;
 	MantleRotationSpeed = 6.4;
+	MantleToWallClimbInterval = 0.1;
 	MantleLedgeLocationOffset = -55;
 	MantleSurfaceTraceFromLedgeOffset = 10;
 	MantleTraceDistance = 64;
@@ -819,7 +820,7 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 			float subTimeTickRemaining = timeTick * (1.f - Hit.Time);
 			
 			// if they're trying to transition to mantling/ledge climbing
-			if (CheckIfSafeToMantleLedge())
+			if ((bUseMantling || bUseLedgeClimbing) && !PlayerInput.IsNearlyZero(0.1) && CheckIfSafeToMantleLedge())
 			{
 				// Client replication for mantle/ledge climbing
 				if (CharacterOwner->IsLocallyControlled())
@@ -828,10 +829,20 @@ void UAdvancedMovementComponent::PhysWallClimbing(float deltaTime, int32 Iterati
 					Client_MantleLocation = MantleLedgeLocation;
 				}
 				
-				if (UpdatedComponent->GetComponentLocation().Z <= MantleLedgeLocation.Z) SetMovementMode(MOVE_Custom, MOVE_Custom_Mantling);
-				else SetMovementMode(MOVE_Custom, MOVE_Custom_LedgeClimbing);
-				StartNewPhysics(subTimeTickRemaining, Iterations);
-				return;
+				if (UpdatedComponent->GetComponentLocation().Z <= MantleLedgeLocation.Z)
+				{
+					SetMovementMode(MOVE_Custom, MOVE_Custom_Mantling);
+					StartNewPhysics(subTimeTickRemaining, Iterations);
+					return;
+				}
+				
+				const float PlayerAngle = -PrevWallClimbNormal.Dot(Acceleration.GetSafeNormal());
+				if (bUseLedgeClimbing && PlayerAngle > 0.64)
+				{
+					SetMovementMode(MOVE_Custom, MOVE_Custom_LedgeClimbing);
+					StartNewPhysics(subTimeTickRemaining, Iterations);
+					return;
+				}
 			}
 			
 			// transition out of wall climbing if they aren't trying to climb the wall
@@ -2099,6 +2110,7 @@ bool UAdvancedMovementComponent::CanWallClimb() const
 	if (!bUseWallClimbing) return false;
 	if (CurrentWallClimbDuration <= 0) return false;
 	if (JumpStartTime + WallClimbJumpInterval > Time) return false;
+	if (PrevMantleTime + MantleToWallClimbInterval > Time) return false;
 	if ((bOrientRotationToMovement && PlayerInput.IsNearlyZero(0.1)) || (!bOrientRotationToMovement && PlayerInput.X <= 0.1)) return false;
 	return true;
 }
@@ -2329,6 +2341,9 @@ void UAdvancedMovementComponent::EnterMantle(EMovementMode PrevMode, ECustomMove
 		RemoveCharacterCameraLogic();
 		Character->SetPreventRotationAdjustments(true);
 	}
+
+	// Reset wall climb duration
+	CurrentWallClimbDuration = WallClimbDuration;
 }
 
 
@@ -2337,6 +2352,7 @@ void UAdvancedMovementComponent::ExitMantle()
 	MantleStartTime = 0;
 	MantleStartLocation = FVector();
 	MantleLedgeLocation = FVector();
+	PrevMantleTime = Time;
 	
 	// Reset the camera style logic
 	if (bPreventMovementRotationsDuringMantle)
