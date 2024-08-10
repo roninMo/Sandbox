@@ -7,6 +7,7 @@
 #include "Perception/AISightTargetInterface.h"
 #include "CharacterBase.generated.h"
 
+
 class UInventoryComponent;
 class UAdvancedMovementComponent;
 
@@ -105,23 +106,23 @@ class UAdvancedMovementComponent;
 			- Montage_Pelvis
 			- Montage_Spine
 			- Montage_Legs
-			- Montage_Arm_l
-			- Montage_Arm_r
+			- Montage_Arm_L
+			- Montage_Arm_R
 
 			- Layering_Head
 			- Layering_Pelvis
 			- Layering_Spine
 			- Layering_Legs
-			- Layering_Arm_l
-			- Layering_Arm_r
+			- Layering_Arm_L
+			- Layering_Arm_R
 
 			- IK_Enabled
-			- IK_Foot_l
-			- IK_Foot_r
-			- IK_Arm_l
-			- IK_Arm_r
-			- IK_Hand_l
-			- IK_Hand_r
+			- IK_Foot_L
+			- IK_Foot_R
+			- IK_Arm_L
+			- IK_Arm_R
+			- IK_Hand_L
+			- IK_Hand_R
 			- IK_Head
 			- IK_Pelvis
 			- IK_Spine

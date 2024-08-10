@@ -38,241 +38,233 @@ public:
 	virtual void NativeInitializeAnimation() override;
 	// virtual void InitializeAbilitySystem(UAbilitySystemComponent* ASC);
 	virtual void NativeUpdateAnimation(float DeltaTime) override;
-
-
+	UAnimInstanceBase(const FObjectInitializer& ObjectInitializer);
+	
 
 //----------------------------------------------------------------------------------------------------------------------------------//
-// Movement Values																													//
+// Movement																													//
 //----------------------------------------------------------------------------------------------------------------------------------//
 protected:
-	/** The character's input */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector2D Input;
-	
-	/** The character's acceleration */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector Acceleration;
+	/**** Input, Acceleration, and velocity ****/
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FVector2D Input;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FVector Acceleration;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FVector Acceleration_N;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FVector Velocity;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FVector Velocity_N;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float Speed;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float Speed_N;
 
-	/** The character's normalized acceleration */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector Acceleration_N;
-	
-	/** The character's velocity */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector Velocity;
-	
-	/** The character's normalized velocity */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector Velocity_N;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FVector DirectionalVelocity;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FVector RelativeVelocity;
 
-	/** The character's speed */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") float Speed;
-
-	/** The character's normalized speed (used for blend space logic */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") float Speed_N;
-
-	/** */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector2D WalkRunValues;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector2D CrouchWalkValues;
-
-	/** The added velocity based on the player's direction */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector DirectionalVelocity;
-
-	/** Movement inputs */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector RelativeVelocity;
-
-	/** Which what the player is moving in first person */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") EMovementDirection MovementDirection;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FVector2D WalkRunValues;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FVector2D CrouchWalkValues;
 	
 	
 	/**** Rotations and Aim Values ****/
-	/** The character's previous rotation */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator PreviousRotation;
-
-	/** The character's rotation */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator Rotation;
-
-	/** The camera's rotation relative to the player's current rotation */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator RelativeRotation;
-
-	/** A smoothed version of the character rotation */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator SmoothedAimRotation;
-
-	/** The aim rotation, which is a rotation with less smoothing to follow the player's overall aim */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator AimRotation;
-
-	/** The character's movement aim rotation */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator MovementAimRotation;
-
-	/** The blendspace version of the player's aim rotation. This helps normalize the values for handling in multiple blueprints without any errors */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator BlendSpaceAimRotation;
-
-	/** The character's yaw */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") float Yaw;
-
-	/** The character's pitch */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") float Pitch;
-
-	/** The interp that handles player rotations. This is normally smoothed out to prevent any problems when the player's are moving around inSp third person */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") float TurnInPlaceInterp;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FRotator PreviousRotation;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FRotator Rotation;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float Pitch;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float Yaw;
+	
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FRotator RelativeRotation;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FRotator SmoothedAimRotation;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FRotator AimRotation;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FRotator MovementAimRotation;
+	
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float AimRotationAngle;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float AimRotationInterpSpeed;
+	
 
 	/**** Lean calculations ****/
-	/** Lean calculations (we're just using additive animations to blend this dynamically anywhere)
-	 * This is captured here because inverse values really mess up interps and everything comes out as negative if you start interp calculations with a positive
-	 */
-	/** The lean calculation used for adjusting the lean */
-	FVector2D LeanCalculation;
-
-	/** The lean amount used for calculating the player's lean */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector2D LeanAmount;
-
-	/** The player's lean interp speed */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") float LeanInterpSpeed = 3.4;
-
-	/** The lean amount used for calculating the player's lean while wall running */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector2D WallRunLeanAmount;
-
-	/** The player's lean interp speed */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") float WallRunLeanInterpSpeed = 30;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Lean") FVector2D LeanCalculation;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Lean") FVector2D LeanAmount;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Lean") float LeanInterpSpeed;
+	
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Lean") FVector2D WallRunLeanAmount;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Lean") float WallRunLeanInterpSpeed;
 
 	
 	/**** Character Movement State values ****/
-	/** Whether the player is accelerating */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") bool bIsAccelerating;
-	
-	/** Whether the player is moving */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") bool bIsMoving;
-	
-	/** Whether the player is sprinting */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") bool bSprinting;
-	
-	/** Whether the player is crouching */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") bool bCrouching;
-	
-	/** Whether the player is walking */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") bool bWalking;
-	
-	/** The current movement mode */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") TEnumAsByte<EMovementMode> MovementMode;
-	
-	/** The custom movement mode */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") uint8 CustomMovementMode;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|State") EMovementDirection MovementDirection;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|State") TEnumAsByte<EMovementMode> MovementMode;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|State") uint8 CustomMovementMode;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|State") bool bIsAccelerating;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|State") bool bIsMoving;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|State") bool bSprinting;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|State") bool bCrouching;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|State") bool bWalking;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|State") FName CameraStyle;
 
-	/** The camera style */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FName CameraStyle;
+
+	/** Animation specific values */
+	/** The start time of the animation if the player lands on their right foot */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet") float LandingFootStartTime = 0.0f;
 	
+	/** The start time of the animation if the player lands on their left foot */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet") float AlternateFootStartTime = 0.45f;
+	
+
+//----------------------------------------------------------------------------------------------------------------------------------//
+// Curve Values	(setting the curve values to 0 prevents (Montages/Overlays/Ik) from influencing animations							//
+//----------------------------------------------------------------------------------------------------------------------------------//
+protected:
+	/**** Montage Overrides ****/
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Montage_Head;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Montage_Pelvis;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Montage_Spine;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Montage_Legs;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Montage_Arm_L;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Montage_Arm_R;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Montage_Hand_L;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Montage_Hand_R;
+
+	/**** Overlay Overrides ****/
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Layering_Head;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Layering_Pelvis;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Layering_Spine;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Layering_Legs;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Layering_Arm_L;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Layering_Arm_R;
+	
+	/**** Inverse Kinematics ****/
+	/** Used to determine whether ik should influence the head during animations. Aim offsets already handle this by default */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float IK_Head;
+	
+	/** Used to determine whether ik should influence the pelvis during animations */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float IK_Pelvis;
+
+	/** Used to determine whether ik should influence the spine during animations */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float IK_Spine;
+
+	/** Used to determine whether ik should influence the left foot's placement when the player is walking on uneven surfaces */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float IK_Feet;
+	
+	/** Arm ik. Used for determining when inverse kinematics should influence the arm's movements */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float IK_Arm_L;
+	
+	/** Arm ik. Used for determining when inverse kinematics should influence the arm's movements */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float IK_Arm_R;
+
+	/** Ik specifically for hands. Used for adjusting the hands during specific logic */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float IK_Hand_L;
+	
+	/** Ik specifically for hands. Used for adjusting the hands during specific logic */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float IK_Hand_R;
+
+	
+//------------------------------------------------------------------------------//
+// Captured Movement															//
+//------------------------------------------------------------------------------//
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float MaxWalkSpeed;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float MaxCrouchSpeed;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float MaxRunSpeed;
+
 	
 //----------------------------------------------------------------------------------------------------------------------------------//
 // Inverse Kinematics																												//
 //----------------------------------------------------------------------------------------------------------------------------------//
 protected:
 	/**** Spine rotations ****/
-	/** The character's spine rotations are being divided into individual bones, there's calculations for both of unreal's skeletons,
-	 * the individual values are for the main UE skeleton. These are all just adjusted using the turn in place rotation.
-	 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator NormalizedSpineRotation;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator PelvisRotation;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator Spine01Rotation;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator Spine02Rotation;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator Spine03Rotation;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator Spine04Rotation;
+	/*** The individual values are for the main UE skeleton. These are all just adjusted using the turn in place rotation. **/
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Spine") FRotator NormalizedSpineRotation;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Spine") FRotator PelvisRotation;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Spine") FRotator Spine01Rotation;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Spine") FRotator Spine02Rotation;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Spine") FRotator Spine03Rotation;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Spine") FRotator Spine04Rotation;
 
 	
 	/**** Pelvis ****/
-	/** The alpha of the pelvis, which influences adjusting the pelvis */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") float PelvisAlpha;
-	
-	/** The offset of the pelvis */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector PelvisOffset;
-	
-	/** The target location of the pelvis */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector PelvisTarget;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Pelvis") float PelvisAlpha;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Pelvis") FVector PelvisOffset;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Pelvis") FVector PelvisTarget;
 
 
 	/**** Feet ****/
-	/** The animation's start time for foot placement during the walk/run animations */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Anim") float AlternateFootStartTime = 0.45f;
-	
-	/** The animation's start time for foot placement when the player lands */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Anim") float LandingFootStartTime = 0.0f;
-	
-	/** The trace distance above the foot */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement|IK") float IK_TraceDistanceAboveFoot = 50.0f;
-	
-	/** The trace distance below the foot */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement|IK") float IK_TraceDistanceBelowFoot = 45.0f;
-	
-	/** The height of the foot (used for ik calculations) */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement|IK") float FootHeight = 13.5f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet") float IK_FootInterpSpeed_Slow;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet") float IK_FootInterpSpeed_Fast;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet") float IK_TraceDistanceBelowFoot;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet") float IK_TraceDistanceAboveFoot;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet") float FootOffsetRollAdjustHeight;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet") FVector2D UpperFootOffsetInRange;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet") FVector2D UpperFootOffsetOutRange;
 
 	
 	/**** Left foot ****/
-	/** Anim curve to enable/disable the left foot ik during different animations */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement|IK") FName EnableFootIK_L_Curve = FName("Enable_FootIK_L");
-	
-	/** The name of the left foot ik bone */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement|IK") FName IK_Foot_L = FName("ik_foot_l");
-	
-	/** The ik's target location */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector FootOffsetL_Target;
-	
-	/** The foot's current location */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector FootOffsetL_Location;
-	
-	/** The foot's current rotation */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator FootOffsetL_Rotation;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FName IKLeftFootBoneName;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FVector FootLocationTarget_L;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FVector FootLocationOffset_L;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FRotator FootRotationTarget_L;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FRotator FootRotationOffset_L;
 
 	
 	/**** Right foot ****/
-	/** Anim curve to enable/disable the right foot ik during different animations */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement|IK") FName EnableFootIK_R_Curve = FName("Enable_FootIK_R");
-	
-	/** The name of the right foot ik bone */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement|IK") FName IK_Foot_R = FName("ik_foot_r");
-	
-	/** The ik's target location */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector FootOffsetR_Target;
-	
-	/** The foot's current location */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FVector FootOffsetR_Location;
-	
-	/** The foot's current rotation */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Movement") FRotator FootOffsetR_Rotation;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FName IKRightFootBoneName;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FVector FootLocationTarget_R;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FVector FootLocationOffset_R;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FRotator FootRotationTarget_R;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FRotator FootRotationOffset_R;
 
 	
-	/**** Hands ****/
-	/** The left hand transform */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|AnimBlueprint|Combat") FTransform LeftHandTransform;
+	/**** Arms ****/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") FTransform LeftHandTransform;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") FTransform RightHandTransform;
 	
 	
-	/**** References ****/
-	/** The character's movement component reference */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Character|AnimBlueprint") TObjectPtr<UAdvancedMovementComponent> MovementComponent;
-	
-	/** The character reference */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Character|AnimBlueprint") TObjectPtr<ACharacterBase> Character;
-	
-	/** If this is a controlled character or a proxy */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Character|AnimBlueprint") bool bLocallyControlled;
+	/**** Other References ****/
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Utility") TObjectPtr<UAdvancedMovementComponent> MovementComponent;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Utility") TObjectPtr<ACharacterBase> Character;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Utility") bool bLocallyControlled;
 
+	
 	// Gameplay tags that can be mapped to blueprint variables. The variables will automatically update as the tags are added or removed
 	// UPROPERTY(EditDefaultsOnly, Category = "GameplayTags") FGameplayTagBlueprintPropertyMap GameplayTagPropertyMap;
-
-//------------------------------------------------------------------------------//
-// Captured Movement Values														//
-//------------------------------------------------------------------------------//
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Character|AnimBlueprint") float MaxWalkSpeed;
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Character|AnimBlueprint") float MaxCrouchSpeed;
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Character|AnimBlueprint") float MaxRunSpeed;
 	
 
+//------------------------------------------------------------------------------//
+// Other																		//
+//------------------------------------------------------------------------------//
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Debugging") bool bDebugIKFootTrace;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Debugging") float IKFootTraceDuration = 0.1;
+	
+	
 //------------------------------------------------------------------------------//
 // Movement Calculations														//
 //------------------------------------------------------------------------------//
 protected:
 	/** Calculates teh character's base movement values */
-	virtual void CalculateCharacterMovementValues(float DeltaTime);
+	virtual void GetCharacterMovementValues(float DeltaTime);
 	
 	/** Calculates the yaw, lean, and aim rotations for the character */
 	virtual void CalculateYawAndLean(float DeltaTime);
 
 	/** Calculates the movement direction for the character */
 	virtual void CalculateMovementDirection();
+
+	/** Finds the curve values and stores the information for bp reference */
+	virtual void UpdateCurveValues();
+	
+	
+//------------------------------------------------------------------------------//
+// Inverse Kinematics															//
+//------------------------------------------------------------------------------//
+	/** Calculates the feet positions for IK control rigs */
+	virtual void CalculateFootIK(float DeltaTime);
+
+	/** Sets the offset location and rotation for ik feet placement */
+	virtual void SetIKFootOffsets(float DeltaTime, FName IKFootBone, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset);
+
+	/** Sets the pelvis offset for feet ik */
+	virtual void SetIKPelvisOffsetForFeet(float DeltaTime, FVector& CurrentOffset, FVector& TargetOffset);
+
+	/** Resets the feet and pelvis offsets for feet ik */
+	virtual void ResetIKFeetAndPelvisOffsets(float DeltaTime);
+
+	/** Whether we should calculate inverse kinematics for feet */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Animation|Inverse Kinematics") bool ShouldCalculateFeetIK();
+	virtual bool ShouldCalculateFeetIK_Implementation();
 
 	
 //------------------------------------------------------------------------------//
@@ -288,16 +280,3 @@ public:
 
 	
 };
-
-
-/*
- * Handling Spine rotations from the character's aim rotation is smoothed out for better transitions, but I don't know enough to do this completely correctly (share with me your secrets)
- * We're just starting with a third, and decrementing gradually for the rest of the spine bones, which helps with hip pivots, but that doesn't mean that these values don't persist
- * It might just be easier to divide these values evenly, but I'm more concerned about the leg placement than I am the rest of the character's movement in general
-
-	50 = 16.65 + 13.35 + 10 + 6.65 + 3.35
-
-
-
-
-*/
