@@ -1395,7 +1395,7 @@ void UAdvancedMovementComponent::FallingMovementPhysics(float deltaTime, float& 
 		{
 			WallRunWall = Hit.GetComponent();
 			WallRunNormal = Hit.Normal;
-			WallRunLocation = Hit.ImpactNormal;
+			WallRunLocation = Hit.ImpactPoint;
 			SetMovementMode(MOVE_Custom, MOVE_Custom_WallRunning);
 			StartNewPhysics(deltaTime, Iterations);
 		}

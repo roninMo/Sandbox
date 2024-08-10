@@ -72,17 +72,17 @@ protected:
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FRotator AimRotation;
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FRotator MovementAimRotation;
 	
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float AimRotationAngle;
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float AimRotationInterpSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement") float AimRotationAngle;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement") float AimRotationInterpSpeed;
 	
 
 	/**** Lean calculations ****/
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Lean") FVector2D LeanCalculation;
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Lean") FVector2D LeanAmount;
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Lean") float LeanInterpSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Lean") float LeanInterpSpeed;
 	
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Lean") FVector2D WallRunLeanAmount;
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Lean") float WallRunLeanInterpSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Lean") float WallRunLeanInterpSpeed;
 
 	
 	/**** Character Movement State values ****/
@@ -208,8 +208,26 @@ protected:
 
 	
 	/**** Arms ****/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float WallRunTraceDistance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float IK_ArmsInterpSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float ArmLength;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float WallRunArmHeightOffset;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") FTransform LeftHandTransform;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") FTransform RightHandTransform;
+
+	/**** Left arm ****/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FName LeftArmBoneName;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FVector ArmLocationTarget_L;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FVector ArmLocationOffset_L;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FRotator ArmRotationTarget_L;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FRotator ArmRotationOffset_L;
+
+	/**** Right arm ****/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FName RightArmBoneName;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FVector ArmLocationTarget_R;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FVector ArmLocationOffset_R;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FRotator ArmRotationTarget_R;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FRotator ArmRotationOffset_R;
 	
 	
 	/**** Other References ****/
@@ -228,6 +246,9 @@ protected:
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Debugging") bool bDebugIKFootTrace;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Debugging") float IKFootTraceDuration = 0.1;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Debugging") bool bDebugArmTrace;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Debugging") float ArmTraceDuration = 0.1;
 	
 	
 //------------------------------------------------------------------------------//
@@ -253,8 +274,8 @@ protected:
 	/** Calculates the feet positions for IK control rigs */
 	virtual void CalculateFootIK(float DeltaTime);
 
-	/** Sets the offset location and rotation for ik feet placement */
-	virtual void SetIKFootOffsets(float DeltaTime, FName IKFootBone, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset);
+	/** Sets the offset location and rotation for ik foot placement */
+	virtual void SetIKFootOffset(float DeltaTime, FName IKFootBone, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset);
 
 	/** Sets the pelvis offset for feet ik */
 	virtual void SetIKPelvisOffsetForFeet(float DeltaTime, FVector& CurrentOffset, FVector& TargetOffset);
@@ -266,6 +287,23 @@ protected:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Animation|Inverse Kinematics") bool ShouldCalculateFeetIK();
 	virtual bool ShouldCalculateFeetIK_Implementation();
 
+	/** Calculates the arm positions for IK control rigs */
+	virtual void CalculateArmsIK(float DeltaTime);
+
+	/** Sets the offset location and rotation for ik arm placement */
+	virtual void SetArmIKOffset(float DeltaTime, FName IKHandBone, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset);
+
+	/** Resets the feet and pelvis offsets for feet ik */
+	virtual void ResetIKFeetAndPelvisOffsets(float DeltaTime, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset);
+	
+	/** Whether we should calculate inverse kinematics for the left arm */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Animation|Inverse Kinematics") bool ShouldCalculateLeftArmIK();
+	virtual bool ShouldCalculateLeftArmIK_Implementation();
+
+	/** Whether we should calculate inverse kinematics for the right arm */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Animation|Inverse Kinematics") bool ShouldCalculateRightArmIK();
+	virtual bool ShouldCalculateRightArmIK_Implementation();
+	
 	
 //------------------------------------------------------------------------------//
 // Utility																		//
