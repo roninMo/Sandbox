@@ -1169,6 +1169,7 @@ void UAdvancedMovementComponent::PhysWallRunning(float deltaTime, int32 Iteratio
 			float LastMoveTimeSlice = timeTick;
 			float subTimeTickRemaining = timeTick * (1.f - Hit.Time);
 			WallRunNormal = Hit.Normal;
+			WallRunImpactNormal = Hit.ImpactNormal;
 			WallRunWall = Hit.GetComponent();
 			
 			// if the character just landed on the ground
@@ -1395,6 +1396,7 @@ void UAdvancedMovementComponent::FallingMovementPhysics(float deltaTime, float& 
 		{
 			WallRunWall = Hit.GetComponent();
 			WallRunNormal = Hit.Normal;
+			WallRunImpactNormal = Hit.ImpactNormal;
 			WallRunLocation = Hit.ImpactPoint;
 			SetMovementMode(MOVE_Custom, MOVE_Custom_WallRunning);
 			StartNewPhysics(deltaTime, Iterations);
@@ -2481,6 +2483,7 @@ void UAdvancedMovementComponent::ResetWallRunInformation(EMovementMode PrevMode,
 		WallRunWall = nullptr;
 		WallRunStartTime = 0;
 		WallRunLocation = FVector();
+		WallRunImpactNormal = FVector();
 		WallRunNormal = FVector();
 	}
 }
@@ -3153,6 +3156,11 @@ FVector UAdvancedMovementComponent::GetWallRunLocation() const
 FVector UAdvancedMovementComponent::GetWallRunNormal() const
 {
 	return WallRunNormal;
+}
+
+FVector UAdvancedMovementComponent::GetWallRunImpactNormal() const
+{
+	return WallRunImpactNormal;
 }
 
 FVector UAdvancedMovementComponent::GetWallJumpLocation() const

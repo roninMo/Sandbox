@@ -289,6 +289,7 @@ void UAnimInstanceBase::CalculateArmsIK(float DeltaTime)
 		{
 			if (MovementComponent->GetWallRunNormal().Dot(Character->GetActorRightVector()) >= 0)
 			{
+				bRightHandWallRun = true;
 				SetArmIKOffset(DeltaTime, LeftArmBoneName, ArmLocationOffset_L, ArmLocationTarget_L, ArmRotationOffset_L, ArmRotationTarget_L);
 			}
 		}
@@ -305,6 +306,7 @@ void UAnimInstanceBase::CalculateArmsIK(float DeltaTime)
 		// Wall run logic
 		if (CustomMovementMode == MOVE_Custom_WallRunning)
 		{
+			bRightHandWallRun = false;
 			if (MovementComponent->GetWallRunNormal().Dot(Character->GetActorRightVector()) <= 0)
 			{
 				SetArmIKOffset(DeltaTime, RightArmBoneName, ArmLocationOffset_R, ArmLocationTarget_R, ArmRotationOffset_R, ArmRotationTarget_R);
@@ -321,15 +323,17 @@ void UAnimInstanceBase::CalculateArmsIK(float DeltaTime)
 
 void UAnimInstanceBase::SetArmIKOffset(float DeltaTime, FName IKHandBone, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset)
 {
-	const FVector HandLocation = GetOwningComponent()->GetSocketLocation(IKHandBone);
+	const FVector ArmLocation = GetOwningComponent()->GetSocketLocation(IKHandBone);
 	const FVector CharacterLocation = GetOwningComponent()->GetSocketLocation("spine_05");
-	if (HandLocation == FVector() || CharacterLocation == FVector()) return;
+	const FVector RootLocation = GetOwningComponent()->GetSocketLocation("root");
+	if (ArmLocation == FVector() || CharacterLocation == FVector()) return;
 	
 	// Wall run logic
 	if (CustomMovementMode == MOVE_Custom_WallRunning)
 	{
 		FVector WallLocation = MovementComponent->GetWallRunLocation();
-		FVector WallNormal = MovementComponent->GetWallRunNormal();
+		FVector WallNormal = MovementComponent->GetWallRunImpactNormal();
+		FVector RightVector = IKHandBone == RightArmBoneName ? Character->GetActorRightVector() : -Character->GetActorRightVector();
 		FHitResult Hit;	
 		UKismetSystemLibrary::LineTraceSingle(
 			GetWorld(),
@@ -347,18 +351,20 @@ void UAnimInstanceBase::SetArmIKOffset(float DeltaTime, FName IKHandBone, FVecto
 		);
 
 		// Interp the location and rotation
-		// FVector TargetLocation = CharacterLocation + FVector(0, 0, WallRunArmHeightOffset) + (Character->GetActorForwardVector() * ArmLength);
-		FVector TargetLocation = CharacterLocation + (Character->GetActorForwardVector() * ArmLength) + (-WallNormal * WallRunArmWidthOffset);
+		FVector TargetLocation = CharacterLocation + (Character->GetActorForwardVector() * ArmLength) + (WallRunArmWidthOffset * RightVector);
 		if (Hit.IsValidBlockingHit())
 		{
 			// TargetLocation = Hit.Location + FVector(0, 0, WallRunArmHeightOffset) + (Character->GetActorForwardVector() * ArmLength);
-			TargetOffset = TargetLocation - HandLocation;
 			CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, TargetOffset, DeltaTime, ArmsInterpSpeed);
+			TargetOffset = TargetLocation - RootLocation;
 			
 			if (bDebugArmTrace)
 			{
-				DrawDebugBox(GetWorld(), HandLocation + TargetOffset, FVector(3), FColor::Red, false, ArmTraceDuration);
+				DrawDebugBox(GetWorld(), RootLocation + TargetOffset, FVector(3), FColor::Red, false, ArmTraceDuration);
 			}
+
+			// CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, TargetRotationOffset, DeltaTime, ArmsInterpSpeed);
+			TargetRotationOffset = FRotator(180, 0, 0);
 		}
 
 	}
@@ -370,7 +376,7 @@ void UAnimInstanceBase::SetArmIKOffset(float DeltaTime, FName IKHandBone, FVecto
 
 void UAnimInstanceBase::ResetIKFeetAndPelvisOffsets(float DeltaTime, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset)
 {
-	CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, FVector::ZeroVector, DeltaTime, ArmsInterpSpeed);
+	CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, FVector::ZeroVector, DeltaTime, ArmsInterpSpeedTransition);
 	CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, FRotator::ZeroRotator, DeltaTime, ArmsInterpSpeedTransition);
 	TargetOffset = FVector::ZeroVector;
 	TargetRotationOffset = FRotator::ZeroRotator;
@@ -408,6 +414,7 @@ void UAnimInstanceBase::UpdateCurveValues()
 	Montage_Hand_R = GetCurveValue(Curve_Montage_Hand_R);
 
 	// Overlay Overrides
+	Layering_Head = GetCurveValue(Curve_Layering_Head);
 	Layering_Pelvis = GetCurveValue(Curve_Layering_Pelvis);
 	Layering_Spine = GetCurveValue(Curve_Layering_Spine);
 	Layering_Legs = GetCurveValue(Curve_Layering_Legs);
@@ -423,6 +430,12 @@ void UAnimInstanceBase::UpdateCurveValues()
 	IK_Arm_R = GetCurveValue(Curve_IK_Arm_R);
 	IK_Hand_L = GetCurveValue(Curve_IK_Hand_L);
 	IK_Hand_R = GetCurveValue(Curve_IK_Hand_R);
+
+	// Primary values
+	Feet_Plant = GetCurveValue(Curve_Feet_Plant);
+	Turn_RotationAmount = GetCurveValue(Curve_Turn_RotationAmount);
+	Mask_Sprint = GetCurveValue(Curve_Mask_Sprint);
+	Mask_Lean = GetCurveValue(Curve_Mask_Lean);
 }
 
 

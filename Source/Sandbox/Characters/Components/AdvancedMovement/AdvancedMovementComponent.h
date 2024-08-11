@@ -653,6 +653,9 @@ protected:
 	/** The wall run's normal. This helps with knowing which way to add velocity, and if they run on the same wall at the same height, it needs to be at a different acceptable angle */
 	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Running") FVector WallRunNormal;
 	
+	/** The wall run's impact normal. This helps with knowing which way to add velocity, and if they run on the same wall at the same height, it needs to be at a different acceptable angle */
+	UPROPERTY(Transient, BlueprintReadWrite, Category="Character Movement (General Settings)|Wall Running") FVector WallRunImpactNormal;
+	
 	
 //----------------------------------------------------------------------------------------------------------------------------------//
 // Sliding																															//
@@ -1277,6 +1280,9 @@ public:
 	
 	/** Returns the wall run normal */
 	UFUNCTION(BlueprintCallable) virtual FVector GetWallRunNormal() const;
+	
+	/** Returns the wall run impact normal */
+	UFUNCTION(BlueprintCallable) virtual FVector GetWallRunImpactNormal() const;
 	
 	/** Returns the wall jump location */
 	UFUNCTION(BlueprintCallable) virtual FVector GetWallJumpLocation() const;
