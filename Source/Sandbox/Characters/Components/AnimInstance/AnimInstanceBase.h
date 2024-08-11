@@ -53,6 +53,11 @@ protected:
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FVector Velocity_N;
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float Speed;
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float Speed_N;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|State") EMovementDirection MovementDirection;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float Forward;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float Backward;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float Left;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") float Right;
 
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FVector DirectionalVelocity;
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FVector RelativeVelocity;
@@ -86,7 +91,6 @@ protected:
 
 	
 	/**** Character Movement State values ****/
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|State") EMovementDirection MovementDirection;
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|State") TEnumAsByte<EMovementMode> MovementMode;
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|State") uint8 CustomMovementMode;
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|State") bool bIsAccelerating;
@@ -218,16 +222,43 @@ protected:
 
 	
 	/**** Arms ****/
+	/** The interp speed of inverse kinematics during wall running */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float WallRunArmsInterpSpeed;
+	
+	/** The interp speed while transitioning out of inverse kinematics during wall running */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float WallRunArmsInterpSpeedTransition;
+
+	/** The trace distance from the center of the character towards the wall */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float WallRunTraceDistance;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float ArmsInterpSpeed;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float ArmsInterpSpeedTransition;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float ArmLength;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") bool bRightHandWallRun;
+
+	/** The length of the arm. Used for placing the arm during wall run inverse kinematics */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float WallRunArmLength;
+	
+	/** The height offset of the arm during wall run inverse kinematics */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float WallRunArmHeightOffset;
+	
+	/** The spacing offset for hand placement on the wall */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float WallRunHandSpacing;
+	
+	/** The left hand rotation for proper placement on the wall */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") FRotator WallRunLeftHandRotation;
+	
+	/** The right hand rotation for proper placement on the wall */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") FRotator WallRunRightHandRotation;
+	
+	/** The width offset of the arm during wall run inverse kinematics. This is only used if something happened and it isn't using the wall location */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float WallRunArmWidthOffset;
+
+	/** Whether the current wall run inverse kinematics is for the left or right hand */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") bool bRightHandWallRun;
+
+	/** Value to capture first frame of wall run inverse kinematics. We need to adjust the current offset to account for world space interps */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") bool bWallRunInverseKinematics;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") FTransform LeftHandTransform;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") FTransform RightHandTransform;
 
+	
 	/**** Left arm ****/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FName LeftArmBoneName;
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FVector ArmLocationTarget_L;
@@ -235,6 +266,7 @@ protected:
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FRotator ArmRotationTarget_L;
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FRotator ArmRotationOffset_L;
 
+	
 	/**** Right arm ****/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FName RightArmBoneName;
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FVector ArmLocationTarget_R;
@@ -307,7 +339,7 @@ protected:
 	virtual void SetArmIKOffset(float DeltaTime, FName IKHandBone, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset);
 
 	/** Resets the feet and pelvis offsets for feet ik */
-	virtual void ResetIKFeetAndPelvisOffsets(float DeltaTime, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset);
+	virtual void ResetArmIKOffsets(float DeltaTime, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset, FName ArmBoneName);
 	
 	/** Whether we should calculate inverse kinematics for the left arm */
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Animation|Inverse Kinematics") bool ShouldCalculateLeftArmIK();
