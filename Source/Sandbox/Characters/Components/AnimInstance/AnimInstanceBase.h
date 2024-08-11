@@ -72,8 +72,8 @@ protected:
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FRotator AimRotation;
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement") FRotator MovementAimRotation;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement") float AimRotationAngle;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement") float AimRotationInterpSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Aim") float AimRotationAngle;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Aim") float AimRotationInterpSpeed;
 	
 
 	/**** Lean calculations ****/
@@ -209,9 +209,11 @@ protected:
 	
 	/**** Arms ****/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float WallRunTraceDistance;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float IK_ArmsInterpSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float ArmsInterpSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float ArmsInterpSpeedTransition;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float ArmLength;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float WallRunArmHeightOffset;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") float WallRunArmWidthOffset;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") FTransform LeftHandTransform;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") FTransform RightHandTransform;
 

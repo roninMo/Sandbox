@@ -307,12 +307,12 @@ void UAnimInstanceBase::CalculateArmsIK(float DeltaTime)
 		{
 			if (MovementComponent->GetWallRunNormal().Dot(Character->GetActorRightVector()) <= 0)
 			{
-				SetArmIKOffset(DeltaTime, RightArmBoneName, ArmLocationOffset_L, ArmLocationTarget_L, ArmRotationOffset_L, ArmRotationTarget_L);
+				SetArmIKOffset(DeltaTime, RightArmBoneName, ArmLocationOffset_R, ArmLocationTarget_R, ArmRotationOffset_R, ArmRotationTarget_R);
 			}
 		}
 		else
 		{
-			SetArmIKOffset(DeltaTime, RightArmBoneName, ArmLocationOffset_L, ArmLocationTarget_L, ArmRotationOffset_L, ArmRotationTarget_L);
+			SetArmIKOffset(DeltaTime, RightArmBoneName, ArmLocationOffset_R, ArmLocationTarget_R, ArmRotationOffset_R, ArmRotationTarget_R);
 		}
 	}
 	else ResetIKFeetAndPelvisOffsets(DeltaTime, ArmLocationOffset_R, ArmLocationTarget_R, ArmRotationOffset_R, ArmRotationTarget_R);
@@ -330,10 +330,6 @@ void UAnimInstanceBase::SetArmIKOffset(float DeltaTime, FName IKHandBone, FVecto
 	{
 		FVector WallLocation = MovementComponent->GetWallRunLocation();
 		FVector WallNormal = MovementComponent->GetWallRunNormal();
-
-		DrawDebugBox(GetWorld(), HandLocation, FVector(3), FColor::Emerald);
-		DrawDebugBox(GetWorld(), WallLocation, FVector(3), FColor::Cyan);
-		
 		FHitResult Hit;	
 		UKismetSystemLibrary::LineTraceSingle(
 			GetWorld(),
@@ -342,7 +338,7 @@ void UAnimInstanceBase::SetArmIKOffset(float DeltaTime, FName IKHandBone, FVecto
 			TraceTypeQuery1,
 			false,
 			{},
-			bDebugArmTrace ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
+			EDrawDebugTrace::None, // bDebugArmTrace ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
 			Hit,
 			true,
 			FColor::Turquoise,
@@ -350,12 +346,19 @@ void UAnimInstanceBase::SetArmIKOffset(float DeltaTime, FName IKHandBone, FVecto
 			ArmTraceDuration
 		);
 
+		// Interp the location and rotation
+		// FVector TargetLocation = CharacterLocation + FVector(0, 0, WallRunArmHeightOffset) + (Character->GetActorForwardVector() * ArmLength);
+		FVector TargetLocation = CharacterLocation + (Character->GetActorForwardVector() * ArmLength) + (-WallNormal * WallRunArmWidthOffset);
 		if (Hit.IsValidBlockingHit())
 		{
-			FVector TargetLocation = Hit.ImpactPoint + FVector(0, 0, WallRunArmHeightOffset) + (Character->GetActorForwardVector() * ArmLength);
-			DrawDebugBox(GetWorld(), TargetLocation, FVector(3), FColor::Emerald);
-
+			// TargetLocation = Hit.Location + FVector(0, 0, WallRunArmHeightOffset) + (Character->GetActorForwardVector() * ArmLength);
+			TargetOffset = TargetLocation - HandLocation;
+			CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, TargetOffset, DeltaTime, ArmsInterpSpeed);
 			
+			if (bDebugArmTrace)
+			{
+				DrawDebugBox(GetWorld(), HandLocation + TargetOffset, FVector(3), FColor::Red, false, ArmTraceDuration);
+			}
 		}
 
 	}
@@ -367,8 +370,8 @@ void UAnimInstanceBase::SetArmIKOffset(float DeltaTime, FName IKHandBone, FVecto
 
 void UAnimInstanceBase::ResetIKFeetAndPelvisOffsets(float DeltaTime, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset)
 {
-	CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, FVector::ZeroVector, DeltaTime, IK_ArmsInterpSpeed);
-	CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, FRotator::ZeroRotator, DeltaTime, IK_ArmsInterpSpeed);
+	CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, FVector::ZeroVector, DeltaTime, ArmsInterpSpeed);
+	CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, FRotator::ZeroRotator, DeltaTime, ArmsInterpSpeedTransition);
 	TargetOffset = FVector::ZeroVector;
 	TargetRotationOffset = FRotator::ZeroRotator;
 }
@@ -543,9 +546,11 @@ UAnimInstanceBase::UAnimInstanceBase(const FObjectInitializer& ObjectInitializer
 	FootRotationOffset_R = FRotator::ZeroRotator;
 
 	// Arms
+	WallRunTraceDistance = 64;
+	ArmsInterpSpeed = 1;
+	ArmsInterpSpeedTransition = 1;
 	ArmLength = 45;
 	WallRunArmHeightOffset = 30;
-	WallRunTraceDistance = 64;
 	LeftArmBoneName = FName("hand_l");
 	RightArmBoneName = FName("hand_r");
 	LeftHandTransform = FTransform();
