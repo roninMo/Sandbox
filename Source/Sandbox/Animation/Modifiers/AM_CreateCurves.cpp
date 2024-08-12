@@ -41,7 +41,7 @@ UAM_CreateCurves::UAM_CreateCurves()
 	Curves.Add(F_AnimationCurveInfo(Curve_AO_Head, 1));
 	Curves.Add(F_AnimationCurveInfo(Curve_AO_Pelvis, 1));
 	Curves.Add(F_AnimationCurveInfo(Curve_AO_Spine, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_AO_Feet, 1));
+	Curves.Add(F_AnimationCurveInfo(Curve_AO_Legs, 1));
 	Curves.Add(F_AnimationCurveInfo(Curve_AO_Arm_L, 1));
 	Curves.Add(F_AnimationCurveInfo(Curve_AO_Arm_R, 1));
 	Curves.Add(F_AnimationCurveInfo(Curve_AO_Hand_L, 1));

@@ -487,6 +487,14 @@ void UAnimInstanceBase::UpdateCurveValues()
 	Turn_RotationAmount = GetCurveValue(Curve_Turn_RotationAmount);
 	Mask_Sprint = GetCurveValue(Curve_Mask_Sprint);
 	Mask_Lean = GetCurveValue(Curve_Mask_Lean);
+
+	// AO influence
+	AO_Head = GetCurveValue(Curve_AO_Head);
+	AO_Pelvis = GetCurveValue(Curve_AO_Pelvis);
+	AO_Spine = GetCurveValue(Curve_AO_Spine);
+	AO_Legs = GetCurveValue(Curve_AO_Legs);
+	AO_Arm_L = GetCurveValue(Curve_AO_Arm_L);
+	AO_Arm_R = GetCurveValue(Curve_AO_Arm_R);
 }
 
 
@@ -588,8 +596,8 @@ UAnimInstanceBase::UAnimInstanceBase(const FObjectInitializer& ObjectInitializer
 	PelvisTarget = FVector::ZeroVector;
 
 	// Feet
-	IK_FootInterpSpeed_Slow = 5;
-	IK_FootInterpSpeed_Fast = 10;
+	IK_FootInterpSpeed_Slow = 10;
+	IK_FootInterpSpeed_Fast = 20;
 	IK_TraceDistanceAboveFoot = 45;
 	IK_TraceDistanceBelowFoot = 20;
 	FootOffsetRollAdjustHeight = -2;
@@ -614,8 +622,8 @@ UAnimInstanceBase::UAnimInstanceBase(const FObjectInitializer& ObjectInitializer
 	bWallRunInverseKinematics = false;
 	IK_WallRunState = EInverseKinematicsState::IK_Disabled;
 	WallRunTraceDistance = 64;
-	WallRunArmsInterpSpeed = 15;
-	WallRunArmsInterpSpeedTransition = 5;
+	WallRunArmsInterpSpeed = 10;
+	WallRunArmsInterpSpeedTransition = 1;
 	WallRunArmLength = 54;
 	WallRunArmHeightOffset = 40;
 	WallRunHandSpacing = 5;

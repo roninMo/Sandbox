@@ -166,7 +166,16 @@ protected:
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Mask_Sprint; // 1 = Prevent sprint
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float Mask_Lean; // 1 = Prevent lean
+
 	
+	/**** AO Overrides ****/
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float AO_Head;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float AO_Pelvis;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float AO_Spine;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float AO_Legs;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float AO_Arm_L;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves") float AO_Arm_R;
+
 	
 //------------------------------------------------------------------------------//
 // Captured Movement															//

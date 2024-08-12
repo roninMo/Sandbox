@@ -33,7 +33,7 @@
 #define Curve_AO_Head FName("AO_Head")
 #define Curve_AO_Pelvis FName("AO_Pelvis")
 #define Curve_AO_Spine FName("AO_Spine")
-#define Curve_AO_Feet FName("AO_Feet")
+#define Curve_AO_Legs FName("AO_Legs")
 #define Curve_AO_Arm_L FName("AO_Arm_L")
 #define Curve_AO_Arm_R FName("AO_Arm_R")
 #define Curve_AO_Hand_L FName("AO_Hand_L")
