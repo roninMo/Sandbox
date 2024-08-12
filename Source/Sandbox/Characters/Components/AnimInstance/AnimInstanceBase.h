@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
+#include "Sandbox/Data/Enums/InverseKinematicsState.h"
 #include "Sandbox/Data/Enums/MovementTypes.h"
 #include "AnimInstanceBase.generated.h"
 
@@ -254,6 +255,7 @@ protected:
 
 	/** Value to capture first frame of wall run inverse kinematics. We need to adjust the current offset to account for world space interps */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") bool bWallRunInverseKinematics;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") EInverseKinematicsState IK_WallRunState;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") FTransform LeftHandTransform;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms") FTransform RightHandTransform;
@@ -332,8 +334,11 @@ protected:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Animation|Inverse Kinematics") bool ShouldCalculateFeetIK();
 	virtual bool ShouldCalculateFeetIK_Implementation();
 
-	/** Calculates the arm positions for IK control rigs */
+	/** Calculates the arm positions for inverse kinematics */
 	virtual void CalculateArmsIK(float DeltaTime);
+	
+	/** Calculates the arm positions during wall running */
+	virtual void CalculateWallRunArmsIK(float DeltaTime);
 
 	/** Sets the offset location and rotation for ik arm placement */
 	virtual void SetArmIKOffset(float DeltaTime, FName IKHandBone, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset);

@@ -30,7 +30,7 @@ void UAnimInstanceBase::NativeUpdateAnimation(float DeltaTime)
 	}
 
 	// Save the player's movement information
-	UpdateCurveValues();
+	// UpdateCurveValues();
 	GetCharacterMovementValues(DeltaTime);
 
 	// Calculate movement logic
@@ -287,49 +287,50 @@ bool UAnimInstanceBase::ShouldCalculateFeetIK_Implementation()
 void UAnimInstanceBase::CalculateArmsIK(float DeltaTime)
 {
 	// Handle state values for handling different versions of inverse kinematics
-	if (CustomMovementMode != MOVE_Custom_WallRunning)
+	if (CustomMovementMode == MOVE_Custom_WallRunning)
 	{
-		bWallRunInverseKinematics = false;
-	}
-	
-	// Left arm
-	if (ShouldCalculateLeftArmIK())
-	{
-		// Wall run logic
-		if (CustomMovementMode == MOVE_Custom_WallRunning)
+		if (!bWallRunInverseKinematics)
 		{
-			if (MovementComponent->GetWallRunNormal().Dot(Character->GetActorRightVector()) >= 0)
-			{
-				bRightHandWallRun = false;
-				SetArmIKOffset(DeltaTime, LeftArmBoneName, ArmLocationOffset_L, ArmLocationTarget_L, ArmRotationOffset_L, ArmRotationTarget_L);
-			}
-		}
-		else
-		{
-			SetArmIKOffset(DeltaTime, LeftArmBoneName, ArmLocationOffset_L, ArmLocationTarget_L, ArmRotationOffset_L, ArmRotationTarget_L);
+			bWallRunInverseKinematics = true;
+			IK_WallRunState = EInverseKinematicsState::IK_TransitionIn;
 		}
 	}
-	else ResetArmIKOffsets(DeltaTime, ArmLocationOffset_L, ArmLocationTarget_L, ArmRotationOffset_L, ArmRotationTarget_L, LeftArmBoneName);
+	else if (bWallRunInverseKinematics)
+	{
+		if (IK_WallRunState == EInverseKinematicsState::IK_Enabled) IK_WallRunState = EInverseKinematicsState::IK_TransitionOut;
+		if (IK_WallRunState == EInverseKinematicsState::IK_Disabled) bWallRunInverseKinematics = false;
+	}
 
-	
-	// Right arm
-	if (ShouldCalculateRightArmIK())
+
+	// Inverse kinematics during wall running
+	if (bWallRunInverseKinematics)
 	{
-		// Wall run logic
-		if (CustomMovementMode == MOVE_Custom_WallRunning)
-		{
-			if (MovementComponent->GetWallRunNormal().Dot(Character->GetActorRightVector()) <= 0)
-			{
-				bRightHandWallRun = true;
-				SetArmIKOffset(DeltaTime, RightArmBoneName, ArmLocationOffset_R, ArmLocationTarget_R, ArmRotationOffset_R, ArmRotationTarget_R);
-			}
-		}
-		else
-		{
-			SetArmIKOffset(DeltaTime, RightArmBoneName, ArmLocationOffset_R, ArmLocationTarget_R, ArmRotationOffset_R, ArmRotationTarget_R);
-		}
+		CalculateWallRunArmsIK(DeltaTime);
 	}
-	else ResetArmIKOffsets(DeltaTime, ArmLocationOffset_R, ArmLocationTarget_R, ArmRotationOffset_R, ArmRotationTarget_R, RightArmBoneName);
+	else
+	{
+		ResetArmIKOffsets(DeltaTime, ArmLocationOffset_L, ArmLocationTarget_L, ArmRotationOffset_L, ArmRotationTarget_L, LeftArmBoneName);
+		ResetArmIKOffsets(DeltaTime, ArmLocationOffset_R, ArmLocationTarget_R, ArmRotationOffset_R, ArmRotationTarget_R, RightArmBoneName);
+	}
+}
+
+
+void UAnimInstanceBase::CalculateWallRunArmsIK(float DeltaTime)
+{
+	if (MovementComponent->GetWallRunNormal().Dot(Character->GetActorRightVector()) >= 0)
+	{
+		bRightHandWallRun = false;
+	}
+
+
+	if (!bRightHandWallRun)
+	{
+		SetArmIKOffset(DeltaTime, LeftArmBoneName, ArmLocationOffset_L, ArmLocationTarget_L, ArmRotationOffset_L, ArmRotationTarget_L);
+	}
+	else
+	{
+		SetArmIKOffset(DeltaTime, LeftArmBoneName, ArmLocationOffset_R, ArmLocationTarget_R, ArmRotationOffset_R, ArmRotationTarget_R);
+	}
 }
 
 
@@ -341,45 +342,29 @@ void UAnimInstanceBase::SetArmIKOffset(float DeltaTime, FName IKHandBone, FVecto
 	if (ArmLocation == FVector::ZeroVector || CharacterLocation == FVector::ZeroVector) return;
 
 	// We're using world space for handling inverse kinematics for hands, so adjust the initial offset so we're able to use interp speeds without problems
-	if (!bWallRunInverseKinematics && CustomMovementMode == MOVE_Custom_WallRunning)
+	if (IK_WallRunState == EInverseKinematicsState::IK_TransitionIn)
 	{
+		IK_WallRunState = EInverseKinematicsState::IK_Enabled;
 		bWallRunInverseKinematics = true;
 		CurrentOffset = ArmLocation;
 		TargetOffset = ArmLocation;
 	}
 	
 	// Wall run logic
-	if (CustomMovementMode == MOVE_Custom_WallRunning)
+	if (bWallRunInverseKinematics)
 	{
 		FVector WallLocation = MovementComponent->GetWallRunLocation();
 		FVector WallNormal = MovementComponent->GetWallRunImpactNormal();
-		FVector RightVector = IKHandBone == RightArmBoneName ? Character->GetActorRightVector() : -Character->GetActorRightVector();
-		FHitResult Hit;	
-		UKismetSystemLibrary::LineTraceSingle(
-			GetWorld(),
-			CharacterLocation,
-			CharacterLocation + -WallNormal * WallRunTraceDistance,
-			TraceTypeQuery1,
-			false,
-			{},
-			bDebugArmTrace ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
-			Hit,
-			true,
-			FColor::Turquoise,
-			FColor::Emerald,
-			ArmTraceDuration
-		);
-
+		
 		// Interp the location and rotation
-		// TargetOffset = CharacterLocation + (Character->GetActorForwardVector() * WallRunArmLength) + ((WallRunArmWidthOffset - WallRunHandSpacing) * RightVector) + FVector(0, 0, WallRunArmHeightOffset);
-		if (Hit.IsValidBlockingHit())
+		if (IK_WallRunState == EInverseKinematicsState::IK_Enabled)
 		{
 			// Adjust the interp speed based on the character's movement speed
-			float InterpSpeed = WallRunArmsInterpSpeed * (Speed / MaxRunSpeed);
+			const float InterpSpeed = WallRunArmsInterpSpeed * (Speed / MaxRunSpeed);
 
-			// Location interps
-			const FVector ForwardVector = Hit.Normal.RotateAngleAxis(90 * (IKHandBone == RightArmBoneName ? 1 : -1), FVector(0, 0, 1));
-			TargetOffset = Hit.Location + FVector(0, 0, WallRunArmHeightOffset) + (ForwardVector * WallRunArmLength) + (WallNormal * WallRunHandSpacing);
+			// Location calculations
+			const FVector ForwardVector = WallNormal.RotateAngleAxis(90 * (IKHandBone == RightArmBoneName ? 1 : -1), FVector(0, 0, 1));
+			TargetOffset = WallLocation + FVector(0, 0, WallRunArmHeightOffset) + (ForwardVector * WallRunArmLength) + (WallNormal * WallRunHandSpacing);
 			CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, TargetOffset, DeltaTime, InterpSpeed);
 			
 			if (bDebugArmTrace)
@@ -388,11 +373,32 @@ void UAnimInstanceBase::SetArmIKOffset(float DeltaTime, FName IKHandBone, FVecto
 				if (IKHandBone == RightArmBoneName) DrawDebugBox(GetWorld(), TargetOffset, FVector(3), FColor::Emerald, false, ArmTraceDuration);
 			}
 
-			// Rotation interps
+			// Rotation calculations
 			TargetRotationOffset = WallNormal.Rotation() + (IKHandBone == LeftArmBoneName ? WallRunLeftHandRotation : WallRunRightHandRotation);
 			CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, TargetRotationOffset, DeltaTime, InterpSpeed);
 		}
+		else if (IK_WallRunState == EInverseKinematicsState::IK_TransitionOut)
+		{
+			if (CurrentRotationOffset != FRotator::ZeroRotator)
+			{
+				CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, FRotator::ZeroRotator, DeltaTime, WallRunArmsInterpSpeedTransition);
+			}
+			else
+			{
+				TargetOffset = ArmLocation;
+				CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, TargetOffset, DeltaTime, WallRunArmsInterpSpeedTransition);
 
+				if (CurrentOffset.Equals(TargetOffset, 1))
+				{
+					IK_WallRunState = EInverseKinematicsState::IK_Disabled;
+					bWallRunInverseKinematics = false;
+				}
+			}
+		}
+		else
+		{
+			ResetArmIKOffsets(DeltaTime, CurrentOffset, TargetOffset, CurrentRotationOffset, TargetRotationOffset, IKHandBone);
+		}
 	}
 	else
 	{
@@ -533,6 +539,7 @@ UAnimInstanceBase::UAnimInstanceBase(const FObjectInitializer& ObjectInitializer
 	Montage_Hand_R = 1;
 
 	// Overlay Overrides
+	Layering_Head = 1;
 	Layering_Pelvis = 1;
 	Layering_Spine = 1;
 	Layering_Legs = 1;

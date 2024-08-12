@@ -10,32 +10,32 @@
 UAM_CreateCurves::UAM_CreateCurves()
 {
 	// Montage Overrides
-	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Head, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Pelvis, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Spine, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Legs, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Arm_L, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Arm_R, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Hand_L, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Hand_R, 1));
+	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Head, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Pelvis, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Spine, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Legs, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Arm_L, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Arm_R, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Hand_L, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Hand_R, 0));
 	
 	// Overlay Overrides
-	Curves.Add(F_AnimationCurveInfo(Curve_Layering_Head, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_Layering_Pelvis, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_Layering_Spine, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_Layering_Legs, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_Layering_Arm_L, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_Layering_Arm_R, 1));
+	Curves.Add(F_AnimationCurveInfo(Curve_Layering_Head, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_Layering_Pelvis, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_Layering_Spine, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_Layering_Legs, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_Layering_Arm_L, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_Layering_Arm_R, 0));
 	
 	// IK influence
-	Curves.Add(F_AnimationCurveInfo(Curve_IK_Head, 0));
-	Curves.Add(F_AnimationCurveInfo(Curve_IK_Pelvis, 0));
-	Curves.Add(F_AnimationCurveInfo(Curve_IK_Spine, 0));
-	Curves.Add(F_AnimationCurveInfo(Curve_IK_Feet, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_IK_Arm_L, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_IK_Arm_R, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_IK_Hand_L, 1));
-	Curves.Add(F_AnimationCurveInfo(Curve_IK_Hand_R, 1));
+	Curves.Add(F_AnimationCurveInfo(Curve_IK_Head, 1));
+	Curves.Add(F_AnimationCurveInfo(Curve_IK_Pelvis, 1));
+	Curves.Add(F_AnimationCurveInfo(Curve_IK_Spine, 1));
+	Curves.Add(F_AnimationCurveInfo(Curve_IK_Feet, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_IK_Arm_L, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_IK_Arm_R, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_IK_Hand_L, 0));
+	Curves.Add(F_AnimationCurveInfo(Curve_IK_Hand_R, 0));
 }
 
 void UAM_CreateCurves::OnApply_Implementation(UAnimSequence* AnimationSequence)
@@ -58,11 +58,14 @@ void UAM_CreateCurves::OnApply_Implementation(UAnimSequence* AnimationSequence)
 		UAnimationBlueprintLibrary::GetTimeAtFrame(AnimationSequence, 0, Time);
 		UAnimationBlueprintLibrary::AddFloatCurveKey(AnimationSequence, Curve.Name, Time, Curve.DefaultValue);
 
-		const int32 Frames = AnimationSequence->GetNumberOfSampledKeys();
-		for (int32 Frame = 0; Frame < Frames; Frame++)
+		if (Curve.bAdjustFrames)
 		{
-			UAnimationBlueprintLibrary::GetTimeAtFrame(AnimationSequence, Frame, Time);
-			UAnimationBlueprintLibrary::AddFloatCurveKey(AnimationSequence, Curve.Name, Time, Curve.DefaultValue);
+			const int32 Frames = AnimationSequence->GetNumberOfSampledKeys();
+			for (int32 Frame = 0; Frame < Frames; Frame++)
+			{
+				UAnimationBlueprintLibrary::GetTimeAtFrame(AnimationSequence, Frame, Time);
+				UAnimationBlueprintLibrary::AddFloatCurveKey(AnimationSequence, Curve.Name, Time, Curve.DefaultValue);
+			}
 		}
 	}
 }
