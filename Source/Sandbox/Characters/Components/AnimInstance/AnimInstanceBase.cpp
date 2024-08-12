@@ -374,9 +374,13 @@ void UAnimInstanceBase::SetArmIKOffset(float DeltaTime, FName IKHandBone, FVecto
 		// TargetOffset = CharacterLocation + (Character->GetActorForwardVector() * WallRunArmLength) + ((WallRunArmWidthOffset - WallRunHandSpacing) * RightVector) + FVector(0, 0, WallRunArmHeightOffset);
 		if (Hit.IsValidBlockingHit())
 		{
+			// Adjust the interp speed based on the character's movement speed
+			float InterpSpeed = WallRunArmsInterpSpeed * (Speed / MaxRunSpeed);
+
+			// Location interps
 			const FVector ForwardVector = Hit.Normal.RotateAngleAxis(90 * (IKHandBone == RightArmBoneName ? 1 : -1), FVector(0, 0, 1));
 			TargetOffset = Hit.Location + FVector(0, 0, WallRunArmHeightOffset) + (ForwardVector * WallRunArmLength) + (WallNormal * WallRunHandSpacing);
-			CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, TargetOffset, DeltaTime, WallRunArmsInterpSpeed);
+			CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, TargetOffset, DeltaTime, InterpSpeed);
 			
 			if (bDebugArmTrace)
 			{
@@ -384,8 +388,9 @@ void UAnimInstanceBase::SetArmIKOffset(float DeltaTime, FName IKHandBone, FVecto
 				if (IKHandBone == RightArmBoneName) DrawDebugBox(GetWorld(), TargetOffset, FVector(3), FColor::Emerald, false, ArmTraceDuration);
 			}
 
+			// Rotation interps
 			TargetRotationOffset = WallNormal.Rotation() + (IKHandBone == LeftArmBoneName ? WallRunLeftHandRotation : WallRunRightHandRotation);
-			CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, TargetRotationOffset, DeltaTime, WallRunArmsInterpSpeed);
+			CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, TargetRotationOffset, DeltaTime, InterpSpeed);
 		}
 
 	}
@@ -583,7 +588,7 @@ UAnimInstanceBase::UAnimInstanceBase(const FObjectInitializer& ObjectInitializer
 
 	// Arms
 	WallRunTraceDistance = 64;
-	WallRunArmsInterpSpeed = 20;
+	WallRunArmsInterpSpeed = 15;
 	WallRunArmsInterpSpeedTransition = 5;
 	WallRunArmLength = 54;
 	WallRunArmHeightOffset = 40;
