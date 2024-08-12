@@ -4,12 +4,11 @@
 #include "Sandbox/Animation/Modifiers/AM_CreateCurves.h"
 
 #include "Sandbox/Data/Enums/MovementAnimCurveValues.h"
+#include "AnimationBlueprintLibrary.h"
 
 
-UAM_CreateCurves::UAM_CreateCurves(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+UAM_CreateCurves::UAM_CreateCurves()
 {
-	Curves.Add(F_AnimationCurveInfo(Curve_Layering_Head, 1));
-
 	// Montage Overrides
 	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Head, 1));
 	Curves.Add(F_AnimationCurveInfo(Curve_Montage_Pelvis, 1));
@@ -42,25 +41,25 @@ UAM_CreateCurves::UAM_CreateCurves(const FObjectInitializer& ObjectInitializer) 
 void UAM_CreateCurves::OnApply_Implementation(UAnimSequence* AnimationSequence)
 {
 	if (!AnimationSequence) return;
-
-	for (F_AnimationCurveInfo Curve : Curves)
+	
+	for (const F_AnimationCurveInfo Curve : Curves)
 	{
 		// Delete curve if it already exists
 		if (UAnimationBlueprintLibrary::DoesCurveExist(AnimationSequence, Curve.Name, ERawCurveTrackTypes::RCT_Float))
 		{
 			UAnimationBlueprintLibrary::RemoveCurve(AnimationSequence, Curve.Name);
 		}
-
+	
 		// Add curve
 		UAnimationBlueprintLibrary::AddCurve(AnimationSequence, Curve.Name);
-
+	
 		// Adjust values
 		float Time = 0;
 		UAnimationBlueprintLibrary::GetTimeAtFrame(AnimationSequence, 0, Time);
 		UAnimationBlueprintLibrary::AddFloatCurveKey(AnimationSequence, Curve.Name, Time, Curve.DefaultValue);
 
-		int32 Frames = AnimationSequence->GetNumberOfSampledKeys();
-		for (const int32 Frame : Frames)
+		const int32 Frames = AnimationSequence->GetNumberOfSampledKeys();
+		for (int32 Frame = 0; Frame < Frames; Frame++)
 		{
 			UAnimationBlueprintLibrary::GetTimeAtFrame(AnimationSequence, Frame, Time);
 			UAnimationBlueprintLibrary::AddFloatCurveKey(AnimationSequence, Curve.Name, Time, Curve.DefaultValue);

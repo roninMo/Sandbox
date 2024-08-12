@@ -30,7 +30,7 @@
 #define Curve_IK_Hand_R FName("IK_Hand_R")
 
 // Primary values
-#define Curve_Feet_Plant FName("Feet_Plant")
-#define Curve_Turn_RotationAmount FName("Turn_RotationAmount")
-#define Curve_Mask_Sprint FName("Mask_Sprint")
-#define Curve_Mask_Lean FName("Mask_Lean")
+#define Curve_Feet_Plant FName("Feet_Plant") // -1 = Left foot, 1 = Right foot
+#define Curve_Turn_RotationAmount FName("Turn_RotationAmount") // -1, 1 = Left, Right
+#define Curve_Mask_Sprint FName("Mask_Sprint") // 1 = Prevent sprint
+#define Curve_Mask_Lean FName("Mask_Lean") // 1 = Prevent lean

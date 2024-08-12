@@ -15,7 +15,7 @@ struct F_AnimationCurveInfo
 			const FName Name = FName(),
 			const float DefaultValue = 0,
 			const bool bAdjustFrames = false,
-			const TArray<uint32>& Frames = {}
+			const TArray<int32>& Frames = {}
 		) :
 
 		Name(Name),
@@ -35,5 +35,5 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bAdjustFrames;
 	
 	/** The values for each frame of the animation */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<uint32> Frames;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<int32> Frames;
 };

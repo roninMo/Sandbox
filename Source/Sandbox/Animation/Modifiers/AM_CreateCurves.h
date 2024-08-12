@@ -22,7 +22,7 @@ protected:
 
 
 protected:
-	UAM_CreateCurves(const FObjectInitializer& ObjectInitializer);
+	UAM_CreateCurves();
 	
 	/** Executed when the Animation is initialized (native event for debugging / testing purposes) */
 	virtual void OnApply_Implementation(UAnimSequence* AnimationSequence) override;
