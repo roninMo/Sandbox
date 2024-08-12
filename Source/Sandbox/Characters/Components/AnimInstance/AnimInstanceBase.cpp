@@ -38,7 +38,7 @@ void UAnimInstanceBase::NativeUpdateAnimation(float DeltaTime)
 	CalculateMovementDirection();
 
 	// Handle Inverse Kinematics
-	CalculateFootIK(DeltaTime);
+	CalculateFeetIK(DeltaTime);
 	CalculateArmsIK(DeltaTime);
 }
 
@@ -138,8 +138,8 @@ void UAnimInstanceBase::CalculateYawAndLean(float DeltaTime)
 	// The aim rotation for blendspace animations
 	SmoothedAimRotation = FMath::RInterpTo(SmoothedAimRotation, RelativeRotation, DeltaTime, AimRotationInterpSpeed);
 	SmoothedAimRotation = FRotator(
-		FMath::Clamp(SmoothedAimRotation.Pitch, -AimRotationAngle, AimRotationAngle),
-		FMath::Clamp(SmoothedAimRotation.Yaw, -90, 90),
+		FMath::Clamp(SmoothedAimRotation.Pitch, -AimRotationAngles.Y, AimRotationAngles.Y),
+		FMath::Clamp(SmoothedAimRotation.Yaw, -AimRotationAngles.X, AimRotationAngles.X),
 		FMath::Clamp(SmoothedAimRotation.Roll, -90, 90)
 	);
 }
@@ -171,7 +171,7 @@ void UAnimInstanceBase::CalculateMovementDirection()
 
 #pragma region Inverse Kinematics
 #pragma region Feet Ik
-void UAnimInstanceBase::CalculateFootIK(float DeltaTime)
+void UAnimInstanceBase::CalculateFeetIK(float DeltaTime)
 {
 	if (!ShouldCalculateFeetIK())
 	{
@@ -179,13 +179,32 @@ void UAnimInstanceBase::CalculateFootIK(float DeltaTime)
 		return;
 	}
 
-	SetIKFootOffset(DeltaTime, IKLeftFootBoneName, FootLocationOffset_L, FootLocationTarget_L, FootRotationOffset_L, FootRotationTarget_L);
-	SetIKFootOffset(DeltaTime, IKRightFootBoneName, FootLocationOffset_R, FootLocationTarget_R, FootRotationOffset_R, FootRotationTarget_R);
-	SetIKPelvisOffsetForFeet(DeltaTime,PelvisOffset, PelvisTarget);
+	// Handle state values for handling different versions of inverse kinematics
+	bFootPlacementInverseKinematics = !bIsMoving;
+	if (bWalking || bSprinting /** Wall Climbing || Wall Running */)
+	{
+		bFootPlacementInverseKinematics = false;
+		bFootLockingInverseKinematics = true;
+	}
+
+	if (bFootPlacementInverseKinematics)
+	{
+		FootPlacementInverseKinematics(DeltaTime, IKLeftFootBoneName, FootLocationOffset_L, FootLocationTarget_L, FootRotationOffset_L, FootRotationTarget_L);
+		FootPlacementInverseKinematics(DeltaTime, IKRightFootBoneName, FootLocationOffset_R, FootLocationTarget_R, FootRotationOffset_R, FootRotationTarget_R);
+		PelvisOffsetForFootPlacement(DeltaTime);
+	}
+	else if (bFootLockingInverseKinematics)
+	{
+		FeetLockingInverseKinematics(DeltaTime);
+	}
+	else
+	{
+		ResetIKFeetAndPelvisOffsets(DeltaTime);
+	}
 }
 
 
-void UAnimInstanceBase::SetIKFootOffset(float DeltaTime, FName IKFootBone, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset)
+void UAnimInstanceBase::FootPlacementInverseKinematics(float DeltaTime, FName IKFootBone, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset)
 {
 	FVector IKFootLocation = GetOwningComponent()->GetSocketLocation(IKFootBone);
 	FVector RootLocation = GetOwningComponent()->GetSocketLocation(FName("root"));
@@ -199,12 +218,12 @@ void UAnimInstanceBase::SetIKFootOffset(float DeltaTime, FName IKFootBone, FVect
 		TraceTypeQuery1,
 		false,
 		{},
-		bDebugIKFootTrace ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
+		bDebugIKFootPlacement ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
 		Hit,
 		true,
 		FColor::Red,
 		FColor::Emerald,
-		IKFootTraceDuration
+		IKFootPlacementTraceDuration
 	);
 
 	// Adjust the target location and rotation
@@ -212,7 +231,7 @@ void UAnimInstanceBase::SetIKFootOffset(float DeltaTime, FName IKFootBone, FVect
 	{
 		// Floor location + Foot dimensions 
 		TargetOffset = Hit.ImpactPoint - FootLocation;
-		if (!bIsMoving && TargetOffset.Z >= FootOffsetRollAdjustHeight)
+		if (TargetOffset.Z >= FootOffsetRollAdjustHeight)
 		{
 			float Adjusted = UKismetMathLibrary::MapRangeClamped(FMath::Abs(TargetRotationOffset.Pitch),
 				UpperFootOffsetInRange.X, UpperFootOffsetInRange.Y,
@@ -230,8 +249,8 @@ void UAnimInstanceBase::SetIKFootOffset(float DeltaTime, FName IKFootBone, FVect
 	}
 	
 	// Interp speed should only be natural if they're putting their foot down
-	float InterpSpeed = IK_FootInterpSpeed_Slow;
-	if (CurrentOffset.Z <= TargetOffset.Z) InterpSpeed = IK_FootInterpSpeed_Fast;
+	float InterpSpeed = IK_FootPlacementInterpSpeed;
+	if (CurrentOffset.Z <= TargetOffset.Z) InterpSpeed = IK_FootInterpSpeedTransition;
 
 	// Location and Rotation interps
 	CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, TargetOffset, DeltaTime, InterpSpeed);
@@ -239,7 +258,7 @@ void UAnimInstanceBase::SetIKFootOffset(float DeltaTime, FName IKFootBone, FVect
 	if (bIsMoving) CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, FRotator(0, 0, TargetRotationOffset.Roll), DeltaTime, InterpSpeed);
 	else CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, TargetRotationOffset, DeltaTime, InterpSpeed);
 	
-	if (bDebugIKFootTrace)
+	if (bDebugIKFootPlacement)
 	{
 		DrawDebugBox(
 			GetWorld(),
@@ -248,28 +267,117 @@ void UAnimInstanceBase::SetIKFootOffset(float DeltaTime, FName IKFootBone, FVect
 			GetOwningComponent()->GetSocketQuaternion(IKFootBone),
 			FColor::Turquoise,
 			false,
-			IKFootTraceDuration
+			IKFootPlacementTraceDuration
 		);
 	}
 }
 
 
-void UAnimInstanceBase::SetIKPelvisOffsetForFeet(float DeltaTime, FVector& CurrentOffset, FVector& TargetOffset)
+void UAnimInstanceBase::PelvisOffsetForFootPlacement(float DeltaTime)
 {
 	if (FootLocationOffset_L.Z <= FootLocationOffset_R.Z) PelvisTarget = FootLocationOffset_L;
 	else PelvisTarget = FootLocationOffset_R;
 
-	float InterpSpeed = PelvisOffset.Z <= PelvisTarget.Z ? IK_FootInterpSpeed_Slow : IK_FootInterpSpeed_Fast;
+	float InterpSpeed = PelvisOffset.Z <= PelvisTarget.Z ? IK_FootPlacementInterpSpeed : IK_FootInterpSpeedTransition;
 	PelvisOffset = UKismetMathLibrary::VInterpTo(PelvisOffset, PelvisTarget, DeltaTime, InterpSpeed); 
+}
+
+
+void UAnimInstanceBase::FeetLockingInverseKinematics(float DeltaTime)
+{
+	// Left foot
+	if (Feet_Plant == -1)
+	{
+		FootLockInverseKinematics(DeltaTime, IKLeftFootBoneName, FootLocationOffset_L, FootLocationTarget_L, FootRotationOffset_L, FootRotationTarget_L);
+	}
+
+	// Right foot
+	if (Feet_Plant == 1)
+	{
+		FootLockInverseKinematics(DeltaTime, IKRightFootBoneName, FootLocationOffset_R, FootLocationTarget_R, FootRotationOffset_R, FootRotationTarget_R);
+	}
+
+	// Pelvis offset
+	PelvisOffsetForFootPlacement(DeltaTime);
+
+	// Reset offsets
+	if (Feet_Plant != -1 && Feet_Plant != 1)
+	{
+		ResetIKFeetAndPelvisOffsets(DeltaTime);
+	}
+	
+	// Save values for finding the target offset
+	PrevFeetPlantValue = Feet_Plant;
+}
+
+
+void UAnimInstanceBase::FootLockInverseKinematics(float DeltaTime, FName IKFootBone, FVector& CurrentOffset, FVector& TargetLocation, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset)
+{
+	FVector IKFootLocation = GetOwningComponent()->GetSocketLocation(IKFootBone);
+	FVector RootLocation = GetOwningComponent()->GetSocketLocation(FName("root"));
+	FVector FootLocation = FVector(IKFootLocation.X, IKFootLocation.Y, RootLocation.Z);
+	
+	// Calculate the target offset 
+	if (PrevFeetPlantValue != Feet_Plant)
+	{
+		FHitResult Hit;	
+		UKismetSystemLibrary::LineTraceSingle(
+			GetWorld(),
+			FootLocation + FVector(0, 0, IK_TraceDistanceAboveFoot),
+			FootLocation - FVector(0, 0, IK_TraceDistanceBelowFoot),
+			TraceTypeQuery1,
+			false,
+			{},
+			bDebugIKFootLocking ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
+			Hit,
+			true,
+			FColor::Red,
+			FColor::Emerald,
+			IKFootLockingTraceDuration
+		);
+
+		if (MovementComponent->IsWalkable(Hit))
+		{
+			TargetLocation = Hit.ImpactPoint;
+			
+			// Find the target rotation
+			float FloorPitch = 0;
+			float FloorRoll = 0;
+			UKismetMathLibrary::GetSlopeDegreeAngles(Character->GetActorRightVector(), Hit.ImpactNormal, Character->GetActorUpVector(), FloorPitch, FloorRoll);
+			TargetRotationOffset = FRotator(-FloorRoll, 0, -FloorPitch); // This is a fix for translating to the character's bone rotations
+		}
+	}
+
+	// Interp the location and rotation
+	if (TargetLocation != FVector::ZeroVector)
+	{
+		FVector TargetOffset = TargetLocation - FootLocation;
+
+		// Fix the height based on the angle of the foot
+		if (TargetOffset.Z >= FootOffsetRollAdjustHeight)
+		{
+			float Adjusted = UKismetMathLibrary::MapRangeClamped(FMath::Abs(TargetRotationOffset.Pitch),
+				UpperFootOffsetInRange.X, UpperFootOffsetInRange.Y,
+				UpperFootOffsetOutRange.X, UpperFootOffsetOutRange.Y
+			);
+			// UE_LOGFMT(LogTemp, Log, "{0} ->  TargetOffset Z: {1}, Adjusted: -{2}", IKFootBone, TargetOffset.Z, Adjusted);
+			TargetOffset.Z = TargetOffset.Z - Adjusted;
+		}
+
+		// Location and Rotation interpsspeed
+		const float InterpSpeed = FMath::Clamp(IK_FootLockInterpSpeed * (Speed / MaxWalkSpeed), IK_FootLockInterpSpeed / 2, 100);
+		CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, TargetOffset, DeltaTime, InterpSpeed);
+		CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, TargetRotationOffset, DeltaTime, InterpSpeed);
+	}
 }
 
 
 void UAnimInstanceBase::ResetIKFeetAndPelvisOffsets(float DeltaTime)
 {
-	FootLocationOffset_L = UKismetMathLibrary::VInterpTo(FootLocationOffset_L, FVector::ZeroVector, DeltaTime, IK_FootInterpSpeed_Fast);
-	FootRotationOffset_L = UKismetMathLibrary::RInterpTo(FootRotationOffset_L, FRotator::ZeroRotator, DeltaTime, IK_FootInterpSpeed_Fast);
-	FootLocationOffset_R = UKismetMathLibrary::VInterpTo(FootLocationOffset_R, FVector::ZeroVector, DeltaTime, IK_FootInterpSpeed_Fast);
-	FootRotationTarget_R = UKismetMathLibrary::RInterpTo(FootRotationTarget_R, FRotator::ZeroRotator, DeltaTime, IK_FootInterpSpeed_Fast);
+	FootLocationOffset_L = UKismetMathLibrary::VInterpTo(FootLocationOffset_L, FVector::ZeroVector, DeltaTime, IK_FootInterpSpeedTransition);
+	FootRotationOffset_L = UKismetMathLibrary::RInterpTo(FootRotationOffset_L, FRotator::ZeroRotator, DeltaTime, IK_FootInterpSpeedTransition);
+	FootLocationOffset_R = UKismetMathLibrary::VInterpTo(FootLocationOffset_R, FVector::ZeroVector, DeltaTime, IK_FootInterpSpeedTransition);
+	FootRotationTarget_R = UKismetMathLibrary::RInterpTo(FootRotationTarget_R, FRotator::ZeroRotator, DeltaTime, IK_FootInterpSpeedTransition);
 }
 
 
@@ -306,14 +414,29 @@ void UAnimInstanceBase::CalculateArmsIK(float DeltaTime)
 	{
 		CalculateWallRunArmsIK(DeltaTime);
 	}
+	else if (bWallPlacementInverseKinematics)
+	{
+		WallPlacementArmInverseKinematics(DeltaTime);
+	}
 	else
 	{
-		ResetArmIKOffsets(DeltaTime, ArmLocationOffset_L, ArmLocationTarget_L, ArmRotationOffset_L, ArmRotationTarget_L, LeftArmBoneName);
-		ResetArmIKOffsets(DeltaTime, ArmLocationOffset_R, ArmLocationTarget_R, ArmRotationOffset_R, ArmRotationTarget_R, RightArmBoneName);
+		ResetArmIKOffsets(DeltaTime, ArmLocationOffset_L, ArmLocationTarget_L, ArmRotationOffset_L, ArmRotationTarget_L);
+		ResetArmIKOffsets(DeltaTime, ArmLocationOffset_R, ArmLocationTarget_R, ArmRotationOffset_R, ArmRotationTarget_R);
 	}
 }
 
 
+#pragma region Wall Placement
+void UAnimInstanceBase::WallPlacementArmInverseKinematics(float DeltaTime)
+{
+	
+}
+#pragma endregion
+
+
+
+
+#pragma region Wall Running
 void UAnimInstanceBase::CalculateWallRunArmsIK(float DeltaTime)
 {
 	if (CustomMovementMode == MOVE_Custom_WallRunning)
@@ -321,20 +444,25 @@ void UAnimInstanceBase::CalculateWallRunArmsIK(float DeltaTime)
 		float Angle = MovementComponent->GetWallRunImpactNormal().Dot(Character->GetActorRightVector());
 		bRightHandWallRun = Angle <= 0 ? true : false;
 	}
-
-
+	
 	if (!bRightHandWallRun)
 	{
-		SetArmIKOffset(DeltaTime, LeftArmBoneName, ArmLocationOffset_L, ArmLocationTarget_L, ArmRotationOffset_L, ArmRotationTarget_L);
+		if (ShouldCalculateLeftArmIK())
+		{
+			WallRunArmInverseKinematics(DeltaTime, LeftArmBoneName, ArmLocationOffset_L, ArmLocationTarget_L, ArmRotationOffset_L, ArmRotationTarget_L);
+		}
 	}
 	else
 	{
-		SetArmIKOffset(DeltaTime, RightArmBoneName, ArmLocationOffset_R, ArmLocationTarget_R, ArmRotationOffset_R, ArmRotationTarget_R);
+		if (ShouldCalculateRightArmIK())
+		{
+			WallRunArmInverseKinematics(DeltaTime, RightArmBoneName, ArmLocationOffset_R, ArmLocationTarget_R, ArmRotationOffset_R, ArmRotationTarget_R);
+		}
 	}
 }
 
 
-void UAnimInstanceBase::SetArmIKOffset(float DeltaTime, FName IKHandBone, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset)
+void UAnimInstanceBase::WallRunArmInverseKinematics(float DeltaTime, FName IKHandBone, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset)
 {
 	const FVector ArmLocation = GetOwningComponent()->GetSocketLocation(IKHandBone);
 	const FVector CharacterLocation = GetOwningComponent()->GetSocketLocation("spine_05");
@@ -348,86 +476,87 @@ void UAnimInstanceBase::SetArmIKOffset(float DeltaTime, FName IKHandBone, FVecto
 		bWallRunInverseKinematics = true;
 		CurrentOffset = ArmLocation;
 		TargetOffset = ArmLocation;
+		ResetLocationOffset = ArmLocation - CharacterLocation;
+		ResetRotationOffset = GetOwningComponent()->GetSocketRotation(IKHandBone);
 	}
 	
-	// Wall run logic
-	if (bWallRunInverseKinematics)
+	FVector WallNormal = MovementComponent->GetWallRunImpactNormal();
+	FHitResult Hit;	
+	UKismetSystemLibrary::LineTraceSingle(
+		GetWorld(),
+		CharacterLocation,
+		CharacterLocation + -WallNormal * WallRunTraceDistance,
+		TraceTypeQuery1,
+		false,
+		{},
+		bDebugArmTrace ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
+		Hit,
+		true,
+		FColor::Turquoise,
+		FColor::Emerald,
+		ArmTraceDuration
+	);
+
+	
+	// Interp the location and rotation
+	if (IK_WallRunState == EInverseKinematicsState::IK_Enabled)
 	{
-		FVector WallNormal = MovementComponent->GetWallRunImpactNormal();
-		FHitResult Hit;	
-		UKismetSystemLibrary::LineTraceSingle(
-			GetWorld(),
-			CharacterLocation,
-			CharacterLocation + -WallNormal * WallRunTraceDistance,
-			TraceTypeQuery1,
-			false,
-			{},
-			bDebugArmTrace ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
-			Hit,
-			true,
-			FColor::Turquoise,
-			FColor::Emerald,
-			ArmTraceDuration
-		);
+		// Adjust the interp speed based on the character's movement speed
+		const float InterpSpeed = FMath::Clamp(WallRunArmsInterpSpeed * (Speed / MaxRunSpeed), 1, 100);
 
-		
-		// Interp the location and rotation
-		if (IK_WallRunState == EInverseKinematicsState::IK_Enabled)
+		// Location calculations
+		const FVector ForwardVector = WallNormal.RotateAngleAxis(90 * (IKHandBone == RightArmBoneName ? 1 : -1), FVector(0, 0, 1));
+		if (Hit.IsValidBlockingHit())
 		{
-			// Adjust the interp speed based on the character's movement speed
-			const float InterpSpeed = WallRunArmsInterpSpeed * FMath::Clamp(Speed / MaxRunSpeed, 1, 100);
-
-			// Location calculations
-			const FVector ForwardVector = WallNormal.RotateAngleAxis(90 * (IKHandBone == RightArmBoneName ? 1 : -1), FVector(0, 0, 1));
-			if (Hit.IsValidBlockingHit())
-			{
-				TargetOffset = Hit.Location + FVector(0, 0, WallRunArmHeightOffset) + (ForwardVector * WallRunArmLength) + (WallNormal * WallRunHandSpacing);
-			}
-			else
-			{
-				const FVector RightVector = WallNormal * (IKHandBone == RightArmBoneName ? 1 : -1);
-				TargetOffset = CharacterLocation + (Character->GetActorForwardVector() * WallRunArmLength) + ((WallRunArmWidthOffset - WallRunHandSpacing) * -RightVector) + FVector(0, 0, WallRunArmHeightOffset);
-			}
-			CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, TargetOffset, DeltaTime, InterpSpeed);
-			
-			if (bDebugArmTrace)
-			{
-				if (IKHandBone == LeftArmBoneName) DrawDebugBox(GetWorld(), TargetOffset, FVector(3), FColor::Red, false, ArmTraceDuration);
-				if (IKHandBone == RightArmBoneName) DrawDebugBox(GetWorld(), TargetOffset, FVector(3), FColor::Emerald, false, ArmTraceDuration);
-			}
-
-			// Rotation calculations
-			TargetRotationOffset = WallNormal.Rotation() + (IKHandBone == LeftArmBoneName ? WallRunLeftHandRotation : WallRunRightHandRotation);
-			CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, TargetRotationOffset, DeltaTime, InterpSpeed);
-		}
-		else if (IK_WallRunState == EInverseKinematicsState::IK_TransitionOut)
-		{
-			// Adding both location and rotations when transitioning causes problems during inverse kinematics, so we handle the rotations before we disable inverse kinematics
-			if (CurrentRotationOffset.Equals(FRotator::ZeroRotator, 1))
-			{
-				CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, FRotator::ZeroRotator, DeltaTime, WallRunArmsInterpSpeedTransition);
-			}
-			else
-			{
-				IK_WallRunState = EInverseKinematicsState::IK_Disabled;
-			}
+			TargetOffset = Hit.Location + FVector(0, 0, WallRunArmHeightOffset) + (ForwardVector * WallRunArmLength) + (WallNormal * WallRunHandSpacing);
 		}
 		else
 		{
-			ResetArmIKOffsets(DeltaTime, CurrentOffset, TargetOffset, CurrentRotationOffset, TargetRotationOffset, IKHandBone);
+			const FVector RightVector = WallNormal * (IKHandBone == RightArmBoneName ? 1 : -1);
+			TargetOffset = CharacterLocation + (Character->GetActorForwardVector() * WallRunArmLength) + ((WallRunArmWidthOffset - WallRunHandSpacing) * -RightVector) + FVector(0, 0, WallRunArmHeightOffset);
+		}
+		CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, TargetOffset, DeltaTime, InterpSpeed);
+		
+		if (bDebugArmTrace)
+		{
+			if (IKHandBone == LeftArmBoneName) DrawDebugBox(GetWorld(), TargetOffset, FVector(3), FColor::Red, false, ArmTraceDuration);
+			if (IKHandBone == RightArmBoneName) DrawDebugBox(GetWorld(), TargetOffset, FVector(3), FColor::Emerald, false, ArmTraceDuration);
+		}
+
+		// Rotation calculations
+		TargetRotationOffset = WallNormal.Rotation() + (IKHandBone == LeftArmBoneName ? WallRunLeftHandRotation : WallRunRightHandRotation);
+		CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, TargetRotationOffset, DeltaTime, InterpSpeed);
+	}
+	else if (IK_WallRunState == EInverseKinematicsState::IK_TransitionOut)
+	{
+		// Adding both location and rotations when transitioning causes problems during inverse kinematics, so we handle the rotations before we disable inverse kinematics
+		if (!CurrentRotationOffset.Equals(ResetRotationOffset, 1))
+		{
+			const FVector RightVector = WallNormal * (IKHandBone == RightArmBoneName ? 1 : -1);
+			TargetOffset = CharacterLocation + (Character->GetActorForwardVector() * WallRunArmLength) + ((WallRunArmWidthOffset - WallRunHandSpacing) * -RightVector) + FVector(0, 0, WallRunArmHeightOffset);
+			
+			// Adjust the interp speed based on the character's movement speed
+			const float InterpSpeed = FMath::Clamp(WallRunArmsInterpSpeedTransition * (Speed / MaxRunSpeed), 1, 100);
+			
+			CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, ResetRotationOffset, DeltaTime, InterpSpeed);
+			CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, TargetOffset, DeltaTime, InterpSpeed);
+		}
+		else
+		{
+			IK_WallRunState = EInverseKinematicsState::IK_Disabled;
 		}
 	}
 	else
 	{
-		ResetArmIKOffsets(DeltaTime, CurrentOffset, TargetOffset, CurrentRotationOffset, TargetRotationOffset, IKHandBone);
+		ResetArmIKOffsets(DeltaTime, CurrentOffset, TargetOffset, CurrentRotationOffset, TargetRotationOffset, GetOwningComponent()->GetSocketLocation(IKHandBone));
 	}
 }
+#pragma endregion
 
 
-void UAnimInstanceBase::ResetArmIKOffsets(float DeltaTime, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset, FName ArmBoneName)
+void UAnimInstanceBase::ResetArmIKOffsets(float DeltaTime, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset, const FVector Location)
 {
-	const FVector Location = GetOwningComponent()->GetSocketLocation(ArmBoneName);
-	CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, Location, DeltaTime, WallRunArmsInterpSpeedTransition);
+	CurrentOffset = UKismetMathLibrary::VInterpTo(CurrentOffset, Location, DeltaTime, WallRunArmsInterpSpeedTransition); 
 	CurrentRotationOffset = UKismetMathLibrary::RInterpTo(CurrentRotationOffset, FRotator::ZeroRotator, DeltaTime, WallRunArmsInterpSpeedTransition);
 	TargetOffset = Location;
 	TargetRotationOffset = FRotator::ZeroRotator;
@@ -500,6 +629,69 @@ void UAnimInstanceBase::UpdateCurveValues()
 
 UAnimInstanceBase::UAnimInstanceBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
+	//// IK ////
+	// Spine
+	NormalizedSpineRotation = FRotator::ZeroRotator;
+	PelvisRotation = FRotator::ZeroRotator;
+	Spine01Rotation = FRotator::ZeroRotator;
+	Spine02Rotation = FRotator::ZeroRotator;
+	Spine03Rotation = FRotator::ZeroRotator;
+	Spine04Rotation = FRotator::ZeroRotator;
+
+	// Pelvis
+	PelvisAlpha = 0;
+	PelvisOffset = FVector::ZeroVector;
+	PelvisTarget = FVector::ZeroVector;
+
+	
+	// Feet
+	IK_TraceDistanceAboveFoot = 45;
+	IK_TraceDistanceBelowFoot = 20;
+	IK_FootPlacementInterpSpeed = 10;
+	IK_FootInterpSpeedTransition = 20;
+	
+	FootOffsetRollAdjustHeight = -2;
+	UpperFootOffsetInRange = FVector2D(0, 15);
+	UpperFootOffsetOutRange = FVector2D(2, 5);
+
+	IK_FootLockInterpSpeed = 10;
+
+	// Left Foot
+	IKLeftFootBoneName = FName("ik_foot_l");
+	FootLocationTarget_L = FVector::ZeroVector;
+	FootLocationOffset_L = FVector::ZeroVector;
+	FootRotationTarget_L = FRotator::ZeroRotator;
+	FootRotationOffset_L = FRotator::ZeroRotator;
+
+	// Right Foot
+	IKRightFootBoneName = FName("ik_foot_r");
+	FootLocationTarget_R = FVector::ZeroVector;
+	FootLocationOffset_R = FVector::ZeroVector;
+	FootRotationTarget_R = FRotator::ZeroRotator;
+	FootRotationOffset_R = FRotator::ZeroRotator;
+
+	
+	// Arms
+	bWallRunInverseKinematics = false;
+	IK_WallRunState = EInverseKinematicsState::IK_Disabled;
+	WallRunTraceDistance = 64;
+	WallRunArmsInterpSpeed = 10;
+	WallRunArmsInterpSpeedTransition = 5;
+	WallRunArmLength = 54;
+	WallRunArmHeightOffset = 40;
+	WallRunHandSpacing = 5;
+	WallRunLeftHandRotation = FRotator(45,-90, 0);
+	WallRunRightHandRotation = FRotator(-135, 90, 0);
+	WallRunArmWidthOffset = 30;
+	LeftArmBoneName = FName("hand_l");
+	RightArmBoneName = FName("hand_r");
+
+	
+	// Animation specific values
+	AlternateFootStartTime = 0.45;
+	LandingFootStartTime = 0;
+
+	
 	// Input, acceleration, velocity
 	Input = FVector2D::ZeroVector;
 	Acceleration = FVector::ZeroVector;
@@ -515,6 +707,7 @@ UAnimInstanceBase::UAnimInstanceBase(const FObjectInitializer& ObjectInitializer
 	WalkRunValues = FVector2D::ZeroVector;
 	CrouchWalkValues = FVector2D::ZeroVector;
 
+	
 	// Rotations and aim offsets
 	PreviousRotation = FRotator::ZeroRotator;
 	Rotation = FRotator::ZeroRotator;
@@ -526,9 +719,10 @@ UAnimInstanceBase::UAnimInstanceBase(const FObjectInitializer& ObjectInitializer
 	AimRotation = FRotator::ZeroRotator;
 	MovementAimRotation = FRotator::ZeroRotator;
 	
-	AimRotationAngle = 75;
+	AimRotationAngles = FVector2D(80, 130);
 	AimRotationInterpSpeed = 6.4;
 
+	
 	// Lean calculations
 	LeanCalculation = FVector2D::ZeroVector;
 	LeanAmount = FVector2D::ZeroVector;
@@ -537,6 +731,7 @@ UAnimInstanceBase::UAnimInstanceBase(const FObjectInitializer& ObjectInitializer
 	WallRunLeanAmount = FVector2D::ZeroVector;
 	WallRunLeanInterpSpeed = 34;
 
+	
 	// Movement logic
 	MovementDirection = EMD_Neutral;
 	MovementMode = MOVE_Walking;
@@ -548,9 +743,6 @@ UAnimInstanceBase::UAnimInstanceBase(const FObjectInitializer& ObjectInitializer
 	bWalking = true;
 	CameraStyle = FName();
 
-	// Animation specific values
-	AlternateFootStartTime = 0.45;
-	LandingFootStartTime = 0;
 	
 	//// Curve Values ////
 	// Montage Overrides
@@ -581,59 +773,13 @@ UAnimInstanceBase::UAnimInstanceBase(const FObjectInitializer& ObjectInitializer
 	IK_Hand_L = 0;
 	IK_Hand_R = 0;
 
-	//// IK ////
-	// Spine
-	NormalizedSpineRotation = FRotator::ZeroRotator;
-	PelvisRotation = FRotator::ZeroRotator;
-	Spine01Rotation = FRotator::ZeroRotator;
-	Spine02Rotation = FRotator::ZeroRotator;
-	Spine03Rotation = FRotator::ZeroRotator;
-	Spine04Rotation = FRotator::ZeroRotator;
-
-	// Pelvis
-	PelvisAlpha = 0;
-	PelvisOffset = FVector::ZeroVector;
-	PelvisTarget = FVector::ZeroVector;
-
-	// Feet
-	IK_FootInterpSpeed_Slow = 10;
-	IK_FootInterpSpeed_Fast = 20;
-	IK_TraceDistanceAboveFoot = 45;
-	IK_TraceDistanceBelowFoot = 20;
-	FootOffsetRollAdjustHeight = -2;
-	UpperFootOffsetInRange = FVector2D(0, 15);
-	UpperFootOffsetOutRange = FVector2D(2, 5);
-
-	// Left Foot
-	IKLeftFootBoneName = FName("ik_foot_l");
-	FootLocationTarget_L = FVector::ZeroVector;
-	FootLocationOffset_L = FVector::ZeroVector;
-	FootRotationTarget_L = FRotator::ZeroRotator;
-	FootRotationOffset_L = FRotator::ZeroRotator;
-
-	// Right Foot
-	IKRightFootBoneName = FName("ik_foot_r");
-	FootLocationTarget_R = FVector::ZeroVector;
-	FootLocationOffset_R = FVector::ZeroVector;
-	FootRotationTarget_R = FRotator::ZeroRotator;
-	FootRotationOffset_R = FRotator::ZeroRotator;
-
-	// Arms
-	bWallRunInverseKinematics = false;
-	IK_WallRunState = EInverseKinematicsState::IK_Disabled;
-	WallRunTraceDistance = 64;
-	WallRunArmsInterpSpeed = 10;
-	WallRunArmsInterpSpeedTransition = 1;
-	WallRunArmLength = 54;
-	WallRunArmHeightOffset = 40;
-	WallRunHandSpacing = 5;
-	WallRunLeftHandRotation = FRotator(45,-90, 0);
-	WallRunRightHandRotation = FRotator(-135, 90, 0);
-	WallRunArmWidthOffset = 30;
-	LeftArmBoneName = FName("hand_l");
-	RightArmBoneName = FName("hand_r");
-	LeftHandTransform = FTransform();
-	RightHandTransform = FTransform();
+	// AO influence
+	AO_Head = 1;
+	AO_Pelvis = 1;
+	AO_Spine = 1;
+	AO_Legs = 1;
+	AO_Arm_L = 1;
+	AO_Arm_R = 1;
 
 	// Captured Movement Component Values
 	MaxWalkSpeed = 100;
