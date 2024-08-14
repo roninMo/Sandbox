@@ -40,7 +40,8 @@
 #define Curve_AO_Hand_R FName("AO_Hand_R")
 
 // Primary values
-#define Curve_Feet_Plant FName("Feet_Plant") // -1 = Left foot, 1 = Right foot
+#define Curve_Foot_Lock_L FName("Foot_Lock_L")
+#define Curve_Foot_Lock_R FName("Foot_Lock_R")
 #define Curve_Turn_RotationAmount FName("Turn_RotationAmount") // -1, 1 = Left, Right
 #define Curve_Mask_Sprint FName("Mask_Sprint") // 1 = Prevent sprint
 #define Curve_Mask_Lean FName("Mask_Lean") // 1 = Prevent lean
