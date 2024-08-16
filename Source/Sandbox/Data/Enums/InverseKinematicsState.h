@@ -18,3 +18,31 @@ enum class EInverseKinematicsState : uint8
 	IK_Disabled		                    UMETA(DisplayName = "Disabled"),
 	IK_None								UMETA(DisplayName = "None")
 };
+
+
+/**
+ *	The current state of inverse kinematics for feet
+ */
+UENUM(BlueprintType)
+enum class EFootInverseKinematics : uint8
+{
+	FootPlacement		                UMETA(DisplayName = "Foot Placement"),
+	FootLocking		                    UMETA(DisplayName = "Foot Locking"),
+	WallRunning		                    UMETA(DisplayName = "Wall Running"),
+	WallClimbing		                UMETA(DisplayName = "Wall Climbing"),
+	Landing								UMETA(DisplayName = "Landing"),
+	None								UMETA(DisplayName = "None")
+};
+
+
+/**
+ *	The current state of inverse kinematics for arms/hands (did you come here to mess with these hands?)
+ */
+UENUM(BlueprintType)
+enum class EArmsInverseKinematics : uint8
+{
+	WallRunning							UMETA(DisplayName = "Wall Running"),
+	WallClimbing		                UMETA(DisplayName = "Wall Climbing (Ledge placement)"),
+	WallPlacement		                UMETA(DisplayName = "Wall Placement"),
+	None								UMETA(DisplayName = "None")
+};

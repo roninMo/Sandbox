@@ -361,49 +361,55 @@ protected:
 	/** The height adjustments based on the angle of the foot */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet") FVector2D UpperFootOffsetOutRange;
 
-	/** Whether the inverse kinematics is for foot placement */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Wall Run") bool bFootPlacementInverseKinematics;
+	/** The version of foot calculations we're using for foot placement */
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Wall Run") EFootInverseKinematics FootInverseKinematics;
 
 	
 	/**** Foot Locking ****/
 	/** The interp speed for foot locking. This scales with the player's movement speed */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet") float IK_FootLockInterpSpeed;
 
-	/** Whether the inverse kinematics is for foot locking */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Wall Run") bool bFootLockingInverseKinematics;
+	/** Curve values transition because of animation blending, so during a blend space sometimes the values are offset when the foot is already in place. This helps with activating kinematics early to account for this */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet", meta=(UIMin = "0", UIMax = "0.5")) float FootLockActivationOffset;
+
+	/** The left foot lock state */
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Wall Run") EInverseKinematicsState LeftFootLockState;
+	
+	/** The right foot lock state */
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Wall Run") EInverseKinematicsState RightFootLockState;
 	
 	
 	/**** Left foot ****/
 	/** The name of the left foot bone used for creating inverse kinematics */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FName IKLeftFootBoneName;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet|Left Foot") FName IKLeftFootBoneName;
 
 	/** The target location for the left foot */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FVector FootLocationTarget_L;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet|Left Foot") FVector FootLocationTarget_L;
 
 	/** The current location for the left foot */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FVector FootLocationOffset_L;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet|Left Foot") FVector FootLocationOffset_L;
 
 	/** The target rotation for the left foot */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FRotator FootRotationTarget_L;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet|Left Foot") FRotator FootRotationTarget_L;
 
 	/** The current rotation for the left foot */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FRotator FootRotationOffset_L;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet|Left Foot") FRotator FootRotationOffset_L;
 	
 	/**** Right foot ****/
 	/** The name of the right foot bone used for creating inverse kinematics */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FName IKRightFootBoneName;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet|Right Foot") FName IKRightFootBoneName;
 
 	/** The target location for the right foot */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FVector FootLocationTarget_R;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet|Right Foot") FVector FootLocationTarget_R;
 
 	/** The current location for the right foot */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FVector FootLocationOffset_R;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet|Right Foot") FVector FootLocationOffset_R;
 
 	/** The target rotation for the right foot */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FRotator FootRotationTarget_R;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet|Right Foot") FRotator FootRotationTarget_R;
 
 	/** The current rotation for the right foot */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FRotator FootRotationOffset_R;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet|Right Foot") FRotator FootRotationOffset_R;
 
 
 //----------------------------------------------------------//
@@ -411,6 +417,9 @@ protected:
 //----------------------------------------------------------//
 	/** The alpha of the inverse kinematics for arms */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Wall Run") float ArmsInverseKinematicsAlpha;
+
+	/** The version of arm calculations we're using for arm placement */
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Wall Run") EArmsInverseKinematics ArmsInverseKinematics;
 
 	
 	/**** Wall Running ****/
@@ -473,36 +482,36 @@ protected:
 	
 	/**** Left arm ****/
 	/** The name of the left hand bone used for creating inverse kinematic effectors. The majority of solving algorithms we're using are forwards and backwards or full body */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FName LeftArmBoneName;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Left Arm") FName LeftArmBoneName;
 
 	/** The target location for the left arm. This can either be in world space or component space */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FVector ArmLocationTarget_L;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Left Arm") FVector ArmLocationTarget_L;
 
 	/** The current location for the left arm. This can either be in world space or component space */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FVector ArmLocationOffset_L;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Left Arm") FVector ArmLocationOffset_L;
 
 	/** The target rotation for the left arm. This can either be in world space or component space */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FRotator ArmRotationTarget_L;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Left Arm") FRotator ArmRotationTarget_L;
 
 	/** The target location for the left arm. This can either be in world space or component space */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FRotator ArmRotationOffset_L;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Left Arm") FRotator ArmRotationOffset_L;
 
 	
 	/**** Right arm ****/
 	/** The name of the right hand bone used for creating inverse kinematic effectors. The majority of solving algorithms we're using are forwards and backwards or full body */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Left Foot") FName RightArmBoneName;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Right Arm") FName RightArmBoneName;
 
 	/** The target location for the right arm. This can either be in world space or component space */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FVector ArmLocationTarget_R;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Right Arm") FVector ArmLocationTarget_R;
 
 	/** The current location for the right arm. This can either be in world space or component space */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FVector ArmLocationOffset_R;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Right Arm") FVector ArmLocationOffset_R;
 
 	/** The target rotation for the right arm. This can either be in world space or component space */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FRotator ArmRotationTarget_R;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Right Arm") FRotator ArmRotationTarget_R;
 
 	/** The current rotation for the right arm. This can either be in world space or component space */
-	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Right Foot") FRotator ArmRotationOffset_R;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Arms|Right Arm") FRotator ArmRotationOffset_R;
 	
 	
 	/**** Other References ****/
@@ -568,8 +577,8 @@ protected:
 	virtual void ResetIKFeetAndPelvisOffsets(float DeltaTime);
 
 	/** Whether we should calculate inverse kinematics for feet */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Animation|Inverse Kinematics") bool ShouldCalculateFeetIK();
-	virtual bool ShouldCalculateFeetIK_Implementation();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Animation|Inverse Kinematics") bool CanCalculateFeetIK();
+	virtual bool CanCalculateFeetIK_Implementation();
 	
 	
 	/** Determines which variation of inverse kinematics to use and then handles calculations */
@@ -589,14 +598,18 @@ protected:
 
 	/** Resets the feet and pelvis offsets for feet ik @remarks Don't use during world transitions if you're setting the transforms of the actual bones */
 	virtual void ResetArmIKOffsets(float DeltaTime, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset, FVector Location = FVector::ZeroVector);
-	
-	/** Whether we should calculate inverse kinematics for the left arm */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Animation|Inverse Kinematics") bool ShouldCalculateLeftArmIK();
-	virtual bool ShouldCalculateLeftArmIK_Implementation();
 
-	/** Whether we should calculate inverse kinematics for the right arm */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Animation|Inverse Kinematics") bool ShouldCalculateRightArmIK();
-	virtual bool ShouldCalculateRightArmIK_Implementation();
+
+	
+
+	/** If the movement conditions are valid for calculating foot placement inverse kinematics. This doesn't influence blending, and is used to activate/deactivate the state */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Animation|Inverse Kinematics") bool ShouldCalculateFootPlacementIK() const;
+	virtual bool ShouldCalculateFootPlacementIK_Implementation() const;
+	
+	/** If the movement conditions are valid for calculating foot locking inverse kinematics. This doesn't influence blending, and is used to activate/deactivate the state */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Animation|Inverse Kinematics") bool ShouldCalculateFootLockIK() const;
+	virtual bool ShouldCalculateFootLockIK_Implementation() const;
+	
 	
 	
 //------------------------------------------------------------------------------//
