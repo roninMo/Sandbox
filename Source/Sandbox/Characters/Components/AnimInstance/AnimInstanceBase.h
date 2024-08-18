@@ -254,10 +254,16 @@ protected:
 	
 	/**** Primary values ****/
 	/** Value to store whether the left foot should be stuck to the ground to create a realistic movement feel. This way the player isn't just sliding everywhere based on other player's interpretations */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves|Movement", meta=(DisplayPriority=0)) float Foot_Lock_L;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Curves|Movement") float Foot_Lock_L;
 
 	/** Value to store whether the right foot should be stuck to the ground to create a realistic movement feel. This way the player isn't just sliding everywhere based on other player's interpretations */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves|Movement", meta=(DisplayPriority=0)) float Foot_Lock_R;
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Curves|Movement") float Foot_Lock_R;
+
+	/** Value to store whether to adjust inverse kinematics influence for placing the foot on the ground */
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Curves|Movement") float FootPlacement_L;
+
+	/** Value to store whether to adjust inverse kinematics influence for placing the foot on the ground */
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Curves|Movement") float FootPlacement_R;
 
 	/** Value to store the rotation during turn in place animations. This isn't networking safe, and probably shouldn't be used */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Curves|Movement", meta=(DisplayPriority=0)) float Turn_RotationAmount; // -1, 1 = Left, Right
@@ -327,7 +333,10 @@ protected:
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Spine") FRotator Spine04Rotation;
 
 	
-	/**** Pelvis ****/ // @note the pelvis is used in both spine and feet inverse kinematics!
+	/**** Pelvis ****/
+	/** The target offset of the pelvis */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Pelvis") float IK_PelvisInterpSpeed;
+
 	/** The current offset of the pelvis */
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Pelvis") FVector PelvisOffset;
 	
@@ -351,6 +360,9 @@ protected:
 	
 	/** The interp speed for foot placement when the foot is out of place (in the ground on inclines) */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet") float IK_FootInterpSpeedTransition;
+
+	/** An additional offset for adjusting the foot placement (to prevent clipping in the ground). */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet") FVector FootPlacementLocationOffset;
 
 	/** When we should adjust the height to account for the angle of the foot. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet") float FootOffsetRollAdjustHeight;
@@ -383,6 +395,9 @@ protected:
 	
 	
 	/**** Left foot ****/
+	/** The name of the left foot bone used for creating inverse kinematics */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet|Left Foot") FName LeftFootBoneName;
+
 	/** The name of the left foot bone used for creating inverse kinematics */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet|Left Foot") FName IKLeftFootBoneName;
 
@@ -432,6 +447,9 @@ protected:
 
 	
 	/**** Right foot ****/
+	/** The name of the right foot bone used for creating inverse kinematics */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet|Right Foot") FName RightFootBoneName;
+	
 	/** The name of the right foot bone used for creating inverse kinematics */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Feet|Right Foot") FName IKRightFootBoneName;
 	
@@ -638,12 +656,6 @@ protected:
 	/** Adjusts the pelvis offset for feet ik */
 	virtual void PelvisOffsetForFootPlacement(float DeltaTime, FVector& LeftFootLocation, FVector& RightFootLocation, FVector& PelvisTargetLocation, FVector& PelvisOffsetLocation);
 	
-	/** Handles the inverse kinematic location and rotation offsets for foot locking */
-	virtual void FeetLockingInverseKinematics(float DeltaTime);
-
-	/** Calculates the target offset and interps the foot lock positions for a foot */
-	virtual void FootLockInverseKinematics(float DeltaTime, FName IKFootBone, FVector& CurrentLocation, FVector& TargetLocation, FRotator& CurrentRotation, FRotator& TargetRotation, float& CurrentAlpha);
-	
 	/** Resets the feet and pelvis offsets for feet ik */
 	virtual void ResetIKFeetAndPelvisOffsets(float DeltaTime);
 
@@ -669,18 +681,6 @@ protected:
 
 	/** Resets the feet and pelvis offsets for feet ik @remarks Don't use during world transitions if you're setting the transforms of the actual bones */
 	virtual void ResetArmIKOffsets(float DeltaTime, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset, FVector Location = FVector::ZeroVector);
-
-
-	
-
-	/** If the movement conditions are valid for calculating foot placement inverse kinematics. This doesn't influence blending, and is used to activate/deactivate the state */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Animation|Inverse Kinematics") bool ShouldCalculateFootPlacementIK() const;
-	virtual bool ShouldCalculateFootPlacementIK_Implementation() const;
-	
-	/** If the movement conditions are valid for calculating foot locking inverse kinematics. This doesn't influence blending, and is used to activate/deactivate the state */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Animation|Inverse Kinematics") bool ShouldCalculateFootLockIK() const;
-	virtual bool ShouldCalculateFootLockIK_Implementation() const;
-	
 	
 	
 //------------------------------------------------------------------------------//
