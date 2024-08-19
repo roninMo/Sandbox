@@ -197,7 +197,7 @@ void UAnimInstanceBase::CalculateFeetIK(float DeltaTime)
 
 	// PelvisOffsetForFootPlacement(DeltaTime, FootLocation_L, FootLocation_R, PelvisTarget, PelvisOffset);
 }
-
+  
 
 void UAnimInstanceBase::FootPlacementInverseKinematics(float DeltaTime, FName IKFootBone, FVector& CurrentOffset, FVector& TargetOffset, FRotator& CurrentRotationOffset, FRotator& TargetRotationOffset)
 {;
@@ -275,6 +275,7 @@ void UAnimInstanceBase::PelvisOffsetForFootPlacement(float DeltaTime, FVector& L
 	float InterpSpeed = PelvisOffsetLocation.Z <= PelvisTargetLocation.Z ? IK_FootPlacementInterpSpeed : IK_FootInterpSpeedTransition;
 	PelvisOffsetLocation = UKismetMathLibrary::VInterpTo(PelvisOffsetLocation, PelvisTargetLocation, DeltaTime, InterpSpeed); 
 }
+
 
 
 void UAnimInstanceBase::ResetIKFeetAndPelvisOffsets(float DeltaTime)
