@@ -343,6 +343,9 @@ protected:
 	/** The target offset of the pelvis */
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Pelvis") FVector PelvisTarget;
 
+	/** The leg length used for pelvis calculations */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Inverse Kinematics|Pelvis") float LegLength;
+
 
 	
 //----------------------------------------------------------//

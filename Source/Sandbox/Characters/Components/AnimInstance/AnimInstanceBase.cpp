@@ -530,6 +530,7 @@ UAnimInstanceBase::UAnimInstanceBase(const FObjectInitializer& ObjectInitializer
 	IK_FootPlacementInterpSpeed = 10;
 	IK_FootInterpSpeedTransition = 20;
 	IK_PelvisInterpSpeed = 10;
+	LegLength = 64;
 	
 	FootPlacementLocationOffset = FVector(0, 0, 0);
 	FootOffsetRollAdjustHeight = -2;
