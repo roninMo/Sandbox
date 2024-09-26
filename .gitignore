@@ -72,3 +72,15 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+# Plugins
+Plugins/*
+!Plugins/AdvancedPlayerMovement/AdvancedPlayerMovement.uplugin
+!Plugins/CharacterCameraSystem/CharacterCameraSystem.uplugin
+!Plugins/InventorySystem/InventorySystem.uplugin
+!Plugins/PeripherySystemComponent/PeripherySystemComponent.uplugin
+
+# Content
+Content/_Imports/Hud/*
+Content/_Imports/LevelDesign/*
+Content/_Imports/Scifi_Outline_Creater/*
