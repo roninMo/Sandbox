@@ -5,12 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Perception/AISightTargetInterface.h"
+#include "Sandbox/Data/Structs/AbilityInformation.h"
 #include "CharacterBase.generated.h"
-
-class UPlayerPeripheriesComponent;
-class UInventoryComponent;
-class UAdvancedMovementComponent;
-
 
 /*
 //----------------------------------------------------------------------------------//
@@ -203,68 +199,72 @@ class UAdvancedMovementComponent;
 
 
 
+/*
 
 
-
-Ability System Component
-	- Ability Retrieval and Activation
-	- Ability delegates handling (Learn how to handle adding and removing delegate and ability system logic during play)
-	- Create modular characters/attributes/abilities with game features for different characters and games
-	- GSCGameFeatureAction_AddAbilities, GSCGameFeatureAction_AddAnimLayers, GSCGameFeatureAction_AddInputMappingContext
-
-Abilities 
-	- Exec Calc Adjustments
-	- Input Evoked Events
-	- Combat logic
-	- Utils
-
-Ability Tasks
-	- Net safe multi task events that use targeting and are input asynchronous
-	- Utils for different version of targeting
-
-Ability System and Attribute Information
-	- Add universal information for player stats
-	- Combat logic
+	Ability System Component
+		- Ability Retrieval and Activation
+		- Ability delegates handling (Learn how to handle adding and removing delegate and ability system logic during play)
+		- Create modular characters/attributes/abilities with game features for different characters and games
+		- GSCGameFeatureAction_AddAbilities, GSCGameFeatureAction_AddAnimLayers, GSCGameFeatureAction_AddInputMappingContext
+			Abilities should be retrieved for each game, and added/removed based on the player's current equipment
+			Attributes should be specific to game, and then the saved information
+				- Npc's retrieve saved information from databases for easy creation and reference
+				- Players retrieve references to the base attributes, and then the player's saved attributes for that game
 
 
-Blueprint function library
-	- reference retrieval
-	- adding abilities and attributes
+	Abilities 
+		- Exec Calc Adjustments
+		- Input Evoked Events
+		- Combat logic
+		- Utils
 
 
-Combat Component
-	- Handle initialization and equipping of weapons and armor
-	- Combat logic for each weapon
-	- Handle Attribute's combat calculations
-	- Combat Utils
+	Ability Tasks
+		- Net safe multi task events that use targeting and are input asynchronous
+		- Utils for different version of targeting
 
 
-Weapons
-	- Handles construction of weapon
-	- Intuitive equipping and allocation of abilities and saved weapon information 
-	
+	Ability System and Attribute Information
+		- Add universal information for player stats
+		- Combat logic
 
 
-
-Player Abilities
-	- Handle multiple instances being added/removed without it affecting gameplay
-	- Have multiple objects for ability/input binding, and attribute/allocation information
-
-
+	Blueprint function library
+		- reference retrieval
+		- adding abilities and attributes
+		
 
 
-	- On (Activated/Failed/Ended)
-		- TArray<FGSCMappedAbility> AddedAbilityHandles;
-		- TArray<TObjectPtr<UAttributeSet>> AddedAttributes;
-		- TArray<FActiveGameplayEffectHandle> AddedEffects;
-		- TArray<FGSCAbilitySetHandle> AddedAbilitySets;
-		- TArray<FDelegateHandle> InputBindingDelegateHandles;
+	Combat Component
+		- Handle initialization and equipping of weapons and armor 
+		- Combat logic for each weapon
+		- Handle Attribute's combat calculations
+		- Combat Utils
 
 
-	Ability Handling, Attribute Handling, Input Handling
+	Weapons
+		- Handles construction of weapon
+		- Intuitive equipping and allocation of abilities and saved weapon information
+		- Each weapon should have their own logic for constructing and destroying weapons 
+		
+
+	Player Abilities
+		- Handle multiple instances being added/removed without it affecting gameplay
+		- Have multiple objects for ability/input binding, and attribute/allocation information
 
 
-	
+		- On (Activated/Failed/Ended)
+			- TArray<FGSCMappedAbility> AddedAbilityHandles;
+			- TArray<TObjectPtr<UAttributeSet>> AddedAttributes;
+			- TArray<FActiveGameplayEffectHandle> AddedEffects;
+			- TArray<FGSCAbilitySetHandle> AddedAbilitySets;
+			- TArray<FDelegateHandle> InputBindingDelegateHandles;
+
+
+		Ability Handling, Attribute Handling, Input Handling
+
+
 
 
 	Abilities should be retrieved for each game, and added/removed based on the player's current equipment
@@ -274,8 +274,12 @@ Player Abilities
 
 
 */
-	
 
+
+class UAbilitySystem;
+class UInventoryComponent;
+class UPlayerPeripheriesComponent;
+class UAdvancedMovementComponent;
 
 
 /*
@@ -286,8 +290,20 @@ class SANDBOX_API ACharacterBase : public ACharacter, public IAISightTargetInter
 {
 	GENERATED_BODY()
 
+protected:
+	/** A stored reference to the player's ability system component */
+	UPROPERTY(BlueprintReadWrite) TObjectPtr<UAbilitySystem> AbilitySystemComponent;
+	
+	/** Input bindings for the ability pressed and released events. Don't forget to also add input mappings to the player's input mapping context */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FInputActionAbilityMap> AbilityInputActions;
+
+	
 public:
 	ACharacterBase(const FObjectInitializer& ObjectInitializer);
+
+
+
+
 	
 //----------------------------------------------------------------------//
 // Initialization functions and components								//
@@ -296,6 +312,40 @@ protected:
 	/** Called when play begins for this actor. */
 	virtual void BeginPlay() override;
 	
+	/** 
+	 * Called when this Pawn is possessed. Only called on the server (or in standalone).
+	 * @param NewController The controller possessing this pawn
+	 */
+	virtual void PossessedBy(AController* NewController) override;
+
+	/** PlayerState Replication Notification Callback */
+	virtual void OnRep_PlayerState() override;
+
+	/**
+	 * Initialized the Abilities' ActorInfo - the structure that holds information about who we are acting on and who controls us. \n\n
+	 * 
+	 * Invoked multiple times for both client / server, also depends on whether the Ability System Component lives on Pawns or Player States:
+	 *		- Once for Server after component initialization
+	 *		- Once for Server after replication of owning actor (Possessed by for Player State)
+	 *		- Once for Client after component initialization
+	 *		- Once for Client after replication of owning actor (Once more for Player State OnRep_PlayerState)
+	 * 
+	 * @param InOwnerActor			Is the actor that logically owns this component.
+	 * @param InAvatarActor			Is what physical actor in the world we are acting on. Usually a Pawn but it could be a Tower, Building, Turret, etc, may be the same as Owner
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ability") virtual void OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor);
+	UFUNCTION(BlueprintImplementableEvent, Category = "Ability", DisplayName = "On Init Ability Actor Info") void BP_OnInitAbilityActorInfo();
+
+	
+public:
+	/** Creates an InputComponent that can be used for custom input bindings. Called upon possession by a PlayerController. Return null if you don't want one. */
+	virtual UInputComponent* CreatePlayerInputComponent() override;
+
+	/** Allows a Pawn to set up custom input bindings. Called upon possession by a PlayerController, using the InputComponent created by CreatePlayerInputComponent(). */
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	
+
+
 	
 //----------------------------------------------------------------------------------//
 // Movement																			//
@@ -322,25 +372,10 @@ protected:
 	 * @Return Whether the character can jump in the current state. 
 	 */
 	virtual bool CanJumpInternal_Implementation() const override;
-
-	
-//--------------------------------------------------------------------------------------------------------------------------//
-// OnRepPlayerState/PossessedBy -> Or AI PossessedBy -> To this initialization loop											//
-//--------------------------------------------------------------------------------------------------------------------------//
-protected:
-	/** Initializes global information that's not specific to any character. This should happen before any other initialization logic as a safeguard */
-	virtual void InitCharacterGlobals(UDataAsset* Data);
-
-	/** Initialize character components -> Get access to all the pointers, nothing else */
-	virtual void InitCharacterComponents(const bool bCalledFromPossessedBy);
-
-	/** Inits ability system component and information pertaining to the Asc */
-	virtual void InitAbilitySystem(const bool bCalledFromPossessedBy);
-	
-	/** InitCharacterInformation -> Run any logic necessary for the start of any of the components */
-	virtual void InitCharacterInformation();
 	
 
+
+	
 //-------------------------------------------------------------------------------------//
 // Peripheries																		   //
 //-------------------------------------------------------------------------------------//
@@ -356,11 +391,15 @@ protected:
 	virtual UAISense_Sight::EVisibilityResult CanBeSeenFrom(const FCanBeSeenFromContext& Context, FVector& OutSeenLocation, int32& OutNumberOfLoSChecksPerformed, int32& OutNumberOfAsyncLosCheckRequested, float& OutSightStrength, int32* UserData, const FOnPendingVisibilityQueryProcessedDelegate* Delegate) override;
 	virtual bool IsTraceConsideredVisible(const FHitResult* HitResult, const AActor* TargetActor);
 	
+
+
 	
 //-------------------------------------------------------------------------------------//
 // Camera																			   //
 //-------------------------------------------------------------------------------------//
 protected:
+
+
 
 	
 //----------------------------------------------------------------------------------//
@@ -373,11 +412,12 @@ protected:
 	
 public:
 	/** Templated convenience version for retrieving the movement component. */
-	template<class T> T* GetInventory(void) const { return Cast<T>(GetInventory()); }
+	template<class T> T* GetInventory(void) const { return Cast<T>(GetInventoryComponent()); }
 
 	/** Retrieves the advanced movement component */
 	UFUNCTION(BlueprintCallable, Category="Movement", DisplayName="Get Inventory")
 	virtual UInventoryComponent* GetInventoryComponent() const;
+
 
 	
 	

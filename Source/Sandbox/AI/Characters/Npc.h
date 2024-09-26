@@ -55,25 +55,20 @@ protected:
 	 * @param NewController The controller possessing this pawn
 	 */
 	virtual void PossessedBy(AController* NewController) override;
-
 	
-//--------------------------------------------------------------------------------------------------------------------------//
-// OnRepPlayerState/PossessedBy -> Or AI PossessedBy -> To this initialization loop											//
-//--------------------------------------------------------------------------------------------------------------------------//
-	/** Initializes global information that's not specific to any character. This should happen before any other initialization logic as a safeguard */
-	virtual void InitCharacterGlobals(UDataAsset* Data) override;
-
-	/** Initialize character components -> Get access to all the pointers, nothing else */
-	virtual void InitCharacterComponents(const bool bCalledFromPossessedBy) override;
-
-	/** Inits ability system component and information pertaining to the Asc */
-	virtual void InitAbilitySystem(const bool bCalledFromPossessedBy);
-	
-	/** InitCharacterInformation -> Run any logic necessary for the start of any of the components */
-	virtual void InitCharacterInformation() override;
-
-	/** Blueprint logic for character information initialization logic */
-	// UFUNCTION(BlueprintImplementableEvent, DisplayName = "Init Character Information (Blueprint)") void BP_InitCharacterInformation();
+	/**
+	 * Initialized the Abilities' ActorInfo - the structure that holds information about who we are acting on and who controls us. \n\n
+	 * 
+	 * Invoked multiple times for both client / server, also depends on whether the Ability System Component lives on Pawns or Player States:
+	 *		- Once for Server after component initialization
+	 *		- Once for Server after replication of owning actor (Possessed by for Player State)
+	 *		- Once for Client after component initialization
+	 *		- Once for Client after replication of owning actor (Once more for Player State OnRep_PlayerState)
+	 * 
+	 * @param InOwnerActor			Is the actor that logically owns this component.
+	 * @param InAvatarActor			Is what physical actor in the world we are acting on. Usually a Pawn but it could be a Tower, Building, Turret, etc, may be the same as Owner
+	 */
+	virtual void OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor) override;
 
 	
 //----------------------------------------------------------------------------------------------------------------------//

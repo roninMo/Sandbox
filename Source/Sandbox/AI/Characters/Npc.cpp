@@ -35,31 +35,18 @@ void ANpc::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 	// InitCharacterGlobals(CharacterGlobals);
-	InitCharacterComponents(true);	
-	InitAbilitySystem(true);
-	InitCharacterInformation();
+	// InitCharacterComponents(true);	
+	// InitAbilitySystem(true);
+	// InitCharacterInformation();
 	// BP_InitCharacterInformation();
 }
 
-void ANpc::InitCharacterGlobals(UDataAsset* Data)
-{
-	Super::InitCharacterGlobals(Data);
-}
 
-void ANpc::InitCharacterComponents(const bool bCalledFromPossessedBy)
+void ANpc::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 {
-	Super::InitCharacterComponents(bCalledFromPossessedBy);
+	Super::OnInitAbilityActorInfo(InOwnerActor, InAvatarActor);
+	
 	AIController = AIController ? AIController : GetController<AAIControllerBase>();
-}
-
-void ANpc::InitAbilitySystem(const bool bCalledFromPossessedBy)
-{
-	Super::InitAbilitySystem(bCalledFromPossessedBy);
-}
-
-void ANpc::InitCharacterInformation()
-{
-	Super::InitCharacterInformation();
 	
 	// SetCharacterMontages();
 	// if (BaseAnimInstance) BaseAnimInstance->GetCharacterInformation();

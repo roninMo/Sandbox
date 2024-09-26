@@ -1,0 +1,344 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "AbilitySystemComponent.h"
+#include "GameplayAbilitySpec.h"
+#include "Components/InputComponent.h"
+#include "AbilitySystem.generated.h"
+
+struct FInputActionAbilityMap;
+struct FInputAbilityAction;
+class UInputAction;
+struct FGameplayEffectMapping;
+struct FGameplayAbilityMapping;
+struct FCharacterAbilityDataSetHandle;
+struct FInputActionBindingAbilityMap;
+class AAbilitySystemController;
+
+
+DECLARE_LOG_CATEGORY_EXTERN(AbilityLog, Log, All);
+// DECLARE_LOG_CATEGORY_EXTERN(AbilityTagLog, Log, All);
+// DECLARE_LOG_CATEGORY_EXTERN(AbilityPredictionKeyLog, Log, All);
+// DECLARE_LOG_CATEGORY_EXTERN(AscDebugInformation, Log, All);
+// DECLARE_LOG_CATEGORY_EXTERN(AscGameplayEffectLog, Log, All);
+// DECLARE_LOG_CATEGORY_EXTERN(AbilityAnimLog, Log, All);
+// DECLARE_LOG_CATEGORY_EXTERN(AbilityFailedLog, Log, All);
+// DECLARE_LOG_CATEGORY_EXTERN(AbilityTaskLog, Log, All);
+// DECLARE_LOG_CATEGORY_EXTERN(AttributeLog, Verbose, All);
+
+/* 
+| Verbosity Level | Printed in Console? | Printed in Editor's Log? |                      Notes                       |
+|-----------------|---------------------|--------------------------|--------------------------------------------------|
+| Fatal           | Yes                 | N/A                      | Crashes the session, even if logging is disabled |
+| Error           | Yes                 | Yes                      | Log text is coloured red                         |
+| Warning         | Yes                 | Yes                      | Log text is coloured yellow                      |
+| Display         | Yes                 | Yes                      | Log text is coloured grey                        |
+| Log             | No                  | Yes                      | Log text is coloured grey                        |
+| Verbose         | No                  | No                       |                                                  |
+| VeryVerbose     | No                  | No                       |                                       
+*/
+
+
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnGiveAbility, FGameplayAbilitySpec&);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInitAbilityActorInfo);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityActivated, const UGameplayAbility*, Ability);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityCommit, UGameplayAbility*, Ability);
+// DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityEnded, const UGameplayAbility*, Ability);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnAbilityFailed, const UGameplayAbility*, Ability, const FGameplayTagContainer&, ReasonTags);
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnGameplayEffectAdded, FGameplayTagContainer, AssetTags, FGameplayTagContainer, GrantedTags, FActiveGameplayEffectHandle, ActiveHandle);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_FiveParams(FOnGameplayEffectStackChange, FGameplayTagContainer, AssetTags, FGameplayTagContainer, GrantedTags, FActiveGameplayEffectHandle, ActiveHandle, int32, NewStackCount, int32, OldStackCount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_FiveParams(FOnGameplayEffectTimeChange,  FGameplayTagContainer, AssetTags, FGameplayTagContainer, GrantedTags, FActiveGameplayEffectHandle, ActiveHandle, float, NewStartTime, float, NewDuration);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnGameplayEffectRemoved, FGameplayTagContainer, AssetTags, FGameplayTagContainer, GrantedTags, FActiveGameplayEffectHandle, ActiveHandle);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnGameplayTagStackChange, FGameplayTag, GameplayTag, int32, NewTagCount);
+
+///// Ability System /////
+// "showdebug abilitysystem"
+// "AbilitySystem.Debug.NextCategory"
+// NextDebugTarget or PgUpKey 
+
+
+/** The core ActorComponent for interfacing with the GameplayAbilities System
+ *	This inherits from multiple classes
+ *		- GameplayTasksComponent
+ *		- AbilitySystemComponent
+ *		- AbilitySystemComponent_Abilities
+ *
+ *		TODO: Update to version 5.3 and use GameplayComponents
+ */
+UCLASS()
+class SANDBOX_API UAbilitySystem : public UAbilitySystemComponent
+{
+	GENERATED_BODY()
+
+protected:
+	/** Cached granted Ability Handles */
+	UPROPERTY(Transient)
+	TArray<FGameplayAbilitySpec> AddedAbilityHandles;
+
+	/** Cached granted AttributeSets */
+	UPROPERTY(Transient)
+	TArray<TObjectPtr<UAttributeSet>> AddedAttributes;
+
+	/** Cached applied Startup Effects */
+	UPROPERTY(Transient)
+	TArray<FActiveGameplayEffectHandle> AddedEffects;
+	
+	/** Cached granted Ability Sets */
+	UPROPERTY(Transient)
+	TArray<FCharacterAbilityDataSetHandle> AddedAbilitySets;
+	
+	// Cached input actions linked to abilities using Input bind handle and input id
+	TArray<FInputActionBindingAbilityMap> AbilityInputActions_Old;
+	FInputActionBinding LocalConfirmInput_Old;
+	FInputActionBinding LocalCancelInput_Old;
+	TArray<int32> RegisteredAbilityInputHandles;
+
+	/** Array of gameplay effect handles */
+	TArray<FActiveGameplayEffectHandle> GameplayEffectAddedHandles;
+
+	
+public:
+	//~ End UActorComponent interface
+	virtual void BeginPlay() override;
+	//~ End UActorComponent interface
+
+	//~ Begin UObject interface
+	virtual void BeginDestroy() override;
+	//~ End UObject interface
+
+	/**
+	 * Initialized the Abilities' ActorInfo - the structure that holds information about who we are acting on and who controls us. \n\n
+	 * 
+	 * Invoked multiple times for both client / server, also depends on whether the Ability System Component lives on Pawns or Player States:
+	 *		- Once for Server after component initialization
+	 *		- Once for Server after replication of owning actor (Possessed by for Player State)
+	 *		- Once for Client after component initialization
+	 *		- Once for Client after replication of owning actor (Once more for Player State OnRep_PlayerState)
+	 * 
+	 * @param InOwnerActor			Is the actor that logically owns this component.
+	 * @param InAvatarActor			Is what physical actor in the world we are acting on. Usually a Pawn but it could be a Tower, Building, Turret, etc, may be the same as Owner
+	 */
+	virtual void InitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor) override;
+	
+	/** Register Ability System delegates to mainly broadcast blueprint assignable event to BPs */
+	void RegisterAbilitySystemDelegates();
+
+	/** Clean up any bound delegates to Ability System delegates */
+	void ShutdownAbilitySystemDelegates();
+
+	
+//------------------------------------------------------------------------------------------//
+// Ability System Component Primary Functions												//
+//------------------------------------------------------------------------------------------//
+	/** These are just convenience functions for safely adding/removing abilities/attributes/effects during gameplay, with infrastructure for creating and adding abilities for different games. Just takes a second to construct */
+public:
+	/**
+	 * Creates an ability, adds it to the character, and stores the reference to the player's added abilities
+	 * This will be ignored if the actor is not authoritative.
+	 * 
+	 * @param AbilityMapping		Gameplay Ability Mapping containing information about the ability class, level and input ID to bind it to
+	 * @returns						handle that can be used in TryActivateAbility, etc
+	 */
+	UFUNCTION(BlueprintCallable)
+	virtual FGameplayAbilitySpecHandle AddAbility(const FGameplayAbilityMapping& AbilityMapping);
+	
+	/**
+	 * Creates the abilities, adds them to the character, and stores the references to the player's added abilities
+	 * This will be ignored if the actor is not authoritative.
+	 * 
+	 * @param AbilityMappings		An array of Gameplay Ability Mappings containing information about the ability class, level and input ID to bind it to
+	 * @returns						the ability handles that can be used in TryActivateAbility, etc
+	 */
+	UFUNCTION(BlueprintCallable)
+	virtual TArray<FGameplayAbilitySpecHandle> AddAbilities(const TArray<FGameplayAbilityMapping> AbilityMappings);
+	
+	/** 
+	 * Removes the specified ability from the character and the stored added ability references
+	 * 
+	 * @param Handle				Ability Spec Handle of the ability we want to remove
+	 */
+	UFUNCTION(BlueprintCallable)
+	virtual void RemoveGameplayAbility(const FGameplayAbilitySpecHandle& Handle);
+	
+	/** 
+	 * Removes the specified ability from the character and the stored added ability references
+	 * 
+	 * @param Handles				Ability Spec Handles of the abilities we want to remove
+	 */
+	UFUNCTION(BlueprintCallable)
+	virtual void RemoveGameplayAbilities(const TArray<FGameplayAbilitySpecHandle> Handles);
+	
+	
+	/**
+	 * Adds a gameplay effect to the character, and stores a reference to the player's added effects
+	 * 
+	 * @param EffectMapping			Gameplay Effect Mapping containing the gameplay effect class and level of the effect
+	 * @returns						FActiveGameplayEffectHandle of the created gameplay effect
+	 */
+	UFUNCTION(BlueprintCallable)
+	virtual FActiveGameplayEffectHandle AddGameplayEffect(const FGameplayEffectMapping& EffectMapping);
+	
+	/**
+	 * Adds gameplay effects to the character, and stores the references to the player's added effects
+	 * 
+	 * @param EffectMappings		Gameplay Effect Mappings containing the gameplay effect class and level of the effect
+	 * @returns						the active effect handles of the created gameplay effects
+	 */
+	UFUNCTION(BlueprintCallable)
+	virtual TArray<FActiveGameplayEffectHandle> AddGameplayEffects(const TArray<FGameplayEffectMapping> EffectMappings);
+	
+	/** 
+	 * Removes the specified ability from the character and the stored added ability references
+	 * 
+	 * @param Handle				The gameplay effect handle that we want to remove
+	 * @param StacksToRemove		The number of stacks of the gameplay effect we want to remove
+	 */
+	UFUNCTION(BlueprintCallable)
+	virtual bool RemoveGameplayEffect(const FActiveGameplayEffectHandle& Handle, int32 StacksToRemove = -1);
+	
+	
+	/** 
+	 * Attempts to activate a single gameplay ability that has the given tag and DoesAbilitySatisfyTagRequirements().
+	 * Returns true if anything attempts to activate.
+	 * If bAllowRemoteActivation is true, it will remotely activate local/server abilities, if false it will only try to locally activate abilities.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Abilities") bool TryActivateAbilityByTag(const FGameplayTag Tag, bool bAllowRemoteActivation = true);
+	
+	/**
+	 * Bind to an input component with customized bindings
+	 *
+	 * @param InputComponent		The enhanced input component we're adding player input to
+	 * @param AbilityInputActions	The input action information to for the different input binds 
+	 */
+	UFUNCTION(Blueprintable, Category = "Abilities|Input") virtual void BindAbilityActivationToEnhancedInput(UEnhancedInputComponent* InputComponent, const TArray<FInputActionAbilityMap>& AbilityInputActions);
+	
+	//~ Begin UAbilitySystemComponent interface
+	/**
+	 * Bind to an input component with customized bindings
+	 *
+	 * @param InputComponent		The input component we're adding player input to
+	 * @param BindInfo				The input bind information, an enum used to create input actions and their index that we use to link the Ability's Input to 
+	 */
+	virtual void BindAbilityActivationToInputComponent(UInputComponent* InputComponent, FGameplayAbilityInputBinds BindInfo) override;
+	
+	/**
+	 * Input binding for activating abilities and their input events using @ref BindAbilityActivationToInputComponent()
+	 * It checks if there's local input pressed/released event delegates and adds them if so, then it loops through the abilities and invoke's their input events or activates their ability 
+	 */
+	virtual void AbilityLocalInputPressed(int32 InputID) override;
+
+	/**
+	 * Input binding for activated abilities input events using @ref BindAbilityActivationToInputComponent()
+	 * Activates input released events for specific abilities
+	 */
+	virtual void AbilityLocalInputReleased(int32 InputID) override;
+	//~ End UAbilitySystemComponent interface
+
+	
+	
+	
+//------------------------------------------------------------------------------------------//
+// Ability Events (For handling certain logic during specific events)						//
+//------------------------------------------------------------------------------------------//
+public:
+	/**
+	 * Event called just after InitAbilityActorInfo, once abilities and attributes have been granted. \n\n
+	 *
+	 * Invoked multiple times for both client / server, also depends on whether the Ability System Component lives on Pawns or Player States:
+	 *		- Once for Server after component initialization
+	 *		- Once for Server after replication of owning actor (Possessed by for Player State)
+	 *		- Once for Client after component initialization
+	 *		- Once for Client after replication of owning actor (Once more for Player State OnRep_PlayerState)
+	 *
+	 */
+	UPROPERTY(BlueprintAssignable, Category="Abilities")
+	FOnInitAbilityActorInfo OnInitAbilityActorInfo;
+
+	/**
+	 * Specifically set abilities to persist across deaths / respawns or possessions.
+	 *
+	 * When this is set to false, abilities will only be granted the first time InitAbilityActor is called. This is the default
+	 * behavior for ASC living on Player States (GSCModularPlayerState specifically).
+	 *
+	 * Do not set it true for ASC living on Player States if you're using ability input binding. Only ASC living on Pawns supports this.
+	 * 
+	 * (Default is true)
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "Abilities")
+	bool bResetAbilitiesOnSpawn = true;
+
+	/** Delegate invoked OnGiveAbility (when an ability is granted and available) */
+	FOnGiveAbility OnGiveAbilityDelegate;
+
+
+	
+	/** Triggered by ASC when GEs are added */
+	virtual void OnActiveGameplayEffectAdded(UAbilitySystemComponent* Target, const FGameplayEffectSpec& SpecApplied, FActiveGameplayEffectHandle ActiveHandle);
+
+	/** Triggered by ASC when GEs stack count changes */
+	virtual void OnActiveGameplayEffectStackChanged(FActiveGameplayEffectHandle ActiveHandle, int32 NewStackCount, int32 PreviousStackCount);
+
+	/** Triggered by ASC when GEs stack count changes */
+	virtual void OnActiveGameplayEffectTimeChanged(FActiveGameplayEffectHandle ActiveHandle, float NewStartTime, float NewDuration);
+
+	/** Triggered by ASC when any GEs are removed */
+	virtual void OnAnyGameplayEffectRemoved(const FActiveGameplayEffect& EffectRemoved);
+
+	/**
+	* Called when a GameplayEffect is added or removed.
+	*/
+	UPROPERTY(BlueprintAssignable, Category="Abilities")
+	FOnGameplayEffectStackChange OnGameplayEffectStackChange;
+
+	/**
+	* Called when a GameplayEffect duration is changed (for instance when duration is refreshed)
+	*/
+	UPROPERTY(BlueprintAssignable, Category="Abilities")
+	FOnGameplayEffectTimeChange OnGameplayEffectTimeChange;
+
+	/**
+	* Called when a GameplayEffect is added.
+	*/
+	UPROPERTY(BlueprintAssignable, Category="Abilities")
+	FOnGameplayEffectAdded OnGameplayEffectAdded;
+
+	/**
+	* Called when a GameplayEffect is removed.
+	*/
+	UPROPERTY(BlueprintAssignable, Category="Abilities")
+	FOnGameplayEffectRemoved OnGameplayEffectRemoved;
+
+	
+	
+	
+//------------------------------------------------------------------------------------------//
+// Utility																					//
+//------------------------------------------------------------------------------------------//
+public:
+	/** Adds a loose gameplay tag that isn't replicated */
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Add Loose Gameplay Tag"))
+	virtual void K2_AddLooseGameplayTag(FGameplayTag Tag);
+	
+	/** Adds a gameplay tag that's replicated */
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Add Replicated Loose Gameplay Tag"))
+	virtual void K2_AddReplicatedLooseGameplayTag(FGameplayTag Tag);
+	
+	/** Removes a loose gameplay tag */
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Remove Loose Gameplay Tag"))
+	virtual void K2_RemoveLooseGameplayTag(FGameplayTag Tag);
+	
+	/** Removes gameplay tag and replicates it to the client */
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Remove Replicated Loose Gameplay Tag"))
+	virtual void K2_RemoveReplicatedLooseGameplayTag(FGameplayTag Tag);
+
+
+protected:
+	/** Reinit the cached ability actor info (specifically the player controller) */
+	UFUNCTION()
+	void OnPawnControllerChanged(APawn* Pawn, AController* NewController);
+	
+	
+};

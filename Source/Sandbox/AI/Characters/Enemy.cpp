@@ -11,23 +11,3 @@ void AEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 }
-
-void AEnemy::PossessedBy(AController* NewController)
-{
-	Super::PossessedBy(NewController);
-}
-
-void AEnemy::InitCharacterComponents(const bool bCalledFromPossessedBy)
-{
-	Super::InitCharacterComponents(bCalledFromPossessedBy);
-}
-
-void AEnemy::InitAbilitySystem(const bool bCalledFromPossessedBy)
-{
-	Super::InitAbilitySystem(bCalledFromPossessedBy);
-}
-
-void AEnemy::InitCharacterInformation()
-{
-	Super::InitCharacterInformation();
-}

@@ -3,10 +3,17 @@
 
 #include "GAbilityActorInfo.h"
 
-AbilityActorInfo::AbilityActorInfo()
+void FGAbilityActorInfo::InitFromActor(AActor* Owner, AActor* Avatar, UAbilitySystemComponent* InAbilitySystemComponent)
 {
+	FGameplayAbilityActorInfo::InitFromActor(Owner, Avatar, InAbilitySystemComponent);
 }
 
-AbilityActorInfo::~AbilityActorInfo()
+void FGAbilityActorInfo::SetAvatarActor(AActor* Avatar)
 {
+	FGameplayAbilityActorInfo::SetAvatarActor(Avatar);
+}
+
+void FGAbilityActorInfo::ClearActorInfo()
+{
+	FGameplayAbilityActorInfo::ClearActorInfo();
 }

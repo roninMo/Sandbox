@@ -3,6 +3,10 @@
 
 #include "Sandbox/Characters/CharacterBase.h"
 
+#include "EnhancedInputComponent.h"
+#include "GameFramework/PlayerState.h"
+#include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 
 
@@ -28,26 +32,73 @@ ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Su
 
 
 #pragma region Character Initialization
-void ACharacterBase::InitCharacterGlobals(UDataAsset* Data)
+void ACharacterBase::BeginPlay()
 {
+	Super::BeginPlay();
+	
+}
+
+void ACharacterBase::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	
+	// For Player State ASC Pawns, initialize ASC on server in PossessedBy
+	if (APlayerState* PS = GetPlayerState())
+	{
+		AbilitySystemComponent = UGameplayAbilitiyUtilities::GetAbilitySystem(PS);
+		if (AbilitySystemComponent)
+		{
+			AbilitySystemComponent->InitAbilityActorInfo(PS, this);
+			OnInitAbilityActorInfo(PS, this);
+		}
+	}
 }
 
 
-void ACharacterBase::InitCharacterComponents(const bool bCalledFromPossessedBy)
+void ACharacterBase::OnRep_PlayerState()
 {
+	Super::OnRep_PlayerState();
+	
+	// For Player State ASC Pawns, initialize ASC on clients in OnRep_PlayerState
+	if (APlayerState* PS = GetPlayerState())
+	{
+		AbilitySystemComponent = UGameplayAbilitiyUtilities::GetAbilitySystem(PS);
+		if (AbilitySystemComponent)
+		{
+			AbilitySystemComponent->InitAbilityActorInfo(PS, this);
+			OnInitAbilityActorInfo(PS, this);
+		}
+	}
 }
 
 
-void ACharacterBase::InitAbilitySystem(const bool bCalledFromPossessedBy)
+void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 {
+	// Blueprint function event
+	BP_OnInitAbilityActorInfo();
 }
 
 
-void ACharacterBase::InitCharacterInformation()
+UInputComponent* ACharacterBase::CreatePlayerInputComponent()
 {
+	return Super::CreatePlayerInputComponent();
 }
 
 
+void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	
+	// Add the ability input bindings
+	UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
+	AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
+}
+#pragma endregion 
+
+
+
+
+#pragma region Utility
 UAISense_Sight::EVisibilityResult ACharacterBase::CanBeSeenFrom(const FCanBeSeenFromContext& Context,
 	FVector& OutSeenLocation, int32& OutNumberOfLoSChecksPerformed, int32& OutNumberOfAsyncLosCheckRequested,
 	float& OutSightStrength, int32* UserData, const FOnPendingVisibilityQueryProcessedDelegate* Delegate)
@@ -99,15 +150,4 @@ bool ACharacterBase::CanJumpInternal_Implementation() const
 	return JumpIsAllowedInternal();
 }
 #pragma endregion
-
-
-
-
-void ACharacterBase::BeginPlay()
-{
-	Super::BeginPlay();
-
-	
-
-}
 
