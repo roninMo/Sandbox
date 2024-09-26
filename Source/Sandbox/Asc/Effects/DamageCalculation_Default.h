@@ -13,5 +13,10 @@ UCLASS()
 class SANDBOX_API UDamageCalculation_Default : public UGameplayEffectExecutionCalculation
 {
 	GENERATED_BODY()
+
+public:
+	UDamageCalculation_Default();
+	virtual void Execute_Implementation(const FGameplayEffectCustomExecutionParameters& ExecutionParams, FGameplayEffectCustomExecutionOutput& OutExecutionOutput) const override;
+
 	
 };
