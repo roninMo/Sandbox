@@ -244,8 +244,9 @@ bool UAdvancedMovementComponent::IsMantling() const { return			MovementMode == M
 bool UAdvancedMovementComponent::IsLedgeClimbing() const { return		MovementMode == MOVE_Custom && CustomMovementMode == MOVE_Custom_LedgeClimbing; }
 bool UAdvancedMovementComponent::IsWallRunning() const { return			MovementMode == MOVE_Custom && CustomMovementMode == MOVE_Custom_WallRunning; }
 bool UAdvancedMovementComponent::IsAiming() const { return AimPressed; }
-bool UAdvancedMovementComponent::IsStrafeSwaying() { return AirStrafeSwayPhysics; }
-bool UAdvancedMovementComponent::IsStrafeLurching() { return AirStrafeLurchPhysics; }
+bool UAdvancedMovementComponent::IsStrafeSwaying() const { return AirStrafeSwayPhysics; }
+bool UAdvancedMovementComponent::IsStrafeLurching() const { return AirStrafeLurchPhysics; }
+bool UAdvancedMovementComponent::CanSprint() const { return true; }
 #pragma endregion 
 
 
@@ -1059,7 +1060,6 @@ void UAdvancedMovementComponent::PhysLedgeClimbing(float deltaTime, int32 Iterat
 		}
 		else
 		{
-			Velocity = FVector();
 			MantleJumpStartTime = Time;
 			MantleJumpLocation = UpdatedComponent->GetComponentLocation();
 			

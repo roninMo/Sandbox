@@ -30,8 +30,23 @@ enum class EInputAbilities : uint8
 	SpecialAttack = 6 				UMETA(DisplayName = "Special Attack"),
 	Aim = 7							UMETA(DisplayName = "Aim"),
 	Reload = 8						UMETA(DisplayName = "Reload"),
+	Crouch = 9						UMETA(DisplayName = "Crouch"),
+	Jump = 10						UMETA(DisplayName = "Jump"),
 };
 
+/**
+
+	LT, RT 
+	LMB, RMB 
+	A, B, X, Y
+	Dpad
+	Joysticks
+	Settings
+
+
+	
+
+*/
 
 
 

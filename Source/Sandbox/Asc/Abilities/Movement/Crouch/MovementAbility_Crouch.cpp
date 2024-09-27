@@ -1,0 +1,76 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "Sandbox/Asc/Abilities/Movement/Crouch/MovementAbility_Crouch.h"
+
+#include "GameFramework/Character.h"
+
+UMovementAbility_Crouch::UMovementAbility_Crouch()
+{
+	// Non instanced abilities for movement component logic
+	InstancingPolicy = EGameplayAbilityInstancingPolicy::NonInstanced;
+
+	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.Crouch")));
+	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Crouching")));
+}
+
+
+bool UMovementAbility_Crouch::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayTagContainer* SourceTags, const FGameplayTagContainer* TargetTags, FGameplayTagContainer* OptionalRelevantTags) const
+{
+	if (!Super::CanActivateAbility(Handle, ActorInfo, SourceTags, TargetTags, OptionalRelevantTags))
+	{
+		return false;
+	}
+
+	const ACharacter* Character = Cast<ACharacter>(ActorInfo->AvatarActor.Get());
+	if (!Character || !Character->CanCrouch()) return false;
+	return true;
+}
+
+
+void UMovementAbility_Crouch::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
+{
+	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
+	if (HasAuthorityOrPredictionKey(ActorInfo, &ActivationInfo))
+	{
+		if (!CommitAbility(Handle, ActorInfo, ActivationInfo))
+		{
+			CancelAbility(Handle, ActorInfo, ActivationInfo, true);
+			return;
+		}
+
+		ACharacter* Character = Cast<ACharacter>(ActorInfo->AvatarActor.Get());
+		if (Character)
+		{
+			Character->Crouch();
+		}
+	}
+}
+
+
+void UMovementAbility_Crouch::InputReleased(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo)
+{
+	Super::InputReleased(Handle, ActorInfo, ActivationInfo);
+	if (ActorInfo != nullptr && ActorInfo->AvatarActor != nullptr)
+	{
+		CancelAbility(Handle, ActorInfo, ActivationInfo, true);
+	}
+}
+
+
+void UMovementAbility_Crouch::CancelAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateCancelAbility)
+{
+	if (ScopeLockCount > 0)
+	{
+		WaitingToExecute.Add(FPostLockDelegate::CreateUObject(this, &UMovementAbility_Crouch::CancelAbility, Handle, ActorInfo, ActivationInfo, bReplicateCancelAbility));
+		return;
+	}
+
+	Super::CancelAbility(Handle, ActorInfo, ActivationInfo, bReplicateCancelAbility);
+	
+	ACharacter* Character = CastChecked<ACharacter>(ActorInfo->AvatarActor.Get(), ECastCheckedType::NullAllowed);
+	if (Character)
+	{
+		Character->UnCrouch();
+	}
+}

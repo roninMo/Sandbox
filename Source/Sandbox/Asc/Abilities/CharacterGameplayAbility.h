@@ -65,9 +65,6 @@ protected:
 	/** Does this ability need to delete its tasks at the end of the ability? If true you need to keep track of and add the tasks to the tracked tasks yourself. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability|Tasks") bool bDeleteTasksOnEndOfAbility = false;
 	UPROPERTY(BlueprintReadWrite) TArray<FName> TrackedTasks;
-
-	/** A saved reference to the ability system component */
-	UPROPERTY(BlueprintReadWrite) TObjectPtr<UAbilitySystem> Asc;
 	
 	/** Prints debug messages about the ability. This is to just breakdown the ability to find out what's going on */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability|Debug") bool bDebug = false;
@@ -83,7 +80,7 @@ public:
 // Primary Functions																		//
 //------------------------------------------------------------------------------------------//
 public:
-	UCharacterGameplayAbility(const FObjectInitializer& ObjectInitializer);
+	UCharacterGameplayAbility();
 	
 	/** Actually activate ability, do not call this directly */
 	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
@@ -162,15 +159,14 @@ protected:
 // Input Evocations																			//
 //------------------------------------------------------------------------------------------//
 protected:
-	/** Input released function that's called if the ability system input bind is released for this ability input tag. This is setup through the ability system bindings. */
+	/** Input released function that's called if the player invokes the ability's input bind */
 	virtual void InputReleased(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo) override;
 	
 	/** Blueprint function for when the input is released for this attack. This is how to access the InputReleased function through blueprint. */
 	UFUNCTION(BlueprintImplementableEvent, Category = Ability, DisplayName = "InputReleased", meta=(ScriptName = "InputReleased"))
 	void K2_InputReleased(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActivationInfo ActivationInfo);
 	
-
-	/** Input pressed function that's called if the ability system input bind is released for this ability input tag. This is setup through the ability system bindings. */
+	/** Input pressed function that's called if the player invokes the ability's input bind */
 	virtual void InputPressed(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo) override;
 
 	/** Blueprint function for when the input is pressed for this attack. This is how to access the InputPressed function through blueprint. */
@@ -182,6 +178,7 @@ protected:
 // Utility																					//
 //------------------------------------------------------------------------------------------//
 public:
+	// TODO: Update add/remove gameplay tags to reference the gameplay utilities library version
 	/** Add a loose gameplay tag to the character. This isn't safe to call in non replicated situations */
 	UFUNCTION(BlueprintCallable) void AddGameplayTag(const FGameplayTag& Tag) const;
 	

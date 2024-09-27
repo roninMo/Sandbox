@@ -799,10 +799,13 @@ public:
 	UFUNCTION(BlueprintCallable) virtual bool IsAiming() const;
 
 	/** If the player is strafe swaying */
-	UFUNCTION(BlueprintCallable) virtual bool IsStrafeSwaying();
+	UFUNCTION(BlueprintCallable) virtual bool IsStrafeSwaying() const;
 
 	/** If the player is strafe lurching */
-	UFUNCTION(BlueprintCallable) virtual bool IsStrafeLurching();
+	UFUNCTION(BlueprintCallable) virtual bool IsStrafeLurching() const;
+
+	/** Returns whether the player is able to currently sprint */
+	UFUNCTION(BlueprintCallable) virtual bool CanSprint() const;
 	
 	
 //------------------------------------------------------------------------------//

@@ -295,7 +295,7 @@ protected:
 	UPROPERTY(BlueprintReadWrite) TObjectPtr<UAbilitySystem> AbilitySystemComponent;
 	
 	/** Input bindings for the ability pressed and released events. Don't forget to also add input mappings to the player's input mapping context */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FInputActionAbilityMap> AbilityInputActions;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System Component") TArray<FInputActionAbilityMap> AbilityInputActions;
 
 	
 public:

@@ -390,8 +390,10 @@ void UAbilitySystem::BindAbilityActivationToEnhancedInput(UEnhancedInputComponen
 	// Enhanced inputs is the norm, and it's more interactive and customizable than the old version
 	if (!InputComponent)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() The input component was invalid while trying to add input bindings to {2}!",
-			*UEnum::GetValueAsString(GetAvatarActor()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetAvatarActor()));
+		// UE_LOGFMT(AbilityLog, Error, "{0}::{1}() The input component was invalid while trying to add input bindings to {2}!",
+		// 	*UEnum::GetValueAsString(GetAvatarActor()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetAvatarActor()));
+		// TODO: Add a check for whether the input component was invalid during both SetupPlayerInput() and OnInitAbilityActorInfo()
+		// Right now on the server only SetupPlayerInput() works, and on client OnInitAbilityActorInfo() 
 		return;
 	}
 

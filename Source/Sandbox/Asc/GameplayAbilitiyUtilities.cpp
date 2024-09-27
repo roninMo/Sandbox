@@ -16,6 +16,7 @@ UAbilitySystem* UGameplayAbilitiyUtilities::GetAbilitySystem(const AActor* Actor
 	UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Actor);
 	if (!ASC)
 	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Did not find {2}'s Ability System!", *UEnum::GetValueAsString(Actor->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Actor));
 		return nullptr;
 	}
 

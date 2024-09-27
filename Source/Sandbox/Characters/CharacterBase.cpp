@@ -76,6 +76,17 @@ void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvat
 {
 	// Blueprint function event
 	BP_OnInitAbilityActorInfo();
+	
+	if (!AbilitySystemComponent)
+	{
+		AbilitySystemComponent = UGameplayAbilitiyUtilities::GetAbilitySystem(this);
+		if (!AbilitySystemComponent) return;
+	}
+	
+	// Add the ability input bindings
+	// UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
+	UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
+	AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
 }
 
 
@@ -88,9 +99,17 @@ UInputComponent* ACharacterBase::CreatePlayerInputComponent()
 void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	// InputComponent = PlayerInputComponent;
+	
+	
+	if (!AbilitySystemComponent)
+	{
+		AbilitySystemComponent = UGameplayAbilitiyUtilities::GetAbilitySystem(this);
+		if (!AbilitySystemComponent) return;
+	}
 	
 	// Add the ability input bindings
-	UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
+	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent);
 	AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
 }
 #pragma endregion 

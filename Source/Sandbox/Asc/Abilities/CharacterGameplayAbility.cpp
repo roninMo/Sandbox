@@ -8,9 +8,10 @@
 #include "GameplayCue_Types.h"
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
 
 
-UCharacterGameplayAbility::UCharacterGameplayAbility(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+UCharacterGameplayAbility::UCharacterGameplayAbility()
 {
 	// Never stray from this config unless you're handling ai or it's a single player game. GA information persists between activations, so be mindful about how you save information
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
@@ -40,9 +41,11 @@ void UCharacterGameplayAbility::ActivateAbility(const FGameplayAbilitySpecHandle
 		}
 	}
 
+	UAbilitySystemComponent* Asc = ActorInfo->AbilitySystemComponent.Get();
+	if (!Asc) Asc = UGameplayAbilitiyUtilities::GetAbilitySystem(ActorInfo->OwnerActor.Get());
 	if (!Asc)
 	{
-		UE_LOGFMT(AbilityLog, Warning, "{0}() {1} Ability system component pointer missing during %s activating the startup effects", *FString(__FUNCTION__), *GetNameSafe(ActorInfo->OwnerActor.Get()));
+		UE_LOGFMT(AbilityLog, Error, "{0}() {1}'s AbilitySystemComponent was invalid while activating the startup effects", *FString(__FUNCTION__), *GetNameSafe(ActorInfo->OwnerActor.Get()));
 		ABILITY_LOG(Log, TEXT("%s() Ability system component pointer missing during %s activating the startup effects"), *FString(__FUNCTION__), *GetName());
 		return;
 	}
@@ -56,25 +59,22 @@ void UCharacterGameplayAbility::ActivateAbility(const FGameplayAbilitySpecHandle
 		FGameplayEffectSpecHandle SpecHandle = Asc->MakeOutgoingSpec(GameplayEffect, GetAbilityLevel(), EffectContext);
 		if (SpecHandle.IsValid())
 		{
-			FActiveGameplayEffectHandle ActiveGEHandle = Asc->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
+			FActiveGameplayEffectHandle ActiveGEHandle = ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, SpecHandle);
 			if (!ActiveGEHandle.WasSuccessfullyApplied()) ABILITY_LOG(Log, TEXT("Ability %s failed to apply startup effect %s"), *GetName(), *GetNameSafe(GameplayEffect));
 		}
 	}
 
 	// This is for instanced abilities, store the handle effect to the array
-	if (IsInstantiated())
+	for (auto gameplayEffect : OngoingEffectsToRemoveOnEnd)
 	{
-		for (auto gameplayEffect : OngoingEffectsToRemoveOnEnd)
-		{
-			if (!gameplayEffect.Get()) continue;
+		if (!gameplayEffect.Get()) continue;
 
-			FGameplayEffectSpecHandle specHandle = Asc->MakeOutgoingSpec(gameplayEffect, GetAbilityLevel(), EffectContext);
-			if (specHandle.IsValid())
-			{
-				FActiveGameplayEffectHandle ActiveGEHandle = Asc->ApplyGameplayEffectSpecToSelf(*specHandle.Data.Get());
-				if (ActiveGEHandle.WasSuccessfullyApplied()) RemoveOnEndEffectHandles.Add(ActiveGEHandle);
-				if (!ActiveGEHandle.WasSuccessfullyApplied()) ABILITY_LOG(Log, TEXT("Instanced Ability %s failed to apply startup effect %s"), *GetName(), *GetNameSafe(gameplayEffect));
-			}
+		FGameplayEffectSpecHandle SpecHandle = Asc->MakeOutgoingSpec(gameplayEffect, GetAbilityLevel(), EffectContext);
+		if (SpecHandle.IsValid())
+		{
+			FActiveGameplayEffectHandle ActiveGEHandle = ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, SpecHandle);
+			if (ActiveGEHandle.WasSuccessfullyApplied()) RemoveOnEndEffectHandles.Add(ActiveGEHandle);
+			if (!ActiveGEHandle.WasSuccessfullyApplied()) ABILITY_LOG(Log, TEXT("Instanced Ability %s failed to apply startup effect %s"), *GetName(), *GetNameSafe(gameplayEffect));
 		}
 	}
 }
@@ -89,6 +89,8 @@ void UCharacterGameplayAbility::OnAvatarSet(const FGameplayAbilityActorInfo* Act
 void UCharacterGameplayAbility::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled)
 {
 	// Remove the active gameplay effects for the OngoingEffectsToRemoveOnEnd array
+	UAbilitySystemComponent* Asc = ActorInfo->AbilitySystemComponent.Get();
+	if (!Asc) Asc = UGameplayAbilitiyUtilities::GetAbilitySystem(ActorInfo->OwnerActor.Get());
 	if (Asc)
 	{
 		for (const FActiveGameplayEffectHandle ActiveEffectHandle : RemoveOnEndEffectHandles)
@@ -220,6 +222,8 @@ void UCharacterGameplayAbility::InputPressed(const FGameplayAbilitySpecHandle Ha
 #pragma region Utility
 void UCharacterGameplayAbility::AddGameplayTag(const FGameplayTag& Tag) const
 {
+	UAbilitySystemComponent* Asc = GetAbilitySystemComponentFromActorInfo();
+	if (!Asc) Asc = UGameplayAbilitiyUtilities::GetAbilitySystem(GetOwningActorFromActorInfo());
 	Asc->AddLooseGameplayTag(Tag);
 	Asc->AddReplicatedLooseGameplayTag(Tag);
 }
@@ -227,6 +231,8 @@ void UCharacterGameplayAbility::AddGameplayTag(const FGameplayTag& Tag) const
 
 void UCharacterGameplayAbility::RemoveGameplayTag(const FGameplayTag& Tag, const bool EveryTag) const
 {
+	UAbilitySystemComponent* Asc = GetAbilitySystemComponentFromActorInfo();
+	if (!Asc) Asc = UGameplayAbilitiyUtilities::GetAbilitySystem(GetOwningActorFromActorInfo());
 	if (!Asc) return;
 	if (EveryTag)
 	{
