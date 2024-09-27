@@ -19,6 +19,12 @@ UCharacterGameplayAbility::UCharacterGameplayAbility()
 }
 
 
+void UCharacterGameplayAbility::OnAvatarSet(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec)
+{
+	Super::OnAvatarSet(ActorInfo, Spec);
+}
+
+
 void UCharacterGameplayAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
 {
 	DebugActivateAbility();
@@ -41,48 +47,76 @@ void UCharacterGameplayAbility::ActivateAbility(const FGameplayAbilitySpecHandle
 		}
 	}
 
-	UAbilitySystemComponent* Asc = ActorInfo->AbilitySystemComponent.Get();
-	if (!Asc) Asc = UGameplayAbilitiyUtilities::GetAbilitySystem(ActorInfo->OwnerActor.Get());
-	if (!Asc)
+	if (HasAuthorityOrPredictionKey(ActorInfo, &ActivationInfo))
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}() {1}'s AbilitySystemComponent was invalid while activating the startup effects", *FString(__FUNCTION__), *GetNameSafe(ActorInfo->OwnerActor.Get()));
-		ABILITY_LOG(Log, TEXT("%s() Ability system component pointer missing during %s activating the startup effects"), *FString(__FUNCTION__), *GetName());
-		return;
-	}
-
-	// Apply the OngoingEffectsToApplyOnStart values
-	const FGameplayEffectContextHandle EffectContext = Asc->MakeEffectContext();
-	for (auto GameplayEffect : OngoingEffectsToApplyOnStart)
-	{
-		if (!GameplayEffect.Get()) continue;
-
-		FGameplayEffectSpecHandle SpecHandle = Asc->MakeOutgoingSpec(GameplayEffect, GetAbilityLevel(), EffectContext);
-		if (SpecHandle.IsValid())
+		UAbilitySystemComponent* Asc = ActorInfo->AbilitySystemComponent.Get();
+		if (!Asc) Asc = UGameplayAbilitiyUtilities::GetAbilitySystem(ActorInfo->OwnerActor.Get());
+		if (!Asc)
 		{
-			FActiveGameplayEffectHandle ActiveGEHandle = ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, SpecHandle);
-			if (!ActiveGEHandle.WasSuccessfullyApplied()) ABILITY_LOG(Log, TEXT("Ability %s failed to apply startup effect %s"), *GetName(), *GetNameSafe(GameplayEffect));
+			UE_LOGFMT(AbilityLog, Error, "{0}() {1}'s AbilitySystemComponent was invalid while activating the startup effects", *FString(__FUNCTION__), *GetNameSafe(ActorInfo->OwnerActor.Get()));
+			ABILITY_LOG(Log, TEXT("%s() Ability system component pointer missing during %s activating the startup effects"), *FString(__FUNCTION__), *GetName());
+			return;
 		}
-	}
 
-	// This is for instanced abilities, store the handle effect to the array
-	for (auto gameplayEffect : OngoingEffectsToRemoveOnEnd)
-	{
-		if (!gameplayEffect.Get()) continue;
-
-		FGameplayEffectSpecHandle SpecHandle = Asc->MakeOutgoingSpec(gameplayEffect, GetAbilityLevel(), EffectContext);
-		if (SpecHandle.IsValid())
+		// Apply the OngoingEffectsToApplyOnStart values
+		const FGameplayEffectContextHandle EffectContext = Asc->MakeEffectContext();
+		for (auto GameplayEffect : OngoingEffectsToApplyOnStart)
 		{
-			FActiveGameplayEffectHandle ActiveGEHandle = ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, SpecHandle);
-			if (ActiveGEHandle.WasSuccessfullyApplied()) RemoveOnEndEffectHandles.Add(ActiveGEHandle);
-			if (!ActiveGEHandle.WasSuccessfullyApplied()) ABILITY_LOG(Log, TEXT("Instanced Ability %s failed to apply startup effect %s"), *GetName(), *GetNameSafe(gameplayEffect));
+			if (!GameplayEffect.Get()) continue;
+
+			FGameplayEffectSpecHandle SpecHandle = Asc->MakeOutgoingSpec(GameplayEffect, GetAbilityLevel(), EffectContext);
+			if (SpecHandle.IsValid())
+			{
+				FActiveGameplayEffectHandle ActiveGEHandle = ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, SpecHandle);
+				if (!ActiveGEHandle.WasSuccessfullyApplied()) ABILITY_LOG(Log, TEXT("Ability %s failed to apply startup effect %s"), *GetName(), *GetNameSafe(GameplayEffect));
+			}
+		}
+
+		// This is for instanced abilities, store the handle effect to the array
+		for (auto gameplayEffect : OngoingEffectsToRemoveOnEnd)
+		{
+			if (!gameplayEffect.Get()) continue;
+
+			FGameplayEffectSpecHandle SpecHandle = Asc->MakeOutgoingSpec(gameplayEffect, GetAbilityLevel(), EffectContext);
+			if (SpecHandle.IsValid())
+			{
+				FActiveGameplayEffectHandle ActiveGEHandle = ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, SpecHandle);
+				if (ActiveGEHandle.WasSuccessfullyApplied()) RemoveOnEndEffectHandles.Add(ActiveGEHandle);
+				if (!ActiveGEHandle.WasSuccessfullyApplied()) ABILITY_LOG(Log, TEXT("Instanced Ability %s failed to apply startup effect %s"), *GetName(), *GetNameSafe(gameplayEffect));
+			}
 		}
 	}
 }
 
 
-void UCharacterGameplayAbility::OnAvatarSet(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec)
+void UCharacterGameplayAbility::CancelAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateCancelAbility)
 {
-	Super::OnAvatarSet(ActorInfo, Spec);
+	if (CanBeCanceled())
+	{
+		if (ScopeLockCount > 0)
+		{
+			// UE_LOG(LogAbilitySystem, Verbose, TEXT("Attempting to cancel Ability %s but ScopeLockCount was greater than 0, adding cancel to the WaitingToExecute Array"), *GetName());
+			WaitingToExecute.Add(FPostLockDelegate::CreateUObject(this, &UGameplayAbility::CancelAbility, Handle, ActorInfo, ActivationInfo, bReplicateCancelAbility));
+			return;
+		}
+
+		// Replicate the the server/client if needed
+		if (bReplicateCancelAbility && ActorInfo && ActorInfo->AbilitySystemComponent.IsValid())
+		{
+			ActorInfo->AbilitySystemComponent->ReplicateEndOrCancelAbility(Handle, ActivationInfo, this, true);
+		}
+
+		// Gives the Ability BP a chance to perform custom logic/cleanup when any active ability states are active
+		if (OnGameplayAbilityCancelled.IsBound())
+		{
+			OnGameplayAbilityCancelled.Broadcast();
+		}
+
+		// End the ability but don't replicate it, we replicate the CancelAbility call directly
+		bool bReplicateEndAbility = false;
+		bool bWasCancelled = true;
+		EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
+	}
 }
 
 
@@ -97,6 +131,7 @@ void UCharacterGameplayAbility::EndAbility(const FGameplayAbilitySpecHandle Hand
 		{
 			Asc->RemoveActiveGameplayEffect(ActiveEffectHandle);
 		}
+		RemoveOnEndEffectHandles.Empty();
 	}
 
 	// DebugEndAbility();

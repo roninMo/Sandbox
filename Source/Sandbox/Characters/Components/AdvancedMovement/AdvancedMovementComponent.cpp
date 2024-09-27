@@ -246,7 +246,6 @@ bool UAdvancedMovementComponent::IsWallRunning() const { return			MovementMode =
 bool UAdvancedMovementComponent::IsAiming() const { return AimPressed; }
 bool UAdvancedMovementComponent::IsStrafeSwaying() const { return AirStrafeSwayPhysics; }
 bool UAdvancedMovementComponent::IsStrafeLurching() const { return AirStrafeLurchPhysics; }
-bool UAdvancedMovementComponent::CanSprint() const { return true; }
 #pragma endregion 
 
 
@@ -2069,6 +2068,23 @@ void UAdvancedMovementComponent::GroundMovementPhysics(float deltaTime, int32 It
 	}
 }
 #pragma endregion 
+
+
+
+
+//------------------------------------------------------------------------------//
+// Waling Logic																	//
+//------------------------------------------------------------------------------//
+bool UAdvancedMovementComponent::AllowedToAim() const
+{
+	return true;
+}
+
+
+bool UAdvancedMovementComponent::CanSprint() const
+{
+	return true;
+}
 
 
 

@@ -53,7 +53,21 @@ ACharacterCameraLogic::ACharacterCameraLogic(const FObjectInitializer& ObjectIni
 void ACharacterCameraLogic::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	// Default values
+	CameraFOV = FollowCamera->FieldOfView;
+}
 
+
+void ACharacterCameraLogic::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
+{
+	Super::OnInitAbilityActorInfo(InOwnerActor, InAvatarActor);	
+	InitCameraSettings();
+}
+
+
+void ACharacterCameraLogic::InitCameraSettings()
+{
 	OnCameraStyleSet();
 	OnCameraOrientationSet();
 	SetTargetLockTransitionSpeed(TargetLockTransitionSpeed);
@@ -63,17 +77,31 @@ void ACharacterCameraLogic::BeginPlay()
 void ACharacterCameraLogic::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
 
 void ACharacterCameraLogic::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	if (TargetOffset != CameraArm->SocketOffset)
+	
+	
+	// Camera arm
+	if (CameraArm)
 	{
-		UpdateCameraSocketLocation(TargetOffset, DeltaTime);
+		// Camera transition logic
+		if (TargetOffset != CameraArm->SocketOffset)
+		{
+			UpdateCameraSocketLocation(TargetOffset, DeltaTime);
+		}
+		
+	}
+	
+
+	// Follow camera
+	if (FollowCamera)
+	{
+		// Camera Zooming
+		AdjustCameraFOV(DeltaTime);
 	}
 }
 
@@ -221,6 +249,35 @@ void ACharacterCameraLogic::UpdateCameraSocketLocation(const FVector Offset, con
 	const FVector TargetOffset_Z = FVector(0, 0, Offset.Z);
 	CameraArm->SocketOffset = UKismetMathLibrary::VInterpTo(CameraArm->SocketOffset, SocketOffset, DeltaTime, CameraOrientationTransitionSpeed);
 	CameraArm->TargetOffset = UKismetMathLibrary::VInterpTo(CameraArm->TargetOffset, TargetOffset_Z, DeltaTime, CameraOrientationTransitionSpeed);
+}
+
+
+void ACharacterCameraLogic::AdjustCameraFOV(const float DeltaTime)
+{
+	if (!FollowCamera) return;
+	
+	// Camera fov // TODO: Add a camera fov calculation that's accurate for all computers and FOVs
+	/* Adjusting zoom is based on the player's current fov and different zooms. For example let's just use an fov of 90
+	 *
+	 * 1x zoom is 90
+	 * 2x zoom is 45
+	 * 4x zoom is 30
+	 *
+	 * something like this. Find an equation for this, and then for calculating it at different fov's, and add it to the camera component, with adjustments for varying camera styles
+	*/
+	float TargetFOV;
+	if (CameraZoom <= 1) TargetFOV = UKismetMathLibrary::MapRangeClamped(CameraZoom, 1, 0, 90, 140);
+	else TargetFOV = UKismetMathLibrary::MapRangeClamped(CameraZoom, 1, 4, 90, 25);
+	
+	// if (CameraStyle_FirstPerson == CameraStyle) CameraStyleZoomMultiplier = CameraZoom * FirstPersonZoomMultiplier;
+	// else if (CameraStyle_ThirdPerson == CameraStyle) CameraStyleZoomMultiplier = CameraZoom * ThirdPersonZoomMultiplier;
+	// else if (CameraStyle_TargetLocking == CameraStyle) CameraStyleZoomMultiplier = CameraZoom * TargetLockingZoomMultiplier;
+	
+	if (FollowCamera->FieldOfView != TargetFOV)
+	{
+		float FOV = UKismetMathLibrary::FInterpTo(FollowCamera->FieldOfView, TargetFOV, DeltaTime, CameraFOVInterpSpeed);
+		FollowCamera->SetFieldOfView(FOV);
+	}
 }
 #pragma endregion
 
@@ -495,6 +552,18 @@ bool ACharacterCameraLogic::GetPreventRotationAdjustments() const
 void ACharacterCameraLogic::SetPreventRotationAdjustments(const bool bPreventRotations)
 {
 	bPreventRotationAdjustments = bPreventRotations;
+}
+
+
+void ACharacterCameraLogic::SetCameraFOVInterpSpeed(const float InterpSpeed)
+{
+	CameraFOVInterpSpeed = InterpSpeed;
+}
+
+
+void ACharacterCameraLogic::SetCameraZoom(const float Zoom)
+{
+	CameraZoom = Zoom;
 }
 
 

@@ -49,7 +49,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Inventory") TMap<FGuid, F_Item> Armors;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Inventory") TMap<FGuid, F_Item> Materials;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Inventory") TMap<FGuid, F_Item> Notes;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Inventory") UDataTable* ItemDatabase;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory") UDataTable* ItemDatabase;
 	
 	/**** References and stored information ****/
 	/** The client's Net Id */

@@ -58,19 +58,13 @@ void UMovementAbility_Crouch::InputReleased(const FGameplayAbilitySpecHandle Han
 }
 
 
-void UMovementAbility_Crouch::CancelAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateCancelAbility)
+void UMovementAbility_Crouch::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled)
 {
-	if (ScopeLockCount > 0)
-	{
-		WaitingToExecute.Add(FPostLockDelegate::CreateUObject(this, &UMovementAbility_Crouch::CancelAbility, Handle, ActorInfo, ActivationInfo, bReplicateCancelAbility));
-		return;
-	}
-
-	Super::CancelAbility(Handle, ActorInfo, ActivationInfo, bReplicateCancelAbility);
-	
 	ACharacter* Character = CastChecked<ACharacter>(ActorInfo->AvatarActor.Get(), ECastCheckedType::NullAllowed);
 	if (Character)
 	{
 		Character->UnCrouch();
 	}
+	
+	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
 }

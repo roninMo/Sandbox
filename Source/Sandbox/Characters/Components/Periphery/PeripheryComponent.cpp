@@ -71,12 +71,12 @@ UPlayerPeripheriesComponent::UPlayerPeripheriesComponent(const FObjectInitialize
 	
 	/** Periphery Radius */
 	ValidPeripheryRadiusObjects = APawn::StaticClass();
-	PeripheryRadius->ShapeColor = FColor(116, 134, 29, 255);
+	PeripheryRadius->ShapeColor = FColor(100, 110, 50, 255);
 	PeripheryRadius->SetSphereRadius(1340);
 	
 	/** Item Detection */
 	ValidItemDetectionObjects = AActor::StaticClass();
-	ItemDetectionRadius->ShapeColor = FColor(150,255,108,255);
+	ItemDetectionRadius->ShapeColor = FColor(80,200,110,255);
 	ItemDetectionRadius->SetSphereRadius(100);
 	ItemDetectionRadius->SetRelativeLocation(FVector(0, 0, -79));
 

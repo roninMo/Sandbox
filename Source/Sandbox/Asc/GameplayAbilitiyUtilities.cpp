@@ -47,17 +47,101 @@ void UGameplayAbilitiyUtilities::GetAllAttributes(TSubclassOf<UAttributeSet> Att
 }
 
 
-void UGameplayAbilitiyUtilities::TryAddAbility(UAbilitySystemComponent* InASC,
+bool UGameplayAbilitiyUtilities::TryAddAbilitySet(UAbilitySystemComponent* AbilitySystemComponent, const UCharacterAbilityDataSet* InAbilitySet, FCharacterAbilityDataSetHandle& OutAbilitySetHandle)
+{
+	check(AbilitySystemComponent);
+	if (!InAbilitySet)
+	{
+		return false;
+	}
+	
+	// Add Abilities
+	int32 AbilitiesIndex = 0;
+	for (const FGameplayAbilityMapping& AbilityMapping : InAbilitySet->GrantedAbilities)
+	{
+		AbilitiesIndex++;
+		
+		if (AbilityMapping.Ability.IsNull())
+		{
+			UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s GrantedAbilities Ability on ability set {2} is not valid at Index {3}",
+				*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()), *GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *GetNameSafe(InAbilitySet), AbilitiesIndex  - 1
+			);
+			continue;
+		}
+	
+		// Try to grant the ability first
+		FGameplayAbilitySpec AbilitySpec;
+		FGameplayAbilitySpecHandle AbilityHandle;
+		TryAddAbility(AbilitySystemComponent, AbilityMapping, AbilityHandle, AbilitySpec);
+		OutAbilitySetHandle.Abilities.Add(AbilityHandle);
+	}
+	
+	// Add Attributes
+	int32 AttributesIndex = 0;
+	for (const FGameplayAttributeMapping& Attributes : InAbilitySet->GrantedAttributes)
+	{
+		AttributesIndex++;
+	
+		if (Attributes.AttributeSet.IsNull())
+		{
+			UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s GrantedAttributes AttributeSet on ability set {2} is not valid at Index {3}",
+				*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()), *GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *GetNameSafe(InAbilitySet), AttributesIndex  - 1
+			);
+			continue;
+		}
+	
+		UAttributeSet* AddedAttributeSet = nullptr;
+		TryAddAttributes(AbilitySystemComponent, Attributes, AddedAttributeSet);
+	
+		if (AddedAttributeSet)
+		{
+			OutAbilitySetHandle.Attributes.Add(AddedAttributeSet);
+		}
+	}
+	
+	// Add Effects
+	int32 EffectsIndex = 0;
+	for (const FGameplayEffectMapping& Effect : InAbilitySet->GrantedEffects)
+	{
+		EffectsIndex++;
+		
+		if (Effect.Effect.IsNull())
+		{
+			UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s GrantedEffects EffectType on ability set {2} is not valid at Index {3}",
+				*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()), *GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *GetNameSafe(InAbilitySet), EffectsIndex  - 1
+			);
+			continue;
+		}
+		
+		TryAddGameplayEffect(AbilitySystemComponent, Effect.Effect.LoadSynchronous(), Effect.Level, OutAbilitySetHandle.EffectHandles);
+	}
+	
+	// Add Owned Gameplay Tags
+	if (InAbilitySet->OwnedTags.IsValid())
+	{		
+		AddLooseGameplayTagsUnique(AbilitySystemComponent, InAbilitySet->OwnedTags);
+	
+		// Store a copy of the tags, so that they can be removed later on from handle
+		OutAbilitySetHandle.OwnedTags = InAbilitySet->OwnedTags;
+	}
+	
+	// Store the name of the Ability Set "instigator"
+	OutAbilitySetHandle.AbilitySetPathName = InAbilitySet->GetPathName();
+	return true;
+}
+
+
+void UGameplayAbilitiyUtilities::TryAddAbility(UAbilitySystemComponent* AbilitySystemComponent,
 	const FGameplayAbilityMapping& InAbilityMapping, FGameplayAbilitySpecHandle& OutAbilityHandle,
 	FGameplayAbilitySpec& OutAbilitySpec)
 {
-	check(InASC);
+	check(AbilitySystemComponent);
 	
 	if (InAbilityMapping.Ability.IsNull())
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s Failed to Add Ability \"{2}\" because class is null",
-			*UEnum::GetValueAsString(InASC->GetOwnerActor()->GetLocalRole()),
-			*GetNameSafe(InASC->GetOwnerActor()), *InAbilityMapping.Ability.ToString()
+			*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()),
+			*GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *InAbilityMapping.Ability.ToString()
 		);
 		return;
 	}
@@ -65,12 +149,12 @@ void UGameplayAbilitiyUtilities::TryAddAbility(UAbilitySystemComponent* InASC,
 	const TSubclassOf<UGameplayAbility> Ability = InAbilityMapping.Ability.LoadSynchronous();
 	check(Ability);
 	
-	UAbilitySystem* ASC = Cast<UAbilitySystem>(InASC);
+	UAbilitySystem* ASC = Cast<UAbilitySystem>(AbilitySystemComponent);
 	if (!ASC)
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s Failed to Add Ability \"{2}\" because ASC \"{3}\" is not a valid UAbilitySystem",
-			*UEnum::GetValueAsString(InASC->GetOwnerActor()->GetLocalRole()),
-			*GetNameSafe(InASC->GetOwnerActor()), *GetNameSafe(Ability), *GetNameSafe(InASC)
+			*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()),
+			*GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *GetNameSafe(Ability), *GetNameSafe(AbilitySystemComponent)
 		);
 		return;
 	}
@@ -106,21 +190,21 @@ void UGameplayAbilitiyUtilities::TryAddAbility(UAbilitySystemComponent* InASC,
 		}
 		
 		UE_LOGFMT(AbilityLog, Verbose, "{0}::{1}'s AddActorAbilities: Not Authority, try to find ability handle from spec: {2}",
-			*UEnum::GetValueAsString(InASC->GetOwnerActor()->GetLocalRole()), *GetNameSafe(InASC->GetOwnerActor()), *OutAbilityHandle.ToString()
+			*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()), *GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *OutAbilityHandle.ToString()
 		);
 	}
 }
 
 
-void UGameplayAbilitiyUtilities::TryAddAttributes(UAbilitySystemComponent* InASC,
+void UGameplayAbilitiyUtilities::TryAddAttributes(UAbilitySystemComponent* AbilitySystemComponent,
 	const FGameplayAttributeMapping& InAttributeSetMapping, UAttributeSet*& OutAttributeSet)
 {
-	check(InASC);
+	check(AbilitySystemComponent);
 	
-	AActor* OwnerActor = InASC->GetOwnerActor();
+	AActor* OwnerActor = AbilitySystemComponent->GetOwnerActor();
 	if (!IsValid(OwnerActor))
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}() {1}'s Ability System Component owner actor is not valid", *FString(__FUNCTION__), *GetNameSafe(InASC));
+		UE_LOGFMT(AbilityLog, Error, "{0}() {1}'s Ability System Component owner actor is not valid", *FString(__FUNCTION__), *GetNameSafe(AbilitySystemComponent));
 		return;
 	}
 	
@@ -134,7 +218,7 @@ void UGameplayAbilitiyUtilities::TryAddAttributes(UAbilitySystemComponent* InASC
 	}
 	
 	// Prevent adding the same attribute set multiple times (if already registered by another GF or on Actor ASC directly)
-	if (UAttributeSet* AttributeSet = GetAttributeSet(InASC, AttributeSetType))
+	if (UAttributeSet* AttributeSet = GetAttributeSet(AbilitySystemComponent, AttributeSetType))
 	{
 		OutAttributeSet = AttributeSet;
 		// UE_LOGFMT(AbilityLog, Warning, "{0}::{1}'s AttributeSet has already been created for {2}",
@@ -153,17 +237,17 @@ void UGameplayAbilitiyUtilities::TryAddAttributes(UAbilitySystemComponent* InASC
 	}
 
 	
-	InASC->AddAttributeSetSubobject(OutAttributeSet);
+	AbilitySystemComponent->AddAttributeSetSubobject(OutAttributeSet);
 }
 
 
-void UGameplayAbilitiyUtilities::TryAddGameplayEffect(UAbilitySystemComponent* InASC,
+void UGameplayAbilitiyUtilities::TryAddGameplayEffect(UAbilitySystemComponent* AbilitySystemComponent,
 	const TSubclassOf<UGameplayEffect> InEffectType, const float InLevel,
 	TArray<FActiveGameplayEffectHandle>& OutEffectHandles)
 {
-	check(InASC);
+	check(AbilitySystemComponent);
 	
-	if (!InASC->IsOwnerActorAuthoritative())
+	if (!AbilitySystemComponent->IsOwnerActorAuthoritative())
 	{
 		return;
 	}
@@ -171,111 +255,27 @@ void UGameplayAbilitiyUtilities::TryAddGameplayEffect(UAbilitySystemComponent* I
 	if (!InEffectType)
 	{
 		UE_LOGFMT(AbilityLog, Warning, "{0}::{1}'s Trying to apply an effect from an invalid class",
-			*UEnum::GetValueAsString(InASC->GetOwnerActor()->GetLocalRole()), *InASC->GetOwnerActor()->GetName()
+			*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()), *AbilitySystemComponent->GetOwnerActor()->GetName()
 		);
 		return;
 	}
 	
 	// Don't apply if ASC already has it
 	TArray<FActiveGameplayEffectHandle> ActiveEffects;
-	if (HasGameplayEffectApplied(InASC, InEffectType, ActiveEffects))
+	if (HasGameplayEffectApplied(AbilitySystemComponent, InEffectType, ActiveEffects))
 	{
 		// Return the list of found effects already applied as part of this ability set handle (would be removed when set is removed)
 		OutEffectHandles = MoveTemp(ActiveEffects);
 		return;
 	}
 	
-	const FGameplayEffectContextHandle EffectContext = InASC->MakeEffectContext();
-	const FGameplayEffectSpecHandle NewHandle = InASC->MakeOutgoingSpec(InEffectType, InLevel, EffectContext);
+	const FGameplayEffectContextHandle EffectContext = AbilitySystemComponent->MakeEffectContext();
+	const FGameplayEffectSpecHandle NewHandle = AbilitySystemComponent->MakeOutgoingSpec(InEffectType, InLevel, EffectContext);
 	if (NewHandle.IsValid())
 	{
-		FActiveGameplayEffectHandle EffectHandle = InASC->ApplyGameplayEffectSpecToSelf(*NewHandle.Data.Get());
+		FActiveGameplayEffectHandle EffectHandle = AbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*NewHandle.Data.Get());
 		OutEffectHandles.Add(MoveTemp(EffectHandle));
 	}
-}
-
-
-bool UGameplayAbilitiyUtilities::TryAddAbilitySet(UAbilitySystemComponent* InASC, const UCharacterAbilityDataSet* InAbilitySet, FCharacterAbilityDataSetHandle& OutAbilitySetHandle)
-{
-	check(InASC);
-	if (!InAbilitySet)
-	{
-		return false;
-	}
-	
-	// Add Abilities
-	int32 AbilitiesIndex = 0;
-	for (const FGameplayAbilityMapping& AbilityMapping : InAbilitySet->GrantedAbilities)
-	{
-		AbilitiesIndex++;
-		
-		if (AbilityMapping.Ability.IsNull())
-		{
-			UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s GrantedAbilities Ability on ability set {2} is not valid at Index {3}",
-				*UEnum::GetValueAsString(InASC->GetOwnerActor()->GetLocalRole()), *GetNameSafe(InASC->GetOwnerActor()), *GetNameSafe(InAbilitySet), AbilitiesIndex  - 1
-			);
-			continue;
-		}
-	
-		// Try to grant the ability first
-		FGameplayAbilitySpec AbilitySpec;
-		FGameplayAbilitySpecHandle AbilityHandle;
-		TryAddAbility(InASC, AbilityMapping, AbilityHandle, AbilitySpec);
-		OutAbilitySetHandle.Abilities.Add(AbilityHandle);
-	}
-	
-	// Add Attributes
-	int32 AttributesIndex = 0;
-	for (const FGameplayAttributeMapping& Attributes : InAbilitySet->GrantedAttributes)
-	{
-		AttributesIndex++;
-	
-		if (Attributes.AttributeSet.IsNull())
-		{
-			UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s GrantedAttributes AttributeSet on ability set {2} is not valid at Index {3}",
-				*UEnum::GetValueAsString(InASC->GetOwnerActor()->GetLocalRole()), *GetNameSafe(InASC->GetOwnerActor()), *GetNameSafe(InAbilitySet), AttributesIndex  - 1
-			);
-			continue;
-		}
-	
-		UAttributeSet* AddedAttributeSet = nullptr;
-		TryAddAttributes(InASC, Attributes, AddedAttributeSet);
-	
-		if (AddedAttributeSet)
-		{
-			OutAbilitySetHandle.Attributes.Add(AddedAttributeSet);
-		}
-	}
-	
-	// Add Effects
-	int32 EffectsIndex = 0;
-	for (const FGameplayEffectMapping& Effect : InAbilitySet->GrantedEffects)
-	{
-		EffectsIndex++;
-		
-		if (Effect.Effect.IsNull())
-		{
-			UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s GrantedEffects EffectType on ability set {2} is not valid at Index {3}",
-				*UEnum::GetValueAsString(InASC->GetOwnerActor()->GetLocalRole()), *GetNameSafe(InASC->GetOwnerActor()), *GetNameSafe(InAbilitySet), EffectsIndex  - 1
-			);
-			continue;
-		}
-	
-		TryAddGameplayEffect(InASC, Effect.Effect.LoadSynchronous(), Effect.Level, OutAbilitySetHandle.EffectHandles);
-	}
-	
-	// Add Owned Gameplay Tags
-	if (InAbilitySet->OwnedTags.IsValid())
-	{		
-		AddLooseGameplayTagsUnique(InASC, InAbilitySet->OwnedTags);
-	
-		// Store a copy of the tags, so that they can be removed later on from handle
-		OutAbilitySetHandle.OwnedTags = InAbilitySet->OwnedTags;
-	}
-	
-	// Store the name of the Ability Set "instigator"
-	OutAbilitySetHandle.AbilitySetPathName = InAbilitySet->GetPathName();
-	return true;
 }
 
 

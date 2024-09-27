@@ -81,12 +81,15 @@ public:
 //------------------------------------------------------------------------------------------//
 public:
 	UCharacterGameplayAbility();
+
+	/* Epic's comment: Projects should initiate passives or do other "BeginPlay" type of logic here. */
+	virtual void OnAvatarSet(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec) override;
 	
 	/** Actually activate ability, do not call this directly */
 	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
 
-	/* Epic's comment: Projects should initiate passives or do other "BeginPlay" type of logic here. */
-	virtual void OnAvatarSet(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec) override;
+	/** Destroys instanced-per-execution abilities. Instance-per-actor abilities should 'reset'. Any active ability state tasks receive the 'OnAbilityStateInterrupted' event. Non instance abilities - what can we do? */
+	virtual void CancelAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateCancelAbility) override;
 
 	/** Native function, called if an ability ends normally or abnormally. If bReplicate is set to true, try to replicate the ending to the client/server */
 	virtual void EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled) override;
@@ -159,20 +162,24 @@ protected:
 // Input Evocations																			//
 //------------------------------------------------------------------------------------------//
 protected:
-	/** Input released function that's called if the player invokes the ability's input bind */
+	/** Input pressed function that's called if the player invokes the ability's input bind. @note This works for non instanced abilities, Instanced abilities need to use ability tasks for replication */
+	virtual void InputPressed(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo) override;
+	
+	/** Input released function that's called if the player invokes the ability's input bind. @note This works for non instanced abilities, Instanced abilities need to use ability tasks for replication */
 	virtual void InputReleased(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo) override;
 	
-	/** Blueprint function for when the input is released for this attack. This is how to access the InputReleased function through blueprint. */
-	UFUNCTION(BlueprintImplementableEvent, Category = Ability, DisplayName = "InputReleased", meta=(ScriptName = "InputReleased"))
-	void K2_InputReleased(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActivationInfo ActivationInfo);
-	
-	/** Input pressed function that's called if the player invokes the ability's input bind */
-	virtual void InputPressed(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo) override;
-
-	/** Blueprint function for when the input is pressed for this attack. This is how to access the InputPressed function through blueprint. */
+	/** Blueprint function for when the input is pressed for this attack. This is how to access the InputPressed function through blueprint.
+	 * @note This works for non instanced abilities, Instanced abilities need to use ability tasks for replication
+	 */
 	UFUNCTION(BlueprintImplementableEvent, Category = Ability, DisplayName = "InputPressed", meta=(ScriptName = "InputPressed"))
 	void K2_InputPressed(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActivationInfo ActivationInfo);
 	
+	/** Blueprint function for when the input is released for this attack. This is how to access the InputReleased function through blueprint.
+	 * @note This works for non instanced abilities, Instanced abilities need to use ability tasks for replication
+	 */
+	UFUNCTION(BlueprintImplementableEvent, Category = Ability, DisplayName = "InputReleased", meta=(ScriptName = "InputReleased"))
+	void K2_InputReleased(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActivationInfo ActivationInfo);
+
 	
 //------------------------------------------------------------------------------------------//
 // Utility																					//

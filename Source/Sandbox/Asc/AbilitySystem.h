@@ -342,3 +342,80 @@ protected:
 	
 	
 };
+
+
+/**
+	Ability System Component Event Functions  @ref GSCCoreComponent / AbilitySystemComponent
+		- OnInitAbilityActorInfo()
+
+		// Gameplay Abilities
+		- AbilityActivatedCallbacks(FGenericAbilityDelegate, UGameplayAbility*)
+		- AbilityCommittedCallbacks(FGenericAbilityDelegate, UGameplayAbility*)
+		- AbilityEndedCallbacks(FAbilityEnded, UGameplayAbility*)
+		- AbilityFailedCallbacks(FAbilityFailedDelegate, const UGameplayAbility*, const FGameplayTagContainer&)
+
+		// Gameplay Effects
+		- OnActiveGameplayEffectAddedDelegateToSelf(UAbilitySystemComponent* Target, const FGameplayEffectSpec& SpecApplied, const FActiveGameplayEffectHandle ActiveHandle)
+		- OnAnyGameplayEffectRemovedDelegate(const FActiveGameplayEffect& EffectRemoved)
+		
+		// Returns delegate structure that allows binding to several gameplay effect changes
+		FActiveGameplayEffectEvents* GetActiveEffectEventSet(FActiveGameplayEffectHandle Handle);
+		FOnActiveGameplayEffectRemoved_Info* OnGameplayEffectRemoved_InfoDelegate(FActiveGameplayEffectHandle Handle);
+		FOnActiveGameplayEffectStackChange* OnGameplayEffectStackChangeDelegate(FActiveGameplayEffectHandle Handle);
+		FOnActiveGameplayEffectTimeChange* OnGameplayEffectTimeChangeDelegate(FActiveGameplayEffectHandle Handle);
+		// Retrieving the delegate during activation and binding to one of these events for updates, or during creation
+
+		// Other
+		- RegisterGenericGameplayTagEvent(const FGameplayTag GameplayTag, const int32 NewCount)
+		- OnGiveAbilityDelegate(FGameplayAbilitySpec&, UGSCAbilityInputBindingComponent*, UInputAction*, EGSCAbilityTriggerEvent, FGameplayAbilitySpec)
+*/
+
+
+// Ability System Component
+	// Test if abilities support multiple montages being played through client prediction
+		// - Already done, works with ai, you just need to invoke the montage again (they're very time sensitive, still need to test in combination with asynchronous input events)
+
+	// Test the optional objects passed through gameplay events
+
+	// Subclass the gameplay cue manager and learn gameplay cues
+		// - InitGameplayCueParameters
+		// - UGameplayCueManager::CheckForTooManyRPCs
+	
+		
+	// Start using tags to classify specific abilities, for both evocation and invocation
+	/** 
+	 * Gets all Activatable Gameplay Abilities that match all tags in GameplayTagContainer AND for which
+	 * DoesAbilitySatisfyTagRequirements() is true.  The latter requirement allows this function to find the correct
+	 * ability without requiring advanced knowledge.  For example, if there are two "Melee" abilities, one of which
+	 * requires a weapon and one of which requires being unarmed, then those abilities can use Blocking and Required
+	 * tags to determine when they can fire.  Using the Satisfying Tags requirements simplifies a lot of usage cases.
+	 * For example, Behavior Trees can use various decorators to test an ability fetched using this mechanism as well
+	 * as the Task to execute the ability without needing to know that there even is more than one such ability.
+	 */
+	// void GetActivatableGameplayAbilitySpecsByAllMatchingTags(const FGameplayTagContainer& GameplayTagContainer, TArray < struct FGameplayAbilitySpec* >& MatchingGameplayAbilities, bool bOnlyAbilitiesThatSatisfyTagRequirements = true) const;
+
+	
+	/** 
+	 * Attempts to activate every gameplay ability that matches the given tag and DoesAbilitySatisfyTagRequirements().
+	 * Returns true if anything attempts to activate. Can activate more than one ability and the ability may fail later.
+	 * If bAllowRemoteActivation is true, it will remotely activate local/server abilities, if false it will only try to locally activate abilities.
+	 */
+	// UFUNCTION(BlueprintCallable, Category = "Abilities")
+	// bool TryActivateAbilitiesByTag(const FGameplayTagContainer& GameplayTagContainer, bool bAllowRemoteActivation = true);
+	
+
+	/** Returns an ability spec corresponding to given ability class. If modifying call MarkAbilitySpecDirty */
+	// FGameplayAbilitySpec* FindAbilitySpecFromClass(TSubclassOf<UGameplayAbility> InAbilityClass);
+
+	
+	// Learn how to pass an ability through a gameplay event and activate it through this function, and check if this replicates event information
+	/*
+	 * Grants an ability and attempts to activate it exactly one time, which will cause it to be removed.
+	 * Only valid on the server, and the ability's Net Execution Policy cannot be set to Local or Local Predicted
+	 * 
+	 * @param AbilitySpec FGameplayAbilitySpec containing information about the ability class, level and input ID to bind it to.
+	 * @param GameplayEventData Optional activation event data. If provided, Activate Ability From Event will be called instead of ActivateAbility, passing the Event Data
+	 */
+	// FGameplayAbilitySpecHandle GiveAbilityAndActivateOnce(FGameplayAbilitySpec& AbilitySpec, const FGameplayEventData* GameplayEventData = nullptr);
+	
+	

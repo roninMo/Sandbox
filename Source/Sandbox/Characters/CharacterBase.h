@@ -14,7 +14,6 @@
 //----------------------------------------------------------------------------------//
 	- Stephen Ulibarri has content on combat for fps and melee combat, and teaches you a lot of different things and how to handle multiplayer
 		- Check that client side prediction helps with combat and all melee attacks except for a few edge case scenarios
-		- Understanding Gameplay Ability tasks helps with handling this safely and a lot of this isn't as complicated once everything settles out
 
 	- Finally let's start learning AI in depth and how to go about this. A lot of this is already done (with some configuration that's been cleared away) this is going to be fun
 		- Refactor ai combat for multiplayer for handling calculations for all types of combat, different enemies with gimmicks and let's play with attack patterns
@@ -25,7 +24,6 @@
 //----------------------------------------------------------------------------------//
 	- The player peripheries already gives us a construct for handling and updating information within the player's range and is probably how we'll handle the player interaction
 	- There needs to be some construct in place for handling player and npc interaction with precedence between different situations (whether it's during a quest or passing by)
-		- And this logic does not need to be conditional it needs to be fun
 
 
 //----------------------------------------------------------------------------------//
@@ -33,6 +31,13 @@
 //----------------------------------------------------------------------------------//
 
 
+		Anim Curves are an interesting thing for handling things with animation and there's a lot of functionality that branches out from this. They return a value from a frame of an animation, and that can be used for calculations
+		There's using it for things like handling logic, adjusting calculations based on values, adjusting materials, using it for blending values, ik placement and logic, and the list goes on
+
+		Values that we're using to enable certain logic during different animations to enable overlays and inverse kinematics during specific animations to prevent problems
+
+			- Montage/Layering/Inverse Kinematics ("Montage_", "Layering_", "IK_") 
+				- (Head), (Pelvis), (Spine), (Legs), (Arm_L), (Arm_R)
 
 		Abp references
 			- Primary Layers
@@ -54,7 +59,6 @@
 	There's also a lot of things you have to account for. The animations could be random actions, combat, or inverse kinematics for things like feet and hand placement, and you have to create another blueprint for when the character has weapons equipped
 
 		- If you haven't created blueprints before I'd reference the documentation because there's a lot of things they've done to make things easier, I'm just combining everything here
-		- I have it so that there's an anim blueprint with logic to add actions both in blueprint and from montages, and another blueprint for handling weapons, and inverse kinematics for a bunch of things
 
 
 		Slots
@@ -86,13 +90,6 @@
 			- SlowArms
 
 
-		Anim Curves are an interesting thing for handling things with animation and there's a lot of functionality that branches out from this. They return a value from a frame of an animation, and that can be used for calculations
-		There's using it for things like handling logic, adjusting calculations based on values, adjusting materials, using it for blending values, ik placement and logic, and the list goes on
-
-		Here's a list of the values we're using to enable certain logic during different animations to enable overlays and inverse kinematics during specific animations to prevent problems
-
-			- Montage/Layering/Inverse Kinematics ("Montage_", "Layering_", "IK_") 
-				- (Head), (Pelvis), (Spine), (Legs), (Arm_L), (Arm_R)
 		
 
 

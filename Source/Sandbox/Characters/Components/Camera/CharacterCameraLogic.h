@@ -73,8 +73,30 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "Camera|Networking") FVector CurrentCameraOffset;
 
 	/** The interval for when the player is allowed to transition between camera styles. This is used for network purposes */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Transient, Category = "Camera|Networking", meta=(UIMin = 0.2, ClampMin = 0.1, UIMax = 1, ClampMax = 3)) float InputPressed_ReplicationInterval = 0.25;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Transient, Category = "Camera|Networking", meta=(UIMin = 0.2, ClampMin = 0.1, UIMax = 1, ClampMax = 3))
+	float InputPressed_ReplicationInterval = 0.25;
 
+	
+	/**** Camera zooming ****/
+	/** Camera FOV interp speed. Used for smooth interps for camera zooming */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera|Zooming", meta=(UIMin= 0.0, UIMax= 100)) float CameraFOVInterpSpeed = 4.5;
+
+	/** How much of the current camera zoom should be factored during first person camera style? */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera|Zooming|Camera Style", meta=(UIMin= 0.1, UIMax= 1)) float FirstPersonZoomMultiplier = 1;
+
+	/** How much of the current camera zoom should be factored during third person camera style? */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera|Zooming|Camera Style", meta=(UIMin= 0.1, UIMax= 1)) float ThirdPersonZoomMultiplier = 0.8;
+	
+	/** How much of the current camera zoom should be factored during target locking camera style? */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera|Zooming|Camera Style", meta=(UIMin= 0.1, UIMax= 1)) float TargetLockingZoomMultiplier = 0.1;
+	
+	
+	/** The target camera zoom. Different camera modes can adjust the zoom for different camera modes during @ref AdjustCameraFOV() */
+	UPROPERTY(BlueprintReadWrite, Category = "Camera|Zooming", meta=(UIMin= 0.1, UIMax= 10)) float CameraZoom = 1;
+
+	/** The player's camera field of view */
+	UPROPERTY(BlueprintReadWrite) float CameraFOV;
+	
 	
 	/**** Camera post process settings ****/
 	/** Hide camera */
@@ -122,11 +144,28 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	/**
+	 * Initialized the Abilities' ActorInfo - the structure that holds information about who we are acting on and who controls us. \n\n
+	 * 
+	 * Invoked multiple times for both client / server, also depends on whether the Ability System Component lives on Pawns or Player States:
+	 *		- Once for Server after component initialization
+	 *		- Once for Server after replication of owning actor (Possessed by for Player State)
+	 *		- Once for Client after component initialization
+	 *		- Once for Client after replication of owning actor (Once more for Player State OnRep_PlayerState)
+	 * 
+	 * @param InOwnerActor			Is the actor that logically owns this component.
+	 * @param InAvatarActor			Is what physical actor in the world we are acting on. Usually a Pawn but it could be a Tower, Building, Turret, etc, may be the same as Owner
+	 */
+	virtual void OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor) override;
+
 	
 //-------------------------------------------------------------------------------------//
 // Camera																			   //
 //-------------------------------------------------------------------------------------//
 public:
+	/** Initializes the camera settings. Activate this function when the character information is valid  */
+	UFUNCTION(BlueprintCallable) virtual void InitCameraSettings();
+	
 	/**
 	 * Sets the camera style, and calls the OnCameraStyleSet function for handling camera transitions and other logic specific to each style.
 	 * The default styles are "Fixed", "Spectator", "FirstPerson", "ThirdPerson", "TargetLocking", and "Aiming"
@@ -149,6 +188,7 @@ public:
 	/** Blueprint function for preventing the player from adjusting the camera style during specific events */
 	UFUNCTION(BlueprintImplementableEvent, Category="Camera|Style", meta = (DisplayName = "Should Prevent Camera Style Adjustments"))
 	bool BP_ShouldPreventCameraStyleAdjustments();
+
 	
 protected:
 	/**
@@ -197,6 +237,9 @@ public:
 
 	/** Updates the camera's target offset to transition to the target offset */
 	UFUNCTION(BlueprintCallable, Category = "Camera|Orientation") virtual void UpdateCameraSocketLocation(FVector Offset, float DeltaTime);
+	
+	/** Function that handles interping to the current camera FOV */
+	UFUNCTION(BlueprintCallable, Category = "Camera|Zooming") virtual void AdjustCameraFOV(const float DeltaTime);
 
 	
 //--------------------------------------------------------------------------------------------------------------------------//
@@ -286,6 +329,12 @@ public:
 	/** Sets whether to prevent rotations */
 	UFUNCTION(BlueprintCallable, Category = "Camera|Utilities") virtual void SetPreventRotationAdjustments(bool bPreventRotations);
 	
+	/** Adjusts the camera FOV's interp speed */
+	UFUNCTION(BlueprintCallable, Category = "Camera|Zooming") virtual void SetCameraFOVInterpSpeed(const float InterpSpeed);
+
+	/** Adjusts the camera's target FOV */
+	UFUNCTION(BlueprintCallable, Category = "Camera|Zooming") virtual void SetCameraZoom(const float Zoom);
+
 	
 public:
 	/** Internal function for returning a reference to the target lock characters array */

@@ -803,9 +803,6 @@ public:
 
 	/** If the player is strafe lurching */
 	UFUNCTION(BlueprintCallable) virtual bool IsStrafeLurching() const;
-
-	/** Returns whether the player is able to currently sprint */
-	UFUNCTION(BlueprintCallable) virtual bool CanSprint() const;
 	
 	
 //------------------------------------------------------------------------------//
@@ -838,8 +835,9 @@ protected:
 	
 	
 //------------------------------------------------------------------------------//
-// Physics Functions															//
+// Physics Functions
 //------------------------------------------------------------------------------//
+/* The majority of these functions use the same logic for player movement, read through physwalking, falling, and then calcvelocity. All movement calculations happen during CalcVelocity() and SafeMovementUpdate() */
 protected:
 	/** changes physics based on MovementMode */
 	virtual void StartNewPhysics(float deltaTime, int32 Iterations) override;
@@ -951,6 +949,17 @@ protected:
 	 */
 	virtual void GroundMovementPhysics(float deltaTime, int32 Iterations);
 
+	
+//------------------------------------------------------------------------------//
+// Walking Logic																//
+//------------------------------------------------------------------------------//
+public:
+	/** Returns whether the player is able to currently aim */
+	UFUNCTION(BlueprintCallable) virtual bool AllowedToAim() const;
+	
+	/** Returns whether the player is able to currently sprint */
+	UFUNCTION(BlueprintCallable) virtual bool CanSprint() const;
+	
 	
 //------------------------------------------------------------------------------//
 // Slide Logic																	//

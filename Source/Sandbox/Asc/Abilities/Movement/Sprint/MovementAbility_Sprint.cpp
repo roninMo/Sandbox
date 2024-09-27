@@ -4,8 +4,8 @@
 #include "Sandbox/Asc/Abilities/Movement/Sprint/MovementAbility_Sprint.h"
 
 #include "AbilitySystemGlobals.h"
-#include "Logging/StructuredLog.h"
 #include "Sandbox/Asc/AbilitySystem.h"
+#include "Abilities/Tasks/AbilityTask_WaitAttributeChangeThreshold.h"
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 
 UMovementAbility_Sprint::UMovementAbility_Sprint()
@@ -38,51 +38,32 @@ void UMovementAbility_Sprint::ActivateAbility(const FGameplayAbilitySpecHandle H
 	UAdvancedMovementComponent* MovementComponent = GetMovementComponent(ActorInfo->AvatarActor.Get());
 	if (!MovementComponent)
 	{
-		EndAbility(GetCurrentAbilitySpecHandle(), GetCurrentActorInfo(), GetCurrentActivationInfo(), true, false);
+		CancelAbility(Handle, ActorInfo, ActivationInfo, true);
 		return;
 	}
 
 	if (!CommitAbility(Handle, ActorInfo, ActivationInfo)) 
 	{
-		EndAbility(GetCurrentAbilitySpecHandle(), GetCurrentActorInfo(), GetCurrentActivationInfo(), true, false);
+		CancelAbility(Handle, ActorInfo, ActivationInfo, true);
 		return;
 	}
 
 	MovementComponent->StartSprinting();
-	if (StaminaDrainWhileSprinting)
-	{
-		const UGameplayEffect* SprintDrainEffect = StaminaDrainWhileSprinting->GetDefaultObject<UGameplayEffect>();
-		StaminaDrainHandle = ApplyGameplayEffectToOwner(Handle, ActorInfo, ActivationInfo, SprintDrainEffect, 1);
-	}
 }
 
 
 void UMovementAbility_Sprint::InputReleased(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo)
 {
 	Super::InputReleased(Handle, ActorInfo, ActivationInfo);
-	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
+	if (ActorInfo != nullptr && ActorInfo->AvatarActor != nullptr)
+	{
+		CancelAbility(Handle, ActorInfo, ActivationInfo, true);
+	}
 }
 
 
 void UMovementAbility_Sprint::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled)
 {
-	if (StaminaDrainHandle.IsValid())
-	{
-		UAbilitySystemComponent* AbilitySystemComponent = ActorInfo->AbilitySystemComponent.Get();
-		if (!AbilitySystemComponent)
-		{
-			AbilitySystemComponent = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(ActorInfo->OwnerActor.Get());
-			if (!AbilitySystemComponent)
-			{
-				UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to find the ability system component to remove the sprint's stamina drain!",
-					HasAuthorityOrPredictionKey(ActorInfo, &ActivationInfo) ? FString("Authority") : FString("Client"), *FString(__FUNCTION__), *GetNameSafe(ActorInfo->OwnerActor.Get())
-				);
-			}
-		}
-
-		AbilitySystemComponent->RemoveActiveGameplayEffect(StaminaDrainHandle); // TODO: Find out whether this is safe
-	}
-
 	UAdvancedMovementComponent* MovementComponent = GetMovementComponent(ActorInfo->AvatarActor.Get());
 	if (MovementComponent)
 	{

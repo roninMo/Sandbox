@@ -592,6 +592,7 @@ void UAbilitySystem::AbilityLocalInputReleased(int32 InputID)
 
 				AbilitySpecInputReleased(Spec);
 				
+				// Invoke the InputPressed event. This is not replicated here. If someone is listening, they may replicate the InputReleased event to the server.
 				InvokeReplicatedEvent(EAbilityGenericReplicatedEvent::InputReleased, Spec.Handle, Spec.ActivationInfo.GetActivationPredictionKey());
 			}
 		}

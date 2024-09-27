@@ -6,6 +6,7 @@
 #include "Sandbox/Asc/Abilities/Movement/MovementAbility.h"
 #include "MovementAbility_Sprint.generated.h"
 
+
 /**
  * 
  */
@@ -14,15 +15,6 @@ class SANDBOX_API UMovementAbility_Sprint : public UMovementAbility
 {
 	GENERATED_BODY()
 
-protected:
-	/** The stamina cost while the ability is activated. Use this to prevent constantly reactivating the ability */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<UGameplayEffect> StaminaDrainWhileSprinting;
-
-	/** The handle of the stamina cost effect */
-	UPROPERTY(BlueprintReadWrite) FActiveGameplayEffectHandle StaminaDrainHandle;
-
-	
 public:
 	UMovementAbility_Sprint();
 

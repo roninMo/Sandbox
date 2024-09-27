@@ -33,7 +33,6 @@ bool UMovementAbility_Jump::CanActivateAbility(const FGameplayAbilitySpecHandle 
 void UMovementAbility_Jump::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
 {
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
-	
 	if (HasAuthorityOrPredictionKey(ActorInfo, &ActivationInfo))
 	{
 		if (!CommitAbility(Handle, ActorInfo, ActivationInfo))
@@ -54,6 +53,7 @@ void UMovementAbility_Jump::ActivateAbility(const FGameplayAbilitySpecHandle Han
 	}
 }
 
+
 void UMovementAbility_Jump::InputReleased(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo)
 {
 	Super::InputReleased(Handle, ActorInfo, ActivationInfo);
@@ -63,14 +63,9 @@ void UMovementAbility_Jump::InputReleased(const FGameplayAbilitySpecHandle Handl
 	}
 }
 
-void UMovementAbility_Jump::CancelAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateCancelAbility)
-{
-	if (ScopeLockCount > 0)
-	{
-		WaitingToExecute.Add(FPostLockDelegate::CreateUObject(this, &UMovementAbility_Jump::CancelAbility, Handle, ActorInfo, ActivationInfo, bReplicateCancelAbility));
-		return;
-	}
 
+void UMovementAbility_Jump::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled)
+{
 	ACharacter* Character = Cast<ACharacter>(ActorInfo->AvatarActor.Get());
 	if (Character)
 	{
@@ -81,7 +76,7 @@ void UMovementAbility_Jump::CancelAbility(const FGameplayAbilitySpecHandle Handl
 			MovementComponent->StopWallJump();
 		}
 	}
-
-	Super::CancelAbility(Handle, ActorInfo, ActivationInfo, bReplicateCancelAbility);
+	
+	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
 }
 
