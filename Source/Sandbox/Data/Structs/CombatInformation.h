@@ -102,6 +102,7 @@ USTRUCT(BlueprintType)
 struct F_ArmamentInformation
 {
 	GENERATED_USTRUCT_BODY()
+	virtual ~F_ArmamentInformation() = default;
 	F_ArmamentInformation() = default;
 
 	/** The database id of the armament */
@@ -119,17 +120,23 @@ struct F_ArmamentInformation
 	/** The armament's equip restrictions */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) EEquipRestrictions EquipRestrictions;
 	
-	/** The armament's abilities */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<F_ArmamentAbilityInformation> Abilities;
+	/** The base attack information of the armament */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FGameplayAttribute, float> BaseDamageStats;
 	
 	/** The armament's passives */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayEffectMapping> Passives;
 	
 	/** The armament's state information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayEffectMapping StateInformation;
+	
+	/** The armament's abilities */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<F_ArmamentAbilityInformation> Abilities;
 
-	/** The base attack information of the armament */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FGameplayAttribute, float> BaseDamageStats;
+	/** There needs to be a valid reference to retrieve the armament/item */
+	virtual bool IsValid() const
+	{
+		return !Id.IsValid();
+	}
 };
 
 
@@ -143,7 +150,6 @@ struct F_Table_ArmamentSourceInformation : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_ArmamentInformation ArmamentInformation;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString DevDescription;
 };
-
 
 
 /*

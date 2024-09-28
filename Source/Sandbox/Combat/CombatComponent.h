@@ -6,26 +6,54 @@
 #include "Components/ActorComponent.h"
 #include "CombatComponent.generated.h"
 
+class AArmament;
+enum class EEquipSlot : uint8;
+enum class EArmamentClassification : uint8;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FArmamentEquippedSignature, AArmament*, Armament, EEquipSlot, EquipSlot);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FArmamentUnequippedSignature, FName, Id, EEquipSlot, EquipSlot);
+
+/**
+ * Combat component for characters and enemies in the game
+ */
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SANDBOX_API UCombatComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	UCombatComponent(const FObjectInitializer& ObjectInitializer);
+	
+	/** Delegate for when a player equips an armament */
+	UPROPERTY(BlueprintAssignable) FArmamentEquippedSignature OnEquippedArmament;
 
+	/** Delegate for when a player unequips an armament */
+	UPROPERTY(BlueprintAssignable) FArmamentUnequippedSignature OnUnequippedArmament;
+	
+	
 protected:
 	virtual void BeginPlay() override;
 
 public:	
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+
+	
+//-------------------------------------------------------------------------------------//
+// Utility																			   //
+//-------------------------------------------------------------------------------------//
+public:
+	/** Retrieves the equipped socket for a specific armament */
+	UFUNCTION(BlueprintCallable, Category = "Combat|Equipping") virtual FName GetEquippedSocket(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
+	
+	/** Retrieves the holster for a specific equipped armament */
+	UFUNCTION(BlueprintCallable, Category = "Combat|Equipping") virtual FName GetHolsterSocket(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
+	
+	/** Retrieves the sheathed for a specific equipped armament */
+	UFUNCTION(BlueprintCallable, Category = "Combat|Equipping") virtual FName GetSheathedSocket(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
+
+	
 };
-
-
-
 
 
 

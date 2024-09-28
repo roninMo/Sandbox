@@ -59,7 +59,7 @@ enum class EComboType : uint8
 	Strong				UMETA(DisplayName = "Strong Attack"),
 	Special				UMETA(DisplayName = "Special Attack"),
 	Blocking			UMETA(DisplayName = "Block"),
-	Parrying			UMETA(DisplayName = "Parray"),
+	Parrying			UMETA(DisplayName = "Parry"),
 	Crouching			UMETA(DisplayName = "Crouching Attack"),
 	Running				UMETA(DisplayName = "Running Attack")
 };
@@ -73,9 +73,9 @@ enum class EArmamentClassification : uint8
 {
 	None								UMETA(DisplayName = "None"),
 	Unarmed								UMETA(DisplayName = "Unarmed"),
-	Daggers								UMETA(DisplayName = "Daggers"),
 	StraightSwords						UMETA(DisplayName = "Straight Swords"),
 	Katanas								UMETA(DisplayName = "Katanas"),
+	Knifes								UMETA(DisplayName = "Knifes"),
 	Axes								UMETA(DisplayName = "Axes"),
 	Hammers								UMETA(DisplayName = "Hammers"),
 	Scythes								UMETA(DisplayName = "Scythes"),
@@ -99,10 +99,10 @@ enum class EArmamentClassification : uint8
 UENUM(BlueprintType)
 enum class EEquipRestrictions : uint8
 {
+	None								UMETA(DisplayName = "None"),
 	Default								UMETA(DisplayName = "Default"),
 	TwoHandOnly							UMETA(DisplayName = "Two Hand Only"),
 	OneHandOnly							UMETA(DisplayName = "One Hand Only"),
-	None								UMETA(DisplayName = "None")
 };
 
 

@@ -8,7 +8,7 @@
 #include "Engine/DataAsset.h"
 #include "InventoryInformation.generated.h"
 
-class AItemBase;
+class AItem;
 class IInventoryItemInterface;
 
 
@@ -32,7 +32,7 @@ struct F_Item
 			const EItemType ItemType = EItemType::Inv_None,
 
 			const TSubclassOf<UObject> ActualClass = nullptr,
-			const TSubclassOf<AItemBase> WorldClass = nullptr,
+			const TSubclassOf<AItem> WorldClass = nullptr,
 			UDataAsset* GlobalInformation = nullptr
 		) :
 	
@@ -83,7 +83,7 @@ public:
 	 * 
 	 * @remarks This should reference the inventory interface or use the ItemBase class
 	 */	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TSubclassOf<AItemBase> WorldClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TSubclassOf<AItem> WorldClass;
 	
 	/** Global data for items that's added to the object from the blueprint */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UDataAsset* GlobalInformation;

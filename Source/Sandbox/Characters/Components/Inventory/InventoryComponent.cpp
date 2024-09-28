@@ -5,7 +5,7 @@
 
 #include "GameFramework/Character.h"
 #include "Sandbox/Data/Interfaces/InventoryItem/InventoryItemInterface.h"
-#include "Sandbox/World/Props/Items/ItemBase.h"
+#include "Sandbox/World/Props/Items/Item.h"
 #include "Engine/PackageMapClient.h"
 #include "Logging/StructuredLog.h"
 
@@ -847,7 +847,7 @@ TScriptInterface<IInventoryItemInterface> UInventoryComponent::SpawnWorldItem_Im
 		SpawnLocation.Z = SpawnLocation.Z + 34.0f;
 		SpawnTransform.SetLocation(SpawnLocation);
 	
-		if (AItemBase* SpawnedItem = GetWorld()->SpawnActor<AItemBase>(Item.WorldClass, SpawnTransform, SpawnParameters))
+		if (AItem* SpawnedItem = GetWorld()->SpawnActor<AItem>(Item.WorldClass, SpawnTransform, SpawnParameters))
 		{
 			const TScriptInterface<IInventoryItemInterface> WorldItem = SpawnedItem;
 			SpawnedItem->Execute_SetItemInformationDatabase(SpawnedItem, ItemDatabase);

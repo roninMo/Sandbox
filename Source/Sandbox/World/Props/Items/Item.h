@@ -5,13 +5,13 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Sandbox/Data/Interfaces/InventoryItem/InventoryItemInterface.h"
-#include "ItemBase.generated.h"
+#include "Item.generated.h"
 
 /*
  * The base class for inventory items that are spawned in the world
  */
 UCLASS( Blueprintable, ClassGroup=(Inventory) )
-class SANDBOX_API AItemBase : public AActor, public IInventoryItemInterface
+class SANDBOX_API AItem : public AActor, public IInventoryItemInterface
 {
 	GENERATED_BODY()
 	
@@ -33,8 +33,9 @@ protected:
 
 	
 public:
+	/** Returns the properties used for network replication, this needs to be overridden by all actor classes with native replicated properties */
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-	AItemBase(const FObjectInitializer& ObjectInitializer);
+	AItem();
 
 	/** Function for dynamically adding default information to inventory items */
 	virtual void InitializeItemGlobals();

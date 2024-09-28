@@ -25,3 +25,18 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 }
 
+FName UCombatComponent::GetEquippedSocket(EArmamentClassification Armament, EEquipSlot EquipSlot) const
+{
+	return FName();
+}
+
+FName UCombatComponent::GetHolsterSocket(EArmamentClassification Armament, EEquipSlot EquipSlot) const
+{
+	return FName();
+}
+
+FName UCombatComponent::GetSheathedSocket(EArmamentClassification Armament, EEquipSlot EquipSlot) const
+{
+	return FName();
+}
+

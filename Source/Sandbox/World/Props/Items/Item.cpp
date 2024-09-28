@@ -1,14 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Sandbox/World/Props/Items/ItemBase.h"
+#include "Sandbox/World/Props/Items/Item.h"
 
 #include "Sandbox/Characters/Components/Inventory/InventoryComponent.h"
 #include "Logging/StructuredLog.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
-AItemBase::AItemBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+AItem::AItem()
 {
 	// Network values
 	PrimaryActorTick.bCanEverTick = false;
@@ -33,14 +33,14 @@ AItemBase::AItemBase(const FObjectInitializer& ObjectInitializer) : Super(Object
 }
 
 
-void AItemBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+void AItem::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-	DOREPLIFETIME_CONDITION(AItemBase, Item, COND_InitialOrOwner);
+	DOREPLIFETIME_CONDITION(AItem, Item, COND_InitialOrOwner);
 }
 
 
-void AItemBase::InitializeItemGlobals()
+void AItem::InitializeItemGlobals()
 {
 	// Ex item globals function.
 	if (!Item.GlobalInformation) return;
@@ -51,7 +51,7 @@ void AItemBase::InitializeItemGlobals()
 }
 
 
-void AItemBase::BeginPlay()
+void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 	InitializeItemGlobals();
@@ -66,7 +66,7 @@ void AItemBase::BeginPlay()
 }
 
 
-void AItemBase::CreateIdIfNull()
+void AItem::CreateIdIfNull()
 {
 	if (Item.Id == FGuid())
 	{
@@ -75,26 +75,26 @@ void AItemBase::CreateIdIfNull()
 }
 
 
-void AItemBase::Tick(float DeltaSeconds)
+void AItem::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 }
 
 
 #pragma region Inventory item functions
-F_Item AItemBase::GetItem_Implementation() const				{ return Item; }
-const EItemType AItemBase::GetItemType_Implementation() const	{ return Item.ItemType; }
-const FGuid AItemBase::GetId_Implementation() const				{ return Item.Id; }
-const FName AItemBase::GetItemName_Implementation() const		{ return Item.ItemName; }
-void AItemBase::SetItem_Implementation(const F_Item Data)		{ Item = Data; }
-void AItemBase::SetId_Implementation(const FGuid& Id)			{ Item.Id = Id; }
-bool AItemBase::IsSafeToAdjustItem_Implementation() const { return PendingPlayer == nullptr; }
-void AItemBase::SetPlayerPending_Implementation(ACharacter* Player) { PendingPlayer = Player; }
-ACharacter* AItemBase::GetPlayerPending_Implementation() { return PendingPlayer; }
-void AItemBase::SetItemInformationDatabase_Implementation(UDataTable* Database) { ItemInformationTable = Database; }
+F_Item AItem::GetItem_Implementation() const				{ return Item; }
+const EItemType AItem::GetItemType_Implementation() const	{ return Item.ItemType; }
+const FGuid AItem::GetId_Implementation() const				{ return Item.Id; }
+const FName AItem::GetItemName_Implementation() const		{ return Item.ItemName; }
+void AItem::SetItem_Implementation(const F_Item Data)		{ Item = Data; }
+void AItem::SetId_Implementation(const FGuid& Id)			{ Item.Id = Id; }
+bool AItem::IsSafeToAdjustItem_Implementation() const { return PendingPlayer == nullptr; }
+void AItem::SetPlayerPending_Implementation(ACharacter* Player) { PendingPlayer = Player; }
+ACharacter* AItem::GetPlayerPending_Implementation() { return PendingPlayer; }
+void AItem::SetItemInformationDatabase_Implementation(UDataTable* Database) { ItemInformationTable = Database; }
 
 
-bool AItemBase::RetrieveItemFromDataTable(const FName Id, F_Item& ItemData)
+bool AItem::RetrieveItemFromDataTable(const FName Id, F_Item& ItemData)
 {
 	if (ItemInformationTable)
 	{

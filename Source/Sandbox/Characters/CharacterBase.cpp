@@ -152,6 +152,12 @@ bool ACharacterBase::IsTraceConsideredVisible(const FHitResult* HitResult, const
 	return (HitResultActor ? HitResultActor->IsOwnedBy(TargetActor) : false);
 }
 
+
+UCombatComponent* ACharacterBase::GetCombatComponent() const
+{
+	return CombatComponent;
+}
+
 UInventoryComponent* ACharacterBase::GetInventoryComponent() const
 {
 	return Inventory;

@@ -273,6 +273,7 @@
 */
 
 
+class UCombatComponent;
 class UAbilitySystem;
 class UInventoryComponent;
 class UPlayerPeripheriesComponent;
@@ -395,6 +396,26 @@ protected:
 // Camera																			   //
 //-------------------------------------------------------------------------------------//
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	TObjectPtr<UCombatComponent> CombatComponent;
+
+	
+public:
+	/** Templated convenience version for retrieving the combat component. */
+	template<class T> T* GetCombatComponent(void) const { return Cast<T>(GetCombatComponent()); }
+
+	/** Retrieves the combat component */
+	UFUNCTION(BlueprintCallable, Category="Combat", DisplayName="Get Combat Component")
+	virtual UCombatComponent* GetCombatComponent() const;
+
+
+
+
+	
+//-------------------------------------------------------------------------------------//
+// Camera																			   //
+//-------------------------------------------------------------------------------------//
+protected:
 
 
 
@@ -408,11 +429,11 @@ protected:
 
 	
 public:
-	/** Templated convenience version for retrieving the movement component. */
+	/** Templated convenience version for retrieving the inventory component. */
 	template<class T> T* GetInventory(void) const { return Cast<T>(GetInventoryComponent()); }
 
-	/** Retrieves the advanced movement component */
-	UFUNCTION(BlueprintCallable, Category="Movement", DisplayName="Get Inventory")
+	/** Retrieves the inventory component */
+	UFUNCTION(BlueprintCallable, Category="Inventory", DisplayName="Get Inventory Component")
 	virtual UInventoryComponent* GetInventoryComponent() const;
 
 
