@@ -6,7 +6,7 @@
 #include "InventoryInformation.h"
 #include "Engine/DataTable.h"
 #include "Sandbox/Data/Enums/AISenseTypes.h"
-#include "Sandbox/Data/Enums/EquipTypes.h"
+#include "..\Enums\EquipSlot.h"
 #include "NpcInformation.generated.h"
 
 class UGameplayEffect;

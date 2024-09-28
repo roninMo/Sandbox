@@ -41,18 +41,12 @@ void UMovementAbility_Sprint_Stamina::ActivateAbility(const FGameplayAbilitySpec
 		return;
 	}
 
-	if (!CommitAbility(Handle, ActorInfo, ActivationInfo)) 
-	{
-		EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
-		return;
-	}
-
 	MovementComponent->StartSprinting();
 
 	// Prevent sprinting if the player's stamina is drained
 	StaminaDrainHandle = UAbilityTask_WaitAttributeChangeThreshold::WaitForAttributeChangeThreshold(
 		this,
-		UDefaultAttributes::GetStaminaAttribute(),
+		UDefaultAttributes::GetStaminaAttribute(), 
 		EWaitAttributeChangeComparison::LessThanOrEqualTo,
 		0.0,
 		true

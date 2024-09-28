@@ -1059,6 +1059,7 @@ void UAdvancedMovementComponent::PhysLedgeClimbing(float deltaTime, int32 Iterat
 		}
 		else
 		{
+			Velocity = Velocity * 0.1; // Calculations when Velocity == 0 causes movement speeds to skyrocket, let's just add this as a safety precaution and reward for player movement
 			MantleJumpStartTime = Time;
 			MantleJumpLocation = UpdatedComponent->GetComponentLocation();
 			

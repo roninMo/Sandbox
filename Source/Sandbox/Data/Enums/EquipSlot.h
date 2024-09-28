@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "EquipTypes.generated.h"
+#include "EquipSlot.generated.h"
 
 
 /**

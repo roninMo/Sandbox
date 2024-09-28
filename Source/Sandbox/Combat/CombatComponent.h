@@ -23,3 +23,53 @@ public:
 
 		
 };
+
+
+/*
+
+
+	Weapon
+		- Ranged Information / Damage
+			- Weapon / Attachment config
+			- Ranged damage information
+			
+		- Melee Information / Damage
+			- Combo retrieval
+			- Melee damage information
+
+	->
+	-> Damage information (varying attribute set modifiers)
+
+	
+	Weapon
+		- Equip slot mapping
+		- Anim montage mapping
+		- Ability mapping
+		- Character to Weapon information mapping
+		- 
+
+
+
+
+
+
+
+	Combat Component
+		- Attribute damage calculation
+
+
+
+	Combat
+		
+
+
+
+	Stats
+		- Individual Stats
+		- attributes retrieved at begin play
+		- attribute adjustments based on player level
+
+
+ 
+*/
+

@@ -16,10 +16,3 @@ void AArmament::BeginPlay()
 	
 }
 
-
-void AArmament::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-

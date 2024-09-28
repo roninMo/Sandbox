@@ -29,18 +29,18 @@ class SANDBOX_API UDefaultAttributes : public UAttributeSet
 //---------------------------------------------------------------------------------------------------------------------------------------------------//
 // In game status attributes																														 //
 //---------------------------------------------------------------------------------------------------------------------------------------------------//
-public:
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Health) FGameplayAttributeData Health;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Health", ReplicatedUsing = OnRep_MaxHealth) FGameplayAttributeData MaxHealth;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Health", ReplicatedUsing = OnRep_HealthRegenRate) FGameplayAttributeData HealthRegenRate;
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat", ReplicatedUsing = OnRep_Health) FGameplayAttributeData Health;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Health", ReplicatedUsing = OnRep_MaxHealth) FGameplayAttributeData MaxHealth;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Health", ReplicatedUsing = OnRep_HealthRegenRate) FGameplayAttributeData HealthRegenRate;
 	
-	// UPROPERTY(BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Mana) FGameplayAttributeData Mana;
-	// UPROPERTY(BlueprintReadOnly, Category = "Attributes|Mana", ReplicatedUsing = OnRep_MaxMana) FGameplayAttributeData MaxMana;
-	// UPROPERTY(BlueprintReadOnly, Category = "Attributes|Mana", ReplicatedUsing = OnRep_ManaRegenRate) FGameplayAttributeData ManaRegenRate;
+	// UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat", ReplicatedUsing = OnRep_Mana) FGameplayAttributeData Mana;
+	// UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Mana", ReplicatedUsing = OnRep_MaxMana) FGameplayAttributeData MaxMana;
+	// UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Mana", ReplicatedUsing = OnRep_ManaRegenRate) FGameplayAttributeData ManaRegenRate;
 	
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Stamina) FGameplayAttributeData Stamina;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stamina", ReplicatedUsing = OnRep_MaxStamina) FGameplayAttributeData MaxStamina;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stamina", ReplicatedUsing = OnRep_StaminaRegenRate) FGameplayAttributeData StaminaRegenRate;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat", ReplicatedUsing = OnRep_Stamina) FGameplayAttributeData Stamina;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Stamina", ReplicatedUsing = OnRep_MaxStamina) FGameplayAttributeData MaxStamina;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Stamina", ReplicatedUsing = OnRep_StaminaRegenRate) FGameplayAttributeData StaminaRegenRate;
 	
 
 public:
