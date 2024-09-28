@@ -1,0 +1,536 @@
+[
+	{
+		"Name": "MMOAttributeSet.Mana",
+		"BaseValue": 40,
+		"MinValue": 0,
+		"MaxValue": 40,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.MaxMana",
+		"BaseValue": 40,
+		"MinValue": 0,
+		"MaxValue": 40,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.ManaRegenRate",
+		"BaseValue": 0.4,
+		"MinValue": 0,
+		"MaxValue": 0.4,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Poise",
+		"BaseValue": 10,
+		"MinValue": 0,
+		"MaxValue": 10,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.MaxPoise",
+		"BaseValue": 10,
+		"MinValue": 0,
+		"MaxValue": 10,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.PoiseRegenRate",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.PoisonBuildup",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.MaxPoisonBuildup",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.BleedBuildup",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.MaxBleedBuildup",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.FrostbiteBuildup",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.MaxFrostbiteBuildup",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.SleepBuildup",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.MaxSleepBuildup",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.MadnessBuildup",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.MaxMadnessBuildup",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.CurseBuildup",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.MaxCurseBuildup",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Combat Stats",
+		"bCanStack": false
+	},
+	
+	
+	
+	
+	{
+		"Name": "MMOAttributeSet.Vitality",
+		"BaseValue": 9,
+		"MinValue": 0,
+		"MaxValue": 9,
+		"DerivedAttributeInfo": "Leveling",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Endurance",
+		"BaseValue": 9,
+		"MinValue": 0,
+		"MaxValue": 9,
+		"DerivedAttributeInfo": "Leveling",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Mind",
+		"BaseValue": 15,
+		"MinValue": 0,
+		"MaxValue": 15,
+		"DerivedAttributeInfo": "Leveling",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Intelligence",
+		"BaseValue": 16,
+		"MinValue": 0,
+		"MaxValue": 16,
+		"DerivedAttributeInfo": "Leveling",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Faith",
+		"BaseValue": 7,
+		"MinValue": 0,
+		"MaxValue": 7,
+		"DerivedAttributeInfo": "Leveling",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Dexterity",
+		"BaseValue": 12,
+		"MinValue": 0,
+		"MaxValue": 12,
+		"DerivedAttributeInfo": "Leveling",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Strength",
+		"BaseValue": 8,
+		"MinValue": 0,
+		"MaxValue": 8,
+		"DerivedAttributeInfo": "Leveling",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Arcane",
+		"BaseValue": 10,
+		"MinValue": 0,
+		"MaxValue": 10,
+		"DerivedAttributeInfo": "Leveling",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Experience",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Leveling",
+		"bCanStack": false
+	},
+	
+	
+	
+	
+	{
+		"Name": "MMOAttributeSet.Defence_Standard",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Defence",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Defence_Slash",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Defence",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Defence_Pierce",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Defence",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Defence_Strike",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Defence",
+		"bCanStack": false
+	},
+	
+
+	{
+		"Name": "MMOAttributeSet.Resistance_Magic",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Resistances",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Resistance_Ice",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Resistances",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Resistance_Fire",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Resistances",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Resistance_Holy",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Resistances",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Resistance_Lightning",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Resistances",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Immunity",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Resistances",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Robustness",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Resistances",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Focus",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Resistances",
+		"bCanStack": false
+	},
+
+	
+
+
+	{
+		"Name": "MMOAttributeSet.Discovery",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Other",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Spells",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Other",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Weight",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Other",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.EquipLoad",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Other",
+		"bCanStack": false
+	},
+
+	
+	
+
+	{
+		"Name": "MMOAttributeSet.Negation_Standard",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Damage Negation",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Negation_Slash",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Damage Negation",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Negation_Pierce",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Damage Negation",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Negation_Strike",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Damage Negation",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Negation_Magic",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Damage Negation",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Negation_Ice",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Damage Negation",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Negation_Fire",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Damage Negation",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Negation_Holy",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Damage Negation",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Negation_Lightning",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Damage Negation",
+		"bCanStack": false
+	},
+	
+	
+	
+	
+	{
+		"Name": "MMOAttributeSet.Damage_Standard",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Meta Attribute",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Damage_Slash",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Meta Attribute",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Damage_Pierce",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Meta Attribute",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Damage_Strike",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Meta Attribute",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Damage_Magic",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Meta Attribute",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Damage_Ice",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Meta Attribute",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Damage_Fire",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Meta Attribute",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Damage_Holy",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Meta Attribute",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Damage_Lightning",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Meta Attribute",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Bleed",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Meta Attribute",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Poison",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Meta Attribute",
+		"bCanStack": false
+	},
+	{
+		"Name": "MMOAttributeSet.Curse",
+		"BaseValue": 0,
+		"MinValue": 0,
+		"MaxValue": 0,
+		"DerivedAttributeInfo": "Meta Attribute",
+		"bCanStack": false
+	}
+]

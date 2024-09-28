@@ -10,9 +10,14 @@ AArmament::AArmament(const FObjectInitializer& ObjectInitializer) : Super(Object
 }
 
 
+void AArmament::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+}
+
+
 void AArmament::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
-

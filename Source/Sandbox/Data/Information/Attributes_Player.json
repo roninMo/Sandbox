@@ -1,0 +1,50 @@
+[
+	{
+		"Name": "DefaultAttributes.Health",
+		"BaseValue": 100,
+		"MinValue": 0,
+		"MaxValue": 450,
+		"DerivedAttributeInfo": "",
+		"bCanStack": false
+	},
+	{
+		"Name": "DefaultAttributes.MaxHealth",
+		"BaseValue": 100,
+		"MinValue": 0,
+		"MaxValue": 450,
+		"DerivedAttributeInfo": "",
+		"bCanStack": false
+	},
+	{
+		"Name": "DefaultAttributes.HealthRegenRate",
+		"BaseValue": 0.1,
+		"MinValue": 0,
+		"MaxValue": 450,
+		"DerivedAttributeInfo": "",
+		"bCanStack": false
+	},
+	{
+		"Name": "DefaultAttributes.Stamina",
+		"BaseValue": 45,
+		"MinValue": 0,
+		"MaxValue": 45,
+		"DerivedAttributeInfo": "",
+		"bCanStack": false
+	},
+	{
+		"Name": "DefaultAttributes.MaxStamina",
+		"BaseValue": 45,
+		"MinValue": 0,
+		"MaxValue": 45,
+		"DerivedAttributeInfo": "",
+		"bCanStack": false
+	},
+	{
+		"Name": "DefaultAttributes.StaminaRegenRate",
+		"BaseValue": 2,
+		"MinValue": 0,
+		"MaxValue": 45,
+		"DerivedAttributeInfo": "",
+		"bCanStack": false
+	}
+]

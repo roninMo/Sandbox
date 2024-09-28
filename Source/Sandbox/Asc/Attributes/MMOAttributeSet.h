@@ -37,12 +37,32 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Poise", ReplicatedUsing = OnRep_MaxPoise) FGameplayAttributeData MaxPoise;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Poise", ReplicatedUsing = OnRep_PoiseRegenRate) FGameplayAttributeData PoiseRegenRate;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_PoisonBuildup) FGameplayAttributeData PoisonBuildup;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MaxPoisonBuildup) FGameplayAttributeData MaxPoisonBuildup;
 	
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_BleedBuildup) FGameplayAttributeData BleedBuildup;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MaxBleedBuildup) FGameplayAttributeData MaxBleedBuildup;
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_FrostbiteBuildup) FGameplayAttributeData FrostbiteBuildup;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MaxFrostbiteBuildup) FGameplayAttributeData MaxFrostbiteBuildup;
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_SleepBuildup) FGameplayAttributeData SleepBuildup;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MaxSleepBuildup) FGameplayAttributeData MaxSleepBuildup;
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MadnessBuildup) FGameplayAttributeData MadnessBuildup;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MaxMadnessBuildup) FGameplayAttributeData MaxMadnessBuildup;
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_CurseBuildup) FGameplayAttributeData CurseBuildup;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MaxCurseBuildup) FGameplayAttributeData MaxCurseBuildup;
+	
+	
+
 	
 //--------------------------------------------------------------------------------------------------------------//
 // Level attributes																								//
 //--------------------------------------------------------------------------------------------------------------//
-protected:
+	protected:
+	// TODO: Find out if you can use curve tables to multiply based on level for an easier visualization -> (lvl 1 == +1), (lvl 10 == +4), instead of (lvl 1 == 1), (lvl 10 == 10) 
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Vitality) FGameplayAttributeData Vitality;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Endurance) FGameplayAttributeData Endurance;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Mind) FGameplayAttributeData Mind;
@@ -55,13 +75,28 @@ protected:
 	
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Arcane) FGameplayAttributeData Arcane;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Experience) FGameplayAttributeData Experience;
-	
-
 
 	
 //--------------------------------------------------------------------------------------------------------------//
 // Secondary attributes (these attributes are increased by the primary attributes)								//
 //--------------------------------------------------------------------------------------------------------------//
+	/**
+	 * The crazy thing about gameplay effects is that they let you adjust attributes and state instantly, through durations, or using infinite effects
+	 *
+	 * If you want to add fire damage to a weapon, or a status effect, add slow durations, or a passive effect that heals the player
+	 *
+	 * There's another thing you can do with gameplay effects, and it's attribute based modifications. Read through the documenations because it's extensive, however here's a list of some of the things you should watch out for
+	 *		- Attribute based modifications (Modifying one attribute with another)
+	 *			- Attribute Coefficients (Using one attribute to affect another and you can use curve tables for attribute/level scaling)
+	 *		- Applying one attribute/debuff/effect from a list of currently applied effects (Say you have multiple slows, you can have it so that you only apply one based on certain conditions)
+	 *		- Exec Calculations, modifications using multiple attributes to adjust player stats (This is currently how combat calculations are generally handled)
+	 *		- Instant changes to attributes
+	 *		- Duration or Periodic temporal changes to attributes (bleed effects, or debuffs)
+	 *		- Infinite effects (What you should probably use to apply stats to the player's health, stamina, poise, mana, etc.
+	 *
+	 *	I don't know a good way for combat calculations or how most MMO's have their attributes put together for gameplay, however I'd just take from this for reference, hopefully this helps!
+	 */
+	
 protected:
 	/**** Defenses ****/
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Defence_Standard) FGameplayAttributeData Defence_Standard;
@@ -69,13 +104,23 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Defence_Pierce) FGameplayAttributeData Defence_Pierce;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Defence_Strike) FGameplayAttributeData Defence_Strike;
 	
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Defence_Magic) FGameplayAttributeData Defence_Magic;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Defence_Ice) FGameplayAttributeData Defence_Ice;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Defence_Fire) FGameplayAttributeData Defence_Fire;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Defence_Holy) FGameplayAttributeData Defence_Holy;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Defence_Lightning) FGameplayAttributeData Defence_Lightning;
+	
+	/**** Resistances ****/
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Magic) FGameplayAttributeData Resistance_Magic;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Ice) FGameplayAttributeData Resistance_Ice;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Fire) FGameplayAttributeData Resistance_Fire;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Holy) FGameplayAttributeData Resistance_Holy;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Lightning) FGameplayAttributeData Resistance_Lightning;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Immunity) FGameplayAttributeData Immunity; // poison
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Robustness) FGameplayAttributeData Robustness; // bleed / frostbite
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Focus) FGameplayAttributeData Focus; // sleep / madness
 
-
+	/**** Other ****/
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Discovery) FGameplayAttributeData Discovery;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Spells) FGameplayAttributeData Spells;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Weight) FGameplayAttributeData Weight;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_EquipLoad) FGameplayAttributeData EquipLoad;
+	
 	/**** Damage Negations ****/
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Negation_Standard) FGameplayAttributeData Negation_Standard;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Negation_Slash) FGameplayAttributeData Negation_Slash;
@@ -87,39 +132,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Negation_Fire) FGameplayAttributeData Negation_Fire;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Negation_Holy) FGameplayAttributeData Negation_Holy;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Negation_Lightning) FGameplayAttributeData Negation_Lightning;
-
 	
-	/**** Resistances ****/
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Standard) FGameplayAttributeData Resistance_Standard;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Slash) FGameplayAttributeData Resistance_Slash;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Pierce) FGameplayAttributeData Resistance_Pierce;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Strike) FGameplayAttributeData Resistance_Strike;
-		
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Magic) FGameplayAttributeData Resistance_Magic;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Ice) FGameplayAttributeData Resistance_Ice;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Fire) FGameplayAttributeData Resistance_Fire;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Holy) FGameplayAttributeData Resistance_Holy;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Lightning) FGameplayAttributeData Resistance_Lightning;
-		
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Bleed) FGameplayAttributeData Resistance_Bleed;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Poison) FGameplayAttributeData Resistance_Poison;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Resistance_Curse) FGameplayAttributeData Resistance_Curse;
-
-	 
-	/**** Statuses ****/
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Immunity) FGameplayAttributeData Immunity; // poison
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Robustness) FGameplayAttributeData Robustness; // bleed / frostbite
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Focus) FGameplayAttributeData Focus; // sleep / madness
-
-
-	/**** Other ****/
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Discovery) FGameplayAttributeData Discovery;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Spells) FGameplayAttributeData Spells;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Weight) FGameplayAttributeData Weight;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_EquipLoad) FGameplayAttributeData EquipLoad;
-
-
-
+	
+	
 	
 //------------------------------------------------------------------//
 // Meta attributes													//
@@ -140,7 +155,7 @@ protected:
 	/**** Statuses ****/
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Bleed) FGameplayAttributeData Bleed;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Poison) FGameplayAttributeData Poison;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_CurseBuildup) FGameplayAttributeData CurseBuildup;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Curse) FGameplayAttributeData Curse;
 	
 	
 
@@ -158,6 +173,21 @@ public:
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxPoise)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, PoiseRegenRate)
 
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, PoisonBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxPoisonBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, BleedBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxBleedBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, FrostbiteBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxFrostbiteBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, SleepBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxSleepBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MadnessBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxMadnessBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, CurseBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxCurseBuildup)
+	
+
+	// Level Attributes
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Vitality)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Endurance)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Mind)
@@ -167,16 +197,30 @@ public:
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Strength)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Arcane)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Experience)
-	
+
+	// Defences
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Defence_Standard)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Defence_Slash)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Defence_Pierce)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Defence_Strike)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Defence_Magic)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Defence_Ice)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Defence_Fire)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Defence_Holy)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Defence_Lightning)
+
+	// Resistances
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Magic)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Ice)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Fire)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Holy)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Lightning)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Immunity)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Robustness)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Focus)
+
+	// Other
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Discovery)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Spells)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Weight)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, EquipLoad)
+	
+	// Damage Negations
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Negation_Standard)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Negation_Slash)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Negation_Pierce)
@@ -186,28 +230,8 @@ public:
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Negation_Fire)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Negation_Holy)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Negation_Lightning)
-	
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Standard)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Slash)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Pierce)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Strike)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Magic)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Ice)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Fire)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Holy)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Lightning)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Bleed)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Poison)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Resistance_Curse)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Immunity)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Robustness)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Focus)
-	
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Discovery)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Spells)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Weight)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, EquipLoad)
-	
+
+	// Meta
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Standard)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Slash)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Pierce)
@@ -219,20 +243,33 @@ public:
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Lightning)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Bleed)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Poison)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, CurseBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Curse)
 	
 	
 protected:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	
 	// Player Stats
-	UFUNCTION() void OnRep_Mana(const FGameplayAttributeData& OldMana) const;
-	UFUNCTION() void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
-	UFUNCTION() void OnRep_ManaRegenRate(const FGameplayAttributeData& OldManaRegenRate) const;
+	UFUNCTION() virtual void OnRep_Mana(const FGameplayAttributeData& OldMana) const;
+	UFUNCTION() virtual void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
+	UFUNCTION() virtual void OnRep_ManaRegenRate(const FGameplayAttributeData& OldManaRegenRate) const;
 	
-	UFUNCTION() void OnRep_Poise(const FGameplayAttributeData& OldPoise) const;
-	UFUNCTION() void OnRep_MaxPoise(const FGameplayAttributeData& OldMaxPoise) const;
-	UFUNCTION() void OnRep_PoiseRegenRate(const FGameplayAttributeData& OldPoiseRegenRate) const;
+	UFUNCTION() virtual void OnRep_Poise(const FGameplayAttributeData& OldPoise) const;
+	UFUNCTION() virtual void OnRep_MaxPoise(const FGameplayAttributeData& OldMaxPoise) const;
+	UFUNCTION() virtual void OnRep_PoiseRegenRate(const FGameplayAttributeData& OldPoiseRegenRate) const;
+
+	UFUNCTION() virtual void OnRep_PoisonBuildup(const FGameplayAttributeData& OldPoisonBuildup) const;
+	UFUNCTION() virtual void OnRep_MaxPoisonBuildup(const FGameplayAttributeData& OldMaxPoisonBuildup) const;
+	UFUNCTION() virtual void OnRep_BleedBuildup(const FGameplayAttributeData& OldBleedBuildup) const;
+	UFUNCTION() virtual void OnRep_MaxBleedBuildup(const FGameplayAttributeData& OldMaxBleedBuildup) const;
+	UFUNCTION() virtual void OnRep_FrostbiteBuildup(const FGameplayAttributeData& OldFrostbiteBuildup) const;
+	UFUNCTION() virtual void OnRep_MaxFrostbiteBuildup(const FGameplayAttributeData& OldMaxFrostbiteBuildup) const;
+	UFUNCTION() virtual void OnRep_SleepBuildup(const FGameplayAttributeData& OldSleepBuildup) const;
+	UFUNCTION() virtual void OnRep_MaxSleepBuildup(const FGameplayAttributeData& OldMaxSleepBuildup) const;
+	UFUNCTION() virtual void OnRep_MadnessBuildup(const FGameplayAttributeData& OldMadnessBuildup) const;
+	UFUNCTION() virtual void OnRep_MaxMadnessBuildup(const FGameplayAttributeData& OldMaxMadnessBuildup) const;
+	UFUNCTION() virtual void OnRep_CurseBuildup(const FGameplayAttributeData& OldCurseBuildup) const;
+	UFUNCTION() virtual void OnRep_MaxCurseBuildup(const FGameplayAttributeData& OldMaxCurseBuildup) const;
 	
 	// Attributes
 	UFUNCTION() virtual void OnRep_Vitality(const FGameplayAttributeData OldVitality) const;
@@ -250,12 +287,23 @@ protected:
 	UFUNCTION() virtual void OnRep_Defence_Slash(const FGameplayAttributeData OldDefence_Slash) const;
 	UFUNCTION() virtual void OnRep_Defence_Pierce(const FGameplayAttributeData OldDefence_Pierce) const;
 	UFUNCTION() virtual void OnRep_Defence_Strike(const FGameplayAttributeData OldDefence_Strike) const;
-	UFUNCTION() virtual void OnRep_Defence_Magic(const FGameplayAttributeData OldDefence_Magic) const;
-	UFUNCTION() virtual void OnRep_Defence_Ice(const FGameplayAttributeData OldDefence_Ice) const;
-	UFUNCTION() virtual void OnRep_Defence_Fire(const FGameplayAttributeData OldDefence_Fire) const;
-	UFUNCTION() virtual void OnRep_Defence_Holy(const FGameplayAttributeData OldDefence_Holy) const;
-	UFUNCTION() virtual void OnRep_Defence_Lightning(const FGameplayAttributeData OldDefence_Defence_Lightning) const;
 
+	// Resistances
+	UFUNCTION() virtual void OnRep_Resistance_Magic(const FGameplayAttributeData OldResistance_Magic) const;
+	UFUNCTION() virtual void OnRep_Resistance_Ice(const FGameplayAttributeData OldResistance_Ice) const;
+	UFUNCTION() virtual void OnRep_Resistance_Fire(const FGameplayAttributeData OldResistance_Fire) const;
+	UFUNCTION() virtual void OnRep_Resistance_Holy(const FGameplayAttributeData OldResistance_Holy) const;
+	UFUNCTION() virtual void OnRep_Resistance_Lightning(const FGameplayAttributeData OldResistance_Lightning) const;
+	UFUNCTION() virtual void OnRep_Immunity(const FGameplayAttributeData OldImmunity) const;
+	UFUNCTION() virtual void OnRep_Robustness(const FGameplayAttributeData OldRobustness) const;
+	UFUNCTION() virtual void OnRep_Focus(const FGameplayAttributeData OldFocus) const;
+
+	// Other
+	UFUNCTION() virtual void OnRep_Discovery(const FGameplayAttributeData OldDiscovery) const;
+	UFUNCTION() virtual void OnRep_Spells(const FGameplayAttributeData OldSpells) const;
+	UFUNCTION() virtual void OnRep_Weight(const FGameplayAttributeData OldWeight) const;
+	UFUNCTION() virtual void OnRep_EquipLoad(const FGameplayAttributeData OldEquipLoad) const;
+	
 	// Damage Negations
 	UFUNCTION() virtual void OnRep_Negation_Standard(const FGameplayAttributeData OldNegation_Standard) const;
 	UFUNCTION() virtual void OnRep_Negation_Slash(const FGameplayAttributeData OldNegation_Slash) const;
@@ -266,29 +314,6 @@ protected:
 	UFUNCTION() virtual void OnRep_Negation_Fire(const FGameplayAttributeData OldNegation_Fire) const;
 	UFUNCTION() virtual void OnRep_Negation_Holy(const FGameplayAttributeData OldNegation_Holy) const;
 	UFUNCTION() virtual void OnRep_Negation_Lightning(const FGameplayAttributeData OldNegation_Lightning) const;
-
-	// Resistances
-	UFUNCTION() virtual void OnRep_Resistance_Standard(const FGameplayAttributeData OldResistance_Standard) const;
-	UFUNCTION() virtual void OnRep_Resistance_Slash(const FGameplayAttributeData OldResistance_Slash) const;
-	UFUNCTION() virtual void OnRep_Resistance_Pierce(const FGameplayAttributeData OldResistance_Pierce) const;
-	UFUNCTION() virtual void OnRep_Resistance_Strike(const FGameplayAttributeData OldResistance_Strike) const;
-	UFUNCTION() virtual void OnRep_Resistance_Magic(const FGameplayAttributeData OldResistance_Magic) const;
-	UFUNCTION() virtual void OnRep_Resistance_Ice(const FGameplayAttributeData OldResistance_Ice) const;
-	UFUNCTION() virtual void OnRep_Resistance_Fire(const FGameplayAttributeData OldResistance_Fire) const;
-	UFUNCTION() virtual void OnRep_Resistance_Holy(const FGameplayAttributeData OldResistance_Holy) const;
-	UFUNCTION() virtual void OnRep_Resistance_Lightning(const FGameplayAttributeData OldResistance_Lightning) const;
-	UFUNCTION() virtual void OnRep_Resistance_Bleed(const FGameplayAttributeData OldResistance_Bleed) const;
-	UFUNCTION() virtual void OnRep_Resistance_Poison(const FGameplayAttributeData OldResistance_Poison) const;
-	UFUNCTION() virtual void OnRep_Resistance_Curse(const FGameplayAttributeData OldResistance_Curse) const;
-	UFUNCTION() virtual void OnRep_Immunity(const FGameplayAttributeData OldImmunity) const;
-	UFUNCTION() virtual void OnRep_Robustness(const FGameplayAttributeData OldRobustness) const;
-	UFUNCTION() virtual void OnRep_Focus(const FGameplayAttributeData OldFocus) const;
-
-	// Other
-	UFUNCTION() virtual void OnRep_Discovery(const FGameplayAttributeData OldDiscovery) const;
-	UFUNCTION() virtual void OnRep_Spells(const FGameplayAttributeData OldSpells) const;
-	UFUNCTION() virtual void OnRep_Weight(const FGameplayAttributeData OldWeight) const;
-	UFUNCTION() virtual void OnRep_EquipLoad(const FGameplayAttributeData OldEquipLoad) const;
 
 	// Meta Attributes
 	UFUNCTION() virtual void OnRep_Damage_Standard(const FGameplayAttributeData OldDamage_Standard) const;
@@ -302,7 +327,7 @@ protected:
 	UFUNCTION() virtual void OnRep_Damage_Lightning(const FGameplayAttributeData OldDamage_Lightning) const;
 	UFUNCTION() virtual void OnRep_Bleed(const FGameplayAttributeData OldBleed) const;
 	UFUNCTION() virtual void OnRep_Poison(const FGameplayAttributeData OldPoison) const;
-	UFUNCTION() virtual void OnRep_CurseBuildup(const FGameplayAttributeData OldCurseBuildup) const;
+	UFUNCTION() virtual void OnRep_Curse(const FGameplayAttributeData OldCurse) const;
 
 
 

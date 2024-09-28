@@ -25,8 +25,12 @@ public:
 };
 
 
-/*
 
+
+
+
+
+/*
 
 	Weapon
 		- Ranged Information / Damage
@@ -60,15 +64,10 @@ public:
 
 
 	Combat
-		
-
-
-
-	Stats
-		- Individual Stats
-		- attributes retrieved at begin play
-		- attribute adjustments based on player level
-
+		- Weapon retrieves it's attack information
+			- Branching logic is okay here, it ends up adjusting attributes which can easily be added to both
+		- Weapon creates a damage calculation and sends it to the attribute logic
+		- AttributeLogic handles adjusting attributes
 
  
 */
