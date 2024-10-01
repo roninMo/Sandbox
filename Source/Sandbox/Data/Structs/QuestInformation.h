@@ -124,6 +124,7 @@ struct FS_QuestInformation
 	
 
 public:
+	virtual ~FS_QuestInformation() = default;
 	/** Whether the quest is in progress, completed, or locked */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) EQuestState State;
 

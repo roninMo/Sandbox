@@ -9,6 +9,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Data/Enums/CollisionChannels.h"
 
 DEFINE_LOG_CATEGORY(PeripheryLog)
 
@@ -30,9 +31,10 @@ UPlayerPeripheriesComponent::UPlayerPeripheriesComponent(const FObjectInitialize
 	PeripheryRadius->SetCastHiddenShadow(false);
 
 	PeripheryRadius->SetGenerateOverlapEvents(true);
-	PeripheryRadius->SetCollisionObjectType(ECC_GameTraceChannel1);
+	PeripheryRadius->SetCollisionObjectType(ECC_PeripheryComponents);
 	PeripheryRadius->SetCollisionResponseToAllChannels(ECR_Ignore);
 	PeripheryRadius->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	PeripheryRadius->SetCollisionResponseToChannel(ECC_Items, ECollisionResponse::ECR_Overlap);
 	PeripheryRadius->SetCollisionResponseToChannel(ECC_WorldDynamic, ECollisionResponse::ECR_Overlap);
 	PeripheryRadius->SetCollisionResponseToChannel(ECC_Pawn, ECollisionResponse::ECR_Overlap);
 
@@ -43,9 +45,10 @@ UPlayerPeripheriesComponent::UPlayerPeripheriesComponent(const FObjectInitialize
 	PeripheryCone->SetCastHiddenShadow(false);
 	
 	PeripheryCone->SetGenerateOverlapEvents(true);
-	PeripheryCone->SetCollisionObjectType(ECC_GameTraceChannel1);
+	PeripheryCone->SetCollisionObjectType(ECC_PeripheryComponents);
 	PeripheryCone->SetCollisionResponseToAllChannels(ECR_Ignore);
 	PeripheryCone->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	PeripheryCone->SetCollisionResponseToChannel(ECC_Items, ECollisionResponse::ECR_Overlap);
 	PeripheryCone->SetCollisionResponseToChannel(ECC_WorldDynamic, ECollisionResponse::ECR_Overlap);
 	PeripheryCone->SetCollisionResponseToChannel(ECC_Pawn, ECollisionResponse::ECR_Overlap);
 
@@ -59,7 +62,7 @@ UPlayerPeripheriesComponent::UPlayerPeripheriesComponent(const FObjectInitialize
 	ItemDetectionRadius->SetCollisionObjectType(ECC_GameTraceChannel1);
 	ItemDetectionRadius->SetCollisionResponseToChannels(ECR_Ignore);
 	ItemDetectionRadius->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-	ItemDetectionRadius->SetCollisionResponseToChannel(ECC_WorldDynamic, ECollisionResponse::ECR_Overlap);
+	ItemDetectionRadius->SetCollisionResponseToChannel(ECC_Items, ECollisionResponse::ECR_Overlap);
 
 	/** Periphery Values */
 	bCone = false;

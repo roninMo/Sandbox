@@ -27,7 +27,6 @@ struct F_Item
 			const FString& DisplayName = "",
             
 			const FString& Description = "",
-			const FString& InteractText = "",
 			UTexture2D* Image = nullptr,
 			const EItemType ItemType = EItemType::Inv_None,
 
@@ -42,7 +41,6 @@ struct F_Item
 		DisplayName(DisplayName),
 	
 		Description(Description),
-		InteractText(InteractText),
 		ItemType(ItemType),
 		Image(Image),
 	
@@ -67,14 +65,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString DisplayName;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString Description;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString InteractText;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) EItemType ItemType;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UTexture2D* Image;
 
 	/**
 	 * The actual class of this item. This could be from a weapon to an activatable item, and it's information is mapped through the item type.
 	 * 
-	 * @remarks This should reference the inventory interface or use the ItemBase class
+	 * @remarks This should reference the inventory interface or use the @ref Item class
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TSubclassOf<UObject> ActualClass;
 	

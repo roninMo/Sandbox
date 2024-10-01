@@ -14,11 +14,10 @@
 			"ItemName": "Soldier_Archer_Chest",
 			"DisplayName": "Soldier_Archer_Chest",
 			"Description": "An Archer soldier's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SoldierSets/BPI_Soldier_Archer_Chest.BPI_Soldier_Archer_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -38,11 +37,10 @@
 			"ItemName": "Soldier_Rogue_Chest",
 			"DisplayName": "Soldier_Rogue_Chest",
 			"Description": "A rogue soldier's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SoldierSets/BPI_Soldier_Rogue_Chest.BPI_Soldier_Rogue_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -62,11 +60,10 @@
 			"ItemName": "Soldier_Captain_Chest",
 			"DisplayName": "Soldier_Captain_Chest",
 			"Description": "a captain soldier's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SoldierSets/BPI_Soldier_Captain_Chest.BPI_Soldier_Captain_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -86,11 +83,10 @@
 			"ItemName": "Soldier_Captain_Gauntlets",
 			"DisplayName": "Soldier_Captain_Gauntlets",
 			"Description": "a captain soldier's gauntlets",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SoldierSets/BPI_Soldier_Captain_Gauntlets.BPI_Soldier_Captain_Gauntlets_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -110,11 +106,10 @@
 			"ItemName": "Soldier_Swordsman_Chest",
 			"DisplayName": "Soldier_Swordsman_Chest",
 			"Description": "a swordsman soldier's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SoldierSets/BPI_Soldier_Swordsman_Chest.BPI_Soldier_Swordsman_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -134,11 +129,10 @@
 			"ItemName": "Soldier_Fighter_Chest",
 			"DisplayName": "Soldier_Fighter_Chest",
 			"Description": "a soldier fighter's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SoldierSets/BPI_Soldier_Fighter_Chest.BPI_Soldier_Fighter_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -158,11 +152,10 @@
 			"ItemName": "Leather_Vest",
 			"DisplayName": "Leather_Vest",
 			"Description": "A leather vest",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/LeatherApparel/BPI_Leather_Vest.BPI_Leather_Vest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -182,11 +175,10 @@
 			"ItemName": "Leather_Shirt",
 			"DisplayName": "Leather_Shirt",
 			"Description": "A leather shirt",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/LeatherApparel/BPI_Leather_Shirt.BPI_Leather_Shirt_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -206,11 +198,10 @@
 			"ItemName": "Leather_Armor",
 			"DisplayName": "Leather_Armor",
 			"Description": "leather chestplate armor",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/LeatherApparel/BPI_Leather_Armor.BPI_Leather_Armor_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -230,11 +221,10 @@
 			"ItemName": "Bandit_Archer_Chest",
 			"DisplayName": "Bandit_Archer_Chest",
 			"Description": "A bandit archer's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BanditSets/BPI_Bandit_Archer_Chest.BPI_Bandit_Archer_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -254,11 +244,10 @@
 			"ItemName": "Bandit_Captain_Chest",
 			"DisplayName": "Bandit_Captain_Chest",
 			"Description": "A bandit captain's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BanditSets/BPI_Bandit_Captain_Chest.BPI_Bandit_Captain_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -278,11 +267,10 @@
 			"ItemName": "Bandit_Fighter_Chest",
 			"DisplayName": "Bandit_Fighter_Chest",
 			"Description": "A bandit fighter's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BanditSets/BPI_Bandit_Fighter_Chest.BPI_Bandit_Fighter_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -302,11 +290,10 @@
 			"ItemName": "Bandit_Brawler_Chest",
 			"DisplayName": "Bandit_Brawler_Chest",
 			"Description": "A bandit brawler's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BanditSets/BPI_Bandit_Brawler_Chest.BPI_Bandit_Brawler_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -326,11 +313,10 @@
 			"ItemName": "Knight_Leggings",
 			"DisplayName": "Knight_Leggings",
 			"Description": "A knight's leggings",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/BPI_Knight_Leggings.BPI_Knight_Leggings_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -350,11 +336,10 @@
 			"ItemName": "Knight_Gauntlets",
 			"DisplayName": "Knight_Gauntlets",
 			"Description": "A knight's gauntlets",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/BPI_Knight_Gauntlets.BPI_Knight_Gauntlets_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -374,11 +359,10 @@
 			"ItemName": "Knight_Helm",
 			"DisplayName": "Knight_Helm",
 			"Description": "A knight's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/BPI_Knight_Helm.BPI_Knight_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -398,11 +382,10 @@
 			"ItemName": "Knight_Chest",
 			"DisplayName": "Knight_Chest",
 			"Description": "A knight's chest",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/BPI_Knight_Chest.BPI_Knight_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -422,11 +405,10 @@
 			"ItemName": "KnightCaptain_Leggings",
 			"DisplayName": "KnightCaptain_Leggings",
 			"Description": "A captain knight's leggings",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Captain/BPI_KnightCaptain_Leggings.BPI_KnightCaptain_Leggings_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -446,11 +428,10 @@
 			"ItemName": "KnightCaptain_Gauntlets",
 			"DisplayName": "KnightCaptain_Gauntlets",
 			"Description": "A captain knight's gauntlets",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Captain/BPI_KnightCaptain_Gauntlets.BPI_KnightCaptain_Gauntlets_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -470,11 +451,10 @@
 			"ItemName": "KnightCaptain_Helm",
 			"DisplayName": "KnightCaptain_Helm",
 			"Description": "A captain knight's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Captain/BPI_KnightCaptain_Helm.BPI_KnightCaptain_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -494,11 +474,10 @@
 			"ItemName": "KnightCaptain_Chest",
 			"DisplayName": "KnightCaptain_Chest",
 			"Description": "A captain knight's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Captain/BPI_KnightCaptain_Chest.BPI_KnightCaptain_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -518,11 +497,10 @@
 			"ItemName": "SteelCommander_Leggings",
 			"DisplayName": "SteelCommander_Leggings",
 			"Description": "A Steel Comannder's leggings",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SteelCommanderSet/BPI_SteelCommander_Leggings.BPI_SteelCommander_Leggings_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -542,11 +520,10 @@
 			"ItemName": "SteelCommander_Gauntlets",
 			"DisplayName": "SteelCommander_Gauntlets",
 			"Description": "A Steel Comannder's gauntlets",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SteelCommanderSet/BPI_SteelCommander_Gauntlets.BPI_SteelCommander_Gauntlets_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -566,11 +543,10 @@
 			"ItemName": "SteelCommander_Helm",
 			"DisplayName": "SteelCommander_Helm",
 			"Description": "A Steel Comannder's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SteelCommanderSet/BPI_SteelCommander_Helm.BPI_SteelCommander_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -590,11 +566,10 @@
 			"ItemName": "SteelCommander_Chest",
 			"DisplayName": "SteelCommander_Chest",
 			"Description": "A Steel Comannder's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SteelCommanderSet/BPI_SteelCommander_Chest.BPI_SteelCommander_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -614,11 +589,10 @@
 			"ItemName": "KnightCommander_Leggings",
 			"DisplayName": "KnightCommander_Leggings",
 			"Description": "A Steel Comannder's leggings",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Commander/BPI_KnightCommander_Leggings.BPI_KnightCommander_Leggings_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -638,11 +612,10 @@
 			"ItemName": "KnightCommander_Gauntlets",
 			"DisplayName": "KnightCommander_Gauntlets",
 			"Description": "A Steel Comannder's gauntlets",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Commander/BPI_KnightCommander_Gauntlets.BPI_KnightCommander_Gauntlets_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -662,11 +635,10 @@
 			"ItemName": "KnightCommander_Helm",
 			"DisplayName": "KnightCommander_Helm",
 			"Description": "A Steel Comannder's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Commander/BPI_KnightCommander_Helm.BPI_KnightCommander_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -686,11 +658,10 @@
 			"ItemName": "KnightCommander_Chest",
 			"DisplayName": "KnightCommander_Chest",
 			"Description": "A Steel Comannder's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Commander/BPI_KnightCommander_Chest.BPI_KnightCommander_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -710,11 +681,10 @@
 			"ItemName": "Brigandier_Leggings",
 			"DisplayName": "Brigandier_Leggings",
 			"Description": "A Brigandier's leggings",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/BPI_Brigandier_Leggings.BPI_Brigandier_Leggings_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -734,11 +704,10 @@
 			"ItemName": "Brigandier_Gauntlets",
 			"DisplayName": "Brigandier_Gauntlets",
 			"Description": "A Brigandier's gauntlets",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/BPI_Brigandier_Gauntlets.BPI_Brigandier_Gauntlets_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -758,11 +727,10 @@
 			"ItemName": "Brigandier_Helm",
 			"DisplayName": "Brigandier_Helm",
 			"Description": "A Brigandier's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/BPI_Brigandier_Helm.BPI_Brigandier_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -782,11 +750,10 @@
 			"ItemName": "Brigandier_Chest",
 			"DisplayName": "Brigandier_Chest",
 			"Description": "A Brigandier's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/BPI_Brigandier_Chest.BPI_Brigandier_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -806,11 +773,10 @@
 			"ItemName": "BrigandierCaptain_Leggings",
 			"DisplayName": "BrigandierCaptain_Leggings",
 			"Description": "A Brigandier's leggings",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Captain/BPI_BrigandierCaptain_Leggings.BPI_BrigandierCaptain_Leggings_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -830,11 +796,10 @@
 			"ItemName": "BrigandierCaptain_Gauntlets",
 			"DisplayName": "BrigandierCaptain_Gauntlets",
 			"Description": "A Brigandier's gauntlets",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Captain/BPI_BrigandierCaptain_Gauntlets.BPI_BrigandierCaptain_Gauntlets_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -854,11 +819,10 @@
 			"ItemName": "BrigandierCaptain_Helm",
 			"DisplayName": "BrigandierCaptain_Helm",
 			"Description": "A Brigandier's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Captain/BPI_BrigandierCaptain_Helm.BPI_BrigandierCaptain_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -878,11 +842,10 @@
 			"ItemName": "BrigandierCaptain_Chest",
 			"DisplayName": "BrigandierCaptain_Chest",
 			"Description": "A Brigandier's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Captain/BPI_BrigandierCaptain_Chest.BPI_BrigandierCaptain_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -902,11 +865,10 @@
 			"ItemName": "BrigandierCommander_Leggings",
 			"DisplayName": "BrigandierCommander_Leggings",
 			"Description": "A Commander Brigandier's leggings",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Commander/BPI_BrigandierCommander_Leggings.BPI_BrigandierCommander_Leggings_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -926,11 +888,10 @@
 			"ItemName": "BrigandierCommander_Gauntlets",
 			"DisplayName": "BrigandierCommander_Gauntlets",
 			"Description": "A Commander Brigandier's gauntlets",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Commander/BPI_BrigandierCommander_Gauntlets.BPI_BrigandierCommander_Gauntlets_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -950,11 +911,10 @@
 			"ItemName": "BrigandierCommander_Helm",
 			"DisplayName": "BrigandierCommander_Helm",
 			"Description": "A Commander Brigandier's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Commander/BPI_BrigandierCommander_Helm.BPI_BrigandierCommander_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -974,11 +934,10 @@
 			"ItemName": "BrigandierCommander_Chest",
 			"DisplayName": "BrigandierCommander_Chest",
 			"Description": "A Commander Brigandier's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Commander/BPI_BrigandierCommander_Chest.BPI_BrigandierCommander_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -998,11 +957,10 @@
 			"ItemName": "RoyalKnight_Leggings",
 			"DisplayName": "RoyalKnight_Leggings",
 			"Description": "A Royal Knight's leggings",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/RoyalKnightSet/BPI_RoyalKnight_Leggings.BPI_RoyalKnight_Leggings_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1022,11 +980,10 @@
 			"ItemName": "RoyalKnight_Gauntlets",
 			"DisplayName": "RoyalKnight_Gauntlets",
 			"Description": "A Royal Knight's gauntlets",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/RoyalKnightSet/BPI_RoyalKnight_Gauntlets.BPI_RoyalKnight_Gauntlets_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1046,11 +1003,10 @@
 			"ItemName": "RoyalKnight_Helm",
 			"DisplayName": "RoyalKnight_Helm",
 			"Description": "A Royal Knight's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/RoyalKnightSet/BPI_RoyalKnight_Helm.BPI_RoyalKnight_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1070,11 +1026,10 @@
 			"ItemName": "RoyalKnight_Chest",
 			"DisplayName": "RoyalKnight_Chest",
 			"Description": "A Royal Knight's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/RoyalKnightSet/BPI_RoyalKnight_Chest.BPI_RoyalKnight_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1094,11 +1049,10 @@
 			"ItemName": "Owl_Leggings",
 			"DisplayName": "Owl_Leggings",
 			"Description": "An Owl armor's leggings",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/OwlSet/BPI_Owl_Leggings.BPI_Owl_Leggings_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1118,11 +1072,10 @@
 			"ItemName": "Owl_Gauntlets",
 			"DisplayName": "Owl_Gauntlets",
 			"Description": "An Owl armor's gauntlets",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/OwlSet/BPI_Owl_Gauntlets.BPI_Owl_Gauntlets_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1142,11 +1095,10 @@
 			"ItemName": "Owl_Helm",
 			"DisplayName": "Owl_Helm",
 			"Description": "An Owl armor's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/OwlSet/BPI_Owl_Helm.BPI_Owl_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1166,11 +1118,10 @@
 			"ItemName": "Owl_Chest",
 			"DisplayName": "Owl_Chest",
 			"Description": "An Owl armor's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/OwlSet/BPI_Owl_Chest.BPI_Owl_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1190,11 +1141,10 @@
 			"ItemName": "Gladiator_Leggings",
 			"DisplayName": "Gladiator_Leggings",
 			"Description": "A Gladiator's leggings",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/GaldiatorSet/BPI_Gladiator_Leggings.BPI_Gladiator_Leggings_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1214,11 +1164,10 @@
 			"ItemName": "Gladiator_Gauntlets",
 			"DisplayName": "Gladiator_Gauntlets",
 			"Description": "A Gladiator's gauntlets",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/GaldiatorSet/BPI_Gladiator_Gauntlets.BPI_Gladiator_Gauntlets_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1238,11 +1187,10 @@
 			"ItemName": "Gladiator_Helm",
 			"DisplayName": "Gladiator_Helm",
 			"Description": "A Gladiator's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/GaldiatorSet/BPI_Gladiator_Helm.BPI_Gladiator_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1262,11 +1210,10 @@
 			"ItemName": "Gladiator_Chest",
 			"DisplayName": "Gladiator_Chest",
 			"Description": "A Gladiator's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/GaldiatorSet/BPI_Gladiator_Chest.BPI_Gladiator_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1286,11 +1233,10 @@
 			"ItemName": "Tank_Leggings",
 			"DisplayName": "Tank_Leggings",
 			"Description": "A Tank's leggings",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/TankSet/BPI_Tank_Leggings.BPI_Tank_Leggings_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1310,11 +1256,10 @@
 			"ItemName": "Tank_Gauntlets",
 			"DisplayName": "Tank_Gauntlets",
 			"Description": "A Tank's gauntlets",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/TankSet/BPI_Tank_Gauntlets.BPI_Tank_Gauntlets_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1334,11 +1279,10 @@
 			"ItemName": "Tank_Helm",
 			"DisplayName": "Tank_Helm",
 			"Description": "A Tank's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/TankSet/BPI_Tank_Helm.BPI_Tank_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1358,11 +1302,10 @@
 			"ItemName": "Tank_Chest",
 			"DisplayName": "Tank_Chest",
 			"Description": "A Tank's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/TankSet/BPI_Tank_Chest.BPI_Tank_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1382,11 +1325,10 @@
 			"ItemName": "Cavalry_Leggings",
 			"DisplayName": "Cavalry_Leggings",
 			"Description": "A Cavalry's leggings",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/CavalrySet/BPI_Cavalry_Leggings.BPI_Cavalry_Leggings_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1406,11 +1348,10 @@
 			"ItemName": "Cavalry_Gauntlets",
 			"DisplayName": "Cavalry_Gauntlets",
 			"Description": "A Cavalry's gauntlets",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/CavalrySet/BPI_Cavalry_Gauntlets.BPI_Cavalry_Gauntlets_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1430,11 +1371,10 @@
 			"ItemName": "Cavalry_Helm",
 			"DisplayName": "Cavalry_Helm",
 			"Description": "A Cavalry's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/CavalrySet/BPI_Cavalry_Helm.BPI_Cavalry_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1454,11 +1394,10 @@
 			"ItemName": "Cavalry_Chest",
 			"DisplayName": "Cavalry_Chest",
 			"Description": "A Cavalry's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/CavalrySet/BPI_Cavalry_Chest.BPI_Cavalry_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1478,11 +1417,10 @@
 			"ItemName": "Templar_Leggings",
 			"DisplayName": "Templar_Leggings",
 			"Description": "A Templar's leggings",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/TemplarSet/BPI_Templar_Leggings.BPI_Templar_Leggings_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1502,11 +1440,10 @@
 			"ItemName": "Templar_Gauntlets",
 			"DisplayName": "Templar_Gauntlets",
 			"Description": "A Templar's gauntlets",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/TemplarSet/BPI_Templar_Gauntlets.BPI_Templar_Gauntlets_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1526,11 +1463,10 @@
 			"ItemName": "Templar_Helm",
 			"DisplayName": "Templar_Helm",
 			"Description": "A Templar's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/TemplarSet/BPI_Templar_Helm.BPI_Templar_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1550,11 +1486,10 @@
 			"ItemName": "Templar_Chest",
 			"DisplayName": "Templar_Chest",
 			"Description": "A Templar's chestplate",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/TemplarSet/BPI_Templar_Chest.BPI_Templar_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1574,11 +1509,10 @@
 			"ItemName": "Bandit_Helm",
 			"DisplayName": "Bandit_Helm",
 			"Description": "A bandit's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Helms/BPI_Bandit_Helm.BPI_Bandit_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1598,11 +1532,10 @@
 			"ItemName": "Bandit_Captain_Helm",
 			"DisplayName": "Bandit_Captain_Helm",
 			"Description": "a bandit captain's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Helms/BPI_BanditCaptain_Helm.BPI_BanditCaptain_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1622,11 +1555,10 @@
 			"ItemName": "Jarl_Helm",
 			"DisplayName": "Jarl_Helm",
 			"Description": "A Jarl's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Helms/BPI_Jarl_Helm.BPI_Jarl_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1646,11 +1578,10 @@
 			"ItemName": "JomsViking_Helm",
 			"DisplayName": "JomsViking_Helm",
 			"Description": "A JomsViking's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Helms/BPI_JomsViking_Helm.BPI_JomsViking_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1670,11 +1601,10 @@
 			"ItemName": "Danes_Helm",
 			"DisplayName": "Danes_Helm",
 			"Description": "A Dane's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Helms/BPI_Danes_Helm.BPI_Danes_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1694,11 +1624,10 @@
 			"ItemName": "Berserker_Helm",
 			"DisplayName": "Berserker_Helm",
 			"Description": "A Berserker's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Helms/BPI_Berserker_Helm.BPI_Berserker_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1718,11 +1647,10 @@
 			"ItemName": "Inquisitor_Helm",
 			"DisplayName": "Inquisitor_Helm",
 			"Description": "An Inquisitor's helm",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Helms/BPI_Inquisitor_Helm.BPI_Inquisitor_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1742,11 +1670,10 @@
 			"ItemName": "Katana",
 			"DisplayName": "Katana",
 			"Description": "A katana for whacking things with",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Sword.UI_Sword'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Katana/BPI_Katana.BPI_Katana_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1766,11 +1693,10 @@
 			"ItemName": "ItachiAnbuBlade",
 			"DisplayName": "Anbu Blade",
 			"Description": "Itachi's anbu blade",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_ThrowingKnife.UI_ThrowingKnife'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/ItachiAnbuBlade/BPI_ItachiAnbuBlade.BPI_ItachiAnbuBlade_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1790,11 +1716,10 @@
 			"ItemName": "ZabuzaSword",
 			"DisplayName": "Zabuza Sword",
 			"Description": "Zabuza's sword",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Hammer.UI_Hammer'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/ZabuzaSword/BPI_ZabuzaSword.BPI_ZabuzaSword_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1814,11 +1739,10 @@
 			"ItemName": "Shuriken",
 			"DisplayName": "Shuriken",
 			"Description": "A ninja throwing knife",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_ThrowingKnife.UI_ThrowingKnife'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Shuriken/BPI_Shuriken.BPI_Shuriken_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1838,11 +1762,10 @@
 			"ItemName": "WindmillShuriken",
 			"DisplayName": "Windmill Shuriken",
 			"Description": "A windmill shuriken",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_EmblemTyphoon.UI_EmblemTyphoon'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/WindmillShuriken/BPI_WindmillShuriken.BPI_WindmillShuriken_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1862,11 +1785,10 @@
 			"ItemName": "AdamantineNyoi",
 			"DisplayName": "Adamantine Nyoi",
 			"Description": "Monkey King Enma's staff",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_scythe.UI_scythe'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/AdamantineNyoi/BPI_AdamantineNyoi.BPI_AdamantineNyoi_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1886,11 +1808,10 @@
 			"ItemName": "Kurosawa",
 			"DisplayName": "Kurosawa",
 			"Description": "Mifune's sword",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Sword.UI_Sword'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Kurosawa/BPI_Kurosawa.BPI_Kurosawa_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1910,11 +1831,10 @@
 			"ItemName": "SasukeSword",
 			"DisplayName": "Sasuke's sword",
 			"Description": "A katana for whacking things with",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Mace.UI_Mace'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/SasukeSword/BPI_SasukeSword.BPI_SasukeSword_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1934,11 +1854,33 @@
 			"ItemName": "Uchigatana",
 			"DisplayName": "Uchigatana",
 			"Description": "A katana for whacking things with",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Sword.UI_Sword'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Uchigatana/BPI_Uchigatana.BPI_Uchigatana_C'",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Shield",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
+			},
+			"SortOrder": -1,
+			"ItemName": "Shield",
+			"DisplayName": "Shield",
+			"Description": "A shield for defending attacks",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Shield.UI_Shield'",
+			"ActualClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/BPI_Shield.BPI_Shield_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1958,7 +1900,6 @@
 			"ItemName": "HealthPotion",
 			"DisplayName": "Health Potion",
 			"Description": "A potion that heals health",
-			"InteractText": "Take potion",
 			"ItemType": "Inv_None",
 			"Image": "None",
 			"ActualClass": "None",
@@ -1982,7 +1923,6 @@
 			"ItemName": "ManaPotion",
 			"DisplayName": "Mana Potion",
 			"Description": "A potion that heals mana",
-			"InteractText": "Take potion",
 			"ItemType": "Inv_None",
 			"Image": "None",
 			"ActualClass": "None",
@@ -2006,7 +1946,6 @@
 			"ItemName": "StaminaPotion",
 			"DisplayName": "Stamina Potion",
 			"Description": "A potion that heals stamina",
-			"InteractText": "Take potion",
 			"ItemType": "Inv_None",
 			"Image": "None",
 			"ActualClass": "None",
@@ -2030,11 +1969,10 @@
 			"ItemName": "Bow",
 			"DisplayName": "A Bow",
 			"Description": "A bow for hunting",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Bow.UI_Bow'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/Bows/Meshes/Bow/BPI_Bow.BPI_Bow_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -2053,12 +1991,11 @@
 			"SortOrder": -1,
 			"ItemName": "Pistol",
 			"DisplayName": "Pistol",
-			"Description": "",
-			"InteractText": "Press e to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"Description": "A pistol",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Gun.UI_Gun'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Weapons/Pistol/BPI_Pistol.BPI_Pistol_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -2078,11 +2015,10 @@
 			"ItemName": "FJX_Imperium",
 			"DisplayName": "FJX Imperium",
 			"Description": "A Sniper Rifle",
-			"InteractText": "Press E to pickup",
-			"ItemType": "Inv_None",
-			"Image": "None",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Gun.UI_Gun'",
 			"ActualClass": "None",
-			"WorldClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Weapons/SniperRifles/FJX_Imperium/BPI_FJX_Imperium.BPI_FJX_Imperium_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""

@@ -11,22 +11,19 @@ AWorldItem::AWorldItem()
 	SetRootComponent(WorldItem);
 	WorldItem->SetRenderCustomDepth(true);
 
-	WorldItem->SetCollisionObjectType(ECC_Item);
+	WorldItem->SetCollisionObjectType(ECC_Items);
 	WorldItem->SetGenerateOverlapEvents(true);
 	WorldItem->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	WorldItem->SetCollisionResponseToAllChannels(ECR_Block);
+	WorldItem->SetCollisionResponseToAllChannels(ECR_Ignore);
 
 	// Interact with the character, block the world, and ignore everything else...
-	WorldItem->SetCollisionResponseToChannel(ECC_CharacterComponents, ECR_Overlap);
-
 	WorldItem->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
-	WorldItem->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
-	WorldItem->SetCollisionResponseToChannel(ECC_Vehicle, ECR_Ignore);
-	WorldItem->SetCollisionResponseToChannel(ECC_Destructible, ECR_Ignore);
-	WorldItem->SetCollisionResponseToChannel(ECC_Armament, ECR_Ignore);
-	WorldItem->SetCollisionResponseToChannel(ECC_Projectile, ECR_Ignore);
-	WorldItem->SetCollisionResponseToChannel(ECC_AOE, ECR_Ignore);
-	WorldItem->SetCollisionResponseToChannel(ECC_Target, ECR_Ignore);
+	WorldItem->SetCollisionResponseToChannel(ECC_CharacterComponents, ECR_Overlap);
+	WorldItem->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+	WorldItem->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+	WorldItem->SetCollisionResponseToChannel(ECC_WorldDynamic, ECR_Block);
+	WorldItem->SetCollisionResponseToChannel(ECC_PhysicsBody, ECR_Block);
+	WorldItem->SetCollisionResponseToChannel(ECC_Items, ECR_Block);
 }
 
 

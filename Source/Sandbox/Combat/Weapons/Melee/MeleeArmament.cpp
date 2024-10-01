@@ -20,21 +20,21 @@ AMeleeArmament::AMeleeArmament()
 	ArmamentMesh->SetGenerateOverlapEvents(false);
 	ArmamentMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	ArmamentMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
-	ArmamentMesh->SetCollisionObjectType(ECC_Armament);
+	ArmamentMesh->SetCollisionObjectType(ECC_Armaments);
 
 	// Collision
 	ArmamentCollision = CreateDefaultSubobject<UCapsuleComponent>("Armament Collision");
 	ArmamentCollision->SetupAttachment(ArmamentMesh);
 	ArmamentCollision->SetGenerateOverlapEvents(false);
 	ArmamentCollision->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
-	ArmamentCollision->SetCollisionObjectType(ECC_Armament);
+	ArmamentCollision->SetCollisionObjectType(ECC_Armaments);
 	
 	ArmamentCollision->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);
 	ArmamentCollision->SetCollisionResponseToChannel(ECollisionChannel::ECC_Vehicle, ECollisionResponse::ECR_Overlap);
 	ArmamentCollision->SetCollisionResponseToChannel(ECollisionChannel::ECC_PhysicsBody, ECollisionResponse::ECR_Overlap);
 	ArmamentCollision->SetCollisionResponseToChannel(ECollisionChannel::ECC_Destructible, ECollisionResponse::ECR_Overlap);
-	ArmamentCollision->SetCollisionResponseToChannel(ECC_Projectile, ECollisionResponse::ECR_Overlap);
-	ArmamentCollision->SetCollisionResponseToChannel(ECC_Armament, ECollisionResponse::ECR_Overlap);
+	ArmamentCollision->SetCollisionResponseToChannel(ECC_Projectiles, ECollisionResponse::ECR_Overlap);
+	ArmamentCollision->SetCollisionResponseToChannel(ECC_Armaments, ECollisionResponse::ECR_Overlap);
 
 	// For editing
 	ArmamentCollision->SetGenerateOverlapEvents(true);

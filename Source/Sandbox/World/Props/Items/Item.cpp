@@ -23,7 +23,6 @@ AItem::AItem()
 	Item.DisplayName = "Rock";
 
 	Item.Description = "This world item's values haven't been set yet!";
-	Item.InteractText = "Press E to pickup";
 	Item.ItemType = EItemType::Inv_None;
 	Item.Image = nullptr;
 
