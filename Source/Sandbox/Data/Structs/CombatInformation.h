@@ -144,7 +144,7 @@ struct F_ArmamentInformation
  * This is the data table to hold all the armament information, data, and attacks
  */
 USTRUCT(BlueprintType)
-struct F_Table_ArmamentSourceInformation : public FTableRowBase
+struct F_Table_ArmamentInformation : public FTableRowBase
 {
 	GENERATED_BODY()
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_ArmamentInformation ArmamentInformation;

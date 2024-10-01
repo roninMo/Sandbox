@@ -37,6 +37,7 @@ AMeleeArmament::AMeleeArmament()
 	// For editing
 	ArmamentCollision->SetGenerateOverlapEvents(true);
 	ArmamentCollision->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	
 }
 
 
@@ -79,7 +80,7 @@ bool AMeleeArmament::ConstructArmament()
 	
 	// Create and attach the armament to the character
 	bool bCreatedSuccessfully = false;
-	const USkeletalMeshSocket* HolsterSocket = Character->GetMesh()->GetSocketByName(CombatComponent->GetHolsterSocket(ArmamentInformation.Classification, EquipSlot));
+	const USkeletalMeshSocket* HolsterSocket = Character->GetMesh()->GetSocketByName(CombatComponent->GetHolsterSocketName(ArmamentInformation.Classification, EquipSlot));
 	if (HolsterClass && !HolsterSocket)
 	{
 		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} did not find the holster socket while constructing the armament.",
@@ -102,7 +103,7 @@ bool AMeleeArmament::ConstructArmament()
 			if (Holster) bCreatedSuccessfully = HolsterSocket->AttachActor(Holster, Character->GetMesh());
 		}
 
-		if (!AttachArmamentToEquipSlot(CombatComponent->GetSheathedSocket(ArmamentInformation.Classification, EquipSlot)))
+		if (!AttachArmamentToSocket(CombatComponent->GetSheathedSocketName(ArmamentInformation.Classification, EquipSlot)))
 		{
 			bCreatedSuccessfully = false;
 		}
@@ -170,7 +171,7 @@ bool AMeleeArmament::SheatheArmament()
 		return false;
 	}
 
-	if (AttachArmamentToEquipSlot(CombatComponent->GetSheathedSocket(ArmamentInformation.Classification, EquipSlot)))
+	if (AttachArmamentToSocket(CombatComponent->GetSheathedSocketName(ArmamentInformation.Classification, EquipSlot)))
 	{
 		ArmamentCollision->SetGenerateOverlapEvents(false);
 		ArmamentCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -191,7 +192,7 @@ bool AMeleeArmament::UnsheatheArmament()
 		return false;
 	}
 
-	if (AttachArmamentToEquipSlot(CombatComponent->GetEquippedSocket(ArmamentInformation.Classification, EquipSlot)))
+	if (AttachArmamentToSocket(CombatComponent->GetEquippedSocketName(ArmamentInformation.Classification, EquipSlot)))
 	{
 		ArmamentCollision->SetGenerateOverlapEvents(true);
 		ArmamentCollision->SetCollisionEnabled(ECollisionEnabled::QueryOnly);

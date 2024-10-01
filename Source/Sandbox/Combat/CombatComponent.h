@@ -8,11 +8,32 @@
 #include "Sandbox/Data/Structs/InventoryInformation.h"
 #include "CombatComponent.generated.h"
 
-struct F_ArmamentInformation;
-enum class EArmamentStance : uint8;
+DECLARE_LOG_CATEGORY_EXTERN(CombatComponentLog, Log, All);
+
+// Equip Sockets
+#define Socket_LeftHandEquip FName("hand_lSocket")
+#define Socket_RightHandEquip FName("hand_rSocket")
+
+#define Socket_Sheathe_1h_blade_l FName("sheathe_1h_b_l");
+#define Socket_Holster_1h_blade_l FName("holster_1h_b_l");
+#define Socket_Sheathe_1h_blade_r FName("sheathe_1h_b_r");
+#define Socket_Holster_1h_blade_r FName("holster_1h_b_r");
+
+#define Socket_Sheathe_2h_blade FName("sheathe_2h_b");
+#define Socket_Holster_2h_blade FName("holster_2h_b");
+
+#define Socket_Holster_pistol FName("holster_pistol"); // with a silencer!
+#define Socket_Holster_rifle FName("holster_rifle");
+#define Socket_Holster_shotgun FName("holster_shotgun");
+
+
 class AArmament;
 class UDataTable;
+struct F_ArmamentInformation;
 struct FGAttributeSetExecutionData;
+enum class EComboType : uint8;
+enum class ECharacterToMontageMapping : uint8;
+enum class EArmamentStance : uint8;
 enum class EEquipSlot : uint8;
 enum class EArmorSlot : uint8;
 enum class EArmamentClassification : uint8;
@@ -33,28 +54,69 @@ class SANDBOX_API UCombatComponent : public UActorComponent
 	GENERATED_BODY()
 
 protected:
-	// Armaments And equip slots
+	/**** Armaments And equip slots */
+	/** The primary armament the player has equipped */
 	UPROPERTY(Replicated, BlueprintReadWrite, Category = "Combat Component|Armaments") AArmament* PrimaryArmament;
+	
+	/** The secondary armament the player has equipped */
 	UPROPERTY(Replicated, BlueprintReadWrite, Category = "Combat Component|Armaments") AArmament* SecondaryArmament;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item LeftHandEquipSlot_One;
-	UPROPERTY(BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item LeftHandEquipSlot_Two;
-	UPROPERTY(BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item LeftHandEquipSlot_Three;
-	UPROPERTY(BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item RightHandEquipSlot_One;
-	UPROPERTY(BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item RightHandEquipSlot_Two;
-	UPROPERTY(BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item RightHandEquipSlot_Three;
-
-	// Armor
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Gauntlets;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Leggings;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Helm;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Chest;
-	UPROPERTY(BlueprintReadWrite, Category = "Combat Component|Armors") TMap<EArmorSlot, F_Information_Armor_Handle> ArmorAbilityHandles;
-
-	// Data table for information and retrieval
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament Information") UDataTable* ArmamentInformationTable;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament Information") UDataTable* ArmorInformationTable;
+	/** The armament information for the armament in the left hand's first equip slot */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item LeftHandEquipSlot_One;
 	
+	/** The armament information for the armament in the left hand's second equip slot */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item LeftHandEquipSlot_Two;
+	
+	/** The armament information for the armament in the left hand's third equip slot */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item LeftHandEquipSlot_Three;
+	
+	/** The armament information for the armament in the right hand's first equip slot */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item RightHandEquipSlot_One;
+	
+	/** The armament information for the armament in the right hand's second equip slot */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item RightHandEquipSlot_Two;
+	
+	/** The armament information for the armament in the right hand's third equip slot */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item RightHandEquipSlot_Three;
+
+	
+	/**** Armor ****/
+	/** The currently equipped gauntlets's information */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Gauntlets;
+	
+	/** The currently equipped leggings's information */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Leggings;
+	
+	/** The currently equipped helm's information */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Helm;
+	
+	/** The currently equipped chest's information */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Chest;
+
+	/** The ability handles for the currently equipped armors */
+	UPROPERTY(Transient, BlueprintReadWrite) TMap<EArmorSlot, F_Information_Armor_Handle> ArmorAbilityHandles;
+
+	
+	/**** Data tables for information and retrieval ****/
+	/** The data table for retrieving an armament's combat information */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat Component") UDataTable* ArmamentInformationTable;
+	
+	/** The data table for retrieving information for armor */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat Component") UDataTable* ArmorInformationTable;
+	
+	/** The data table for retrieving armament montages for specific characters */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat Component") TObjectPtr<UDataTable> MontageInformationTable;
+	
+	/**** Other ****/
+	/** The player's current armament stance */
+	UPROPERTY(Transient, BlueprintReadWrite) EArmamentStance CurrentStance;
+	
+	/** The primary armament index These are just used specifically for handling switching weapons */
+	UPROPERTY(Transient, BlueprintReadWrite) int32 ArmamentIndex;
+
+	/** The secondary armament index These are just used specifically for handling switching weapons */
+	UPROPERTY(Transient, BlueprintReadWrite) int32 OffhandArmamentIndex;
+
 	
 public:
 	/** Delegate for when a player equips an armament */
@@ -116,10 +178,13 @@ public:
 	virtual bool DeleteEquippedArmament(AArmament* Armament);
 	
 	/**
-	 * Sets the Armament stance for the character. This should happen on equip and when the player sets how he's wielding the armament
+	 * Sets the armament stance for the character. This is more for the player's input driven events for how they want to wield the armament
 	 * @param Stance							The player's current combat stance
 	 */
 	virtual void SetArmamentStance(EArmamentStance Stance);
+
+	/** Updates the armament stance for the character based on the currently equipped armaments. */
+	virtual void UpdateArmamentStance();
 	
 	/**
 	 * Retrieves the armament from one of the player's hands
@@ -162,13 +227,23 @@ public:
 	virtual F_Item GetArmamentInventoryInformation(EEquipSlot Slot);
 
 	/**
-	 * Get the armament information of a specific slot
+	 * Retrieves the armament's information from the database
 	 *
-	 * @param Slot								The armament's equip slot
-	 * @returns									The armament information of the armament equipped to that slot
+	 * @param ArmamentId						The id of the armament
+	 * @returns									The armament information
 	 */
-	virtual F_ArmamentInformation GetArmamentInformation(EEquipSlot Slot);
+	virtual F_ArmamentInformation GetArmamentInformationFromDatabase(FName ArmamentId);
 
+	/**
+	 * Retrieves the armament montage from the armament montage database. For ranged weapons, use EComboType::None
+	 *
+	 * @param ArmamentId						The id of the armament
+	 * @param ComboType							The combo montage we're retrieving. If the armament doesn't use combos, just use EComboType::None to retrieve it's montage
+	 * @param Mapping							The character skeleton to montage mapping reference  
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Armament|Montages")
+	virtual UAnimMontage* GetArmamentMontageFromDB(FName ArmamentId, EComboType ComboType, ECharacterToMontageMapping Mapping);
+	
 
 protected:
 	// 	/** Synchronization RPC's (Most of the combat data is not replicated and is handled during interaction or on save (weapons/inventory) */
@@ -232,14 +307,17 @@ public:
 // Utility																			   //
 //-------------------------------------------------------------------------------------//
 public:
+	/** Retrieves a socket from the character for equipping weapons, etc. */
+	UFUNCTION(BlueprintCallable, Category = "Combat|Equipping") virtual const USkeletalMeshSocket* GetSkeletalSocket(FName SocketName) const;
+	
 	/** Retrieves the equipped socket for a specific armament */
-	UFUNCTION(BlueprintCallable, Category = "Combat|Equipping") virtual FName GetEquippedSocket(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
+	UFUNCTION(BlueprintCallable, Category = "Combat|Equipping") virtual FName GetEquippedSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
 	
 	/** Retrieves the holster for a specific equipped armament */
-	UFUNCTION(BlueprintCallable, Category = "Combat|Equipping") virtual FName GetHolsterSocket(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
+	UFUNCTION(BlueprintCallable, Category = "Combat|Equipping") virtual FName GetHolsterSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
 	
 	/** Retrieves the sheathed for a specific equipped armament */
-	UFUNCTION(BlueprintCallable, Category = "Combat|Equipping") virtual FName GetSheathedSocket(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
+	UFUNCTION(BlueprintCallable, Category = "Combat|Equipping") virtual FName GetSheathedSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
 
 	
 };

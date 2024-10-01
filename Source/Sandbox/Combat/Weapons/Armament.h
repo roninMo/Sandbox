@@ -11,6 +11,7 @@
 
 DECLARE_LOG_CATEGORY_EXTERN(ArmamentLog, Log, All);
 
+
 class ACharacterBase;
 class UCombatComponent;
 class UGameplayEffect;
@@ -39,7 +40,7 @@ protected:
 	/** The information for this armament */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament")
 	F_ArmamentInformation ArmamentInformation;
-
+	
 	/** The current equip slot of the armament */
 	UPROPERTY(Replicated, BlueprintReadWrite, Category = "Armament") EEquipSlot EquipSlot;
 
@@ -81,8 +82,6 @@ public:
 // Montages																			   //
 //-------------------------------------------------------------------------------------//
 protected:
-	/** The data table for retrieving armament montages for specific characters */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TObjectPtr<UDataTable> MontageInformationTable;
 
 	/** The montages for the armament */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EComboType, UAnimMontage*> ArmamentMontages;
@@ -91,9 +90,6 @@ protected:
 public:
 	/** Updates the armament's montages provided a character to montage reference */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Montages") virtual bool UpdateArmamentMontages(const ECharacterToMontageMapping MontageMapping);
-
-	/** Retrieves the armament montage from the armament montage database. For ranged weapons, use EComboType::None */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Montages") virtual UAnimMontage* GetArmamentMontageFromDB(FName ArmamentId, EComboType ComboType, ECharacterToMontageMapping Mapping);
 	
 	
 //-------------------------------------------------------------------------------------//
@@ -101,15 +97,15 @@ public:
 //-------------------------------------------------------------------------------------//
 public:
 	/** Sheathes the weapon for the character */ 
-	UFUNCTION(BlueprintCallable, Category = "Armament|Equipping") virtual bool SheatheArmament();
+	UFUNCTION(BlueprintCallable, Category = "Armament|Equipping and Unequipping") virtual bool SheatheArmament();
 
 	/** Draw the character's sword */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Equipping") virtual bool UnsheatheArmament();
+	UFUNCTION(BlueprintCallable, Category = "Armament|Equipping and Unequipping") virtual bool UnsheatheArmament();
 
 
 protected:
 	/** Attach the armament to the character using socket locations. This works for both the character's hand, sheathe, or any other custom location */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual bool AttachArmamentToEquipSlot(FName Socket);
+	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual bool AttachArmamentToSocket(FName Socket);
 	
 	
 //-------------------------------------------------------------------------------------//

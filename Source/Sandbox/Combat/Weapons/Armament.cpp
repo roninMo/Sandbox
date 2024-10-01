@@ -12,6 +12,7 @@
 #include "Sandbox/Data/Enums/MontageMappings.h"
 #include "Engine/SkeletalMeshSocket.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Combat/CombatComponent.h"
 
 DEFINE_LOG_CATEGORY(ArmamentLog);
 
@@ -26,7 +27,7 @@ AArmament::AArmament()
 	MinNetUpdateFrequency = 33.0f;
 	NetUpdateFrequency = 66.0f;
 	AActor::SetReplicateMovement(true);
-
+	
 	/*
 	 * Here's how the collision should be, but this should be created in the subclasses for more adaptability
 
@@ -176,11 +177,20 @@ bool AArmament::IsValidArmanent()
 #pragma region Montages
 bool AArmament::UpdateArmamentMontages(const ECharacterToMontageMapping MontageMapping)
 {
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
+	{
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} Failed to retrieve the combat component while updating the armament montages!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		return nullptr;
+	}
+	
+	
 	// For melee armaments, retrieve all combo montages, otherwise just retrieve the montage (use "None" for armaments with a single montage for their animations (that aren't combo specific))
 	ArmamentMontages.Empty();
 	for (F_ArmamentAbilityInformation ArmamentAbility : ArmamentInformation.Abilities)
 	{
-		UAnimMontage* ArmamentComboMontage = GetArmamentMontageFromDB(ArmamentInformation.Id, ArmamentAbility.ComboType, MontageMapping);
+		UAnimMontage* ArmamentComboMontage = CombatComponent->GetArmamentMontageFromDB(ArmamentInformation.Id, ArmamentAbility.ComboType, MontageMapping);
 		if (ArmamentComboMontage)
 		{
 			ArmamentMontages.Add(ArmamentAbility.ComboType, ArmamentComboMontage);
@@ -188,40 +198,6 @@ bool AArmament::UpdateArmamentMontages(const ECharacterToMontageMapping MontageM
 	}
 	
 	return true;
-}
-
-
-UAnimMontage* AArmament::GetArmamentMontageFromDB(const FName ArmamentId, const EComboType ComboType, const ECharacterToMontageMapping Mapping)
-{
-	if (!MontageInformationTable) return nullptr;
-	
-	const FString RowContext(TEXT("Armament Montage Information Context"));
-	if (const F_Table_ArmamentMontages* Data = MontageInformationTable->FindRow<F_Table_ArmamentMontages>(ArmamentId, RowContext))
-	{
-		// Search for the specific combo
-		if (Data->ArmamentMontages.Contains(ComboType))
-		{
-			F_CharacterToMontage CharacterMontages = Data->ArmamentMontages[ComboType];
-
-			// Check if there's a montage for the specific character
-			if (CharacterMontages.MontageMappings.Contains(Mapping))
-			{
-				return CharacterMontages.MontageMappings[Mapping];
-			}
-			else
-			{
-				UE_LOGFMT(ArmamentLog, Error, "{0}::{1} did not find an armament montage for this specific character! ({2})",
-					*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()), *UEnum::GetValueAsString(Mapping));
-			}
-		}
-		else
-		{
-			UE_LOGFMT(ArmamentLog, Error, "{0}::{1} did not find an armament montage for the {2} combo",
-				*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()), *UEnum::GetValueAsString(ComboType));
-		}
-	}
-
-	return nullptr;
 }
 #pragma endregion 
 
@@ -239,7 +215,7 @@ bool AArmament::UnsheatheArmament()
 	return true;
 }
 
-bool AArmament::AttachArmamentToEquipSlot(const FName Socket)
+bool AArmament::AttachArmamentToSocket(const FName Socket)
 {
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
 	if (!Character || !Character->GetMesh())
