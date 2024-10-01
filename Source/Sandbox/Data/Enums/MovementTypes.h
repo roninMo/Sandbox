@@ -8,7 +8,7 @@
 
 /** The custom movement modes */
 UENUM(BlueprintType)
-enum ECustomMovementMode
+enum ECustomMovementMode : uint8
 {
 	MOVE_Custom_None				UMETA(DisplayName = "None"),
 	MOVE_Custom_Slide				UMETA(DisplayName = "Slide"),

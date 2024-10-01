@@ -21,7 +21,7 @@ struct F_CharacterToMontage
 	F_CharacterToMontage() = default;
 
 	/**  */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<TEnumAsByte<ECharacterToMontageMapping>, UAnimMontage*> MontageMappings;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<ECharacterToMontageMapping, UAnimMontage*> MontageMappings;
 };
 
 

@@ -411,7 +411,7 @@ public:
 // Combat																			   //
 //-------------------------------------------------------------------------------------//
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation") TEnumAsByte<ECharacterToMontageMapping> MontageMapping;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation") ECharacterToMontageMapping MontageMapping;
 
 
 public:
