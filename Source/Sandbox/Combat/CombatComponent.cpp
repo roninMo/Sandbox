@@ -333,7 +333,7 @@ F_ArmamentInformation UCombatComponent::GetArmamentInformationFromDatabase(const
 }
 
 
-UAnimMontage* UCombatComponent::GetArmamentMontageFromDB(FName ArmamentId, EComboType ComboType, ECharacterToMontageMapping Mapping)
+UAnimMontage* UCombatComponent::GetArmamentMontageFromDB(FName ArmamentId, EComboType ComboType, ECharacterSkeletonMapping Mapping)
 {
 	if (!MontageInformationTable) return nullptr;
 	

@@ -8,7 +8,9 @@
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
-#include "Sandbox/Data/Enums/MontageMappings.h"
+#include "Sandbox/Data/Enums/SkeletonMappings.h"
+#include "Net/UnrealNetwork.h"
+#include "Sandbox/Data/Enums/ArmorTypes.h"
 
 
 ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Super(
@@ -25,18 +27,42 @@ ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Su
 	MinNetUpdateFrequency = 33.f; // To help with bandwidth and lagginess, allow a minNetUpdateFrequency, which is generally 33 in fps games
 	// The other value is the server config tick rate, which is in the project defaultEngine.ini -> [/Script/OnlineSubsystemUtils.IpNetDriver] NetServerMaxTickRate = 60
 	// also this which is especially crucial for implementing the gameplay ability system defaultEngine.ini -> [SystemSettings] net.UseAdaptiveNetUpdateFrequency = 1
-
 	
+	// Character armor
+	Gauntlets = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Gauntlets"));
+	Leggings = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Leggings"));
+	Helm = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Helm"));
+	Chest = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Chest"));
+
+	ACharacterBase::ConstructArmorInformation(Helm);
+	ACharacterBase::ConstructArmorInformation(Gauntlets);
+	ACharacterBase::ConstructArmorInformation(Leggings);
+	ACharacterBase::ConstructArmorInformation(Chest);
+	
+	// For handling animations on the server
+	GetMesh()->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
 }
 
 
+void ACharacterBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME_CONDITION_NOTIFY(ACharacterBase, Armor_Leggings, COND_Custom, REPNOTIFY_OnChanged);
+	DOREPLIFETIME_CONDITION_NOTIFY(ACharacterBase, Armor_Gauntlets, COND_Custom, REPNOTIFY_OnChanged);
+	DOREPLIFETIME_CONDITION_NOTIFY(ACharacterBase, Armor_Helm, COND_Custom, REPNOTIFY_OnChanged);
+	DOREPLIFETIME_CONDITION_NOTIFY(ACharacterBase, Armor_Chest, COND_Custom, REPNOTIFY_OnChanged);
+}
 
 
 #pragma region Character Initialization
 void ACharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	if (Leggings) Armor_Leggings = Leggings->GetSkeletalMeshAsset();
+	if (Gauntlets) Armor_Gauntlets = Gauntlets->GetSkeletalMeshAsset();
+	if (Helm) Armor_Helm = Helm->GetSkeletalMeshAsset();
+	if (Chest) Armor_Chest = Chest->GetSkeletalMeshAsset();
 }
 
 void ACharacterBase::PossessedBy(AController* NewController)
@@ -159,10 +185,52 @@ UAbilitySystemComponent* ACharacterBase::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
-
-ECharacterToMontageMapping ACharacterBase::GetCharacterToMontageMapping() const
+void ACharacterBase::SetArmorMesh(EArmorSlot ArmorSlot, USkeletalMesh* Armor)
 {
-	return MontageMapping;
+	if (EArmorSlot::Leggings == ArmorSlot) Armor_Leggings = Armor;
+	if (EArmorSlot::Gauntlets == ArmorSlot) Armor_Gauntlets = Armor;
+	if (EArmorSlot::Helm == ArmorSlot) Armor_Helm = Armor;
+	if (EArmorSlot::Chest == ArmorSlot) Armor_Chest = Armor;
+}
+
+void ACharacterBase::SetHideCharacterAndArmor(const bool bHide)
+{
+	GetMesh()->SetHiddenInGame(bHide);
+	Gauntlets->SetHiddenInGame(bHide);
+	Leggings->SetHiddenInGame(bHide);
+	Helm->SetHiddenInGame(bHide);
+	Chest->SetHiddenInGame(bHide);
+}
+
+ECharacterSkeletonMapping ACharacterBase::GetCharacterSkeletonMapping() const { return CharacterSkeletonMapping; }
+USkeletalMeshComponent* ACharacterBase::GetLeggings() const { return Leggings; }
+USkeletalMeshComponent* ACharacterBase::GetGauntlets() const { return Gauntlets; }
+USkeletalMeshComponent* ACharacterBase::GetHelm() const { return Helm; }
+USkeletalMeshComponent* ACharacterBase::GetChest() const { return Chest; }
+void ACharacterBase::OnRep_Armor_Gauntlets() { Gauntlets->SetSkeletalMesh(Armor_Gauntlets); }
+void ACharacterBase::OnRep_Armor_Leggings() { Leggings->SetSkeletalMesh(Armor_Leggings); }
+void ACharacterBase::OnRep_Armor_Helm() { Helm->SetSkeletalMesh(Armor_Helm); }
+void ACharacterBase::OnRep_Armor_Chest() { Chest->SetSkeletalMesh(Armor_Chest); }
+
+void ACharacterBase::ConstructArmorInformation(USkeletalMeshComponent* MeshComponent) const
+{
+	if (MeshComponent)
+	{
+		MeshComponent->AlwaysLoadOnClient = true;
+		MeshComponent->AlwaysLoadOnServer = true;
+		MeshComponent->bOwnerNoSee = false;
+		MeshComponent->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones; // @ref -> Required for client hit detection with ai
+		MeshComponent->bCastDynamicShadow = true;
+		MeshComponent->bAffectDynamicIndirectLighting = true;
+		MeshComponent->PrimaryComponentTick.TickGroup = TG_PrePhysics;
+		MeshComponent->SetupAttachment(GetMesh());
+		static FName MeshCollisionProfileName(TEXT("CharacterMesh"));
+		MeshComponent->SetCollisionProfileName(MeshCollisionProfileName);
+		MeshComponent->SetGenerateOverlapEvents(false);
+		MeshComponent->SetCanEverAffectNavigation(false);
+
+		MeshComponent->SetLeaderPoseComponent(GetMesh());
+	}
 }
 
 

@@ -19,7 +19,7 @@ struct F_ArmamentAbilityInformation;
 struct FGameplayEffectMapping;
 enum class EEquipSlot : uint8;
 enum class EComboType : uint8;
-enum class ECharacterToMontageMapping : uint8;
+enum class ECharacterSkeletonMapping : uint8;
 enum class EArmamentClassification : uint8;
 enum class EDamageInformationSource : uint8;
 enum class EEquipRestrictions : uint8;
@@ -102,7 +102,7 @@ protected:
 
 public:
 	/** Updates the armament's montages provided a character to montage reference */
-	UFUNCTION(BlueprintCallable, Category = "Armaments|Montages") virtual bool UpdateArmamentMontages(const ECharacterToMontageMapping MontageMapping);
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Montages") virtual bool UpdateArmamentMontages(const ECharacterSkeletonMapping MontageMapping);
 	
 	
 //-------------------------------------------------------------------------------------//

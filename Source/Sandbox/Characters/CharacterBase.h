@@ -274,7 +274,8 @@
 */
 
 
-enum class ECharacterToMontageMapping : uint8;
+enum class EArmorSlot : uint8;
+enum class ECharacterSkeletonMapping : uint8;
 class UCombatComponent;
 class UAbilitySystem;
 class UInventoryComponent;
@@ -294,8 +295,9 @@ protected:
 
 
 public:
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	ACharacterBase(const FObjectInitializer& ObjectInitializer);
-
+	
 	
 //----------------------------------------------------------------------//
 // Initialization functions and components								//
@@ -403,20 +405,69 @@ public:
 
 	/** Returns the ability system component to use for this actor. It may live on another actor, such as a Pawn using the PlayerState's component */
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-	
+
 
 	
 
 //-------------------------------------------------------------------------------------//
-// Combat																			   //
+// Skeleton																			   //
 //-------------------------------------------------------------------------------------//
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation") ECharacterToMontageMapping MontageMapping;
+	/** The player's current helm */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mesh") TObjectPtr<USkeletalMeshComponent> Helm;
+	
+	/** The player's current gauntlets */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mesh") TObjectPtr<USkeletalMeshComponent> Gauntlets;
+	
+	/** The player's current leggings */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mesh") TObjectPtr<USkeletalMeshComponent> Leggings;
+	
+	/** The player's current chestplate */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mesh") TObjectPtr<USkeletalMeshComponent> Chest;
+
+	/** The current character skeleton mapping reference */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mesh") ECharacterSkeletonMapping CharacterSkeletonMapping;
+
+	
+public:
+	/** A stored reference to the armor's gauntlets mesh */
+	UPROPERTY(ReplicatedUsing=OnRep_Armor_Gauntlets, BlueprintReadWrite) USkeletalMesh* Armor_Gauntlets;
+	
+	/** A stored reference to the armor's leggings mesh */
+	UPROPERTY(ReplicatedUsing=OnRep_Armor_Leggings, BlueprintReadWrite) USkeletalMesh* Armor_Leggings;
+	
+	/** A stored reference to the armor's helm mesh */
+	UPROPERTY(ReplicatedUsing=OnRep_Armor_Helm, BlueprintReadWrite) USkeletalMesh* Armor_Helm;
+	
+	/** A stored reference to the armor's chest plate mesh */
+	UPROPERTY(ReplicatedUsing=OnRep_Armor_Chest, BlueprintReadWrite) USkeletalMesh* Armor_Chest;
+
+
+	/** Adjust's the armor of a specific slot */
+	UFUNCTION(BlueprintCallable, Category = "Character|Skeleton") virtual void SetArmorMesh(EArmorSlot ArmorSlot, USkeletalMesh* Armor);
+
+	/** Convenience function to show/hide the character and armor for first/third person logic */
+	UFUNCTION(BlueprintCallable, Category = "Character|Skeleton") virtual void SetHideCharacterAndArmor(bool bHide = true);
+
+	/** Retrieves the armor mesh components */
+	UFUNCTION(BlueprintCallable, Category = "Character|Skeleton") virtual USkeletalMeshComponent* GetLeggings() const;
+	UFUNCTION(BlueprintCallable, Category = "Character|Skeleton") virtual USkeletalMeshComponent* GetGauntlets() const;
+	UFUNCTION(BlueprintCallable, Category = "Character|Skeleton") virtual USkeletalMeshComponent* GetHelm() const;
+	UFUNCTION(BlueprintCallable, Category = "Character|Skeleton") virtual USkeletalMeshComponent* GetChest() const;
+	
+	/** Onrep functions handle client replicated information for scenarios when players join the game late @note these still need to be updated on the server */
+	UFUNCTION() virtual void OnRep_Armor_Gauntlets();
+	UFUNCTION() virtual void OnRep_Armor_Leggings();
+	UFUNCTION() virtual void OnRep_Armor_Helm();
+	UFUNCTION() virtual void OnRep_Armor_Chest();
+
+	/** Constructor values for each of the armor's skeletal mesh components */
+	virtual void ConstructArmorInformation(USkeletalMeshComponent* MeshComponent) const;
 
 
 public:
 	/** Retrieves the character to montage mapping. Used for retrieving the proper animations for different character skeletons */
-	UFUNCTION(BlueprintCallable, Category = "Animation|Utilities") virtual ECharacterToMontageMapping GetCharacterToMontageMapping() const;
+	UFUNCTION(BlueprintCallable, Category = "Animation|Utilities") virtual ECharacterSkeletonMapping GetCharacterSkeletonMapping() const;
 
 
 	

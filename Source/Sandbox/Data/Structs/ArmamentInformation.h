@@ -4,10 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
-#include "Sandbox/Data/Enums/MontageMappings.h" // Potential error
+#include "Sandbox/Data/Enums/SkeletonMappings.h" // Potential error
 #include "ArmamentInformation.generated.h"
 
-// enum class ECharacterToMontageMapping : uint8;
+// enum class ECharacterSkeletonMapping : uint8;
 enum class EComboType : uint8;
 
 
@@ -21,7 +21,7 @@ struct F_CharacterToMontage
 	F_CharacterToMontage() = default;
 
 	/**  */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<ECharacterToMontageMapping, UAnimMontage*> MontageMappings;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<ECharacterSkeletonMapping, UAnimMontage*> MontageMappings;
 };
 
 

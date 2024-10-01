@@ -32,7 +32,7 @@ class UDataTable;
 struct F_ArmamentInformation;
 struct FGAttributeSetExecutionData;
 enum class EComboType : uint8;
-enum class ECharacterToMontageMapping : uint8;
+enum class ECharacterSkeletonMapping : uint8;
 enum class EArmamentStance : uint8;
 enum class EEquipSlot : uint8;
 enum class EArmorSlot : uint8;
@@ -264,7 +264,7 @@ public:
 	 * @param Mapping							The character skeleton to montage mapping reference  
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils")
-	virtual UAnimMontage* GetArmamentMontageFromDB(FName ArmamentId, EComboType ComboType, ECharacterToMontageMapping Mapping);
+	virtual UAnimMontage* GetArmamentMontageFromDB(FName ArmamentId, EComboType ComboType, ECharacterSkeletonMapping Mapping);
 	
 
 protected:

@@ -3,7 +3,7 @@
 
 #include "Sandbox/Combat/Weapons/Armament.h"
 
-#include "Sandbox/Data/Enums/MontageMappings.h"
+#include "Sandbox/Data/Enums/SkeletonMappings.h"
 
 #include "Net/UnrealNetwork.h"
 #include "Engine/SkeletalMeshSocket.h"
@@ -115,7 +115,7 @@ bool AArmament::ConstructArmament()
 	}
 	
 	// Add armament montages
-	UpdateArmamentMontages(Character->GetCharacterToMontageMapping());
+	UpdateArmamentMontages(Character->GetCharacterSkeletonMapping());
 	
 	return true;
 }
@@ -173,7 +173,7 @@ bool AArmament::IsValidArmanent()
 
 
 #pragma region Montages
-bool AArmament::UpdateArmamentMontages(const ECharacterToMontageMapping MontageMapping)
+bool AArmament::UpdateArmamentMontages(const ECharacterSkeletonMapping MontageMapping)
 {
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
