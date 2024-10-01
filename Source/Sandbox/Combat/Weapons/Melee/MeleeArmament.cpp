@@ -82,7 +82,7 @@ bool AMeleeArmament::ConstructArmament()
 	
 	// Create and attach the armament to the character
 	bool bCreatedSuccessfully = false;
-	const USkeletalMeshSocket* HolsterSocket = Character->GetMesh()->GetSocketByName(CombatComponent->GetHolsterSocketName(ArmamentInformation.Classification, EquipSlot));
+	const USkeletalMeshSocket* HolsterSocket = Character->GetMesh()->GetSocketByName(GetHolsterSocketName());
 	if (HolsterClass && !HolsterSocket)
 	{
 		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} did not find the holster socket while constructing the armament.",
@@ -105,7 +105,7 @@ bool AMeleeArmament::ConstructArmament()
 			if (Holster) bCreatedSuccessfully = HolsterSocket->AttachActor(Holster, Character->GetMesh());
 		}
 
-		if (!AttachArmamentToSocket(CombatComponent->GetSheathedSocketName(ArmamentInformation.Classification, EquipSlot)))
+		if (!AttachArmamentToSocket(GetSheathedSocketName()))
 		{
 			bCreatedSuccessfully = false;
 		}
@@ -173,7 +173,7 @@ bool AMeleeArmament::SheatheArmament()
 		return false;
 	}
 
-	if (AttachArmamentToSocket(CombatComponent->GetSheathedSocketName(ArmamentInformation.Classification, EquipSlot)))
+	if (AttachArmamentToSocket(GetSheathedSocketName()))
 	{
 		ArmamentCollision->SetGenerateOverlapEvents(false);
 		ArmamentCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);

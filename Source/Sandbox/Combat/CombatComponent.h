@@ -43,6 +43,8 @@ enum class EArmamentClassification : uint8;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FArmamentEquippedSignature, AArmament*, Armament, EEquipSlot, EquipSlot);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FArmamentUnequippedSignature, FName, Id, EEquipSlot, EquipSlot);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorEquippedSignature, F_Item, Information, F_Information_Armor, Abilities, EArmorSlot, EquipSlot);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item, Information, F_Information_Armor, Abilities, EArmorSlot, EquipSlot);
 
 
 /**
@@ -94,6 +96,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Chest;
 
 	/** The ability handles for the currently equipped armors */
+	UPROPERTY(Transient, BlueprintReadWrite) TMap<EArmorSlot, F_Information_Armor> ArmorAbilities;
 	UPROPERTY(Transient, BlueprintReadWrite) TMap<EArmorSlot, F_Information_Armor_Handle> ArmorAbilityHandles;
 
 	
@@ -120,10 +123,20 @@ protected:
 	
 public:
 	/** Delegate for when a player equips an armament */
-	UPROPERTY(BlueprintAssignable) FArmamentEquippedSignature OnEquippedArmament;
+	UPROPERTY(BlueprintAssignable)
+	FArmamentEquippedSignature OnEquippedArmament;
 
 	/** Delegate for when a player unequips an armament */
-	UPROPERTY(BlueprintAssignable) FArmamentUnequippedSignature OnUnequippedArmament;
+	UPROPERTY(BlueprintAssignable)
+	FArmamentUnequippedSignature OnUnequippedArmament;
+	
+	/** Delegate for when a player equips an armor */
+	UPROPERTY(BlueprintAssignable)
+	FArmorEquippedSignature OnEquippedArmor;
+
+	/** Delegate for when a player unequips an armor */
+	UPROPERTY(BlueprintAssignable)
+	FArmorUnequippedSignature OnUnequippedArmor;
 	
 	
 protected:
@@ -208,7 +221,7 @@ public:
 	 * @returns									True if it's a right hand slot
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils")
-	virtual bool IsRightHandedArmament(EEquipSlot Slot);
+	virtual bool IsRightHandedArmament(EEquipSlot Slot) const;
 	
 	/**
 	 * Retrieves the currently equipped slot for a specific hand
@@ -269,47 +282,26 @@ protected:
 // Armor Functionality																	//
 //--------------------------------------------------------------------------------------//
 public:
+	/** Unequips one of the player's armors. */
+	virtual bool UnequipArmor(EArmorSlot ArmorSlot);
 
-	// EquipArmor
-	// UnequipArmor
-	
-	// GetArmorItemInformation
-	// GetArmorAbilityInformation
-	// GetArmorMesh
-	// GetArmorFromDatabase
+	/** Creates and equips the player's armor */
+	virtual bool EquipArmor(F_Item Armor);
 
 	
-// public:
-// 	/** Add the abilities of this armor */
-// 	virtual void AddArmorAbilitiesStatsAndBuffs(F_Information_Armor& ArmorInformation) override;
-//
-// 	/** Remove the abilities of this armor */
-// 	virtual void RemoveArmorAbilitiesStatsAndBuffs(F_Information_Armor& ArmorInformation) override;
-//
-// 	/** Creates a gameplay effect to add or remove armor stats from the character */
-// 	virtual bool CreateAndAddArmorStatsEffect(EArmorType ArmorType, TMap<EAttribute, float>& ArmorStats, bool bEquipping);
-// 	
-// 	/** Unequip an active armament from one of the character's currently equipped armor, removing the armor and it's abilities from the character. */
-// 	virtual bool UnequipArmor(EArmorType ArmorSlot) override;
-//
-// 	/** Creates and equips the player's armor */
-// 	virtual bool EquipArmor(F_InventoryItem Armor) override;
-// 	
-// 	/** Accesses the armor slot from the type of armor */
-// 	virtual F_InventoryItem GetArmorItemInformation(EArmorType ArmorType) override;
-// 	
-// 	/** Accesses the armor information from the database */
-// 	virtual const F_Information_Armor GetArmorInformationFromDatabase(const FName RowName) const override;
-//
-// 	/** Get's the skeletal mesh armor of a specific slot */
-// 	virtual USkeletalMeshComponent* GetArmorMesh(EArmorType ArmorType);
-//
-// 	/** Adds the armor's inventory item to the combat component for reference */
-// 	virtual void SetArmorInformation(F_InventoryItem Item, EArmorType ArmorType);
-//
-// 	/** Finds the armor information from the item */ // This might be helpful for widgets that need access to the armor information 
-// 	virtual F_Information_Armor GetArmorInformationFromItem(F_InventoryItem Item);
-// 	
+	/** Retrieves the armor's information from the database */
+	virtual F_Item GetArmorItemInformation(EArmorSlot ArmorSlot);
+	
+	/** Retrieves the one of the current armor's ability information */
+	virtual F_Information_Armor GetArmorAbilityInformation(EArmorSlot ArmorSlot);
+	
+	/** Get's the skeletal mesh armor of a specific slot */
+	virtual USkeletalMeshComponent* GetArmorMesh(EArmorSlot ArmorSlot);
+	
+	/** Accesses the armor information from the database */
+	virtual const F_Information_Armor GetArmorFromDatabase(const FName Id) const;
+	
+	
 // 	/** Synchronization RPC's (Most of the combat data is not replicated and is handled during interaction or on save (weapons/inventory) */
 // 	UFUNCTION(Server, Reliable) virtual void Server_EquipArmor(const F_InventoryItem& Armor);
 	
@@ -325,12 +317,6 @@ public:
 	/** Retrieves the equipped socket for a specific armament */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping") virtual FName GetEquippedSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
 	
-	/** Retrieves the holster for a specific equipped armament */
-	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping") virtual FName GetHolsterSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
-	
-	/** Retrieves the sheathed for a specific equipped armament */
-	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping") virtual FName GetSheathedSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
-
 	
 };
 

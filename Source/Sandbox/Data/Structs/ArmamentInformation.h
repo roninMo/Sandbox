@@ -4,9 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
+#include "Sandbox/Data/Enums/MontageMappings.h" // Potential error
 #include "ArmamentInformation.generated.h"
 
-enum class ECharacterToMontageMapping : uint8;
+// enum class ECharacterToMontageMapping : uint8;
 enum class EComboType : uint8;
 
 
@@ -17,6 +18,7 @@ USTRUCT(BlueprintType)
 struct F_CharacterToMontage
 {
 	GENERATED_USTRUCT_BODY()
+	F_CharacterToMontage() = default;
 
 	/**  */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<TEnumAsByte<ECharacterToMontageMapping>, UAnimMontage*> MontageMappings;

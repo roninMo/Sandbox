@@ -6,5 +6,5 @@
 UENUM(BlueprintType)
 enum class ECharacterToMontageMapping : uint8
 {
-	CTM_Manny				UMETA(DisplayName = "Manny"),
+	Manny				UMETA(DisplayName = "Manny")
 };

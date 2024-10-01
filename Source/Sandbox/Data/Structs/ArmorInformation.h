@@ -2,13 +2,16 @@
 
 
 #include "CoreMinimal.h"
+#include "AbilityInformation.h"
 #include "ActiveGameplayEffectHandle.h"
 #include "GameplayAbilitySpecHandle.h"
 #include "Engine/DataTable.h"
 #include "ArmorInformation.generated.h"
 
+struct FGameplayEffectMapping;
 class UCharacterGameplayAbility;
 class UGameplayEffect;
+struct F_Item;
 enum class EArmorSlot : uint8;
 
 
@@ -118,15 +121,13 @@ struct F_Information_Armor
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) USkeletalMesh* ArmorMesh;
 
 	/** Gameplay effect for adjusting the player's stats from the armor */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TSubclassOf<UGameplayEffect> ArmorStats;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayEffectMapping ArmorStats;
 
 	/** The passives the armor grants to the player */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<TSubclassOf<UGameplayEffect>> Passives;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayEffectMapping> Passives;
 
 	/** The abilities the armor grants to the player */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<TSubclassOf<UCharacterGameplayAbility>> Abilities;
-
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayAbilityMapping> Abilities;
 };
 
 

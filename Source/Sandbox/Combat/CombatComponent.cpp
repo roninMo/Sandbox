@@ -14,6 +14,7 @@
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Weapons/Armament.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Data/Enums/ArmorTypes.h"
 
 DEFINE_LOG_CATEGORY(CombatComponentLog);
 // TODO: Custom logging to remove the extra message logic for clarification
@@ -23,7 +24,6 @@ UCombatComponent::UCombatComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 	PrimaryComponentTick.bStartWithTickEnabled = false;
-	SetIsReplicated(true);
 	
 }
 
@@ -253,7 +253,7 @@ AArmament* UCombatComponent::GetArmament(const bool bRightHand)
 }
 
 
-bool UCombatComponent::IsRightHandedArmament(EEquipSlot Slot)
+bool UCombatComponent::IsRightHandedArmament(EEquipSlot Slot) const
 {
 	if (Slot == EEquipSlot::LeftHandSlotOne || Slot == EEquipSlot::LeftHandSlotTwo || Slot == EEquipSlot::LeftHandSlotThree) return false;
 	return true;
@@ -317,10 +317,18 @@ F_ArmamentInformation UCombatComponent::GetArmamentInformationFromDatabase(const
 		{
 			return Data->ArmamentInformation;
 		}
+		else
+		{
+			UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve {2} from the armament information table!",
+				UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()), ArmamentId);
+		}
+	}
+	else
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} The armament information table hasn't been added to the character yet!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
 	}
 
-	UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} The armament information table hasn't been added to the character yet!",
-		UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
 	return F_ArmamentInformation();
 }
 
@@ -359,6 +367,206 @@ UAnimMontage* UCombatComponent::GetArmamentMontageFromDB(FName ArmamentId, EComb
 }
 
 
+
+
+
+bool UCombatComponent::UnequipArmor(EArmorSlot ArmorSlot)
+{
+	// Sanity checks
+	if (!ArmorAbilityHandles.Contains(ArmorSlot))
+	{
+		return true;
+	}
+	
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve the character while removing the armor!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		return false;
+	}
+
+	if (!Character->HasAuthority())
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Only remove the armor on the server!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		return false;
+	}
+
+	UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
+	if (!AbilitySystemComponent)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve the ability system while remove the armor!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		return false;
+	}
+
+	
+	// Remove any of the old armor abilities
+	F_Information_Armor_Handle& OldArmor = ArmorAbilityHandles[ArmorSlot];
+	AbilitySystemComponent->RemoveGameplayAbilities(OldArmor.AbilityHandles);
+	AbilitySystemComponent->RemoveGameplayEffect(OldArmor.ArmorStats);
+	for (FActiveGameplayEffectHandle& CurrentPassive : OldArmor.PassiveHandles)
+	{
+		AbilitySystemComponent->RemoveGameplayEffect(CurrentPassive);
+	}
+	
+	// Remove the armor from the character
+
+
+	
+	// Broadcast the event
+	F_Item Information = GetArmorItemInformation(ArmorSlot);
+	OnUnequippedArmor.Broadcast(GetArmorItemInformation(ArmorSlot), ArmorAbilities[ArmorSlot], ArmorSlot);
+
+	// Clear the old armor information
+	if (EArmorSlot::Gauntlets == ArmorSlot) Gauntlets = F_Item();
+	if (EArmorSlot::Leggings == ArmorSlot) Leggings = F_Item();
+	if (EArmorSlot::Chest == ArmorSlot) Chest = F_Item();
+	if (EArmorSlot::Helm == ArmorSlot) Helm = F_Item();
+	ArmorAbilityHandles.Remove(ArmorSlot);
+	ArmorAbilities.Remove(ArmorSlot);
+	return true;
+}
+
+
+bool UCombatComponent::EquipArmor(F_Item Armor)
+{
+	if (!Armor.IsValid())
+	{
+		return false;
+	}
+	
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve the character while creating the armor!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		return false;
+	}
+
+	if (!Character->HasAuthority())
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Only create the armor on the server!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		return false;
+	}
+
+	UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
+	if (!AbilitySystemComponent)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve the ability system while creating the armor!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		return false;
+	}
+	
+	F_Information_Armor ArmorInformation = GetArmorFromDatabase(Armor.ItemName);
+	if (!ArmorInformation.Id.IsValid() || ArmorInformation.ArmorSlot == EArmorSlot::None)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve the armor information!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		return false;
+	}
+	
+	// Remove any of the old armor
+	if (ArmorAbilityHandles.Contains(ArmorInformation.ArmorSlot))
+	{
+		UnequipArmor(ArmorInformation.ArmorSlot);
+	}
+
+	// Equip the armor
+	F_Information_Armor_Handle ArmorHandle;
+	ArmorHandle.ArmorStats = AbilitySystemComponent->AddGameplayEffect(ArmorInformation.ArmorStats);
+	
+	// Passives
+	for (const FGameplayEffectMapping& Passive : ArmorInformation.Passives)
+	{
+		ArmorHandle.PassiveHandles.Add(AbilitySystemComponent->AddGameplayEffect(Passive));
+	}
+	
+	// Abilities
+	for (const FGameplayAbilityMapping& Ability : ArmorInformation.Abilities)
+	{
+		ArmorHandle.AbilityHandles.Add(AbilitySystemComponent->AddAbility(Ability));
+	}
+
+	// Equip the armor to the character
+	
+
+	
+	// Broadcast the event
+	OnEquippedArmor.Broadcast(Armor, ArmorInformation, ArmorInformation.ArmorSlot);
+	
+	// Update the armor information
+	if (EArmorSlot::Gauntlets == ArmorInformation.ArmorSlot) Gauntlets = Armor;
+	if (EArmorSlot::Leggings == ArmorInformation.ArmorSlot) Leggings = Armor;
+	if (EArmorSlot::Chest == ArmorInformation.ArmorSlot) Chest = Armor;
+	if (EArmorSlot::Helm == ArmorInformation.ArmorSlot) Helm = Armor;
+	ArmorAbilities.Add(ArmorInformation.ArmorSlot, ArmorInformation);
+	ArmorAbilityHandles.Add(ArmorInformation.ArmorSlot, ArmorHandle);
+	return true;
+}
+
+
+F_Item UCombatComponent::GetArmorItemInformation(EArmorSlot ArmorSlot)
+{
+	if (EArmorSlot::Gauntlets == ArmorSlot) return Gauntlets;
+	if (EArmorSlot::Leggings == ArmorSlot) return Leggings;
+	if (EArmorSlot::Chest == ArmorSlot) return Chest;
+	if (EArmorSlot::Helm == ArmorSlot) return Helm;
+	return F_Item();
+}
+
+
+F_Information_Armor UCombatComponent::GetArmorAbilityInformation(EArmorSlot ArmorSlot)
+{
+	if (ArmorAbilities.Contains(ArmorSlot))
+	{
+		return ArmorAbilities[ArmorSlot];
+	}
+	return F_Information_Armor();
+}
+
+
+USkeletalMeshComponent* UCombatComponent::GetArmorMesh(EArmorSlot ArmorSlot)
+{
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve the character while retrieving the armor mesh!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		return nullptr;
+	}
+	
+	return nullptr;
+}
+
+
+const F_Information_Armor UCombatComponent::GetArmorFromDatabase(const FName Id) const
+{
+	if (ArmorInformationTable)
+	{
+		const FString RowContext(TEXT("Armor Information Context"));
+		if (const F_Table_Armors* Data = ArmorInformationTable->FindRow<F_Table_Armors>(Id, RowContext))
+		{
+			return Data->ArmorInformation;
+		}
+		else
+		{
+			UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve {2} from the armor information table!",
+				UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()), Id);
+		}
+	}
+	else
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} The armor information table hasn't been added to the character yet!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+	}
+
+	return F_Information_Armor();
+}
+
+
 const USkeletalMeshSocket* UCombatComponent::GetSkeletalSocket(const FName SocketName) const
 {
 	const ACharacterBase* OwningCharacter = Cast<ACharacterBase>(GetOwner());
@@ -373,17 +581,13 @@ const USkeletalMeshSocket* UCombatComponent::GetSkeletalSocket(const FName Socke
 
 FName UCombatComponent::GetEquippedSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const
 {
-	return FName();
-}
-
-
-FName UCombatComponent::GetHolsterSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const
-{
-	return FName();
-}
-
-
-FName UCombatComponent::GetSheathedSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const
-{
-	return FName();
+	const bool bRightHand = IsRightHandedArmament(EquipSlot);
+	if (!bRightHand)
+	{
+		return Socket_LeftHandEquip;
+	}
+	else
+	{
+		return Socket_RightHandEquip;
+	}
 }

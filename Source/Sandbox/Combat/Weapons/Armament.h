@@ -38,11 +38,11 @@ protected:
 	TObjectPtr <USkeletalMeshComponent> ArmamentMesh;
 
 	/** The information for this armament */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armaments")
 	F_ArmamentInformation ArmamentInformation;
 	
 	/** The current equip slot of the armament */
-	UPROPERTY(Replicated, BlueprintReadWrite, Category = "Armament") EEquipSlot EquipSlot;
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "Armaments") EEquipSlot EquipSlot;
 
 	/** The armament's ability handles */
 	UPROPERTY(BlueprintReadWrite) TArray<FGameplayAbilitySpecHandle> AbilityHandles;
@@ -52,6 +52,19 @@ protected:
 	
 	/** The armament's state information handle */
 	UPROPERTY(BlueprintReadWrite) FActiveGameplayEffectHandle StateInformationHandle;
+	
+	/**** Equip Information ****/
+	/** The socket location for the left hand weapon when it's unequipped */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament|Equipping") FName LeftHandSheatheSocket;
+	
+	/** The socket location for the right hand weapon when it's unequipped */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament|Equipping") FName RightHandSheatheSocket;
+
+	/** The socket location for the left hand weapon's holster */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament|Equipping") FName LeftHandHolsterSocket;
+	
+	/** The socket location for the right hand weapon's holster */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament|Equipping") FName RightHandHolsterSocket;
 
 	
 //-------------------------------------------------------------------------------------//
@@ -97,16 +110,22 @@ public:
 //-------------------------------------------------------------------------------------//
 public:
 	/** Sheathes the weapon for the character */ 
-	UFUNCTION(BlueprintCallable, Category = "Armaments|Equipping and Unequipping") virtual bool SheatheArmament();
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Equipping") virtual bool SheatheArmament();
 
 	/** Draw the character's sword */
-	UFUNCTION(BlueprintCallable, Category = "Armaments|Equipping and Unequipping") virtual bool UnsheatheArmament();
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Equipping") virtual bool UnsheatheArmament();
 
 
 protected:
 	/** Attach the armament to the character using socket locations. This works for both the character's hand, sheathe, or any other custom location */
 	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual bool AttachArmamentToSocket(FName Socket);
 	
+	/** Retrieves the holster for a specific equipped armament */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping") virtual FName GetHolsterSocketName() const;
+	
+	/** Retrieves the sheathed for a specific equipped armament */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping") virtual FName GetSheathedSocketName() const;
+
 	
 //-------------------------------------------------------------------------------------//
 // Utility																			   //

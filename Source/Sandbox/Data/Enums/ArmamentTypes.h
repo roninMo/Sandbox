@@ -74,6 +74,7 @@ enum class EArmamentClassification : uint8
 	None								UMETA(DisplayName = "None"),
 	Unarmed								UMETA(DisplayName = "Unarmed"),
 	StraightSwords						UMETA(DisplayName = "Straight Swords"),
+	GreatSwords							UMETA(DisplayName = "Great Swords"),
 	Katanas								UMETA(DisplayName = "Katanas"),
 	Knifes								UMETA(DisplayName = "Knifes"),
 	Axes								UMETA(DisplayName = "Axes"),

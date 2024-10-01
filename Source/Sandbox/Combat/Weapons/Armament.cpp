@@ -235,6 +235,28 @@ bool AArmament::AttachArmamentToSocket(const FName Socket)
 	
 	return HandSocket->AttachActor(this, Character->GetMesh());
 }
+
+
+FName AArmament::GetHolsterSocketName() const
+{
+	const UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent) return FName();
+	
+	const bool bRightHand = CombatComponent->IsRightHandedArmament(EquipSlot);
+	if (!bRightHand) return LeftHandHolsterSocket;
+	return RightHandHolsterSocket;
+}
+
+
+FName AArmament::GetSheathedSocketName() const
+{
+	const UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent) return FName();
+	
+	const bool bRightHand = CombatComponent->IsRightHandedArmament(EquipSlot);
+	if (!bRightHand) return LeftHandSheatheSocket;
+	return RightHandSheatheSocket;
+}
 #pragma endregion 
 
 
