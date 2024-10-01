@@ -5,7 +5,7 @@
 		{
 			"Id": "Soldier_Captain_Chest",
 			"ArmorSlot": "Chest",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Soldier/SKM_Armor_14_Chest.SKM_Armor_14_Chest'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -22,7 +22,7 @@
 		{
 			"Id": "Soldier_Captain_Gauntlets",
 			"ArmorSlot": "Gauntlets",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Soldier/SKM_Armor_14_Gauntlets.SKM_Armor_14_Gauntlets'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -39,7 +39,7 @@
 		{
 			"Id": "Soldier_Swordsman_Chest",
 			"ArmorSlot": "Chest",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Soldier/SKM_Armor_2_Chest.SKM_Armor_2_Chest'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -56,7 +56,7 @@
 		{
 			"Id": "Soldier_Fighter_Chest",
 			"ArmorSlot": "Chest",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Soldier/SKM_Armor_13_Chest.SKM_Armor_13_Chest'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -73,7 +73,7 @@
 		{
 			"Id": "Leather_Vest",
 			"ArmorSlot": "Chest",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Leather/SKM_Armor_6_Chest.SKM_Armor_6_Chest'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -90,7 +90,7 @@
 		{
 			"Id": "Leather_Shirt",
 			"ArmorSlot": "Chest",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Leather/SKM_Armor_3_Chest.SKM_Armor_3_Chest'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -107,7 +107,24 @@
 		{
 			"Id": "Leather_Armor",
 			"ArmorSlot": "Chest",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Leather/SKM_Armor_4_Chest.SKM_Armor_4_Chest'",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Leather_Leggings",
+		"ArmorInformation":
+		{
+			"Id": "None",
+			"ArmorSlot": "Leggings",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Leather/SKM_MedievalPants.SKM_MedievalPants'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -124,7 +141,7 @@
 		{
 			"Id": "Bandit_Captain_Chest",
 			"ArmorSlot": "Chest",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Bandit/SKM_Armor_7_Chest.SKM_Armor_7_Chest'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -141,7 +158,7 @@
 		{
 			"Id": "Cavalry_Leggings",
 			"ArmorSlot": "Leggings",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Cavalry/SKM_Armor_17_Leggings.SKM_Armor_17_Leggings'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -158,7 +175,7 @@
 		{
 			"Id": "Cavalry_Gauntlets",
 			"ArmorSlot": "Gauntlets",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Cavalry/SKM_Armor_17_Gauntlets.SKM_Armor_17_Gauntlets'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -175,7 +192,7 @@
 		{
 			"Id": "Cavalry_Helm",
 			"ArmorSlot": "Helm",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Cavalry/SKM_Armor_17_Helm.SKM_Armor_17_Helm'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -192,7 +209,7 @@
 		{
 			"Id": "Cavalry_Chest",
 			"ArmorSlot": "Chest",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Cavalry/SKM_Armor_17_Chest.SKM_Armor_17_Chest'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -209,7 +226,7 @@
 		{
 			"Id": "Knight_Leggings",
 			"ArmorSlot": "Leggings",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Knight/SKM_Armor_18_Leggings.SKM_Armor_18_Leggings'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -226,7 +243,7 @@
 		{
 			"Id": "Knight_Gauntlets",
 			"ArmorSlot": "Gauntlets",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Knight/SKM_Armor_18_Gauntlets.SKM_Armor_18_Gauntlets'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -243,7 +260,7 @@
 		{
 			"Id": "Knight_Helm",
 			"ArmorSlot": "Helm",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Knight/SKM_Armor_18_Helm.SKM_Armor_18_Helm'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -260,7 +277,7 @@
 		{
 			"Id": "Knight_Chest",
 			"ArmorSlot": "Chest",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Knight/SKM_Armor_18_Chest.SKM_Armor_18_Chest'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -277,7 +294,7 @@
 		{
 			"Id": "Brigandier_Leggings",
 			"ArmorSlot": "Leggings",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Brigandier/SKM_Armor_21_Leggings.SKM_Armor_21_Leggings'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -294,7 +311,7 @@
 		{
 			"Id": "Brigandier_Gauntlets",
 			"ArmorSlot": "Gauntlets",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Brigandier/SKM_Armor_21_Gauntlets.SKM_Armor_21_Gauntlets'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -311,7 +328,7 @@
 		{
 			"Id": "Brigandier_Helm",
 			"ArmorSlot": "Helm",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Brigandier/SKM_Armor_21_Helm.SKM_Armor_21_Helm'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -328,7 +345,7 @@
 		{
 			"Id": "Brigandier_Chest",
 			"ArmorSlot": "Chest",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Brigandier/SKM_Armor_21_Chest.SKM_Armor_21_Chest'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -345,7 +362,7 @@
 		{
 			"Id": "Owl_Leggings",
 			"ArmorSlot": "Leggings",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Owl/SKM_Armor_23_Leggings.SKM_Armor_23_Leggings'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -362,7 +379,7 @@
 		{
 			"Id": "Owl_Gauntlets",
 			"ArmorSlot": "Gauntlets",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Owl/SKM_Armor_23_Gauntlets.SKM_Armor_23_Gauntlets'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -379,7 +396,7 @@
 		{
 			"Id": "Owl_Helm",
 			"ArmorSlot": "Helm",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Owl/SKM_Armor_23_Helm.SKM_Armor_23_Helm'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -396,7 +413,7 @@
 		{
 			"Id": "Owl_Chest",
 			"ArmorSlot": "Chest",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Owl/SKM_Armor_23_Chest.SKM_Armor_23_Chest'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -413,7 +430,7 @@
 		{
 			"Id": "Tank_Leggings",
 			"ArmorSlot": "Leggings",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Tank/SKM_Armor_25_Leggings.SKM_Armor_25_Leggings'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -430,7 +447,7 @@
 		{
 			"Id": "Tank_Gauntlets",
 			"ArmorSlot": "Gauntlets",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Tank/SKM_Armor_25_Gauntlets.SKM_Armor_25_Gauntlets'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -447,7 +464,7 @@
 		{
 			"Id": "Tank_Helm",
 			"ArmorSlot": "Helm",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Tank/SKM_Armor_25_Helm.SKM_Armor_25_Helm'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -464,7 +481,7 @@
 		{
 			"Id": "Tank_Chest",
 			"ArmorSlot": "Chest",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Tank/SKM_Armor_25_Chest.SKM_Armor_25_Chest'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -481,7 +498,7 @@
 		{
 			"Id": "Bandit_Helm",
 			"ArmorSlot": "Helm",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Helms/SKM_Armor_Helm_01.SKM_Armor_Helm_01'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -498,7 +515,7 @@
 		{
 			"Id": "Bandit_Captain_Helm",
 			"ArmorSlot": "Helm",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Helms/SKM_Armor_Helm_02.SKM_Armor_Helm_02'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -515,7 +532,7 @@
 		{
 			"Id": "Jarl_Helm",
 			"ArmorSlot": "Helm",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Helms/SKM_Armor_Helm_03.SKM_Armor_Helm_03'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -532,7 +549,7 @@
 		{
 			"Id": "JomsViking_Helm",
 			"ArmorSlot": "Helm",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Helms/SKM_Armor_Helm_04.SKM_Armor_Helm_04'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -549,7 +566,7 @@
 		{
 			"Id": "Danes_Helm",
 			"ArmorSlot": "Helm",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Helms/SKM_Armor_Helm_05.SKM_Armor_Helm_05'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -566,7 +583,7 @@
 		{
 			"Id": "Berserker_Helm",
 			"ArmorSlot": "Helm",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Helms/SKM_Armor_Helm_06.SKM_Armor_Helm_06'",
 			"ArmorStats":
 			{
 				"Effect": "None",
@@ -583,7 +600,7 @@
 		{
 			"Id": "Inquisitor_Helm",
 			"ArmorSlot": "Helm",
-			"ArmorMesh": "None",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Helms/SKM_Armor_Helm_07.SKM_Armor_Helm_07'",
 			"ArmorStats":
 			{
 				"Effect": "None",
