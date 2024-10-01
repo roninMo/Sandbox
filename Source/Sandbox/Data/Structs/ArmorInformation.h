@@ -31,7 +31,7 @@ struct F_Information_Armor_Handle
 
 	/** The stored abilities that were granted from the armor */
 	UPROPERTY() TArray<FGameplayAbilitySpecHandle> AbilityHandles;
-    
+	
 	/** Default constructor */
 	F_Information_Armor_Handle() = default;
 

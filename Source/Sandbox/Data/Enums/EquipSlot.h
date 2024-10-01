@@ -12,11 +12,11 @@
 UENUM(BlueprintType)
 enum class EEquipSlot : uint8
 {
+	None								UMETA(DisplayName = "None"), 
 	LeftHandSlotOne						UMETA(DisplayName = "Left Hand Slot One"),
 	LeftHandSlotTwo						UMETA(DisplayName = "Left Hand Slot Two"),
 	LeftHandSlotThree					UMETA(DisplayName = "Left Hand Slot Three"),
 	RightHandSlotOne					UMETA(DisplayName = "Right Hand Slot One"),
 	RightHandSlotTwo					UMETA(DisplayName = "Right Hand Slot Two"),
 	RightHandSlotThree					UMETA(DisplayName = "Right Hand Slot Three"),
-	EE_None								UMETA(DisplayName = "None") // Keep this at the bottom so it doesn't mess up for loop calculations 
 };

@@ -3,12 +3,15 @@
 
 #include "Sandbox/Combat/Weapons/Armament.h"
 
+#include "Net/UnrealNetwork.h"
+#include "Sandbox/Characters/CharacterBase.h"
+#include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
+
+#include "Sandbox/Data/Structs/ArmamentInformation.h"
+#include "Sandbox/Data/Enums/MontageMappings.h"
 #include "Engine/SkeletalMeshSocket.h"
 #include "Logging/StructuredLog.h"
-#include "Net/UnrealNetwork.h"
-#include "Sandbox/Asc/AbilitySystem.h"
-#include "Sandbox/Characters/CharacterBase.h"
-#include "Sandbox/Data/Structs/ArmamentInformation.h"
 
 DEFINE_LOG_CATEGORY(ArmamentLog);
 
@@ -78,6 +81,32 @@ void AArmament::BeginPlay()
 }
 
 
+void AArmament::BeginDestroy()
+{
+	// Cleanup ability system logic
+	// UAbilitySystem* AbilitySystemComponent = UGameplayAbilitiyUtilities::GetAbilitySystem(GetOwner());
+	// if (AbilitySystemComponent)
+	// {
+	// 	// Remove armament state, passives, and abilities
+	// 	AbilitySystemComponent->RemoveGameplayEffect(StateInformationHandle, 1);
+	// 	StateInformationHandle.Invalidate();
+	//
+	// 	// Remove the armament's passives
+	// 	for (const FActiveGameplayEffectHandle& PassiveHandle : PassiveHandles)
+	// 	{
+	// 		AbilitySystemComponent->RemoveGameplayEffect(PassiveHandle, 1);
+	// 	}
+	// 	PassiveHandles.Empty();
+	//
+	// 	// Remove the armament's abilities
+	// 	AbilitySystemComponent->RemoveGameplayAbilities(AbilityHandles);
+	// 	AbilityHandles.Empty();
+	// }
+
+	Super::BeginDestroy();
+}
+
+
 
 
 #pragma region Construction and Deconstruction
@@ -91,9 +120,30 @@ bool AArmament::ConstructArmament()
 		return false;
 	}
 
+	UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
+	if (!AbilitySystemComponent)
+	{
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} Failed to retrieve the ability system while constructing the armament!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		return false;
+	}
+
 	// Add armament state and passives
+	StateInformationHandle = AbilitySystemComponent->AddGameplayEffect(ArmamentInformation.StateInformation);
+	for (const FGameplayEffectMapping& Passive : ArmamentInformation.Passives)
+	{
+		PassiveHandles.Add(AbilitySystemComponent->AddGameplayEffect(Passive));
+	}
+	
 	// Add armament abilities
+	for (const F_ArmamentAbilityInformation& ArmamentAbility : ArmamentInformation.Abilities)
+	{
+		AbilityHandles.Add(AbilitySystemComponent->AddAbility(FGameplayAbilityMapping(ArmamentAbility.Ability.Get(), ArmamentAbility.Level, ArmamentAbility.InputId)));
+	}
+	
 	// Add armament montages
+	// UpdateArmamentMontages(Character->GetCharacterToMontageMapping());
+	
 	return true;
 }
 
@@ -108,9 +158,31 @@ bool AArmament::DeconstructArmament()
 		return false;
 	}
 
-	// Remove armament state and passives
-	// Remove armament abilities
-	// Handle any cleanup and information specific to the character
+	UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
+	if (!AbilitySystemComponent)
+	{
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} Failed to retrieve the ability system while deconstructing the armament!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		return false;
+	}
+
+	// Remove armament state, passives, and abilities
+	AbilitySystemComponent->RemoveGameplayEffect(StateInformationHandle, 1);
+	StateInformationHandle.Invalidate();
+
+	// Remove the armament's passives
+	for (const FActiveGameplayEffectHandle& PassiveHandle : PassiveHandles)
+	{
+		AbilitySystemComponent->RemoveGameplayEffect(PassiveHandle, 1);
+	}
+	PassiveHandles.Empty();
+
+	// Remove the armament's abilities
+	AbilitySystemComponent->RemoveGameplayAbilities(AbilityHandles);
+	AbilityHandles.Empty();
+	
+	// Handle any cleanup and information specific to the armament
+
 	return true;
 }
 
@@ -128,9 +200,19 @@ bool AArmament::IsValidArmanent()
 
 
 #pragma region Montages
-bool AArmament::UpdateArmamentMontages(ECharacterToMontageMapping MontageMapping)
+bool AArmament::UpdateArmamentMontages(const ECharacterToMontageMapping MontageMapping)
 {
-	// For melee armaments, retrieve all combo montages, otherwise just retrieve the montage
+	// For melee armaments, retrieve all combo montages, otherwise just retrieve the montage (use "None" for armaments with a single montage for their animations (that aren't combo specific))
+	ArmamentMontages.Empty();
+	for (F_ArmamentAbilityInformation ArmamentAbility : ArmamentInformation.Abilities)
+	{
+		UAnimMontage* ArmamentComboMontage = GetArmamentMontageFromDB(ArmamentInformation.Id, ArmamentAbility.ComboType, MontageMapping);
+		if (ArmamentComboMontage)
+		{
+			ArmamentMontages.Add(ArmamentAbility.ComboType, ArmamentComboMontage);
+		}
+	}
+	
 	return true;
 }
 

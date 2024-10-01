@@ -6,8 +6,8 @@
 #include "Engine/DataTable.h"
 #include "ArmamentInformation.generated.h"
 
-enum class EComboType : uint8;
 enum class ECharacterToMontageMapping : uint8;
+enum class EComboType : uint8;
 
 
 /**

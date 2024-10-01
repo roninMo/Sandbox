@@ -45,6 +45,21 @@ void AMeleeArmament::BeginPlay()
 	Super::BeginPlay();
 }
 
+void AMeleeArmament::BeginDestroy()
+{
+	// // Delete the holster
+	// Holster->Destroy();
+	//
+	// // If there's a collision component, remove it's delegate bindings
+	// if (ArmamentCollision)
+	// {
+	// 	ArmamentCollision->OnComponentBeginOverlap.RemoveAll(this);
+	// 	ArmamentCollision->OnComponentEndOverlap.RemoveAll(this);
+	// }
+	
+	Super::BeginDestroy();
+}
+
 
 bool AMeleeArmament::ConstructArmament()
 {

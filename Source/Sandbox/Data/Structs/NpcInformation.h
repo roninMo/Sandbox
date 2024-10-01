@@ -26,8 +26,8 @@ struct F_NpcInformation
 			const TArray<FS_Item>& InventoryItems = {},
 			// const TArray<FS_WeaponInformation>& WeaponInformation = {},
 			
-			const EEquipSlot CurrentlyEquippedActiveWeapon = EEquipSlot::EE_None,
-			const EEquipSlot CurrentlyEquippedOffhandWeapon = EEquipSlot::EE_None,
+			const EEquipSlot CurrentlyEquippedActiveWeapon = EEquipSlot::None,
+			const EEquipSlot CurrentlyEquippedOffhandWeapon = EEquipSlot::None,
 			const TArray<FS_Item>& LeftHandWeapons = {},
 			const TArray<FS_Item>& RightHandWeapons = {},
 			

@@ -153,6 +153,18 @@ bool ACharacterBase::IsTraceConsideredVisible(const FHitResult* HitResult, const
 }
 
 
+UAbilitySystemComponent* ACharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
+
+// ECharacterToMontageMapping ACharacterBase::GetCharacterToMontageMapping() const
+// {
+// 	return MontageMapping;
+// }
+
+
 UCombatComponent* ACharacterBase::GetCombatComponent() const
 {
 	return CombatComponent;

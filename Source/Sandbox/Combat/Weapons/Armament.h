@@ -9,11 +9,10 @@
 #include "ActiveGameplayEffectHandle.h"
 #include "Armament.generated.h"
 
-class ACharacterBase;
-class UCombatComponent;
 DECLARE_LOG_CATEGORY_EXTERN(ArmamentLog, Log, All);
 
-
+class ACharacterBase;
+class UCombatComponent;
 class UGameplayEffect;
 struct F_ArmamentAbilityInformation;
 struct FGameplayEffectMapping;
@@ -65,6 +64,9 @@ protected:
 	
 	/** Overridable native event for when play begins for this actor. */
 	virtual void BeginPlay() override;
+
+	/** Called before destroying the object. This is called immediately upon deciding to destroy the object, to allow the object to begin an asynchronous cleanup process. */
+	virtual void BeginDestroy() override;
 	
 	
 public:
@@ -91,7 +93,7 @@ protected:
 
 public:
 	/** Updates the armament's montages provided a character to montage reference */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Montages") virtual bool UpdateArmamentMontages(ECharacterToMontageMapping MontageMapping);
+	UFUNCTION(BlueprintCallable, Category = "Armament|Montages") virtual bool UpdateArmamentMontages(const ECharacterToMontageMapping MontageMapping);
 
 	/** Retrieves the armament montage from the armament montage database. For ranged weapons, use EComboType::None */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Montages") virtual UAnimMontage* GetArmamentMontageFromDB(FName ArmamentId, EComboType ComboType, ECharacterToMontageMapping Mapping);

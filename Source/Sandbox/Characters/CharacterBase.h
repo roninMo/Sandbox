@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystemInterface.h"
 #include "GameFramework/Character.h"
 #include "Perception/AISightTargetInterface.h"
 #include "Sandbox/Data/Structs/AbilityInformation.h"
@@ -273,6 +274,7 @@
 */
 
 
+enum class ECharacterToMontageMapping : uint8;
 class UCombatComponent;
 class UAbilitySystem;
 class UInventoryComponent;
@@ -284,23 +286,15 @@ class UAdvancedMovementComponent;
  * The universal class for characters, npc's, and enemies in the game
  */
 UCLASS()
-class SANDBOX_API ACharacterBase : public ACharacter, public IAISightTargetInterface
+class SANDBOX_API ACharacterBase : public ACharacter, public IAbilitySystemInterface, public IAISightTargetInterface
 {
 	GENERATED_BODY()
 
 protected:
-	/** A stored reference to the player's ability system component */
-	UPROPERTY(BlueprintReadWrite) TObjectPtr<UAbilitySystem> AbilitySystemComponent;
-	
-	/** Input bindings for the ability pressed and released events. Don't forget to also add input mappings to the player's input mapping context */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System Component") TArray<FInputActionAbilityMap> AbilityInputActions;
 
-	
+
 public:
 	ACharacterBase(const FObjectInitializer& ObjectInitializer);
-
-
-
 
 	
 //----------------------------------------------------------------------//
@@ -388,12 +382,47 @@ protected:
 	/** This calculates whether an ai character has sensed this player, and uses the default logic with an offset for accurate traces  */
 	virtual UAISense_Sight::EVisibilityResult CanBeSeenFrom(const FCanBeSeenFromContext& Context, FVector& OutSeenLocation, int32& OutNumberOfLoSChecksPerformed, int32& OutNumberOfAsyncLosCheckRequested, float& OutSightStrength, int32* UserData, const FOnPendingVisibilityQueryProcessedDelegate* Delegate) override;
 	virtual bool IsTraceConsideredVisible(const FHitResult* HitResult, const AActor* TargetActor);
-	
+
 
 
 	
 //-------------------------------------------------------------------------------------//
-// Camera																			   //
+// Ability System Component															   //
+//-------------------------------------------------------------------------------------//
+protected:
+	/** A stored reference to the player's ability system component */
+	UPROPERTY(BlueprintReadWrite, Category = "Ability System Component") TObjectPtr<UAbilitySystem> AbilitySystemComponent;
+	
+	/** Input bindings for the ability pressed and released events. Don't forget to also add input mappings to the player's input mapping context */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System Component") TArray<FInputActionAbilityMap> AbilityInputActions;
+
+
+public:
+	/** Templated convenience version for retrieving the ability system component. */
+	template<class T> T* GetAbilitySystem(void) const { return Cast<T>(GetAbilitySystemComponent()); }
+
+	/** Returns the ability system component to use for this actor. It may live on another actor, such as a Pawn using the PlayerState's component */
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	
+
+	
+
+//-------------------------------------------------------------------------------------//
+// Combat																			   //
+//-------------------------------------------------------------------------------------//
+protected:
+// 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation") TEnumAsByte<ECharacterToMontageMapping> MontageMapping;
+//
+//
+// public:
+// 	/** Retrieves the character to montage mapping. Used for retrieving the proper animations for different character skeletons */
+// 	UFUNCTION(BlueprintCallable, Category = "Animation|Utilities") virtual ECharacterToMontageMapping GetCharacterToMontageMapping() const;
+
+
+	
+	
+//-------------------------------------------------------------------------------------//
+// Combat																			   //
 //-------------------------------------------------------------------------------------//
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
@@ -407,16 +436,7 @@ public:
 	/** Retrieves the combat component */
 	UFUNCTION(BlueprintCallable, Category="Combat", DisplayName="Get Combat Component")
 	virtual UCombatComponent* GetCombatComponent() const;
-
-
-
-
 	
-//-------------------------------------------------------------------------------------//
-// Camera																			   //
-//-------------------------------------------------------------------------------------//
-protected:
-
 
 
 	
