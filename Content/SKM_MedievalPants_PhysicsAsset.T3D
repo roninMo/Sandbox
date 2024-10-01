@@ -1,0 +1,132 @@
+Begin Object Class=/Script/Engine.PhysicsAsset Name="SKM_MedievalPants_PhysicsAsset" ExportPath=/Script/Engine.PhysicsAsset'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset"'
+   Begin Object Class=/Script/Engine.SkeletalBodySetup Name="SkeletalBodySetup_8" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_8"'
+   End Object
+   Begin Object Class=/Script/Engine.SkeletalBodySetup Name="SkeletalBodySetup_7" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_7"'
+   End Object
+   Begin Object Class=/Script/Engine.SkeletalBodySetup Name="SkeletalBodySetup_6" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_6"'
+   End Object
+   Begin Object Class=/Script/Engine.SkeletalBodySetup Name="SkeletalBodySetup_5" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_5"'
+   End Object
+   Begin Object Class=/Script/Engine.SkeletalBodySetup Name="SkeletalBodySetup_4" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_4"'
+   End Object
+   Begin Object Class=/Script/Engine.SkeletalBodySetup Name="SkeletalBodySetup_3" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_3"'
+   End Object
+   Begin Object Class=/Script/Engine.SkeletalBodySetup Name="SkeletalBodySetup_2" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_2"'
+   End Object
+   Begin Object Class=/Script/Engine.SkeletalBodySetup Name="SkeletalBodySetup_1" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_1"'
+   End Object
+   Begin Object Class=/Script/Engine.SkeletalBodySetup Name="SkeletalBodySetup_0" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_0"'
+   End Object
+   Begin Object Class=/Script/Engine.PhysicsConstraintTemplate Name="PhysicsConstraintTemplate_7" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_7"'
+   End Object
+   Begin Object Class=/Script/Engine.PhysicsConstraintTemplate Name="PhysicsConstraintTemplate_6" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_6"'
+   End Object
+   Begin Object Class=/Script/Engine.PhysicsConstraintTemplate Name="PhysicsConstraintTemplate_5" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_5"'
+   End Object
+   Begin Object Class=/Script/Engine.PhysicsConstraintTemplate Name="PhysicsConstraintTemplate_4" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_4"'
+   End Object
+   Begin Object Class=/Script/Engine.PhysicsConstraintTemplate Name="PhysicsConstraintTemplate_3" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_3"'
+   End Object
+   Begin Object Class=/Script/Engine.PhysicsConstraintTemplate Name="PhysicsConstraintTemplate_2" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_2"'
+   End Object
+   Begin Object Class=/Script/Engine.PhysicsConstraintTemplate Name="PhysicsConstraintTemplate_1" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_1"'
+   End Object
+   Begin Object Class=/Script/Engine.PhysicsConstraintTemplate Name="PhysicsConstraintTemplate_0" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_0"'
+   End Object
+   Begin Object Name="SkeletalBodySetup_8" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_8"'
+      AggGeom=(SphylElems=((Center=(X=-0.349486,Y=2.103958,Z=-0.156196),Rotation=(Pitch=-0.000000,Yaw=85.103247,Roll=-87.553065),Radius=10.179863,Length=18.821033)))
+      BoneName="thigh_twist_02_l"
+      CollisionTraceFlag=CTF_UseSimpleAsComplex
+   End Object
+   Begin Object Name="SkeletalBodySetup_7" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_7"'
+      AggGeom=(SphylElems=((Center=(X=-3.429402,Y=9.063831,Z=-0.784275),Rotation=(Pitch=-0.000000,Yaw=-176.248705,Roll=-79.634812),Radius=6.404346,Length=15.437318)))
+      BoneName="foot_l"
+      CollisionTraceFlag=CTF_UseSimpleAsComplex
+   End Object
+   Begin Object Name="SkeletalBodySetup_6" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_6"'
+      AggGeom=(SphylElems=((Center=(X=-19.303270,Y=-2.016190,Z=-1.469545),Rotation=(Pitch=0.000000,Yaw=-92.652654,Roll=-89.174910),Radius=10.366769,Length=23.438517)))
+      BoneName="calf_l"
+      CollisionTraceFlag=CTF_UseSimpleAsComplex
+   End Object
+   Begin Object Name="SkeletalBodySetup_5" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_5"'
+      AggGeom=(SphylElems=((Center=(X=-7.181889,Y=-0.478968,Z=-0.679196),Rotation=(Pitch=0.000000,Yaw=168.488853,Roll=-84.157590),Radius=10.395785,Length=11.820673)))
+      BoneName="thigh_l"
+      CollisionTraceFlag=CTF_UseSimpleAsComplex
+   End Object
+   Begin Object Name="SkeletalBodySetup_4" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_4"'
+      AggGeom=(SphylElems=((Center=(X=-1.672856,Y=-2.797302,Z=-1.477370),Rotation=(Pitch=0.000000,Yaw=-124.279864,Roll=-76.931805),Radius=15.182574,Length=17.795338)))
+      BoneName="thigh_twist_02_r"
+      CollisionTraceFlag=CTF_UseSimpleAsComplex
+   End Object
+   Begin Object Name="SkeletalBodySetup_3" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_3"'
+      AggGeom=(SphylElems=((Center=(X=3.228144,Y=-9.065862,Z=0.826336),Rotation=(Pitch=0.000000,Yaw=-176.254073,Roll=-79.942608),Radius=6.384756,Length=15.435962)))
+      BoneName="foot_r"
+      CollisionTraceFlag=CTF_UseSimpleAsComplex
+   End Object
+   Begin Object Name="SkeletalBodySetup_2" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_2"'
+      AggGeom=(SphylElems=((Center=(X=19.479843,Y=2.027308,Z=1.479432),Rotation=(Pitch=-0.000000,Yaw=-92.471377,Roll=-89.361594),Radius=10.349113,Length=23.232042)))
+      BoneName="calf_r"
+      CollisionTraceFlag=CTF_UseSimpleAsComplex
+   End Object
+   Begin Object Name="SkeletalBodySetup_1" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_1"'
+      AggGeom=(SphylElems=((Center=(X=7.955765,Y=0.428777,Z=-0.238084),Rotation=(Pitch=0.000000,Yaw=-31.442535,Roll=-69.589376),Radius=10.553280,Length=12.684516)))
+      BoneName="thigh_r"
+      CollisionTraceFlag=CTF_UseSimpleAsComplex
+   End Object
+   Begin Object Name="SkeletalBodySetup_0" ExportPath=/Script/Engine.SkeletalBodySetup'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:SkeletalBodySetup_0"'
+      AggGeom=(SphylElems=((Center=(X=-0.274967,Y=1.217356,Z=-0.358269),Rotation=(Pitch=0.000000,Yaw=-8.021323,Roll=-169.679896),Radius=17.017574,Length=18.593138)))
+      BoneName="pelvis"
+      CollisionTraceFlag=CTF_UseSimpleAsComplex
+   End Object
+   Begin Object Name="PhysicsConstraintTemplate_7" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_7"'
+      DefaultInstance=(JointName="thigh_twist_02_l",ConstraintBone1="thigh_twist_02_l",ConstraintBone2="thigh_l",Pos2=(X=-28.894249,Y=-0.000011,Z=-0.000013),PriAxis2=(X=0.999728,Y=0.022894,Z=-0.004485),SecAxis2=(X=-0.022895,Y=0.999738,Z=-0.000024),ProfileInstance=(ConeLimit=(Swing1Motion=ACM_Limited,Swing2Motion=ACM_Limited),TwistLimit=(TwistMotion=ACM_Limited)))
+   End Object
+   Begin Object Name="PhysicsConstraintTemplate_6" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_6"'
+      DefaultInstance=(JointName="foot_l",ConstraintBone1="foot_l",ConstraintBone2="calf_l",Pos2=(X=-42.217873,Y=-0.000012,Z=-0.000008),PriAxis2=(X=0.997475,Y=-0.046414,Z=-0.053751),SecAxis2=(X=0.046485,Y=0.998919,Z=0.000081),ProfileInstance=(ConeLimit=(Swing1Motion=ACM_Limited,Swing2Motion=ACM_Limited),TwistLimit=(TwistMotion=ACM_Limited)))
+   End Object
+   Begin Object Name="PhysicsConstraintTemplate_5" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_5"'
+      DefaultInstance=(JointName="calf_l",ConstraintBone1="calf_l",ConstraintBone2="thigh_l",Pos2=(X=-43.341370,Y=-0.000013,Z=-0.000006),PriAxis2=(X=0.996187,Y=0.087240,Z=-0.000000),SecAxis2=(X=-0.087240,Y=0.996187,Z=-0.000000),ProfileInstance=(ConeLimit=(Swing1Motion=ACM_Limited,Swing2Motion=ACM_Limited),TwistLimit=(TwistMotion=ACM_Limited)))
+   End Object
+   Begin Object Name="PhysicsConstraintTemplate_4" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_4"'
+      DefaultInstance=(JointName="thigh_l",ConstraintBone1="thigh_l",ConstraintBone2="pelvis",Pos2=(X=-2.365726,Y=0.110049,Z=-9.969203),PriAxis2=(X=0.996586,Y=0.062004,Z=0.054524),SecAxis2=(X=-0.053471,Y=0.987837,Z=-0.146013),ProfileInstance=(ConeLimit=(Swing1Motion=ACM_Limited,Swing2Motion=ACM_Limited),TwistLimit=(TwistMotion=ACM_Limited)))
+   End Object
+   Begin Object Name="PhysicsConstraintTemplate_3" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_3"'
+      DefaultInstance=(JointName="thigh_twist_02_r",ConstraintBone1="thigh_twist_02_r",ConstraintBone2="thigh_r",Pos2=(X=28.894135,Y=0.000001,Z=0.000147),PriAxis2=(X=0.999726,Y=0.022691,Z=-0.005829),SecAxis2=(X=-0.022691,Y=0.999743,Z=0.000012),ProfileInstance=(ConeLimit=(Swing1Motion=ACM_Limited,Swing2Motion=ACM_Limited),TwistLimit=(TwistMotion=ACM_Limited)))
+   End Object
+   Begin Object Name="PhysicsConstraintTemplate_2" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_2"'
+      DefaultInstance=(JointName="foot_r",ConstraintBone1="foot_r",ConstraintBone2="calf_r",Pos2=(X=42.217953,Y=0.000006,Z=0.000048),PriAxis2=(X=0.997475,Y=-0.046413,Z=-0.053749),SecAxis2=(X=0.046485,Y=0.998919,Z=0.000081),ProfileInstance=(ConeLimit=(Swing1Motion=ACM_Limited,Swing2Motion=ACM_Limited),TwistLimit=(TwistMotion=ACM_Limited)))
+   End Object
+   Begin Object Name="PhysicsConstraintTemplate_1" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_1"'
+      DefaultInstance=(JointName="calf_r",ConstraintBone1="calf_r",ConstraintBone2="thigh_r",Pos2=(X=43.341232,Y=0.000005,Z=0.000219),PriAxis2=(X=0.996187,Y=0.087240,Z=0.000004),SecAxis2=(X=-0.087240,Y=0.996187,Z=-0.000001),ProfileInstance=(ConeLimit=(Swing1Motion=ACM_Limited,Swing2Motion=ACM_Limited),TwistLimit=(TwistMotion=ACM_Limited)))
+   End Object
+   Begin Object Name="PhysicsConstraintTemplate_0" ExportPath=/Script/Engine.PhysicsConstraintTemplate'"/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants_PhysicsAsset.SKM_MedievalPants_PhysicsAsset:PhysicsConstraintTemplate_0"'
+      DefaultInstance=(JointName="thigh_r",ConstraintBone1="thigh_r",ConstraintBone2="pelvis",Pos2=(X=-2.365760,Y=0.119491,Z=9.969094),PriAxis2=(X=-0.996586,Y=-0.062003,Z=0.054519),SecAxis2=(X=0.053471,Y=-0.987836,Z=-0.146013),ProfileInstance=(ConeLimit=(Swing1Motion=ACM_Limited,Swing2Motion=ACM_Limited),TwistLimit=(TwistMotion=ACM_Limited)))
+   End Object
+   PreviewSkeletalMesh="/Game/Prototypes/Characters/Manny/Character/Modular/SKM_MedievalPants.SKM_MedievalPants"
+   BoundsBodies(0)=0
+   BoundsBodies(1)=1
+   BoundsBodies(2)=2
+   BoundsBodies(3)=3
+   BoundsBodies(4)=4
+   BoundsBodies(5)=5
+   BoundsBodies(6)=6
+   BoundsBodies(7)=7
+   BoundsBodies(8)=8
+   SkeletalBodySetups(0)=/Script/Engine.SkeletalBodySetup'"SkeletalBodySetup_0"'
+   SkeletalBodySetups(1)=/Script/Engine.SkeletalBodySetup'"SkeletalBodySetup_1"'
+   SkeletalBodySetups(2)=/Script/Engine.SkeletalBodySetup'"SkeletalBodySetup_2"'
+   SkeletalBodySetups(3)=/Script/Engine.SkeletalBodySetup'"SkeletalBodySetup_3"'
+   SkeletalBodySetups(4)=/Script/Engine.SkeletalBodySetup'"SkeletalBodySetup_4"'
+   SkeletalBodySetups(5)=/Script/Engine.SkeletalBodySetup'"SkeletalBodySetup_5"'
+   SkeletalBodySetups(6)=/Script/Engine.SkeletalBodySetup'"SkeletalBodySetup_6"'
+   SkeletalBodySetups(7)=/Script/Engine.SkeletalBodySetup'"SkeletalBodySetup_7"'
+   SkeletalBodySetups(8)=/Script/Engine.SkeletalBodySetup'"SkeletalBodySetup_8"'
+   ConstraintSetup(0)=/Script/Engine.PhysicsConstraintTemplate'"PhysicsConstraintTemplate_0"'
+   ConstraintSetup(1)=/Script/Engine.PhysicsConstraintTemplate'"PhysicsConstraintTemplate_1"'
+   ConstraintSetup(2)=/Script/Engine.PhysicsConstraintTemplate'"PhysicsConstraintTemplate_2"'
+   ConstraintSetup(3)=/Script/Engine.PhysicsConstraintTemplate'"PhysicsConstraintTemplate_3"'
+   ConstraintSetup(4)=/Script/Engine.PhysicsConstraintTemplate'"PhysicsConstraintTemplate_4"'
+   ConstraintSetup(5)=/Script/Engine.PhysicsConstraintTemplate'"PhysicsConstraintTemplate_5"'
+   ConstraintSetup(6)=/Script/Engine.PhysicsConstraintTemplate'"PhysicsConstraintTemplate_6"'
+   ConstraintSetup(7)=/Script/Engine.PhysicsConstraintTemplate'"PhysicsConstraintTemplate_7"'
+End Object

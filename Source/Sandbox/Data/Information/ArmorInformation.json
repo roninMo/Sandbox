@@ -1,0 +1,597 @@
+[
+	{
+		"Name": "Soldier_Captain_Chest",
+		"ArmorInformation":
+		{
+			"Id": "Soldier_Captain_Chest",
+			"ArmorSlot": "Chest",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Soldier_Captain_Gauntlets",
+		"ArmorInformation":
+		{
+			"Id": "Soldier_Captain_Gauntlets",
+			"ArmorSlot": "Gauntlets",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Soldier_Swordsman_Chest",
+		"ArmorInformation":
+		{
+			"Id": "Soldier_Swordsman_Chest",
+			"ArmorSlot": "Chest",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Soldier_Fighter_Chest",
+		"ArmorInformation":
+		{
+			"Id": "Soldier_Fighter_Chest",
+			"ArmorSlot": "Chest",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Leather_Vest",
+		"ArmorInformation":
+		{
+			"Id": "Leather_Vest",
+			"ArmorSlot": "Chest",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Leather_Shirt",
+		"ArmorInformation":
+		{
+			"Id": "Leather_Shirt",
+			"ArmorSlot": "Chest",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Leather_Armor",
+		"ArmorInformation":
+		{
+			"Id": "Leather_Armor",
+			"ArmorSlot": "Chest",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Bandit_Captain_Chest",
+		"ArmorInformation":
+		{
+			"Id": "Bandit_Captain_Chest",
+			"ArmorSlot": "Chest",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Cavalry_Leggings",
+		"ArmorInformation":
+		{
+			"Id": "Cavalry_Leggings",
+			"ArmorSlot": "Leggings",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Cavalry_Gauntlets",
+		"ArmorInformation":
+		{
+			"Id": "Cavalry_Gauntlets",
+			"ArmorSlot": "Gauntlets",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Cavalry_Helm",
+		"ArmorInformation":
+		{
+			"Id": "Cavalry_Helm",
+			"ArmorSlot": "Helm",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Cavalry_Chest",
+		"ArmorInformation":
+		{
+			"Id": "Cavalry_Chest",
+			"ArmorSlot": "Chest",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Knight_Leggings",
+		"ArmorInformation":
+		{
+			"Id": "Knight_Leggings",
+			"ArmorSlot": "Leggings",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Knight_Gauntlets",
+		"ArmorInformation":
+		{
+			"Id": "Knight_Gauntlets",
+			"ArmorSlot": "Gauntlets",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Knight_Helm",
+		"ArmorInformation":
+		{
+			"Id": "Knight_Helm",
+			"ArmorSlot": "Helm",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Knight_Chest",
+		"ArmorInformation":
+		{
+			"Id": "Knight_Chest",
+			"ArmorSlot": "Chest",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Brigandier_Leggings",
+		"ArmorInformation":
+		{
+			"Id": "Brigandier_Leggings",
+			"ArmorSlot": "Leggings",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Brigandier_Gauntlets",
+		"ArmorInformation":
+		{
+			"Id": "Brigandier_Gauntlets",
+			"ArmorSlot": "Gauntlets",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Brigandier_Helm",
+		"ArmorInformation":
+		{
+			"Id": "Brigandier_Helm",
+			"ArmorSlot": "Helm",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Brigandier_Chest",
+		"ArmorInformation":
+		{
+			"Id": "Brigandier_Chest",
+			"ArmorSlot": "Chest",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Owl_Leggings",
+		"ArmorInformation":
+		{
+			"Id": "Owl_Leggings",
+			"ArmorSlot": "Leggings",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Owl_Gauntlets",
+		"ArmorInformation":
+		{
+			"Id": "Owl_Gauntlets",
+			"ArmorSlot": "Gauntlets",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Owl_Helm",
+		"ArmorInformation":
+		{
+			"Id": "Owl_Helm",
+			"ArmorSlot": "Helm",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Owl_Chest",
+		"ArmorInformation":
+		{
+			"Id": "Owl_Chest",
+			"ArmorSlot": "Chest",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Tank_Leggings",
+		"ArmorInformation":
+		{
+			"Id": "Tank_Leggings",
+			"ArmorSlot": "Leggings",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Tank_Gauntlets",
+		"ArmorInformation":
+		{
+			"Id": "Tank_Gauntlets",
+			"ArmorSlot": "Gauntlets",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Tank_Helm",
+		"ArmorInformation":
+		{
+			"Id": "Tank_Helm",
+			"ArmorSlot": "Helm",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Tank_Chest",
+		"ArmorInformation":
+		{
+			"Id": "Tank_Chest",
+			"ArmorSlot": "Chest",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Bandit_Helm",
+		"ArmorInformation":
+		{
+			"Id": "Bandit_Helm",
+			"ArmorSlot": "Helm",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Bandit_Captain_Helm",
+		"ArmorInformation":
+		{
+			"Id": "Bandit_Captain_Helm",
+			"ArmorSlot": "Helm",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Jarl_Helm",
+		"ArmorInformation":
+		{
+			"Id": "Jarl_Helm",
+			"ArmorSlot": "Helm",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "JomsViking_Helm",
+		"ArmorInformation":
+		{
+			"Id": "JomsViking_Helm",
+			"ArmorSlot": "Helm",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Danes_Helm",
+		"ArmorInformation":
+		{
+			"Id": "Danes_Helm",
+			"ArmorSlot": "Helm",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Berserker_Helm",
+		"ArmorInformation":
+		{
+			"Id": "Berserker_Helm",
+			"ArmorSlot": "Helm",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Inquisitor_Helm",
+		"ArmorInformation":
+		{
+			"Id": "Inquisitor_Helm",
+			"ArmorSlot": "Helm",
+			"ArmorMesh": "None",
+			"ArmorStats":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Passives": [],
+			"Abilities": []
+		},
+		"DevDescription": ""
+	}
+]

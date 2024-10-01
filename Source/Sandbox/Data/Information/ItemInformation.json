@@ -1,51 +1,5 @@
 [
 	{
-		"Name": "Soldier_Archer_Chest",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": 966642533,
-				"B": 1268756768,
-				"C": 1912860042,
-				"D": 537301185
-			},
-			"SortOrder": -1,
-			"ItemName": "Soldier_Archer_Chest",
-			"DisplayName": "Soldier_Archer_Chest",
-			"Description": "An Archer soldier's chestplate",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SoldierSets/BPI_Soldier_Archer_Chest.BPI_Soldier_Archer_Chest_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "Soldier_Rogue_Chest",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -561619661,
-				"B": 1331186316,
-				"C": 1977478322,
-				"D": -1238179258
-			},
-			"SortOrder": -1,
-			"ItemName": "Soldier_Rogue_Chest",
-			"DisplayName": "Soldier_Rogue_Chest",
-			"Description": "A rogue soldier's chestplate",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SoldierSets/BPI_Soldier_Rogue_Chest.BPI_Soldier_Rogue_Chest_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
 		"Name": "Soldier_Captain_Chest",
 		"ItemInformation":
 		{
@@ -58,7 +12,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Soldier_Captain_Chest",
-			"DisplayName": "Soldier_Captain_Chest",
+			"DisplayName": "Soldier Captain Chestplate",
 			"Description": "a captain soldier's chestplate",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -81,7 +35,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Soldier_Captain_Gauntlets",
-			"DisplayName": "Soldier_Captain_Gauntlets",
+			"DisplayName": "Soldier Captain Gauntlets",
 			"Description": "a captain soldier's gauntlets",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -104,7 +58,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Soldier_Swordsman_Chest",
-			"DisplayName": "Soldier_Swordsman_Chest",
+			"DisplayName": "Soldier Swordsman Chestplate",
 			"Description": "a swordsman soldier's chestplate",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -127,7 +81,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Soldier_Fighter_Chest",
-			"DisplayName": "Soldier_Fighter_Chest",
+			"DisplayName": "Soldier Fighter Chestplate",
 			"Description": "a soldier fighter's chestplate",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -150,7 +104,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Leather_Vest",
-			"DisplayName": "Leather_Vest",
+			"DisplayName": "Leather Vest",
 			"Description": "A leather vest",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -173,7 +127,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Leather_Shirt",
-			"DisplayName": "Leather_Shirt",
+			"DisplayName": "Leather Shirt",
 			"Description": "A leather shirt",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -196,35 +150,12 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Leather_Armor",
-			"DisplayName": "Leather_Armor",
+			"DisplayName": "Leather Armor",
 			"Description": "leather chestplate armor",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
 			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/LeatherApparel/BPI_Leather_Armor.BPI_Leather_Armor_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "Bandit_Archer_Chest",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -1596297584,
-				"B": 1238926405,
-				"C": 239270832,
-				"D": 1855004812
-			},
-			"SortOrder": -1,
-			"ItemName": "Bandit_Archer_Chest",
-			"DisplayName": "Bandit_Archer_Chest",
-			"Description": "A bandit archer's chestplate",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BanditSets/BPI_Bandit_Archer_Chest.BPI_Bandit_Archer_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -242,58 +173,104 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Bandit_Captain_Chest",
-			"DisplayName": "Bandit_Captain_Chest",
+			"DisplayName": "Bandit Captain Chestplate",
 			"Description": "A bandit captain's chestplate",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BanditSets/BPI_Bandit_Captain_Chest.BPI_Bandit_Captain_Chest_C'",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/LeatherApparel/BPI_Bandit_Chest.BPI_Bandit_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
 	},
 	{
-		"Name": "Bandit_Fighter_Chest",
+		"Name": "Cavalry_Leggings",
 		"ItemInformation":
 		{
 			"Id":
 			{
-				"A": 1473684878,
-				"B": 1314615797,
-				"C": -774663507,
-				"D": 664954511
+				"A": -353803982,
+				"B": 1123064611,
+				"C": -1431719747,
+				"D": 2075816338
 			},
 			"SortOrder": -1,
-			"ItemName": "Bandit_Fighter_Chest",
-			"DisplayName": "Bandit_Fighter_Chest",
-			"Description": "A bandit fighter's chestplate",
+			"ItemName": "Cavalry_Leggings",
+			"DisplayName": "Cavalry Leggings",
+			"Description": "A Cavary's leggings",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BanditSets/BPI_Bandit_Fighter_Chest.BPI_Bandit_Fighter_Chest_C'",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Cavalry/BPI_Cavalry_Leggings.BPI_Cavalry_Leggings_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
 	},
 	{
-		"Name": "Bandit_Brawler_Chest",
+		"Name": "Cavalry_Gauntlets",
 		"ItemInformation":
 		{
 			"Id":
 			{
-				"A": 1595996310,
-				"B": 1224758968,
-				"C": -893955935,
-				"D": -1263560471
+				"A": 1510503753,
+				"B": 1095607351,
+				"C": -1951670087,
+				"D": -1788420581
 			},
 			"SortOrder": -1,
-			"ItemName": "Bandit_Brawler_Chest",
-			"DisplayName": "Bandit_Brawler_Chest",
-			"Description": "A bandit brawler's chestplate",
+			"ItemName": "Cavalry_Gauntlets",
+			"DisplayName": "Cavalry Gauntlets",
+			"Description": "A Cavalry's gauntlets",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BanditSets/BPI_Bandit_Brawler_Chest.BPI_Bandit_Brawler_Chest_C'",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Cavalry/BPI_Cavalry_Gauntlets.BPI_Cavalry_Gauntlets_C'",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Cavalry_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -753011820,
+				"B": 1251525340,
+				"C": 1548913339,
+				"D": 1757592641
+			},
+			"SortOrder": -1,
+			"ItemName": "Calvalry_Helm",
+			"DisplayName": "Calvalry Helm",
+			"Description": "A Cavalry's helm",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
+			"ActualClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Cavalry/BPI_Cavalry_Helm.BPI_Cavalry_Helm_C'",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Cavalry_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1926098502,
+				"B": 1090222082,
+				"C": 1649864630,
+				"D": -849930014
+			},
+			"SortOrder": -1,
+			"ItemName": "Calvalry_Chest",
+			"DisplayName": "Calvalry Chestplate",
+			"Description": "A Cavalry's chestplate",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
+			"ActualClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Cavalry/BPI_Cavalry_Chest.BPI_Cavalry_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -304,15 +281,15 @@
 		{
 			"Id":
 			{
-				"A": -1022082537,
-				"B": 1324141028,
-				"C": 706958485,
-				"D": 536772566
+				"A": -280574481,
+				"B": 1186262922,
+				"C": 1822581125,
+				"D": 810149228
 			},
 			"SortOrder": -1,
 			"ItemName": "Knight_Leggings",
-			"DisplayName": "Knight_Leggings",
-			"Description": "A knight's leggings",
+			"DisplayName": "Knight Leggings",
+			"Description": "A Knight's leggings",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
@@ -327,15 +304,15 @@
 		{
 			"Id":
 			{
-				"A": 11573779,
-				"B": 1335803756,
-				"C": 1088848535,
-				"D": -1693553582
+				"A": 466423304,
+				"B": 1218010309,
+				"C": 251479967,
+				"D": 494154148
 			},
 			"SortOrder": -1,
 			"ItemName": "Knight_Gauntlets",
-			"DisplayName": "Knight_Gauntlets",
-			"Description": "A knight's gauntlets",
+			"DisplayName": "Knight Gauntlets",
+			"Description": "A Knight's gauntlets",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
@@ -350,15 +327,15 @@
 		{
 			"Id":
 			{
-				"A": 1931270691,
-				"B": 1141897769,
-				"C": -106939260,
-				"D": 1190534245
+				"A": -1066972201,
+				"B": 1156590770,
+				"C": 116401333,
+				"D": 284979084
 			},
 			"SortOrder": -1,
 			"ItemName": "Knight_Helm",
-			"DisplayName": "Knight_Helm",
-			"Description": "A knight's helm",
+			"DisplayName": "Knight Helm",
+			"Description": "A Knight's helm",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
@@ -373,295 +350,19 @@
 		{
 			"Id":
 			{
-				"A": 1457882787,
-				"B": 1273645106,
-				"C": 233799040,
-				"D": -237033465
-			},
-			"SortOrder": -1,
-			"ItemName": "Knight_Chest",
-			"DisplayName": "Knight_Chest",
-			"Description": "A knight's chest",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/BPI_Knight_Chest.BPI_Knight_Chest_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "KnightCaptain_Leggings",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -1915331850,
-				"B": 1272441307,
-				"C": -1923402061,
-				"D": -1318836565
-			},
-			"SortOrder": -1,
-			"ItemName": "KnightCaptain_Leggings",
-			"DisplayName": "KnightCaptain_Leggings",
-			"Description": "A captain knight's leggings",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Captain/BPI_KnightCaptain_Leggings.BPI_KnightCaptain_Leggings_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "KnightCaptain_Gauntlets",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": 1625612406,
-				"B": 1313056880,
-				"C": 1733515703,
-				"D": -708587666
-			},
-			"SortOrder": -1,
-			"ItemName": "KnightCaptain_Gauntlets",
-			"DisplayName": "KnightCaptain_Gauntlets",
-			"Description": "A captain knight's gauntlets",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Captain/BPI_KnightCaptain_Gauntlets.BPI_KnightCaptain_Gauntlets_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "KnightCaptain_Helm",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -990100333,
-				"B": 1226999978,
-				"C": -2032414042,
-				"D": -903772113
-			},
-			"SortOrder": -1,
-			"ItemName": "KnightCaptain_Helm",
-			"DisplayName": "KnightCaptain_Helm",
-			"Description": "A captain knight's helm",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Captain/BPI_KnightCaptain_Helm.BPI_KnightCaptain_Helm_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "KnightCaptain_Chest",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -661279082,
-				"B": 1302013227,
-				"C": 1828441759,
-				"D": -565825400
-			},
-			"SortOrder": -1,
-			"ItemName": "KnightCaptain_Chest",
-			"DisplayName": "KnightCaptain_Chest",
-			"Description": "A captain knight's chestplate",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Captain/BPI_KnightCaptain_Chest.BPI_KnightCaptain_Chest_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "SteelCommander_Leggings",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -353803982,
-				"B": 1123064611,
-				"C": -1431719747,
-				"D": 2075816338
-			},
-			"SortOrder": -1,
-			"ItemName": "SteelCommander_Leggings",
-			"DisplayName": "SteelCommander_Leggings",
-			"Description": "A Steel Comannder's leggings",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SteelCommanderSet/BPI_SteelCommander_Leggings.BPI_SteelCommander_Leggings_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "SteelCommander_Gauntlets",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": 1510503753,
-				"B": 1095607351,
-				"C": -1951670087,
-				"D": -1788420581
-			},
-			"SortOrder": -1,
-			"ItemName": "SteelCommander_Gauntlets",
-			"DisplayName": "SteelCommander_Gauntlets",
-			"Description": "A Steel Comannder's gauntlets",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SteelCommanderSet/BPI_SteelCommander_Gauntlets.BPI_SteelCommander_Gauntlets_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "SteelCommander_Helm",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -753011820,
-				"B": 1251525340,
-				"C": 1548913339,
-				"D": 1757592641
-			},
-			"SortOrder": -1,
-			"ItemName": "SteelCommander_Helm",
-			"DisplayName": "SteelCommander_Helm",
-			"Description": "A Steel Comannder's helm",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SteelCommanderSet/BPI_SteelCommander_Helm.BPI_SteelCommander_Helm_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "SteelCommander_Chest",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -1926098502,
-				"B": 1090222082,
-				"C": 1649864630,
-				"D": -849930014
-			},
-			"SortOrder": -1,
-			"ItemName": "SteelCommander_Chest",
-			"DisplayName": "SteelCommander_Chest",
-			"Description": "A Steel Comannder's chestplate",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/SteelCommanderSet/BPI_SteelCommander_Chest.BPI_SteelCommander_Chest_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "KnightCommander_Leggings",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -280574481,
-				"B": 1186262922,
-				"C": 1822581125,
-				"D": 810149228
-			},
-			"SortOrder": -1,
-			"ItemName": "KnightCommander_Leggings",
-			"DisplayName": "KnightCommander_Leggings",
-			"Description": "A Steel Comannder's leggings",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Commander/BPI_KnightCommander_Leggings.BPI_KnightCommander_Leggings_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "KnightCommander_Gauntlets",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": 466423304,
-				"B": 1218010309,
-				"C": 251479967,
-				"D": 494154148
-			},
-			"SortOrder": -1,
-			"ItemName": "KnightCommander_Gauntlets",
-			"DisplayName": "KnightCommander_Gauntlets",
-			"Description": "A Steel Comannder's gauntlets",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Commander/BPI_KnightCommander_Gauntlets.BPI_KnightCommander_Gauntlets_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "KnightCommander_Helm",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -1066972201,
-				"B": 1156590770,
-				"C": 116401333,
-				"D": 284979084
-			},
-			"SortOrder": -1,
-			"ItemName": "KnightCommander_Helm",
-			"DisplayName": "KnightCommander_Helm",
-			"Description": "A Steel Comannder's helm",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Commander/BPI_KnightCommander_Helm.BPI_KnightCommander_Helm_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "KnightCommander_Chest",
-		"ItemInformation":
-		{
-			"Id":
-			{
 				"A": 401839660,
 				"B": 1151002825,
 				"C": 501001114,
 				"D": -848906180
 			},
 			"SortOrder": -1,
-			"ItemName": "KnightCommander_Chest",
-			"DisplayName": "KnightCommander_Chest",
-			"Description": "A Steel Comannder's chestplate",
+			"ItemName": "Knight_Chest",
+			"DisplayName": "Knight Chestplate",
+			"Description": "A Knight's chestplate",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/Commander/BPI_KnightCommander_Chest.BPI_KnightCommander_Chest_C'",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/KnightSets/BPI_Knight_Chest.BPI_Knight_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -672,14 +373,14 @@
 		{
 			"Id":
 			{
-				"A": 659448806,
-				"B": 1128728825,
-				"C": 20490418,
-				"D": 983574693
+				"A": -957972791,
+				"B": 1131500286,
+				"C": 738024863,
+				"D": -1385612156
 			},
 			"SortOrder": -1,
 			"ItemName": "Brigandier_Leggings",
-			"DisplayName": "Brigandier_Leggings",
+			"DisplayName": "Brigandier Leggings",
 			"Description": "A Brigandier's leggings",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -695,14 +396,14 @@
 		{
 			"Id":
 			{
-				"A": -1919159096,
-				"B": 1126023343,
-				"C": 1042069898,
-				"D": 1175267857
+				"A": 442015768,
+				"B": 1153594358,
+				"C": 1468005035,
+				"D": -2070613584
 			},
 			"SortOrder": -1,
-			"ItemName": "Brigandier_Gauntlets",
-			"DisplayName": "Brigandier_Gauntlets",
+			"ItemName": "BrigandierGauntlets",
+			"DisplayName": "Brigandier Gauntlets",
 			"Description": "A Brigandier's gauntlets",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -718,14 +419,14 @@
 		{
 			"Id":
 			{
-				"A": -1690291161,
-				"B": 1111497271,
-				"C": -1071564877,
-				"D": 1258595897
+				"A": 634749521,
+				"B": 1305452748,
+				"C": 204127623,
+				"D": 686506595
 			},
 			"SortOrder": -1,
 			"ItemName": "Brigandier_Helm",
-			"DisplayName": "Brigandier_Helm",
+			"DisplayName": "Brigandier Helm",
 			"Description": "A Brigandier's helm",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -741,295 +442,19 @@
 		{
 			"Id":
 			{
-				"A": -750408206,
-				"B": 1209094330,
-				"C": -827509868,
-				"D": 513091622
-			},
-			"SortOrder": -1,
-			"ItemName": "Brigandier_Chest",
-			"DisplayName": "Brigandier_Chest",
-			"Description": "A Brigandier's chestplate",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/BPI_Brigandier_Chest.BPI_Brigandier_Chest_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "BrigandierCaptain_Leggings",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": 611120303,
-				"B": 1322967216,
-				"C": -117267068,
-				"D": 1146398219
-			},
-			"SortOrder": -1,
-			"ItemName": "BrigandierCaptain_Leggings",
-			"DisplayName": "BrigandierCaptain_Leggings",
-			"Description": "A Brigandier's leggings",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Captain/BPI_BrigandierCaptain_Leggings.BPI_BrigandierCaptain_Leggings_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "BrigandierCaptain_Gauntlets",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -1235294061,
-				"B": 1292095510,
-				"C": -945609037,
-				"D": -321032964
-			},
-			"SortOrder": -1,
-			"ItemName": "BrigandierCaptain_Gauntlets",
-			"DisplayName": "BrigandierCaptain_Gauntlets",
-			"Description": "A Brigandier's gauntlets",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Captain/BPI_BrigandierCaptain_Gauntlets.BPI_BrigandierCaptain_Gauntlets_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "BrigandierCaptain_Helm",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -1893542798,
-				"B": 1168533132,
-				"C": 368815500,
-				"D": 162637282
-			},
-			"SortOrder": -1,
-			"ItemName": "BrigandierCaptain_Helm",
-			"DisplayName": "BrigandierCaptain_Helm",
-			"Description": "A Brigandier's helm",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Captain/BPI_BrigandierCaptain_Helm.BPI_BrigandierCaptain_Helm_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "BrigandierCaptain_Chest",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": 122111526,
-				"B": 1090166125,
-				"C": 1604028084,
-				"D": -25248220
-			},
-			"SortOrder": -1,
-			"ItemName": "BrigandierCaptain_Chest",
-			"DisplayName": "BrigandierCaptain_Chest",
-			"Description": "A Brigandier's chestplate",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Captain/BPI_BrigandierCaptain_Chest.BPI_BrigandierCaptain_Chest_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "BrigandierCommander_Leggings",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -957972791,
-				"B": 1131500286,
-				"C": 738024863,
-				"D": -1385612156
-			},
-			"SortOrder": -1,
-			"ItemName": "BrigandierCommander_Leggings",
-			"DisplayName": "BrigandierCommander_Leggings",
-			"Description": "A Commander Brigandier's leggings",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Commander/BPI_BrigandierCommander_Leggings.BPI_BrigandierCommander_Leggings_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "BrigandierCommander_Gauntlets",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": 442015768,
-				"B": 1153594358,
-				"C": 1468005035,
-				"D": -2070613584
-			},
-			"SortOrder": -1,
-			"ItemName": "BrigandierCommander_Gauntlets",
-			"DisplayName": "BrigandierCommander_Gauntlets",
-			"Description": "A Commander Brigandier's gauntlets",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Commander/BPI_BrigandierCommander_Gauntlets.BPI_BrigandierCommander_Gauntlets_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "BrigandierCommander_Helm",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": 634749521,
-				"B": 1305452748,
-				"C": 204127623,
-				"D": 686506595
-			},
-			"SortOrder": -1,
-			"ItemName": "BrigandierCommander_Helm",
-			"DisplayName": "BrigandierCommander_Helm",
-			"Description": "A Commander Brigandier's helm",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Commander/BPI_BrigandierCommander_Helm.BPI_BrigandierCommander_Helm_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "BrigandierCommander_Chest",
-		"ItemInformation":
-		{
-			"Id":
-			{
 				"A": 78317135,
 				"B": 1116030902,
 				"C": 473896867,
 				"D": 1388170083
 			},
 			"SortOrder": -1,
-			"ItemName": "BrigandierCommander_Chest",
-			"DisplayName": "BrigandierCommander_Chest",
-			"Description": "A Commander Brigandier's chestplate",
+			"ItemName": "Brigandier_Chest",
+			"DisplayName": "Brigandier Chestplate",
+			"Description": "A Brigandier's chestplate",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/Commander/BPI_BrigandierCommander_Chest.BPI_BrigandierCommander_Chest_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "RoyalKnight_Leggings",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": 1009381014,
-				"B": 1263640931,
-				"C": -1825613696,
-				"D": 580109341
-			},
-			"SortOrder": -1,
-			"ItemName": "RoyalKnight_Leggings",
-			"DisplayName": "RoyalKnight_Leggings",
-			"Description": "A Royal Knight's leggings",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/RoyalKnightSet/BPI_RoyalKnight_Leggings.BPI_RoyalKnight_Leggings_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "RoyalKnight_Gauntlets",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -256906065,
-				"B": 1163053794,
-				"C": -843094653,
-				"D": -2145294693
-			},
-			"SortOrder": -1,
-			"ItemName": "RoyalKnight_Gauntlets",
-			"DisplayName": "RoyalKnight_Gauntlets",
-			"Description": "A Royal Knight's gauntlets",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/RoyalKnightSet/BPI_RoyalKnight_Gauntlets.BPI_RoyalKnight_Gauntlets_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "RoyalKnight_Helm",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": 1035072778,
-				"B": 1105074756,
-				"C": -1036073324,
-				"D": -167824231
-			},
-			"SortOrder": -1,
-			"ItemName": "RoyalKnight_Helm",
-			"DisplayName": "RoyalKnight_Helm",
-			"Description": "A Royal Knight's helm",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/RoyalKnightSet/BPI_RoyalKnight_Helm.BPI_RoyalKnight_Helm_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "RoyalKnight_Chest",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": 1156998685,
-				"B": 1236751488,
-				"C": 1454109831,
-				"D": -1553916437
-			},
-			"SortOrder": -1,
-			"ItemName": "RoyalKnight_Chest",
-			"DisplayName": "RoyalKnight_Chest",
-			"Description": "A Royal Knight's chestplate",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/RoyalKnightSet/BPI_RoyalKnight_Chest.BPI_RoyalKnight_Chest_C'",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/BrigandierSets/BPI_Brigandier_Chest.BPI_Brigandier_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1047,7 +472,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Owl_Leggings",
-			"DisplayName": "Owl_Leggings",
+			"DisplayName": "Owl Leggings",
 			"Description": "An Owl armor's leggings",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -1070,7 +495,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Owl_Gauntlets",
-			"DisplayName": "Owl_Gauntlets",
+			"DisplayName": "Owl Gauntlets",
 			"Description": "An Owl armor's gauntlets",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -1093,7 +518,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Owl_Helm",
-			"DisplayName": "Owl_Helm",
+			"DisplayName": "Owl Helm",
 			"Description": "An Owl armor's helm",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -1116,104 +541,12 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Owl_Chest",
-			"DisplayName": "Owl_Chest",
+			"DisplayName": "Owl Chestplate",
 			"Description": "An Owl armor's chestplate",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
 			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/OwlSet/BPI_Owl_Chest.BPI_Owl_Chest_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "Gladiator_Leggings",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -1938695907,
-				"B": 1142587367,
-				"C": 1626671243,
-				"D": -1715471764
-			},
-			"SortOrder": -1,
-			"ItemName": "Gladiator_Leggings",
-			"DisplayName": "Gladiator_Leggings",
-			"Description": "A Gladiator's leggings",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/GaldiatorSet/BPI_Gladiator_Leggings.BPI_Gladiator_Leggings_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "Gladiator_Gauntlets",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -448493078,
-				"B": 1151814501,
-				"C": -1676023409,
-				"D": -1484376599
-			},
-			"SortOrder": -1,
-			"ItemName": "Gladiator_Gauntlets",
-			"DisplayName": "Gladiator_Gauntlets",
-			"Description": "A Gladiator's gauntlets",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/GaldiatorSet/BPI_Gladiator_Gauntlets.BPI_Gladiator_Gauntlets_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "Gladiator_Helm",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -524518365,
-				"B": 1121340420,
-				"C": -929475406,
-				"D": 871826560
-			},
-			"SortOrder": -1,
-			"ItemName": "Gladiator_Helm",
-			"DisplayName": "Gladiator_Helm",
-			"Description": "A Gladiator's helm",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/GaldiatorSet/BPI_Gladiator_Helm.BPI_Gladiator_Helm_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "Gladiator_Chest",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -938706293,
-				"B": 1219650922,
-				"C": 196123543,
-				"D": 1512913272
-			},
-			"SortOrder": -1,
-			"ItemName": "Gladiator_Chest",
-			"DisplayName": "Gladiator_Chest",
-			"Description": "A Gladiator's chestplate",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/GaldiatorSet/BPI_Gladiator_Chest.BPI_Gladiator_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1231,7 +564,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Tank_Leggings",
-			"DisplayName": "Tank_Leggings",
+			"DisplayName": "Tank Leggings",
 			"Description": "A Tank's leggings",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -1254,7 +587,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Tank_Gauntlets",
-			"DisplayName": "Tank_Gauntlets",
+			"DisplayName": "Tank Gauntlets",
 			"Description": "A Tank's gauntlets",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -1277,7 +610,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Tank_Helm",
-			"DisplayName": "Tank_Helm",
+			"DisplayName": "Tank Helm",
 			"Description": "A Tank's helm",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -1300,196 +633,12 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Tank_Chest",
-			"DisplayName": "Tank_Chest",
+			"DisplayName": "Tank Chest",
 			"Description": "A Tank's chestplate",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
 			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/TankSet/BPI_Tank_Chest.BPI_Tank_Chest_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "Cavalry_Leggings",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -2146934516,
-				"B": 1218230920,
-				"C": 1727398811,
-				"D": 960677658
-			},
-			"SortOrder": -1,
-			"ItemName": "Cavalry_Leggings",
-			"DisplayName": "Cavalry_Leggings",
-			"Description": "A Cavalry's leggings",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/CavalrySet/BPI_Cavalry_Leggings.BPI_Cavalry_Leggings_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "Cavalry_Gauntlets",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -660246141,
-				"B": 1326515882,
-				"C": -1270502726,
-				"D": 32629973
-			},
-			"SortOrder": -1,
-			"ItemName": "Cavalry_Gauntlets",
-			"DisplayName": "Cavalry_Gauntlets",
-			"Description": "A Cavalry's gauntlets",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/CavalrySet/BPI_Cavalry_Gauntlets.BPI_Cavalry_Gauntlets_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "Cavalry_Helm",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -1105278848,
-				"B": 1285665591,
-				"C": 198680760,
-				"D": 1898383522
-			},
-			"SortOrder": -1,
-			"ItemName": "Cavalry_Helm",
-			"DisplayName": "Cavalry_Helm",
-			"Description": "A Cavalry's helm",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/CavalrySet/BPI_Cavalry_Helm.BPI_Cavalry_Helm_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "Cavalry_Chest",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -744365171,
-				"B": 1246000690,
-				"C": 1692580260,
-				"D": 1400586330
-			},
-			"SortOrder": -1,
-			"ItemName": "Cavalry_Chest",
-			"DisplayName": "Cavalry_Chest",
-			"Description": "A Cavalry's chestplate",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/CavalrySet/BPI_Cavalry_Chest.BPI_Cavalry_Chest_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "Templar_Leggings",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -509460949,
-				"B": 1178733825,
-				"C": 2097556106,
-				"D": -585321809
-			},
-			"SortOrder": -1,
-			"ItemName": "Templar_Leggings",
-			"DisplayName": "Templar_Leggings",
-			"Description": "A Templar's leggings",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/TemplarSet/BPI_Templar_Leggings.BPI_Templar_Leggings_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "Templar_Gauntlets",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -1234526142,
-				"B": 1101676777,
-				"C": -1087490669,
-				"D": 358316254
-			},
-			"SortOrder": -1,
-			"ItemName": "Templar_Gauntlets",
-			"DisplayName": "Templar_Gauntlets",
-			"Description": "A Templar's gauntlets",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/TemplarSet/BPI_Templar_Gauntlets.BPI_Templar_Gauntlets_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "Templar_Helm",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": -1304566586,
-				"B": 1152480944,
-				"C": -1759501653,
-				"D": -143401129
-			},
-			"SortOrder": -1,
-			"ItemName": "Templar_Helm",
-			"DisplayName": "Templar_Helm",
-			"Description": "A Templar's helm",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/TemplarSet/BPI_Templar_Helm.BPI_Templar_Helm_C'",
-			"GlobalInformation": "None"
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "Templar_Chest",
-		"ItemInformation":
-		{
-			"Id":
-			{
-				"A": 563991933,
-				"B": 1101673009,
-				"C": 841766323,
-				"D": -81360494
-			},
-			"SortOrder": -1,
-			"ItemName": "Templar_Chest",
-			"DisplayName": "Templar_Chest",
-			"Description": "A Templar's chestplate",
-			"ItemType": "Inv_Armor",
-			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
-			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/TemplarSet/BPI_Templar_Chest.BPI_Templar_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1507,7 +656,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Bandit_Helm",
-			"DisplayName": "Bandit_Helm",
+			"DisplayName": "Bandit Helm",
 			"Description": "A bandit's helm",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -1530,7 +679,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Bandit_Captain_Helm",
-			"DisplayName": "Bandit_Captain_Helm",
+			"DisplayName": "Bandit Captain Helm",
 			"Description": "a bandit captain's helm",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -1553,7 +702,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Jarl_Helm",
-			"DisplayName": "Jarl_Helm",
+			"DisplayName": "Jarl Helm",
 			"Description": "A Jarl's helm",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -1576,7 +725,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "JomsViking_Helm",
-			"DisplayName": "JomsViking_Helm",
+			"DisplayName": "JomsViking Helm",
 			"Description": "A JomsViking's helm",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -1599,7 +748,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Danes_Helm",
-			"DisplayName": "Danes_Helm",
+			"DisplayName": "Danes Helm",
 			"Description": "A Dane's helm",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -1622,7 +771,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Berserker_Helm",
-			"DisplayName": "Berserker_Helm",
+			"DisplayName": "Berserker Helm",
 			"Description": "A Berserker's helm",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
@@ -1645,7 +794,7 @@
 			},
 			"SortOrder": -1,
 			"ItemName": "Inquisitor_Helm",
-			"DisplayName": "Inquisitor_Helm",
+			"DisplayName": "Inquisitor Helm",
 			"Description": "An Inquisitor's helm",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
