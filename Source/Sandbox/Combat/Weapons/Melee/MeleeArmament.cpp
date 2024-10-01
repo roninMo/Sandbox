@@ -3,13 +3,15 @@
 
 #include "Sandbox/Combat/Weapons/Melee/MeleeArmament.h"
 
-#include "Components/CapsuleComponent.h"
+
+#include "Sandbox/Data/Enums/CollisionChannels.h"
+
 #include "Engine/SkeletalMeshSocket.h"
-#include "Logging/StructuredLog.h"
+#include "Components/CapsuleComponent.h"
+#include "Sandbox/World/Props/CharacterAttachment.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Combat/CombatComponent.h"
-#include "Sandbox/Data/Enums/CollisionChannels.h"
-#include "Sandbox/World/Props/CharacterAttachment.h"
+#include "Logging/StructuredLog.h"
 
 AMeleeArmament::AMeleeArmament()
 {

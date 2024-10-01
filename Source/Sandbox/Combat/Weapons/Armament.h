@@ -69,13 +69,13 @@ protected:
 	
 public:
 	/** Function for equipping the armament. Add setup and teardown logic specific to this armament's configuration. */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Init") virtual bool ConstructArmament();
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Init") virtual bool ConstructArmament();
 	
 	/** Function for unequipping the armament. Add setup and teardown logic specific to this armament's configuration. */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Init") virtual bool DeconstructArmament();
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Init") virtual bool DeconstructArmament();
 	
 	/** Function that checks whether the armament is valid to equip */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Init") virtual bool IsValidArmanent();
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Init") virtual bool IsValidArmanent();
 
 
 //-------------------------------------------------------------------------------------//
@@ -89,7 +89,7 @@ protected:
 
 public:
 	/** Updates the armament's montages provided a character to montage reference */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Montages") virtual bool UpdateArmamentMontages(const ECharacterToMontageMapping MontageMapping);
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Montages") virtual bool UpdateArmamentMontages(const ECharacterToMontageMapping MontageMapping);
 	
 	
 //-------------------------------------------------------------------------------------//
@@ -97,15 +97,15 @@ public:
 //-------------------------------------------------------------------------------------//
 public:
 	/** Sheathes the weapon for the character */ 
-	UFUNCTION(BlueprintCallable, Category = "Armament|Equipping and Unequipping") virtual bool SheatheArmament();
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Equipping and Unequipping") virtual bool SheatheArmament();
 
 	/** Draw the character's sword */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Equipping and Unequipping") virtual bool UnsheatheArmament();
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Equipping and Unequipping") virtual bool UnsheatheArmament();
 
 
 protected:
 	/** Attach the armament to the character using socket locations. This works for both the character's hand, sheathe, or any other custom location */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual bool AttachArmamentToSocket(FName Socket);
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual bool AttachArmamentToSocket(FName Socket);
 	
 	
 //-------------------------------------------------------------------------------------//
@@ -113,59 +113,59 @@ protected:
 //-------------------------------------------------------------------------------------//
 public:
 	/** Retrieves the armament attack information. This includes information on the armament and attack, and it's combo information. */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual const F_ArmamentInformation& GetArmamentInformation() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual const F_ArmamentInformation& GetArmamentInformation() const;
 	
 	/** Retrieves the database id of the armament */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual FName GetArmamentId() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual FName GetArmamentId() const;
 	
 	/** Retrieves the armament classification */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual EArmamentClassification GetClassification() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual EArmamentClassification GetClassification() const;
 	
 	/** Retrieves how we're handling damage calculations */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual EDamageInformationSource GetDamageCalculation() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual EDamageInformationSource GetDamageCalculation() const;
 	
 	/** Retrieves the armament's equip restrictions */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual EEquipRestrictions GetEquipRestrictions() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual EEquipRestrictions GetEquipRestrictions() const;
 	
 	/** Retrieves the armament's abilities */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual const TArray<F_ArmamentAbilityInformation>& GetAbilities() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual const TArray<F_ArmamentAbilityInformation>& GetAbilities() const;
 	
 	/** Retrieves the armament's passives */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual const TArray<FGameplayEffectMapping>& GetPassives() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual const TArray<FGameplayEffectMapping>& GetPassives() const;
 	
 	/** Retrieves the armament's equipped state information */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual FGameplayEffectMapping GetStateInformation() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual FGameplayEffectMapping GetStateInformation() const;
 	
 	/** Retrieves the armament's base attack information */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual const TMap<FGameplayAttribute, float>& GetBaseDamageStats() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual const TMap<FGameplayAttribute, float>& GetBaseDamageStats() const;
 	
 	/** Retrieves the armament's skeletal mesh */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") USkeletalMeshComponent* GetArmamentMesh() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") USkeletalMeshComponent* GetArmamentMesh() const;
 	
 	/** Retrieves the armament's equip slot */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") EEquipSlot GetEquipSlot() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") EEquipSlot GetEquipSlot() const;
 	
 	/** Returns the armament's overlap components for their armament. */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual TArray<UPrimitiveComponent*> GetArmamentHitboxes() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual TArray<UPrimitiveComponent*> GetArmamentHitboxes() const;
 	
 	
 	/** Get the armament attack information. This includes information on the armament and attack, and it's combo information. */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual void SetArmamentInformation(const F_ArmamentInformation& Information);
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual void SetArmamentInformation(const F_ArmamentInformation& Information);
 	
 	/** Set the slot this armament was equipped in. */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual void SetArmamentEquipSlot(EEquipSlot Slot);
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual void SetArmamentEquipSlot(EEquipSlot Slot);
 
 	/** Retrieves the combat component from the character */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual UCombatComponent* GetCombatComponent(ACharacterBase* Character = nullptr) const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual UCombatComponent* GetCombatComponent(ACharacterBase* Character = nullptr) const;
 	
 	/** Retrieves the armament's current ability handles */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual const TArray<FGameplayAbilitySpecHandle>& GetAbilityHandles() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual const TArray<FGameplayAbilitySpecHandle>& GetAbilityHandles() const;
 	
 	/** Retrieves the armament's current passive handles */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual const TArray<FActiveGameplayEffectHandle>& GetPassiveHandles() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual const TArray<FActiveGameplayEffectHandle>& GetPassiveHandles() const;
 	
 	/** Retrieves the armament's current state information handle */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual const FActiveGameplayEffectHandle& GetStateInformationHandle() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual const FActiveGameplayEffectHandle& GetStateInformationHandle() const;
 
 	
 };

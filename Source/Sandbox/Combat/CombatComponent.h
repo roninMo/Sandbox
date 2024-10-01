@@ -152,9 +152,11 @@ public:
 	 * @param ArmamentInventoryInformation		A copy of the armament's inventory for quick access and armament information retrieval
 	 * @param EquipSlot							The slot we're equipping the armament to
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping")
 	virtual void AddArmamentToEquipSlot(const F_Item& ArmamentInventoryInformation, const EEquipSlot EquipSlot);
 	
 	/** Remove an armament from one of the character's armament slots */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping")
 	virtual void RemoveArmamentFromEquipSlot(const EEquipSlot EquipSlot);
 
 	/**
@@ -166,6 +168,7 @@ public:
 	 * @param EquipSlot							The equip slot to retrieve the armament information from.
 	 * @returns									The created armament
 	 **/
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Init")
 	virtual AArmament* CreateArmament(const EEquipSlot EquipSlot);
 
 	/**
@@ -175,15 +178,18 @@ public:
 	 * @param Armament							The armament we're removing
 	 * @returns									Whether the armament was successfully removed
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Init")
 	virtual bool DeleteEquippedArmament(AArmament* Armament);
 	
 	/**
 	 * Sets the armament stance for the character. This is more for the player's input driven events for how they want to wield the armament
 	 * @param Stance							The player's current combat stance
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Armaments")
 	virtual void SetArmamentStance(EArmamentStance Stance);
 
 	/** Updates the armament stance for the character based on the currently equipped armaments. */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Combat")
 	virtual void UpdateArmamentStance();
 	
 	/**
@@ -192,6 +198,7 @@ public:
 	 * @param bRightHand						Whether we're retrieving the right or left hand armament
 	 * @returns									The currently equipped armament for a specified hand
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils")
 	virtual AArmament* GetArmament(const bool bRightHand = true);
 	
 	/**
@@ -200,6 +207,7 @@ public:
 	 * @param Slot								The equip slot
 	 * @returns									True if it's a right hand slot
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils")
 	virtual bool IsRightHandedArmament(EEquipSlot Slot);
 	
 	/**
@@ -208,6 +216,7 @@ public:
 	 * @param bRightHand						Whether we're retrieving the current equip slot of the right or left hand
 	 * @returns									The current equip slot for a specified hand
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils")
 	virtual EEquipSlot GetCurrentlyEquippedSlot(bool bRightHand = true);
 	
 	/**
@@ -216,6 +225,7 @@ public:
 	 * @param bRightHand						Whether we're retrieving the next equip slot of the right or left hand
 	 * @returns									The next equip slot for a specified hand
 	 */ 
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils")
 	virtual EEquipSlot GetNextEquipSlot(bool bRightHand = true);
 	
 	/**
@@ -224,6 +234,7 @@ public:
 	 * @param Slot								The armament's equip slot
 	 * @returns									The inventory information of the armament equipped to that slot
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils")
 	virtual F_Item GetArmamentInventoryInformation(EEquipSlot Slot);
 
 	/**
@@ -232,6 +243,7 @@ public:
 	 * @param ArmamentId						The id of the armament
 	 * @returns									The armament information
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils") 
 	virtual F_ArmamentInformation GetArmamentInformationFromDatabase(FName ArmamentId);
 
 	/**
@@ -241,7 +253,7 @@ public:
 	 * @param ComboType							The combo montage we're retrieving. If the armament doesn't use combos, just use EComboType::None to retrieve it's montage
 	 * @param Mapping							The character skeleton to montage mapping reference  
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Montages")
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils")
 	virtual UAnimMontage* GetArmamentMontageFromDB(FName ArmamentId, EComboType ComboType, ECharacterToMontageMapping Mapping);
 	
 
@@ -308,16 +320,16 @@ public:
 //-------------------------------------------------------------------------------------//
 public:
 	/** Retrieves a socket from the character for equipping weapons, etc. */
-	UFUNCTION(BlueprintCallable, Category = "Combat|Equipping") virtual const USkeletalMeshSocket* GetSkeletalSocket(FName SocketName) const;
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping") virtual const USkeletalMeshSocket* GetSkeletalSocket(FName SocketName) const;
 	
 	/** Retrieves the equipped socket for a specific armament */
-	UFUNCTION(BlueprintCallable, Category = "Combat|Equipping") virtual FName GetEquippedSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping") virtual FName GetEquippedSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
 	
 	/** Retrieves the holster for a specific equipped armament */
-	UFUNCTION(BlueprintCallable, Category = "Combat|Equipping") virtual FName GetHolsterSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping") virtual FName GetHolsterSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
 	
 	/** Retrieves the sheathed for a specific equipped armament */
-	UFUNCTION(BlueprintCallable, Category = "Combat|Equipping") virtual FName GetSheathedSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping") virtual FName GetSheathedSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
 
 	
 };

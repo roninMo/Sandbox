@@ -3,16 +3,14 @@
 
 #include "Sandbox/Combat/Weapons/Armament.h"
 
-#include "Net/UnrealNetwork.h"
-#include "Sandbox/Characters/CharacterBase.h"
-#include "Sandbox/Asc/AbilitySystem.h"
-#include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
-
-#include "Sandbox/Data/Structs/ArmamentInformation.h"
 #include "Sandbox/Data/Enums/MontageMappings.h"
+
+#include "Net/UnrealNetwork.h"
 #include "Engine/SkeletalMeshSocket.h"
-#include "Logging/StructuredLog.h"
+#include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Combat/CombatComponent.h"
+#include "Sandbox/Asc/AbilitySystem.h"
+#include "Logging/StructuredLog.h"
 
 DEFINE_LOG_CATEGORY(ArmamentLog);
 
@@ -210,10 +208,12 @@ bool AArmament::SheatheArmament()
 	return true;
 }
 
+
 bool AArmament::UnsheatheArmament()
 {
 	return true;
 }
+
 
 bool AArmament::AttachArmamentToSocket(const FName Socket)
 {
