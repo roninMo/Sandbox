@@ -63,6 +63,9 @@ protected:
 	/** The secondary armament the player has equipped */
 	UPROPERTY(Replicated, BlueprintReadWrite, Category = "Combat Component|Armaments") AArmament* SecondaryArmament;
 
+	/** The player's current armament stance */
+	UPROPERTY(Transient, BlueprintReadWrite) EArmamentStance CurrentStance;
+	
 	/** The armament information for the armament in the left hand's first equip slot */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item LeftHandEquipSlot_One;
 	
@@ -111,9 +114,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat Component") TObjectPtr<UDataTable> MontageInformationTable;
 	
 	/**** Other ****/
-	/** The player's current armament stance */
-	UPROPERTY(Transient, BlueprintReadWrite) EArmamentStance CurrentStance;
-	
 	/** The primary armament index These are just used specifically for handling switching weapons */
 	UPROPERTY(Transient, BlueprintReadWrite) int32 ArmamentIndex;
 
@@ -151,14 +151,11 @@ protected:
 	/** Handles combat calculations and logic */
 	virtual void CombatCalculations(const FGAttributeSetExecutionData& Props);
 
-
-
 	
 //-------------------------------------------------------------------------------------//
 // Armament Functionality															   //
 //-------------------------------------------------------------------------------------//
 public:
-
 	/**
 	 * Add an armament to one of the character's armament slots. Will only overwrite the current information if the armament is valid
 	 *
@@ -176,7 +173,7 @@ public:
 	 * Creates an armament from one of it's equip slots and equips it to one of the character's active armament hands. Only call on authority. \n\n
 	 *
 	 * Handles spawning the armament, calling @ref ConstructArmament() and if it successfully creates and constructs the armament, it equips and returns the armament. Otherwise, reverts the creation and returns nullptr
-	 * @note If you call this before unequipping the armament from the specified equip slot, it fails to equip the armament
+	 * @note If you call this before unequipping the armament from the specified equip slot, it fails to equip the armament // TODO: Add validity checks with the player's inventory
 	 *
 	 * @param EquipSlot							The equip slot to retrieve the armament information from.
 	 * @returns									The created armament
@@ -271,10 +268,11 @@ public:
 	
 
 protected:
-	// 	/** Synchronization RPC's (Most of the combat data is not replicated and is handled during interaction or on save (weapons/inventory) */
-	// 	UFUNCTION(Server, Reliable) void Server_AddArmamentToEquipSlot(F_InventoryItem ArmamentData, EEquipSlot EquipSlot);
-	// 	UFUNCTION(Server, Reliable) virtual void Server_CreateArmament(EEquipSlot EquipSlot);
-
+	/**** Synchronization RPC's ****/
+	UFUNCTION(Server, Reliable) virtual void Server_AddArmamentToEquipSlot(const F_Item& ArmamentData, const EEquipSlot EquipSlot);
+	UFUNCTION(Server, Reliable) virtual void Server_RemoveArmamentFromEquipSlot(const EEquipSlot EquipSlot);
+	UFUNCTION(Server, Reliable) virtual void Server_CreateArmament(const EEquipSlot EquipSlot);
+	
 
 
 	
@@ -302,9 +300,12 @@ public:
 	virtual const F_Information_Armor GetArmorFromDatabase(const FName Id) const;
 	
 	
-// 	/** Synchronization RPC's (Most of the combat data is not replicated and is handled during interaction or on save (weapons/inventory) */
-// 	UFUNCTION(Server, Reliable) virtual void Server_EquipArmor(const F_InventoryItem& Armor);
+protected:
+	/** Synchronization RPC's */
+	UFUNCTION(Server, Reliable) virtual void Server_EquipArmor(const F_Item& Armor);
 	
+	
+
 	
 	
 //-------------------------------------------------------------------------------------//

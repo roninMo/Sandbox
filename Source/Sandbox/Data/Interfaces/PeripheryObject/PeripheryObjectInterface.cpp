@@ -12,7 +12,7 @@ void IPeripheryObjectInterface::OutsideOfPlayerRadiusPeriphery_Implementation(AA
 {
 }
 
-void IPeripheryObjectInterface::WithinPlayer_Implementation(AActor* SourceCharacter, EPeripheryType PeripheryType)
+void IPeripheryObjectInterface::WithinPlayerConePeriphery_Implementation(AActor* SourceCharacter, EPeripheryType PeripheryType)
 {
 }
 

@@ -29,7 +29,6 @@ AItem::AItem()
 
 	Item.ActualClass = nullptr;
 	Item.WorldClass = nullptr;
-	Item.GlobalInformation = nullptr;
 }
 
 

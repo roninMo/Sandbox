@@ -1,0 +1,2090 @@
+[
+	{
+		"Name": "Soldier_Archer_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 966642533,
+				"B": 1268756768,
+				"C": 1912860042,
+				"D": 537301185
+			},
+			"SortOrder": -1,
+			"ItemName": "Soldier_Archer_Chest",
+			"DisplayName": "Soldier_Archer_Chest",
+			"Description": "An Archer soldier's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Soldier_Rogue_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -561619661,
+				"B": 1331186316,
+				"C": 1977478322,
+				"D": -1238179258
+			},
+			"SortOrder": -1,
+			"ItemName": "Soldier_Rogue_Chest",
+			"DisplayName": "Soldier_Rogue_Chest",
+			"Description": "A rogue soldier's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Soldier_Captain_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 769487892,
+				"B": 1091246594,
+				"C": -1918783081,
+				"D": 786218091
+			},
+			"SortOrder": -1,
+			"ItemName": "Soldier_Captain_Chest",
+			"DisplayName": "Soldier_Captain_Chest",
+			"Description": "a captain soldier's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Soldier_Captain_Gauntlets",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1670849019,
+				"B": 1089019385,
+				"C": -1819934043,
+				"D": 1129453892
+			},
+			"SortOrder": -1,
+			"ItemName": "Soldier_Captain_Gauntlets",
+			"DisplayName": "Soldier_Captain_Gauntlets",
+			"Description": "a captain soldier's gauntlets",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Soldier_Swordsman_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -266232169,
+				"B": 1185513270,
+				"C": 1366092191,
+				"D": -291360758
+			},
+			"SortOrder": -1,
+			"ItemName": "Soldier_Swordsman_Chest",
+			"DisplayName": "Soldier_Swordsman_Chest",
+			"Description": "a swordsman soldier's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Soldier_Fighter_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1180216905,
+				"B": 1130734727,
+				"C": -226572408,
+				"D": -116139714
+			},
+			"SortOrder": -1,
+			"ItemName": "Soldier_Fighter_Chest",
+			"DisplayName": "Soldier_Fighter_Chest",
+			"Description": "a soldier fighter's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Leather_Vest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 2125956996,
+				"B": 1224676069,
+				"C": 1064822692,
+				"D": 2131854571
+			},
+			"SortOrder": -1,
+			"ItemName": "Leather_Vest",
+			"DisplayName": "Leather_Vest",
+			"Description": "A leather vest",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Leather_Shirt",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -215730167,
+				"B": 1209609049,
+				"C": 333604523,
+				"D": 1041351663
+			},
+			"SortOrder": -1,
+			"ItemName": "Leather_Shirt",
+			"DisplayName": "Leather_Shirt",
+			"Description": "A leather shirt",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Leather_Armor",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
+			},
+			"SortOrder": -1,
+			"ItemName": "Leather_Armor",
+			"DisplayName": "Leather_Armor",
+			"Description": "leather chestplate armor",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Bandit_Archer_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1596297584,
+				"B": 1238926405,
+				"C": 239270832,
+				"D": 1855004812
+			},
+			"SortOrder": -1,
+			"ItemName": "Bandit_Archer_Chest",
+			"DisplayName": "Bandit_Archer_Chest",
+			"Description": "A bandit archer's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Bandit_Captain_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1881812820,
+				"B": 1254962395,
+				"C": -474346833,
+				"D": -667308373
+			},
+			"SortOrder": -1,
+			"ItemName": "Bandit_Captain_Chest",
+			"DisplayName": "Bandit_Captain_Chest",
+			"Description": "A bandit captain's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Bandit_Fighter_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1473684878,
+				"B": 1314615797,
+				"C": -774663507,
+				"D": 664954511
+			},
+			"SortOrder": -1,
+			"ItemName": "Bandit_Fighter_Chest",
+			"DisplayName": "Bandit_Fighter_Chest",
+			"Description": "A bandit fighter's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Bandit_Brawler_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1595996310,
+				"B": 1224758968,
+				"C": -893955935,
+				"D": -1263560471
+			},
+			"SortOrder": -1,
+			"ItemName": "Bandit_Brawler_Chest",
+			"DisplayName": "Bandit_Brawler_Chest",
+			"Description": "A bandit brawler's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Knight_Leggings",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1022082537,
+				"B": 1324141028,
+				"C": 706958485,
+				"D": 536772566
+			},
+			"SortOrder": -1,
+			"ItemName": "Knight_Leggings",
+			"DisplayName": "Knight_Leggings",
+			"Description": "A knight's leggings",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Knight_Gauntlets",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 11573779,
+				"B": 1335803756,
+				"C": 1088848535,
+				"D": -1693553582
+			},
+			"SortOrder": -1,
+			"ItemName": "Knight_Gauntlets",
+			"DisplayName": "Knight_Gauntlets",
+			"Description": "A knight's gauntlets",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Knight_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1931270691,
+				"B": 1141897769,
+				"C": -106939260,
+				"D": 1190534245
+			},
+			"SortOrder": -1,
+			"ItemName": "Knight_Helm",
+			"DisplayName": "Knight_Helm",
+			"Description": "A knight's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Knight_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1457882787,
+				"B": 1273645106,
+				"C": 233799040,
+				"D": -237033465
+			},
+			"SortOrder": -1,
+			"ItemName": "Knight_Chest",
+			"DisplayName": "Knight_Chest",
+			"Description": "A knight's chest",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "KnightCaptain_Leggings",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1915331850,
+				"B": 1272441307,
+				"C": -1923402061,
+				"D": -1318836565
+			},
+			"SortOrder": -1,
+			"ItemName": "KnightCaptain_Leggings",
+			"DisplayName": "KnightCaptain_Leggings",
+			"Description": "A captain knight's leggings",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "KnightCaptain_Gauntlets",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1625612406,
+				"B": 1313056880,
+				"C": 1733515703,
+				"D": -708587666
+			},
+			"SortOrder": -1,
+			"ItemName": "KnightCaptain_Gauntlets",
+			"DisplayName": "KnightCaptain_Gauntlets",
+			"Description": "A captain knight's gauntlets",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "KnightCaptain_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -990100333,
+				"B": 1226999978,
+				"C": -2032414042,
+				"D": -903772113
+			},
+			"SortOrder": -1,
+			"ItemName": "KnightCaptain_Helm",
+			"DisplayName": "KnightCaptain_Helm",
+			"Description": "A captain knight's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "KnightCaptain_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -661279082,
+				"B": 1302013227,
+				"C": 1828441759,
+				"D": -565825400
+			},
+			"SortOrder": -1,
+			"ItemName": "KnightCaptain_Chest",
+			"DisplayName": "KnightCaptain_Chest",
+			"Description": "A captain knight's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "SteelCommander_Leggings",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -353803982,
+				"B": 1123064611,
+				"C": -1431719747,
+				"D": 2075816338
+			},
+			"SortOrder": -1,
+			"ItemName": "SteelCommander_Leggings",
+			"DisplayName": "SteelCommander_Leggings",
+			"Description": "A Steel Comannder's leggings",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "SteelCommander_Gauntlets",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1510503753,
+				"B": 1095607351,
+				"C": -1951670087,
+				"D": -1788420581
+			},
+			"SortOrder": -1,
+			"ItemName": "SteelCommander_Gauntlets",
+			"DisplayName": "SteelCommander_Gauntlets",
+			"Description": "A Steel Comannder's gauntlets",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "SteelCommander_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -753011820,
+				"B": 1251525340,
+				"C": 1548913339,
+				"D": 1757592641
+			},
+			"SortOrder": -1,
+			"ItemName": "SteelCommander_Helm",
+			"DisplayName": "SteelCommander_Helm",
+			"Description": "A Steel Comannder's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "SteelCommander_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1926098502,
+				"B": 1090222082,
+				"C": 1649864630,
+				"D": -849930014
+			},
+			"SortOrder": -1,
+			"ItemName": "SteelCommander_Chest",
+			"DisplayName": "SteelCommander_Chest",
+			"Description": "A Steel Comannder's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "KnightCommander_Leggings",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -280574481,
+				"B": 1186262922,
+				"C": 1822581125,
+				"D": 810149228
+			},
+			"SortOrder": -1,
+			"ItemName": "KnightCommander_Leggings",
+			"DisplayName": "KnightCommander_Leggings",
+			"Description": "A Steel Comannder's leggings",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "KnightCommander_Gauntlets",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 466423304,
+				"B": 1218010309,
+				"C": 251479967,
+				"D": 494154148
+			},
+			"SortOrder": -1,
+			"ItemName": "KnightCommander_Gauntlets",
+			"DisplayName": "KnightCommander_Gauntlets",
+			"Description": "A Steel Comannder's gauntlets",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "KnightCommander_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1066972201,
+				"B": 1156590770,
+				"C": 116401333,
+				"D": 284979084
+			},
+			"SortOrder": -1,
+			"ItemName": "KnightCommander_Helm",
+			"DisplayName": "KnightCommander_Helm",
+			"Description": "A Steel Comannder's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "KnightCommander_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 401839660,
+				"B": 1151002825,
+				"C": 501001114,
+				"D": -848906180
+			},
+			"SortOrder": -1,
+			"ItemName": "KnightCommander_Chest",
+			"DisplayName": "KnightCommander_Chest",
+			"Description": "A Steel Comannder's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Brigandier_Leggings",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 659448806,
+				"B": 1128728825,
+				"C": 20490418,
+				"D": 983574693
+			},
+			"SortOrder": -1,
+			"ItemName": "Brigandier_Leggings",
+			"DisplayName": "Brigandier_Leggings",
+			"Description": "A Brigandier's leggings",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Brigandier_Gauntlets",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1919159096,
+				"B": 1126023343,
+				"C": 1042069898,
+				"D": 1175267857
+			},
+			"SortOrder": -1,
+			"ItemName": "Brigandier_Gauntlets",
+			"DisplayName": "Brigandier_Gauntlets",
+			"Description": "A Brigandier's gauntlets",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Brigandier_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1690291161,
+				"B": 1111497271,
+				"C": -1071564877,
+				"D": 1258595897
+			},
+			"SortOrder": -1,
+			"ItemName": "Brigandier_Helm",
+			"DisplayName": "Brigandier_Helm",
+			"Description": "A Brigandier's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Brigandier_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -750408206,
+				"B": 1209094330,
+				"C": -827509868,
+				"D": 513091622
+			},
+			"SortOrder": -1,
+			"ItemName": "Brigandier_Chest",
+			"DisplayName": "Brigandier_Chest",
+			"Description": "A Brigandier's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "BrigandierCaptain_Leggings",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 611120303,
+				"B": 1322967216,
+				"C": -117267068,
+				"D": 1146398219
+			},
+			"SortOrder": -1,
+			"ItemName": "BrigandierCaptain_Leggings",
+			"DisplayName": "BrigandierCaptain_Leggings",
+			"Description": "A Brigandier's leggings",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "BrigandierCaptain_Gauntlets",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1235294061,
+				"B": 1292095510,
+				"C": -945609037,
+				"D": -321032964
+			},
+			"SortOrder": -1,
+			"ItemName": "BrigandierCaptain_Gauntlets",
+			"DisplayName": "BrigandierCaptain_Gauntlets",
+			"Description": "A Brigandier's gauntlets",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "BrigandierCaptain_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1893542798,
+				"B": 1168533132,
+				"C": 368815500,
+				"D": 162637282
+			},
+			"SortOrder": -1,
+			"ItemName": "BrigandierCaptain_Helm",
+			"DisplayName": "BrigandierCaptain_Helm",
+			"Description": "A Brigandier's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "BrigandierCaptain_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 122111526,
+				"B": 1090166125,
+				"C": 1604028084,
+				"D": -25248220
+			},
+			"SortOrder": -1,
+			"ItemName": "BrigandierCaptain_Chest",
+			"DisplayName": "BrigandierCaptain_Chest",
+			"Description": "A Brigandier's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "BrigandierCommander_Leggings",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -957972791,
+				"B": 1131500286,
+				"C": 738024863,
+				"D": -1385612156
+			},
+			"SortOrder": -1,
+			"ItemName": "BrigandierCommander_Leggings",
+			"DisplayName": "BrigandierCommander_Leggings",
+			"Description": "A Commander Brigandier's leggings",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "BrigandierCommander_Gauntlets",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 442015768,
+				"B": 1153594358,
+				"C": 1468005035,
+				"D": -2070613584
+			},
+			"SortOrder": -1,
+			"ItemName": "BrigandierCommander_Gauntlets",
+			"DisplayName": "BrigandierCommander_Gauntlets",
+			"Description": "A Commander Brigandier's gauntlets",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "BrigandierCommander_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 634749521,
+				"B": 1305452748,
+				"C": 204127623,
+				"D": 686506595
+			},
+			"SortOrder": -1,
+			"ItemName": "BrigandierCommander_Helm",
+			"DisplayName": "BrigandierCommander_Helm",
+			"Description": "A Commander Brigandier's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "BrigandierCommander_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 78317135,
+				"B": 1116030902,
+				"C": 473896867,
+				"D": 1388170083
+			},
+			"SortOrder": -1,
+			"ItemName": "BrigandierCommander_Chest",
+			"DisplayName": "BrigandierCommander_Chest",
+			"Description": "A Commander Brigandier's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "RoyalKnight_Leggings",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1009381014,
+				"B": 1263640931,
+				"C": -1825613696,
+				"D": 580109341
+			},
+			"SortOrder": -1,
+			"ItemName": "RoyalKnight_Leggings",
+			"DisplayName": "RoyalKnight_Leggings",
+			"Description": "A Royal Knight's leggings",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "RoyalKnight_Gauntlets",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -256906065,
+				"B": 1163053794,
+				"C": -843094653,
+				"D": -2145294693
+			},
+			"SortOrder": -1,
+			"ItemName": "RoyalKnight_Gauntlets",
+			"DisplayName": "RoyalKnight_Gauntlets",
+			"Description": "A Royal Knight's gauntlets",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "RoyalKnight_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1035072778,
+				"B": 1105074756,
+				"C": -1036073324,
+				"D": -167824231
+			},
+			"SortOrder": -1,
+			"ItemName": "RoyalKnight_Helm",
+			"DisplayName": "RoyalKnight_Helm",
+			"Description": "A Royal Knight's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "RoyalKnight_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1156998685,
+				"B": 1236751488,
+				"C": 1454109831,
+				"D": -1553916437
+			},
+			"SortOrder": -1,
+			"ItemName": "RoyalKnight_Chest",
+			"DisplayName": "RoyalKnight_Chest",
+			"Description": "A Royal Knight's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Owl_Leggings",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -912390691,
+				"B": 1155182437,
+				"C": -1202569807,
+				"D": 1850479647
+			},
+			"SortOrder": -1,
+			"ItemName": "Owl_Leggings",
+			"DisplayName": "Owl_Leggings",
+			"Description": "An Owl armor's leggings",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Owl_Gauntlets",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1420126776,
+				"B": 1285386168,
+				"C": -587530828,
+				"D": -8545511
+			},
+			"SortOrder": -1,
+			"ItemName": "Owl_Gauntlets",
+			"DisplayName": "Owl_Gauntlets",
+			"Description": "An Owl armor's gauntlets",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Owl_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1299589150,
+				"B": 1176254090,
+				"C": 665106335,
+				"D": 1694601689
+			},
+			"SortOrder": -1,
+			"ItemName": "Owl_Helm",
+			"DisplayName": "Owl_Helm",
+			"Description": "An Owl armor's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Owl_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1230460077,
+				"B": 1077481325,
+				"C": -490428797,
+				"D": 1592191489
+			},
+			"SortOrder": -1,
+			"ItemName": "Owl_Chest",
+			"DisplayName": "Owl_Chest",
+			"Description": "An Owl armor's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Gladiator_Leggings",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1938695907,
+				"B": 1142587367,
+				"C": 1626671243,
+				"D": -1715471764
+			},
+			"SortOrder": -1,
+			"ItemName": "Gladiator_Leggings",
+			"DisplayName": "Gladiator_Leggings",
+			"Description": "A Gladiator's leggings",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Gladiator_Gauntlets",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -448493078,
+				"B": 1151814501,
+				"C": -1676023409,
+				"D": -1484376599
+			},
+			"SortOrder": -1,
+			"ItemName": "Gladiator_Gauntlets",
+			"DisplayName": "Gladiator_Gauntlets",
+			"Description": "A Gladiator's gauntlets",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Gladiator_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -524518365,
+				"B": 1121340420,
+				"C": -929475406,
+				"D": 871826560
+			},
+			"SortOrder": -1,
+			"ItemName": "Gladiator_Helm",
+			"DisplayName": "Gladiator_Helm",
+			"Description": "A Gladiator's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Gladiator_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -938706293,
+				"B": 1219650922,
+				"C": 196123543,
+				"D": 1512913272
+			},
+			"SortOrder": -1,
+			"ItemName": "Gladiator_Chest",
+			"DisplayName": "Gladiator_Chest",
+			"Description": "A Gladiator's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Tank_Leggings",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1269537115,
+				"B": 1118972710,
+				"C": -2019616361,
+				"D": 1621815513
+			},
+			"SortOrder": -1,
+			"ItemName": "Tank_Leggings",
+			"DisplayName": "Tank_Leggings",
+			"Description": "A Tank's leggings",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Tank_Gauntlets",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1738565280,
+				"B": 1107340351,
+				"C": 1118471320,
+				"D": -62901519
+			},
+			"SortOrder": -1,
+			"ItemName": "Tank_Gauntlets",
+			"DisplayName": "Tank_Gauntlets",
+			"Description": "A Tank's gauntlets",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Tank_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 779780315,
+				"B": 1292709093,
+				"C": -125855094,
+				"D": -2032180332
+			},
+			"SortOrder": -1,
+			"ItemName": "Tank_Helm",
+			"DisplayName": "Tank_Helm",
+			"Description": "A Tank's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Tank_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 2029330532,
+				"B": 1076283673,
+				"C": 964302989,
+				"D": -1226538486
+			},
+			"SortOrder": -1,
+			"ItemName": "Tank_Chest",
+			"DisplayName": "Tank_Chest",
+			"Description": "A Tank's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Cavalry_Leggings",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -2146934516,
+				"B": 1218230920,
+				"C": 1727398811,
+				"D": 960677658
+			},
+			"SortOrder": -1,
+			"ItemName": "Cavalry_Leggings",
+			"DisplayName": "Cavalry_Leggings",
+			"Description": "A Cavalry's leggings",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Cavalry_Gauntlets",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -660246141,
+				"B": 1326515882,
+				"C": -1270502726,
+				"D": 32629973
+			},
+			"SortOrder": -1,
+			"ItemName": "Cavalry_Gauntlets",
+			"DisplayName": "Cavalry_Gauntlets",
+			"Description": "A Cavalry's gauntlets",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Cavalry_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1105278848,
+				"B": 1285665591,
+				"C": 198680760,
+				"D": 1898383522
+			},
+			"SortOrder": -1,
+			"ItemName": "Cavalry_Helm",
+			"DisplayName": "Cavalry_Helm",
+			"Description": "A Cavalry's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Cavalry_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -744365171,
+				"B": 1246000690,
+				"C": 1692580260,
+				"D": 1400586330
+			},
+			"SortOrder": -1,
+			"ItemName": "Cavalry_Chest",
+			"DisplayName": "Cavalry_Chest",
+			"Description": "A Cavalry's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Templar_Leggings",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -509460949,
+				"B": 1178733825,
+				"C": 2097556106,
+				"D": -585321809
+			},
+			"SortOrder": -1,
+			"ItemName": "Templar_Leggings",
+			"DisplayName": "Templar_Leggings",
+			"Description": "A Templar's leggings",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Templar_Gauntlets",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1234526142,
+				"B": 1101676777,
+				"C": -1087490669,
+				"D": 358316254
+			},
+			"SortOrder": -1,
+			"ItemName": "Templar_Gauntlets",
+			"DisplayName": "Templar_Gauntlets",
+			"Description": "A Templar's gauntlets",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Templar_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1304566586,
+				"B": 1152480944,
+				"C": -1759501653,
+				"D": -143401129
+			},
+			"SortOrder": -1,
+			"ItemName": "Templar_Helm",
+			"DisplayName": "Templar_Helm",
+			"Description": "A Templar's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Templar_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 563991933,
+				"B": 1101673009,
+				"C": 841766323,
+				"D": -81360494
+			},
+			"SortOrder": -1,
+			"ItemName": "Templar_Chest",
+			"DisplayName": "Templar_Chest",
+			"Description": "A Templar's chestplate",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Bandit_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1793779603,
+				"B": 1113897307,
+				"C": -59402339,
+				"D": 2045658065
+			},
+			"SortOrder": -1,
+			"ItemName": "Bandit_Helm",
+			"DisplayName": "Bandit_Helm",
+			"Description": "A bandit's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Bandit_Captain_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 381000156,
+				"B": 1258251364,
+				"C": -410229829,
+				"D": -97293121
+			},
+			"SortOrder": -1,
+			"ItemName": "Bandit_Captain_Helm",
+			"DisplayName": "Bandit_Captain_Helm",
+			"Description": "a bandit captain's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Jarl_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -859327241,
+				"B": 1327475215,
+				"C": -17095779,
+				"D": 1092205001
+			},
+			"SortOrder": -1,
+			"ItemName": "Jarl_Helm",
+			"DisplayName": "Jarl_Helm",
+			"Description": "A Jarl's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "JomsViking_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1230970877,
+				"B": 1172611228,
+				"C": 715300011,
+				"D": 272317681
+			},
+			"SortOrder": -1,
+			"ItemName": "JomsViking_Helm",
+			"DisplayName": "JomsViking_Helm",
+			"Description": "A JomsViking's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Danes_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 92826477,
+				"B": 1296849763,
+				"C": 685594528,
+				"D": 898205965
+			},
+			"SortOrder": -1,
+			"ItemName": "Danes_Helm",
+			"DisplayName": "Danes_Helm",
+			"Description": "A Dane's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Berserker_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1627493008,
+				"B": 1339519971,
+				"C": -211868788,
+				"D": -435559081
+			},
+			"SortOrder": -1,
+			"ItemName": "Berserker_Helm",
+			"DisplayName": "Berserker_Helm",
+			"Description": "A Berserker's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Inquisitor_Helm",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1150766197,
+				"B": 1144286036,
+				"C": 1374597813,
+				"D": -256293262
+			},
+			"SortOrder": -1,
+			"ItemName": "Inquisitor_Helm",
+			"DisplayName": "Inquisitor_Helm",
+			"Description": "An Inquisitor's helm",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Katana",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1632895758,
+				"B": 1271367386,
+				"C": 1446025346,
+				"D": -284427210
+			},
+			"SortOrder": -1,
+			"ItemName": "Katana",
+			"DisplayName": "Katana",
+			"Description": "A katana for whacking things with",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "ItachiAnbuBlade",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -734928546,
+				"B": 1253449632,
+				"C": -271516491,
+				"D": -1677444347
+			},
+			"SortOrder": -1,
+			"ItemName": "ItachiAnbuBlade",
+			"DisplayName": "Anbu Blade",
+			"Description": "Itachi's anbu blade",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "ZabuzaSword",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 867134706,
+				"B": 1292746109,
+				"C": -2072439639,
+				"D": 926060488
+			},
+			"SortOrder": -1,
+			"ItemName": "ZabuzaSword",
+			"DisplayName": "Zabuza Sword",
+			"Description": "Zabuza's sword",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Shuriken",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1960018056,
+				"B": 1147875268,
+				"C": -16127554,
+				"D": 1751715389
+			},
+			"SortOrder": -1,
+			"ItemName": "Shuriken",
+			"DisplayName": "Shuriken",
+			"Description": "A ninja throwing knife",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "WindmillShuriken",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -2142451051,
+				"B": 1153520992,
+				"C": -799531110,
+				"D": -199227708
+			},
+			"SortOrder": -1,
+			"ItemName": "WindmillShuriken",
+			"DisplayName": "Windmill Shuriken",
+			"Description": "A windmill shuriken",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "AdamantineNyoi",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1593534144,
+				"B": 1272853674,
+				"C": -619959397,
+				"D": 1507788283
+			},
+			"SortOrder": -1,
+			"ItemName": "AdamantineNyoi",
+			"DisplayName": "Adamantine Nyoi",
+			"Description": "Monkey King Enma's staff",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Kurosawa",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 390750134,
+				"B": 1109368518,
+				"C": -759840625,
+				"D": 129457154
+			},
+			"SortOrder": -1,
+			"ItemName": "Kurosawa",
+			"DisplayName": "Kurosawa",
+			"Description": "Mifune's sword",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "SasukeSword",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 841780984,
+				"B": 1274538076,
+				"C": 1560315811,
+				"D": 210180225
+			},
+			"SortOrder": -1,
+			"ItemName": "SasukeSword",
+			"DisplayName": "Sasuke's sword",
+			"Description": "A katana for whacking things with",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Uchigatana",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1294701281,
+				"B": 1115146374,
+				"C": 1853190317,
+				"D": -566508448
+			},
+			"SortOrder": -1,
+			"ItemName": "Uchigatana",
+			"DisplayName": "Uchigatana",
+			"Description": "A katana for whacking things with",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "HealthPotion",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 276298222,
+				"B": 1143160413,
+				"C": 629840306,
+				"D": -292200418
+			},
+			"SortOrder": -1,
+			"ItemName": "HealthPotion",
+			"DisplayName": "Health Potion",
+			"Description": "A potion that heals health",
+			"InteractText": "Take potion",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "ManaPotion",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1311834321,
+				"B": 1074503411,
+				"C": -786235252,
+				"D": -164186275
+			},
+			"SortOrder": -1,
+			"ItemName": "ManaPotion",
+			"DisplayName": "Mana Potion",
+			"Description": "A potion that heals mana",
+			"InteractText": "Take potion",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "StaminaPotion",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 1397213829,
+				"B": 1308859646,
+				"C": 229132977,
+				"D": -1235939055
+			},
+			"SortOrder": -1,
+			"ItemName": "StaminaPotion",
+			"DisplayName": "Stamina Potion",
+			"Description": "A potion that heals stamina",
+			"InteractText": "Take potion",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Bow",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -558510241,
+				"B": 1155930181,
+				"C": 560394933,
+				"D": -1623835214
+			},
+			"SortOrder": -1,
+			"ItemName": "Bow",
+			"DisplayName": "A Bow",
+			"Description": "A bow for hunting",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Pistol",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1547678973,
+				"B": 1182541101,
+				"C": -897276778,
+				"D": 310550569
+			},
+			"SortOrder": -1,
+			"ItemName": "Pistol",
+			"DisplayName": "Pistol",
+			"Description": "",
+			"InteractText": "Press e to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "FJX_Imperium",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": -1946187852,
+				"B": 1270850586,
+				"C": 83101322,
+				"D": 2028988933
+			},
+			"SortOrder": -1,
+			"ItemName": "FJX_Imperium",
+			"DisplayName": "FJX Imperium",
+			"Description": "A Sniper Rifle",
+			"InteractText": "Press E to pickup",
+			"ItemType": "Inv_None",
+			"Image": "None",
+			"ActualClass": "None",
+			"WorldClass": "None",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	}
+]

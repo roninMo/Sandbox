@@ -367,7 +367,22 @@ UAnimMontage* UCombatComponent::GetArmamentMontageFromDB(FName ArmamentId, EComb
 }
 
 
+void UCombatComponent::Server_AddArmamentToEquipSlot_Implementation(const F_Item& ArmamentData, const EEquipSlot EquipSlot)
+{
+	AddArmamentToEquipSlot(ArmamentData, EquipSlot);
+}
 
+
+void UCombatComponent::Server_RemoveArmamentFromEquipSlot_Implementation(const EEquipSlot EquipSlot)
+{
+	RemoveArmamentFromEquipSlot(EquipSlot);
+}
+
+
+void UCombatComponent::Server_CreateArmament_Implementation(const EEquipSlot EquipSlot)
+{
+	CreateArmament(EquipSlot);
+}
 
 
 bool UCombatComponent::UnequipArmor(EArmorSlot ArmorSlot)
@@ -564,6 +579,12 @@ const F_Information_Armor UCombatComponent::GetArmorFromDatabase(const FName Id)
 	}
 
 	return F_Information_Armor();
+}
+
+
+void UCombatComponent::Server_EquipArmor_Implementation(const F_Item& Armor)
+{
+	EquipArmor(Armor);
 }
 
 

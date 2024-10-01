@@ -36,7 +36,7 @@ public:
 	/** Logic when a character's periphery cone registers the object */
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Peripheries|Cone", DisplayName = "(Periphery Interface) Within Player Cone Periphery") 
 	void WithinPlayerConePeriphery(AActor* SourceCharacter, EPeripheryType PeripheryType);
-	virtual void WithinPlayer_Implementation(AActor* SourceCharacter, EPeripheryType PeripheryType);
+	virtual void WithinPlayerConePeriphery_Implementation(AActor* SourceCharacter, EPeripheryType PeripheryType);
 
 	/** Logic when a character's periphery cone unregisters the object */
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Peripheries|Cone", DisplayName = "(Periphery Interface) Outside Of Cone Periphery") 

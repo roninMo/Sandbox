@@ -18,7 +18,6 @@ class SANDBOX_API AItem : public AActor, public IInventoryItemInterface
 protected:
 	/** Information for access this item's data */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Data Configuration") UDataTable* ItemInformationTable;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Data Configuration") UDataAsset* GlobalItemInformation;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Data Configuration") FName TableId;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Item|Information") F_Item Item;
 	
