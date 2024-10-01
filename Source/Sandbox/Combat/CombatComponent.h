@@ -73,9 +73,6 @@ protected:
 	/** Overridable native event for when play begins for this actor. */
 	virtual void BeginPlay() override;
 
-	/** Called before destroying the object. This is called immediately upon deciding to destroy the object, to allow the object to begin an asynchronous cleanup process. */
-	virtual void BeginDestroy() override;
-	
 	/** Handles combat calculations and logic */
 	virtual void CombatCalculations(const FGAttributeSetExecutionData& Props);
 

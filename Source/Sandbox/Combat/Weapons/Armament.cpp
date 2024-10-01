@@ -81,32 +81,6 @@ void AArmament::BeginPlay()
 }
 
 
-void AArmament::BeginDestroy()
-{
-	// Cleanup ability system logic
-	// UAbilitySystem* AbilitySystemComponent = UGameplayAbilitiyUtilities::GetAbilitySystem(GetOwner());
-	// if (AbilitySystemComponent)
-	// {
-	// 	// Remove armament state, passives, and abilities
-	// 	AbilitySystemComponent->RemoveGameplayEffect(StateInformationHandle, 1);
-	// 	StateInformationHandle.Invalidate();
-	//
-	// 	// Remove the armament's passives
-	// 	for (const FActiveGameplayEffectHandle& PassiveHandle : PassiveHandles)
-	// 	{
-	// 		AbilitySystemComponent->RemoveGameplayEffect(PassiveHandle, 1);
-	// 	}
-	// 	PassiveHandles.Empty();
-	//
-	// 	// Remove the armament's abilities
-	// 	AbilitySystemComponent->RemoveGameplayAbilities(AbilityHandles);
-	// 	AbilityHandles.Empty();
-	// }
-
-	Super::BeginDestroy();
-}
-
-
 
 
 #pragma region Construction and Deconstruction
@@ -142,7 +116,7 @@ bool AArmament::ConstructArmament()
 	}
 	
 	// Add armament montages
-	// UpdateArmamentMontages(Character->GetCharacterToMontageMapping());
+	UpdateArmamentMontages(Character->GetCharacterToMontageMapping());
 	
 	return true;
 }

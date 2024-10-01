@@ -8,6 +8,7 @@
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
+#include "Sandbox/Data/Enums/MontageMappings.h"
 
 
 ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Super(
@@ -159,10 +160,10 @@ UAbilitySystemComponent* ACharacterBase::GetAbilitySystemComponent() const
 }
 
 
-// ECharacterToMontageMapping ACharacterBase::GetCharacterToMontageMapping() const
-// {
-// 	return MontageMapping;
-// }
+ECharacterToMontageMapping ACharacterBase::GetCharacterToMontageMapping() const
+{
+	return MontageMapping;
+}
 
 
 UCombatComponent* ACharacterBase::GetCombatComponent() const

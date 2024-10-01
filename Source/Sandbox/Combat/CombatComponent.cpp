@@ -25,31 +25,6 @@ void UCombatComponent::BeginPlay()
 }
 
 
-void UCombatComponent::BeginDestroy()
-{
-	// Remove the player's equipment
-	// if (PrimaryArmament)
-	// {
-	// 	PrimaryArmament->DeconstructArmament();
-	// 	PrimaryArmament->Destroy();
-	// }
-	//
-	// if (SecondaryArmament)
-	// {
-	// 	SecondaryArmament->DeconstructArmament();
-	// 	SecondaryArmament->Destroy();
-	// }
-	//
-	//
-	//
-	// // Remove the delegate bindings 
-	// OnEquippedArmament.RemoveAll(this);
-	// OnUnequippedArmament.RemoveAll(this);
-	//
-	Super::BeginDestroy();
-}
-
-
 void UCombatComponent::CombatCalculations(const FGAttributeSetExecutionData& Props)
 {
 }

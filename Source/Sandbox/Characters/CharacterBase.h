@@ -411,12 +411,12 @@ public:
 // Combat																			   //
 //-------------------------------------------------------------------------------------//
 protected:
-// 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation") TEnumAsByte<ECharacterToMontageMapping> MontageMapping;
-//
-//
-// public:
-// 	/** Retrieves the character to montage mapping. Used for retrieving the proper animations for different character skeletons */
-// 	UFUNCTION(BlueprintCallable, Category = "Animation|Utilities") virtual ECharacterToMontageMapping GetCharacterToMontageMapping() const;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation") TEnumAsByte<ECharacterToMontageMapping> MontageMapping;
+
+
+public:
+	/** Retrieves the character to montage mapping. Used for retrieving the proper animations for different character skeletons */
+	UFUNCTION(BlueprintCallable, Category = "Animation|Utilities") virtual ECharacterToMontageMapping GetCharacterToMontageMapping() const;
 
 
 	
