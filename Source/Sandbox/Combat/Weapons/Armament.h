@@ -95,7 +95,6 @@ public:
 // Montages																			   //
 //-------------------------------------------------------------------------------------//
 protected:
-
 	/** The montages for the armament */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EAttackPattern, UAnimMontage*> ArmamentMontages;
 

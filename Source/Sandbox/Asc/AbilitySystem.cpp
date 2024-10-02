@@ -193,7 +193,6 @@ void UAbilitySystem::ShutdownAbilitySystemDelegates()
 #pragma region Gameplay Ability Functions
 FGameplayAbilitySpecHandle UAbilitySystem::AddAbility(const FGameplayAbilityInfo& NewAbility)
 {
-	FGameplayAbilitySpec Spec;
 	if (!IsOwnerActorAuthoritative())
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() Add Ability called on non authoritative actor! {2}",
@@ -230,7 +229,11 @@ FGameplayAbilitySpecHandle UAbilitySystem::AddAbility(const FGameplayAbilityInfo
 			Map.AbilityHandle = FGameplayAbilitySpecHandle();
 			Map.GrantedAbilities.Remove(Map.CurrentlyActivatedAbility);
 			Map.CurrentlyActivatedAbility = FGuid();
+		}
 
+		// Add the ability if there isn't a current instance of the ability already
+		if (!Map.Ability.Ability)
+		{
 			// Create the new ability specification
 			Map.Ability = BuildAbilitySpecFromClass(AbilityClass, NewAbility.Level, static_cast<int32>(NewAbility.InputId));
 

@@ -64,7 +64,10 @@ protected:
 	UPROPERTY(Replicated, BlueprintReadWrite, Category = "Combat Component|Armaments") AArmament* SecondaryArmament;
 
 	/** The player's current armament stance */
-	UPROPERTY(Transient, BlueprintReadWrite) EArmamentStance CurrentStance;
+	UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_CurrentStance) EArmamentStance CurrentStance;
+	
+	/** The current combo index the player is on */
+	UPROPERTY(BlueprintReadWrite, Replicated, Category = "Combat Component|Armaments") int32 ComboIndex;
 	
 	/** The armament information for the armament in the left hand's first equip slot */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item LeftHandEquipSlot_One;
@@ -151,6 +154,8 @@ protected:
 	/** Handles combat calculations and logic */
 	virtual void CombatCalculations(const FGAttributeSetExecutionData& Props);
 
+	/** Function called every frame on this ActorComponent. Override this function to implement custom logic */
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
 //-------------------------------------------------------------------------------------//
 // Armament Functionality															   //
@@ -201,6 +206,9 @@ public:
 	/** Updates the armament stance for the character based on the currently equipped armaments. */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Combat")
 	virtual void UpdateArmamentStance();
+
+	/** OnRep function for handling updating the current stance */
+	UFUNCTION() virtual void OnRep_CurrentStance();
 	
 	/**
 	 * Retrieves the armament from one of the player's hands

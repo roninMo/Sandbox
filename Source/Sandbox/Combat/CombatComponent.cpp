@@ -33,6 +33,8 @@ void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME_CONDITION_NOTIFY(UCombatComponent, PrimaryArmament, COND_Custom, REPNOTIFY_OnChanged);
 	DOREPLIFETIME_CONDITION_NOTIFY(UCombatComponent, SecondaryArmament, COND_Custom, REPNOTIFY_OnChanged);
+	DOREPLIFETIME_CONDITION_NOTIFY(UCombatComponent, CurrentStance, COND_Custom, REPNOTIFY_OnChanged);
+	DOREPLIFETIME_CONDITION_NOTIFY(UCombatComponent, ComboIndex, COND_Custom, REPNOTIFY_OnChanged);
 }
 
 
@@ -49,7 +51,12 @@ void UCombatComponent::CombatCalculations(const FGAttributeSetExecutionData& Pro
 }
 
 
+void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	UE_LOGFMT(CombatComponentLog, Log, "{0}::{1}'s combo index: {2}", *UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()), ComboIndex);
+}
 
 
 void UCombatComponent::AddArmamentToEquipSlot(const F_Item& ArmamentInventoryInformation, const EEquipSlot EquipSlot)
@@ -243,6 +250,11 @@ void UCombatComponent::UpdateArmamentStance()
 	}
 
 	CurrentStance = EArmamentStance::EAS_None;
+}
+
+void UCombatComponent::OnRep_CurrentStance()
+{
+	// Update client state based on the current stance
 }
 
 

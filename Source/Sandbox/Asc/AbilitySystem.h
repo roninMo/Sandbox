@@ -3,10 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystemComponent.h"
 #include "GameplayAbilitySpec.h"
-#include "Components/InputComponent.h"
+#include "AbilitySystemComponent.h"
+#include "GameplayAbilitiyUtilities.h"
 #include "Sandbox/Data/Structs/AbilityInformation.h"
+#include "Components/InputComponent.h"
 #include "AbilitySystem.generated.h"
 
 class UInputAction;
