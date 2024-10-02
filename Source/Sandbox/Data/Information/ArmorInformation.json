@@ -158,7 +158,7 @@
 		{
 			"Id": "Plate_Leggings",
 			"ArmorSlot": "Leggings",
-			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Cavalry/SKM_Armor_17_Leggings.SKM_Armor_17_Leggings'",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Plate/SKM_Armor_17_Leggings.SKM_Armor_17_Leggings'",
 			"ArmorStats":
 			{
 				"Effect": "/Game/Props/Armors/Plate/GE_Attributes_Plate_Leggings.GE_Attributes_Plate_Leggings_C",
@@ -175,7 +175,7 @@
 		{
 			"Id": "Plate_Gauntlets",
 			"ArmorSlot": "Gauntlets",
-			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Cavalry/SKM_Armor_17_Gauntlets.SKM_Armor_17_Gauntlets'",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Plate/SKM_Armor_17_Gauntlets.SKM_Armor_17_Gauntlets'",
 			"ArmorStats":
 			{
 				"Effect": "/Game/Props/Armors/Plate/GE_Attributes_Plate_Gauntlets.GE_Attributes_Plate_Gauntlets_C",
@@ -192,7 +192,7 @@
 		{
 			"Id": "Plate_Helm",
 			"ArmorSlot": "Helm",
-			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Cavalry/SKM_Armor_17_Helm.SKM_Armor_17_Helm'",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Plate/SKM_Armor_17_Helm.SKM_Armor_17_Helm'",
 			"ArmorStats":
 			{
 				"Effect": "/Game/Props/Armors/Plate/GE_Attributes_Plate_Helm.GE_Attributes_Plate_Helm_C",
@@ -209,7 +209,7 @@
 		{
 			"Id": "Plate_Chest",
 			"ArmorSlot": "Chest",
-			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Cavalry/SKM_Armor_17_Chest.SKM_Armor_17_Chest'",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Plate/SKM_Armor_17_Chest.SKM_Armor_17_Chest'",
 			"ArmorStats":
 			{
 				"Effect": "/Game/Props/Armors/Plate/GE_Attributes_Plate_Chest.GE_Attributes_Plate_Chest_C",
@@ -416,7 +416,7 @@
 			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Owl/SKM_Armor_23_Chest.SKM_Armor_23_Chest'",
 			"ArmorStats":
 			{
-				"Effect": "/Game/Props/Armors/Plate/GE_Attributes_Plate_Chest.GE_Attributes_Plate_Chest_C",
+				"Effect": "/Game/Props/Armors/OwlSet/GE_Attributes_Owl_Chest.GE_Attributes_Owl_Chest_C",
 				"Level": 1
 			},
 			"Passives": [],
