@@ -12,7 +12,7 @@ class UGameplayEffect;
 struct FGameplayAttribute;
 enum class EEquipRestrictions : uint8;
 enum class EArmamentClassification : uint8;
-enum class EComboType : uint8;
+enum class EAttackPattern : uint8;
 enum class EDamageInformationSource : uint8;
 enum class EInputAbilities : uint8;
 
@@ -82,16 +82,16 @@ struct F_ArmamentAbilityInformation
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TSubclassOf<UGameplayAbility> Ability;
 	
 	/** The level of the ability */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly) int32 Level;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly) int32 Level = 1;
 	
 	/** If this is an input ability, this is the stored reference for the input */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) EInputAbilities InputId;
+
+	/** The attack pattern for the current ability. This helps determine the specific attack montage we're granting to the character for the ability */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) EAttackPattern AttackPattern;
 	
 	/** The combos of a specific attack */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_ComboAttacks Combo;
-
-	/** The combo type for the armament. This can be used for many things, we're using it for animations because storing character to montage mappings shouldn's be on data tables */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) EComboType ComboType;
 };
 
 
@@ -113,12 +113,12 @@ struct F_ArmamentInformation
 
 	/** The armament classification */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) EArmamentClassification Classification;
-
-	/** Are the damage calculations from the armament, combo, or both? */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) EDamageInformationSource DamageCalculations;
 	
 	/** The armament's equip restrictions */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) EEquipRestrictions EquipRestrictions;
+
+	/** Are the damage calculations from the armament, combo, or both? */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) EDamageInformationSource DamageCalculations;
 	
 	/** The base attack information of the armament */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FGameplayAttribute, float> BaseDamageStats;

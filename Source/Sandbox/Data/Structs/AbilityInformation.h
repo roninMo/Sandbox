@@ -105,12 +105,14 @@ struct FGameplayAbilityMapping
 		const TSoftClassPtr<UGameplayAbility>& Ability = nullptr,
 		const int32 Level = 1,
 		const EInputAbilities InputId = EInputAbilities::None,
-		const TSubclassOf<UObject> ObjectInformation = nullptr
+		const TSubclassOf<UObject> ObjectInformation = nullptr,
+		const FGuid Id = FGuid()
 	) :
 		Ability(Ability),
 		Level(Level),
 		InputId(InputId),
-		ObjectInformation(ObjectInformation)
+		ObjectInformation(ObjectInformation),
+		Id(Id)
 	{}
 
 	/** Type of ability to grant */
@@ -127,6 +129,10 @@ struct FGameplayAbilityMapping
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Ability)
 	TSubclassOf<UObject> ObjectInformation;
+	
+	/** A reference to where we retrieved the ability from. This is usually the id of one of the player's inventory items, or null */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Ability)
+	FGuid Id;
 };
 
 

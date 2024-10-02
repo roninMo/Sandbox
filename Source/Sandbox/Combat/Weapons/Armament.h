@@ -18,7 +18,7 @@ class UGameplayEffect;
 struct F_ArmamentAbilityInformation;
 struct FGameplayEffectMapping;
 enum class EEquipSlot : uint8;
-enum class EComboType : uint8;
+enum class EAttackPattern : uint8;
 enum class ECharacterSkeletonMapping : uint8;
 enum class EArmamentClassification : uint8;
 enum class EDamageInformationSource : uint8;
@@ -97,7 +97,7 @@ public:
 protected:
 
 	/** The montages for the armament */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EComboType, UAnimMontage*> ArmamentMontages;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EAttackPattern, UAnimMontage*> ArmamentMontages;
 
 
 public:

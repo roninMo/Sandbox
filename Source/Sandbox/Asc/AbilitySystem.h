@@ -54,6 +54,27 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_FiveParams(FOnGameplayEffectTimeChange,  FGam
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnGameplayEffectRemoved, FGameplayTagContainer, AssetTags, FGameplayTagContainer, GrantedTags, FActiveGameplayEffectHandle, ActiveHandle);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnGameplayTagStackChange, FGameplayTag, GameplayTag, int32, NewTagCount);
 
+
+/**
+ * An object for the ability system to handle retrieving multiple abilities and adding/removing an ability without it affecting gameplay.  
+ */
+USTRUCT(BlueprintType)
+struct F_MultiAbilityHandle
+{
+	GENERATED_USTRUCT_BODY()
+	F_MultiAbilityHandle() = default;
+
+	/** The current ability that's added to the character */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayAbilitySpec Ability;
+
+	/** The handle of the ability that's applied to the character */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayAbilitySpecHandle AbilityHandle;
+
+	/** The different instances that have granted the ability to the player */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayAbilityMapping> GrantedAbilities;
+};
+
+
 ///// Ability System /////
 // "showdebug abilitysystem"
 // "AbilitySystem.Debug.NextCategory"
@@ -76,7 +97,7 @@ class SANDBOX_API UAbilitySystem : public UAbilitySystemComponent
 protected:
 	/** Cached granted Ability Handles */
 	UPROPERTY(Transient)
-	TArray<FGameplayAbilitySpec> AddedAbilityHandles;
+	TArray<FGameplayAbilitySpecHandle> AddedAbilityHandles;
 
 	/** Cached granted AttributeSets */
 	UPROPERTY(Transient)

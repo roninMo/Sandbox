@@ -52,7 +52,7 @@ enum class EDamageInformationSource : uint8
  *	Is this a primary, secondary, special, or alt attack?
  */
 UENUM(BlueprintType)
-enum class EComboType : uint8
+enum class EAttackPattern : uint8
 {
 	None				UMETA(DisplayName = "None"),
 	Primary				UMETA(DisplayName = "Primary Attack"),

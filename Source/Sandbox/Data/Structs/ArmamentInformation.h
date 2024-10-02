@@ -8,7 +8,7 @@
 #include "ArmamentInformation.generated.h"
 
 // enum class ECharacterSkeletonMapping : uint8;
-enum class EComboType : uint8;
+enum class EAttackPattern : uint8;
 
 
 /**
@@ -34,7 +34,7 @@ USTRUCT(BlueprintType)
 struct F_Table_ArmamentMontages : public FTableRowBase
 {
 	GENERATED_BODY()
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<EComboType, F_CharacterToMontage> ArmamentMontages;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<EAttackPattern, F_CharacterToMontage> ArmamentMontages;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString DevDescription;
 };
 

@@ -188,10 +188,10 @@ bool AArmament::UpdateArmamentMontages(const ECharacterSkeletonMapping MontageMa
 	ArmamentMontages.Empty();
 	for (F_ArmamentAbilityInformation ArmamentAbility : ArmamentInformation.Abilities)
 	{
-		UAnimMontage* ArmamentComboMontage = CombatComponent->GetArmamentMontageFromDB(ArmamentInformation.Id, ArmamentAbility.ComboType, MontageMapping);
+		UAnimMontage* ArmamentComboMontage = CombatComponent->GetArmamentMontageFromDB(ArmamentInformation.Id, ArmamentAbility.AttackPattern, MontageMapping);
 		if (ArmamentComboMontage)
 		{
-			ArmamentMontages.Add(ArmamentAbility.ComboType, ArmamentComboMontage);
+			ArmamentMontages.Add(ArmamentAbility.AttackPattern, ArmamentComboMontage);
 		}
 	}
 	

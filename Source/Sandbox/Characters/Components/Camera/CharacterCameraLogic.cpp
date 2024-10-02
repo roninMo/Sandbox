@@ -24,8 +24,8 @@ ACharacterCameraLogic::ACharacterCameraLogic(const FObjectInitializer& ObjectIni
 	CameraArm = CreateDefaultSubobject<UTargetLockSpringArm>(TEXT("Camera Arm"));
 	CameraArm->SetupAttachment(RootComponent); // Attach this to the mesh because if we attach this to the root, whenever we crouch the springArm/Camera will move along with it, which is not intended
 	CameraArm->TargetOffset = FVector(0, 0, 100); 
-	CameraArm->TargetArmLength = 240; // Distance from the character
 	CameraArm->bUsePawnControlRotation = true; // Allows us to rotate the camera boom along with our controller when we're adding mouse input
+	CameraArm->TargetArmLength = TargetArmLength; // Distance from the character
 	CameraArm->ProbeSize = 16.4;
 	CameraArm->bEnableCameraLag = true;
 	CameraArm->CameraLagSpeed = 2.3;

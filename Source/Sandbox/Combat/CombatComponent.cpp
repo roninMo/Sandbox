@@ -333,7 +333,7 @@ F_ArmamentInformation UCombatComponent::GetArmamentInformationFromDatabase(const
 }
 
 
-UAnimMontage* UCombatComponent::GetArmamentMontageFromDB(FName ArmamentId, EComboType ComboType, ECharacterSkeletonMapping Mapping)
+UAnimMontage* UCombatComponent::GetArmamentMontageFromDB(FName ArmamentId, EAttackPattern AttackPattern, ECharacterSkeletonMapping Mapping)
 {
 	if (!MontageInformationTable) return nullptr;
 	
@@ -341,9 +341,9 @@ UAnimMontage* UCombatComponent::GetArmamentMontageFromDB(FName ArmamentId, EComb
 	if (const F_Table_ArmamentMontages* Data = MontageInformationTable->FindRow<F_Table_ArmamentMontages>(ArmamentId, RowContext))
 	{
 		// Search for the specific combo
-		if (Data->ArmamentMontages.Contains(ComboType))
+		if (Data->ArmamentMontages.Contains(AttackPattern))
 		{
-			F_CharacterToMontage CharacterMontages = Data->ArmamentMontages[ComboType];
+			F_CharacterToMontage CharacterMontages = Data->ArmamentMontages[AttackPattern];
 
 			// Check if there's a montage for the specific character
 			if (CharacterMontages.MontageMappings.Contains(Mapping))
@@ -359,7 +359,7 @@ UAnimMontage* UCombatComponent::GetArmamentMontageFromDB(FName ArmamentId, EComb
 		else
 		{
 			UE_LOGFMT(ArmamentLog, Error, "{0}::{1} did not find an armament montage for the {2} combo",
-				*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()), *UEnum::GetValueAsString(ComboType));
+				*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()), *UEnum::GetValueAsString(AttackPattern));
 		}
 	}
 
