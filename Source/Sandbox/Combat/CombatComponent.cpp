@@ -495,13 +495,13 @@ bool UCombatComponent::EquipArmor(F_Item Armor)
 	ArmorHandle.ArmorStats = AbilitySystemComponent->AddGameplayEffect(ArmorInformation.ArmorStats);
 	
 	// Passives
-	for (const FGameplayEffectMapping& Passive : ArmorInformation.Passives)
+	for (const FGameplayEffectInfo& Passive : ArmorInformation.Passives)
 	{
 		ArmorHandle.PassiveHandles.Add(AbilitySystemComponent->AddGameplayEffect(Passive));
 	}
 	
 	// Abilities
-	for (const FGameplayAbilityMapping& Ability : ArmorInformation.Abilities)
+	for (const FGameplayAbilityInfo& Ability : ArmorInformation.Abilities)
 	{
 		ArmorHandle.AbilityHandles.Add(AbilitySystemComponent->AddAbility(Ability));
 	}

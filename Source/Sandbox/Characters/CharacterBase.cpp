@@ -73,7 +73,7 @@ void ACharacterBase::PossessedBy(AController* NewController)
 	// For Player State ASC Pawns, initialize ASC on server in PossessedBy
 	if (APlayerState* PS = GetPlayerState())
 	{
-		AbilitySystemComponent = UGameplayAbilitiyUtilities::GetAbilitySystem(PS);
+		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(PS);
 		if (AbilitySystemComponent)
 		{
 			AbilitySystemComponent->InitAbilityActorInfo(PS, this);
@@ -90,7 +90,7 @@ void ACharacterBase::OnRep_PlayerState()
 	// For Player State ASC Pawns, initialize ASC on clients in OnRep_PlayerState
 	if (APlayerState* PS = GetPlayerState())
 	{
-		AbilitySystemComponent = UGameplayAbilitiyUtilities::GetAbilitySystem(PS);
+		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(PS);
 		if (AbilitySystemComponent)
 		{
 			AbilitySystemComponent->InitAbilityActorInfo(PS, this);
@@ -107,7 +107,7 @@ void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvat
 	
 	if (!AbilitySystemComponent)
 	{
-		AbilitySystemComponent = UGameplayAbilitiyUtilities::GetAbilitySystem(this);
+		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(this);
 		if (!AbilitySystemComponent) return;
 	}
 	
@@ -138,7 +138,7 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	
 	if (!AbilitySystemComponent)
 	{
-		AbilitySystemComponent = UGameplayAbilitiyUtilities::GetAbilitySystem(this);
+		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(this);
 		if (!AbilitySystemComponent) return;
 	}
 	

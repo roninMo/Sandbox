@@ -6,6 +6,7 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "GameplayAbilitiyUtilities.generated.h"
 
+struct FCharacterAbilityDataSetHandle;
 class UInputAction;
 class UGameplayEffect;
 class UGameplayAbility;
@@ -19,20 +20,20 @@ struct FGameplayTag;
 struct FGameplayAbilitySpec;
 struct FActiveGameplayEffectHandle;
 struct FCharacterAbilityDataSet;
-struct FGameplayAttributeMapping;
+struct FGameplayAttributeInfo;
 struct FGameplayAbilitySpecHandle;
 struct FGameplayAttribute;
-struct FGameplayAbilityMapping;
+struct FGameplayAbilityInfo;
 struct FComponentRequestHandle;
 struct FGameplayCueParameters;
 struct FGameplayEffectContextHandle;
 
 
 /**
- * 
+ * TODO: Refactor adding abilities to use the ability system for storing abilities correctly
  */
 UCLASS()
-class SANDBOX_API UGameplayAbilitiyUtilities : public UBlueprintFunctionLibrary
+class SANDBOX_API UGameplayAbilityUtilities : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 
@@ -58,11 +59,11 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ability|Adding and Clearing")
 	static bool TryAddAbilitySet(UAbilitySystemComponent* AbilitySystemComponent, const UCharacterAbilityDataSet* InAbilitySet, FCharacterAbilityDataSetHandle& OutAbilitySetHandle);
-	
-	static void TryAddAbility(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayAbilityMapping& InAbilityMapping, FGameplayAbilitySpecHandle& OutAbilityHandle, FGameplayAbilitySpec& OutAbilitySpec);
-	static void TryAddAttributes(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayAttributeMapping& InAttributeSetMapping, UAttributeSet*& OutAttributeSet);
+
+	static void TryAddAbility(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayAbilityInfo& InAbilityMapping, FGameplayAbilitySpecHandle& OutAbilityHandle, FGameplayAbilitySpec& OutAbilitySpec);
+	static void TryAddAttributes(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayAttributeInfo& InAttributeSetMapping, UAttributeSet*& OutAttributeSet);
 	static void TryAddGameplayEffect(UAbilitySystemComponent* AbilitySystemComponent, const TSubclassOf<UGameplayEffect> InEffectType, const float InLevel, TArray<FActiveGameplayEffectHandle>& OutEffectHandles);
-	
+
 	/** Helper to return the AttributeSet UObject as a non const pointer, if the passed in ASC has it granted */
 	UFUNCTION(BlueprintCallable, Category = "Attributes")
 	static UAttributeSet* GetAttributeSet(const UAbilitySystemComponent* InASC, const TSubclassOf<UAttributeSet> InAttributeSet);

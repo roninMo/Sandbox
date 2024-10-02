@@ -97,16 +97,16 @@ struct FInputActionBindingAbilityMap
 
 
 USTRUCT(BlueprintType)
-struct FGameplayAbilityMapping
+struct FGameplayAbilityInfo
 {
 	GENERATED_USTRUCT_BODY()
 	/** Default constructor */
-	FGameplayAbilityMapping(
-		const TSoftClassPtr<UGameplayAbility>& Ability = nullptr,
+	FGameplayAbilityInfo(
+		const TSubclassOf<UGameplayAbility>& Ability = nullptr,
 		const int32 Level = 1,
 		const EInputAbilities InputId = EInputAbilities::None,
 		const TSubclassOf<UObject> ObjectInformation = nullptr,
-		const FGuid Id = FGuid()
+		const FGuid Id = FGuid::NewGuid()
 	) :
 		Ability(Ability),
 		Level(Level),
@@ -117,7 +117,7 @@ struct FGameplayAbilityMapping
 
 	/** Type of ability to grant */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Ability)
-	TSoftClassPtr<UGameplayAbility> Ability;
+	TSubclassOf<UGameplayAbility> Ability;
 
 	/** Level to grant the ability at */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Ability)
@@ -131,19 +131,21 @@ struct FGameplayAbilityMapping
 	TSubclassOf<UObject> ObjectInformation;
 	
 	/** A reference to where we retrieved the ability from. This is usually the id of one of the player's inventory items, or null */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Ability)
+	UPROPERTY(BlueprintReadOnly, Category=Ability)
 	FGuid Id;
 };
 
 
 
-
+/**
+ * 
+ */
 USTRUCT(BlueprintType)
-struct FGameplayAttributeMapping
+struct FGameplayAttributeInfo
 {
 	GENERATED_USTRUCT_BODY()
 	/** Default constructor */
-	FGameplayAttributeMapping(
+	FGameplayAttributeInfo(
 		const TSoftClassPtr<UAttributeSet>& AttributeSet = nullptr,
 		const TSoftObjectPtr<UDataTable>& InitializationData = nullptr
 	): AttributeSet(AttributeSet), InitializationData(InitializationData) {}
@@ -161,19 +163,19 @@ struct FGameplayAttributeMapping
 
 
 USTRUCT(BlueprintType)
-struct FGameplayEffectMapping
+struct FGameplayEffectInfo
 {
 	GENERATED_USTRUCT_BODY()
 	/** Default constructor */
-	FGameplayEffectMapping() = default;
-	// FGameplayEffectMapping(
+	FGameplayEffectInfo() = default;
+	// FGameplayEffectInfo(
 	// 	const TSoftClassPtr<UGameplayEffect>& EffectType = nullptr,
 	// 	const int32 Level = 1
 	// ): EffectType(EffectType), Level(Level) {}
 
 	/** Gameplay Effect to apply */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Gameplay Effect")
-	TSoftClassPtr<UGameplayEffect> Effect;
+	TSubclassOf<UGameplayEffect> Effect;
 
 	/** Level for the Gameplay Effect to apply */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Gameplay Effect")

@@ -124,10 +124,10 @@ struct F_ArmamentInformation
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FGameplayAttribute, float> BaseDamageStats;
 	
 	/** The armament's passives */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayEffectMapping> Passives;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayEffectInfo> Passives;
 	
 	/** The armament's state information */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayEffectMapping StateInformation;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayEffectInfo StateInformation;
 	
 	/** The armament's abilities */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<F_ArmamentAbilityInformation> Abilities;

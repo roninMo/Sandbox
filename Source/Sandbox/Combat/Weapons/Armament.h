@@ -16,7 +16,7 @@ class ACharacterBase;
 class UCombatComponent;
 class UGameplayEffect;
 struct F_ArmamentAbilityInformation;
-struct FGameplayEffectMapping;
+struct FGameplayEffectInfo;
 enum class EEquipSlot : uint8;
 enum class EAttackPattern : uint8;
 enum class ECharacterSkeletonMapping : uint8;
@@ -150,10 +150,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual const TArray<F_ArmamentAbilityInformation>& GetAbilities() const;
 	
 	/** Retrieves the armament's passives */
-	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual const TArray<FGameplayEffectMapping>& GetPassives() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual const TArray<FGameplayEffectInfo>& GetPassives() const;
 	
 	/** Retrieves the armament's equipped state information */
-	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual FGameplayEffectMapping GetStateInformation() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual FGameplayEffectInfo GetStateInformation() const;
 	
 	/** Retrieves the armament's base attack information */
 	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual const TMap<FGameplayAttribute, float>& GetBaseDamageStats() const;

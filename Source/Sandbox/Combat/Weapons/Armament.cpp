@@ -103,7 +103,7 @@ bool AArmament::ConstructArmament()
 
 	// Add armament state and passives
 	StateInformationHandle = AbilitySystemComponent->AddGameplayEffect(ArmamentInformation.StateInformation);
-	for (const FGameplayEffectMapping& Passive : ArmamentInformation.Passives)
+	for (const FGameplayEffectInfo& Passive : ArmamentInformation.Passives)
 	{
 		PassiveHandles.Add(AbilitySystemComponent->AddGameplayEffect(Passive));
 	}
@@ -111,7 +111,7 @@ bool AArmament::ConstructArmament()
 	// Add armament abilities
 	for (const F_ArmamentAbilityInformation& ArmamentAbility : ArmamentInformation.Abilities)
 	{
-		AbilityHandles.Add(AbilitySystemComponent->AddAbility(FGameplayAbilityMapping(ArmamentAbility.Ability.Get(), ArmamentAbility.Level, ArmamentAbility.InputId)));
+		AbilityHandles.Add(AbilitySystemComponent->AddAbility(FGameplayAbilityInfo(ArmamentAbility.Ability.Get(), ArmamentAbility.Level, ArmamentAbility.InputId)));
 	}
 	
 	// Add armament montages
@@ -299,13 +299,13 @@ const TArray<F_ArmamentAbilityInformation>& AArmament::GetAbilities() const
 }
 
 
-const TArray<FGameplayEffectMapping>& AArmament::GetPassives() const
+const TArray<FGameplayEffectInfo>& AArmament::GetPassives() const
 {
 	return ArmamentInformation.Passives;
 }
 
 
-FGameplayEffectMapping AArmament::GetStateInformation() const
+FGameplayEffectInfo AArmament::GetStateInformation() const
 {
 	return ArmamentInformation.StateInformation;
 }

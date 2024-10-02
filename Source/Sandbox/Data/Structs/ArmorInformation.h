@@ -8,7 +8,7 @@
 #include "Engine/DataTable.h"
 #include "ArmorInformation.generated.h"
 
-struct FGameplayEffectMapping;
+struct FGameplayEffectInfo;
 class UCharacterGameplayAbility;
 class UGameplayEffect;
 struct F_Item;
@@ -121,13 +121,13 @@ struct F_Information_Armor
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) USkeletalMesh* ArmorMesh;
 
 	/** Gameplay effect for adjusting the player's stats from the armor */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayEffectMapping ArmorStats;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayEffectInfo ArmorStats;
 
 	/** The passives the armor grants to the player */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayEffectMapping> Passives;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayEffectInfo> Passives;
 
 	/** The abilities the armor grants to the player */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayAbilityMapping> Abilities;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayAbilityInfo> Abilities;
 };
 
 

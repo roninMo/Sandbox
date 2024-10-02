@@ -11,9 +11,9 @@
 #include "CharacterAbilityDataSet.generated.h"
 
 
-struct FGameplayEffectMapping;
-struct FGameplayAttributeMapping;
-struct FGameplayAbilityMapping;
+struct FGameplayEffectInfo;
+struct FGameplayAttributeInfo;
+struct FGameplayAbilityInfo;
 struct FGameplayAbilitySpec;
 class UAbilitySystemComponent;
 
@@ -148,15 +148,15 @@ public:
 
 	/** List of Gameplay Abilities to grant when the Ability System Component is initialized */
 	UPROPERTY(EditDefaultsOnly, Category="Abilities", meta=(TitleProperty=Ability))
-	TArray<FGameplayAbilityMapping> GrantedAbilities;
+	TArray<FGameplayAbilityInfo> GrantedAbilities;
 
 	/** List of Attribute Sets to grant when the Ability System Component is initialized, with optional initialization data */
 	UPROPERTY(EditDefaultsOnly, Category="Attributes", meta=(TitleProperty=AttributeSet))
-	TArray<FGameplayAttributeMapping> GrantedAttributes;
+	TArray<FGameplayAttributeInfo> GrantedAttributes;
 
 	/** List of GameplayEffects to apply when the Ability System Component is initialized (typically on begin play) */
 	UPROPERTY(EditDefaultsOnly, Category="Effects", meta=(TitleProperty=Effect))
-	TArray<FGameplayEffectMapping> GrantedEffects;
+	TArray<FGameplayEffectInfo> GrantedEffects;
 	
 	/** An optional set of Gameplay Tags to grant to the ASC when the Ability Set is applied */
 	UPROPERTY(EditDefaultsOnly, Category="Owned Gameplay Tags")

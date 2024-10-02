@@ -4,9 +4,7 @@
 #include "AbilitySystem.h"
 
 #include "EnhancedInputComponent.h"
-#include "GameplayAbilitiyUtilities.h"
 #include "Logging/StructuredLog.h"
-#include "Sandbox/Data/Structs/AbilityInformation.h"
 
 DEFINE_LOG_CATEGORY(AbilityLog);
 
@@ -193,7 +191,7 @@ void UAbilitySystem::ShutdownAbilitySystemDelegates()
 
 
 #pragma region Gameplay Ability Functions
-FGameplayAbilitySpecHandle UAbilitySystem::AddAbility(const FGameplayAbilityMapping& AbilityMapping)
+FGameplayAbilitySpecHandle UAbilitySystem::AddAbility(const FGameplayAbilityInfo& NewAbility)
 {
 	FGameplayAbilitySpec Spec;
 	if (!IsOwnerActorAuthoritative())
@@ -204,8 +202,8 @@ FGameplayAbilitySpecHandle UAbilitySystem::AddAbility(const FGameplayAbilityMapp
 		return FGameplayAbilitySpecHandle();
 	}
 
-	const TSubclassOf<UGameplayAbility> Ability = AbilityMapping.Ability.LoadSynchronous();
-	if (!Ability)
+	const TSubclassOf<UGameplayAbility> AbilityClass = NewAbility.Ability;
+	if (!AbilityClass)
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() Add Ability called with an invalid ability! {2}",
 			*UEnum::GetValueAsString(GetOwnerActor()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwnerActor())
@@ -213,14 +211,65 @@ FGameplayAbilitySpecHandle UAbilitySystem::AddAbility(const FGameplayAbilityMapp
 		return FGameplayAbilitySpecHandle();
 	}
 	
-	// Add the ability to the list of current abilities
-	UGameplayAbilitiyUtilities::TryAddAbility(this, AbilityMapping, Spec.Handle, Spec);
-	AddedAbilityHandles.Add(Spec);
-	return Spec.Handle;
+
+	// Handling for if we already have this ability
+	for (auto &[CurrentAbility, Map] : AddedAbilityHandles)
+	{
+		if (AbilityClass != CurrentAbility) continue;
+			
+		// Add the ability to the ability handle, if we don't have this instance of the ability added
+		if (!Map.GrantedAbilities.Contains(NewAbility.Id))
+		{
+			Map.GrantedAbilities.Add(NewAbility.Id, NewAbility);
+		}
+		else if (Map.Ability.Level < NewAbility.Level)
+		{
+			// Update the ability level
+			RemoveGameplayAbility(Map.AbilityHandle);
+			Map.Ability = FGameplayAbilitySpec();
+			Map.AbilityHandle = FGameplayAbilitySpecHandle();
+			Map.GrantedAbilities.Remove(Map.CurrentlyActivatedAbility);
+			Map.CurrentlyActivatedAbility = FGuid();
+
+			// Create the new ability specification
+			Map.Ability = BuildAbilitySpecFromClass(AbilityClass, NewAbility.Level, static_cast<int32>(NewAbility.InputId));
+
+			// Add the ability to the character, and update the handle
+			Map.AbilityHandle = GiveAbility(Map.Ability);
+			Map.CurrentlyActivatedAbility = NewAbility.Id;
+			Map.GrantedAbilities.Add(NewAbility.Id, NewAbility);
+		}
+
+		// Map.AbilityHandle.IsValid()
+		return Map.AbilityHandle;
+	}
+	
+	// If we haven't added this ability yet
+	if (!AddedAbilityHandles.Contains(AbilityClass))
+	{
+		// Build another ability handle and add the ability
+		F_MultiAbilityHandle NewAbilityHandle;
+
+		// Create the new ability specification
+		NewAbilityHandle.Ability = BuildAbilitySpecFromClass(AbilityClass, NewAbility.Level, static_cast<int32>(NewAbility.InputId));
+		
+		// Add the ability to the character, and update the handle
+		NewAbilityHandle.AbilityHandle = GiveAbility(NewAbilityHandle.Ability);
+		NewAbilityHandle.CurrentlyActivatedAbility = NewAbility.Id;
+		NewAbilityHandle.GrantedAbilities.Add(NewAbility.Id, NewAbility);
+
+		// Only add the ability if it was successfully applied
+		if (NewAbilityHandle.AbilityHandle.IsValid()) AddedAbilityHandles.Add(AbilityClass, NewAbilityHandle);
+		return NewAbilityHandle.AbilityHandle;
+	}
+
+	UE_LOGFMT(AbilityLog, Error, "{0}::{1}() Something happened while adding an ability! {2}",
+		*UEnum::GetValueAsString(GetOwnerActor()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwnerActor()));
+	return FGameplayAbilitySpecHandle();
 }
 
 
-TArray<FGameplayAbilitySpecHandle> UAbilitySystem::AddAbilities(TArray<FGameplayAbilityMapping> AbilityMappings)
+TArray<FGameplayAbilitySpecHandle> UAbilitySystem::AddAbilities(TArray<FGameplayAbilityInfo> NewAbilities)
 {
 	if (!IsOwnerActorAuthoritative())
 	{
@@ -230,7 +279,7 @@ TArray<FGameplayAbilitySpecHandle> UAbilitySystem::AddAbilities(TArray<FGameplay
 	}
 	
 	TArray<FGameplayAbilitySpecHandle> SpecHandles;
-	for (const FGameplayAbilityMapping& AbilityMapping : AbilityMappings)
+	for (const FGameplayAbilityInfo& AbilityMapping : NewAbilities)
 	{
 		FGameplayAbilitySpecHandle SpecHandle = AddAbility(AbilityMapping);
 		if (SpecHandle.IsValid())
@@ -243,6 +292,20 @@ TArray<FGameplayAbilitySpecHandle> UAbilitySystem::AddAbilities(TArray<FGameplay
 }
 
 
+FGameplayAbilitySpec UAbilitySystem::GetAbilitySpec(TSubclassOf<UGameplayAbility> GameplayAbility)
+{
+	for (auto &[Id, Map] : AddedAbilityHandles)
+	{
+		if (GameplayAbility == Map.Ability.Ability.GetClass())
+		{
+			return Map.Ability;
+		}
+	}
+
+	return FGameplayAbilitySpec();
+}
+
+
 void UAbilitySystem::RemoveGameplayAbility(const FGameplayAbilitySpecHandle& Handle)
 {
 	if (!IsOwnerActorAuthoritative())
@@ -251,21 +314,43 @@ void UAbilitySystem::RemoveGameplayAbility(const FGameplayAbilitySpecHandle& Han
 			*UEnum::GetValueAsString(GetOwnerActor()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwnerActor()));
 		return;
 	}
-	
-	// Remove the ability, and the handles we have stored for reference
-	ClearAbility(Handle);
-	int32 AbilityIndex = -1;
-	for (int32 Index = 0; Index < AddedAbilityHandles.Num(); Index++)
+
+	// Remove the current instance, and add the next valid current instance
+	bool bRemovedAbility = false; // If we don't find the ability within our own handles, just remove it later
+	for (auto &[CurrentAbility, Map] : AddedAbilityHandles)
 	{
-		const FGameplayAbilitySpec& Ability = AddedAbilityHandles[Index];
-		if (Ability.Handle == Handle)
+		if (Map.AbilityHandle != Handle) continue;
+
+		// Remove the current instance of the ability
+		ClearAbility(Handle);
+		Map.GrantedAbilities.Remove(Map.CurrentlyActivatedAbility);
+		Map.CurrentlyActivatedAbility = FGuid();
+		Map.Ability = FGameplayAbilitySpec();
+		Map.AbilityHandle = FGameplayAbilitySpecHandle();
+		bRemovedAbility = true;
+
+		// Find the next instance of this ability to use
+		FGameplayAbilityInfo AbilityInstance;
+		for (auto &[Id, AbilityInfo] : Map.GrantedAbilities)
 		{
-			AbilityIndex = Index;
-			break;
+			if (!AbilityInfo.Ability) continue;
+			
+			// Just use the current ability if we don't have a valid one yet
+			if (!AbilityInstance.Ability) AbilityInstance = AbilityInfo;
+			else if (AbilityInfo.Level > AbilityInstance.Level) AbilityInstance = AbilityInfo;
+		}
+
+		// Add the new instance of the ability
+		if (AbilityInstance.Ability)
+		{
+			AddAbility(AbilityInstance);
 		}
 	}
-	
-	AddedAbilityHandles.RemoveAt(AbilityIndex);
+
+	if (!bRemovedAbility)
+	{
+		ClearAbility(Handle);
+	}
 }
 
 
@@ -285,9 +370,9 @@ void UAbilitySystem::RemoveGameplayAbilities(const TArray<FGameplayAbilitySpecHa
 }
 
 
-FActiveGameplayEffectHandle UAbilitySystem::AddGameplayEffect(const FGameplayEffectMapping& EffectMapping)
+FActiveGameplayEffectHandle UAbilitySystem::AddGameplayEffect(const FGameplayEffectInfo& EffectMapping)
 {
-	const TSubclassOf<UGameplayEffect> GameplayEffect = EffectMapping.Effect.LoadSynchronous();
+	const TSubclassOf<UGameplayEffect> GameplayEffect = EffectMapping.Effect;
 	if (!GameplayEffect)
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Tried to add a gameplay effect without a valid class reference!",
@@ -313,10 +398,10 @@ FActiveGameplayEffectHandle UAbilitySystem::AddGameplayEffect(const FGameplayEff
 }
 
 
-TArray<FActiveGameplayEffectHandle> UAbilitySystem::AddGameplayEffects(const TArray<FGameplayEffectMapping> EffectMappings)
+TArray<FActiveGameplayEffectHandle> UAbilitySystem::AddGameplayEffects(const TArray<FGameplayEffectInfo> EffectMappings)
 {
 	TArray<FActiveGameplayEffectHandle> GameplayEffectHandles;
-	for (const FGameplayEffectMapping& EffectMapping : EffectMappings)
+	for (const FGameplayEffectInfo& EffectMapping : EffectMappings)
 	{
 		FActiveGameplayEffectHandle EffectHandle = AddGameplayEffect(EffectMapping);
 		if (EffectHandle.IsValid())

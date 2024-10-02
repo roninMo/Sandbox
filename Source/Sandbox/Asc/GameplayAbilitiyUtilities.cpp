@@ -11,7 +11,7 @@
 #include "Logging/StructuredLog.h"
 
 
-UAbilitySystem* UGameplayAbilitiyUtilities::GetAbilitySystem(const AActor* Actor)
+UAbilitySystem* UGameplayAbilityUtilities::GetAbilitySystem(const AActor* Actor)
 {
 	UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Actor);
 	if (!ASC)
@@ -30,7 +30,7 @@ UAbilitySystem* UGameplayAbilitiyUtilities::GetAbilitySystem(const AActor* Actor
 }
 
 
-void UGameplayAbilitiyUtilities::GetAllAttributes(TSubclassOf<UAttributeSet> AttributeSetClass, TArray<FGameplayAttribute>& OutAttributes)
+void UGameplayAbilityUtilities::GetAllAttributes(TSubclassOf<UAttributeSet> AttributeSetClass, TArray<FGameplayAttribute>& OutAttributes)
 {
 	const UClass* Class = AttributeSetClass.Get();
 	for (TFieldIterator<FProperty> It(Class); It; ++It)
@@ -47,7 +47,7 @@ void UGameplayAbilitiyUtilities::GetAllAttributes(TSubclassOf<UAttributeSet> Att
 }
 
 
-bool UGameplayAbilitiyUtilities::TryAddAbilitySet(UAbilitySystemComponent* AbilitySystemComponent, const UCharacterAbilityDataSet* InAbilitySet, FCharacterAbilityDataSetHandle& OutAbilitySetHandle)
+bool UGameplayAbilityUtilities::TryAddAbilitySet(UAbilitySystemComponent* AbilitySystemComponent, const UCharacterAbilityDataSet* InAbilitySet, FCharacterAbilityDataSetHandle& OutAbilitySetHandle)
 {
 	check(AbilitySystemComponent);
 	if (!InAbilitySet)
@@ -57,11 +57,11 @@ bool UGameplayAbilitiyUtilities::TryAddAbilitySet(UAbilitySystemComponent* Abili
 	
 	// Add Abilities
 	int32 AbilitiesIndex = 0;
-	for (const FGameplayAbilityMapping& AbilityMapping : InAbilitySet->GrantedAbilities)
+	for (const FGameplayAbilityInfo& AbilityMapping : InAbilitySet->GrantedAbilities)
 	{
 		AbilitiesIndex++;
 		
-		if (AbilityMapping.Ability.IsNull())
+		if (!AbilityMapping.Ability)
 		{
 			UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s GrantedAbilities Ability on ability set {2} is not valid at Index {3}",
 				*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()), *GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *GetNameSafe(InAbilitySet), AbilitiesIndex  - 1
@@ -78,7 +78,7 @@ bool UGameplayAbilitiyUtilities::TryAddAbilitySet(UAbilitySystemComponent* Abili
 	
 	// Add Attributes
 	int32 AttributesIndex = 0;
-	for (const FGameplayAttributeMapping& Attributes : InAbilitySet->GrantedAttributes)
+	for (const FGameplayAttributeInfo& Attributes : InAbilitySet->GrantedAttributes)
 	{
 		AttributesIndex++;
 	
@@ -101,11 +101,11 @@ bool UGameplayAbilitiyUtilities::TryAddAbilitySet(UAbilitySystemComponent* Abili
 	
 	// Add Effects
 	int32 EffectsIndex = 0;
-	for (const FGameplayEffectMapping& Effect : InAbilitySet->GrantedEffects)
+	for (const FGameplayEffectInfo& Effect : InAbilitySet->GrantedEffects)
 	{
 		EffectsIndex++;
 		
-		if (Effect.Effect.IsNull())
+		if (!Effect.Effect)
 		{
 			UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s GrantedEffects EffectType on ability set {2} is not valid at Index {3}",
 				*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()), *GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *GetNameSafe(InAbilitySet), EffectsIndex  - 1
@@ -113,7 +113,7 @@ bool UGameplayAbilitiyUtilities::TryAddAbilitySet(UAbilitySystemComponent* Abili
 			continue;
 		}
 		
-		TryAddGameplayEffect(AbilitySystemComponent, Effect.Effect.LoadSynchronous(), Effect.Level, OutAbilitySetHandle.EffectHandles);
+		TryAddGameplayEffect(AbilitySystemComponent, Effect.Effect, Effect.Level, OutAbilitySetHandle.EffectHandles);
 	}
 	
 	// Add Owned Gameplay Tags
@@ -131,22 +131,22 @@ bool UGameplayAbilitiyUtilities::TryAddAbilitySet(UAbilitySystemComponent* Abili
 }
 
 
-void UGameplayAbilitiyUtilities::TryAddAbility(UAbilitySystemComponent* AbilitySystemComponent,
-	const FGameplayAbilityMapping& InAbilityMapping, FGameplayAbilitySpecHandle& OutAbilityHandle,
+void UGameplayAbilityUtilities::TryAddAbility(UAbilitySystemComponent* AbilitySystemComponent,
+	const FGameplayAbilityInfo& InAbilityMapping, FGameplayAbilitySpecHandle& OutAbilityHandle,
 	FGameplayAbilitySpec& OutAbilitySpec)
 {
 	check(AbilitySystemComponent);
 	
-	if (InAbilityMapping.Ability.IsNull())
+	if (!InAbilityMapping.Ability)
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s Failed to Add Ability \"{2}\" because class is null",
 			*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()),
-			*GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *InAbilityMapping.Ability.ToString()
+			*GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *InAbilityMapping.Ability->GetName()
 		);
 		return;
 	}
 	
-	const TSubclassOf<UGameplayAbility> Ability = InAbilityMapping.Ability.LoadSynchronous();
+	const TSubclassOf<UGameplayAbility> Ability = InAbilityMapping.Ability;
 	check(Ability);
 	
 	UAbilitySystem* ASC = Cast<UAbilitySystem>(AbilitySystemComponent);
@@ -158,46 +158,56 @@ void UGameplayAbilitiyUtilities::TryAddAbility(UAbilitySystemComponent* AbilityS
 		);
 		return;
 	}
+
+	// Add the ability 
+	OutAbilityHandle = ASC->AddAbility(InAbilityMapping);
+
+	// Only use this function if you need a reference to an ability's specifications
+	OutAbilitySpec = ASC->GetAbilitySpec(Ability);
+
 	
-	OutAbilitySpec = ASC->BuildAbilitySpecFromClass(Ability, InAbilityMapping.Level, static_cast<int32>(InAbilityMapping.InputId));
-	
-	// Try to grant the ability first
-	if (ASC->IsOwnerActorAuthoritative())
-	{
-		// Only Grant abilities on authority, and only if we should (ability not granted yet or wants reset on spawn)
-		if (!IsAbilityGranted(ASC, Ability, InAbilityMapping.Level))
+	/** Ability system behavior for different states when the abilities are granted
+	 * 
+		OutAbilitySpec = ASC->BuildAbilitySpecFromClass(Ability, InAbilityMapping.Level, static_cast<int32>(InAbilityMapping.InputId));
+		
+		// Try to grant the ability first
+		if (ASC->IsOwnerActorAuthoritative())
 		{
-			UE_LOGFMT(AbilityLog, Verbose, "Authority, Grant Ability ({0})", *Ability->GetName());
-			OutAbilityHandle = ASC->GiveAbility(OutAbilitySpec);
+			// Only Grant abilities on authority, and only if we should (ability not granted yet or wants reset on spawn)
+			if (!IsAbilityGranted(ASC, Ability, InAbilityMapping.Level))
+			{
+				UE_LOGFMT(AbilityLog, Verbose, "Authority, Grant Ability ({0})", *Ability->GetName());
+				OutAbilityHandle = ASC->GiveAbility(OutAbilitySpec);
+			}
+			else
+			{
+				// In case granting is prevented because of ability already existing, return the existing handle
+				const FGameplayAbilitySpec* ExistingAbilitySpec = ASC->FindAbilitySpecFromClass(Ability);
+				if (ExistingAbilitySpec)
+				{
+					OutAbilityHandle = ExistingAbilitySpec->Handle;
+				}
+			}
 		}
 		else
 		{
-			// In case granting is prevented because of ability already existing, return the existing handle
+			// For clients, try to get ability spec and update handle used later on for input binding
 			const FGameplayAbilitySpec* ExistingAbilitySpec = ASC->FindAbilitySpecFromClass(Ability);
 			if (ExistingAbilitySpec)
 			{
 				OutAbilityHandle = ExistingAbilitySpec->Handle;
 			}
+			
+			UE_LOGFMT(AbilityLog, Verbose, "{0}::{1}'s AddActorAbilities: Not Authority, try to find ability handle from spec: {2}",
+				*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()), *GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *OutAbilityHandle.ToString()
+			);
 		}
-	}
-	else
-	{
-		// For clients, try to get ability spec and update handle used later on for input binding
-		const FGameplayAbilitySpec* ExistingAbilitySpec = ASC->FindAbilitySpecFromClass(Ability);
-		if (ExistingAbilitySpec)
-		{
-			OutAbilityHandle = ExistingAbilitySpec->Handle;
-		}
-		
-		UE_LOGFMT(AbilityLog, Verbose, "{0}::{1}'s AddActorAbilities: Not Authority, try to find ability handle from spec: {2}",
-			*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()), *GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *OutAbilityHandle.ToString()
-		);
-	}
+	*/
 }
 
 
-void UGameplayAbilitiyUtilities::TryAddAttributes(UAbilitySystemComponent* AbilitySystemComponent,
-	const FGameplayAttributeMapping& InAttributeSetMapping, UAttributeSet*& OutAttributeSet)
+void UGameplayAbilityUtilities::TryAddAttributes(UAbilitySystemComponent* AbilitySystemComponent,
+	const FGameplayAttributeInfo& InAttributeSetMapping, UAttributeSet*& OutAttributeSet)
 {
 	check(AbilitySystemComponent);
 	
@@ -241,7 +251,7 @@ void UGameplayAbilitiyUtilities::TryAddAttributes(UAbilitySystemComponent* Abili
 }
 
 
-void UGameplayAbilitiyUtilities::TryAddGameplayEffect(UAbilitySystemComponent* AbilitySystemComponent,
+void UGameplayAbilityUtilities::TryAddGameplayEffect(UAbilitySystemComponent* AbilitySystemComponent,
 	const TSubclassOf<UGameplayEffect> InEffectType, const float InLevel,
 	TArray<FActiveGameplayEffectHandle>& OutEffectHandles)
 {
@@ -279,7 +289,7 @@ void UGameplayAbilitiyUtilities::TryAddGameplayEffect(UAbilitySystemComponent* A
 }
 
 
-UAttributeSet* UGameplayAbilitiyUtilities::GetAttributeSet(const UAbilitySystemComponent* InASC, const TSubclassOf<UAttributeSet> InAttributeSet)
+UAttributeSet* UGameplayAbilityUtilities::GetAttributeSet(const UAbilitySystemComponent* InASC, const TSubclassOf<UAttributeSet> InAttributeSet)
 {
 	check(InASC);
 	
@@ -294,7 +304,7 @@ UAttributeSet* UGameplayAbilitiyUtilities::GetAttributeSet(const UAbilitySystemC
 	return nullptr;
 }
 
-bool UGameplayAbilitiyUtilities::HasGameplayEffectApplied(const UAbilitySystemComponent* InASC,
+bool UGameplayAbilityUtilities::HasGameplayEffectApplied(const UAbilitySystemComponent* InASC,
 	const TSubclassOf<UGameplayEffect>& InEffectType, TArray<FActiveGameplayEffectHandle>& OutEffectHandles)
 {
 	check(InASC);
@@ -310,7 +320,7 @@ bool UGameplayAbilitiyUtilities::HasGameplayEffectApplied(const UAbilitySystemCo
 	return !OutEffectHandles.IsEmpty();
 }
 
-bool UGameplayAbilitiyUtilities::IsAbilityGranted(const UAbilitySystemComponent* InASC,
+bool UGameplayAbilityUtilities::IsAbilityGranted(const UAbilitySystemComponent* InASC,
 	TSubclassOf<UGameplayAbility> InAbility, const int32 InLevel)
 {
 	check(InASC);
@@ -337,7 +347,7 @@ bool UGameplayAbilitiyUtilities::IsAbilityGranted(const UAbilitySystemComponent*
 
 
 #pragma region Gameplay Cues
-void UGameplayAbilitiyUtilities::ExecuteGameplayCueForActor(AActor* Actor, FGameplayTag GameplayCueTag, FGameplayEffectContextHandle Context)
+void UGameplayAbilityUtilities::ExecuteGameplayCueForActor(AActor* Actor, FGameplayTag GameplayCueTag, FGameplayEffectContextHandle Context)
 {
 	UAbilitySystemComponent* AbilitySystemComponent = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Actor, true);
 	if (AbilitySystemComponent)
@@ -347,7 +357,7 @@ void UGameplayAbilitiyUtilities::ExecuteGameplayCueForActor(AActor* Actor, FGame
 }
 
 
-void UGameplayAbilitiyUtilities::ExecuteGameplayCueWithParams(AActor* Actor, FGameplayTag GameplayCueTag, const FGameplayCueParameters& GameplayCueParameters)
+void UGameplayAbilityUtilities::ExecuteGameplayCueWithParams(AActor* Actor, FGameplayTag GameplayCueTag, const FGameplayCueParameters& GameplayCueParameters)
 {
 	UAbilitySystemComponent* AbilitySystemComponent = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Actor, true);
 	if (AbilitySystemComponent)
@@ -357,7 +367,7 @@ void UGameplayAbilitiyUtilities::ExecuteGameplayCueWithParams(AActor* Actor, FGa
 }
 
 
-void UGameplayAbilitiyUtilities::AddGameplayCue(AActor* Actor, FGameplayTag GameplayCueTag, FGameplayEffectContextHandle Context)
+void UGameplayAbilityUtilities::AddGameplayCue(AActor* Actor, FGameplayTag GameplayCueTag, FGameplayEffectContextHandle Context)
 {
 	UAbilitySystemComponent* AbilitySystemComponent = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Actor, true);
 	if (AbilitySystemComponent)
@@ -367,7 +377,7 @@ void UGameplayAbilitiyUtilities::AddGameplayCue(AActor* Actor, FGameplayTag Game
 }
 
 
-void UGameplayAbilitiyUtilities::AddGameplayCueWithParams(AActor* Actor, FGameplayTag GameplayCueTag, const FGameplayCueParameters& GameplayCueParameter)
+void UGameplayAbilityUtilities::AddGameplayCueWithParams(AActor* Actor, FGameplayTag GameplayCueTag, const FGameplayCueParameters& GameplayCueParameter)
 {
 	UAbilitySystemComponent* AbilitySystemComponent = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Actor, true);
 	if (AbilitySystemComponent)
@@ -377,7 +387,7 @@ void UGameplayAbilitiyUtilities::AddGameplayCueWithParams(AActor* Actor, FGamepl
 }
 
 
-void UGameplayAbilitiyUtilities::RemoveGameplayCue(AActor* Actor, FGameplayTag GameplayCueTag)
+void UGameplayAbilityUtilities::RemoveGameplayCue(AActor* Actor, FGameplayTag GameplayCueTag)
 {
 	UAbilitySystemComponent* AbilitySystemComponent = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Actor, true);
 	if (AbilitySystemComponent)
@@ -387,7 +397,7 @@ void UGameplayAbilitiyUtilities::RemoveGameplayCue(AActor* Actor, FGameplayTag G
 }
 
 
-void UGameplayAbilitiyUtilities::RemoveAllGameplayCues(AActor* Actor)
+void UGameplayAbilityUtilities::RemoveAllGameplayCues(AActor* Actor)
 {
 	UAbilitySystemComponent* AbilitySystemComponent = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Actor, true);
 	if (AbilitySystemComponent)
@@ -401,7 +411,7 @@ void UGameplayAbilitiyUtilities::RemoveAllGameplayCues(AActor* Actor)
 
 
 #pragma region Utility
-void UGameplayAbilitiyUtilities::AddLooseGameplayTagsUnique(UAbilitySystemComponent* InASC,
+void UGameplayAbilityUtilities::AddLooseGameplayTagsUnique(UAbilitySystemComponent* InASC,
 	const FGameplayTagContainer& InTags, const bool bReplicated)
 {
 	check(InASC);
@@ -435,7 +445,7 @@ void UGameplayAbilitiyUtilities::AddLooseGameplayTagsUnique(UAbilitySystemCompon
 }
 
 
-void UGameplayAbilitiyUtilities::RemoveLooseGameplayTagsUnique(UAbilitySystemComponent* InASC,
+void UGameplayAbilityUtilities::RemoveLooseGameplayTagsUnique(UAbilitySystemComponent* InASC,
 	const FGameplayTagContainer& InTags, const bool bReplicated)
 {
 	check(InASC);
@@ -467,7 +477,7 @@ void UGameplayAbilitiyUtilities::RemoveLooseGameplayTagsUnique(UAbilitySystemCom
 }
 
 
-void UGameplayAbilitiyUtilities::HandleOnGiveAbility(FGameplayAbilitySpec& InAbilitySpec,
+void UGameplayAbilityUtilities::HandleOnGiveAbility(FGameplayAbilitySpec& InAbilitySpec,
 	TWeakObjectPtr<UInputComponent> InInputComponent, TWeakObjectPtr<UInputAction> InInputAction,
 	const ETriggerEvent InTriggerEvent, FGameplayAbilitySpec InNewAbilitySpec)
 {

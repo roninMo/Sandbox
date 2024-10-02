@@ -26,7 +26,7 @@ bool UCharacterAbilityDataSet::AddToAbilitySystem(UAbilitySystemComponent* InASC
 		return false;
 	}
 	
-	const bool bSuccess = UGameplayAbilitiyUtilities::TryAddAbilitySet(InASC, this, OutAbilitySetHandle);
+	const bool bSuccess = UGameplayAbilityUtilities::TryAddAbilitySet(InASC, this, OutAbilitySetHandle);
 
 	if (bShouldRegisterComponent)
 	{
@@ -120,7 +120,7 @@ bool UCharacterAbilityDataSet::RemoveFromAbilitySystem(UAbilitySystemComponent* 
 	if (InAbilitySetHandle.OwnedTags.IsValid())
 	{
 		// Remove tags (on server, replicated to all other clients - on owning client, for itself)
-		UGameplayAbilitiyUtilities::RemoveLooseGameplayTagsUnique(InASC, InAbilitySetHandle.OwnedTags);
+		UGameplayAbilityUtilities::RemoveLooseGameplayTagsUnique(InASC, InAbilitySetHandle.OwnedTags);
 	}
 
 	// Clear any delegate handled bound previously for this actor
@@ -177,7 +177,7 @@ bool UCharacterAbilityDataSet::RemoveFromAbilitySystem(const AActor* InActor, FC
 
 bool UCharacterAbilityDataSet::HasInputBinding() const
 {
-	for (const FGameplayAbilityMapping& GrantedAbility : GrantedAbilities)
+	for (const FGameplayAbilityInfo& GrantedAbility : GrantedAbilities)
 	{
 		// Needs binding whenever one of the granted abilities is registered for ability input pressed events
 		if (GrantedAbility.InputId != EInputAbilities::None)

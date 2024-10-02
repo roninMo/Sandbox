@@ -6,16 +6,12 @@
 #include "AbilitySystemComponent.h"
 #include "GameplayAbilitySpec.h"
 #include "Components/InputComponent.h"
+#include "Sandbox/Data/Structs/AbilityInformation.h"
 #include "AbilitySystem.generated.h"
 
-struct FInputActionAbilityMap;
-struct FInputAbilityAction;
 class UInputAction;
-struct FGameplayEffectMapping;
-struct FGameplayAbilityMapping;
-struct FCharacterAbilityDataSetHandle;
-struct FInputActionBindingAbilityMap;
 class AAbilitySystemController;
+struct FCharacterAbilityDataSetHandle;
 
 
 DECLARE_LOG_CATEGORY_EXTERN(AbilityLog, Log, All);
@@ -45,7 +41,6 @@ DECLARE_MULTICAST_DELEGATE_OneParam(FOnGiveAbility, FGameplayAbilitySpec&);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInitAbilityActorInfo);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityActivated, const UGameplayAbility*, Ability);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityCommit, UGameplayAbility*, Ability);
-// DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityEnded, const UGameplayAbility*, Ability);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnAbilityFailed, const UGameplayAbility*, Ability, const FGameplayTagContainer&, ReasonTags);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnGameplayEffectAdded, FGameplayTagContainer, AssetTags, FGameplayTagContainer, GrantedTags, FActiveGameplayEffectHandle, ActiveHandle);
@@ -58,20 +53,23 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnGameplayTagStackChange, FGamepla
 /**
  * An object for the ability system to handle retrieving multiple abilities and adding/removing an ability without it affecting gameplay.  
  */
-USTRUCT(BlueprintType)
+USTRUCT()
 struct F_MultiAbilityHandle
 {
 	GENERATED_USTRUCT_BODY()
 	F_MultiAbilityHandle() = default;
 
 	/** The current ability that's added to the character */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayAbilitySpec Ability;
+	UPROPERTY() FGameplayAbilitySpec Ability;
 
 	/** The handle of the ability that's applied to the character */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayAbilitySpecHandle AbilityHandle;
+	UPROPERTY() FGameplayAbilitySpecHandle AbilityHandle;
 
+	/** The currently activated instance of the granted ability */
+	UPROPERTY() FGuid CurrentlyActivatedAbility;
+	
 	/** The different instances that have granted the ability to the player */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayAbilityMapping> GrantedAbilities;
+	UPROPERTY() TMap<FGuid, FGameplayAbilityInfo> GrantedAbilities;
 };
 
 
@@ -97,7 +95,7 @@ class SANDBOX_API UAbilitySystem : public UAbilitySystemComponent
 protected:
 	/** Cached granted Ability Handles */
 	UPROPERTY(Transient)
-	TArray<FGameplayAbilitySpecHandle> AddedAbilityHandles;
+	TMap<TSubclassOf<UGameplayAbility>, F_MultiAbilityHandle> AddedAbilityHandles;
 
 	/** Cached granted AttributeSets */
 	UPROPERTY(Transient)
@@ -160,21 +158,30 @@ public:
 	 * Creates an ability, adds it to the character, and stores the reference to the player's added abilities
 	 * This will be ignored if the actor is not authoritative.
 	 * 
-	 * @param AbilityMapping		Gameplay Ability Mapping containing information about the ability class, level and input ID to bind it to
+	 * @param NewAbility		Gameplay Ability Mapping containing information about the ability class, level and input ID to bind it to
 	 * @returns						handle that can be used in TryActivateAbility, etc
 	 */
 	UFUNCTION(BlueprintCallable)
-	virtual FGameplayAbilitySpecHandle AddAbility(const FGameplayAbilityMapping& AbilityMapping);
+	virtual FGameplayAbilitySpecHandle AddAbility(const FGameplayAbilityInfo& NewAbility);
 	
 	/**
 	 * Creates the abilities, adds them to the character, and stores the references to the player's added abilities
 	 * This will be ignored if the actor is not authoritative.
 	 * 
-	 * @param AbilityMappings		An array of Gameplay Ability Mappings containing information about the ability class, level and input ID to bind it to
+	 * @param NewAbilities			An array of Gameplay Ability Mappings containing information about the ability class, level and input ID to bind it to
 	 * @returns						the ability handles that can be used in TryActivateAbility, etc
 	 */
 	UFUNCTION(BlueprintCallable)
-	virtual TArray<FGameplayAbilitySpecHandle> AddAbilities(const TArray<FGameplayAbilityMapping> AbilityMappings);
+	virtual TArray<FGameplayAbilitySpecHandle> AddAbilities(const TArray<FGameplayAbilityInfo> NewAbilities);
+
+	/**
+	 * Searches for an ability that's already been granted to the player using the class reference
+	 *
+	 * @param GameplayAbility		The ability we're searching for
+	 * @returns A gameplay ability spec if there is one
+	 */
+	UFUNCTION()
+	virtual FGameplayAbilitySpec GetAbilitySpec(TSubclassOf<UGameplayAbility> GameplayAbility);
 	
 	/** 
 	 * Removes the specified ability from the character and the stored added ability references
@@ -200,7 +207,7 @@ public:
 	 * @returns						FActiveGameplayEffectHandle of the created gameplay effect
 	 */
 	UFUNCTION(BlueprintCallable)
-	virtual FActiveGameplayEffectHandle AddGameplayEffect(const FGameplayEffectMapping& EffectMapping);
+	virtual FActiveGameplayEffectHandle AddGameplayEffect(const FGameplayEffectInfo& EffectMapping);
 	
 	/**
 	 * Adds gameplay effects to the character, and stores the references to the player's added effects
@@ -209,7 +216,7 @@ public:
 	 * @returns						the active effect handles of the created gameplay effects
 	 */
 	UFUNCTION(BlueprintCallable)
-	virtual TArray<FActiveGameplayEffectHandle> AddGameplayEffects(const TArray<FGameplayEffectMapping> EffectMappings);
+	virtual TArray<FActiveGameplayEffectHandle> AddGameplayEffects(const TArray<FGameplayEffectInfo> EffectMappings);
 	
 	/** 
 	 * Removes the specified ability from the character and the stored added ability references
