@@ -194,10 +194,26 @@ UAbilitySystemComponent* ACharacterBase::GetAbilitySystemComponent() const
 
 void ACharacterBase::SetArmorMesh(EArmorSlot ArmorSlot, USkeletalMesh* Armor)
 {
-	if (EArmorSlot::Leggings == ArmorSlot) Armor_Leggings = Armor;
-	if (EArmorSlot::Gauntlets == ArmorSlot) Armor_Gauntlets = Armor;
-	if (EArmorSlot::Helm == ArmorSlot) Armor_Helm = Armor;
-	if (EArmorSlot::Chest == ArmorSlot) Armor_Chest = Armor;
+	if (EArmorSlot::Leggings == ArmorSlot)
+	{
+		Armor_Leggings = Armor;
+		if (Leggings) Leggings->SetSkeletalMesh(Armor_Leggings);
+	}
+	if (EArmorSlot::Gauntlets == ArmorSlot)
+	{
+		Armor_Gauntlets = Armor;
+		if (Gauntlets) Gauntlets->SetSkeletalMesh(Armor_Gauntlets);
+	}
+	if (EArmorSlot::Helm == ArmorSlot)
+	{
+		Armor_Helm = Armor;
+		if (Helm) Helm->SetSkeletalMesh(Armor_Helm);
+	}
+	if (EArmorSlot::Chest == ArmorSlot)
+	{
+		Armor_Chest = Armor;
+		if (Chest) Chest->SetSkeletalMesh(Armor_Chest);
+	}
 }
 
 void ACharacterBase::SetHideCharacterAndArmor(const bool bHide)
