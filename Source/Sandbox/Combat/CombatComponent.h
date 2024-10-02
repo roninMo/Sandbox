@@ -178,7 +178,7 @@ public:
 	 * @param EquipSlot							The equip slot to retrieve the armament information from.
 	 * @returns									The created armament
 	 **/
-	UFUNCTION(BlueprintCallable, Category = "Combat Component|Init")
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping")
 	virtual AArmament* CreateArmament(const EEquipSlot EquipSlot);
 
 	/**
@@ -281,22 +281,28 @@ protected:
 //--------------------------------------------------------------------------------------//
 public:
 	/** Unequips one of the player's armors. */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping")
 	virtual bool UnequipArmor(EArmorSlot ArmorSlot);
 
 	/** Creates and equips the player's armor */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping")
 	virtual bool EquipArmor(F_Item Armor);
 
 	
 	/** Retrieves the armor's information from the database */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping")
 	virtual F_Item GetArmorItemInformation(EArmorSlot ArmorSlot);
 	
 	/** Retrieves the one of the current armor's ability information */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping")
 	virtual F_Information_Armor GetArmorAbilityInformation(EArmorSlot ArmorSlot);
 	
 	/** Get's the skeletal mesh armor of a specific slot */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping")
 	virtual USkeletalMeshComponent* GetArmorMesh(EArmorSlot ArmorSlot);
 	
 	/** Accesses the armor information from the database */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping")
 	virtual const F_Information_Armor GetArmorFromDatabase(const FName Id) const;
 	
 	

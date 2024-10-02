@@ -427,6 +427,7 @@ bool UCombatComponent::UnequipArmor(EArmorSlot ArmorSlot)
 	}
 	
 	// Remove the armor from the character
+	Character->SetArmorMesh(ArmorSlot, nullptr);
 
 
 	
@@ -506,7 +507,7 @@ bool UCombatComponent::EquipArmor(F_Item Armor)
 	}
 
 	// Equip the armor to the character
-	
+	Character->SetArmorMesh(ArmorInformation.ArmorSlot, ArmorInformation.ArmorMesh);
 
 	
 	// Broadcast the event

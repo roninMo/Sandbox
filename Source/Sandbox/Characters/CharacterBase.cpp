@@ -4,6 +4,7 @@
 #include "Sandbox/Characters/CharacterBase.h"
 
 #include "EnhancedInputComponent.h"
+#include "Components/Inventory/InventoryComponent.h"
 #include "GameFramework/PlayerState.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
@@ -114,6 +115,12 @@ void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvat
 	// UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
 	UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
 	AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
+
+	// Inventory component initialization
+	if (Inventory)
+	{
+		Inventory->SetPlayerId();
+	}
 }
 
 
@@ -195,11 +202,11 @@ void ACharacterBase::SetArmorMesh(EArmorSlot ArmorSlot, USkeletalMesh* Armor)
 
 void ACharacterBase::SetHideCharacterAndArmor(const bool bHide)
 {
-	GetMesh()->SetHiddenInGame(bHide);
-	Gauntlets->SetHiddenInGame(bHide);
-	Leggings->SetHiddenInGame(bHide);
-	Helm->SetHiddenInGame(bHide);
-	Chest->SetHiddenInGame(bHide);
+	if (GetMesh()) GetMesh()->SetOwnerNoSee(bHide);
+	if (Gauntlets) Gauntlets->SetOwnerNoSee(bHide);
+	if (Leggings) Leggings->SetOwnerNoSee(bHide);
+	if (Helm) Helm->SetOwnerNoSee(bHide);
+	if (Chest) Chest->SetOwnerNoSee(bHide);
 }
 
 ECharacterSkeletonMapping ACharacterBase::GetCharacterSkeletonMapping() const { return CharacterSkeletonMapping; }

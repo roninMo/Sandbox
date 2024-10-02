@@ -5,10 +5,10 @@
 		{
 			"Id":
 			{
-				"A": 769487892,
-				"B": 1091246594,
-				"C": -1918783081,
-				"D": 786218091
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Soldier_Captain_Chest",
@@ -28,10 +28,10 @@
 		{
 			"Id":
 			{
-				"A": -1670849019,
-				"B": 1089019385,
-				"C": -1819934043,
-				"D": 1129453892
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Soldier_Captain_Gauntlets",
@@ -51,10 +51,10 @@
 		{
 			"Id":
 			{
-				"A": -266232169,
-				"B": 1185513270,
-				"C": 1366092191,
-				"D": -291360758
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Soldier_Swordsman_Chest",
@@ -74,10 +74,10 @@
 		{
 			"Id":
 			{
-				"A": -1180216905,
-				"B": 1130734727,
-				"C": -226572408,
-				"D": -116139714
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Soldier_Fighter_Chest",
@@ -97,10 +97,10 @@
 		{
 			"Id":
 			{
-				"A": 2125956996,
-				"B": 1224676069,
-				"C": 1064822692,
-				"D": 2131854571
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Leather_Vest",
@@ -120,10 +120,10 @@
 		{
 			"Id":
 			{
-				"A": -215730167,
-				"B": 1209609049,
-				"C": 333604523,
-				"D": 1041351663
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Leather_Shirt",
@@ -146,7 +146,7 @@
 				"A": 0,
 				"B": 0,
 				"C": 0,
-				"D": 0
+				"D":0
 			},
 			"SortOrder": -1,
 			"ItemName": "Leather_Armor",
@@ -161,20 +161,43 @@
 		"DevDescription": ""
 	},
 	{
-		"Name": "Bandit_Captain_Chest",
+		"Name": "Leather_Leggings",
 		"ItemInformation":
 		{
 			"Id":
 			{
-				"A": 1881812820,
-				"B": 1254962395,
-				"C": -474346833,
-				"D": -667308373
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D":0
 			},
 			"SortOrder": -1,
-			"ItemName": "Bandit_Captain_Chest",
-			"DisplayName": "Bandit Captain Chestplate",
-			"Description": "A bandit captain's chestplate",
+			"ItemName": "Leather_Leggings",
+			"DisplayName": "Leather Leggings",
+			"Description": "Leggings made of leather",
+			"ItemType": "Inv_Armor",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
+			"ActualClass": "None",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/LeatherApparel/BPI_Leather_Leggings.BPI_Leather_Leggings_C'",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Bandit_Chest",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
+			},
+			"SortOrder": -1,
+			"ItemName": "Bandit_Chest",
+			"DisplayName": "Bandit Chestplate",
+			"Description": "A bandit's chestplate",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
@@ -184,93 +207,93 @@
 		"DevDescription": ""
 	},
 	{
-		"Name": "Cavalry_Leggings",
+		"Name": "Plate_Leggings",
 		"ItemInformation":
 		{
 			"Id":
 			{
-				"A": -353803982,
-				"B": 1123064611,
-				"C": -1431719747,
-				"D": 2075816338
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
-			"ItemName": "Cavalry_Leggings",
-			"DisplayName": "Cavalry Leggings",
-			"Description": "A Cavary's leggings",
+			"ItemName": "Plate_Leggings",
+			"DisplayName": "Plate Leggings",
+			"Description": "Leggings plate armor",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Cavalry/BPI_Cavalry_Leggings.BPI_Cavalry_Leggings_C'",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Plate/BPI_Plate_Leggings.BPI_Plate_Leggings_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
 	},
 	{
-		"Name": "Cavalry_Gauntlets",
+		"Name": "Plate_Gauntlets",
 		"ItemInformation":
 		{
 			"Id":
 			{
-				"A": 1510503753,
-				"B": 1095607351,
-				"C": -1951670087,
-				"D": -1788420581
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
-			"ItemName": "Cavalry_Gauntlets",
-			"DisplayName": "Cavalry Gauntlets",
-			"Description": "A Cavalry's gauntlets",
+			"ItemName": "Plate_Gauntlets",
+			"DisplayName": "Plate Gauntlets",
+			"Description": "Gauntlets plater armor",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Cavalry/BPI_Cavalry_Gauntlets.BPI_Cavalry_Gauntlets_C'",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Plate/BPI_Plate_Gauntlets.BPI_Plate_Gauntlets_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
 	},
 	{
-		"Name": "Cavalry_Helm",
+		"Name": "Plate_Helm",
 		"ItemInformation":
 		{
 			"Id":
 			{
-				"A": -753011820,
-				"B": 1251525340,
-				"C": 1548913339,
-				"D": 1757592641
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
-			"ItemName": "Calvalry_Helm",
-			"DisplayName": "Calvalry Helm",
-			"Description": "A Cavalry's helm",
+			"ItemName": "Plate_Helm",
+			"DisplayName": "Plate Helm",
+			"Description": "Helm's plate armor",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Cavalry/BPI_Cavalry_Helm.BPI_Cavalry_Helm_C'",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Plate/BPI_Plate_Helm.BPI_Plate_Helm_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
 	},
 	{
-		"Name": "Cavalry_Chest",
+		"Name": "Plate_Chest",
 		"ItemInformation":
 		{
 			"Id":
 			{
-				"A": -1926098502,
-				"B": 1090222082,
-				"C": 1649864630,
-				"D": -849930014
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
-			"ItemName": "Calvalry_Chest",
-			"DisplayName": "Calvalry Chestplate",
-			"Description": "A Cavalry's chestplate",
+			"ItemName": "Plate_Chest",
+			"DisplayName": "Plate Chestplate",
+			"Description": "a chestplate armor",
 			"ItemType": "Inv_Armor",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Aura.UI_Aura'",
 			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Cavalry/BPI_Cavalry_Chest.BPI_Cavalry_Chest_C'",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Plate/BPI_Plate_Chest.BPI_Plate_Chest_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -281,10 +304,10 @@
 		{
 			"Id":
 			{
-				"A": -280574481,
-				"B": 1186262922,
-				"C": 1822581125,
-				"D": 810149228
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Knight_Leggings",
@@ -304,10 +327,10 @@
 		{
 			"Id":
 			{
-				"A": 466423304,
-				"B": 1218010309,
-				"C": 251479967,
-				"D": 494154148
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Knight_Gauntlets",
@@ -327,10 +350,10 @@
 		{
 			"Id":
 			{
-				"A": -1066972201,
-				"B": 1156590770,
-				"C": 116401333,
-				"D": 284979084
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Knight_Helm",
@@ -350,10 +373,10 @@
 		{
 			"Id":
 			{
-				"A": 401839660,
-				"B": 1151002825,
-				"C": 501001114,
-				"D": -848906180
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Knight_Chest",
@@ -373,10 +396,10 @@
 		{
 			"Id":
 			{
-				"A": -957972791,
-				"B": 1131500286,
-				"C": 738024863,
-				"D": -1385612156
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Brigandier_Leggings",
@@ -396,10 +419,10 @@
 		{
 			"Id":
 			{
-				"A": 442015768,
-				"B": 1153594358,
-				"C": 1468005035,
-				"D": -2070613584
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "BrigandierGauntlets",
@@ -419,10 +442,10 @@
 		{
 			"Id":
 			{
-				"A": 634749521,
-				"B": 1305452748,
-				"C": 204127623,
-				"D": 686506595
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Brigandier_Helm",
@@ -442,10 +465,10 @@
 		{
 			"Id":
 			{
-				"A": 78317135,
-				"B": 1116030902,
-				"C": 473896867,
-				"D": 1388170083
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Brigandier_Chest",
@@ -465,10 +488,10 @@
 		{
 			"Id":
 			{
-				"A": -912390691,
-				"B": 1155182437,
-				"C": -1202569807,
-				"D": 1850479647
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Owl_Leggings",
@@ -488,10 +511,10 @@
 		{
 			"Id":
 			{
-				"A": 1420126776,
-				"B": 1285386168,
-				"C": -587530828,
-				"D": -8545511
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Owl_Gauntlets",
@@ -511,10 +534,10 @@
 		{
 			"Id":
 			{
-				"A": -1299589150,
-				"B": 1176254090,
-				"C": 665106335,
-				"D": 1694601689
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Owl_Helm",
@@ -534,10 +557,10 @@
 		{
 			"Id":
 			{
-				"A": 1230460077,
-				"B": 1077481325,
-				"C": -490428797,
-				"D": 1592191489
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Owl_Chest",
@@ -557,10 +580,10 @@
 		{
 			"Id":
 			{
-				"A": -1269537115,
-				"B": 1118972710,
-				"C": -2019616361,
-				"D": 1621815513
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Tank_Leggings",
@@ -580,10 +603,10 @@
 		{
 			"Id":
 			{
-				"A": 1738565280,
-				"B": 1107340351,
-				"C": 1118471320,
-				"D": -62901519
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Tank_Gauntlets",
@@ -603,10 +626,10 @@
 		{
 			"Id":
 			{
-				"A": 779780315,
-				"B": 1292709093,
-				"C": -125855094,
-				"D": -2032180332
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Tank_Helm",
@@ -626,10 +649,10 @@
 		{
 			"Id":
 			{
-				"A": 2029330532,
-				"B": 1076283673,
-				"C": 964302989,
-				"D": -1226538486
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Tank_Chest",
@@ -649,10 +672,10 @@
 		{
 			"Id":
 			{
-				"A": -1793779603,
-				"B": 1113897307,
-				"C": -59402339,
-				"D": 2045658065
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Bandit_Helm",
@@ -672,10 +695,10 @@
 		{
 			"Id":
 			{
-				"A": 381000156,
-				"B": 1258251364,
-				"C": -410229829,
-				"D": -97293121
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Bandit_Captain_Helm",
@@ -695,10 +718,10 @@
 		{
 			"Id":
 			{
-				"A": -859327241,
-				"B": 1327475215,
-				"C": -17095779,
-				"D": 1092205001
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Jarl_Helm",
@@ -718,10 +741,10 @@
 		{
 			"Id":
 			{
-				"A": -1230970877,
-				"B": 1172611228,
-				"C": 715300011,
-				"D": 272317681
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "JomsViking_Helm",
@@ -741,10 +764,10 @@
 		{
 			"Id":
 			{
-				"A": 92826477,
-				"B": 1296849763,
-				"C": 685594528,
-				"D": 898205965
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Danes_Helm",
@@ -764,10 +787,10 @@
 		{
 			"Id":
 			{
-				"A": -1627493008,
-				"B": 1339519971,
-				"C": -211868788,
-				"D": -435559081
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Berserker_Helm",
@@ -787,10 +810,10 @@
 		{
 			"Id":
 			{
-				"A": -1150766197,
-				"B": 1144286036,
-				"C": 1374597813,
-				"D": -256293262
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Inquisitor_Helm",
@@ -810,10 +833,10 @@
 		{
 			"Id":
 			{
-				"A": -1632895758,
-				"B": 1271367386,
-				"C": 1446025346,
-				"D": -284427210
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Katana",
@@ -833,10 +856,10 @@
 		{
 			"Id":
 			{
-				"A": -734928546,
-				"B": 1253449632,
-				"C": -271516491,
-				"D": -1677444347
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "ItachiAnbuBlade",
@@ -856,10 +879,10 @@
 		{
 			"Id":
 			{
-				"A": 867134706,
-				"B": 1292746109,
-				"C": -2072439639,
-				"D": 926060488
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "ZabuzaSword",
@@ -879,10 +902,10 @@
 		{
 			"Id":
 			{
-				"A": -1960018056,
-				"B": 1147875268,
-				"C": -16127554,
-				"D": 1751715389
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Shuriken",
@@ -902,10 +925,10 @@
 		{
 			"Id":
 			{
-				"A": -2142451051,
-				"B": 1153520992,
-				"C": -799531110,
-				"D": -199227708
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "WindmillShuriken",
@@ -925,10 +948,10 @@
 		{
 			"Id":
 			{
-				"A": 1593534144,
-				"B": 1272853674,
-				"C": -619959397,
-				"D": 1507788283
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "AdamantineNyoi",
@@ -948,10 +971,10 @@
 		{
 			"Id":
 			{
-				"A": 390750134,
-				"B": 1109368518,
-				"C": -759840625,
-				"D": 129457154
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Kurosawa",
@@ -971,10 +994,10 @@
 		{
 			"Id":
 			{
-				"A": 841780984,
-				"B": 1274538076,
-				"C": 1560315811,
-				"D": 210180225
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "SasukeSword",
@@ -994,10 +1017,10 @@
 		{
 			"Id":
 			{
-				"A": 1294701281,
-				"B": 1115146374,
-				"C": 1853190317,
-				"D": -566508448
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Uchigatana",
@@ -1020,7 +1043,7 @@
 				"A": 0,
 				"B": 0,
 				"C": 0,
-				"D": 0
+				"D":0
 			},
 			"SortOrder": -1,
 			"ItemName": "Shield",
@@ -1040,10 +1063,10 @@
 		{
 			"Id":
 			{
-				"A": 276298222,
-				"B": 1143160413,
-				"C": 629840306,
-				"D": -292200418
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "HealthPotion",
@@ -1063,10 +1086,10 @@
 		{
 			"Id":
 			{
-				"A": -1311834321,
-				"B": 1074503411,
-				"C": -786235252,
-				"D": -164186275
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "ManaPotion",
@@ -1086,10 +1109,10 @@
 		{
 			"Id":
 			{
-				"A": 1397213829,
-				"B": 1308859646,
-				"C": 229132977,
-				"D": -1235939055
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "StaminaPotion",
@@ -1109,10 +1132,10 @@
 		{
 			"Id":
 			{
-				"A": -558510241,
-				"B": 1155930181,
-				"C": 560394933,
-				"D": -1623835214
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Bow",
@@ -1132,10 +1155,10 @@
 		{
 			"Id":
 			{
-				"A": -1547678973,
-				"B": 1182541101,
-				"C": -897276778,
-				"D": 310550569
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "Pistol",
@@ -1155,10 +1178,10 @@
 		{
 			"Id":
 			{
-				"A": -1946187852,
-				"B": 1270850586,
-				"C": 83101322,
-				"D": 2028988933
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
 			},
 			"SortOrder": -1,
 			"ItemName": "FJX_Imperium",

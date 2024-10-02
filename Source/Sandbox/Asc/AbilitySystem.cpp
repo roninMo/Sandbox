@@ -203,8 +203,9 @@ FGameplayAbilitySpecHandle UAbilitySystem::AddAbility(const FGameplayAbilityMapp
 		);
 		return FGameplayAbilitySpecHandle();
 	}
-	
-	if (!AbilityMapping.Ability)
+
+	const TSubclassOf<UGameplayAbility> Ability = AbilityMapping.Ability.LoadSynchronous();
+	if (!Ability)
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() Add Ability called with an invalid ability! {2}",
 			*UEnum::GetValueAsString(GetOwnerActor()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwnerActor())
@@ -286,7 +287,8 @@ void UAbilitySystem::RemoveGameplayAbilities(const TArray<FGameplayAbilitySpecHa
 
 FActiveGameplayEffectHandle UAbilitySystem::AddGameplayEffect(const FGameplayEffectMapping& EffectMapping)
 {
-	if (!EffectMapping.Effect.Get())
+	const TSubclassOf<UGameplayEffect> GameplayEffect = EffectMapping.Effect.LoadSynchronous();
+	if (!GameplayEffect)
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Tried to add a gameplay effect without a valid class reference!",
 			*UEnum::GetValueAsString(GetAvatarActor()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetAvatarActor()));
@@ -295,7 +297,7 @@ FActiveGameplayEffectHandle UAbilitySystem::AddGameplayEffect(const FGameplayEff
 	
 	// Create the effect context and handle, and add the additional information
 	FGameplayEffectContextHandle EffectContext = MakeEffectContext();
-	const FGameplayEffectSpecHandle GameplayEffectSpec = MakeOutgoingSpec(EffectMapping.Effect.Get(), EffectMapping.Level, EffectContext);
+	const FGameplayEffectSpecHandle GameplayEffectSpec = MakeOutgoingSpec(GameplayEffect, EffectMapping.Level, EffectContext);
 	EffectContext.AddSourceObject(GetAvatarActor());
 	
 	// If it's a valid effect, add it to the character
