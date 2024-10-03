@@ -1,0 +1,860 @@
+[
+	{
+		"Name": "Uchigatana",
+		"ArmamentInformation":
+		{
+			"Id": "Uchigatana",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Uchigatana/BPA_Uchigatana.BPA_Uchigatana_C'",
+			"Classification": "Knifes",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Montages":
+			{
+				"Equip": "None",
+				"Unequip": "None"
+			},
+			"CombatAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"Combo":
+					{
+						"DamageEffectClass": "None",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+									}
+								},
+								"StaminaCost": 0,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Katana",
+		"ArmamentInformation":
+		{
+			"Id": "Katana",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Katana/BPA_Katana.BPA_Katana_C'",
+			"Classification": "Katanas",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Montages":
+			{
+				"Equip": "None",
+				"Unequip": "None"
+			},
+			"CombatAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"Combo":
+					{
+						"DamageEffectClass": "None",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+									}
+								},
+								"StaminaCost": 0,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "WindmillShuriken",
+		"ArmamentInformation":
+		{
+			"Id": "WindmillShuriken",
+			"Armament": "None",
+			"Classification": "Shurikens",
+			"EquipRestrictions": "TwoHandOnly",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Montages":
+			{
+				"Equip": "None",
+				"Unequip": "None"
+			},
+			"CombatAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"Combo":
+					{
+						"DamageEffectClass": "None",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+									}
+								},
+								"StaminaCost": 0,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Shuriken",
+		"ArmamentInformation":
+		{
+			"Id": "Shuriken",
+			"Armament": "None",
+			"Classification": "Shurikens",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Montages":
+			{
+				"Equip": "None",
+				"Unequip": "None"
+			},
+			"CombatAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"Combo":
+					{
+						"DamageEffectClass": "None",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+									}
+								},
+								"StaminaCost": 0,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Shortsword",
+		"ArmamentInformation":
+		{
+			"Id": "Shortsword",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/Swords/ShortSword/BPA_ShortSword.BPA_ShortSword_C'",
+			"Classification": "Knifes",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Montages":
+			{
+				"Equip": "None",
+				"Unequip": "None"
+			},
+			"CombatAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"Combo":
+					{
+						"DamageEffectClass": "None",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+									}
+								},
+								"StaminaCost": 0,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Longsword",
+		"ArmamentInformation":
+		{
+			"Id": "Longsword",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/Swords/LongSword/BPA_LongSword.BPA_LongSword_C'",
+			"Classification": "StraightSwords",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Montages":
+			{
+				"Equip": "None",
+				"Unequip": "None"
+			},
+			"CombatAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"Combo":
+					{
+						"DamageEffectClass": "None",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+									}
+								},
+								"StaminaCost": 0,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "ZabuzaSword",
+		"ArmamentInformation":
+		{
+			"Id": "ZabuzaSword",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/ZabuzaSword/BPA_ZabuzaSword.BPA_ZabuzaSword_C'",
+			"Classification": "GreatSwords",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Montages":
+			{
+				"Equip": "None",
+				"Unequip": "None"
+			},
+			"CombatAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"Combo":
+					{
+						"DamageEffectClass": "None",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+									}
+								},
+								"StaminaCost": 0,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "SasukeSword",
+		"ArmamentInformation":
+		{
+			"Id": "SasukeSword",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/SasukeSword/BPA_SasukeSword.BPA_SasukeSword_C'",
+			"Classification": "StraightSwords",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Montages":
+			{
+				"Equip": "None",
+				"Unequip": "None"
+			},
+			"CombatAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"Combo":
+					{
+						"DamageEffectClass": "None",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+									}
+								},
+								"StaminaCost": 0,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Kurosawa",
+		"ArmamentInformation":
+		{
+			"Id": "Kurosawa",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Kurosawa/BPA_Kurosawa.BPA_Kurosawa_C'",
+			"Classification": "Katanas",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Montages":
+			{
+				"Equip": "None",
+				"Unequip": "None"
+			},
+			"CombatAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"Combo":
+					{
+						"DamageEffectClass": "None",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+									}
+								},
+								"StaminaCost": 0,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "AdamantineNyoi",
+		"ArmamentInformation":
+		{
+			"Id": "AdamantineNyoi",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/AdamantineNyoi/BPA_AdamantineNyoi.BPA_AdamantineNyoi_C'",
+			"Classification": "Halberds",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Montages":
+			{
+				"Equip": "None",
+				"Unequip": "None"
+			},
+			"CombatAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"Combo":
+					{
+						"DamageEffectClass": "None",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+									}
+								},
+								"StaminaCost": 0,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "ItachiAnbuBlade",
+		"ArmamentInformation":
+		{
+			"Id": "ItachiAnbuBlade",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/ItachiAnbuBlade/BPA_ItachiAnbuBlade.BPA_ItachiAnbuBlade_C'",
+			"Classification": "Knifes",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"Montages":
+			{
+				"Equip": "None",
+				"Unequip": "None"
+			},
+			"CombatAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"Combo":
+					{
+						"DamageEffectClass": "None",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+									}
+								},
+								"StaminaCost": 0,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
+		},
+		"DevDescription": ""
+	}
+]

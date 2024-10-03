@@ -204,7 +204,9 @@ public:
 	
 	/** Returns the armament's overlap components for their armament. */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual TArray<UPrimitiveComponent*> GetArmamentHitboxes() const;
-	
+
+	/** Shows or hides the armament and it's components for the player */
+	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual void SetOwnerNoSee(const bool bHide = true);
 	
 	/** Get the armament attack information. This includes information on the armament and attack, and it's combo information. */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual void SetArmamentInformation(const F_ArmamentInformation& Information);

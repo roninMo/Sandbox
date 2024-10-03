@@ -208,3 +208,13 @@ bool AMeleeArmament::UnsheatheArmament()
 	return false;
 }
 
+void AMeleeArmament::SetOwnerNoSee(const bool bHide)
+{
+	Super::SetOwnerNoSee(bHide);
+
+	if (Holster && Holster->Object)
+	{
+		Holster->Object->SetOwnerNoSee(bHide);
+	}
+}
+

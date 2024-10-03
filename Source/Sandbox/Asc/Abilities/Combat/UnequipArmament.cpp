@@ -20,18 +20,7 @@ UUnequipArmament::UUnequipArmament()
 
 bool UUnequipArmament::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayTagContainer* SourceTags, const FGameplayTagContainer* TargetTags, FGameplayTagContainer* OptionalRelevantTags) const
 {
-	if (!Super::CanActivateAbility(Handle, ActorInfo, SourceTags, TargetTags, OptionalRelevantTags))
-	{
-		return false;
-	}
-
-	UCombatComponent* CombatComponent = GetCombatComponent();
-	if (!CombatComponent)
-	{
-		return false;
-	}
-
-	return CombatComponent->GetArmament(true) || CombatComponent->GetArmament(false);
+	return Super::CanActivateAbility(Handle, ActorInfo, SourceTags, TargetTags, OptionalRelevantTags);
 }
 
 
@@ -44,13 +33,15 @@ void UUnequipArmament::ActivateAbility(const FGameplayAbilitySpecHandle Handle, 
 		return;
 	}
 
-	GetUnequipMontage();
-	if (!GetCurrentMontage())
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent || (!CombatComponent->GetArmament(true) && !CombatComponent->GetArmament(false)))
 	{
 		EndAbility(GetCurrentAbilitySpecHandle(), GetCurrentActorInfo(), GetCurrentActivationInfo(), true, false);
 		return;
 	}
+
 	
+	GetUnequipMontage();
 	
 	// Equip weapon montage
 	// ANPC* NPC = Cast<ANPC>(BaseCharacter); // Multicast to clients, call before the ability task
@@ -132,20 +123,20 @@ void UUnequipArmament::HandleUnequipArmamentLogic()
 		return;
 	}
 
-	bool bEquippedSecondary = false;
-	bool bEquippedPrimary = false;
+	bool bUnequippedSecondary = false;
+	bool bUnequippedPrimary = false;
 
 	if (AArmament* PrimaryArmament = CombatComponent->GetArmament(true))
 	{
-		bEquippedPrimary = PrimaryArmament->SheatheArmament();
+		bUnequippedPrimary = PrimaryArmament->SheatheArmament();
 	}
 
 	if (AArmament* SecondaryArmament = CombatComponent->GetArmament(false))
 	{
-		bEquippedSecondary = SecondaryArmament->SheatheArmament();
+		bUnequippedSecondary = SecondaryArmament->SheatheArmament();
 	}
 
-	bUnequippedArmaments = bEquippedPrimary || bEquippedSecondary;
+	bUnequippedArmaments = bUnequippedPrimary || bUnequippedSecondary;
 }
 
 

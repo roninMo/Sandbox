@@ -148,7 +148,7 @@ AArmament* UCombatComponent::CreateArmament(const EEquipSlot EquipSlot)
 	if (Armament)
 	{
 		bool bRightHand = IsRightHandedArmament(EquipSlot);
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Created the armament -> {3}({4}): {5} ",
+		UE_LOGFMT(CombatComponentLog, Log, "{0}::{1}() {2} Created the armament -> {3}({4}): {5} ",
 			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()),
 			ArmamentItemData.ItemName, *ArmamentItemData.Id.ToString(), *UEnum::GetValueAsString(EquipSlot)
 		);
@@ -264,7 +264,7 @@ void UCombatComponent::OnRep_CurrentStance()
 }
 
 
-AArmament* UCombatComponent::GetArmament(const bool bRightHand)
+AArmament* UCombatComponent::GetArmament(const bool bRightHand) const
 {
 	if (!bRightHand) return SecondaryArmament;
 	return PrimaryArmament;

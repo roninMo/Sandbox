@@ -11,12 +11,10 @@ class SANDBOX_API ACharacterAttachment : public AActor
 {
 	GENERATED_BODY()
 
-protected:
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<UStaticMeshComponent> Object;
 	
-	
-protected:
 	ACharacterAttachment();
 	virtual void BeginPlay() override;
 

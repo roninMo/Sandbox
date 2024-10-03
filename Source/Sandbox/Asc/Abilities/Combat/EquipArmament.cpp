@@ -18,18 +18,7 @@ UEquipArmament::UEquipArmament()
 
 bool UEquipArmament::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayTagContainer* SourceTags, const FGameplayTagContainer* TargetTags, FGameplayTagContainer* OptionalRelevantTags) const
 {
-	if (!Super::CanActivateAbility(Handle, ActorInfo, SourceTags, TargetTags, OptionalRelevantTags))
-	{
-		return false;
-	}
-
-	UCombatComponent* CombatComponent = GetCombatComponent();
-	if (!CombatComponent)
-	{
-		return false;
-	}
-
-	return CombatComponent->GetArmament(true) || CombatComponent->GetArmament(false);
+	return Super::CanActivateAbility(Handle, ActorInfo, SourceTags, TargetTags, OptionalRelevantTags);
 }
 
 
@@ -42,13 +31,15 @@ void UEquipArmament::ActivateAbility(const FGameplayAbilitySpecHandle Handle, co
 		return;
 	}
 
-	GetEquipMontage();
-	if (!GetCurrentMontage())
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent || (!CombatComponent->GetArmament(true) && !CombatComponent->GetArmament(false)))
 	{
 		EndAbility(GetCurrentAbilitySpecHandle(), GetCurrentActorInfo(), GetCurrentActivationInfo(), true, false);
 		return;
 	}
+
 	
+	GetEquipMontage();
 	
 	// Equip weapon montage
 	// ANPC* NPC = Cast<ANPC>(BaseCharacter); // Multicast to clients, call before the ability task

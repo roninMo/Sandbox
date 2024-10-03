@@ -844,7 +844,7 @@
 			"Description": "A katana for whacking things with",
 			"ItemType": "Inv_Weapon",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Sword.UI_Sword'",
-			"ActualClass": "None",
+			"ActualClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Katana/BPA_Katana.BPA_Katana_C'",
 			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Katana/BPI_Katana.BPI_Katana_C'",
 			"GlobalInformation": "None"
 		},
@@ -867,7 +867,7 @@
 			"Description": "Itachi's anbu blade",
 			"ItemType": "Inv_Weapon",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_ThrowingKnife.UI_ThrowingKnife'",
-			"ActualClass": "None",
+			"ActualClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/ItachiAnbuBlade/BPA_ItachiAnbuBlade.BPA_ItachiAnbuBlade_C'",
 			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/ItachiAnbuBlade/BPI_ItachiAnbuBlade.BPI_ItachiAnbuBlade_C'",
 			"GlobalInformation": "None"
 		},
@@ -890,7 +890,7 @@
 			"Description": "Zabuza's sword",
 			"ItemType": "Inv_Weapon",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Hammer.UI_Hammer'",
-			"ActualClass": "None",
+			"ActualClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/ZabuzaSword/BPA_ZabuzaSword.BPA_ZabuzaSword_C'",
 			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/ZabuzaSword/BPI_ZabuzaSword.BPI_ZabuzaSword_C'",
 			"GlobalInformation": "None"
 		},
@@ -959,7 +959,7 @@
 			"Description": "Monkey King Enma's staff",
 			"ItemType": "Inv_Weapon",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_scythe.UI_scythe'",
-			"ActualClass": "None",
+			"ActualClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/AdamantineNyoi/BPA_AdamantineNyoi.BPA_AdamantineNyoi_C'",
 			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/AdamantineNyoi/BPI_AdamantineNyoi.BPI_AdamantineNyoi_C'",
 			"GlobalInformation": "None"
 		},
@@ -982,7 +982,7 @@
 			"Description": "Mifune's sword",
 			"ItemType": "Inv_Weapon",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Sword.UI_Sword'",
-			"ActualClass": "None",
+			"ActualClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Kurosawa/BPA_Kurosawa.BPA_Kurosawa_C'",
 			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Kurosawa/BPI_Kurosawa.BPI_Kurosawa_C'",
 			"GlobalInformation": "None"
 		},
@@ -1005,7 +1005,7 @@
 			"Description": "A katana for whacking things with",
 			"ItemType": "Inv_Weapon",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Mace.UI_Mace'",
-			"ActualClass": "None",
+			"ActualClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/SasukeSword/BPA_SasukeSword.BPA_SasukeSword_C'",
 			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/SasukeSword/BPI_SasukeSword.BPI_SasukeSword_C'",
 			"GlobalInformation": "None"
 		},
@@ -1028,8 +1028,54 @@
 			"Description": "A katana for whacking things with",
 			"ItemType": "Inv_Weapon",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Sword.UI_Sword'",
-			"ActualClass": "None",
+			"ActualClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Uchigatana/BPA_Uchigatana.BPA_Uchigatana_C'",
 			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Uchigatana/BPI_Uchigatana.BPI_Uchigatana_C'",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Longsword",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
+			},
+			"SortOrder": -1,
+			"ItemName": "Longsword",
+			"DisplayName": "Long Sword",
+			"Description": "A sword for wacking things with",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Sword.UI_Sword'",
+			"ActualClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/Swords/LongSword/BPA_LongSword.BPA_LongSword_C'",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/Swords/LongSword/BPI_LongSword.BPI_LongSword_C'",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Shortsword",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
+			},
+			"SortOrder": -1,
+			"ItemName": "Shortsword",
+			"DisplayName": "Short Sword",
+			"Description": "A sword for wacking things with",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_ThrowingKnife.UI_ThrowingKnife'",
+			"ActualClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/Swords/ShortSword/BPA_ShortSword.BPA_ShortSword_C'",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/Swords/ShortSword/BPI_ShortSword.BPI_ShortSword_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""
@@ -1052,7 +1098,7 @@
 			"ItemType": "Inv_Weapon",
 			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Shield.UI_Shield'",
 			"ActualClass": "None",
-			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/BPI_Shield.BPI_Shield_C'",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/Shields/BPI_Shield.BPI_Shield_C'",
 			"GlobalInformation": "None"
 		},
 		"DevDescription": ""

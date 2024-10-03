@@ -362,6 +362,14 @@ TArray<UPrimitiveComponent*> AArmament::GetArmamentHitboxes() const
 	return {};
 }
 
+void AArmament::SetOwnerNoSee(const bool bHide)
+{
+	if (ArmamentMesh)
+	{
+		ArmamentMesh->SetOwnerNoSee(bHide);
+	}
+}
+
 
 void AArmament::SetArmamentInformation(const F_ArmamentInformation& Information)
 {

@@ -216,7 +216,7 @@ public:
 	 * @returns									The currently equipped armament for a specified hand
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils")
-	virtual AArmament* GetArmament(const bool bRightHand = true);
+	virtual AArmament* GetArmament(const bool bRightHand = true) const;
 	
 	/**
 	 * Returns whether this is the right handed armament

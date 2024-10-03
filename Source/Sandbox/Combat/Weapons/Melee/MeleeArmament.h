@@ -65,6 +65,13 @@ public:
 
 	/** Draw the character's sword */
 	virtual bool UnsheatheArmament() override;
+
+	
+//-------------------------------------------------------------------------------------//
+// Utility																			   //
+//-------------------------------------------------------------------------------------//
+	/** Shows or hides the armament and it's components for the player */
+	virtual void SetOwnerNoSee(const bool bHide = true) override;
 	
 	
 };
