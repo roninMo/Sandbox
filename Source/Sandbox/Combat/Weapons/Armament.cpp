@@ -88,16 +88,16 @@ bool AArmament::ConstructArmament()
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
 	if (!Character)
 	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} Failed to retrieve the character while constructing the armament!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while constructing the armament!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 
 	UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
 	if (!AbilitySystemComponent)
 	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} Failed to retrieve the ability system while constructing the armament!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the ability system while constructing the armament!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 
@@ -126,16 +126,16 @@ bool AArmament::DeconstructArmament()
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
 	if (!Character)
 	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} Failed to retrieve the character while deconstructing the armament!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while deconstructing the armament!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 
 	UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
 	if (!AbilitySystemComponent)
 	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} Failed to retrieve the ability system while deconstructing the armament!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the ability system while deconstructing the armament!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 
@@ -178,8 +178,8 @@ bool AArmament::UpdateArmamentMontages(const ECharacterSkeletonMapping MontageMa
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} Failed to retrieve the combat component while updating the armament montages!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while updating the armament montages!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return nullptr;
 	}
 	
@@ -242,16 +242,16 @@ bool AArmament::AttachArmamentToSocket(const FName Socket)
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
 	if (!Character || !Character->GetMesh())
 	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} Failed to retrieve the character while attaching the armament to an equip slot!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while attaching the armament to an equip slot!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 	
 	const USkeletalMeshSocket* HandSocket = Character->GetMesh()->GetSocketByName(Socket);
 	if (!HandSocket)
 	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} did not find the armament's equip socket ({2})!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()), Socket);
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} did not find the armament's equip socket ({2})!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), Socket);
 		return false;
 	}
 	
@@ -381,8 +381,8 @@ UCombatComponent* AArmament::GetCombatComponent(ACharacterBase* Character) const
 	Character = Character ? Character : Cast<ACharacterBase>(GetOwner());
 	if (!Character)
 	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} Failed to retrieve the character while retrieving the combat component!!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while retrieving the combat component!!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return nullptr;
 	}
 

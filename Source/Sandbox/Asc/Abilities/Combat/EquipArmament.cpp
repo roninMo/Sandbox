@@ -112,8 +112,8 @@ bool UEquipArmament::GetEquipMontage()
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Failed to retrieve the combat component while equipping the weapon!",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()));
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while equipping the weapon!",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 		return false;
 	}
 
@@ -132,8 +132,8 @@ void UEquipArmament::HandleEquipArmamentLogic()
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Failed to retrieve the combat component while unsheathing the weapons!",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()));
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while unsheathing the weapons!",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 		return;
 	}
 
@@ -159,8 +159,8 @@ bool UEquipArmament::ApplyEquippedStateInformation(AArmament* EquippedArmament)
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Failed to retrieve the combat component while applying equipped state information!",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()));
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while applying equipped state information!",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()),  *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 		return nullptr;
 	}
 	
@@ -188,11 +188,11 @@ bool UEquipArmament::ApplyEquippedStateInformation(AArmament* EquippedArmament)
 
 UCombatComponent* UEquipArmament::GetCombatComponent() const
 {
-	ACharacterBase* Character = Cast<ACharacterBase>(GetOwningActorFromActorInfo());
+	ACharacterBase* Character = Cast<ACharacterBase>(GetAvatarActorFromActorInfo());
 	if (!Character)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Failed to retrieve the character while equipping the weapons!",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()));
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the character while equipping the weapons!",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 		return nullptr;
 	}
 	

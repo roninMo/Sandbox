@@ -64,8 +64,8 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Failed to retrieve the combat component during {2} while getting combo and armament information",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component during {2} while getting combo and armament information",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
 		return false;
 	}
 
@@ -189,23 +189,31 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 	// Validity Checks
 	if (!TargetData.IsValid(0))
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s Target data is not valid! ",
-			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()));
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2}'s Target data is not valid! ",
+			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 		return;
 	}
 	
 	if (!Armament || !ComboAttacks.DamageEffectClass)
 	{
-		if (!Armament) UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s is missing it's armament!", *UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()));
-		else UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s {2} does not have a execution calculation!", *UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()), *GetNameSafe(Armament));
+		if (!Armament)
+		{
+			UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2}'s is missing it's armament!",
+				*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
+		}
+		else
+		{
+			UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2}'s {3} does not have a execution calculation!",
+				*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetNameSafe(Armament));
+		}
 		return;
 	}
 
 	AActor* TargetCharacter = TargetAsc->GetAvatarActor();
 	if (!TargetCharacter)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1} failed to retrieve it's avatar actor!",
-			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()));
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} failed to retrieve it's avatar actor!",
+			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 		return;
 	}
 	
@@ -220,8 +228,8 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 	
 	if (!ExecCalcHandle.IsValid())
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s execution calculation handle for an attack was not valid!",
-			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()));
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2}'s execution calculation handle for an attack was not valid!",
+			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 		return;
 	}
 
@@ -337,8 +345,8 @@ UCombatComponent* UCombatAbility::GetCombatComponent() const
 	ACharacterBase* Character = Cast<ACharacterBase>(GetAvatarActorFromActorInfo());
 	if (!Character)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Failed to retrieve the character while retrieving the combat component!!",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()));
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the character while retrieving the combat component!!",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 		return nullptr;
 	}
 	

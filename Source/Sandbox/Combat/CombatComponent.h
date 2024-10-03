@@ -29,7 +29,7 @@ DECLARE_LOG_CATEGORY_EXTERN(CombatComponentLog, Log, All);
 
 class AArmament;
 class UDataTable;
-struct F_ArmamentInformation;
+struct F_ArmamentInformation;	
 struct FGAttributeSetExecutionData;
 enum class ECharacterSkeletonMapping : uint8;
 enum class EArmamentStance : uint8;

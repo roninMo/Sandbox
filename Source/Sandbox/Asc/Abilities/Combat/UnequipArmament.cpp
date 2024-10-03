@@ -107,8 +107,8 @@ bool UUnequipArmament::GetUnequipMontage()
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Failed to retrieve the combat component while unequipping!",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()));
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while unequipping!",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 		return false;
 	}
 
@@ -127,8 +127,8 @@ void UUnequipArmament::HandleUnequipArmamentLogic()
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Failed to retrieve the combat component while sheathing the weapons!",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()));
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while sheathing the weapons!",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 		return;
 	}
 
@@ -157,11 +157,11 @@ bool UUnequipArmament::ApplyUnequippedStateInformation(AArmament* EquippedArmame
 
 UCombatComponent* UUnequipArmament::GetCombatComponent() const
 {
-	ACharacterBase* Character = Cast<ACharacterBase>(GetOwningActorFromActorInfo());
+	ACharacterBase* Character = Cast<ACharacterBase>(GetAvatarActorFromActorInfo());
 	if (!Character)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Failed to retrieve the character while unequipping the weapons!",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()));
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the character while unequipping the weapons!",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 		return nullptr;
 	}
 	

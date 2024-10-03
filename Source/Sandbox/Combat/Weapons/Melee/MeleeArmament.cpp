@@ -79,8 +79,8 @@ bool AMeleeArmament::ConstructArmament()
 	UCombatComponent* CombatComponent = GetCombatComponent(Character);
 	if (!CombatComponent)
 	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} Failed to retrieve the combat component while constructing the armament.",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while constructing the armament.",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 	
@@ -89,8 +89,8 @@ bool AMeleeArmament::ConstructArmament()
 	const USkeletalMeshSocket* HolsterSocket = Character->GetMesh()->GetSocketByName(GetHolsterSocketName());
 	if (HolsterClass && !HolsterSocket)
 	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} did not find the holster socket while constructing the armament.",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} did not find the holster socket while constructing the armament.",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 
@@ -118,8 +118,8 @@ bool AMeleeArmament::ConstructArmament()
 	if (!bCreatedSuccessfully)
 	{
 		DeconstructArmament();
-		UE_LOGFMT(ArmamentLog, Warning, "{0}::{1} Failed to construct the armament.",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(ArmamentLog, Warning, "{0}::{1}() {2} Failed to construct the armament.",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 
@@ -137,8 +137,8 @@ bool AMeleeArmament::DeconstructArmament()
 	UCombatComponent* CombatComponent = GetCombatComponent(Character);
 	if (!CombatComponent)
 	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} Failed to retrieve the combat component while deconstructing the armament.",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while deconstructing the armament.",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 	
@@ -172,8 +172,8 @@ bool AMeleeArmament::SheatheArmament()
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} Failed to retrieve the combat component while sheathing the armament!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while sheathing the armament!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 
@@ -193,8 +193,8 @@ bool AMeleeArmament::UnsheatheArmament()
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1} Failed to retrieve the combat component while unsheathing the armament!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while unsheathing the armament!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 

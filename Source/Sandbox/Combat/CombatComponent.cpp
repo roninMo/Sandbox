@@ -55,7 +55,7 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	UE_LOGFMT(CombatComponentLog, Log, "{0}::{1}'s combo index: {2}", *UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()), ComboIndex);
+	UE_LOGFMT(CombatComponentLog, Log, "{0}::{1}() {2}'s combo index: {2}", *UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), ComboIndex);
 }
 
 
@@ -89,23 +89,23 @@ AArmament* UCombatComponent::CreateArmament(const EEquipSlot EquipSlot)
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
 	if (!Character)
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve the character while creating the armament!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while creating the armament!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return nullptr;
 	}
 
 	if (!Character->HasAuthority())
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Only create the armament on the server!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Only create the armament on the server!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return nullptr;
 	}
 
 	UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
 	if (!AbilitySystemComponent)
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve the ability system while creating the armament!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the ability system while creating the armament!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return nullptr;
 	}
 
@@ -114,16 +114,16 @@ AArmament* UCombatComponent::CreateArmament(const EEquipSlot EquipSlot)
 	F_Item ArmamentItemData = GetArmamentInventoryInformation(EquipSlot);
 	if (!ArmamentItemData.ActualClass)
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve valid armament class while creating the armament!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve valid armament class while creating the armament!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return nullptr;
 	}
 
 	F_ArmamentInformation ArmamentData = GetArmamentInformationFromDatabase(ArmamentItemData.ItemName);
 	if (!ArmamentData.IsValid())
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve valid armament information while creating the armament!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve valid armament information while creating the armament!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return nullptr;
 	}
 	
@@ -132,8 +132,8 @@ AArmament* UCombatComponent::CreateArmament(const EEquipSlot EquipSlot)
 	const USkeletalMeshSocket* CharacterSocket = GetSkeletalSocket(EquipSocket);
 	if (!CharacterSocket)
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to find an equip socket while creating the armament!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to find an equip socket while creating the armament!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return nullptr;
 	}
 
@@ -148,16 +148,16 @@ AArmament* UCombatComponent::CreateArmament(const EEquipSlot EquipSlot)
 	if (Armament)
 	{
 		bool bRightHand = IsRightHandedArmament(EquipSlot);
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Created the armament -> {2}({3}): {4} ",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()), ArmamentItemData.ItemName,
-			*ArmamentItemData.Id.ToString(), *UEnum::GetValueAsString(EquipSlot)
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Created the armament -> {3}({4}): {5} ",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()),
+			ArmamentItemData.ItemName, *ArmamentItemData.Id.ToString(), *UEnum::GetValueAsString(EquipSlot)
 		);
 
 		// Add the armament's information and construct the armament
 		Armament->SetArmamentInformation(ArmamentData);
 		Armament->SetArmamentEquipSlot(EquipSlot);
-		Armament->SetItem(ArmamentItemData);
-		Armament->SetId(ArmamentItemData.Id);
+		Armament->Execute_SetItem(Armament, ArmamentItemData);
+		Armament->Execute_SetId(Armament, ArmamentItemData.Id);
 		if (Armament->IsValidArmanent() && Armament->ConstructArmament())
 		{
 			// Delete the currently equipped armament, if there is one
@@ -184,26 +184,32 @@ AArmament* UCombatComponent::CreateArmament(const EEquipSlot EquipSlot)
 		Armament->DeconstructArmament();
 		Armament->Destroy();
 	}
-	UE_LOGFMT(LogTemp, Error, "{0} {1}() failed to create the armament!", *GetName(), *FString(__FUNCTION__));
 
+	UE_LOGFMT(LogTemp, Error, "{0}::{1}() {2} failed to create the armament {3}!",
+		*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), ArmamentItemData.ItemName);
 	return nullptr;
 }
 
 
 bool UCombatComponent::DeleteEquippedArmament(AArmament* Armament)
 {
+	if (!Armament)
+	{
+		return true;
+	}
+	
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
 	if (!Character)
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve the character while deleting the armament!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while deleting the armament!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return nullptr;
 	}
 
 	if (!Character->HasAuthority())
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Only delete the armament on the server!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Only delete the armament on the server!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return nullptr;
 	}
 
@@ -331,14 +337,14 @@ F_ArmamentInformation UCombatComponent::GetArmamentInformationFromDatabase(const
 		}
 		else
 		{
-			UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve {2} from the armament information table!",
-				UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()), ArmamentId);
+			UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve {3} from the armament information table!",
+				UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), ArmamentId);
 		}
 	}
 	else
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} The armament information table hasn't been added to the character yet!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2}'s Armament information table hasn't been added to the character yet!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 	}
 
 	return F_ArmamentInformation();
@@ -364,14 +370,14 @@ UAnimMontage* UCombatComponent::GetArmamentMontageFromDB(FName ArmamentId, EInpu
 			}
 			else
 			{
-				UE_LOGFMT(ArmamentLog, Error, "{0}::{1} did not find an armament montage for this specific character! ({2})",
-					*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()), *UEnum::GetValueAsString(Mapping));
+				UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} did not find an armament montage for this specific character! ({3})",
+					*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), *UEnum::GetValueAsString(Mapping));
 			}
 		}
 		else
 		{
-			UE_LOGFMT(ArmamentLog, Error, "{0}::{1} did not find an armament montage for the {2} combo",
-				*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()), *UEnum::GetValueAsString(AttackPattern));
+			UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} did not find an armament montage for the {3} combo",
+				*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), *UEnum::GetValueAsString(AttackPattern));
 		}
 	}
 
@@ -408,23 +414,23 @@ bool UCombatComponent::UnequipArmor(EArmorSlot ArmorSlot)
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
 	if (!Character)
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve the character while removing the armor!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while removing the armor!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 
 	if (!Character->HasAuthority())
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Only remove the armor on the server!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Only remove the armor on the server!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 
 	UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
 	if (!AbilitySystemComponent)
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve the ability system while remove the armor!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the ability system while remove the armor!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 
@@ -468,31 +474,31 @@ bool UCombatComponent::EquipArmor(F_Item Armor)
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
 	if (!Character)
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve the character while creating the armor!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while creating the armor!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 
 	if (!Character->HasAuthority())
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Only create the armor on the server!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Only create the armor on the server!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 
 	UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
 	if (!AbilitySystemComponent)
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve the ability system while creating the armor!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the ability system while creating the armor!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 	
 	F_Information_Armor ArmorInformation = GetArmorFromDatabase(Armor.ItemName);
 	if (!ArmorInformation.Id.IsValid() || ArmorInformation.ArmorSlot == EArmorSlot::None)
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve the armor information!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the armor information!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
 	
@@ -561,8 +567,8 @@ USkeletalMeshComponent* UCombatComponent::GetArmorMesh(EArmorSlot ArmorSlot)
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
 	if (!Character)
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve the character while retrieving the armor mesh!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while retrieving the armor mesh!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return nullptr;
 	}
 	
@@ -581,14 +587,14 @@ const F_Information_Armor UCombatComponent::GetArmorFromDatabase(const FName Id)
 		}
 		else
 		{
-			UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve {2} from the armor information table!",
-				UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()), Id);
+			UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve {2} from the armor information table!",
+				UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), Id);
 		}
 	}
 	else
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} The armor information table hasn't been added to the character yet!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} The armor information table hasn't been added to the character yet!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 	}
 
 	return F_Information_Armor();
