@@ -114,7 +114,7 @@ AArmament* UCombatComponent::CreateArmament(const EEquipSlot EquipSlot)
 	F_Item ArmamentItemData = GetArmamentInventoryInformation(EquipSlot);
 	if (!ArmamentItemData.ActualClass)
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve valid equip slot information while creating the armament!",
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1} Failed to retrieve valid armament class while creating the armament!",
 			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetNameSafe(GetOwner()));
 		return nullptr;
 	}
@@ -345,7 +345,7 @@ F_ArmamentInformation UCombatComponent::GetArmamentInformationFromDatabase(const
 }
 
 
-UAnimMontage* UCombatComponent::GetArmamentMontageFromDB(FName ArmamentId, EAttackPattern AttackPattern, ECharacterSkeletonMapping Mapping)
+UAnimMontage* UCombatComponent::GetArmamentMontageFromDB(FName ArmamentId, EInputAbilities AttackPattern, ECharacterSkeletonMapping Mapping)
 {
 	if (!MontageInformationTable) return nullptr;
 	

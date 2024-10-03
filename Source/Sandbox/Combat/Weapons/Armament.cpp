@@ -185,13 +185,13 @@ bool AArmament::UpdateArmamentMontages(const ECharacterSkeletonMapping MontageMa
 	
 	
 	// For melee armaments, retrieve all combo montages, otherwise just retrieve the montage (use "None" for armaments with a single montage for their animations (that aren't combo specific))
-	ArmamentMontages.Empty();
+	ArmamentCombatMontages.Empty();
 	for (F_ArmamentAbilityInformation ArmamentAbility : ArmamentInformation.CombatAbilities)
 	{
-		UAnimMontage* ArmamentComboMontage = CombatComponent->GetArmamentMontageFromDB(ArmamentInformation.Id, ArmamentAbility.AttackPattern, MontageMapping);
+		UAnimMontage* ArmamentComboMontage = CombatComponent->GetArmamentMontageFromDB(ArmamentInformation.Id, ArmamentAbility.InputId, MontageMapping);
 		if (ArmamentComboMontage)
 		{
-			ArmamentMontages.Add(ArmamentAbility.AttackPattern, ArmamentComboMontage);
+			ArmamentCombatMontages.Add(ArmamentAbility.InputId, ArmamentComboMontage);
 		}
 	}
 	
@@ -199,11 +199,22 @@ bool AArmament::UpdateArmamentMontages(const ECharacterSkeletonMapping MontageMa
 }
 
 
-UAnimMontage* AArmament::GetArmamentMontage(const EAttackPattern AttackPattern)
+UAnimMontage* AArmament::GetCombatMontage(const EInputAbilities AttackPattern)
 {
-	if (ArmamentMontages.Contains(AttackPattern))
+	if (ArmamentCombatMontages.Contains(AttackPattern))
 	{
-		return ArmamentMontages[AttackPattern];
+		return ArmamentCombatMontages[AttackPattern];
+	}
+
+	return nullptr;
+}
+
+
+UAnimMontage* AArmament::GetMontage(FName Montage)
+{
+	if (ArmamentInformation.Montages.Contains(Montage))
+	{
+		return ArmamentInformation.Montages[Montage];
 	}
 
 	return nullptr;

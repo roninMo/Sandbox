@@ -12,13 +12,22 @@ class UGameplayEffect;
 struct FGameplayAttribute;
 enum class EEquipRestrictions : uint8;
 enum class EArmamentClassification : uint8;
-enum class EAttackPattern : uint8;
 enum class EDamageInformationSource : uint8;
 enum class EInputAbilities : uint8;
 
 // Montage information
 #define Montage_ComboSections TArray<FName> {FName("1"), FName("2"), FName("3"), FName("4"), FName("5"), FName("6"), FName("7"), FName("8"), FName("9"), FName("10"), FName("1")}
 #define Montage_Section_Charge FString("_C")
+
+// Montages
+#define Montage_Equip FName("Equip")
+#define Montage_Unequip FName("Unequip")
+
+// Equip Montage sections
+#define Montage_EquipSection FName("Equip")
+#define Montage_UnequipSection FName("Unequip")
+
+
 
 
 /**
@@ -88,11 +97,8 @@ struct F_ArmamentAbilityInformation
 	/** The level of the ability */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly) int32 Level = 1;
 	
-	/** If this is an input ability, this is the stored reference for the input */
+	/** The attack pattern and input id for the current ability. This helps determine the specific attack montage we're granting to the character for the ability */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) EInputAbilities InputId;
-
-	/** The attack pattern for the current ability. This helps determine the specific attack montage we're granting to the character for the ability */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) EAttackPattern AttackPattern;
 	
 	/** The combos of a specific attack */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_ComboAttacks Combo;
@@ -120,7 +126,7 @@ struct F_ArmamentInformation
 	
 	/** The armament's equip restrictions */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) EEquipRestrictions EquipRestrictions;
-
+	
 	/** Are the damage calculations from the armament, combo, or both? */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) EDamageInformationSource DamageCalculations;
 	
@@ -132,7 +138,10 @@ struct F_ArmamentInformation
 	
 	/** The armament's state information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayEffectInfo StateInformation;
-	
+
+	/** The armament's montages */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FName, UAnimMontage*> Montages;
+
 	/** The armament's abilities */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<F_ArmamentAbilityInformation> CombatAbilities;
 	
@@ -142,7 +151,7 @@ struct F_ArmamentInformation
 	/** There needs to be a valid reference to retrieve the armament/item */
 	virtual bool IsValid() const
 	{
-		return !Id.IsValid();
+		return Id.IsValid();
 	}
 };
 

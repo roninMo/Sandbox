@@ -59,7 +59,7 @@ void UCombatAbility::EndAbility(const FGameplayAbilitySpecHandle Handle, const F
 
 
 #pragma region Initialization
-bool UCombatAbility::GetComboAndArmamentInformation()
+bool UCombatAbility::SetComboAndArmamentInformation()
 {
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
@@ -84,13 +84,13 @@ bool UCombatAbility::GetComboAndArmamentInformation()
 	
 	// Retrieve the attacks for the current stance
 	const F_ArmamentInformation& ArmamentInformation = EquippedArmament->GetArmamentInformation();
-	for (const auto& [Ability, Level, InputId, AbilityAttackPattern, Combo] : ArmamentInformation.CombatAbilities)
+	for (const auto& [Ability, Level, InputId, Combo] : ArmamentInformation.CombatAbilities)
 	{
-		if (AttackPattern != AbilityAttackPattern) continue;
+		if (AttackPattern != InputId) continue;
 
 		ComboAttacks = Combo;
 		ComboCount = Combo.ComboAttacks.Num();
-		SetCurrentMontage(EquippedArmament->GetArmamentMontage(AttackPattern));
+		SetCurrentMontage(EquippedArmament->GetCombatMontage(AttackPattern));
 		CurrentStance = CombatComponent->GetCurrentStance();
 		ensure(!ComboAttacks.ComboAttacks.IsEmpty());
 		

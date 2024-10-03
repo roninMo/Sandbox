@@ -31,7 +31,6 @@ class AArmament;
 class UDataTable;
 struct F_ArmamentInformation;
 struct FGAttributeSetExecutionData;
-enum class EAttackPattern : uint8;
 enum class ECharacterSkeletonMapping : uint8;
 enum class EArmamentStance : uint8;
 enum class EEquipSlot : uint8;
@@ -265,14 +264,14 @@ public:
 	virtual F_ArmamentInformation GetArmamentInformationFromDatabase(FName ArmamentId);
 
 	/**
-	 * Retrieves the armament montage from the armament montage database. For ranged weapons, use EAttackPattern::None
+	 * Retrieves the armament montage from the armament montage database. For ranged weapons, use EInputAbilities::None
 	 *
 	 * @param ArmamentId						The id of the armament
-	 * @param AttackPattern						The combo montage we're retrieving. If the armament doesn't use combos, just use EAttackPattern::None to retrieve it's montage
+	 * @param AttackPattern						The combo montage we're retrieving. If the armament doesn't use combos, just use EInputAbilities::None to retrieve it's montage
 	 * @param Mapping							The character skeleton to montage mapping reference  
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils")
-	virtual UAnimMontage* GetArmamentMontageFromDB(FName ArmamentId, EAttackPattern AttackPattern, ECharacterSkeletonMapping Mapping);
+	virtual UAnimMontage* GetArmamentMontageFromDB(FName ArmamentId, EInputAbilities AttackPattern, ECharacterSkeletonMapping Mapping);
 	
 
 protected:

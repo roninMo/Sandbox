@@ -20,11 +20,11 @@ class SANDBOX_API AMeleeArmament : public AArmament
 
 protected:
 	/** The hitbox for this melee armament. We use the @ref Hitboxes array in the case that subclassed melee armaments might have multiple hitboxes used for combat */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armaments")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament")
 	TObjectPtr<UCapsuleComponent> ArmamentCollision;
 
 	/** The specific holster that should be spawned when the weapon is equipped */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armaments") TSubclassOf<ACharacterAttachment> HolsterClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TSubclassOf<ACharacterAttachment> HolsterClass;
 	
 	/** The armament's currently spawned holster */
 	UPROPERTY(Transient, BlueprintReadWrite)

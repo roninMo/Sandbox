@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
-#include "Sandbox/Data/Enums/SkeletonMappings.h" // Potential error
+// #include "Sandbox/Data/Enums/SkeletonMappings.h" // Potential error
 #include "ArmamentInformation.generated.h"
 
-// enum class ECharacterSkeletonMapping : uint8;
-enum class EAttackPattern : uint8;
+enum class ECharacterSkeletonMapping : uint8;
+enum class EInputAbilities : uint8;
 
 
 /**
@@ -34,7 +34,7 @@ USTRUCT(BlueprintType)
 struct F_Table_ArmamentMontages : public FTableRowBase
 {
 	GENERATED_BODY()
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<EAttackPattern, F_CharacterToMontage> ArmamentMontages;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<EInputAbilities, F_CharacterToMontage> ArmamentMontages;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString DevDescription;
 };
 

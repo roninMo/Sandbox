@@ -16,7 +16,7 @@
 AMeleeArmament::AMeleeArmament()
 {
 	ArmamentMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("ArmamentMesh"));
-	SetRootComponent(ArmamentMesh);
+	// SetRootComponent(ArmamentMesh);
 	ArmamentMesh->SetGenerateOverlapEvents(false);
 	ArmamentMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	ArmamentMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
@@ -39,7 +39,11 @@ AMeleeArmament::AMeleeArmament()
 	// For editing
 	ArmamentCollision->SetGenerateOverlapEvents(true);
 	ArmamentCollision->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-	
+
+	LeftHandSheatheSocket = Socket_Sheathe_1h_blade_l;
+	RightHandSheatheSocket = Socket_Sheathe_1h_blade_r;
+	LeftHandHolsterSocket = Socket_Holster_1h_blade_l;
+	RightHandHolsterSocket = Socket_Holster_1h_blade_r;
 }
 
 

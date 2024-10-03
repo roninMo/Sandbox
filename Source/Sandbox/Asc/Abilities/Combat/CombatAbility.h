@@ -11,7 +11,6 @@
 class AArmament;
 class UCombatComponent;
 enum class EArmamentStance : uint8;
-enum class EAttackPattern : uint8;
 
 
 /**
@@ -24,7 +23,7 @@ class SANDBOX_API UCombatAbility : public UCharacterGameplayAbility
 
 protected:
 	/** Armament information */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat") EAttackPattern AttackPattern;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat") EInputAbilities AttackPattern;
 	UPROPERTY(Transient, BlueprintReadWrite) AArmament* Armament;
 	UPROPERTY(Transient, BlueprintReadWrite) EArmamentStance CurrentStance;
 	
@@ -63,7 +62,7 @@ public:
 
 protected:
 	/** Retrieves the armament's combat information for this ability. Only updates if the player switches weapons or updates his stance */
-	UFUNCTION(BlueprintCallable) virtual bool GetComboAndArmamentInformation();
+	UFUNCTION(BlueprintCallable) virtual bool SetComboAndArmamentInformation();
 	
 	/** Retrieves all the necessary information for an attack. Call this during ActivateAbility to retrieve the attack information for the current attack */
 	UFUNCTION(BlueprintCallable) virtual void InitCombatInformation();
