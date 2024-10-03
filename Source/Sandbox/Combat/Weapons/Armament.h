@@ -25,6 +25,37 @@ enum class EDamageInformationSource : uint8;
 enum class EEquipRestrictions : uint8;
 
 
+/*
+
+PrimaryAttack		- Lmb
+SecondaryAttack		- Rmb
+StrongAttack		- Shift + Lmb
+SpecialAttack		- Shift + Rmb
+
+
+	Left Hand Weapon
+		- Attack (Secondary)
+
+	Right Hand Weapon
+		- Attack (PrimaryAttack / StrongAttack)
+		- Special attack (various Stance/Combo chaining mixed with input abilities (just use the input component for your own combo configurations))
+
+	Two handing a weapon
+		- Attack (PrimaryAttack / StrongAttack)
+		- Block (SecondaryAttack)
+		- Special attack
+
+	Dual wielding weapons
+			- Combination attack (PrimaryAttack(L) / OtherPrimaryAttack(R) / StrongAttack(L) / SpecialAttack(L))
+			- Individual attacks (PrimaryAttack(L, R) / StrongAttack(L, R) / StrongAttack(L) / SpecialAttack(L))
+
+
+	What abilities are granted is updated every time another weapon is equipped, or the player changes his stance
+		-
+
+
+*/
+
 /**
  *	An armament that's been spawned in the world and used for combat.
  */
@@ -102,7 +133,10 @@ protected:
 public:
 	/** Updates the armament's montages provided a character to montage reference */
 	UFUNCTION(BlueprintCallable, Category = "Armaments|Montages") virtual bool UpdateArmamentMontages(const ECharacterSkeletonMapping MontageMapping);
-	
+
+	/** Retrieves the attack montage for one of the armament's attacks */
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Montages") virtual UAnimMontage* GetArmamentMontage(const EAttackPattern AttackPattern);
+
 	
 //-------------------------------------------------------------------------------------//
 // Armament equipping and unequipping												   //
@@ -146,7 +180,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual EEquipRestrictions GetEquipRestrictions() const;
 	
 	/** Retrieves the armament's abilities */
-	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual const TArray<F_ArmamentAbilityInformation>& GetAbilities() const;
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual const TArray<F_ArmamentAbilityInformation>& GetCombatAbilities() const;
+	
+	/** Retrieves the armament's abilities */
+	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual const TArray<FGameplayAbilityInfo>& GetAbilities() const;
 	
 	/** Retrieves the armament's passives */
 	UFUNCTION(BlueprintCallable, Category = "Armaments|Utils") virtual const TArray<FGameplayEffectInfo>& GetPassives() const;

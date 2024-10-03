@@ -54,13 +54,25 @@ enum class EDamageInformationSource : uint8
 UENUM(BlueprintType)
 enum class EAttackPattern : uint8
 {
+	/** None */
 	None				UMETA(DisplayName = "None"),
+
+	/** The right hand's default attack */
 	Primary				UMETA(DisplayName = "Primary Attack"),
+	
+	/** The left hand's default attack */
+	Secondary			UMETA(DisplayName = "Secondary Attack"),
+
+	/** The right hand's strong attack */
 	Strong				UMETA(DisplayName = "Strong Attack"),
+
+	/** The right hand's special attack */
 	Special				UMETA(DisplayName = "Special Attack"),
-	Blocking			UMETA(DisplayName = "Block"),
-	Parrying			UMETA(DisplayName = "Parry"),
+	
+	/** The right hand's crouching attack */
 	Crouching			UMETA(DisplayName = "Crouching Attack"),
+
+	/** The right hand's running attack */
 	Running				UMETA(DisplayName = "Running Attack")
 };
 

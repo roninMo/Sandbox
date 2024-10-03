@@ -109,7 +109,7 @@ bool AArmament::ConstructArmament()
 	}
 	
 	// Add armament abilities
-	for (const F_ArmamentAbilityInformation& ArmamentAbility : ArmamentInformation.Abilities)
+	for (const FGameplayAbilityInfo& ArmamentAbility : ArmamentInformation.Abilities)
 	{
 		AbilityHandles.Add(AbilitySystemComponent->AddAbility(FGameplayAbilityInfo(ArmamentAbility.Ability.Get(), ArmamentAbility.Level, ArmamentAbility.InputId)));
 	}
@@ -186,7 +186,7 @@ bool AArmament::UpdateArmamentMontages(const ECharacterSkeletonMapping MontageMa
 	
 	// For melee armaments, retrieve all combo montages, otherwise just retrieve the montage (use "None" for armaments with a single montage for their animations (that aren't combo specific))
 	ArmamentMontages.Empty();
-	for (F_ArmamentAbilityInformation ArmamentAbility : ArmamentInformation.Abilities)
+	for (F_ArmamentAbilityInformation ArmamentAbility : ArmamentInformation.CombatAbilities)
 	{
 		UAnimMontage* ArmamentComboMontage = CombatComponent->GetArmamentMontageFromDB(ArmamentInformation.Id, ArmamentAbility.AttackPattern, MontageMapping);
 		if (ArmamentComboMontage)
@@ -196,6 +196,17 @@ bool AArmament::UpdateArmamentMontages(const ECharacterSkeletonMapping MontageMa
 	}
 	
 	return true;
+}
+
+
+UAnimMontage* AArmament::GetArmamentMontage(const EAttackPattern AttackPattern)
+{
+	if (ArmamentMontages.Contains(AttackPattern))
+	{
+		return ArmamentMontages[AttackPattern];
+	}
+
+	return nullptr;
 }
 #pragma endregion 
 
@@ -293,7 +304,13 @@ EEquipRestrictions AArmament::GetEquipRestrictions() const
 }
 
 
-const TArray<F_ArmamentAbilityInformation>& AArmament::GetAbilities() const
+const TArray<F_ArmamentAbilityInformation>& AArmament::GetCombatAbilities() const
+{
+	return ArmamentInformation.CombatAbilities;
+}
+
+
+const TArray<FGameplayAbilityInfo>& AArmament::GetAbilities() const
 {
 	return ArmamentInformation.Abilities;
 }

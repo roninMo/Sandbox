@@ -205,7 +205,7 @@ public:
 
 	/** Updates the armament stance for the character based on the currently equipped armaments. */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Combat")
-	virtual void UpdateArmamentStance();
+	virtual void UpdateArmamentStance(); // TODO: Check if replication for adding/removing abilities is costly, and add logic for only adding/removing the different abilities on a stance update 
 
 	/** OnRep function for handling updating the current stance */
 	UFUNCTION() virtual void OnRep_CurrentStance();
@@ -331,7 +331,16 @@ public:
 	
 	/** Retrieves the equipped socket for a specific armament */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping") virtual FName GetEquippedSocketName(EArmamentClassification Armament, EEquipSlot EquipSlot) const;
-	
+
+	/** Retrieves the player's stance */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils") virtual EArmamentStance GetCurrentStance() const;
+
+	/** Sets the player's current combo index */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Combat") virtual void SetComboIndex(const int32 Index);
+
+	/** Retrieves the current combo index */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Combat") virtual int32 GetComboIndex() const;
+
 	
 };
 

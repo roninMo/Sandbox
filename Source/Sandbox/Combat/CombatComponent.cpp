@@ -625,3 +625,21 @@ FName UCombatComponent::GetEquippedSocketName(EArmamentClassification Armament, 
 		return Socket_RightHandEquip;
 	}
 }
+
+
+EArmamentStance UCombatComponent::GetCurrentStance() const
+{
+	return CurrentStance;
+}
+
+
+void UCombatComponent::SetComboIndex(const int32 Index)
+{
+	ComboIndex = Index;
+}
+
+
+int32 UCombatComponent::GetComboIndex() const
+{
+	return ComboIndex;
+}

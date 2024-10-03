@@ -25,13 +25,14 @@ enum class EInputAbilities : uint8
 	Confirm = 1						UMETA(DisplayName = "Confirm"),
 	Cancel = 2						UMETA(DisplayName = "Cancel"),
 	Sprint = 3						UMETA(DisplayName = "Sprint"),
-	PrimaryAttack = 4				UMETA(DisplayName = "PrimaryAttack"),
+	PrimaryAttack = 4				UMETA(DisplayName = "Primary Attack"),
 	SecondaryAttack = 5				UMETA(DisplayName = "Secondary Attack"),
-	SpecialAttack = 6 				UMETA(DisplayName = "Special Attack"),
-	Aim = 7							UMETA(DisplayName = "Aim"),
-	Reload = 8						UMETA(DisplayName = "Reload"),
-	Crouch = 9						UMETA(DisplayName = "Crouch"),
-	Jump = 10						UMETA(DisplayName = "Jump"),
+	StrongAttack = 6				UMETA(DisplayName = "Strong Attack"),
+	SpecialAttack = 7 				UMETA(DisplayName = "Special Attack"),
+	Aim = 8							UMETA(DisplayName = "Aim"),
+	Reload = 9						UMETA(DisplayName = "Reload"),
+	Crouch = 10						UMETA(DisplayName = "Crouch"),
+	Jump = 11						UMETA(DisplayName = "Jump"),
 };
 
 /**

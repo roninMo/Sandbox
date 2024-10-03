@@ -16,6 +16,10 @@ enum class EAttackPattern : uint8;
 enum class EDamageInformationSource : uint8;
 enum class EInputAbilities : uint8;
 
+// Montage information
+#define Montage_ComboSections TArray<FName> {FName("1"), FName("2"), FName("3"), FName("4"), FName("5"), FName("6"), FName("7"), FName("8"), FName("9"), FName("10"), FName("1")}
+#define Montage_Section_Charge FString("_C")
+
 
 /**
  *  Attack information for an armament or an individual combo attack
@@ -130,7 +134,10 @@ struct F_ArmamentInformation
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayEffectInfo StateInformation;
 	
 	/** The armament's abilities */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<F_ArmamentAbilityInformation> Abilities;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<F_ArmamentAbilityInformation> CombatAbilities;
+	
+	/** The armament's abilities */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayAbilityInfo> Abilities;
 
 	/** There needs to be a valid reference to retrieve the armament/item */
 	virtual bool IsValid() const

@@ -8,12 +8,13 @@
 #include "AttributeSet.h"
 #include "GameplayTagContainer.h"
 #include "Engine/DataAsset.h"
+#include "Sandbox/Data/Structs/AbilityInformation.h" // Potential dependency error
 #include "CharacterAbilityDataSet.generated.h"
 
 
-struct FGameplayEffectInfo;
-struct FGameplayAttributeInfo;
-struct FGameplayAbilityInfo;
+// struct FGameplayEffectInfo;
+// struct FGameplayAttributeInfo;
+// struct FGameplayAbilityInfo;
 struct FGameplayAbilitySpec;
 class UAbilitySystemComponent;
 

@@ -7,7 +7,6 @@
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
-#include "Sandbox/Data/Structs/AbilityInformation.h"
 
 #define LOCTEXT_NAMESPACE "CharacterAbilityDataSet"
 
