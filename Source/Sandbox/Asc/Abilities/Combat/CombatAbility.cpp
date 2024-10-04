@@ -10,12 +10,29 @@
 #include "Sandbox/Combat/Weapons/Armament.h"
 
 #include "Sandbox/Data/Enums/ArmamentTypes.h"
+#include "Sandbox/Data/Enums/EquipSlot.h"
 
 UCombatAbility::UCombatAbility()
 {
 	// Combo attacks should be activated on every actor, and the information needs to be saved between attacks
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
 	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::LocalPredicted;
+}
+
+
+void UCombatAbility::OnAvatarSet(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec)
+{
+	Super::OnAvatarSet(ActorInfo, Spec);
+
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component during {2}'s initialization while binding to unequipped events!",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+		return;
+	}
+
+	CombatComponent->OnUnequippedArmament.AddDynamic(this, &UCombatAbility::OnUnequipArmament);
 }
 
 
@@ -27,26 +44,6 @@ void UCombatAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle, co
 	AlreadyHitActors.Empty();
 	bCancelledToEquipArmament = false;
 	bIsFinalComboAttack = false;
-}
-
-
-bool UCombatAbility::CheckIfShouldEquipArmament()
-{
-	// Equip the armament if the player doesn't already have one equipped
-	// bCancelledToEquipArmament = false;
-	// if (!GetAbilitySystemComponentFromActorInfo()->HasMatchingGameplayTag(ArmamentEquippedTag))
-	// {
-	// 	FGameplayTag EquipTag = bUseRightHandArmament ? FGameplayTag::RequestGameplayTag(Tag_Ability_EquipArmament_Default) : FGameplayTag::RequestGameplayTag(Tag_Ability_EquipArmament_Secondary);
-	// 	FGameplayEventData EventData = FGameplayEventData();
-	// 	EventData.Instigator = GetAvatarActorFromActorInfo();
-	// 	
-	// 	SendGameplayEvent(EquipTag, EventData);
-	// 	bCancelledToEquipArmament = true;
-	// 	// UE_LOGFMT(AbilityLog, Log, "{0} activating the equipping armament ability to attack. {1} {2}()", *GetNameSafe(BaseCharacter), *GetName(), *FString(__FUNCTION__));
-	// 	return true;
-	// }
-
-	return false;
 }
 
 
@@ -68,9 +65,21 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
 		return false;
 	}
-
+	
 	AArmament* EquippedArmament = CombatComponent->GetArmament(IsRightHandAbility());
-	if (!EquippedArmament) return false;
+	if (!EquippedArmament)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the armament during {2} while getting combo and armament information",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+		return false;
+	}
+
+	// Retrieve the attack pattern from the actual input
+	FGameplayAbilitySpec* Spec = GetCurrentAbilitySpec();
+	if (Spec)
+	{
+		AttackPattern = static_cast<EInputAbilities>(Spec->InputID);
+	}
 	
 	// Retrieve the combo information if the player's equipped an armament or their stance has updated
 	if (EquippedArmament == Armament && CurrentStance == CombatComponent->GetCurrentStance()) return true;
@@ -103,6 +112,7 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 void UCombatAbility::InitCombatInformation()
 {
 	SetComboAttack(); // Current attack and combo index
+	SetAttackMontage(nullptr); // Current montage
 	SetMontageStartSection(); // montage start section (customization for different types of attacks
 	CalculateAttributeModifications(); // Damage and attribute calculations
 }
@@ -134,6 +144,13 @@ void UCombatAbility::SetComboAttack()
 	}
 	
 	CombatComponent->SetComboIndex(ComboIndex);
+}
+
+
+void UCombatAbility::SetAttackMontage(AArmament* Weapon)
+{
+	if (!Weapon) return;
+	SetCurrentMontage(Weapon->GetCombatMontage(AttackPattern));
 }
 
 
@@ -335,8 +352,31 @@ TArray<AActor*>& UCombatAbility::GetAlreadyHitActors()
 bool UCombatAbility::IsRightHandAbility() const
 {
 	FGameplayAbilitySpec* Spec = GetCurrentAbilitySpec();
-	if (Spec && Spec->InputID == static_cast<int32>(EInputAbilities::SecondaryAttack)) return false;
-	return true;
+	return IsRightHandAbilityInput(static_cast<EInputAbilities>(Spec->InputID));
+}
+
+
+bool UCombatAbility::IsRightHandAbilityInput(const EInputAbilities AbilityInput) const
+{
+	return AbilityInput != EInputAbilities::SecondaryAttack;
+}
+
+
+void UCombatAbility::SetArmament(AArmament* NewArmament)
+{
+	Armament = NewArmament;
+	EquipSlot = Armament ? Armament->GetEquipSlot() : EEquipSlot::None;
+}
+
+
+void UCombatAbility::OnUnequipArmament(FName ArmamentName, FGuid Id, EEquipSlot Slot)
+{
+	if (Slot == EquipSlot)
+	{
+		Armament = nullptr;
+		EquipSlot = EEquipSlot::None;
+		AttackPattern = EInputAbilities::None;
+	}
 }
 
 

@@ -7,11 +7,15 @@
 #include "Sandbox/Asc/Tasks/AbilityTask_TargetOverlap.h"
 #include "Abilities/Tasks/AbilityTask_WaitGameplayEvent.h"
 #include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
+#include "Logging/StructuredLog.h"
 
 #include "Sandbox/Asc/Information/SandboxTags.h"
 #include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Characters/CharacterBase.h"
+#include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Combat/Weapons/Armament.h"
+#include "Sandbox/Data/Enums/ArmamentTypes.h"
 
 UMeleeAttack::UMeleeAttack()
 {
@@ -43,7 +47,29 @@ bool UMeleeAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, c
 		return false;
 	}
 
-	return CombatComponent->GetArmament(true) || CombatComponent->GetArmament(false);
+	// The ability still needs to retrieve the weapon information
+	if (AttackPattern == EInputAbilities::None)
+	{
+		return true;
+	}
+
+
+	// Check if there's a valid weapon for this specific ability
+	bool bCanActivateAbility = false;
+	if (IsRightHandAbilityInput(AttackPattern)
+		&& CombatComponent->GetArmament()
+		&& CombatComponent->GetArmament()->GetEquipStatus() == EEquipStatus::Equipped)
+	{
+		bCanActivateAbility = true;
+	}
+	else if (!IsRightHandAbilityInput(AttackPattern)
+		&& CombatComponent->GetArmament(false)
+		&& CombatComponent->GetArmament(false)->GetEquipStatus() == EEquipStatus::Equipped)
+	{
+		bCanActivateAbility = true;
+	}
+
+	return bCanActivateAbility;
 }
 
 
@@ -62,13 +88,7 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		return;
 	}
-
-	// Equip the armament if the player doesn't already have one equipped
-	if (CheckIfShouldEquipArmament())
-	{
-		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
-		return;
-	}
+	
 	
 	// Add the combo information and attack calculations
 	InitCombatInformation();
@@ -98,13 +118,9 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 	
 	// Overlap Trace
 	// Have the server handle the attack logic with client prediction
-	MeleeOverlapTaskHandle = UAbilityTask_TargetOverlap::CreateOverlapDataTask(this, Armament->GetArmamentHitboxes());
-	MeleeOverlapTaskHandle->OnValidOverlap.AddDynamic(this, &UMeleeAttack::OnLandedAttack);
-	MeleeOverlapTaskHandle->ReadyForActivation(); // During attack frames
-
-	// TODO: add combat logic that actually let's attacks interact with other actors.
-	// Right now we have an overlap event that dictates everything, and no way of handling different hitboxes for when a player with a weapon does like a sparta kick or something
-	// They just setup their own configuration based on how the weapon reacts to their events
+	// MeleeOverlapTaskHandle = UAbilityTask_TargetOverlap::CreateOverlapDataTask(this, Armament->GetArmamentHitboxes());
+	// MeleeOverlapTaskHandle->OnValidOverlap.AddDynamic(this, &UMeleeAttack::OnLandedAttack);
+	// MeleeOverlapTaskHandle->ReadyForActivation(); // During attack frames
 }
 
 
@@ -126,6 +142,9 @@ void UMeleeAttack::OnHandleAttackState(FGameplayEventData EventData)
 		MeleeOverlapTaskHandle->ReadyForActivation();
 		CheckAndAttackIfAlreadyOverlappingAnything(AlreadyHitActors);
 	}
+
+	UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} is attacking, state: {3}",
+		*UEnum::GetValueAsString(GetAvatarActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetAvatarActorFromActorInfo()), *EventData.EventTag.ToString());
 }
 
 
@@ -146,4 +165,45 @@ void UMeleeAttack::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGa
 	if (MeleeOverlapTaskHandle) MeleeOverlapTaskHandle->EndTask();
 	
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
+}
+
+
+void UMeleeAttack::SetAttackMontage(AArmament* Weapon)
+{
+	ACharacterBase* Character = Cast<ACharacterBase>(GetAvatarActorFromActorInfo());
+	if (!Character)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the character while retrieving the weapon's montage!",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
+		return;
+	}
+	
+	if (!Weapon)
+	{
+		UCombatComponent* CombatComponent = GetCombatComponent();
+		if (!CombatComponent)
+		{
+			UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component during {2} while retrieving the montage",
+				UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+			return;
+		}
+	
+		Weapon = CombatComponent->GetArmament(IsRightHandAbility());
+		if (!Weapon)
+		{
+			UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the armament during {2} while retrieving the montage",
+				UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+			return;
+		}
+	}
+
+	UAdvancedMovementComponent* MovementComponent = Character->GetMovementComp<UAdvancedMovementComponent>();
+	if (MovementComponent && MovementComponent->IsRunning())
+	{
+		// Running attack
+	}
+	else
+	{
+		SetCurrentMontage(Weapon->GetCombatMontage(AttackPattern));
+	}
 }

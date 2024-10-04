@@ -130,7 +130,6 @@ bool AMeleeArmament::ConstructArmament()
 		return false;
 	}
 
-	CombatComponent->OnEquippedArmament.Broadcast(this, EquipSlot);
 	Hitboxes.AddUnique(ArmamentCollision);
 	return true;
 }
@@ -160,7 +159,6 @@ bool AMeleeArmament::DeconstructArmament()
 
 	// Remove any delegate bindings
 	ArmamentCollision->OnComponentBeginOverlap.RemoveAll(this);
-	CombatComponent->OnUnequippedArmament.Broadcast(ArmamentInformation.Id, EquipSlot);
 	return true;
 }
 

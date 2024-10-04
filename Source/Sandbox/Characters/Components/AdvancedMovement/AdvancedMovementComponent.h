@@ -461,7 +461,7 @@ protected:
 	bool bPreventMovementRotationsDuringMantle;
 
 	/** The duration before the player is allowed to wall climb after transitioning out of mantling */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(UIMin = "0", UIMax = "1", EditCondition = "bUseMantling && bRotateCharacterDuringMantle", EditConditionHides)) 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(UIMin = "0", UIMax = "1", EditCondition = "bUseMantling", EditConditionHides)) 
 	float MantleToWallClimbInterval;
 
 	/** The offset for when the player is mantling on a ledge */

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Sandbox/Data/Enums/ArmamentTypes.h"
 #include "Sandbox/Data/Structs/ArmorInformation.h"
 #include "Sandbox/Data/Structs/InventoryInformation.h"
 #include "CombatComponent.generated.h"
@@ -32,16 +33,14 @@ class UDataTable;
 struct F_ArmamentInformation;	
 struct FGAttributeSetExecutionData;
 enum class ECharacterSkeletonMapping : uint8;
-enum class EArmamentStance : uint8;
 enum class EEquipSlot : uint8;
 enum class EArmorSlot : uint8;
-enum class EArmamentClassification : uint8;
 
 
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FArmamentEquippedSignature, AArmament*, Armament, EEquipSlot, EquipSlot);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FArmamentUnequippedSignature, FName, Id, EEquipSlot, EquipSlot);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmamentUnequippedSignature, FName, Armament, FGuid, Id, EEquipSlot, EquipSlot);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorEquippedSignature, F_Item, Information, F_Information_Armor, Abilities, EArmorSlot, EquipSlot);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item, Information, F_Information_Armor, Abilities, EArmorSlot, EquipSlot);
 
@@ -64,6 +63,9 @@ protected:
 
 	/** The player's current armament stance */
 	UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_CurrentStance) EArmamentStance CurrentStance;
+
+	/** The current combat ability handles that are specific to the player's combat stance */
+	UPROPERTY(Transient, BlueprintReadWrite) TArray<FGameplayAbilitySpecHandle> CombatAbilityHandles;
 	
 	/** The current combo index the player is on */
 	UPROPERTY(BlueprintReadWrite, Replicated, Category = "Combat Component|Armaments") int32 ComboIndex;
@@ -205,8 +207,16 @@ public:
 
 	/** Updates the armament stance for the character based on the currently equipped armaments. */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Combat")
-	virtual void UpdateArmamentStance(); // TODO: Check if replication for adding/removing abilities is costly, and add logic for only adding/removing the different abilities on a stance update 
+	virtual void UpdateArmamentStanceAndAbilities();
 
+	/**
+	 * Updates the armament's current abilities based on the current stance, only adding/removing abilities that are required
+	 *
+	 * @param PreviousStance					The previous armament stance. Use this if you only want to remove the abilities that aren't used
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Combat")
+	virtual void UpdateArmamentCombatAbilities(EArmamentStance PreviousStance = EArmamentStance::EAS_None);
+	
 	/** OnRep function for handling updating the current stance */
 	UFUNCTION() virtual void OnRep_CurrentStance();
 	

@@ -97,8 +97,6 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	bUseMantling = true;
 	MantleSpeed = 200.0;
 	bPreventMovementRotationsDuringMantle = true;
-	bRotateCharacterDuringMantle = true;
-	MantleRotationSpeed = 6.4;
 	MantleToWallClimbInterval = 0.1;
 	MantleLedgeLocationOffset = -55;
 	MantleSurfaceTraceFromLedgeOffset = 10;

@@ -5,12 +5,12 @@
 #include "CoreMinimal.h"
 #include "Sandbox/Asc/Abilities/CharacterGameplayAbility.h"
 #include "Sandbox/Data/Structs/CombatInformation.h"
-// #include "Sandbox/Data/Structs/CombatInformation.h"
 #include "CombatAbility.generated.h"
 
 class AArmament;
 class UCombatComponent;
 enum class EArmamentStance : uint8;
+enum class EEquipSlot : uint8;
 
 
 /**
@@ -23,9 +23,10 @@ class SANDBOX_API UCombatAbility : public UCharacterGameplayAbility
 
 protected:
 	/** Armament information */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat") EInputAbilities AttackPattern;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat") EInputAbilities AttackPattern;
 	UPROPERTY(Transient, BlueprintReadWrite) AArmament* Armament;
-	UPROPERTY(Transient, BlueprintReadWrite) EArmamentStance CurrentStance;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite) EArmamentStance CurrentStance;
+	UPROPERTY(Transient, BlueprintReadWrite) EEquipSlot EquipSlot;
 	
 	/** Combat information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") F_ComboAttacks ComboAttacks;
@@ -53,8 +54,8 @@ public:
 	/** Actually activate ability, do not call this directly */
 	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
 
-	/** Checks if the armament is equipped and equips the armament if it isn't already equipped */
-	UFUNCTION(BlueprintCallable) virtual bool CheckIfShouldEquipArmament(); // Input abilities should handle this
+	/* Epic's comment: Projects should initiate passives or do other "BeginPlay" type of logic here. */
+	virtual void OnAvatarSet(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec) override;
 	
 	/** Native function, called if an ability ends normally or abnormally. If bReplicate is set to true, try to replicate the ending to the client/server */
 	virtual void EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled) override;
@@ -70,6 +71,9 @@ protected:
 	/** Calculates the current attack and combo index for this attack */
 	UFUNCTION(BlueprintCallable) virtual void SetComboAttack();
 
+	/** Retrieves the attack montage from the armament based on different conditions */
+	UFUNCTION(BlueprintCallable) virtual void SetAttackMontage(AArmament* Weapon);
+	
 	/** Calculates the montage section for the current combo attack */
 	UFUNCTION(BlueprintCallable) virtual void SetMontageStartSection(bool ChargeAttack = false);
 	
@@ -100,10 +104,19 @@ protected:
 
 	/** Retrieves the actors we've already attacked on this swing */
 	UFUNCTION(BlueprintCallable) virtual TArray<AActor*>& GetAlreadyHitActors();
-	
+
 	/** Returns true if the current ability is a right hand ability */
 	UFUNCTION(BlueprintCallable) virtual bool IsRightHandAbility() const;
+	
+	/** Returns true if the current ability is a right hand ability. Use this for non instanced scenarios */
+	UFUNCTION(BlueprintCallable) virtual bool IsRightHandAbilityInput(const EInputAbilities AbilityInput) const;
 
+	/** Sets the armament that's used during the ability, and the equip slot for reference to know when it's unequipped */
+	UFUNCTION(BlueprintCallable) virtual void SetArmament(AArmament* NewArmament);
+	
+	/** Handles removing the reference to the player's armament on unequip */
+	UFUNCTION() virtual void OnUnequipArmament(FName ArmamentName, FGuid Id, EEquipSlot Slot);
+	
 	/** Retrieves the combat component from the character */
 	UFUNCTION(BlueprintCallable) virtual UCombatComponent* GetCombatComponent() const;
 

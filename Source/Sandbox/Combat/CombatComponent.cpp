@@ -3,18 +3,17 @@
 
 #include "Sandbox/Combat/CombatComponent.h"
 
-#include "Sandbox/Data/Enums/ArmamentTypes.h"
 #include "Sandbox/Data/Enums/EquipSlot.h"
+#include "Sandbox/Data/Enums/ArmorTypes.h"
 #include "Sandbox/Data/Structs/ArmamentInformation.h"
 
 #include "Net/UnrealNetwork.h"
 #include "Engine/SkeletalMeshSocket.h"
-#include "Sandbox/Asc/Attributes/AttributeLogic.h"
 #include "Sandbox/Characters/CharacterBase.h"
+#include "Sandbox/Asc/Attributes/AttributeLogic.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Weapons/Armament.h"
 #include "Logging/StructuredLog.h"
-#include "Sandbox/Data/Enums/ArmorTypes.h"
 
 DEFINE_LOG_CATEGORY(CombatComponentLog);
 // TODO: Custom logging to remove the extra message logic for clarification
@@ -173,6 +172,9 @@ AArmament* UCombatComponent::CreateArmament(const EEquipSlot EquipSlot)
 			{
 				PrimaryArmament = Armament;
 			}
+			
+			// Update the armament stance and combat abilities
+			UpdateArmamentStanceAndAbilities();
 
 			OnEquippedArmament.Broadcast(Armament, EquipSlot);
 			return Armament;
@@ -217,9 +219,13 @@ bool UCombatComponent::DeleteEquippedArmament(AArmament* Armament)
 	// Deconstruct the armament and remove the armament abilities before deleting the armament
 	if (Armament->DeconstructArmament())
 	{
-		UpdateArmamentStance();
 		if (IsRightHandedArmament(Armament->GetEquipSlot())) PrimaryArmament = nullptr;
 		else SecondaryArmament = nullptr;
+
+		// Update the armament stance and combat abilities
+		UpdateArmamentStanceAndAbilities();
+
+		OnUnequippedArmament.Broadcast(Armament->GetArmamentId(), Armament->Execute_GetId(Armament), Armament->GetEquipSlot());
 		Armament->Destroy();
 		return true;
 	}
@@ -234,16 +240,25 @@ void UCombatComponent::SetArmamentStance(const EArmamentStance Stance)
 }
 
 
-void UCombatComponent::UpdateArmamentStance()
+void UCombatComponent::UpdateArmamentStanceAndAbilities()
 {
+	EArmamentStance PreviousStance = CurrentStance;
+
+	// Update the armament stance based on the equipped weapons
+	if (!PrimaryArmament && !SecondaryArmament)
+	{
+		CurrentStance = EArmamentStance::EAS_None;
+	}
 	if (PrimaryArmament && SecondaryArmament)
 	{
 		if (PrimaryArmament->GetArmamentInformation().Classification == SecondaryArmament->GetArmamentInformation().Classification)
 		{
 			CurrentStance = EArmamentStance::EAS_DualWielding;
 		}
-		
-		CurrentStance = EArmamentStance::EAS_TwoWeapons;
+		else
+		{
+			CurrentStance = EArmamentStance::EAS_TwoWeapons;
+		}
 	}
 	else if (PrimaryArmament || SecondaryArmament)
 	{
@@ -256,8 +271,170 @@ void UCombatComponent::UpdateArmamentStance()
 		CurrentStance = EArmamentStance::EAS_OneHanded;
 	}
 
-	CurrentStance = EArmamentStance::EAS_None;
+	UpdateArmamentCombatAbilities(PreviousStance);
 }
+
+void UCombatComponent::UpdateArmamentCombatAbilities(EArmamentStance PreviousStance)
+{
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while updating the combat abilities!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	if (Character->HasAuthority())
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Only update armaments combat abilities on the server!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+
+	TMap<EInputAbilities, F_ArmamentAbilityInformation> RetrievedCombatAbilities;
+	
+	TArray<AArmament*> Armaments;
+	if (PrimaryArmament) Armaments.Add(PrimaryArmament);
+	if (SecondaryArmament) Armaments.Add(SecondaryArmament);
+	for (AArmament* Armament : Armaments)
+	{
+		// Retrieve the combat abilities for this armament
+		const TArray<F_ArmamentAbilityInformation>& CombatAbilities = Armament->GetCombatAbilities();
+		for (const F_ArmamentAbilityInformation& CombatAbility : CombatAbilities)
+		{
+			EInputAbilities AttackPattern = CombatAbility.InputId;
+			if (!RetrievedCombatAbilities.Contains(AttackPattern)) RetrievedCombatAbilities.Add(AttackPattern, CombatAbility);
+			else if (RetrievedCombatAbilities[AttackPattern].Level <= CombatAbility.Level)
+			{
+				RetrievedCombatAbilities.Add(AttackPattern, CombatAbility);
+			}
+		}
+	}
+
+
+	TMap<EInputAbilities, F_ArmamentAbilityInformation> CombatAbilities;
+	if (PrimaryArmament)
+	{
+		// Retrieve the primary weapon's combat abilities for this armament
+		const TArray<F_ArmamentAbilityInformation>& Abilities = PrimaryArmament->GetCombatAbilities();
+		for (const F_ArmamentAbilityInformation& CombatAbility : Abilities)
+		{
+			if (EInputAbilities::PrimaryAttack == CombatAbility.InputId) CombatAbilities.Add(EInputAbilities::PrimaryAttack, CombatAbility);
+			if (EInputAbilities::StrongAttack == CombatAbility.InputId) CombatAbilities.Add(EInputAbilities::StrongAttack, CombatAbility);
+			if (EInputAbilities::SpecialAttack == CombatAbility.InputId) CombatAbilities.Add(EInputAbilities::SpecialAttack, CombatAbility);
+
+			// Only use the secondary attack (Block or alt primary attack) for two handing or dual wielding
+			if (CurrentStance == EArmamentStance::EAS_DualWielding || CurrentStance == EArmamentStance::EAS_TwoWeapons || CurrentStance == EArmamentStance::EAS_TwoHanded)
+			{
+				if (EInputAbilities::SecondaryAttack == CombatAbility.InputId)
+				{
+					CombatAbilities.Add(EInputAbilities::SecondaryAttack, CombatAbility);
+				}
+			}
+		}
+	}
+
+	if (SecondaryArmament)
+	{
+		// Retrieve the secondary weapon's combat abilities for this armament
+		const TArray<F_ArmamentAbilityInformation>& Abilities = SecondaryArmament->GetCombatAbilities();
+		for (const F_ArmamentAbilityInformation& CombatAbility : Abilities)
+		{
+			// If we're two handing the weapon, retrieve every ability
+			if (CurrentStance == EArmamentStance::EAS_TwoHanded)
+			{
+				CombatAbilities.Add(CombatAbility.InputId, CombatAbility);
+			}
+			else if (CurrentStance == EArmamentStance::EAS_OneHanded)
+			{
+				// Otherwise retrieve the offhand ability
+				if (EInputAbilities::SecondaryAttack == CombatAbility.InputId) CombatAbilities.Add(EInputAbilities::SecondaryAttack, CombatAbility);
+			}
+		}
+	}
+
+	
+	
+
+	/*
+
+	Eventually only add/remove the abilities required using these conditions
+
+		One Handed (Offhand)
+			- SecondaryAttack
+		
+		One Handed (Primary hand)
+			- PrimaryAttack
+			- StrongAttack
+			- SpecialAttack
+		
+		Two Handed
+			- PrimaryAttack
+			- SecondaryAttack
+			- StrongAttack
+			- SpecialAttack
+	
+		Two Weapons
+			- PrimaryAttack
+			- SecondaryAttack
+			- StrongAttack
+			- SpecialAttack
+		
+		Dual Wielding
+			- PrimaryAttack
+			- SecondaryAttack
+			- StrongAttack
+			- SpecialAttack
+
+
+	Primary weapon
+		- Every combat ability except the secondary attack
+
+	Two Handed, Two Weapons, Or Dual Wielding
+		- Every combat ability
+
+	Offhand weapon
+		- Secondary attack
+
+	And if they go from dual wielding to two handing a weapon, they need to use the proper abilities
+
+
+	
+	*/
+
+	if (PreviousStance == EArmamentStance::EAS_DualWielding || PreviousStance == EArmamentStance::EAS_TwoWeapons || PreviousStance == EArmamentStance::EAS_TwoHanded)
+	{
+		// Only primary weapon, remove the offhand ability
+
+		// Only offhand weapon, remove all other abilities
+
+		// If dual wielding, use each of the weapon's abilities
+
+		// If they transition to two handing, add the abilities of the specific armament
+	}
+	else if (PreviousStance == EArmamentStance::EAS_OneHanded)
+	{
+		// Primary Weapon
+		if (PrimaryArmament)
+		{
+			// Primary weapon
+			// 	- Every combat ability except the secondary attack
+			
+
+		}
+
+		// Offhand Weapon
+		if (SecondaryArmament)
+		{
+			// Offhand weapon
+			// 	- Secondary attack
+
+			
+		}
+	}
+}
+
 
 void UCombatComponent::OnRep_CurrentStance()
 {
