@@ -20,11 +20,11 @@ class SANDBOX_API UGameplayTagState : public UAnimNotifyStateBase
 	GENERATED_BODY()
 
 protected:
-	UPROPERTY(EditAnywhere, meta = (ToolTip = "The tag that's added for the duration of the notify state"))
-	FGameplayTag TagState;
-
 	UPROPERTY(EditAnywhere, meta = (ToolTip = "Send gameplay event to player actors (and server actors)"))
 	bool bSendGameplayEventToActor;
+
+	UPROPERTY(EditAnywhere, meta = (ToolTip = "The tag that's added for the duration of the notify state"))
+	FGameplayTag TagState;
 
 
 public:
