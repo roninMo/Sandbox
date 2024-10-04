@@ -85,7 +85,7 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 	if (EquippedArmament == Armament && CurrentStance == CombatComponent->GetCurrentStance()) return true;
 	else
 	{
-		CurrentStance = EArmamentStance::EAS_None;
+		CurrentStance = EArmamentStance::None;
 		ComboAttacks = F_ComboAttacks();
 		ComboCount = 0;
 		CurrentAttack = F_ComboAttack();

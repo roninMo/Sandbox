@@ -12,19 +12,22 @@ UENUM(BlueprintType)
 enum class EArmamentStance : uint8
 {
 	/** None */
-	EAS_None				UMETA(DisplayName = "None"),
+	None					UMETA(DisplayName = "None"),
 
-	/** The player has a single aramment and should it's montages */
-	EAS_OneHanded		    UMETA(DisplayName = "One Handed"),
+	/** The player has a single armament and should it's montages */
+	OneHanding				UMETA(DisplayName = "One Handing"),
 
 	/** The player has two separate weapon types equipped */
-	EAS_TwoWeapons			UMETA(DisplayName = "Two Weapons"),
+	TwoWeapons				UMETA(DisplayName = "Two Weapons"),
 
 	/** The player is dual wielding and needs to use the montages for dual wielding */
-	EAS_DualWielding		UMETA(DisplayName = "Dual Wielding"),
+	DualWielding			UMETA(DisplayName = "Dual Wielding"),
 
-	/** The player has an offhand that affects some of it's montages and should use both armament's montage */
-	EAS_TwoHanded			UMETA(DisplayName = "Two Handed")
+	/** The player is two handing the secondary weapon */
+	TwoHandingSecondary		UMETA(DisplayName = "Two Handing (Secondary)"),
+	
+	/** The player is two handing the primary weapon */
+	TwoHandingPrimary		UMETA(DisplayName = "Two Handing (Primary)"),
 };
 
 
@@ -41,10 +44,10 @@ enum class EDamageInformationSource : uint8
 	Armament    		    UMETA(DisplayName = "Armament"),
 	
 	/** Each combo attack has it's own attack information that's not specific to an armament. */
-	Combo    		    UMETA(DisplayName = "Combo"),
+	Combo    				UMETA(DisplayName = "Combo"),
 	
 	/** The damage is gathered from both the armament and the combo attack */
-	Hybrid				UMETA(DisplayName = "Hybrid"),
+	Hybrid					UMETA(DisplayName = "Hybrid"),
 };
 
 

@@ -442,6 +442,36 @@
 							}
 						]
 					}
+				},
+				{
+					"Ability": "None",
+					"Level": 1,
+					"InputId": "None",
+					"Combo":
+					{
+						"DamageEffectClass": "None",
+						"ComboAttacks": []
+					}
+				},
+				{
+					"Ability": "None",
+					"Level": 1,
+					"InputId": "None",
+					"Combo":
+					{
+						"DamageEffectClass": "None",
+						"ComboAttacks": []
+					}
+				},
+				{
+					"Ability": "None",
+					"Level": 1,
+					"InputId": "None",
+					"Combo":
+					{
+						"DamageEffectClass": "None",
+						"ComboAttacks": []
+					}
 				}
 			],
 			"Abilities": [

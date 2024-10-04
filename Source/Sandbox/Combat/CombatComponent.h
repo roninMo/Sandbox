@@ -215,7 +215,7 @@ public:
 	 * @param PreviousStance					The previous armament stance. Use this if you only want to remove the abilities that aren't used
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Combat")
-	virtual void UpdateArmamentCombatAbilities(EArmamentStance PreviousStance = EArmamentStance::EAS_None);
+	virtual void UpdateArmamentCombatAbilities(EArmamentStance PreviousStance = EArmamentStance::None);
 	
 	/** OnRep function for handling updating the current stance */
 	UFUNCTION() virtual void OnRep_CurrentStance();

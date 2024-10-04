@@ -9,6 +9,7 @@
 class AArmament;
 class UGameplayAbility;
 class UGameplayEffect;
+class UGameplayEffectExecutionCalculation;
 struct FGameplayAttribute;
 enum class EEquipRestrictions : uint8;
 enum class EArmamentClassification : uint8;
@@ -74,7 +75,7 @@ struct F_ComboAttacks
 	F_ComboAttacks() = default;
 
 	/** The  class that handles the damage effect calculations */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TSubclassOf<UGameplayEffect> DamageEffectClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TSubclassOf<UGameplayEffectExecutionCalculation> DamageEffectClass;
 	
 	/** The combos of a specific attack */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<F_ComboAttack> ComboAttacks;
@@ -124,7 +125,7 @@ struct F_ArmamentInformation
 	/** The armament classification */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) EArmamentClassification Classification;
 	
-	/** The armament's equip restrictions */
+	/** The armament's equip restrictions */ // This is only here because of ranged weapons
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) EEquipRestrictions EquipRestrictions;
 	
 	/** Are the damage calculations from the armament, combo, or both? */
