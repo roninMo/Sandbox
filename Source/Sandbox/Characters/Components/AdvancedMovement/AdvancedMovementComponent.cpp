@@ -3090,11 +3090,10 @@ void UAdvancedMovementComponent::SimulateMovement(float DeltaTime)
 	const FRepMovement& ConstRepMovement = CharacterOwner->GetReplicatedMovement();
 
 	// Workaround for replication not being updated initially
-	// TODO: Is this a persistent thing, or do they really just need first frame to be null? Non moving movement calculations don't happen because of this, causing sliding during freeze frames which we already handled
-	if (Time <= 2 && (bIsSimulatedProxy &&
+	if (bIsSimulatedProxy &&
 		ConstRepMovement.Location.IsZero() &&
 		ConstRepMovement.Rotation.IsZero() &&
-		ConstRepMovement.LinearVelocity.IsZero()))
+		ConstRepMovement.LinearVelocity.IsZero())
 	{
 		return;
 	}

@@ -14,10 +14,15 @@
 UMeleeAttack::UMeleeAttack()
 {
 	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.MeleeAttack")));
+
+	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking")));
 	
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Armament.Unequipping")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Armament.Equipping")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking")));
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Sliding")));
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Rolling")));
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking")));
+	
 }
 
 

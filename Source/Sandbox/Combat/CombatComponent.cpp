@@ -154,10 +154,11 @@ AArmament* UCombatComponent::CreateArmament(const EEquipSlot EquipSlot)
 		);
 
 		// Add the armament's information and construct the armament
-		Armament->SetArmamentInformation(ArmamentData);
+		Armament->SetArmamentInformation(ArmamentData); // Replicated during EquipSlot OnRep ->  Retrieved from combat component
 		Armament->SetArmamentEquipSlot(EquipSlot);
 		Armament->Execute_SetItem(Armament, ArmamentItemData);
 		Armament->Execute_SetId(Armament, ArmamentItemData.Id);
+		Armament->SetEquipStatus(EEquipStatus::Unequipped); // Not replicated 
 		if (Armament->IsValidArmanent() && Armament->ConstructArmament())
 		{
 			// Delete the currently equipped armament, if there is one

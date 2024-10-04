@@ -8,14 +8,21 @@
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Characters/CharacterBase.h"
+#include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Combat/Weapons/Armament.h"
+#include "Sandbox/Data/Enums/ArmamentTypes.h"
 
 UEquipArmament::UEquipArmament()
 {
 	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.Equip")));
+
+	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Armament.Equipping")));
 	
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Rolling")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Armament.Unequipping")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Armament.Equipping")));
 
 	EquipEventTag = FGameplayTag::RequestGameplayTag(FName("Event.Montage.Action"));
 }
@@ -23,7 +30,54 @@ UEquipArmament::UEquipArmament()
 
 bool UEquipArmament::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayTagContainer* SourceTags, const FGameplayTagContainer* TargetTags, FGameplayTagContainer* OptionalRelevantTags) const
 {
-	return Super::CanActivateAbility(Handle, ActorInfo, SourceTags, TargetTags, OptionalRelevantTags);
+	if (!Super::CanActivateAbility(Handle, ActorInfo, SourceTags, TargetTags, OptionalRelevantTags))
+	{
+		return false;
+	}
+	
+	ACharacterBase* Character = Cast<ACharacterBase>(ActorInfo->AvatarActor.Get());
+	if (!Character)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while unsheathing the weapons!",
+			UEnum::GetValueAsString(ActorInfo->OwnerActor.Get()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(ActorInfo->OwnerActor.Get()));
+		return false;
+	}
+
+	UCombatComponent* CombatComponent = Character->GetCombatComponent();
+	if (!CombatComponent)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while unsheathing the weapons!",
+			UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character));
+		return false;
+	}
+
+	UAdvancedMovementComponent* MovementComponent = Character->GetMovementComp<UAdvancedMovementComponent>();
+	if (!MovementComponent || MovementComponent->IsWallClimbing() || MovementComponent->IsMantling() || MovementComponent->IsLedgeClimbing())
+	{
+		if (!MovementComponent)
+		{
+			UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the movement component while unsheathing the weapons!",
+				UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character));
+		}
+		return false;
+	}
+
+	if (!CombatComponent->GetArmament() && !CombatComponent->GetArmament(false))
+	{
+		return false;
+	}
+
+	bool bCanActivateAbility = false;
+	if (CombatComponent->GetArmament() && CombatComponent->GetArmament()->GetEquipStatus() != EEquipStatus::Equipped)
+	{
+		bCanActivateAbility = true;
+	}
+	else if (CombatComponent->GetArmament(false) && CombatComponent->GetArmament(false)->GetEquipStatus() != EEquipStatus::Equipped)
+	{
+		bCanActivateAbility = true;
+	}
+
+	return bCanActivateAbility;
 }
 
 
@@ -99,15 +153,15 @@ void UEquipArmament::EndAbility(const FGameplayAbilitySpecHandle Handle, const F
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (CombatComponent)
 	{
-		// if (AArmament* PrimaryArmament = CombatComponent->GetArmament(true))
-		// {
-		// 	bUnequippedPrimary = PrimaryArmament->SheatheArmament();
-		// }
-		//
-		// if (AArmament* SecondaryArmament = CombatComponent->GetArmament(false))
-		// {
-		// 	bUnequippedSecondary = SecondaryArmament->SheatheArmament();
-		// }
+		if (AArmament* PrimaryArmament = CombatComponent->GetArmament(true))
+		{
+			PrimaryArmament->SetEquipStatus(EEquipStatus::Equipped);
+		}
+		
+		if (AArmament* SecondaryArmament = CombatComponent->GetArmament(false))
+		{
+			SecondaryArmament->SetEquipStatus(EEquipStatus::Equipped);
+		}
 	}
 
 	if (MontageTaskHandle) MontageTaskHandle->EndTask();
