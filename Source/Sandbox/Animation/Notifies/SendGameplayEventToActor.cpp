@@ -8,6 +8,7 @@
 
 USendGameplayEventToActor::USendGameplayEventToActor()
 {
+	bShouldFireInEditor = false;
 }
 
 void USendGameplayEventToActor::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, const FAnimNotifyEventReference& EventReference)
