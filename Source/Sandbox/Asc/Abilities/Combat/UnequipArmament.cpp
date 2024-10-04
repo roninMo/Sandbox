@@ -15,6 +15,11 @@
 
 UUnequipArmament::UUnequipArmament()
 {
+	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.Unequip")));
+	
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Rolling")));
+
+	UnequipEventTag = FGameplayTag::RequestGameplayTag(FName("Event.Montage.Action"));
 }
 
 

@@ -12,6 +12,8 @@ UMovementAbility_Crouch::UMovementAbility_Crouch()
 
 	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.Crouch")));
 	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Crouching")));
+	
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Rolling")));
 }
 
 

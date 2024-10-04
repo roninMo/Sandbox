@@ -13,7 +13,13 @@
 
 UMeleeAttack::UMeleeAttack()
 {
+	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.MeleeAttack")));
+	
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Sliding")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Rolling")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking")));
 }
+
 
 bool UMeleeAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayTagContainer* SourceTags, const FGameplayTagContainer* TargetTags, FGameplayTagContainer* OptionalRelevantTags) const
 {

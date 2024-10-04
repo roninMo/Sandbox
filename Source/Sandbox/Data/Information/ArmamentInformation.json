@@ -20,8 +20,10 @@
 			},
 			"Montages":
 			{
-				"Equip": "None",
-				"Unequip": "None"
+				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
+				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_Block.AM_Manny_Block'",
+				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
+				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_BlockReactions.AM_Manny_BlockReactions'"
 			},
 			"CombatAbilities": [
 				{
@@ -98,8 +100,10 @@
 			},
 			"Montages":
 			{
-				"Equip": "None",
-				"Unequip": "None"
+				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
+				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_Block.AM_Manny_Block'",
+				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
+				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_BlockReactions.AM_Manny_BlockReactions'"
 			},
 			"CombatAbilities": [
 				{
@@ -332,8 +336,10 @@
 			},
 			"Montages":
 			{
-				"Equip": "None",
-				"Unequip": "None"
+				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
+				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_Block.AM_Manny_Block'",
+				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
+				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_BlockReactions.AM_Manny_BlockReactions'"
 			},
 			"CombatAbilities": [
 				{
@@ -410,8 +416,10 @@
 			},
 			"Montages":
 			{
-				"Equip": "None",
-				"Unequip": "None"
+				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
+				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_Block.AM_Manny_Block'",
+				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
+				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_BlockReactions.AM_Manny_BlockReactions'"
 			},
 			"CombatAbilities": [
 				{
@@ -488,8 +496,10 @@
 			},
 			"Montages":
 			{
-				"Equip": "None",
-				"Unequip": "None"
+				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/_Equips/AM_Manny_GreatSword_Equip.AM_Manny_GreatSword_Equip'",
+				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks.AM_Manny_GreatSword_Blocks'",
+				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/_Equips/AM_Manny_GreatSword_Equip.AM_Manny_GreatSword_Equip'",
+				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks_RM.AM_Manny_GreatSword_Blocks_RM'"
 			},
 			"CombatAbilities": [
 				{
@@ -566,8 +576,10 @@
 			},
 			"Montages":
 			{
-				"Equip": "None",
-				"Unequip": "None"
+				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
+				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_Block.AM_Manny_Block'",
+				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
+				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_BlockReactions.AM_Manny_BlockReactions'"
 			},
 			"CombatAbilities": [
 				{
@@ -644,8 +656,10 @@
 			},
 			"Montages":
 			{
-				"Equip": "None",
-				"Unequip": "None"
+				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
+				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_Block.AM_Manny_Block'",
+				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
+				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_BlockReactions.AM_Manny_BlockReactions'"
 			},
 			"CombatAbilities": [
 				{
@@ -722,8 +736,10 @@
 			},
 			"Montages":
 			{
-				"Equip": "None",
-				"Unequip": "None"
+				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/_Equips/AM_Manny_GreatSword_Equip.AM_Manny_GreatSword_Equip'",
+				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks.AM_Manny_GreatSword_Blocks'",
+				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/_Equips/AM_Manny_GreatSword_Equip.AM_Manny_GreatSword_Equip'",
+				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks_RM.AM_Manny_GreatSword_Blocks_RM'"
 			},
 			"CombatAbilities": [
 				{
@@ -800,8 +816,10 @@
 			},
 			"Montages":
 			{
-				"Equip": "None",
-				"Unequip": "None"
+				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
+				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_Block.AM_Manny_Block'",
+				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
+				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_BlockReactions.AM_Manny_BlockReactions'"
 			},
 			"CombatAbilities": [
 				{

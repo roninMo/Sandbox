@@ -14,6 +14,9 @@ UMovementAbility_Jump::UMovementAbility_Jump()
 
 	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.Jump")));
 	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Jumping")));
+	
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Rolling")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking")));
 }
 
 

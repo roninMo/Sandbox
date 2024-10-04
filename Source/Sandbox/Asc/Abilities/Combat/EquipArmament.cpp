@@ -13,6 +13,11 @@
 
 UEquipArmament::UEquipArmament()
 {
+	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.Equip")));
+	
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Rolling")));
+
+	EquipEventTag = FGameplayTag::RequestGameplayTag(FName("Event.Montage.Action"));
 }
 
 

@@ -14,6 +14,10 @@ UGameplayAbility_Aim::UGameplayAbility_Aim()
 
 	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.Aim")));
 	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Aiming")));
+	
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Stunned")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Reloading")));
 }
 
 
