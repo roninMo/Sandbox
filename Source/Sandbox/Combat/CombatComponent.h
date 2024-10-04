@@ -67,7 +67,8 @@ protected:
 	
 	/** The current combo index the player is on */
 	UPROPERTY(BlueprintReadWrite, Replicated, Category = "Combat Component|Armaments") int32 ComboIndex;
-	
+
+	// TODO: Should these be replicated, or should we just use the inventory events to handle this?
 	/** The armament information for the armament in the left hand's first equip slot */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item LeftHandEquipSlot_One;
 	

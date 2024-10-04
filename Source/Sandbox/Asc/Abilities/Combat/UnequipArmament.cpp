@@ -81,6 +81,7 @@ void UUnequipArmament::ActivateAbility(const FGameplayAbilitySpecHandle Handle, 
 
 void UUnequipArmament::OnUnequipEventReceived(FGameplayEventData EventData)
 {
+	HandleUnequipArmamentLogic();
 }
 
 
@@ -90,6 +91,21 @@ void UUnequipArmament::EndAbility(const FGameplayAbilitySpecHandle Handle, const
 	if (!bUnequippedArmaments)
 	{
 		HandleUnequipArmamentLogic();
+	}
+
+	// Update the equip status of the armaments
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (CombatComponent)
+	{
+		// if (AArmament* PrimaryArmament = CombatComponent->GetArmament(true))
+		// {
+		// 	bUnequippedPrimary = PrimaryArmament->SheatheArmament();
+		// }
+		//
+		// if (AArmament* SecondaryArmament = CombatComponent->GetArmament(false))
+		// {
+		// 	bUnequippedSecondary = SecondaryArmament->SheatheArmament();
+		// }
 	}
 
 	if (MontageTaskHandle) MontageTaskHandle->EndTask();

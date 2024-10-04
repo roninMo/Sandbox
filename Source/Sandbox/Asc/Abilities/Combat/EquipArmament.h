@@ -29,9 +29,6 @@ protected:
 	UPROPERTY(BlueprintReadWrite) UAbilityTask_PlayMontageAndWait* MontageTaskHandle;
 	UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayEvent* EquipGameplayTaskHandle;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag EquipArmamentTag;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag EquipSecondaryArmamentTag;
-
 	
 public:
 	UEquipArmament();
@@ -49,9 +46,8 @@ public:
 protected:
 	UFUNCTION(BlueprintCallable) virtual void OnEndMontage();
 	UFUNCTION(BlueprintCallable) virtual void OnEquipEventReceived(FGameplayEventData EventData);
+	UFUNCTION(BlueprintCallable) virtual void UnSheatheArmament();
 	UFUNCTION(BlueprintCallable) virtual bool GetEquipMontage();
-	UFUNCTION(BlueprintCallable) virtual void HandleEquipArmamentLogic();
-	UFUNCTION(BlueprintCallable) virtual bool ApplyEquippedStateInformation(AArmament* EquippedArmament);
 	
 	/** Retrieves the combat component from the character */
 	UFUNCTION(BlueprintCallable) virtual UCombatComponent* GetCombatComponent() const;

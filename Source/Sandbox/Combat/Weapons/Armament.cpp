@@ -357,6 +357,18 @@ EEquipSlot AArmament::GetEquipSlot() const
 }
 
 
+EEquipStatus AArmament::GetEquipStatus() const
+{
+	return EquipStatus;
+}
+
+
+void AArmament::SetEquipStatus(const EEquipStatus Status)
+{
+	EquipStatus = Status;
+}
+
+
 TArray<UPrimitiveComponent*> AArmament::GetArmamentHitboxes() const
 {
 	return {};
@@ -381,6 +393,43 @@ void AArmament::SetArmamentInformation(const F_ArmamentInformation& Information)
 void AArmament::SetArmamentEquipSlot(EEquipSlot Slot)
 {
 	EquipSlot = Slot;
+}
+
+
+void AArmament::OnRep_CreatedArmament()
+{
+	if (!GetOwner())
+	{
+		// Initial replication happens before the component retrieves the owner, and causes problems. // TODO: add logging that checks against GetOwner() being valid, and handles the extra arguments
+		return;
+	}
+	
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while retrieving the combat component!!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+	
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
+	{
+		
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} tried to add the armament information on the client after creation and failed!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+	
+	// Retrieve the armament information
+	Execute_SetItem(this, CombatComponent->GetArmamentInventoryInformation(EquipSlot));
+	SetArmamentInformation(CombatComponent->GetArmamentInformationFromDatabase(Item.ItemName));
+	
+	if (!Item.IsValid() || !ArmamentInformation.IsValid())
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2}  tried to add the armament information on the client after creation and something happened!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+	}
 }
 
 

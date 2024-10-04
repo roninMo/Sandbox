@@ -91,6 +91,19 @@ enum class EEquipRestrictions : uint8
 
 
 /**
+ *	The armament equip type, or how the character should wield the armament
+ */
+UENUM(BlueprintType)
+enum class EEquipStatus : uint8
+{
+	None								UMETA(DisplayName = "None"),
+	Unequipped							UMETA(DisplayName = "Unequipped"),
+	Equipped							UMETA(DisplayName = "Equipped")
+};
+
+
+
+/**
  *	The specific type of weapon 
  */
 // UENUM(BlueprintType)

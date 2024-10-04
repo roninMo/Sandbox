@@ -153,7 +153,7 @@ You will also need to extend FCharacterNetworkMoveDataContainer so that it can s
 // "emulationPkLag 500"
 
 ///// Ability System /////
-// "showdebug abilitysystem"
+// "ShowDebug AbilitySystem"
 // "AbilitySystem.Debug.NextCategory"
 // NextDebugTarget or PgUpKey 
 

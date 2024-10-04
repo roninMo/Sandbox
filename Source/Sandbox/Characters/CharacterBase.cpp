@@ -39,6 +39,8 @@ ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Su
 	ACharacterBase::ConstructArmorInformation(Gauntlets);
 	ACharacterBase::ConstructArmorInformation(Leggings);
 	ACharacterBase::ConstructArmorInformation(Chest);
+	// TODO: there might be latency issues with pose leader component meshes that causes deformations during movement sometimes, find a fix for this
+	// (however this is the standard way of handling modular characters, so it might actually be that we reimported the skeletons and retargeted the current character)
 	
 	// For handling animations on the server
 	GetMesh()->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;

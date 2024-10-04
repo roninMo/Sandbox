@@ -12,6 +12,7 @@
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Logging/StructuredLog.h"
+#include "Net/UnrealNetwork.h"
 
 AMeleeArmament::AMeleeArmament()
 {
@@ -44,6 +45,12 @@ AMeleeArmament::AMeleeArmament()
 	RightHandSheatheSocket = Socket_Sheathe_1h_blade_r;
 	LeftHandHolsterSocket = Socket_Holster_1h_blade_l;
 	RightHandHolsterSocket = Socket_Holster_1h_blade_r;
+}
+
+void AMeleeArmament::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME_CONDITION(AMeleeArmament, Holster, COND_InitialOnly);
 }
 
 

@@ -27,9 +27,6 @@ protected:
 	UPROPERTY(BlueprintReadWrite) UAbilityTask_PlayMontageAndWait* MontageTaskHandle;
 	UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayEvent* EquipGameplayTaskHandle;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag EquipArmamentTag;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag EquipSecondaryArmamentTag;
-
 	
 public:
 	UUnequipArmament();

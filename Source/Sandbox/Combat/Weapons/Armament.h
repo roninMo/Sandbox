@@ -4,9 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Sandbox/World/Props/Items/Item.h"
-#include "Sandbox/Data/Structs/CombatInformation.h"
 #include "GameplayAbilitySpecHandle.h"
 #include "ActiveGameplayEffectHandle.h"
+#include "Sandbox/Data/Structs/CombatInformation.h"
 #include "Armament.generated.h"
 
 DECLARE_LOG_CATEGORY_EXTERN(ArmamentLog, Log, All);
@@ -18,6 +18,7 @@ class UGameplayEffect;
 struct F_ArmamentAbilityInformation;
 struct FGameplayEffectInfo;
 enum class EEquipSlot : uint8;
+enum class EEquipStatus : uint8;
 enum class ECharacterSkeletonMapping : uint8;
 enum class EArmamentClassification : uint8;
 enum class EDamageInformationSource : uint8;
@@ -72,7 +73,10 @@ protected:
 	F_ArmamentInformation ArmamentInformation;
 	
 	/** The current equip slot of the armament */
-	UPROPERTY(Replicated, BlueprintReadWrite, Category = "Armament") EEquipSlot EquipSlot;
+	UPROPERTY(ReplicatedUsing=OnRep_CreatedArmament, BlueprintReadWrite, Category = "Armament") EEquipSlot EquipSlot;
+	
+	/** The current equip slot of the armament @note this should be replicated using gameplay abilities */
+	UPROPERTY(BlueprintReadWrite, Category = "Armament") EEquipStatus EquipStatus;
 
 	/** The armament's ability handles */
 	UPROPERTY(BlueprintReadWrite) TArray<FGameplayAbilitySpecHandle> AbilityHandles;
@@ -197,10 +201,16 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual const TMap<FGameplayAttribute, float>& GetBaseDamageStats() const;
 	
 	/** Retrieves the armament's skeletal mesh */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") USkeletalMeshComponent* GetArmamentMesh() const;
+	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual USkeletalMeshComponent* GetArmamentMesh() const;
 	
 	/** Retrieves the armament's equip slot */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") EEquipSlot GetEquipSlot() const;
+	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual EEquipSlot GetEquipSlot() const;
+	
+	/** Retrieves the armament's equip status */
+	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual EEquipStatus GetEquipStatus() const;
+
+	/** Sets the armament's equip status */
+	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual void SetEquipStatus(const EEquipStatus Status);
 	
 	/** Returns the armament's overlap components for their armament. */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual TArray<UPrimitiveComponent*> GetArmamentHitboxes() const;
@@ -214,6 +224,9 @@ public:
 	/** Set the slot this armament was equipped in. */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual void SetArmamentEquipSlot(EEquipSlot Slot);
 
+	/** Logic that happens on the client after the armament was created */
+	UFUNCTION() virtual void OnRep_CreatedArmament();
+	
 	/** Retrieves the combat component from the character */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual UCombatComponent* GetCombatComponent(ACharacterBase* Character = nullptr) const;
 	

@@ -56,7 +56,7 @@ void UEquipArmament::ActivateAbility(const FGameplayAbilitySpecHandle Handle, co
 	MontageTaskHandle = UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(
 		this,
 		*GetNameSafe(this),
-		CurrentMontage,
+		GetCurrentMontage(),
 		1.f,
 		Montage_EquipSection
 	);
@@ -78,14 +78,12 @@ void UEquipArmament::ActivateAbility(const FGameplayAbilitySpecHandle Handle, co
 
 	// Add the equip state information
 	bEquippedArmaments = false;
-	// ApplyEquippedStateInformation(Armament);
-	// ApplyEquippedStateInformation(SecondaryArmament);
 }
 
 
 void UEquipArmament::OnEquipEventReceived(FGameplayEventData EventData)
 {
-	HandleEquipArmamentLogic();
+	UnSheatheArmament();
 }
 
 
@@ -94,7 +92,22 @@ void UEquipArmament::EndAbility(const FGameplayAbilitySpecHandle Handle, const F
 {
 	if (!bEquippedArmaments)
 	{
-		HandleEquipArmamentLogic();
+		UnSheatheArmament();
+	}
+	
+	// Update the equip status of the armaments
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (CombatComponent)
+	{
+		// if (AArmament* PrimaryArmament = CombatComponent->GetArmament(true))
+		// {
+		// 	bUnequippedPrimary = PrimaryArmament->SheatheArmament();
+		// }
+		//
+		// if (AArmament* SecondaryArmament = CombatComponent->GetArmament(false))
+		// {
+		// 	bUnequippedSecondary = SecondaryArmament->SheatheArmament();
+		// }
 	}
 
 	if (MontageTaskHandle) MontageTaskHandle->EndTask();
@@ -103,27 +116,7 @@ void UEquipArmament::EndAbility(const FGameplayAbilitySpecHandle Handle, const F
 }
 
 
-bool UEquipArmament::GetEquipMontage()
-{
-	UCombatComponent* CombatComponent = GetCombatComponent();
-	if (!CombatComponent)
-	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while equipping the weapon!",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
-		return false;
-	}
-
-	// TODO: add logic for both armaments
-	if (AArmament* EquippedArmament = CombatComponent->GetArmament())
-	{
-		SetCurrentMontage(EquippedArmament->GetMontage(Montage_Equip));
-	}
-
-	return true;
-}
-
-
-void UEquipArmament::HandleEquipArmamentLogic()
+void UEquipArmament::UnSheatheArmament()
 {
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
@@ -150,34 +143,22 @@ void UEquipArmament::HandleEquipArmamentLogic()
 }
 
 
-bool UEquipArmament::ApplyEquippedStateInformation(AArmament* EquippedArmament)
+bool UEquipArmament::GetEquipMontage()
 {
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while applying equipped state information!",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()),  *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
-		return nullptr;
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while equipping the weapon!",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
+		return false;
 	}
-	
-	const UGameplayEffect* EquippedStateInformation = nullptr; // = EquippedArmament->GetEquippedStateInformation().GetDefaultObject();
-	if (EquippedStateInformation)
+
+	// TODO: add logic for both armaments
+	if (AArmament* EquippedArmament = CombatComponent->GetArmament())
 	{
-		const FActiveGameplayEffectHandle AppliedArmamentState = ApplyGameplayEffectToOwner(
-			GetCurrentAbilitySpecHandle(),
-			GetCurrentActorInfo(),
-			GetCurrentActivationInfo(),
-			EquippedStateInformation,
-			1.f
-		);
-		
-		if (!AppliedArmamentState.WasSuccessfullyApplied())
-		{
-			UE_LOGFMT(AbilityLog, Error, "{0} failed to add the armament state on unequip! {1} {2}()", *GetNameSafe(GetOwningActorFromActorInfo()), *GetName(), *FString(__FUNCTION__));
-			return false;
-		}
+		SetCurrentMontage(EquippedArmament->GetMontage(Montage_Equip));
 	}
-	
+
 	return true;
 }
 

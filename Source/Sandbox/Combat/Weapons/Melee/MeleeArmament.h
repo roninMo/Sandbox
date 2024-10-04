@@ -27,7 +27,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TSubclassOf<ACharacterAttachment> HolsterClass;
 	
 	/** The armament's currently spawned holster */
-	UPROPERTY(Transient, BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Replicated)
 	TObjectPtr<ACharacterAttachment> Holster;
 	
 	/** The hitboxes that are used during combat for this armament */
@@ -38,6 +38,9 @@ protected:
 // Armament Construction															   //
 //-------------------------------------------------------------------------------------//
 	AMeleeArmament();
+
+	/** Returns the properties used for network replication, this needs to be overridden by all actor classes with native replicated properties */
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	
 	/** Overridable native event for when play begins for this actor. */
 	virtual void BeginPlay() override;

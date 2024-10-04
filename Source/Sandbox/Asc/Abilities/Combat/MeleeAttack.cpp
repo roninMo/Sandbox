@@ -55,11 +55,11 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 	}
 
 	// Equip the armament if the player doesn't already have one equipped
-	// if (CheckIfShouldEquipArmament())
-	// {
-	// 	EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
-	// 	return;
-	// }
+	if (CheckIfShouldEquipArmament())
+	{
+		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
+		return;
+	}
 	
 	// Add the combo information and attack calculations
 	InitCombatInformation();
