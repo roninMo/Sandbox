@@ -41,6 +41,7 @@ ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Su
 	ACharacterBase::ConstructArmorInformation(Chest);
 	// TODO: there might be latency issues with pose leader component meshes that causes deformations during movement sometimes, find a fix for this
 	// (however this is the standard way of handling modular characters, so it might actually be that we reimported the skeletons and retargeted the current character)
+	// This isn't an error, it's because I didn't use the original mannequin - https://forums.unrealengine.com/t/set-master-pose-deforms-mesh/351660
 	
 	// For handling animations on the server
 	GetMesh()->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;

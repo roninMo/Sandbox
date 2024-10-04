@@ -26,7 +26,7 @@ protected:
 
 	/**** Camera information ****/
 	/** The current style of the camera that determines the behavior. The default styles are "Fixed", "Spectator", "FirstPerson", "ThirdPerson", "TargetLocking", and "Aiming". You can also add your own in the BasePlayerCameraManager class */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera") FName CameraStyle;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, ReplicatedUsing=OnRep_CameraStyle, Category = "Camera") FName CameraStyle;
 
 	/** These are based on the client, but need to be replicated for late joining clients, so we're using both RPC's and replication to achieve this */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera") ECameraOrientation CameraOrientation;
@@ -138,8 +138,8 @@ protected:
 public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void Tick(float DeltaTime) override;
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	ACharacterCameraLogic(const FObjectInitializer& ObjectInitializer);
-
 	
 protected:
 	virtual void BeginPlay() override;
@@ -181,6 +181,9 @@ public:
 	/** Blueprint function handling transitioning between different camera styles and logic specific to each style */
 	UFUNCTION(BlueprintImplementableEvent, Category="Camera|Style", meta = (DisplayName = "On Camera Style Set"))
 	void BP_OnCameraStyleSet();
+
+	/** Latent replication update function for replicated clients to get updates based on the camera style. Use this for a variety of different things with OnCameraStyleSet() */
+	UFUNCTION() virtual void OnRep_CameraStyle();
 	
 	/** Returns true if there's no input replication delay for transitioning between different camera modes */
 	UFUNCTION(BlueprintCallable, Category = "Camera|Style") virtual bool IsAbleToActivateCameraTransition();

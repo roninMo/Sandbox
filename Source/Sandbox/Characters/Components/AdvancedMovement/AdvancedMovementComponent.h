@@ -1257,6 +1257,9 @@ public:
 // Get And Set functions														//
 //------------------------------------------------------------------------------//
 public:
+	/** Simulate movement on a non-owning client. Called by SimulatedTick(). */
+	virtual void SimulateMovement(float DeltaTime) override;
+	
 	/** Returns maximum acceleration for the current state. */
 	virtual float GetMaxAcceleration() const override;
 	

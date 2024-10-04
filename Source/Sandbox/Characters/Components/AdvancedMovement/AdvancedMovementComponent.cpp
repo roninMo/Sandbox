@@ -233,7 +233,6 @@ void UAdvancedMovementComponent::InitializeComponent()
 //------------------------------------------------------------------------------//
 // General Movement Logic														//
 //------------------------------------------------------------------------------//
-
 #pragma region Conditional Checks
 bool UAdvancedMovementComponent::IsCustomMovementMode(ECustomMovementMode InCustomMovementMode) const { return MovementMode == MOVE_Custom && CustomMovementMode == InCustomMovementMode; }
 bool UAdvancedMovementComponent::IsRunning() const { return SprintPressed && IsMovingOnGround(); }
@@ -939,23 +938,23 @@ void UAdvancedMovementComponent::PhysMantling(float deltaTime, int32 Iterations)
 		{
 			// Find the interp rotation
 			FRotator AdjustedRotation = OldRotation;
-			if (bRotateCharacterDuringMantle)
-			{
-				const FRotator WallClimbRotation = (-LedgeClimbNormal).Rotation();
-				FRotator TargetRotation = FRotator(0, WallClimbRotation.Yaw, 0);
-				if (!OldRotation.Equals(TargetRotation, 0.1))
-				{
-					FRotator DeltaRotation = (TargetRotation - OldRotation).GetNormalized();
-					AdjustedRotation = (OldRotation + DeltaRotation * timeTick * MantleRotationSpeed).GetNormalized();
-				}
-			}
+			// if (bRotateCharacterDuringMantle) // This isn't required because of OnEnter conditions and wall climbing adjusts it's own rotations. 
+			// {
+			// 	const FRotator WallClimbRotation = (-LedgeClimbNormal).Rotation();
+			// 	FRotator TargetRotation = FRotator(0, WallClimbRotation.Yaw, 0);
+			// 	if (!OldRotation.Equals(TargetRotation, 0.1))
+			// 	{
+			// 		FRotator DeltaRotation = (TargetRotation - OldRotation).GetNormalized();
+			// 		AdjustedRotation = (OldRotation + DeltaRotation * timeTick * MantleRotationSpeed).GetNormalized();
+			// 	}
+			// }
 			
 			// Interp the character to the target location
 			Adjusted = MantleAndClimbInterp(timeTick, MantleStartLocation, MantleLedgeLocation, OldLocation, MantleSpeed, MantleSpeedAdjustments);
 			FHitResult Hit;
-			SafeMoveUpdatedComponent(Adjusted, AdjustedRotation, false, Hit);
+			SafeMoveUpdatedComponent(Adjusted, OldRotation, false, Hit);
 
-			// TODO: Error handling
+			// TODO: Error handling -> Replicated clients continue to move after they've made it to the ledge location, and their target location gets reset
 			
 			if (bDebugMantle)
 			{
@@ -975,6 +974,26 @@ void UAdvancedMovementComponent::PhysMantling(float deltaTime, int32 Iterations)
 		}
 		else
 		{
+			// Replicated clients want updated movement in order to actually update the movement. Otherwise during nonmovement (outside of walking) they will just slide from the previous velocity calculation
+			// TODO: Find out where this is happening and fix it, I don't want to handle this right now, just adjust the character location 
+			FVector WallRightVector = UKismetMathLibrary::RotateAngleAxis(LedgeClimbNormal, 90, FVector(0, 0, 1));
+			FVector TargetLocation = OldLocation.Equals(MantleLedgeLocation, .1) ? MantleLedgeLocation + (WallRightVector * 1): MantleLedgeLocation;
+
+			// Rotation adjustment
+			// const FRotator WallClimbRotation = (-LedgeClimbNormal).Rotation();
+			// FRotator TargetRotation = FRotator(0, WallClimbRotation.Yaw, 0);
+			// FRotator DeltaRotation = OldRotation.Equals(TargetRotation, 0.1)
+			// 	? (FRotator(0, WallClimbRotation.Yaw + 1, 0) - OldRotation).GetNormalized()
+			// 	: (FRotator(0, WallClimbRotation.Yaw, 0) - OldRotation).GetNormalized();
+			// FRotator AdjustedRotation = (DeltaRotation * timeTick * 10).GetNormalized();
+			
+			
+			// Interp the character to the target location
+			Adjusted = MantleAndClimbInterp(timeTick, MantleLedgeLocation, TargetLocation, OldLocation, 0.1, nullptr);
+			FHitResult Hit;
+			SafeMoveUpdatedComponent(Adjusted, OldRotation, false, Hit);
+			
+			
 			// if the player presses forward, climb up on the ledge.
 			if (bUseLedgeClimbing && !PlayerInput.IsNearlyZero(0.1) && PlayerAngle > 0.64)
 			{
@@ -3056,6 +3075,201 @@ void UAdvancedMovementComponent::HandleCrouchLogic()
 	// 		BaseAbilitySystem->RemoveReplicatedLooseGameplayTag(CrouchTag);
 	// 	}
 	// }
+}
+
+
+void UAdvancedMovementComponent::SimulateMovement(float DeltaTime)
+{
+	if (!HasValidData() || UpdatedComponent->Mobility != EComponentMobility::Movable || UpdatedComponent->IsSimulatingPhysics())
+	{
+		return;
+	}
+
+	const bool bIsSimulatedProxy = (CharacterOwner->GetLocalRole() == ROLE_SimulatedProxy);
+
+	const FRepMovement& ConstRepMovement = CharacterOwner->GetReplicatedMovement();
+
+	// Workaround for replication not being updated initially
+	// TODO: Is this a persistent thing, or do they really just need first frame to be null? Non moving movement calculations don't happen because of this, causing sliding during freeze frames which we already handled
+	if (Time <= 2 && (bIsSimulatedProxy &&
+		ConstRepMovement.Location.IsZero() &&
+		ConstRepMovement.Rotation.IsZero() &&
+		ConstRepMovement.LinearVelocity.IsZero()))
+	{
+		return;
+	}
+
+	// If base is not resolved on the client, we should not try to simulate at all
+	if (CharacterOwner->GetReplicatedBasedMovement().IsBaseUnresolved())
+	{
+		UE_LOG(Movement, Verbose, TEXT("Base for simulated character '%s' is not resolved on client, skipping SimulateMovement"), *CharacterOwner->GetName());
+		return;
+	}
+
+	FVector OldVelocity;
+	FVector OldLocation;
+
+	// Scoped updates can improve performance of multiple MoveComponent calls.
+	{
+		FScopedMovementUpdate ScopedMovementUpdate(UpdatedComponent, bEnableScopedMovementUpdates ? EScopedUpdate::DeferredUpdates : EScopedUpdate::ImmediateUpdates);
+
+		bool bHandledNetUpdate = false;
+		if (bIsSimulatedProxy)
+		{
+			// Handle network changes
+			if (bNetworkUpdateReceived)
+			{
+				bNetworkUpdateReceived = false;
+				bHandledNetUpdate = true;
+				UE_LOG(Movement, Verbose, TEXT("Proxy %s received net update"), *CharacterOwner->GetName());
+				if (bNetworkMovementModeChanged)
+				{
+					ApplyNetworkMovementMode(CharacterOwner->GetReplicatedMovementMode());
+					bNetworkMovementModeChanged = false;
+				}
+				else if (bJustTeleported || bForceNextFloorCheck)
+				{
+					// Make sure floor is current. We will continue using the replicated base, if there was one.
+					bJustTeleported = false;
+					UpdateFloorFromAdjustment();
+				}
+			}
+			else if (bForceNextFloorCheck)
+			{
+				UpdateFloorFromAdjustment();
+			}
+		}
+
+		UpdateCharacterStateBeforeMovement(DeltaTime);
+
+		if (MovementMode != MOVE_None)
+		{
+			//TODO: Also ApplyAccumulatedForces()?
+			HandlePendingLaunch();
+		}
+		ClearAccumulatedForces();
+
+		if (MovementMode == MOVE_None)
+		{
+			return;
+		}
+
+		const bool bSimGravityDisabled = (bIsSimulatedProxy && CharacterOwner->bSimGravityDisabled);
+		const bool bZeroReplicatedGroundVelocity = (bIsSimulatedProxy && IsMovingOnGround() && ConstRepMovement.LinearVelocity.IsZero());
+		
+		// bSimGravityDisabled means velocity was zero when replicated and we were stuck in something. Avoid external changes in velocity as well.
+		// Being in ground movement with zero velocity, we cannot simulate proxy velocities safely because we might not get any further updates from the server.
+		if (bSimGravityDisabled || bZeroReplicatedGroundVelocity)
+		{
+			Velocity = FVector::ZeroVector;
+		}
+
+		MaybeUpdateBasedMovement(DeltaTime);
+
+		// simulated pawns predict location
+		OldVelocity = Velocity;
+		OldLocation = UpdatedComponent->GetComponentLocation();
+
+		UpdateProxyAcceleration();
+
+		// May only need to simulate forward on frames where we haven't just received a new position update.
+		if (!bHandledNetUpdate || !bNetworkSkipProxyPredictionOnNetUpdate)
+		{
+			UE_LOG(Movement, Verbose, TEXT("Proxy %s simulating movement"), *GetNameSafe(CharacterOwner));
+			FStepDownResult StepDownResult;
+			MoveSmooth(Velocity, DeltaTime, &StepDownResult);
+
+			// find floor and check if falling
+			if (IsMovingOnGround() || MovementMode == MOVE_Falling)
+			{
+				if (StepDownResult.bComputedFloor)
+				{
+					CurrentFloor = StepDownResult.FloorResult;
+				}
+				else if (Velocity.Z <= 0.f)
+				{
+					FindFloor(UpdatedComponent->GetComponentLocation(), CurrentFloor, Velocity.IsZero(), NULL);
+				}
+				else
+				{
+					CurrentFloor.Clear();
+				}
+
+				// Possible for dynamic movement bases, particularly those that align to slopes while the character does not, to encroach the character.
+				// Check to see if we can resolve the penetration in those cases, and if so find the floor.
+				if (CurrentFloor.HitResult.bStartPenetrating && MovementBaseUtility::IsDynamicBase(GetMovementBase()))
+				{
+					// Follows PhysWalking approach for encroachment on floor tests
+					FHitResult Hit(CurrentFloor.HitResult);
+					Hit.TraceEnd = Hit.TraceStart + FVector(0.f, 0.f, MAX_FLOOR_DIST);
+					const FVector RequestedAdjustment = GetPenetrationAdjustment(Hit);
+					const bool bResolved = ResolvePenetration(RequestedAdjustment, Hit, UpdatedComponent->GetComponentQuat());
+					bForceNextFloorCheck |= bResolved;
+				}
+				else if (!CurrentFloor.IsWalkableFloor())
+				{
+					if (!bSimGravityDisabled)
+					{
+						// No floor, must fall.
+						if (Velocity.Z <= 0.f || bApplyGravityWhileJumping || !CharacterOwner->IsJumpProvidingForce())
+						{
+							Velocity = NewFallVelocity(Velocity, FVector(0.f, 0.f, GetGravityZ()), DeltaTime);
+						}
+					}
+					SetMovementMode(MOVE_Falling);
+				}
+				else
+				{
+					// Walkable floor
+					if (IsMovingOnGround())
+					{
+						AdjustFloorHeight();
+						SetBase(CurrentFloor.HitResult.Component.Get(), CurrentFloor.HitResult.BoneName);
+					}
+					else if (MovementMode == MOVE_Falling)
+					{
+						if (CurrentFloor.FloorDist <= MIN_FLOOR_DIST || (bSimGravityDisabled && CurrentFloor.FloorDist <= MAX_FLOOR_DIST))
+						{
+							// Landed
+							SetPostLandedPhysics(CurrentFloor.HitResult);
+						}
+						else
+						{
+							if (!bSimGravityDisabled)
+							{
+								// Continue falling.
+								Velocity = NewFallVelocity(Velocity, FVector(0.f, 0.f, GetGravityZ()), DeltaTime);
+							}
+							CurrentFloor.Clear();
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			UE_LOG(Movement, Verbose, TEXT("Proxy %s SKIPPING simulate movement"), *GetNameSafe(CharacterOwner));
+		}
+
+		UpdateCharacterStateAfterMovement(DeltaTime);
+
+		// consume path following requested velocity
+		LastUpdateRequestedVelocity = bHasRequestedVelocity ? RequestedVelocity : FVector::ZeroVector;
+		bHasRequestedVelocity = false;
+
+		OnMovementUpdated(DeltaTime, OldLocation, OldVelocity);
+	} // End scoped movement update
+
+	// Call custom post-movement events. These happen after the scoped movement completes in case the events want to use the current state of overlaps etc.
+	CallMovementUpdateDelegate(DeltaTime, OldLocation, OldVelocity);
+
+	MaybeSaveBaseLocation();
+	UpdateComponentVelocity();
+	bJustTeleported = false;
+
+	LastUpdateLocation = UpdatedComponent ? UpdatedComponent->GetComponentLocation() : FVector::ZeroVector;
+	LastUpdateRotation = UpdatedComponent ? UpdatedComponent->GetComponentQuat() : FQuat::Identity;
+	LastUpdateVelocity = Velocity;
 }
 #pragma endregion 
 

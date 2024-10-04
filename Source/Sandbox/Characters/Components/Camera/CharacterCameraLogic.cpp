@@ -8,6 +8,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Logging/StructuredLog.h"
+#include "Net/UnrealNetwork.h"
 
 DEFINE_LOG_CATEGORY(CameraLog);
 
@@ -47,6 +48,13 @@ ACharacterCameraLogic::ACharacterCameraLogic(const FObjectInitializer& ObjectIni
 	CameraOffset_Right = FVector(0.0, 64.0, 100.0);
 
 	TargetLockTransitionSpeed = 6.4;
+}
+
+
+void ACharacterCameraLogic::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME_CONDITION_NOTIFY(ACharacterCameraLogic, CameraStyle, COND_None, REPNOTIFY_OnChanged);
 }
 
 
@@ -145,6 +153,7 @@ bool ACharacterCameraLogic::IsAbleToActivateCameraTransition()
 }
 
 
+void ACharacterCameraLogic::OnRep_CameraStyle() { OnCameraStyleSet(); }
 void ACharacterCameraLogic::OnCameraStyleSet()
 {
 	// Camera rotations
