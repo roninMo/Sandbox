@@ -4,6 +4,7 @@
 #include "Sandbox/Asc/Abilities/Movement/Jump/MovementAbility_Jump.h"
 
 #include "GameFramework/Character.h"
+#include "Sandbox/Asc/Information/SandboxTags.h"
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 
 
@@ -12,11 +13,11 @@ UMovementAbility_Jump::UMovementAbility_Jump()
 	// Non instanced abilities for movement component logic
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::NonInstanced;
 
-	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.Jump")));
-	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Jumping")));
+	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_Jump));
+	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Jumping));
 	
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Rolling")));
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Rolling));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Attacking));
 }
 
 

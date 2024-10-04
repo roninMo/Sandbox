@@ -7,21 +7,22 @@
 #include "Abilities/Tasks/AbilityTask_WaitGameplayEvent.h"
 #include "Abilities/Tasks/AbilityTask_WaitInputRelease.h"
 #include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Asc/Information/SandboxTags.h"
 #include "Sandbox/Asc/Tasks/AbilityTask_TargetOverlap.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Combat/Weapons/Armament.h"
 
 UMeleeAttack::UMeleeAttack()
 {
-	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.MeleeAttack")));
+	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_MeleeAttack));
 
-	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking")));
+	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Attacking));
 	
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Armament.Unequipping")));
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Armament.Equipping")));
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking")));
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Sliding")));
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Rolling")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Armament_Unequipping));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Armament_Equipping));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Attacking));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Sliding));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Rolling));
 	
 }
 

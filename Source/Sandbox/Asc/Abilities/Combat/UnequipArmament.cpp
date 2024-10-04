@@ -8,6 +8,7 @@
 #include "Abilities/Tasks/AbilityTask_WaitGameplayEvent.h"
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Asc/Information/SandboxTags.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 #include "Sandbox/Combat/CombatComponent.h"
@@ -17,16 +18,16 @@
 
 UUnequipArmament::UUnequipArmament()
 {
-	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.Unequip")));
+	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_Unequip));
 
-	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Armament.Unequipping")));
+	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Armament_Unequipping));
 	
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Rolling")));
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking")));
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Armament.Unequipping")));
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Armament.Equipping")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Rolling));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Attacking));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Armament_Unequipping));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Armament_Equipping));
 
-	UnequipEventTag = FGameplayTag::RequestGameplayTag(FName("Event.Montage.Action"));
+	UnequipEventTag = FGameplayTag::RequestGameplayTag(Tag_Event_Montage_Action);
 }
 
 

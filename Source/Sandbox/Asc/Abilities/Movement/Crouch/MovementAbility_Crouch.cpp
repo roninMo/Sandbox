@@ -4,16 +4,17 @@
 #include "Sandbox/Asc/Abilities/Movement/Crouch/MovementAbility_Crouch.h"
 
 #include "GameFramework/Character.h"
+#include "Sandbox/Asc/Information/SandboxTags.h"
 
 UMovementAbility_Crouch::UMovementAbility_Crouch()
 {
 	// Non instanced abilities for movement component logic
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::NonInstanced;
 
-	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.Crouch")));
-	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Crouching")));
+	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_Crouch));
+	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Crouching));
 	
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Rolling")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Rolling));
 }
 
 

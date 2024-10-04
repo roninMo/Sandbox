@@ -6,6 +6,7 @@
 #include "AbilitySystemGlobals.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Abilities/Tasks/AbilityTask_WaitAttributeChangeThreshold.h"
+#include "Sandbox/Asc/Information/SandboxTags.h"
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 
 UMovementAbility_Sprint::UMovementAbility_Sprint()
@@ -13,11 +14,11 @@ UMovementAbility_Sprint::UMovementAbility_Sprint()
 	// Non instanced abilities for movement component logic
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::NonInstanced;
 
-	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.Sprint")));
-	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Sprinting")));
+	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_Sprint));
+	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Sprinting));
 	
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Rolling")));
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Rolling));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Attacking));
 }
 
 

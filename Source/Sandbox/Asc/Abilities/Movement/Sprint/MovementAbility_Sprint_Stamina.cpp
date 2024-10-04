@@ -6,17 +6,18 @@
 #include "Abilities/Tasks/AbilityTask_WaitAttributeChangeThreshold.h"
 #include "Abilities/Tasks/AbilityTask_WaitInputRelease.h"
 #include "Sandbox/Asc/Attributes/DefaultAttributes.h"
+#include "Sandbox/Asc/Information/SandboxTags.h"
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 
 UMovementAbility_Sprint_Stamina::UMovementAbility_Sprint_Stamina()
 {
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
 
-	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.Sprint")));
-	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Sprinting")));
+	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_Sprint));
+	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Sprinting));
 	
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Rolling")));
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Rolling));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Attacking));
 }
 
 
