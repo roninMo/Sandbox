@@ -3,12 +3,13 @@
 
 #include "Sandbox/Asc/Abilities/Combat/MeleeAttack.h"
 
-#include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
-#include "Abilities/Tasks/AbilityTask_WaitGameplayEvent.h"
 #include "Abilities/Tasks/AbilityTask_WaitInputRelease.h"
-#include "Sandbox/Asc/AbilitySystem.h"
-#include "Sandbox/Asc/Information/SandboxTags.h"
 #include "Sandbox/Asc/Tasks/AbilityTask_TargetOverlap.h"
+#include "Abilities/Tasks/AbilityTask_WaitGameplayEvent.h"
+#include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
+
+#include "Sandbox/Asc/Information/SandboxTags.h"
+#include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Combat/Weapons/Armament.h"
 
@@ -23,7 +24,9 @@ UMeleeAttack::UMeleeAttack()
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Attacking));
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Sliding));
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Rolling));
-	
+
+	AllowMovementTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AllowMovement);
+	AttackFramesTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames);
 }
 
 
@@ -83,21 +86,25 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 	AttackMontageTaskHandle->ReadyForActivation();
 
 	// Attack Frames
-	// HandleAttackStateTask = UAbilityTask_WaitGameplayEvent::WaitGameplayEvent(
-	// 	this,
-	// 	FGameplayTag::RequestGameplayTag(Tag_State_Attacking),
-	// 	nullptr,
-	// 	false,
-	// 	false
-	// );
-	// HandleAttackStateTask->EventReceived.AddDynamic(this, &UMeleeAttack::OnHandleAttackState);
-	// HandleAttackStateTask->ReadyForActivation();
+	HandleAttackStateTask = UAbilityTask_WaitGameplayEvent::WaitGameplayEvent(
+		this,
+		FGameplayTag::RequestGameplayTag(Tag_State_Attacking),
+		nullptr,
+		false,
+		false
+	);
+	HandleAttackStateTask->EventReceived.AddDynamic(this, &UMeleeAttack::OnHandleAttackState);
+	HandleAttackStateTask->ReadyForActivation();
 	
 	// Overlap Trace
 	// Have the server handle the attack logic with client prediction
-	// MeleeOverlapTaskHandle = UAbilityTask_TargetOverlap::CreateOverlapDataTask(this, Armament->GetArmamentHitboxes());
-	// MeleeOverlapTaskHandle->OnValidOverlap.AddDynamic(this, &UMeleeAttack::OnLandedAttack);
-	// MeleeOverlapTaskHandle->ReadyForActivation(); // During attack frames
+	MeleeOverlapTaskHandle = UAbilityTask_TargetOverlap::CreateOverlapDataTask(this, Armament->GetArmamentHitboxes());
+	MeleeOverlapTaskHandle->OnValidOverlap.AddDynamic(this, &UMeleeAttack::OnLandedAttack);
+	MeleeOverlapTaskHandle->ReadyForActivation(); // During attack frames
+
+	// TODO: add combat logic that actually let's attacks interact with other actors.
+	// Right now we have an overlap event that dictates everything, and no way of handling different hitboxes for when a player with a weapon does like a sparta kick or something
+	// They just setup their own configuration based on how the weapon reacts to their events
 }
 
 
@@ -109,7 +116,11 @@ void UMeleeAttack::OnInputReleased(float TimeHeld)
 
 void UMeleeAttack::OnHandleAttackState(FGameplayEventData EventData)
 {
-	FGameplayTag AttackFramesTag;
+	// Allow movement logic
+	// TODO: Prevent movement on the client, the ability doesn't need to handle this because the client accumulates the aggregated tags
+	// The player controllers still can use gameplay tags to create their logic, just be careful to remove tags safely so it doesn't affect other characters
+
+	// Attack logic
 	if (EventData.EventTag.MatchesTag(AttackFramesTag))
 	{
 		MeleeOverlapTaskHandle->ReadyForActivation();
@@ -125,11 +136,7 @@ void UMeleeAttack::OnLandedAttack(const FGameplayAbilityTargetDataHandle& Target
 }
 
 
-void UMeleeAttack::OnEndOfAttack()
-{
-	EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, false);
-}
-
+void UMeleeAttack::OnEndOfAttack() { EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, false); }
 void UMeleeAttack::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled)
 {
 	if (InputReleasedHandle) InputReleasedHandle->EndTask();

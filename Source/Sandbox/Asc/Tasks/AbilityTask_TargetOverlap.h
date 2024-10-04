@@ -6,7 +6,7 @@
 #include "Abilities/Tasks/AbilityTask.h"
 #include "AbilityTask_TargetOverlap.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FAbilityTask_TargetOverlapDataSignature, const FGameplayAbilityTargetDataHandle&, DataHandle, UAbilitySystemComponent*, TargetAsc);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FAbilityTask_TargetOverlapDataSignature, const FGameplayAbilityTargetDataHandle&, DataHandle, UAbilitySystem*, TargetAsc);
 
 
 /**
@@ -23,7 +23,7 @@ class SANDBOX_API UAbilityTask_TargetOverlap : public UAbilityTask
 public:
 	/** Retrieves the target's overlap data from the client and replicates it to the server */
 	UFUNCTION(BlueprintCallable, Category="Ability|Tasks", meta = (DisplayName = "Get Target Overlap Data", HidePin = "OwningAbility", DefaultToSelf = "OwningAbility", BlueprintInternalUseOnly = "true"))
-	static UAbilityTask_TargetOverlap* CreateOverlapDataTask(UGameplayAbility* OwningAbility, UPrimitiveComponent* CollisionComponent, bool bDebug = false);
+	static UAbilityTask_TargetOverlap* CreateOverlapDataTask(UGameplayAbility* OwningAbility, TArray<UPrimitiveComponent*> CollisionComponents, bool bDebug = false);
 
 	/** Delegate for when the overlap data has been replicated to the server */
 	UPROPERTY(BlueprintAssignable)
@@ -32,7 +32,7 @@ public:
 	
 protected:
 	/** The component that we're using for overlaps */
-	UPROPERTY(BlueprintReadWrite) TObjectPtr<UPrimitiveComponent> OverlapComponent;
+	UPROPERTY(BlueprintReadWrite) TArray<UPrimitiveComponent*> OverlapComponents;
 	
 	/** Whether we should debug the task information */
 	bool bDebugTask;

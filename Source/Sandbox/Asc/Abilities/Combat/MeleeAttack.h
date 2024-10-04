@@ -19,6 +19,9 @@ class SANDBOX_API UMeleeAttack : public UCombatAbility
 	GENERATED_BODY()
 
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AllowMovementTag;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AttackFramesTag;
+	
 	UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitInputRelease* InputReleasedHandle;
 	UPROPERTY(BlueprintReadWrite) UAbilityTask_PlayMontageAndWait* AttackMontageTaskHandle;
 	UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayEvent* HandleAttackStateTask;

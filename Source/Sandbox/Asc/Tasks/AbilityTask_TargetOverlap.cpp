@@ -7,10 +7,10 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "Logging/StructuredLog.h"
 
-UAbilityTask_TargetOverlap* UAbilityTask_TargetOverlap::CreateOverlapDataTask(UGameplayAbility* OwningAbility, UPrimitiveComponent* Component, bool bDebug)
+UAbilityTask_TargetOverlap* UAbilityTask_TargetOverlap::CreateOverlapDataTask(UGameplayAbility* OwningAbility, TArray<UPrimitiveComponent*> CollisionComponents, bool bDebug)
 {
 	UAbilityTask_TargetOverlap* Task = NewAbilityTask<UAbilityTask_TargetOverlap>(OwningAbility);
-	Task->OverlapComponent = Component;
+	Task->OverlapComponents = CollisionComponents;
 	Task->bDebugTask = bDebug;
 	return Task;
 }
@@ -25,12 +25,12 @@ void UAbilityTask_TargetOverlap::Activate()
 	// The way you handle it is by sending the information on the client while listening for it on the server when an ability has been activated and prediction is valid, here's how you should go about it
 
 	const AActor* Character = Ability->GetCurrentActorInfo()->AvatarActor.Get();
-	UAbilitySystemComponent* ASC = AbilitySystemComponent.Get();
-	if (!Character || !ASC || !OverlapComponent)
+	UAbilitySystem* ASC = Cast<UAbilitySystem>(AbilitySystemComponent.Get());
+	if (!Character || !ASC || OverlapComponents.IsEmpty())
 	{
 		if (!Character) UE_LOGFMT(AbilityLog, Error, "{0}() The character wasn't valid on the ability while retrieving input information! {1}", *FString(__FUNCTION__), *GetName());
 		if (!ASC) UE_LOGFMT(AbilityLog, Error, "{0}() The ability system wasn't valid on the ability while retrieving input information! {1}", *FString(__FUNCTION__), *GetName());
-		if (!OverlapComponent) UE_LOGFMT(AbilityLog, Error, "{0}() The overlap wasn't valid on the ability while retrieving input information! {1}", *FString(__FUNCTION__), *GetName());
+		if (OverlapComponents.IsEmpty()) UE_LOGFMT(AbilityLog, Error, "{0}() The overlap wasn't valid on the ability while retrieving input information! {1}", *FString(__FUNCTION__), *GetName());
 		EndTask();
 		return;
 	}
@@ -62,8 +62,13 @@ void UAbilityTask_TargetOverlap::Activate()
 		if (!bCalledDelegate) SetWaitingOnRemotePlayerData();
 	}
 	
-	// TODO: Client side prediction 
-	OverlapComponent->OnComponentBeginOverlap.AddDynamic(this, &UAbilityTask_TargetOverlap::OnTraceOverlap);
+	// TODO: Client side prediction
+	for (UPrimitiveComponent* OverlapComponent : OverlapComponents)
+	{
+		if (!OverlapComponent) continue;
+		
+		OverlapComponent->OnComponentBeginOverlap.AddDynamic(this, &UAbilityTask_TargetOverlap::OnTraceOverlap);
+	}
 }
 
 
@@ -74,7 +79,7 @@ void UAbilityTask_TargetOverlap::OnTraceOverlap(UPrimitiveComponent* OverlappedC
 	
 	if (IsPredictingClient() || IsLocallyControlled())
 	{
-		UAbilitySystemComponent* TargetAsc = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(OtherActor);
+		UAbilitySystem* TargetAsc = Cast<UAbilitySystem>(AbilitySystemComponent.Get());
 		if (!TargetAsc) return;
 		
 		// This might need to always activate so every attack has their data mapped to an individual place in the AbilityTargetDataMap
@@ -88,7 +93,7 @@ void UAbilityTask_TargetOverlap::OnTraceOverlap(UPrimitiveComponent* OverlappedC
 			UE_LOGFMT(AbilityLog, Warning, "{0}: {1}'s armament {2} overlapped with {3}! {4} {5}()",
 				*UEnum::GetValueAsString(Character->GetLocalRole()),
 				*GetNameSafe(Character),
-				*GetNameSafe(OverlapComponent),
+				*GetNameSafe(OverlappedComponent),
 				*GetNameSafe(OtherActor),
 				*GetName(),
 				FString(__FUNCTION__)
@@ -141,7 +146,7 @@ void UAbilityTask_TargetOverlap::OnTargetDataReplicatedCallback(const FGameplayA
 	AActor* TargetActor = TargetActors[0].Get();
 	if (!TargetActor) return;
 
-	UAbilitySystemComponent* TargetAsc = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
+	UAbilitySystem* TargetAsc = Cast<UAbilitySystem>(AbilitySystemComponent.Get());
 	if (!TargetAsc) return;
 	
 	AbilitySystemComponent->ConsumeClientReplicatedTargetData(GetAbilitySpecHandle(), GetActivationPredictionKey());
@@ -154,6 +159,12 @@ void UAbilityTask_TargetOverlap::OnTargetDataReplicatedCallback(const FGameplayA
 
 void UAbilityTask_TargetOverlap::OnDestroy(bool AbilityEnded)
 {
-	if (OverlapComponent) OverlapComponent->OnComponentBeginOverlap.RemoveDynamic(this, &UAbilityTask_TargetOverlap::OnTraceOverlap);
+	for (UPrimitiveComponent* OverlapComponent : OverlapComponents)
+	{
+		if (!OverlapComponent) continue;
+		
+		OverlapComponent->OnComponentBeginOverlap.RemoveDynamic(this, &UAbilityTask_TargetOverlap::OnTraceOverlap);
+	}
+	
 	Super::OnDestroy(AbilityEnded);
 }
