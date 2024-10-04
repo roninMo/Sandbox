@@ -936,19 +936,6 @@ void UAdvancedMovementComponent::PhysMantling(float deltaTime, int32 Iterations)
 		// The player is transitioning to the ledge
 		if (!UpdatedComponent->GetComponentLocation().Equals(MantleLedgeLocation, 0.1))
 		{
-			// Find the interp rotation
-			FRotator AdjustedRotation = OldRotation;
-			// if (bRotateCharacterDuringMantle) // This isn't required because of OnEnter conditions and wall climbing adjusts it's own rotations. 
-			// {
-			// 	const FRotator WallClimbRotation = (-LedgeClimbNormal).Rotation();
-			// 	FRotator TargetRotation = FRotator(0, WallClimbRotation.Yaw, 0);
-			// 	if (!OldRotation.Equals(TargetRotation, 0.1))
-			// 	{
-			// 		FRotator DeltaRotation = (TargetRotation - OldRotation).GetNormalized();
-			// 		AdjustedRotation = (OldRotation + DeltaRotation * timeTick * MantleRotationSpeed).GetNormalized();
-			// 	}
-			// }
-			
 			// Interp the character to the target location
 			Adjusted = MantleAndClimbInterp(timeTick, MantleStartLocation, MantleLedgeLocation, OldLocation, MantleSpeed, MantleSpeedAdjustments);
 			FHitResult Hit;
@@ -978,15 +965,6 @@ void UAdvancedMovementComponent::PhysMantling(float deltaTime, int32 Iterations)
 			// TODO: Find out where this is happening and fix it, I don't want to handle this right now, just adjust the character location 
 			FVector WallRightVector = UKismetMathLibrary::RotateAngleAxis(LedgeClimbNormal, 90, FVector(0, 0, 1));
 			FVector TargetLocation = OldLocation.Equals(MantleLedgeLocation, .1) ? MantleLedgeLocation + (WallRightVector * 1): MantleLedgeLocation;
-
-			// Rotation adjustment
-			// const FRotator WallClimbRotation = (-LedgeClimbNormal).Rotation();
-			// FRotator TargetRotation = FRotator(0, WallClimbRotation.Yaw, 0);
-			// FRotator DeltaRotation = OldRotation.Equals(TargetRotation, 0.1)
-			// 	? (FRotator(0, WallClimbRotation.Yaw + 1, 0) - OldRotation).GetNormalized()
-			// 	: (FRotator(0, WallClimbRotation.Yaw, 0) - OldRotation).GetNormalized();
-			// FRotator AdjustedRotation = (DeltaRotation * timeTick * 10).GetNormalized();
-			
 			
 			// Interp the character to the target location
 			Adjusted = MantleAndClimbInterp(timeTick, MantleLedgeLocation, TargetLocation, OldLocation, 0.1, nullptr);

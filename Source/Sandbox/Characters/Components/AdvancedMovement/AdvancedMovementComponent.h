@@ -460,14 +460,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Mantling")
 	bool bPreventMovementRotationsDuringMantle;
 
-	/** Rotates the character towards the ledge while mantling */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Mantling")
-	bool bRotateCharacterDuringMantle;
-
-	/** The speed at which the player rotates during mantling */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(UIMin = "0", UIMax = "10", EditCondition = "bUseMantling && bRotateCharacterDuringMantle", EditConditionHides)) 
-	float MantleRotationSpeed;
-
 	/** The duration before the player is allowed to wall climb after transitioning out of mantling */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Mantling", meta=(UIMin = "0", UIMax = "1", EditCondition = "bUseMantling && bRotateCharacterDuringMantle", EditConditionHides)) 
 	float MantleToWallClimbInterval;
