@@ -99,14 +99,14 @@ struct F_ArmamentAbilityInformation
 	/** A stored reference to the weapon's ability */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TSubclassOf<UGameplayAbility> Ability;
 	
-	/** The level of the ability */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly) int32 Level = 1;
-	
 	/** The attack pattern and input id for the current ability. This helps determine the specific attack montage we're granting to the character for the ability */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) EInputAbilities InputId;
 
-	/** The stances the player is able to use this combat ability in. For example, two handing shouldn't be able to use both block and the offhand attack which both use the same input */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<EArmamentStance> ValidStances;
+	/** The stances the player isn't able to use this combat ability in. For example, two handing shouldn't be able to use both block and the offhand attack which both use the same input */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<EArmamentStance> InvalidStances;
+	
+	/** The level of the ability */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly) int32 Level = 1;
 
 	/** The combos of a specific attack */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_ComboAttacks ComboInformation;

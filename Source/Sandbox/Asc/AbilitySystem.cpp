@@ -513,8 +513,8 @@ void UAbilitySystem::BindAbilityActivationToEnhancedInput(UEnhancedInputComponen
 				).GetHandle();
 				RegisteredAbilityInputHandles.Add(InputActionHandle);
 				
-				UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} adding ability input bind {3} on press events. Input action: {4}", *UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__),
-					*GetNameSafe(GetOwner()), *UEnum::GetValueAsString(InputAction.InputId), *InputAction.InputAction.GetName());
+				// UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} adding ability input bind {3} on press events. Input action: {4}", *UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__),
+				// 	*GetNameSafe(GetOwner()), *UEnum::GetValueAsString(InputAction.InputId), *InputAction.InputAction.GetName());
 			}
 
 			// Released Events
@@ -529,8 +529,8 @@ void UAbilitySystem::BindAbilityActivationToEnhancedInput(UEnhancedInputComponen
 				).GetHandle();
 				RegisteredAbilityInputHandles.Add(InputActionHandle);
 				
-				UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} adding ability input bind {3} on released events. Input action: {4}", *UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__),
-					*GetNameSafe(GetOwner()), *UEnum::GetValueAsString(InputAction.InputId), *InputAction.InputAction.GetName());
+				// UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} adding ability input bind {3} on released events. Input action: {4}", *UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__),
+				// 	*GetNameSafe(GetOwner()), *UEnum::GetValueAsString(InputAction.InputId), *InputAction.InputAction.GetName());
 			}
 
 			// Add Other Events

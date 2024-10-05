@@ -344,9 +344,9 @@ EEquipRestrictions AArmament::GetEquipRestrictions() const
 }
 
 
-const TArray<F_ArmamentAbilityInformation>& AArmament::GetCombatAbilities() const
+const TArray<F_ArmamentAbilityInformation>& AArmament::GetMeleeAbilities() const
 {
-	return ArmamentInformation.CombatAbilities;
+	return ArmamentInformation.MeleeAbilities;
 }
 
 

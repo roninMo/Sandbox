@@ -82,6 +82,7 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 	if (Spec)
 	{
 		AttackPattern = static_cast<EInputAbilities>(Spec->InputID);
+		CurrentStance = CombatComponent->GetCurrentStance();
 	}
 	
 	// Retrieve the combo information if the player's equipped an armament or their stance has updated
@@ -89,7 +90,6 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 	else
 	{
 		Armament = nullptr;
-		CurrentStance = EArmamentStance::None;
 		ComboAttacks = F_ComboAttacks();
 		ComboCount = 0;
 		CurrentAttack = F_ComboAttack();
@@ -98,19 +98,19 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 	
 	// Retrieve the attacks for the current stance
 	const F_ArmamentInformation& ArmamentInformation = EquippedArmament->GetArmamentInformation();
-	for (const auto& [Ability, Level, InputId, ComboInformation] : ArmamentInformation.CombatAbilities)
+	for (const auto& [Ability, InputId, InvalidStances, Level, ComboInformation] : ArmamentInformation.MeleeAbilities)
 	{
-		if (AttackPattern != InputId) continue;
+		if (AttackPattern != InputId || !InvalidStances.Contains(CombatComponent->GetCurrentStance())) continue;
 
 		// If there's no combat information for this attack, then either the information is missing or the ability was added at the wrong time
 		ComboAttacks = ComboInformation;
-		CurrentStance = CombatComponent->GetCurrentStance();
 		ComboCount = ComboAttacks.ComboAttacks.Num();
 		SetCurrentMontage(EquippedArmament->GetCombatMontage(AttackPattern));
 		ensure(!ComboAttacks.ComboAttacks.IsEmpty());
 	}
 
 	Armament = EquippedArmament;
+	EquipSlot = EquippedArmament->GetEquipSlot();
 	return true;
 }
 

@@ -9,6 +9,7 @@
 #include "Sandbox/Data/Structs/InventoryInformation.h"
 #include "CombatComponent.generated.h"
 
+struct F_ArmamentAbilityInformation;
 DECLARE_LOG_CATEGORY_EXTERN(CombatComponentLog, Log, All);
 
 // Equip Sockets
@@ -359,6 +360,9 @@ public:
 	/** Retrieves the player's stance */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils") virtual EArmamentStance GetCurrentStance() const;
 
+	/** Adds a combat ability if the ability is valid for the player's current stance. This is a utility function for adding the combat abilities */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils") virtual void AddCombatAbilityIfValidStance(TMap<EInputAbilities, F_ArmamentAbilityInformation>& Map, const F_ArmamentAbilityInformation& Ability);
+	
 	/** Retrieves the armament's montage table */
 	UFUNCTION(BlueprintCallable) virtual UDataTable* GetArmamentMontageTable() const;
 	

@@ -21,8 +21,9 @@
 			"MeleeAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
-					"Level": 1,
 					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -43,8 +44,11 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
-					"Level": 1,
 					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -65,8 +69,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
-					"Level": 1,
 					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -87,8 +92,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
-					"Level": 1,
 					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -161,8 +167,9 @@
 			"MeleeAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
-					"Level": 1,
 					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -183,8 +190,11 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
-					"Level": 1,
 					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -205,8 +215,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
-					"Level": 1,
 					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -227,8 +238,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
-					"Level": 1,
 					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -403,8 +415,9 @@
 			"MeleeAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
-					"Level": 1,
 					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -425,8 +438,11 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
-					"Level": 1,
 					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -447,8 +463,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
-					"Level": 1,
 					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -469,8 +486,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
-					"Level": 1,
 					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -543,8 +561,9 @@
 			"MeleeAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
-					"Level": 1,
 					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -565,8 +584,11 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
-					"Level": 1,
 					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -587,8 +609,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
-					"Level": 1,
 					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -609,8 +632,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
-					"Level": 1,
 					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -683,8 +707,9 @@
 			"MeleeAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
-					"Level": 1,
 					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -705,8 +730,11 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
-					"Level": 1,
 					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -727,8 +755,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
-					"Level": 1,
 					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -749,8 +778,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
-					"Level": 1,
 					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -823,8 +853,9 @@
 			"MeleeAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
-					"Level": 1,
 					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -845,8 +876,11 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
-					"Level": 1,
 					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -867,8 +901,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
-					"Level": 1,
 					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -889,8 +924,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
-					"Level": 1,
 					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -963,8 +999,9 @@
 			"MeleeAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
-					"Level": 1,
 					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -985,8 +1022,11 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
-					"Level": 1,
 					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -1007,8 +1047,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
-					"Level": 1,
 					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -1029,8 +1070,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
-					"Level": 1,
 					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -1103,8 +1145,9 @@
 			"MeleeAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
-					"Level": 1,
 					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -1125,8 +1168,11 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
-					"Level": 1,
 					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -1147,8 +1193,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
-					"Level": 1,
 					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -1169,8 +1216,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
-					"Level": 1,
 					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -1243,8 +1291,9 @@
 			"MeleeAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
-					"Level": 1,
 					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -1265,8 +1314,11 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
-					"Level": 1,
 					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -1287,8 +1339,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
-					"Level": 1,
 					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -1309,8 +1362,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
-					"Level": 1,
 					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -1383,8 +1437,9 @@
 			"MeleeAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
-					"Level": 1,
 					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -1405,8 +1460,11 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
-					"Level": 1,
 					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -1427,8 +1485,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
-					"Level": 1,
 					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
@@ -1449,8 +1508,9 @@
 				},
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
-					"Level": 1,
 					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1,
 					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",

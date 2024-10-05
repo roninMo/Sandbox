@@ -313,40 +313,42 @@ void UCombatComponent::UpdateArmamentCombatAbilities(EArmamentStance PreviousSta
 	if (PrimaryArmament)
 	{
 		// Retrieve the primary weapon's combat abilities for this armament
-		const TArray<F_ArmamentAbilityInformation>& Abilities = PrimaryArmament->GetCombatAbilities();
+		const TArray<F_ArmamentAbilityInformation>& Abilities = PrimaryArmament->GetMeleeAbilities();
 		for (const F_ArmamentAbilityInformation& CombatAbility : Abilities)
 		{
-			if (EInputAbilities::PrimaryAttack == CombatAbility.InputId) CombatAbilities.Add(EInputAbilities::PrimaryAttack, CombatAbility);
-			if (EInputAbilities::StrongAttack == CombatAbility.InputId) CombatAbilities.Add(EInputAbilities::StrongAttack, CombatAbility);
-			if (EInputAbilities::SpecialAttack == CombatAbility.InputId) CombatAbilities.Add(EInputAbilities::SpecialAttack, CombatAbility);
-
-			// Only use the secondary attack (Block or alt primary attack) for two handing or dual wielding
-			if (CurrentStance == EArmamentStance::DualWielding || CurrentStance == EArmamentStance::TwoWeapons || CurrentStance == EArmamentStance::TwoHandingPrimary)
+			// Always use the primary armament's combat abilities except for the offhand attack unless they're two handing (block) or dual wielding
+			if (CombatAbility.InputId != EInputAbilities::SecondaryAttack && !CombatAbility.InvalidStances.Contains(GetCurrentStance()))
 			{
-				if (EInputAbilities::SecondaryAttack == CombatAbility.InputId)
+				AddCombatAbilityIfValidStance(CombatAbilities, CombatAbility);
+			}
+			// Only use the secondary attack (Block or alt primary attack) for two handing or dual wielding
+			else if (CombatAbility.InputId == EInputAbilities::SecondaryAttack)
+			{
+				if (CurrentStance == EArmamentStance::DualWielding || CurrentStance == EArmamentStance::TwoWeapons || CurrentStance == EArmamentStance::TwoHanding)
 				{
-					CombatAbilities.Add(CombatAbility.InputId, CombatAbility);
+					AddCombatAbilityIfValidStance(CombatAbilities, CombatAbility);
 				}
 			}
+			
 		}
 	}
 
 	if (SecondaryArmament)
 	{
 		// Retrieve the secondary weapon's combat abilities for this armament
-		const TArray<F_ArmamentAbilityInformation>& Abilities = SecondaryArmament->GetCombatAbilities();
+		const TArray<F_ArmamentAbilityInformation>& Abilities = SecondaryArmament->GetMeleeAbilities();
 		for (const F_ArmamentAbilityInformation& CombatAbility : Abilities)
 		{
 			// If we're two handing the weapon, retrieve every ability, otherwise retrieve the offhand ability
-			if (CurrentStance == EArmamentStance::TwoHandingSecondary)
+			if (CurrentStance == EArmamentStance::TwoHanding)
 			{
-				CombatAbilities.Add(CombatAbility.InputId, CombatAbility);
+				AddCombatAbilityIfValidStance(CombatAbilities, CombatAbility);
 			}
 			else if (CurrentStance == EArmamentStance::OneHanding)
 			{
 				if (EInputAbilities::SecondaryAttack == CombatAbility.InputId)
 				{
-					CombatAbilities.Add(CombatAbility.InputId, CombatAbility);
+					AddCombatAbilityIfValidStance(CombatAbilities, CombatAbility);
 				}
 			}
 		}
@@ -378,11 +380,8 @@ void UCombatComponent::UpdateArmamentCombatAbilities(EArmamentStance PreviousSta
 				- Primary (Primary, Strong, Special)
 				- Secondary (Secondary)
 				
-			- TwoHandingSecondary
+			- TwoHanding
 				- Secondary (Primary, Strong, Special, Secondary)
-			
-			- TwoHandingPrimary
-				- Primary (Primary, Strong, Special, Secondary)
 
 			
 		*/
@@ -393,8 +392,8 @@ void UCombatComponent::UpdateArmamentCombatAbilities(EArmamentStance PreviousSta
 			if (EInputAbilities::SpecialAttack == AttackPattern) Id = PrimaryId;
 			if (EInputAbilities::StrongAttack == AttackPattern) Id = PrimaryId;
 		}
-		else if (CurrentStance == EArmamentStance::TwoHandingSecondary) Id = SecondaryId;
-		else if (CurrentStance == EArmamentStance::TwoHandingPrimary) Id = PrimaryId;
+		else if (CurrentStance == EArmamentStance::TwoHanding && SecondaryArmament && SecondaryArmament->GetEquipStatus() == EEquipStatus::Equipped) Id = SecondaryId;
+		else if (CurrentStance == EArmamentStance::TwoHanding && PrimaryArmament && PrimaryArmament->GetEquipStatus() == EEquipStatus::Equipped) Id = PrimaryId;
 
 		// Add the ability
 		CombatAbilityHandles.Add(Asc->AddAbility(FGameplayAbilityInfo(CombatAbility.Ability, CombatAbility.Level, CombatAbility.InputId, nullptr, Id)));
@@ -796,6 +795,14 @@ FName UCombatComponent::GetEquippedSocketName(EArmamentClassification Armament, 
 EArmamentStance UCombatComponent::GetCurrentStance() const
 {
 	return CurrentStance;
+}
+
+void UCombatComponent::AddCombatAbilityIfValidStance(TMap<EInputAbilities, F_ArmamentAbilityInformation>& Map, const F_ArmamentAbilityInformation& Ability)
+{
+	if (!Ability.InvalidStances.Contains(GetCurrentStance()))
+	{
+		Map.Add(Ability.InputId, Ability);
+	}
 }
 
 UDataTable* UCombatComponent::GetArmamentMontageTable() const

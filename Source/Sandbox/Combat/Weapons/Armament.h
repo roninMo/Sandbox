@@ -204,7 +204,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual EEquipRestrictions GetEquipRestrictions() const;
 	
 	/** Retrieves the armament's abilities */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual const TArray<F_ArmamentAbilityInformation>& GetCombatAbilities() const;
+	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual const TArray<F_ArmamentAbilityInformation>& GetMeleeAbilities() const;
 	
 	/** Retrieves the armament's abilities */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual const TArray<FGameplayAbilityInfo>& GetAbilities() const;

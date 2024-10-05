@@ -203,10 +203,20 @@ void UMeleeAttack::SetAttackMontage(AArmament* Weapon)
 		}
 	}
 
-	UAdvancedMovementComponent* MovementComponent = Character->GetMovementComp<UAdvancedMovementComponent>();
-	if (MovementComponent && MovementComponent->IsRunning())
+	// Primary Attack
+	if (AttackPattern == EInputAbilities::PrimaryAttack || AttackPattern == EInputAbilities::StrongAttack)
 	{
-		// Running attack
+		// Handle running attack variations (Just add them to the montage)
+		UAdvancedMovementComponent* MovementComponent = Character->GetMovementComp<UAdvancedMovementComponent>();
+		if (MovementComponent && MovementComponent->IsRunning() &&
+			MovementComponent->GetLastUpdateVelocity().Length() >= MovementComponent->GetMaxWalkSpeed() * MovementComponent->SprintSpeedMultiplier)
+		{
+			// Running attack
+		}
+		else
+		{
+			SetCurrentMontage(Weapon->GetCombatMontage(AttackPattern));
+		}
 	}
 	else
 	{
