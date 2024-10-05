@@ -67,10 +67,13 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 	}
 	
 	AArmament* EquippedArmament = CombatComponent->GetArmament(IsRightHandAbility());
-	if (!EquippedArmament)
+	if (!EquippedArmament || EquippedArmament->GetEquipStatus() != EEquipStatus::Equipped)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the armament during {2} while getting combo and armament information",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+		if (!EquippedArmament)
+		{
+			UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the armament during {2} while getting combo and armament information",
+				UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+		}
 		return false;
 	}
 
@@ -82,7 +85,7 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 	}
 	
 	// Retrieve the combo information if the player's equipped an armament or their stance has updated
-	if (EquippedArmament == Armament && CurrentStance == CombatComponent->GetCurrentStance() && EquippedArmament->GetEquipStatus() == EEquipStatus::Equipped) return true;
+	if (EquippedArmament == Armament && CurrentStance == CombatComponent->GetCurrentStance()) return true;
 	else
 	{
 		Armament = nullptr;
