@@ -154,6 +154,7 @@ AArmament* UCombatComponent::CreateArmament(const EEquipSlot EquipSlot)
 
 		// Add the armament's information and construct the armament
 		Armament->SetArmamentInformation(ArmamentData); // Replicated during EquipSlot OnRep ->  Retrieved from combat component
+		Armament->SetArmamentMontagesFromDB(MontageInformationTable, Character->GetCharacterSkeletonMapping());
 		Armament->SetArmamentEquipSlot(EquipSlot);
 		Armament->Execute_SetItem(Armament, ArmamentItemData);
 		Armament->Execute_SetId(Armament, ArmamentItemData.Id);
@@ -292,7 +293,7 @@ void UCombatComponent::UpdateArmamentCombatAbilities(EArmamentStance PreviousSta
 		return;
 	}
 
-	if (Character->HasAuthority())
+	if (!Character->HasAuthority())
 	{
 		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Only update armaments combat abilities on the server!",
 			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
@@ -541,40 +542,6 @@ F_ArmamentInformation UCombatComponent::GetArmamentInformationFromDatabase(const
 	}
 
 	return F_ArmamentInformation();
-}
-
-
-UAnimMontage* UCombatComponent::GetArmamentMontageFromDB(FName ArmamentId, EInputAbilities AttackPattern, ECharacterSkeletonMapping Mapping)
-{
-	if (!MontageInformationTable) return nullptr;
-	
-	const FString RowContext(TEXT("Armament Montage Information Context"));
-	if (const F_Table_ArmamentMontages* Data = MontageInformationTable->FindRow<F_Table_ArmamentMontages>(ArmamentId, RowContext))
-	{
-		// Search for the specific combo
-		if (Data->ArmamentMontages.Contains(AttackPattern))
-		{
-			F_CharacterToMontage CharacterMontages = Data->ArmamentMontages[AttackPattern];
-
-			// Check if there's a montage for the specific character
-			if (CharacterMontages.MontageMappings.Contains(Mapping))
-			{
-				return CharacterMontages.MontageMappings[Mapping];
-			}
-			else
-			{
-				UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} did not find an armament montage for this specific character! ({3})",
-					*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), *UEnum::GetValueAsString(Mapping));
-			}
-		}
-		else
-		{
-			UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} did not find an armament montage for the {3} combo",
-				*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), *UEnum::GetValueAsString(AttackPattern));
-		}
-	}
-
-	return nullptr;
 }
 
 
@@ -829,6 +796,11 @@ FName UCombatComponent::GetEquippedSocketName(EArmamentClassification Armament, 
 EArmamentStance UCombatComponent::GetCurrentStance() const
 {
 	return CurrentStance;
+}
+
+UDataTable* UCombatComponent::GetArmamentMontageTable() const
+{
+	return MontageInformationTable;
 }
 
 

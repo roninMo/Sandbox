@@ -12,7 +12,7 @@
 UCLASS()
 class SANDBOX_API UGameplayAbility_Aim : public UMovementAbility
 {
-	GENERATED_BODY()
+	GENERATED_BODY()w
 
 protected:
 	/** The camera zoom */

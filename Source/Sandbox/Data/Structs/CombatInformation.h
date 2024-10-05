@@ -139,9 +139,6 @@ struct F_ArmamentInformation
 	/** The armament's state information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayEffectInfo StateInformation;
 
-	/** The armament's montages */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FName, UAnimMontage*> Montages;
-
 	/** The armament's abilities */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<F_ArmamentAbilityInformation> CombatAbilities;
 	

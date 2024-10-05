@@ -37,6 +37,30 @@ enum class EEquipSlot : uint8;
 enum class EArmorSlot : uint8;
 
 
+/*
+
+	One Hand Attack Pattern
+		Primary Attack
+		Special Attack
+		Strong Attack
+		
+	Two Hand Attack Pattern
+		Primary Attack
+		Block (Two handing)
+		Special Attack
+		Strong Attack
+	
+	Dual Wield (or two handing) Attack Pattern
+		Primary Attack
+		Dual wield Primary Attack (Secondary input)
+		Secondary Attack (Two weapons)
+		Special Attack
+		Strong Attack
+
+
+	
+
+*/
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FArmamentEquippedSignature, AArmament*, Armament, EEquipSlot, EquipSlot);
@@ -273,16 +297,6 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils") 
 	virtual F_ArmamentInformation GetArmamentInformationFromDatabase(FName ArmamentId);
-
-	/**
-	 * Retrieves the armament montage from the armament montage database. For ranged weapons, use EInputAbilities::None
-	 *
-	 * @param ArmamentId						The id of the armament
-	 * @param AttackPattern						The combo montage we're retrieving. If the armament doesn't use combos, just use EInputAbilities::None to retrieve it's montage
-	 * @param Mapping							The character skeleton to montage mapping reference  
-	 */
-	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils")
-	virtual UAnimMontage* GetArmamentMontageFromDB(FName ArmamentId, EInputAbilities AttackPattern, ECharacterSkeletonMapping Mapping);
 	
 
 protected:
@@ -345,6 +359,9 @@ public:
 	/** Retrieves the player's stance */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils") virtual EArmamentStance GetCurrentStance() const;
 
+	/** Retrieves the armament's montage table */
+	UFUNCTION(BlueprintCallable) virtual UDataTable* GetArmamentMontageTable() const;
+	
 	/** Sets the player's current combo index */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Combat") virtual void SetComboIndex(const int32 Index);
 

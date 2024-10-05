@@ -6,6 +6,7 @@
 UENUM(BlueprintType)
 enum class ECharacterSkeletonMapping : uint8
 {
+	None				UMETA(DisplayName = "None"),
 	Manny				UMETA(DisplayName = "Manny"),
 	Other				UMETA(DisplayName = "Other")
 };

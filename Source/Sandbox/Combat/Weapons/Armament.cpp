@@ -11,6 +11,7 @@
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Data/Structs/ArmamentInformation.h"
 
 DEFINE_LOG_CATEGORY(ArmamentLog);
 
@@ -114,9 +115,6 @@ bool AArmament::ConstructArmament()
 		AbilityHandles.Add(AbilitySystemComponent->AddAbility(FGameplayAbilityInfo(ArmamentAbility.Ability.Get(), ArmamentAbility.Level, ArmamentAbility.InputId)));
 	}
 	
-	// Add armament montages
-	UpdateArmamentMontages(Character->GetCharacterSkeletonMapping());
-	
 	return true;
 }
 
@@ -173,37 +171,68 @@ bool AArmament::IsValidArmanent()
 
 
 #pragma region Montages
-bool AArmament::UpdateArmamentMontages(const ECharacterSkeletonMapping MontageMapping)
+void AArmament::SetArmamentMontagesFromDB(UDataTable* ArmamentMontageDB, ECharacterSkeletonMapping Link)
 {
-	UCombatComponent* CombatComponent = GetCombatComponent();
-	if (!CombatComponent)
-	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while updating the armament montages!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return nullptr;
-	}
+	if (!ArmamentMontageDB) return;
 	
-	
-	// For melee armaments, retrieve all combo montages, otherwise just retrieve the montage (use "None" for armaments with a single montage for their animations (that aren't combo specific))
-	ArmamentCombatMontages.Empty();
-	for (F_ArmamentAbilityInformation ArmamentAbility : ArmamentInformation.CombatAbilities)
+	const FString RowContext(TEXT("Armament Montage Information Context"));
+	if (const F_Table_ArmamentMontages* Data = ArmamentMontageDB->FindRow<F_Table_ArmamentMontages>(ArmamentInformation.Id, RowContext))
 	{
-		UAnimMontage* ArmamentComboMontage = CombatComponent->GetArmamentMontageFromDB(ArmamentInformation.Id, ArmamentAbility.InputId, MontageMapping);
-		if (ArmamentComboMontage)
+		const F_ArmamentMeleeMontages& MeleeMontages = Data->ArmamentMontages.MeleeMontages;
+
+		// Montages
+		Montages.Empty();
+		for (auto &[Name, MontageMap] : Data->ArmamentMontages.Montages)
 		{
-			ArmamentCombatMontages.Add(ArmamentAbility.InputId, ArmamentComboMontage);
+			if (MontageMap.MontageMappings.Contains(Link)) Montages.Add(Name, MontageMap.MontageMappings[Link]);
 		}
+
+		// One hand montages
+		MeleeMontages_OneHand.Empty();
+		for (auto &[AttackPattern, MontageMap] : MeleeMontages.OneHandMontages)
+		{
+			if (MontageMap.MontageMappings.Contains(Link)) MeleeMontages_OneHand.Add(AttackPattern, MontageMap.MontageMappings[Link]);
+		}
+
+		// Two hand montages
+		MeleeMontages_TwoHand.Empty();
+		for (auto &[AttackPattern, MontageMap] : MeleeMontages.TwoHandMontages)
+		{
+			if (MontageMap.MontageMappings.Contains(Link)) MeleeMontages_TwoHand.Add(AttackPattern, MontageMap.MontageMappings[Link]);
+		}
+		
+		// Dual wielding montages
+		MeleeMontages_DualWield.Empty();
+		for (auto &[AttackPattern, MontageMap] : MeleeMontages.DualWieldMontages)
+		{
+			if (MontageMap.MontageMappings.Contains(Link)) MeleeMontages_DualWield.Add(AttackPattern, MontageMap.MontageMappings[Link]);
+		}
+		
 	}
-	
-	return true;
+	else
+	{
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} did not find the armament montages for {3}",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), ArmamentInformation.Id);
+	}
 }
 
 
 UAnimMontage* AArmament::GetCombatMontage(const EInputAbilities AttackPattern)
 {
-	if (ArmamentCombatMontages.Contains(AttackPattern))
+	const UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
 	{
-		return ArmamentCombatMontages[AttackPattern];
+		return nullptr;
+	}
+	
+	const TMap<EInputAbilities, UAnimMontage*>& CombatMontages = CombatComponent->GetCurrentStance() == EArmamentStance::OneHanding
+		|| CombatComponent->GetCurrentStance() == EArmamentStance::TwoWeapons ? MeleeMontages_OneHand
+		: CombatComponent->GetCurrentStance() == EArmamentStance::DualWielding ? MeleeMontages_DualWield
+		: MeleeMontages_TwoHand;
+	
+	if (CombatMontages.Contains(AttackPattern))
+	{
+		return CombatMontages[AttackPattern];
 	}
 
 	return nullptr;
@@ -212,9 +241,9 @@ UAnimMontage* AArmament::GetCombatMontage(const EInputAbilities AttackPattern)
 
 UAnimMontage* AArmament::GetMontage(FName Montage)
 {
-	if (ArmamentInformation.Montages.Contains(Montage))
+	if (Montages.Contains(Montage))
 	{
-		return ArmamentInformation.Montages[Montage];
+		return Montages[Montage];
 	}
 
 	return nullptr;
@@ -424,6 +453,7 @@ void AArmament::OnRep_CreatedArmament()
 	// Retrieve the armament information
 	Execute_SetItem(this, CombatComponent->GetArmamentInventoryInformation(EquipSlot));
 	SetArmamentInformation(CombatComponent->GetArmamentInformationFromDatabase(Item.ItemName));
+	SetArmamentMontagesFromDB(CombatComponent->GetArmamentMontageTable(), Character->GetCharacterSkeletonMapping());
 	
 	if (!Item.IsValid() || !ArmamentInformation.IsValid())
 	{

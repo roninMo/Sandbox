@@ -72,7 +72,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Armament")
 	F_ArmamentInformation ArmamentInformation;
 	
-	/** The current equip slot of the armament */
+	/** The current equip slot of the armament. Once the armament is created on the server, the updated equip slot is replicated, and we handle the rest based on the already replicated inventory info */
 	UPROPERTY(ReplicatedUsing=OnRep_CreatedArmament, BlueprintReadWrite, Category = "Armament") EEquipSlot EquipSlot;
 	
 	/** The current equip slot of the armament @note this should be replicated using gameplay abilities */
@@ -129,13 +129,31 @@ public:
 // Montages																			   //
 //-------------------------------------------------------------------------------------//
 protected:
+	/** The ranged montages for the armament */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EInputAbilities, UAnimMontage*> RangedMontages;
+
+	/** The one handing melee montages for the armament */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EInputAbilities, UAnimMontage*> MeleeMontages_OneHand;
+
+	/** The two handing melee montages for the armament */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EInputAbilities, UAnimMontage*> MeleeMontages_TwoHand;
+
+	/** The dual wielding melee montages for the armament */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EInputAbilities, UAnimMontage*> MeleeMontages_DualWield;
+
 	/** The montages for the armament */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EInputAbilities, UAnimMontage*> ArmamentCombatMontages;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<FName, UAnimMontage*> Montages;
 
 
 public:
-	/** Updates the armament's montages provided a character to montage reference */
-	UFUNCTION(BlueprintCallable, Category = "Armament|Montages") virtual bool UpdateArmamentMontages(const ECharacterSkeletonMapping MontageMapping);
+	/**
+	 * Retrieves the armament montages from the armament montage database, and adds them to the armament. If you need to retrieve a montage, use one of the get functions
+	 *
+	 * @param ArmamentMontageDB					The data table that contains the armament montages
+	 * @param Link								The character skeleton to montage mapping reference  
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils")
+	virtual void SetArmamentMontagesFromDB(UDataTable* ArmamentMontageDB, ECharacterSkeletonMapping Link);
 
 	/** Retrieves the attack montage for one of the armament's attacks */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Montages") virtual UAnimMontage* GetCombatMontage(const EInputAbilities AttackPattern);

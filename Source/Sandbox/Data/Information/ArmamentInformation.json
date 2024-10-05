@@ -18,13 +18,6 @@
 				"Effect": "None",
 				"Level": 1
 			},
-			"Montages":
-			{
-				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
-				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_Block.AM_Manny_Block'",
-				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
-				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_BlockReactions.AM_Manny_BlockReactions'"
-			},
 			"CombatAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
@@ -97,13 +90,6 @@
 			{
 				"Effect": "None",
 				"Level": 1
-			},
-			"Montages":
-			{
-				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
-				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_Block.AM_Manny_Block'",
-				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
-				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_BlockReactions.AM_Manny_BlockReactions'"
 			},
 			"CombatAbilities": [
 				{
@@ -178,11 +164,6 @@
 				"Effect": "None",
 				"Level": 1
 			},
-			"Montages":
-			{
-				"Equip": "None",
-				"Unequip": "None"
-			},
 			"CombatAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
@@ -255,11 +236,6 @@
 			{
 				"Effect": "None",
 				"Level": 1
-			},
-			"Montages":
-			{
-				"Equip": "None",
-				"Unequip": "None"
 			},
 			"CombatAbilities": [
 				{
@@ -334,13 +310,6 @@
 				"Effect": "None",
 				"Level": 1
 			},
-			"Montages":
-			{
-				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
-				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_Block.AM_Manny_Block'",
-				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
-				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_BlockReactions.AM_Manny_BlockReactions'"
-			},
 			"CombatAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
@@ -355,7 +324,7 @@
 								{
 									"BaseDamagesOrMultipliers":
 									{
-										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 									}
 								},
 								"StaminaCost": 5,
@@ -377,7 +346,7 @@
 								{
 									"BaseDamagesOrMultipliers":
 									{
-										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 									}
 								},
 								"StaminaCost": 5,
@@ -399,7 +368,7 @@
 								{
 									"BaseDamagesOrMultipliers":
 									{
-										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 									}
 								},
 								"StaminaCost": 5,
@@ -421,7 +390,7 @@
 								{
 									"BaseDamagesOrMultipliers":
 									{
-										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 									}
 								},
 								"StaminaCost": 5,
@@ -481,13 +450,6 @@
 				"Effect": "None",
 				"Level": 1
 			},
-			"Montages":
-			{
-				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
-				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_Block.AM_Manny_Block'",
-				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
-				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_BlockReactions.AM_Manny_BlockReactions'"
-			},
 			"CombatAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
@@ -502,7 +464,7 @@
 								{
 									"BaseDamagesOrMultipliers":
 									{
-										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 									}
 								},
 								"StaminaCost": 5,
@@ -524,7 +486,7 @@
 								{
 									"BaseDamagesOrMultipliers":
 									{
-										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 									}
 								},
 								"StaminaCost": 5,
@@ -546,7 +508,7 @@
 								{
 									"BaseDamagesOrMultipliers":
 									{
-										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 									}
 								},
 								"StaminaCost": 5,
@@ -568,7 +530,7 @@
 								{
 									"BaseDamagesOrMultipliers":
 									{
-										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 									}
 								},
 								"StaminaCost": 5,
@@ -627,13 +589,6 @@
 			{
 				"Effect": "None",
 				"Level": 1
-			},
-			"Montages":
-			{
-				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/_Equips/AM_Manny_GreatSword_Equip.AM_Manny_GreatSword_Equip'",
-				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks.AM_Manny_GreatSword_Blocks'",
-				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/_Equips/AM_Manny_GreatSword_Equip.AM_Manny_GreatSword_Equip'",
-				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks_RM.AM_Manny_GreatSword_Blocks_RM'"
 			},
 			"CombatAbilities": [
 				{
@@ -708,13 +663,6 @@
 				"Effect": "None",
 				"Level": 1
 			},
-			"Montages":
-			{
-				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
-				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_Block.AM_Manny_Block'",
-				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
-				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_BlockReactions.AM_Manny_BlockReactions'"
-			},
 			"CombatAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
@@ -787,13 +735,6 @@
 			{
 				"Effect": "None",
 				"Level": 1
-			},
-			"Montages":
-			{
-				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
-				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_Block.AM_Manny_Block'",
-				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
-				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_BlockReactions.AM_Manny_BlockReactions'"
 			},
 			"CombatAbilities": [
 				{
@@ -868,13 +809,6 @@
 				"Effect": "None",
 				"Level": 1
 			},
-			"Montages":
-			{
-				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/_Equips/AM_Manny_GreatSword_Equip.AM_Manny_GreatSword_Equip'",
-				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks.AM_Manny_GreatSword_Blocks'",
-				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/_Equips/AM_Manny_GreatSword_Equip.AM_Manny_GreatSword_Equip'",
-				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks_RM.AM_Manny_GreatSword_Blocks_RM'"
-			},
 			"CombatAbilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
@@ -947,13 +881,6 @@
 			{
 				"Effect": "None",
 				"Level": 1
-			},
-			"Montages":
-			{
-				"Equip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
-				"Block": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_Block.AM_Manny_Block'",
-				"Unequip": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'",
-				"BlockReactions": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Block/Old/AM_Manny_BlockReactions.AM_Manny_BlockReactions'"
 			},
 			"CombatAbilities": [
 				{
