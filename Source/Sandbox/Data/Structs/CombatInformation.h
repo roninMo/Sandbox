@@ -4,6 +4,7 @@
 #include "CoreMinimal.h"
 #include "AbilityInformation.h" // TODO: This might cause dependency errors
 #include "AttributeSet.h"
+#include "Sandbox/Data/Enums/SkeletonMappings.h"
 #include "CombatInformation.generated.h"
 
 class AArmament;
@@ -30,6 +31,10 @@ enum class EInputAbilities : uint8;
 
 
 
+
+//--------------------------------------------------------------------------------------//
+// Combat Logic																			//
+//--------------------------------------------------------------------------------------//
 
 /**
  *  Attack information for an armament or an individual combo attack. These are the objects created after retrieving the weapons current information from different armament stances
@@ -83,6 +88,13 @@ struct F_ComboAttacks
 
 
 
+
+
+
+//--------------------------------------------------------------------------------------//
+// Armament Objects																		//
+//--------------------------------------------------------------------------------------//
+
 /**
  * The ability information specific to an armament
  *
@@ -107,10 +119,109 @@ struct F_ArmamentAbilityInformation
 	
 	/** The level of the ability */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly) int32 Level = 1;
-
-	/** The combos of a specific attack */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_ComboAttacks ComboInformation;
+	
 };
+
+
+
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------//
+// Armament Montages																	//
+//--------------------------------------------------------------------------------------//
+/**
+ * An object containing the different attack patterns and combo information with a montage map reference to each character, use this for each weapon stance. It is still super tangled, good luck
+ */
+USTRUCT(BlueprintType)
+struct F_ArmamentMeleeMontage
+{
+	GENERATED_USTRUCT_BODY()
+	F_ArmamentMeleeMontage() = default;
+
+	/** The one hand montages for the different attack patterns */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_CharacterToMontage Montage;
+
+	/** The combo attacks for this attack pattern */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_ComboAttacks Combo;
+	
+};
+
+/**
+ * An object containing the different attack patterns and combo information with a montage map reference to each character.
+ * Once the combat component retrieves the armament information, the character to montage reference is removed
+ */
+USTRUCT(BlueprintType)
+struct F_ArmamentComboInformation
+{
+	GENERATED_USTRUCT_BODY()
+	F_ArmamentComboInformation() = default;
+
+	/** The one hand montages for the different attack patterns */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) UAnimMontage* Montage;
+
+	/** The combo attacks for this attack pattern */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_ComboAttacks Combo;
+	
+};
+
+
+/**
+ * Melee armament montages for each weapon stance. This is useful for building up armament logic
+ */
+USTRUCT(BlueprintType)
+struct F_ArmamentMeleeMontages
+{
+	GENERATED_USTRUCT_BODY()
+	F_ArmamentMeleeMontages() = default;
+
+	/** The one hand montages for the different attack patterns */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<EInputAbilities, F_ArmamentMeleeMontage> OneHandMontages;
+
+	/** The two hand montages for the different attack patterns */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<EInputAbilities, F_ArmamentMeleeMontage> TwoHandMontages;
+
+	/** The dual wield montages for the different attack patterns */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<EInputAbilities, F_ArmamentMeleeMontage> DualWieldMontages;
+	
+};
+
+
+/**
+ * An object containing attack montages for an armament
+ */
+USTRUCT(BlueprintType)
+struct F_ArmamentMontages
+{
+	GENERATED_USTRUCT_BODY()
+	F_ArmamentMontages() = default;
+
+	/** The armament's different melee montages for every character. Use @ref EArmamentStance to map each attack  */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_ArmamentMeleeMontages MeleeMontages;
+	
+	/** The armament's general montages */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FName, F_CharacterToMontage> Montages;
+};
+
+
+/**
+ * This is the data table to hold armament montages for every character
+ */
+USTRUCT(BlueprintType)
+struct F_Table_ArmamentMontages : public FTableRowBase
+{
+	GENERATED_BODY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_ArmamentMontages ArmamentMontages;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString DevDescription;
+};
+
+
+
+
+
 
 
 /**
@@ -147,7 +258,8 @@ struct F_ArmamentInformation
 		So this is the base damage for reference, you'll probably have to create a way to add a combo attack and it's combat details together, especially if you want combat for different armament stances
 
 	 */
-	 
+
+	// TODO: Add attribute damage scaling
 	
 	/** The armament's passives */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayEffectInfo> Passives;

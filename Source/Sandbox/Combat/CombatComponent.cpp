@@ -5,7 +5,6 @@
 
 #include "Sandbox/Data/Enums/EquipSlot.h"
 #include "Sandbox/Data/Enums/ArmorTypes.h"
-#include "Sandbox/Data/Structs/ArmamentInformation.h"
 
 #include "Net/UnrealNetwork.h"
 #include "Engine/SkeletalMeshSocket.h"

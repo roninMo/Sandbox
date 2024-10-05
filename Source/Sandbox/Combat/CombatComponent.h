@@ -423,3 +423,57 @@ public:
  
 */
 
+
+
+
+
+/*
+
+	Health: 300
+	Stamina: 90
+
+					1h / 2h
+
+	Shortswords
+		- Damage:	100
+		- Stamina:	11 / 13
+
+	Longswords
+		- Damage:	110
+		- Stamina:	12 / 15
+
+	Greatswords
+		- Damage:	150
+		- Stamina:	16 / 17
+
+	UltraGreatsword
+		- Damage:	164
+		- Stamina:	20 / 27
+
+
+
+	1h montages
+
+	Uchigatana: 1h primary 3
+	Katana: 1h katana
+	Shortsword: 1h primary 1
+	Longsword: 1h katana
+	SasukeSword: 1h katana
+	Kurosawa: 1h primary 2
+	ItachiAnbuBlade: 1h primary 1
+	ZabuzaSword: ultra greatsword
+	Greatsword: 1h greatsword primary
+
+
+
+
+	2h montages
+		- primary: 2h primary attacks
+		- secondary: block
+		- special: 1h special
+		- strong: 2h strong attacks
+
+
+
+
+*/

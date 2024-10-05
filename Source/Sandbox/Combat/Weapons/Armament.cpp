@@ -11,7 +11,6 @@
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Logging/StructuredLog.h"
-#include "Sandbox/Data/Structs/ArmamentInformation.h"
 
 DEFINE_LOG_CATEGORY(ArmamentLog);
 
@@ -191,21 +190,39 @@ void AArmament::SetArmamentMontagesFromDB(UDataTable* ArmamentMontageDB, ECharac
 		MeleeMontages_OneHand.Empty();
 		for (auto &[AttackPattern, MontageMap] : MeleeMontages.OneHandMontages)
 		{
-			if (MontageMap.MontageMappings.Contains(Link)) MeleeMontages_OneHand.Add(AttackPattern, MontageMap.MontageMappings[Link]);
+			if (MontageMap.Montage.MontageMappings.Contains(Link))
+			{
+				F_ArmamentComboInformation MeleeMontageInfo;
+				MeleeMontageInfo.Montage = MontageMap.Montage.MontageMappings[Link];
+				MeleeMontageInfo.Combo = MontageMap.Combo;
+				MeleeMontages_OneHand.Add(AttackPattern, MeleeMontageInfo);
+			}
 		}
 
 		// Two hand montages
 		MeleeMontages_TwoHand.Empty();
 		for (auto &[AttackPattern, MontageMap] : MeleeMontages.TwoHandMontages)
 		{
-			if (MontageMap.MontageMappings.Contains(Link)) MeleeMontages_TwoHand.Add(AttackPattern, MontageMap.MontageMappings[Link]);
+			if (MontageMap.Montage.MontageMappings.Contains(Link))
+			{
+				F_ArmamentComboInformation MeleeMontageInfo;
+				MeleeMontageInfo.Montage = MontageMap.Montage.MontageMappings[Link];
+				MeleeMontageInfo.Combo = MontageMap.Combo;
+				MeleeMontages_TwoHand.Add(AttackPattern, MeleeMontageInfo);
+			}
 		}
 		
 		// Dual wielding montages
 		MeleeMontages_DualWield.Empty();
 		for (auto &[AttackPattern, MontageMap] : MeleeMontages.DualWieldMontages)
 		{
-			if (MontageMap.MontageMappings.Contains(Link)) MeleeMontages_DualWield.Add(AttackPattern, MontageMap.MontageMappings[Link]);
+			if (MontageMap.Montage.MontageMappings.Contains(Link))
+			{
+				F_ArmamentComboInformation MeleeMontageInfo;
+				MeleeMontageInfo.Montage = MontageMap.Montage.MontageMappings[Link];
+				MeleeMontageInfo.Combo = MontageMap.Combo;
+				MeleeMontages_DualWield.Add(AttackPattern, MeleeMontageInfo);
+			}
 		}
 		
 	}
@@ -222,20 +239,41 @@ UAnimMontage* AArmament::GetCombatMontage(const EInputAbilities AttackPattern)
 	const UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while retrieving the combat montage!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return nullptr;
 	}
 	
-	const TMap<EInputAbilities, UAnimMontage*>& CombatMontages = CombatComponent->GetCurrentStance() == EArmamentStance::OneHanding
+	const TMap<EInputAbilities, F_ArmamentComboInformation>& CombatMontages = CombatComponent->GetCurrentStance() == EArmamentStance::OneHanding
 		|| CombatComponent->GetCurrentStance() == EArmamentStance::TwoWeapons ? MeleeMontages_OneHand
 		: CombatComponent->GetCurrentStance() == EArmamentStance::DualWielding ? MeleeMontages_DualWield
 		: MeleeMontages_TwoHand;
 	
 	if (CombatMontages.Contains(AttackPattern))
 	{
-		return CombatMontages[AttackPattern];
+		return CombatMontages[AttackPattern].Montage;
 	}
 
 	return nullptr;
+}
+
+
+const F_ComboAttacks& AArmament::GetComboAttacks(const EInputAbilities AttackPattern) const
+{
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
+	{
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while retrieving the combo attacks!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return DummyMeleeComboInformation;
+	}
+
+	EArmamentStance Stance = CombatComponent->GetCurrentStance();
+	if (Stance == EArmamentStance::OneHanding && MeleeMontages_OneHand.Contains(AttackPattern)) return MeleeMontages_OneHand[AttackPattern].Combo;
+	if (Stance == EArmamentStance::TwoHanding && MeleeMontages_TwoHand.Contains(AttackPattern)) return MeleeMontages_TwoHand[AttackPattern].Combo;
+	if (Stance == EArmamentStance::TwoWeapons && MeleeMontages_OneHand.Contains(AttackPattern)) return MeleeMontages_OneHand[AttackPattern].Combo;
+	if (Stance == EArmamentStance::DualWielding && MeleeMontages_DualWield.Contains(AttackPattern)) return MeleeMontages_DualWield[AttackPattern].Combo;
+	return DummyMeleeComboInformation;
 }
 
 

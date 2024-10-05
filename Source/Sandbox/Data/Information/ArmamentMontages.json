@@ -9,30 +9,198 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_3.AM_Manny_Sword_1H_PrimaryAttacks_3'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_3.AM_Manny_Sword_1H_PrimaryAttacks_3'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SecondaryAttacks.AM_Manny_Sword_1H_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SecondaryAttacks.AM_Manny_Sword_1H_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -40,30 +208,153 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "None",
+							"ComboAttacks": []
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_SpecialAttacks.AM_Manny_Greatsword_1H_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -71,30 +362,198 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				}
@@ -136,30 +595,187 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_PrimaryAttacks.AM_Manny_Katana_1H_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_PrimaryAttacks.AM_Manny_Katana_1H_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_SecondaryAttacks.AM_Manny_Katana_1H_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_SecondaryAttacks.AM_Manny_Katana_1H_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_StrongAttacks.AM_Manny_Katana_1H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -167,30 +783,153 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "None",
+							"ComboAttacks": []
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_SpecialAttacks.AM_Manny_Greatsword_1H_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -198,30 +937,198 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				}
@@ -307,30 +1214,187 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_1.AM_Manny_Sword_1H_PrimaryAttacks_1'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_1.AM_Manny_Sword_1H_PrimaryAttacks_1'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SecondaryAttacks.AM_Manny_Sword_1H_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SecondaryAttacks.AM_Manny_Sword_1H_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -338,30 +1402,153 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "None",
+							"ComboAttacks": []
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_SpecialAttacks.AM_Manny_Greatsword_1H_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -369,30 +1556,198 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				}
@@ -434,30 +1789,187 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_PrimaryAttacks.AM_Manny_Katana_1H_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_PrimaryAttacks.AM_Manny_Katana_1H_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_SecondaryAttacks.AM_Manny_Katana_1H_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_SecondaryAttacks.AM_Manny_Katana_1H_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_StrongAttacks.AM_Manny_Katana_1H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -465,30 +1977,153 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "None",
+							"ComboAttacks": []
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_SpecialAttacks.AM_Manny_Greatsword_1H_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -496,30 +2131,198 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				}
@@ -561,30 +2364,187 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_PrimaryAttacks.AM_Manny_Katana_1H_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_PrimaryAttacks.AM_Manny_Katana_1H_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_SecondaryAttacks.AM_Manny_Katana_1H_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_SecondaryAttacks.AM_Manny_Katana_1H_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_StrongAttacks.AM_Manny_Katana_1H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -592,30 +2552,153 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "None",
+							"ComboAttacks": []
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_SpecialAttacks.AM_Manny_Greatsword_1H_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -623,30 +2706,198 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				}
@@ -710,30 +2961,176 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_2.AM_Manny_Sword_1H_PrimaryAttacks_2'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_2.AM_Manny_Sword_1H_PrimaryAttacks_2'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SecondaryAttacks.AM_Manny_Sword_1H_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SecondaryAttacks.AM_Manny_Sword_1H_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -741,30 +3138,153 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "None",
+							"ComboAttacks": []
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_SpecialAttacks.AM_Manny_Greatsword_1H_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -772,30 +3292,198 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				}
@@ -837,30 +3525,187 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_1.AM_Manny_Sword_1H_PrimaryAttacks_1'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_1.AM_Manny_Sword_1H_PrimaryAttacks_1'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SecondaryAttacks.AM_Manny_Sword_1H_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SecondaryAttacks.AM_Manny_Sword_1H_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -868,30 +3713,153 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "None",
+							"ComboAttacks": []
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_SpecialAttacks.AM_Manny_Greatsword_1H_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -899,30 +3867,198 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				}
@@ -964,30 +4100,165 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_PrimaryAttacks.AM_Manny_Greatsword_1H_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_PrimaryAttacks.AM_Manny_Greatsword_1H_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks_Offhand.AM_Manny_Sword_1H_StrongAttacks_Offhand'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks_Offhand.AM_Manny_Sword_1H_StrongAttacks_Offhand'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_SpecialAttacks.AM_Manny_Greatsword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_StrongAttacks.AM_Manny_Greatsword_1H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_StrongAttacks.AM_Manny_Greatsword_1H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -995,30 +4266,153 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_PrimaryAttacks.AM_Manny_ZabuzaSword_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_PrimaryAttacks.AM_Manny_ZabuzaSword_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks.AM_Manny_GreatSword_Blocks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks.AM_Manny_GreatSword_Blocks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "None",
+							"ComboAttacks": []
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_SpecialAttacks.AM_Manny_ZabuzaSword_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_SpecialAttacks.AM_Manny_ZabuzaSword_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_StrongAttacks.AM_Manny_ZabuzaSword_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_StrongAttacks.AM_Manny_ZabuzaSword_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -1026,30 +4420,198 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				}
@@ -1091,30 +4653,165 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_PrimaryAttacks.AM_Manny_Greatsword_1H_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_PrimaryAttacks.AM_Manny_Greatsword_1H_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks_Offhand.AM_Manny_Sword_1H_StrongAttacks_Offhand'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks_Offhand.AM_Manny_Sword_1H_StrongAttacks_Offhand'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_SpecialAttacks.AM_Manny_Greatsword_1H_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_StrongAttacks.AM_Manny_Greatsword_1H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_StrongAttacks.AM_Manny_Greatsword_1H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 27,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -1122,30 +4819,164 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/AM_Manny_Greatsword_2H_PrimaryAttacks_2.AM_Manny_Greatsword_2H_PrimaryAttacks_2'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/AM_Manny_Greatsword_2H_PrimaryAttacks_2.AM_Manny_Greatsword_2H_PrimaryAttacks_2'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 16,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 16,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 16,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 16,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks.AM_Manny_GreatSword_Blocks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks.AM_Manny_GreatSword_Blocks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "None",
+							"ComboAttacks": []
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_SpecialAttacks.AM_Manny_ZabuzaSword_SpecialAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_SpecialAttacks.AM_Manny_ZabuzaSword_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 16,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/AM_Manny_GreatSword_2H_StrongAttacks.AM_Manny_GreatSword_2H_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/AM_Manny_GreatSword_2H_StrongAttacks.AM_Manny_GreatSword_2H_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 16,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 16,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 16,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 16,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				},
@@ -1153,30 +4984,198 @@
 				{
 					"PrimaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SecondaryAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"StrongAttack":
 					{
-						"MontageMappings":
+						"Montage":
 						{
-							"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"BaseDamagesOrMultipliers":
+										{
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+										}
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					}
 				}

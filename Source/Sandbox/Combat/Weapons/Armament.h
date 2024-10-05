@@ -133,16 +133,21 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EInputAbilities, UAnimMontage*> RangedMontages;
 
 	/** The one handing melee montages for the armament */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EInputAbilities, UAnimMontage*> MeleeMontages_OneHand;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EInputAbilities, F_ArmamentComboInformation> MeleeMontages_OneHand;
 
 	/** The two handing melee montages for the armament */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EInputAbilities, UAnimMontage*> MeleeMontages_TwoHand;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EInputAbilities, F_ArmamentComboInformation> MeleeMontages_TwoHand;
+	
 	/** The dual wielding melee montages for the armament */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EInputAbilities, UAnimMontage*> MeleeMontages_DualWield;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<EInputAbilities, F_ArmamentComboInformation> MeleeMontages_DualWield;
+	
 	/** The montages for the armament */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament") TMap<FName, UAnimMontage*> Montages;
+
+	
+private:
+	/** Dummy combo information in the event we don't have any montage info. This helps with having const functions that pass objects by reference (to prevent it from being costly) */
+	F_ComboAttacks DummyMeleeComboInformation;
 
 
 public:
@@ -152,12 +157,15 @@ public:
 	 * @param ArmamentMontageDB					The data table that contains the armament montages
 	 * @param Link								The character skeleton to montage mapping reference  
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils")
+	UFUNCTION(BlueprintCallable, Category = "Armament|Utils")
 	virtual void SetArmamentMontagesFromDB(UDataTable* ArmamentMontageDB, ECharacterSkeletonMapping Link);
 
 	/** Retrieves the attack montage for one of the armament's attacks */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Montages") virtual UAnimMontage* GetCombatMontage(const EInputAbilities AttackPattern);
 
+	/** Retrieves the combo information for one of the armament's attacks based on the current weapon stance */
+	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual const F_ComboAttacks& GetComboAttacks(EInputAbilities AttackPattern) const;
+	
 	/** Retrieves one of the armament's montages */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Montages") virtual UAnimMontage* GetMontage(FName Montage);
 

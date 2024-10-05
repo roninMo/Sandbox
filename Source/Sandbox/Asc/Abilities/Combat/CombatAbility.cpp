@@ -98,12 +98,12 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 	
 	// Retrieve the attacks for the current stance
 	const F_ArmamentInformation& ArmamentInformation = EquippedArmament->GetArmamentInformation();
-	for (const auto& [Ability, InputId, InvalidStances, Level, ComboInformation] : ArmamentInformation.MeleeAbilities)
+	for (const auto& [Ability, InputId, InvalidStances, Level] : ArmamentInformation.MeleeAbilities)
 	{
 		if (AttackPattern != InputId || !InvalidStances.Contains(CombatComponent->GetCurrentStance())) continue;
 
 		// If there's no combat information for this attack, then either the information is missing or the ability was added at the wrong time
-		ComboAttacks = ComboInformation;
+		ComboAttacks = Armament->GetComboAttacks(AttackPattern);
 		ComboCount = ComboAttacks.ComboAttacks.Num();
 		SetCurrentMontage(EquippedArmament->GetCombatMontage(AttackPattern));
 		ensure(!ComboAttacks.ComboAttacks.IsEmpty());
