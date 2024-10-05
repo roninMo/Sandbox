@@ -104,7 +104,10 @@ struct F_ArmamentAbilityInformation
 	
 	/** The attack pattern and input id for the current ability. This helps determine the specific attack montage we're granting to the character for the ability */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) EInputAbilities InputId;
-	
+
+	/** The stances the player is able to use this combat ability in. For example, two handing shouldn't be able to use both block and the offhand attack which both use the same input */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<EArmamentStance> ValidStances;
+
 	/** The combos of a specific attack */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_ComboAttacks ComboInformation;
 };
@@ -143,8 +146,8 @@ struct F_ArmamentInformation
 		Sometimes this can be really confusing if you want to adjust each combo attack, and have it tied to attributes, at the end of the day you're still creating adjustments during each combat attack
 		So this is the base damage for reference, you'll probably have to create a way to add a combo attack and it's combat details together, especially if you want combat for different armament stances
 
-	 
 	 */
+	 
 	
 	/** The armament's passives */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayEffectInfo> Passives;
@@ -153,7 +156,7 @@ struct F_ArmamentInformation
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayEffectInfo StateInformation;
 
 	/** The armament's abilities */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<F_ArmamentAbilityInformation> CombatAbilities;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<F_ArmamentAbilityInformation> MeleeAbilities;
 	
 	/** The armament's abilities */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayAbilityInfo> Abilities;
