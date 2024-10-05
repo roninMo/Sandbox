@@ -21,6 +21,7 @@
 #define Tag_Activation_Fail_MissingTags FName("Activation.Fail.MissingTags")
 #define Tag_Activation_Fail_Networking FName("Activation.Fail.Networking")
 #define Tag_Activation_Fail_OnCooldown FName("Activation.Fail.OnCooldown")
+#define Tag_Activation_WeaponEquipped FName("Activation.WeaponEquipped")
 
 
 // ; Gameplay Abilities

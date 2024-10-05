@@ -325,7 +325,7 @@ void UCombatComponent::UpdateArmamentCombatAbilities(EArmamentStance PreviousSta
 			{
 				if (EInputAbilities::SecondaryAttack == CombatAbility.InputId)
 				{
-					CombatAbilities.Add(EInputAbilities::SecondaryAttack, CombatAbility);
+					CombatAbilities.Add(CombatAbility.InputId, CombatAbility);
 				}
 			}
 		}
@@ -346,7 +346,7 @@ void UCombatComponent::UpdateArmamentCombatAbilities(EArmamentStance PreviousSta
 			{
 				if (EInputAbilities::SecondaryAttack == CombatAbility.InputId)
 				{
-					CombatAbilities.Add(EInputAbilities::SecondaryAttack, CombatAbility);
+					CombatAbilities.Add(CombatAbility.InputId, CombatAbility);
 				}
 			}
 		}

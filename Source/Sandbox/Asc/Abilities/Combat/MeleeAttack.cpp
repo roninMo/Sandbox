@@ -41,7 +41,13 @@ bool UMeleeAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, c
 		return false;
 	}
 
-	UCombatComponent* CombatComponent = GetCombatComponent();
+	const ACharacterBase* Character = Cast<ACharacterBase>(ActorInfo->AvatarActor.Get());
+	if (!Character)
+	{
+		return nullptr;
+	}
+	
+	UCombatComponent* CombatComponent = Character->GetCombatComponent();
 	if (!CombatComponent)
 	{
 		return false;
@@ -54,7 +60,7 @@ bool UMeleeAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, c
 	}
 
 
-	// Check if there's a valid weapon for this specific ability
+	// Check if there's a valid weapon for this specific ability (This is here to prevent spamming replicated events) // TODO: Find out if this is actually beneficial
 	bool bCanActivateAbility = false;
 	if (IsRightHandAbilityInput(AttackPattern)
 		&& CombatComponent->GetArmament()
@@ -82,7 +88,7 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 		return;
 	}
 
-	// access the armament information
+	// Check for weapon updates
 	if (!SetComboAndArmamentInformation())
 	{
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);

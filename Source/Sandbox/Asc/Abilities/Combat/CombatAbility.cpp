@@ -82,29 +82,32 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 	}
 	
 	// Retrieve the combo information if the player's equipped an armament or their stance has updated
-	if (EquippedArmament == Armament && CurrentStance == CombatComponent->GetCurrentStance()) return true;
+	if (EquippedArmament == Armament && CurrentStance == CombatComponent->GetCurrentStance() && EquippedArmament->GetEquipStatus() == EEquipStatus::Equipped) return true;
 	else
 	{
+		Armament = nullptr;
 		CurrentStance = EArmamentStance::None;
 		ComboAttacks = F_ComboAttacks();
 		ComboCount = 0;
 		CurrentAttack = F_ComboAttack();
+		EquipSlot = EEquipSlot::None;
 	}
 	
 	// Retrieve the attacks for the current stance
 	const F_ArmamentInformation& ArmamentInformation = EquippedArmament->GetArmamentInformation();
-	for (const auto& [Ability, Level, InputId, Combo] : ArmamentInformation.CombatAbilities)
+	for (const auto& [Ability, Level, InputId, ComboInformation] : ArmamentInformation.CombatAbilities)
 	{
 		if (AttackPattern != InputId) continue;
 
-		ComboAttacks = Combo;
-		ComboCount = Combo.ComboAttacks.Num();
-		SetCurrentMontage(EquippedArmament->GetCombatMontage(AttackPattern));
+		// If there's no combat information for this attack, then either the information is missing or the ability was added at the wrong time
+		ComboAttacks = ComboInformation;
 		CurrentStance = CombatComponent->GetCurrentStance();
+		ComboCount = ComboAttacks.ComboAttacks.Num();
+		SetCurrentMontage(EquippedArmament->GetCombatMontage(AttackPattern));
 		ensure(!ComboAttacks.ComboAttacks.IsEmpty());
-		
 	}
-	
+
+	Armament = EquippedArmament;
 	return true;
 }
 
@@ -112,7 +115,7 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 void UCombatAbility::InitCombatInformation()
 {
 	SetComboAttack(); // Current attack and combo index
-	SetAttackMontage(nullptr); // Current montage
+	SetAttackMontage(Armament); // Current montage
 	SetMontageStartSection(); // montage start section (customization for different types of attacks
 	CalculateAttributeModifications(); // Damage and attribute calculations
 }
@@ -175,6 +178,10 @@ void UCombatAbility::SetMontageStartSection(bool ChargeAttack)
 
 void UCombatAbility::CalculateAttributeModifications()
 {
+	// Don't try to add attribute calculations if the weapon isn't valid 
+	if (!Armament) return;
+
+	// Empty out the previous attack's attribute calculations
 	AdjustedAttributes.Empty();
 	
 	// Weapon damage and attribute calculations
@@ -194,6 +201,9 @@ void UCombatAbility::CalculateAttributeModifications()
 		// Combo based -> retrieve the damage from the combo attack, and add damage scaling from attributes
 		AdjustedAttributes = CurrentAttack.AttackInformation.BaseDamagesOrMultipliers;
 	}
+
+	// TODO: Add a function from the combat component that handles attribute adjustments based on the weapon stats, current attack, and armament stance
+	
 }
 #pragma endregion 
 

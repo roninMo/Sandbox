@@ -11,6 +11,7 @@ class UGameplayAbility;
 class UGameplayEffect;
 struct FGameplayAttribute;
 enum class EEquipRestrictions : uint8;
+enum class EArmamentStance : uint8;
 enum class EArmamentClassification : uint8;
 enum class EDamageInformationSource : uint8;
 enum class EInputAbilities : uint8;
@@ -31,7 +32,7 @@ enum class EInputAbilities : uint8;
 
 
 /**
- *  Attack information for an armament or an individual combo attack
+ *  Attack information for an armament or an individual combo attack. These are the objects created after retrieving the weapons current information from different armament stances
  */
 USTRUCT(BlueprintType)
 struct F_AttackInformation
@@ -83,7 +84,11 @@ struct F_ComboAttacks
 
 
 /**
- * The ability information specific to an armament 
+ * The ability information specific to an armament
+ *
+ *		For influencing weapon damage and costs during one handing, two handing, or dual wielding, there's base damage stats and attribute modifications for each attack during each stance in combat
+ *		Sometimes this can be really confusing if you want to adjust each combo attack, and have it tied to attributes, at the end of the day you're still creating adjustments during each combat attack
+ *		So this is the base damage for reference, you'll probably have to create a way to add a combo attack and it's combat details together, especially if you want combat for different armament stances
  */
 USTRUCT(BlueprintType)
 struct F_ArmamentAbilityInformation
@@ -101,7 +106,7 @@ struct F_ArmamentAbilityInformation
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) EInputAbilities InputId;
 	
 	/** The combos of a specific attack */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_ComboAttacks Combo;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_ComboAttacks ComboInformation;
 };
 
 
@@ -132,6 +137,14 @@ struct F_ArmamentInformation
 	
 	/** The base attack information of the armament */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FGameplayAttribute, float> BaseDamageStats;
+
+	/**
+		For influencing weapon damage and costs during one handing, two handing, or dual wielding, there's base damage stats and attribute modifications for each attack during each stance in combat
+		Sometimes this can be really confusing if you want to adjust each combo attack, and have it tied to attributes, at the end of the day you're still creating adjustments during each combat attack
+		So this is the base damage for reference, you'll probably have to create a way to add a combo attack and it's combat details together, especially if you want combat for different armament stances
+
+	 
+	 */
 	
 	/** The armament's passives */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayEffectInfo> Passives;

@@ -3,8 +3,11 @@
 
 #include "Sandbox/Asc/Abilities/Player/GameplayAbility_Aim.h"
 
+#include "Sandbox/Asc/Information/SandboxTags.h"
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 #include "Sandbox/Characters/Components/Camera/CharacterCameraLogic.h"
+#include "Sandbox/Combat/CombatComponent.h"
+#include "Sandbox/Combat/Weapons/Armament.h"
 
 
 UGameplayAbility_Aim::UGameplayAbility_Aim()
@@ -33,6 +36,22 @@ bool UGameplayAbility_Aim::CanActivateAbility(const FGameplayAbilitySpecHandle H
 
 	UAdvancedMovementComponent* MovementComponent = Character->GetAdvancedMovementComp();
 	if (!MovementComponent || !MovementComponent->AllowedToAim()) return false;
+
+	UCombatComponent* CombatComponent = Character->GetCombatComponent();
+	if (CombatComponent)
+	{
+		if (CombatComponent->GetArmament() && CombatComponent->GetArmament()->GetEquipStatus() == EEquipStatus::Equipped)
+		{
+			OptionalRelevantTags->AddTag(FGameplayTag::RequestGameplayTag(Tag_Activation_WeaponEquipped));
+			return false;
+		}
+		
+		if (CombatComponent->GetArmament(false) && CombatComponent->GetArmament(false)->GetEquipStatus() == EEquipStatus::Equipped)
+		{
+			OptionalRelevantTags->AddTag(FGameplayTag::RequestGameplayTag(Tag_Activation_WeaponEquipped));
+			return false;
+		}
+	}
 	
 	return true;
 }

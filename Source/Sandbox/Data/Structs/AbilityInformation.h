@@ -17,6 +17,8 @@ enum class ETriggerEvent : uint8;
 /**
  *	An example enum for creating input mappings for abilities using enums with BindAbilityActivationToInputComponent()
  *	// Help with searching for locations of objects ->  GetPathNameSafe(UClass::TryFindTypeSlow<UEnum>("EInputAbilities"))
+ *
+ *	Dont use inputId of 5, there's probably a specific binding with the ability input system for generic inputs
  */
 UENUM(BlueprintType)
 enum class EInputAbilities : uint8
@@ -25,10 +27,10 @@ enum class EInputAbilities : uint8
 	Confirm = 1						UMETA(DisplayName = "Confirm"),
 	Cancel = 2						UMETA(DisplayName = "Cancel"),
 	Sprint = 3						UMETA(DisplayName = "Sprint"),
-	PrimaryAttack = 4				UMETA(DisplayName = "Primary Attack"),
-	SecondaryAttack = 5				UMETA(DisplayName = "Secondary Attack"),
-	StrongAttack = 6				UMETA(DisplayName = "Strong Attack"),
-	SpecialAttack = 7 				UMETA(DisplayName = "Special Attack"),
+	PrimaryAttack = 12				UMETA(DisplayName = "Primary Attack"),
+	SecondaryAttack = 13			UMETA(DisplayName = "Secondary Attack"),
+	StrongAttack = 14				UMETA(DisplayName = "Strong Attack"),
+	SpecialAttack = 15 				UMETA(DisplayName = "Special Attack"),
 	Aim = 8							UMETA(DisplayName = "Aim"),
 	Reload = 9						UMETA(DisplayName = "Reload"),
 	Crouch = 10						UMETA(DisplayName = "Crouch"),

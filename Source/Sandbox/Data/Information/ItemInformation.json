@@ -1081,6 +1081,29 @@
 		"DevDescription": ""
 	},
 	{
+		"Name": "GreatSword",
+		"ItemInformation":
+		{
+			"Id":
+			{
+				"A": 0,
+				"B": 0,
+				"C": 0,
+				"D": 0
+			},
+			"SortOrder": -1,
+			"ItemName": "GreatSword",
+			"DisplayName": "Great Sword",
+			"Description": "A sword for wacking things with",
+			"ItemType": "Inv_Weapon",
+			"Image": "/Script/Engine.Texture2D'/Game/Hud/Icons/UI_Hammer.UI_Hammer'",
+			"ActualClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/Swords/GreatSword/BPA_GreatSword.BPA_GreatSword_C'",
+			"WorldClass": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/Swords/GreatSword/BPI_GreatSword.BPI_GreatSword_C'",
+			"GlobalInformation": "None"
+		},
+		"DevDescription": ""
+	},
+	{
 		"Name": "Shield",
 		"ItemInformation":
 		{

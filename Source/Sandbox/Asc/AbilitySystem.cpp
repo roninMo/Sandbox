@@ -490,11 +490,13 @@ void UAbilitySystem::BindAbilityActivationToEnhancedInput(UEnhancedInputComponen
 	// Remove the old bindings, if there's already binds
 	for (const int32 RegisteredHandle : RegisteredAbilityInputHandles)
 	{
+		InputComponent->ClearActionBindings();
 		InputComponent->RemoveActionBinding(RegisteredHandle);
 	}
 	RegisteredAbilityInputHandles.Empty();
 
 	// Add the ability input actions
+	UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Adding Ability Inputs", *UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 	for (FInputActionAbilityMap InputAction : AbilityInputActions)
 	{
 		for (int32 i = 0; i < InputAction.KeyEvents.Num(); i++)
@@ -511,6 +513,8 @@ void UAbilitySystem::BindAbilityActivationToEnhancedInput(UEnhancedInputComponen
 				).GetHandle();
 				RegisteredAbilityInputHandles.Add(InputActionHandle);
 				
+				UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} adding ability input bind {3} on press events. Input action: {4}", *UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__),
+					*GetNameSafe(GetOwner()), *UEnum::GetValueAsString(InputAction.InputId), *InputAction.InputAction.GetName());
 			}
 
 			// Released Events
@@ -524,6 +528,9 @@ void UAbilitySystem::BindAbilityActivationToEnhancedInput(UEnhancedInputComponen
 					static_cast<int32>(InputAction.InputId)
 				).GetHandle();
 				RegisteredAbilityInputHandles.Add(InputActionHandle);
+				
+				UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} adding ability input bind {3} on released events. Input action: {4}", *UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__),
+					*GetNameSafe(GetOwner()), *UEnum::GetValueAsString(InputAction.InputId), *InputAction.InputAction.GetName());
 			}
 
 			// Add Other Events

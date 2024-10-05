@@ -23,18 +23,85 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
-					"Combo":
+					"ComboInformation":
 					{
-						"DamageEffectClass": "None",
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
 							{
 								"AttackInformation":
 								{
 									"BaseDamagesOrMultipliers":
 									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 									}
 								},
-								"StaminaCost": 0,
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Level": 1,
+					"InputId": "SecondaryAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Level": 1,
+					"InputId": "SpecialAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Level": 1,
+					"InputId": "StrongAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
 								"CustomMontageSection": "None"
 							}
 						]
@@ -96,18 +163,85 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
-					"Combo":
+					"ComboInformation":
 					{
-						"DamageEffectClass": "None",
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
 							{
 								"AttackInformation":
 								{
 									"BaseDamagesOrMultipliers":
 									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 									}
 								},
-								"StaminaCost": 0,
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Level": 1,
+					"InputId": "SecondaryAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Level": 1,
+					"InputId": "SpecialAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Level": 1,
+					"InputId": "StrongAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
 								"CustomMontageSection": "None"
 							}
 						]
@@ -164,29 +298,7 @@
 				"Effect": "None",
 				"Level": 1
 			},
-			"CombatAbilities": [
-				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
-					"Level": 1,
-					"InputId": "PrimaryAttack",
-					"Combo":
-					{
-						"DamageEffectClass": "None",
-						"ComboAttacks": [
-							{
-								"AttackInformation":
-								{
-									"BaseDamagesOrMultipliers":
-									{
-									}
-								},
-								"StaminaCost": 0,
-								"CustomMontageSection": "None"
-							}
-						]
-					}
-				}
-			],
+			"CombatAbilities": [],
 			"Abilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
@@ -237,29 +349,7 @@
 				"Effect": "None",
 				"Level": 1
 			},
-			"CombatAbilities": [
-				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
-					"Level": 1,
-					"InputId": "PrimaryAttack",
-					"Combo":
-					{
-						"DamageEffectClass": "None",
-						"ComboAttacks": [
-							{
-								"AttackInformation":
-								{
-									"BaseDamagesOrMultipliers":
-									{
-									}
-								},
-								"StaminaCost": 0,
-								"CustomMontageSection": "None"
-							}
-						]
-					}
-				}
-			],
+			"CombatAbilities": [],
 			"Abilities": [
 				{
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
@@ -315,7 +405,7 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
-					"Combo":
+					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
@@ -337,7 +427,7 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"Level": 1,
 					"InputId": "SecondaryAttack",
-					"Combo":
+					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
@@ -359,7 +449,7 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
 					"Level": 1,
 					"InputId": "SpecialAttack",
-					"Combo":
+					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
@@ -381,7 +471,7 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
 					"Level": 1,
 					"InputId": "StrongAttack",
-					"Combo":
+					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
@@ -455,7 +545,7 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
-					"Combo":
+					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
@@ -477,7 +567,7 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"Level": 1,
 					"InputId": "SecondaryAttack",
-					"Combo":
+					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
@@ -499,7 +589,7 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
 					"Level": 1,
 					"InputId": "SpecialAttack",
-					"Combo":
+					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
@@ -521,7 +611,7 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
 					"Level": 1,
 					"InputId": "StrongAttack",
-					"Combo":
+					"ComboInformation":
 					{
 						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
@@ -595,18 +685,85 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
-					"Combo":
+					"ComboInformation":
 					{
-						"DamageEffectClass": "None",
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
 							{
 								"AttackInformation":
 								{
 									"BaseDamagesOrMultipliers":
 									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 									}
 								},
-								"StaminaCost": 0,
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Level": 1,
+					"InputId": "SecondaryAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Level": 1,
+					"InputId": "SpecialAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Level": 1,
+					"InputId": "StrongAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
 								"CustomMontageSection": "None"
 							}
 						]
@@ -668,18 +825,85 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
-					"Combo":
+					"ComboInformation":
 					{
-						"DamageEffectClass": "None",
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
 							{
 								"AttackInformation":
 								{
 									"BaseDamagesOrMultipliers":
 									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 									}
 								},
-								"StaminaCost": 0,
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Level": 1,
+					"InputId": "SecondaryAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Level": 1,
+					"InputId": "SpecialAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Level": 1,
+					"InputId": "StrongAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
 								"CustomMontageSection": "None"
 							}
 						]
@@ -741,18 +965,85 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
-					"Combo":
+					"ComboInformation":
 					{
-						"DamageEffectClass": "None",
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
 							{
 								"AttackInformation":
 								{
 									"BaseDamagesOrMultipliers":
 									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 									}
 								},
-								"StaminaCost": 0,
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Level": 1,
+					"InputId": "SecondaryAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Level": 1,
+					"InputId": "SpecialAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Level": 1,
+					"InputId": "StrongAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
 								"CustomMontageSection": "None"
 							}
 						]
@@ -814,18 +1105,85 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
-					"Combo":
+					"ComboInformation":
 					{
-						"DamageEffectClass": "None",
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
 							{
 								"AttackInformation":
 								{
 									"BaseDamagesOrMultipliers":
 									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 									}
 								},
-								"StaminaCost": 0,
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Level": 1,
+					"InputId": "SecondaryAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Level": 1,
+					"InputId": "SpecialAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Level": 1,
+					"InputId": "StrongAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
 								"CustomMontageSection": "None"
 							}
 						]
@@ -887,18 +1245,225 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
-					"Combo":
+					"ComboInformation":
 					{
-						"DamageEffectClass": "None",
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
 							{
 								"AttackInformation":
 								{
 									"BaseDamagesOrMultipliers":
 									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 									}
 								},
-								"StaminaCost": 0,
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Level": 1,
+					"InputId": "SecondaryAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Level": 1,
+					"InputId": "SpecialAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Level": 1,
+					"InputId": "StrongAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "GreatSword",
+		"ArmamentInformation":
+		{
+			"Id": "GreatSword",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/Swords/GreatSword/BPA_GreatSword.BPA_GreatSword_C'",
+			"Classification": "GreatSwords",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"CombatAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Level": 1,
+					"InputId": "SecondaryAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Level": 1,
+					"InputId": "SpecialAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Level": 1,
+					"InputId": "StrongAttack",
+					"ComboInformation":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
+									}
+								},
+								"StaminaCost": 5,
 								"CustomMontageSection": "None"
 							}
 						]
