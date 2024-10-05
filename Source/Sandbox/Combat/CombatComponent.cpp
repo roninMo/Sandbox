@@ -382,6 +382,7 @@ void UCombatComponent::UpdateArmamentCombatAbilities(EArmamentStance PreviousSta
 			
 			- TwoHandingPrimary
 				- Primary (Primary, Strong, Special, Secondary)
+
 			
 		*/
 		if (CurrentStance == EArmamentStance::OneHanding || CurrentStance == EArmamentStance::TwoWeapons || CurrentStance == EArmamentStance::DualWielding)

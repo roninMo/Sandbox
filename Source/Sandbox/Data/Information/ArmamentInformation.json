@@ -348,16 +348,83 @@
 					"InputId": "PrimaryAttack",
 					"Combo":
 					{
-						"DamageEffectClass": "None",
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
 							{
 								"AttackInformation":
 								{
 									"BaseDamagesOrMultipliers":
 									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
 									}
 								},
-								"StaminaCost": 0,
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Level": 1,
+					"InputId": "SecondaryAttack",
+					"Combo":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Level": 1,
+					"InputId": "SpecialAttack",
+					"Combo":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Level": 1,
+					"InputId": "StrongAttack",
+					"Combo":
+					{
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+									}
+								},
+								"StaminaCost": 5,
 								"CustomMontageSection": "None"
 							}
 						]
@@ -428,49 +495,86 @@
 					"InputId": "PrimaryAttack",
 					"Combo":
 					{
-						"DamageEffectClass": "None",
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 						"ComboAttacks": [
 							{
 								"AttackInformation":
 								{
 									"BaseDamagesOrMultipliers":
 									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
 									}
 								},
-								"StaminaCost": 0,
+								"StaminaCost": 5,
 								"CustomMontageSection": "None"
 							}
 						]
 					}
 				},
 				{
-					"Ability": "None",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"Level": 1,
-					"InputId": "None",
+					"InputId": "SecondaryAttack",
 					"Combo":
 					{
-						"DamageEffectClass": "None",
-						"ComboAttacks": []
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
 					}
 				},
 				{
-					"Ability": "None",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
 					"Level": 1,
-					"InputId": "None",
+					"InputId": "SpecialAttack",
 					"Combo":
 					{
-						"DamageEffectClass": "None",
-						"ComboAttacks": []
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
 					}
 				},
 				{
-					"Ability": "None",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
 					"Level": 1,
-					"InputId": "None",
+					"InputId": "StrongAttack",
 					"Combo":
 					{
-						"DamageEffectClass": "None",
-						"ComboAttacks": []
+						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+						"ComboAttacks": [
+							{
+								"AttackInformation":
+								{
+									"BaseDamagesOrMultipliers":
+									{
+										"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+									}
+								},
+								"StaminaCost": 5,
+								"CustomMontageSection": "None"
+							}
+						]
 					}
 				}
 			],
