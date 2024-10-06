@@ -6,10 +6,14 @@
 #include "Sandbox/Asc/Abilities/Combat/CombatAbility.h"
 #include "MeleeAttack.generated.h"
 
+class UAbilityTask_WaitGameplayTagQuery;
+class UAbilityTask_WaitGameplayTagAdded;
+class UAbilityTask_WaitGameplayTagRemoved;
 class UAbilityTask_WaitInputRelease;
 class UAbilityTask_PlayMontageAndWait;
-class UAbilityTask_WaitGameplayEvent;
 class UAbilityTask_TargetOverlap;
+
+
 /**
  * 
  */
@@ -18,15 +22,30 @@ class SANDBOX_API UMeleeAttack : public UCombatAbility
 {
 	GENERATED_BODY()
 
-protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AllowMovementTag;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AttackFramesTag;
-	
+protected: // TODO: Either adjust the ability task limit, or create additional tasks that handle everything together
+	/** The attack montage handle */
+	UPROPERTY(BlueprintReadWrite) UAbilityTask_PlayMontageAndWait* AttackMontageHandle;
+
+	/** The input released handle */
 	UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitInputRelease* InputReleasedHandle;
-	UPROPERTY(BlueprintReadWrite) UAbilityTask_PlayMontageAndWait* AttackMontageTaskHandle;
-	UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayEvent* HandleAttackStateTask;
-	UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayEvent* HandleLandedAttackTask;
-	UPROPERTY(BlueprintReadWrite) UAbilityTask_TargetOverlap* MeleeOverlapTaskHandle;
+
+	/**** Attack trace logic ****/
+	/** The handle that traces for overlaps during the attack animation */
+	UPROPERTY(BlueprintReadWrite) UAbilityTask_TargetOverlap* MeleeOverlapHandle;
+
+	/** The handle for when attack frames end during an attack */
+	UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayTagRemoved* AttackFramesEndHandle;
+
+	/** The handle for when attack frames begin during an attack */
+	UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayTagAdded* AttackFramesBeginHandle;
+
+	
+	/**** Cached tags ****/
+	/** When we should allow rotation movement during the attack */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AllowMovementTag;
+	
+	/** When we should actually trace for enemies during an attack animations */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AttackFramesTag;
 
 	
 public:
@@ -44,14 +63,17 @@ public:
 	/** Input released event for multiplayer replication */
 	UFUNCTION() virtual void OnInputReleased(float TimeHeld);
 	
-	/** This is a delegate binding that listens for gameplay events for transitioning between different states of the attack (Charging, Attacking) */
-	UFUNCTION(BlueprintCallable) virtual void OnHandleAttackState(FGameplayEventData EventData);
+	/** Begin tracing for targets during the attack frames. For attacks with multiple attack frames, this should either recreate the task or decide when overlap traces are valid */
+	UFUNCTION(BlueprintCallable) virtual void OnBeginAttackFrames();
+	
+	/** Event for when the attack frames of the current attack are done */
+	UFUNCTION(BlueprintCallable) virtual void OnEndAttackFrames();
 
 	/** This is a delegate binding for attacks that's sent to this character during this task */
-	UFUNCTION(BlueprintCallable) virtual void OnLandedAttack(const FGameplayAbilityTargetDataHandle& TargetData, UAbilitySystem* TargetAsc);
+	UFUNCTION(BlueprintCallable) virtual void OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& TargetData, UAbilitySystem* TargetAsc);
 	
 	/** This is a delegate binding for gameplay event information that's sent to this character during this task */
-	UFUNCTION(BlueprintCallable) virtual void OnEndOfAttack();
+	UFUNCTION(BlueprintCallable) virtual void OnEndOfMontage();
 
 	/** Retrieves the attack montage from the armament based on different conditions */
 	virtual void SetAttackMontage(AArmament* Weapon) override;

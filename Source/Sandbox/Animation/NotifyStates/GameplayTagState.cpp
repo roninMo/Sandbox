@@ -25,9 +25,12 @@ void UGameplayTagState::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSeque
 	}
 
 	// UE_LOGFMT(LogTemp, Warning, "{0}: {1} added to {2}_{3}", *UEnum::GetValueAsString(Character->GetLocalRole()), *TagState.ToString(), *GetNameSafe(Character), Character->CharacterId);
-	AbilitySystem->AddLooseGameplayTag(TagState);
-	AbilitySystem->AddReplicatedLooseGameplayTag(TagState);
+	if (bAddGameplayTagToActor)
+	{
+		AbilitySystem->AddReplicatedLooseGameplayTag(TagState);
+	}
 
+	
 	if (bSendGameplayEventToActor)
 	{
 		// if (!Character->HasAuthority() && Cast<ANPC>(Character)) return; // Do not activate on npc clients
@@ -46,9 +49,8 @@ void UGameplayTagState::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimSequenc
 		return;
 	}
 	
-	if (AbilitySystem->HasMatchingGameplayTag(TagState))
+	if (bAddGameplayTagToActor && AbilitySystem->HasMatchingGameplayTag(TagState))
 	{
-		AbilitySystem->RemoveLooseGameplayTag(TagState);
 		AbilitySystem->RemoveReplicatedLooseGameplayTag(TagState);
 	}
 }

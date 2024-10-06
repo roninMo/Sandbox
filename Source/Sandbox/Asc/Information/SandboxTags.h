@@ -99,6 +99,8 @@
 #define Tag_State_Attacking_Charging FName("State.Attacking.Charging")
 #define Tag_State_Attacking_Startup FName("State.Attacking.Startup")
 #define Tag_State_Attacking_AttackFrames FName("State.Attacking.AttackFrames")
+#define Tag_State_Attacking_AttackFrames_End FName("State.Attacking.AttackFrames.End")
+#define Tag_State_Attacking_AttackFrames_Begin FName("State.Attacking.AttackFrames.Begin")
 #define Tag_State_Attacking_AllowMovement FName("State.Attacking.AllowMovement")
 
 

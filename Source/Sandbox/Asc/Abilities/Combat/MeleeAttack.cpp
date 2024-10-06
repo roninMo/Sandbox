@@ -4,18 +4,19 @@
 #include "Sandbox/Asc/Abilities/Combat/MeleeAttack.h"
 
 #include "Abilities/Tasks/AbilityTask_WaitInputRelease.h"
-#include "Sandbox/Asc/Tasks/AbilityTask_TargetOverlap.h"
-#include "Abilities/Tasks/AbilityTask_WaitGameplayEvent.h"
 #include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
+#include "Abilities/Tasks/AbilityTask_WaitGameplayTag.h"
+#include "Sandbox/Asc/Tasks/AbilityTask_TargetOverlap.h"
 #include "Logging/StructuredLog.h"
 
 #include "Sandbox/Asc/Information/SandboxTags.h"
+#include "Sandbox/Data/Enums/ArmamentTypes.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Combat/Weapons/Armament.h"
-#include "Sandbox/Data/Enums/ArmamentTypes.h"
+
 
 UMeleeAttack::UMeleeAttack()
 {
@@ -98,35 +99,41 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 	
 	// Add the combo information and attack calculations
 	InitCombatInformation();
-	AttackMontageTaskHandle = UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(
+	AttackMontageHandle = UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(
 		this,
-		FName("AttackMontageTaskHandle"),
+		FName("AttackMontageHandle"),
 		GetCurrentMontage(),
 		1.f,
 		MontageStartSection
 	);
-	AttackMontageTaskHandle->OnCompleted.AddDynamic(this, &UMeleeAttack::OnEndOfAttack);
-	AttackMontageTaskHandle->OnCancelled.AddDynamic(this, &UMeleeAttack::OnEndOfAttack);
-	AttackMontageTaskHandle->OnBlendOut.AddDynamic(this, &UMeleeAttack::OnEndOfAttack);
-	AttackMontageTaskHandle->OnInterrupted.AddDynamic(this, &UMeleeAttack::OnEndOfAttack);
-	AttackMontageTaskHandle->ReadyForActivation();
+	AttackMontageHandle->OnCompleted.AddDynamic(this, &UMeleeAttack::OnEndOfMontage);
+	AttackMontageHandle->OnCancelled.AddDynamic(this, &UMeleeAttack::OnEndOfMontage);
+	AttackMontageHandle->OnBlendOut.AddDynamic(this, &UMeleeAttack::OnEndOfMontage);
+	AttackMontageHandle->OnInterrupted.AddDynamic(this, &UMeleeAttack::OnEndOfMontage);
+	AttackMontageHandle->ReadyForActivation();
 
-	// Attack Frames
-	HandleAttackStateTask = UAbilityTask_WaitGameplayEvent::WaitGameplayEvent(
-		this,
-		FGameplayTag::RequestGameplayTag(Tag_State_Attacking),
-		nullptr,
-		false,
-		false
-	);
-	HandleAttackStateTask->EventReceived.AddDynamic(this, &UMeleeAttack::OnHandleAttackState);
-	HandleAttackStateTask->ReadyForActivation();
+	// Attack State (Allow movement, begin overlap trace logic, etc.)
+	// FGameplayTagQuery AttackFramesQuery = FGameplayTagQuery::BuildQuery(FGameplayTagQueryExpression().AllTagsMatch().AddTag(AttackFramesTag));
+	// AttackFramesHandle = UAbilityTask_WaitGameplayTagQuery::WaitGameplayTagQuery(
+	// 	this,
+	// 	AttackFramesQuery,
+	// 	nullptr,
+	// 	EWaitGameplayTagQueryTriggerCondition::WhenTrue
+	// );
+
+	AttackFramesBeginHandle = UAbilityTask_WaitGameplayTagAdded::WaitGameplayTagAdd(this, AttackFramesTag);
+	AttackFramesBeginHandle->Added.AddDynamic(this, &UMeleeAttack::OnBeginAttackFrames);
+	AttackFramesBeginHandle->ReadyForActivation();
+
+	AttackFramesEndHandle = UAbilityTask_WaitGameplayTagRemoved::WaitGameplayTagRemove(this, AttackFramesTag);
+	AttackFramesEndHandle->Removed.AddDynamic(this, &UMeleeAttack::OnEndAttackFrames);
+	AttackFramesEndHandle->ReadyForActivation();
 	
-	// Overlap Trace
-	// Have the server handle the attack logic with client prediction
-	// MeleeOverlapTaskHandle = UAbilityTask_TargetOverlap::CreateOverlapDataTask(this, Armament->GetArmamentHitboxes());
-	// MeleeOverlapTaskHandle->OnValidOverlap.AddDynamic(this, &UMeleeAttack::OnLandedAttack);
-	// MeleeOverlapTaskHandle->ReadyForActivation(); // During attack frames
+	
+	// Overlap Trace ->  Have the server handle the attack logic with client prediction
+	MeleeOverlapHandle = UAbilityTask_TargetOverlap::CreateOverlapDataTask(this, Armament->GetArmamentHitboxes());
+	MeleeOverlapHandle->OnValidOverlap.AddDynamic(this, &UMeleeAttack::OnOverlappedTarget);
+	// MeleeOverlapHandle->ReadyForActivation(); // During attack frames
 }
 
 
@@ -136,39 +143,34 @@ void UMeleeAttack::OnInputReleased(float TimeHeld)
 }
 
 
-void UMeleeAttack::OnHandleAttackState(FGameplayEventData EventData)
+void UMeleeAttack::OnBeginAttackFrames()
 {
-	// Allow movement logic
-	// TODO: Prevent movement on the client, the ability doesn't need to handle this because the client accumulates the aggregated tags
-	// The player controllers still can use gameplay tags to create their logic, just be careful to remove tags safely so it doesn't affect other characters
-
-	// Attack logic
-	if (EventData.EventTag.MatchesTag(AttackFramesTag))
-	{
-		MeleeOverlapTaskHandle->ReadyForActivation();
-		CheckAndAttackIfAlreadyOverlappingAnything(AlreadyHitActors);
-	}
-
-	UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} is attacking, state: {3}",
-		*UEnum::GetValueAsString(GetAvatarActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetAvatarActorFromActorInfo()), *EventData.EventTag.ToString());
+	if (MeleeOverlapHandle) MeleeOverlapHandle->ReadyForActivation();
+	CheckAndAttackIfAlreadyOverlappingAnything(AlreadyHitActors);
 }
 
 
-void UMeleeAttack::OnLandedAttack(const FGameplayAbilityTargetDataHandle& TargetData, UAbilitySystem* TargetAsc)
+void UMeleeAttack::OnEndAttackFrames()
+{
+	if (MeleeOverlapHandle) MeleeOverlapHandle->EndTask();
+}
+
+
+void UMeleeAttack::OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& TargetData, UAbilitySystem* TargetAsc)
 {
 	AlreadyHitActors.AddUnique(TargetAsc->GetAvatarActor());
 	HandleMeleeAttack(TargetData, TargetAsc);
 }
 
 
-void UMeleeAttack::OnEndOfAttack() { EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, false); }
+void UMeleeAttack::OnEndOfMontage() { EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, false); }
 void UMeleeAttack::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled)
 {
 	if (InputReleasedHandle) InputReleasedHandle->EndTask();
-	if (AttackMontageTaskHandle) AttackMontageTaskHandle->EndTask();
-	if (HandleLandedAttackTask) HandleLandedAttackTask->EndTask();
-	if (HandleAttackStateTask) HandleAttackStateTask->EndTask();
-	if (MeleeOverlapTaskHandle) MeleeOverlapTaskHandle->EndTask();
+	if (AttackMontageHandle) AttackMontageHandle->EndTask();
+	if (AttackFramesEndHandle) AttackFramesEndHandle->EndTask();
+	if (AttackFramesBeginHandle) AttackFramesBeginHandle->EndTask();
+	if (MeleeOverlapHandle) MeleeOverlapHandle->EndTask();
 
 	SetComboIndex();
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
