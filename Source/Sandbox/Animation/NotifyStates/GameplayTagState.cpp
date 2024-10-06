@@ -29,6 +29,7 @@ void UGameplayTagState::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSeque
 	// Gameplay tag state
 	if (bAddGameplayTagToActor)
 	{
+		AbilitySystem->AddLooseGameplayTag(GameplayTagState);
 		AbilitySystem->AddReplicatedLooseGameplayTag(GameplayTagState);
 	}
 
@@ -57,6 +58,7 @@ void UGameplayTagState::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimSequenc
 	// Gameplay tag state
 	if (bAddGameplayTagToActor && GameplayTagState.IsValid() && AbilitySystem->HasMatchingGameplayTag(GameplayTagState))
 	{
+		AbilitySystem->RemoveLooseGameplayTag(GameplayTagState);
 		AbilitySystem->RemoveReplicatedLooseGameplayTag(GameplayTagState);
 	}
 	

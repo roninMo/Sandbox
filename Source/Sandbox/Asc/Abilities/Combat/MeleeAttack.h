@@ -32,6 +32,7 @@ protected: // TODO: Either adjust the ability task limit, or create additional t
 	/** The handle that traces for overlaps during the attack animation */
 	UPROPERTY(BlueprintReadWrite) UAbilityTask_TargetOverlap* MeleeOverlapHandle;
 
+	// I don't want to add tags to the character's state, attack frames are specific to the attack
 	// /** The handle for the beginning and ending of attack frames logic */
 	// UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayEvent* AttackFramesHandle;
 	
