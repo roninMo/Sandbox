@@ -96,7 +96,11 @@ protected:
 
 	/** The player's camera field of view */
 	UPROPERTY(BlueprintReadWrite) float CameraFOV;
-	
+
+
+	/**** Replicated values for the anim blueprint ****/
+	UPROPERTY(Replicated, BlueprintReadWrite) FRotator AimRotation;
+
 	
 	/**** Camera post process settings ****/
 	/** Hide camera */
@@ -338,6 +342,15 @@ public:
 	/** Adjusts the camera's target FOV */
 	UFUNCTION(BlueprintCallable, Category = "Camera|Zooming") virtual void SetCameraZoom(const float Zoom);
 
+	/**
+	 * Return the aim rotation for the Pawn.
+	 * If we have a controller, by default we aim at the player's 'eyes' direction
+	 * that is by default the Pawn rotation for AI, and camera (crosshair) rotation for human players.
+	 *
+	 * Uses replicated aim rotation for client proxies // TODO: I don't know if this is performant
+	 */
+	virtual FRotator GetBaseAimRotation() const override;
+	
 	
 public:
 	/** Internal function for returning a reference to the target lock characters array */

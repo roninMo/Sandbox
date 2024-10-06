@@ -1137,8 +1137,8 @@ void UAdvancedMovementComponent::PhysWallRunning(float deltaTime, int32 Iteratio
 			float WallDirection = WallRunNormal.Dot(UpdatedComponent->GetForwardVector()); // The impact normal of the wall is based on the current surface
 			FVector WallRunWallVector = WallRunWall ? WallRunWall->GetRightVector() : UpdatedComponent->GetForwardVector();
 			float PlayerForwardsDirection = UpdatedComponent->GetForwardVector().Dot(WallRunWallVector); // The Get vectors of the wall are to help translate things in world space
-			// TODO: This is causing a @ref SelectVectorSwizzle2() error and idk why, check if this is an actual production error
-			FVector WallRunDirection = PlayerForwardsDirection < 0 ? WallRunWall->GetRightVector() * -1 : WallRunWall->GetRightVector();
+			
+			FVector WallRunDirection = PlayerForwardsDirection < 0 ? WallRunWallVector * -1 : WallRunWallVector;
 			if (bShouldRunBackwardsIfFacingAwayFromWall && WallDirection > 0) WallRunDirection *= -1;
 			WallRunVector = FVector(
 				FMath::Clamp(CharacterInput.X + WallRunDirection.X, -1, 1) * WallRunMultiplier.X,

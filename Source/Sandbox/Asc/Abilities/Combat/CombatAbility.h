@@ -43,7 +43,7 @@ protected:
 	/** Current attack information */
 	UPROPERTY(Transient, BlueprintReadWrite) TArray<AActor*> AlreadyHitActors;
 	UPROPERTY(Transient, BlueprintReadWrite) int32 ComboCount = 0;
-	UPROPERTY(Transient, BlueprintReadWrite) int32 ComboIndex = 0;
+	UPROPERTY(Transient, BlueprintReadWrite) int32 ComboIndex = 0; // This value needs to be sent to the client
 	UPROPERTY(Transient, BlueprintReadWrite) bool bCancelledToEquipArmament = false;
 	UPROPERTY(Transient, BlueprintReadWrite) bool bIsFinalComboAttack = false;
 	
@@ -68,8 +68,11 @@ protected:
 	/** Retrieves all the necessary information for an attack. Call this during ActivateAbility to retrieve the attack information for the current attack */
 	UFUNCTION(BlueprintCallable) virtual void InitCombatInformation();
 
-	/** Calculates the current attack and combo index for this attack */
+	/** Calculates the current attack information */
 	UFUNCTION(BlueprintCallable) virtual void SetComboAttack();
+
+	/** Increments the combo index based on the combo attacks */
+	UFUNCTION(BlueprintCallable) virtual void SetComboIndex();
 
 	/** Retrieves the attack montage from the armament based on different conditions */
 	UFUNCTION(BlueprintCallable) virtual void SetAttackMontage(AArmament* Weapon);

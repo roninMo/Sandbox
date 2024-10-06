@@ -169,7 +169,8 @@ void UMeleeAttack::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGa
 	if (HandleLandedAttackTask) HandleLandedAttackTask->EndTask();
 	if (HandleAttackStateTask) HandleAttackStateTask->EndTask();
 	if (MeleeOverlapTaskHandle) MeleeOverlapTaskHandle->EndTask();
-	
+
+	SetComboIndex();
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
 }
 

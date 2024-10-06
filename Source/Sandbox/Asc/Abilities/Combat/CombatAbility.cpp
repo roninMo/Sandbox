@@ -99,8 +99,8 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 	{
 		Armament = nullptr;
 		ComboAttacks = F_ComboAttacks();
-		ComboCount = 0;
 		CurrentAttack = F_ComboAttack();
+		ComboCount = 0;
 		EquipSlot = EEquipSlot::None;
 	}
 	
@@ -144,10 +144,9 @@ void UCombatAbility::SetComboAttack()
 		return;
 	}
 	
-	// Retrieve the combo index and the current attack
+	// Retrieve the current attack
 	if (ComboCount <= 1 || CombatComponent->GetComboIndex() + 1 >= ComboAttacks.ComboAttacks.Num())
 	{
-		ComboIndex = 0;
 		if (!ComboAttacks.ComboAttacks.IsEmpty())
 		{
 			CurrentAttack = ComboAttacks.ComboAttacks[0];
@@ -155,10 +154,23 @@ void UCombatAbility::SetComboAttack()
 	}
 	else
 	{
-		ComboIndex = CombatComponent->GetComboIndex() + 1;
 		CurrentAttack = ComboAttacks.ComboAttacks[ComboIndex];
 	}
+}
+
+
+void UCombatAbility::SetComboIndex()
+{
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Failed to retrieve the combat component during {2} while adjusting the combo index",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+		return;
+	}
 	
+	if (CombatComponent->GetComboIndex() + 1 >= ComboAttacks.ComboAttacks.Num()) ComboIndex = 0;
+	else ComboIndex += 1;
 	CombatComponent->SetComboIndex(ComboIndex);
 }
 

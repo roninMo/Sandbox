@@ -55,6 +55,7 @@ void ACharacterCameraLogic::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME_CONDITION_NOTIFY(ACharacterCameraLogic, CameraStyle, COND_None, REPNOTIFY_OnChanged);
+	DOREPLIFETIME_CONDITION(ACharacterCameraLogic, AimRotation, COND_SimulatedOnly);
 }
 
 
@@ -111,6 +112,9 @@ void ACharacterCameraLogic::Tick(float DeltaTime)
 		// Camera Zooming
 		AdjustCameraFOV(DeltaTime);
 	}
+
+	// Retrieve the aim rotation
+	AimRotation = GetBaseAimRotation();
 }
 
 
@@ -573,6 +577,16 @@ void ACharacterCameraLogic::SetCameraFOVInterpSpeed(const float InterpSpeed)
 void ACharacterCameraLogic::SetCameraZoom(const float Zoom)
 {
 	CameraZoom = Zoom;
+}
+
+FRotator ACharacterCameraLogic::GetBaseAimRotation() const
+{
+	if (GetLocalRole() == ROLE_SimulatedProxy)
+	{
+		return AimRotation;
+	}
+	
+	return Super::GetBaseAimRotation();
 }
 
 
