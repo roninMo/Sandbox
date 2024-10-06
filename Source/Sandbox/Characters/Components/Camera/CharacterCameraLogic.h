@@ -115,6 +115,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera|Target Locking")
 	TObjectPtr<UTargetLockSpringArm> CameraArm;
 	
+	/** Adds an offset to the target lock aim location to help with the camera looking up to each target. @ref ACharacterCameraLogic has values for different camera modes that adjust this when the style updates */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Target Locking") FVector TargetLockOffset;
+
 	/** The current target the player is focusing on */
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "Camera|Target Locking") TObjectPtr<AActor> CurrentTarget;
 
@@ -323,6 +326,12 @@ public:
 	/** Returns the camera arm's length */
 	UFUNCTION(BlueprintCallable, Category = "Camera|Utilities") virtual float GetCameraArmLength() const;
 
+	/** Retrieves the target lock offset for the camera during target locking */
+	UFUNCTION(BlueprintCallable, Category = "Camera|Utilities") virtual FVector GetTargetLockOffset() const;
+	
+	/** Retrieves the target lock transition speed for the character and the camera arm */
+	UFUNCTION(BlueprintCallable, Category = "Camera|Utilities") virtual float GetTargetLockTransitionSpeed() const;
+	
 	/** Updates the target lock transition speed for the character and the camera arm */
 	UFUNCTION(BlueprintCallable, Category = "Camera|Target Locking") virtual void SetTargetLockTransitionSpeed(float Speed);
 

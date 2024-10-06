@@ -47,6 +47,7 @@ ACharacterCameraLogic::ACharacterCameraLogic(const FObjectInitializer& ObjectIni
 	CameraOffset_Left = FVector(0.0, -64.0, 100.0);
 	CameraOffset_Right = FVector(0.0, 64.0, 100.0);
 
+	TargetLockOffset = FVector(0.0, 0.0, 64.0);
 	TargetLockTransitionSpeed = 6.4;
 }
 
@@ -102,7 +103,6 @@ void ACharacterCameraLogic::Tick(float DeltaTime)
 		{
 			UpdateCameraSocketLocation(TargetOffset, DeltaTime);
 		}
-		
 	}
 	
 
@@ -533,11 +533,20 @@ float ACharacterCameraLogic::GetCameraArmLength() const
 	return CameraArm->TargetArmLength;
 }
 
+FVector ACharacterCameraLogic::GetTargetLockOffset() const
+{
+	return TargetLockOffset;
+}
+
+float ACharacterCameraLogic::GetTargetLockTransitionSpeed() const
+{
+	return TargetLockTransitionSpeed;
+}
+
 
 void ACharacterCameraLogic::SetTargetLockTransitionSpeed(const float Speed)
 {
 	TargetLockTransitionSpeed = Speed;
-	if (CameraArm) CameraArm->TargetLockTransitionSpeed = Speed;
 }
 
 

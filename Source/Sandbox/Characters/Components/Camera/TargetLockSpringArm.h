@@ -18,28 +18,19 @@ class SANDBOX_API UTargetLockSpringArm : public USpringArmComponent
 {
 	GENERATED_BODY()
 
-public:
-	/** Controls how quickly the camera transitions between targets. @ref ACharacterCameraLogic's SetTargetLockTransitionSpeed value adjusts this */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Target Locking", meta=(UIMin = "0.0", UIMax = "34.0")) float TargetLockTransitionSpeed = 6.4;
-
-	/** Adds an offset to the target lock aim location to help with the camera looking up to each target. @ref ACharacterCameraLogic has values for different camera modes that adjust this when the style updates */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Target Locking") FVector TargetLockOffset = FVector(0.0, 0.0, 64.0);
-
+protected:
+	/** At the beginning of target locking, or when transitioning to another target, allow the camera to smoothly interp */
+	UPROPERTY(BlueprintReadWrite, Category="Target Locking") bool bTargetTransition;
+	
 	/** The current target lock character, derived from @ref ACharacterCameraLogic's target lock logic */
 	UPROPERTY(BlueprintReadWrite, Category="Target Locking") TObjectPtr<AActor> CurrentTarget;
 
-
-protected:
+	/** A stored reference to the character */
 	UPROPERTY(BlueprintReadWrite, Category="Target Locking") TObjectPtr<ACharacterCameraLogic> Character;
-	UPROPERTY(BlueprintReadWrite, Category="Target Locking") bool bTargetTransition;
 
 	
-public:
-	/** Updates the target lock offset */
-	UFUNCTION(BlueprintCallable, Category="Target Locking") virtual void UpdateTargetLockOffset(FVector Offset);
-	
-	
 protected:
+	/** Updates the desired arm location, calling BlendLocations to do the actual blending if a trace is done */
 	virtual void UpdateDesiredArmLocation(bool bDoTrace, bool bDoLocationLag, bool bDoRotationLag, float DeltaTime) override;
 	
 	

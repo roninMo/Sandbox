@@ -10,16 +10,17 @@
 
 void UTargetLockSpringArm::UpdateDesiredArmLocation(bool bDoTrace, bool bDoLocationLag, bool bDoRotationLag, float DeltaTime)
 {
+	// Super::UpdateDesiredArmLocation(bDoTrace, bDoLocationLag, bDoRotationLag, DeltaTime);
 	FRotator DesiredRotation = GetTargetRotation();
 
-	// If our ViewTarget is simulating using physics, we may need to clamp delta time
+	// If our viewtarget is simulating using physics, we may need to clamp deltatime
 	if (bClampToMaxPhysicsDeltaTime)
 	{
-		// Use the same max time step cap as the physics system to avoid camera jitter when the ViewTarget simulates less time than the camera
+		// Use the same max timestep cap as the physics system to avoid camera jitter when the viewtarget simulates less time than the camera
 		DeltaTime = FMath::Min(DeltaTime, UPhysicsSettings::Get()->MaxPhysicsDeltaTime);
 	}
 	
-	// If the player is target locking an enemy, update the rotation to face the target 
+	// Target locking ->  If the player is target locking an enemy, update the rotation to face the target 
 	Character = Character ? Character : Cast<ACharacterCameraLogic>(GetOwner());
 	if (Character && Character->Execute_GetCameraStyle(Character) == CameraStyle_TargetLocking)
 	{
@@ -31,15 +32,15 @@ void UTargetLockSpringArm::UpdateDesiredArmLocation(bool bDoTrace, bool bDoLocat
 			bTargetTransition = true;
 		}
 		
-		// If they just selected a target or are transitioning between targets we're going to add interpolation which is going to cause some lag until it finishes the transition
 		if (CurrentTarget)
 		{
-			FVector TargetLocation = CurrentTarget->GetActorLocation() + UKismetMathLibrary::Quat_RotateVector(CurrentTarget->GetActorQuat(), TargetLockOffset);
+			// If they just selected a target or are transitioning between targets we're going to add interpolation which is going to cause some lag until it finishes the transition
+			FVector TargetLocation = CurrentTarget->GetActorLocation() + UKismetMathLibrary::Quat_RotateVector(CurrentTarget->GetActorQuat(), Character->GetTargetLockOffset());
 			FRotator TargetRotation = (TargetLocation - PreviousDesiredLoc).Rotation();
 			if (bTargetTransition)
 			{
-				DesiredRotation = FRotator(FMath::QInterpTo(FQuat(PreviousDesiredRot), FQuat(TargetRotation), DeltaTime, TargetLockTransitionSpeed));
-				if (DesiredRotation.Equals(TargetRotation, 0.4)) bTargetTransition = false;
+				DesiredRotation = FRotator(FMath::QInterpTo(FQuat(PreviousDesiredRot), FQuat(TargetRotation), DeltaTime, Character->GetTargetLockTransitionSpeed()));
+				if (DesiredRotation.Equals(TargetRotation, 0.4 /* 1 */)) bTargetTransition = false;
 			}
 			else DesiredRotation = TargetRotation;
 
@@ -98,6 +99,7 @@ void UTargetLockSpringArm::UpdateDesiredArmLocation(bool bDoTrace, bool bDoLocat
 				RemainingTime -= LerpAmount;
 
 				DesiredLoc = FMath::VInterpTo(PreviousDesiredLoc, LerpTarget, LerpAmount, CameraLagSpeed);
+				PreviousDesiredLoc = DesiredLoc;
 			}
 		}
 		else
@@ -115,7 +117,7 @@ void UTargetLockSpringArm::UpdateDesiredArmLocation(bool bDoTrace, bool bDoLocat
 				DesiredLoc = ArmOrigin + FromOrigin.GetClampedToMaxSize(CameraLagMaxDistance);
 				bClampedDist = true;
 			}
-		}		
+		}
 
 		#if !(UE_BUILD_SHIPPING || UE_BUILD_TEST)
 		if (bDrawDebugLagMarkers)
@@ -135,9 +137,9 @@ void UTargetLockSpringArm::UpdateDesiredArmLocation(bool bDoTrace, bool bDoLocat
 
 	
 	// Now offset camera position back along our rotation
-	DesiredLoc -= DesiredRotation.Vector() * TargetArmLength;
+	DesiredLoc -= DesiredRotation.Vector() * TargetArmLength; // Check if the replicated version of this is causing interp problems
 	// Add socket offset in local space
-	DesiredLoc += FRotationMatrix(DesiredRotation).TransformVector(SocketOffset);
+	DesiredLoc += FRotationMatrix(DesiredRotation).TransformVector(SocketOffset); // Same here
 
 	// Do a sweep to ensure we are not penetrating the world
 	FVector ResultLoc;
@@ -169,7 +171,7 @@ void UTargetLockSpringArm::UpdateDesiredArmLocation(bool bDoTrace, bool bDoLocat
 	FTransform WorldCamTM(DesiredRotation, ResultLoc);
 	// Convert to relative to component
 	FTransform RelCamTM = WorldCamTM.GetRelativeTransform(GetComponentTransform());
-	
+
 	// Update socket location/rotation
 	RelativeSocketLocation = RelCamTM.GetLocation();
 	RelativeSocketRotation = RelCamTM.GetRotation();
@@ -181,10 +183,4 @@ void UTargetLockSpringArm::UpdateDesiredArmLocation(bool bDoTrace, bool bDoLocat
 		CurrentTarget = nullptr;
 		bTargetTransition = false;
 	}
-}
-
-
-void UTargetLockSpringArm::UpdateTargetLockOffset(FVector Offset)
-{
-	TargetLockOffset = Offset;
 }
