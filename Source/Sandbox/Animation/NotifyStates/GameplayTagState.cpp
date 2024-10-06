@@ -74,9 +74,17 @@ void UGameplayTagState::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimSequenc
 
 FString UGameplayTagState::GetNotifyName_Implementation() const
 {
-	if(TagState.IsValid())
+	if(bAddGameplayTagToActor && GameplayTagState.IsValid())
 	{
-		return TagState.ToString();
+		return GameplayTagState.ToString();
+	}
+	else if (bNotifyBeginSendGameplayEventToActor && NotifyBeginGameplayEventTag.IsValid())
+	{
+		return NotifyBeginGameplayEventTag.ToString();
+	}
+	else if (bNotifyEndSendGameplayEventToActor && NotifyEndGameplayEventTag.IsValid())
+	{
+		return NotifyEndGameplayEventTag.ToString();
 	}
 
 	return FString("Add Gameplay Tag");
