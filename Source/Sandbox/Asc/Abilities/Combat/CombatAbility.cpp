@@ -100,18 +100,20 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 	const F_ArmamentInformation& ArmamentInformation = EquippedArmament->GetArmamentInformation();
 	for (const auto& [Ability, InputId, InvalidStances, Level] : ArmamentInformation.MeleeAbilities)
 	{
-		if (AttackPattern != InputId || !InvalidStances.Contains(CombatComponent->GetCurrentStance())) continue;
+		if (AttackPattern != InputId || InvalidStances.Contains(CombatComponent->GetCurrentStance())) continue;
 
 		// If there's no combat information for this attack, then either the information is missing or the ability was added at the wrong time
+		Armament = EquippedArmament;
 		ComboAttacks = Armament->GetComboAttacks(AttackPattern);
 		ComboCount = ComboAttacks.ComboAttacks.Num();
 		SetCurrentMontage(EquippedArmament->GetCombatMontage(AttackPattern));
+		EquipSlot = EquippedArmament->GetEquipSlot();
+
 		ensure(!ComboAttacks.ComboAttacks.IsEmpty());
+		return true;
 	}
 
-	Armament = EquippedArmament;
-	EquipSlot = EquippedArmament->GetEquipSlot();
-	return true;
+	return false;
 }
 
 

@@ -364,7 +364,7 @@ void UCombatComponent::UpdateArmamentCombatAbilities(EArmamentStance PreviousSta
 		// The id for each ability should be specific to the equipped armament
 		FGuid SecondaryId = SecondaryArmament ? SecondaryArmament->Execute_GetId(SecondaryArmament) : FGuid();
 		FGuid PrimaryId = PrimaryArmament ? PrimaryArmament->Execute_GetId(PrimaryArmament) : FGuid();
-		FGuid Id;
+		FGuid Id = PrimaryId;
 
 		/*
 			- OneHanding
