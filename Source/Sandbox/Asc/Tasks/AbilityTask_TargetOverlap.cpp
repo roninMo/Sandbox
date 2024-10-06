@@ -30,7 +30,7 @@ void UAbilityTask_TargetOverlap::Activate()
 	{
 		if (!Character) UE_LOGFMT(AbilityLog, Error, "{0}() The character wasn't valid on the ability while retrieving input information! {1}", *FString(__FUNCTION__), *GetName());
 		if (!ASC) UE_LOGFMT(AbilityLog, Error, "{0}() The ability system wasn't valid on the ability while retrieving input information! {1}", *FString(__FUNCTION__), *GetName());
-		if (OverlapComponents.IsEmpty()) UE_LOGFMT(AbilityLog, Error, "{0}() The overlap wasn't valid on the ability while retrieving input information! {1}", *FString(__FUNCTION__), *GetName());
+		if (OverlapComponents.IsEmpty()) UE_LOGFMT(AbilityLog, Error, "{0}() The hitbox wasn't valid on the ability while retrieving input information! {1}", *FString(__FUNCTION__), *GetName());
 		EndTask();
 		return;
 	}

@@ -6,7 +6,6 @@
 #include "Sandbox/Asc/Abilities/Combat/CombatAbility.h"
 #include "MeleeAttack.generated.h"
 
-class UAbilityTask_WaitGameplayTagState;
 class UAbilityTask_WaitInputRelease;
 class UAbilityTask_PlayMontageAndWait;
 class UAbilityTask_WaitGameplayEvent;
@@ -33,8 +32,8 @@ protected: // TODO: Either adjust the ability task limit, or create additional t
 	UPROPERTY(BlueprintReadWrite) UAbilityTask_TargetOverlap* MeleeOverlapHandle;
 
 	// I don't want to add tags to the character's state, attack frames are specific to the attack
-	// /** The handle for the beginning and ending of attack frames logic */
-	// UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayEvent* AttackFramesHandle;
+	/** The handle for the beginning and ending of attack frames logic */
+	UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayEvent* AttackFramesHandle;
 	
 	// /** The handle for when attack frames end during an attack */
 	// UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayTagRemoved* AttackFramesEndHandle;
@@ -43,7 +42,7 @@ protected: // TODO: Either adjust the ability task limit, or create additional t
 	// UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayTagAdded* AttackFramesBeginHandle;
 
 	/** The handle for the beginning and ending of attack frames logic */
-	UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayTagState* AttackFramesHandle;
+	// UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayTagState* AttackFramesHandle;
 	
 	
 	/**** Cached tags ****/

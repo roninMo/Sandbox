@@ -113,9 +113,9 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 	// 	EWaitGameplayTagQueryTriggerCondition::WhenTrue
 	// );
 	
-	AttackFramesHandle = UAbilityTask_WaitGameplayTagState::WaitGameplayTagState(this, AttackFramesQuery);
-	AttackFramesHandle->UpdatedState.AddDynamic(this, &UMeleeAttack::OnAttackFramesStateUpdates);
-	AttackFramesHandle->ReadyForActivation();
+	// AttackFramesHandle = UAbilityTask_WaitGameplayTagState::WaitGameplayTagState(this, AttackFramesQuery);
+	// AttackFramesHandle->UpdatedState.AddDynamic(this, &UMeleeAttack::OnAttackFramesStateUpdates);
+	// AttackFramesHandle->ReadyForActivation();
 
 	// AttackFramesBeginHandle = UAbilityTask_WaitGameplayTagAdded::WaitGameplayTagAdd(this, AttackFramesTag);
 	// AttackFramesBeginHandle->Added.AddDynamic(this, &UMeleeAttack::OnBeginAttackFrames);
@@ -125,10 +125,9 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 	// AttackFramesEndHandle->Removed.AddDynamic(this, &UMeleeAttack::OnEndAttackFrames);
 	// AttackFramesEndHandle->ReadyForActivation();
 
-	// AttackFramesHandle = UAbilityTask_WaitGameplayEvent::WaitGameplayEvent(this, AttackFramesTag, nullptr, false, false);
-	// AttackFramesHandle->EventReceived.AddDynamic(this, &UMeleeAttack::OnAttackFrameEvent);
-	// AttackFramesHandle->ReadyForActivation();
-
+	AttackFramesHandle = UAbilityTask_WaitGameplayEvent::WaitGameplayEvent(this, AttackFramesTag, nullptr, false, false);
+	AttackFramesHandle->EventReceived.AddDynamic(this, &UMeleeAttack::OnAttackFrameEvent);
+	AttackFramesHandle->ReadyForActivation();
 	
 	
 	// Overlap Trace ->  Have the server handle the attack logic with client prediction

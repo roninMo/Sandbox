@@ -57,6 +57,7 @@ void AMeleeArmament::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 void AMeleeArmament::BeginPlay()
 {
 	Super::BeginPlay();
+	Hitboxes.AddUnique(ArmamentCollision);
 }
 
 void AMeleeArmament::BeginDestroy()
@@ -221,5 +222,11 @@ void AMeleeArmament::SetOwnerNoSee(const bool bHide)
 	{
 		Holster->Object->SetOwnerNoSee(bHide);
 	}
+}
+
+
+TArray<UPrimitiveComponent*> AMeleeArmament::GetArmamentHitboxes() const
+{
+	return Hitboxes;
 }
 

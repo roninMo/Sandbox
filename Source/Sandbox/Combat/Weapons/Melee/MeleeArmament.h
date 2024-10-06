@@ -75,6 +75,8 @@ public:
 //-------------------------------------------------------------------------------------//
 	/** Shows or hides the armament and it's components for the player */
 	virtual void SetOwnerNoSee(const bool bHide = true) override;
-	
+
+	/** Returns the armament's overlap components for their armament. */
+	virtual TArray<UPrimitiveComponent*> GetArmamentHitboxes() const override;
 	
 };
