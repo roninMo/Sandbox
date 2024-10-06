@@ -6,11 +6,9 @@
 #include "Sandbox/Asc/Abilities/Combat/CombatAbility.h"
 #include "MeleeAttack.generated.h"
 
-class UAbilityTask_WaitGameplayTagQuery;
-class UAbilityTask_WaitGameplayTagAdded;
-class UAbilityTask_WaitGameplayTagRemoved;
 class UAbilityTask_WaitInputRelease;
 class UAbilityTask_PlayMontageAndWait;
+class UAbilityTask_WaitGameplayEvent;
 class UAbilityTask_TargetOverlap;
 
 
@@ -33,11 +31,14 @@ protected: // TODO: Either adjust the ability task limit, or create additional t
 	/** The handle that traces for overlaps during the attack animation */
 	UPROPERTY(BlueprintReadWrite) UAbilityTask_TargetOverlap* MeleeOverlapHandle;
 
-	/** The handle for when attack frames end during an attack */
-	UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayTagRemoved* AttackFramesEndHandle;
-
-	/** The handle for when attack frames begin during an attack */
-	UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayTagAdded* AttackFramesBeginHandle;
+	/** The handle for the beginning and ending of attack frames logic */
+	UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayEvent* AttackFramesHandle;
+	
+	// /** The handle for when attack frames end during an attack */
+	// UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayTagRemoved* AttackFramesEndHandle;
+	//
+	// /** The handle for when attack frames begin during an attack */
+	// UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayTagAdded* AttackFramesBeginHandle;
 
 	
 	/**** Cached tags ****/
@@ -46,6 +47,12 @@ protected: // TODO: Either adjust the ability task limit, or create additional t
 	
 	/** When we should actually trace for enemies during an attack animations */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AttackFramesTag;
+
+	/** The tag to notify the end of attack frames for a specific animation */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AttackFramesEndTag;
+
+	/** The tag to notify the begin of attack frames for a specific animation */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AttackFramesBeginTag;
 
 	
 public:
@@ -62,6 +69,9 @@ public:
 	
 	/** Input released event for multiplayer replication */
 	UFUNCTION() virtual void OnInputReleased(float TimeHeld);
+
+	/** Function to retrieve gameplay events for handling attack frames during the attack montage */
+	UFUNCTION(BlueprintCallable) virtual void OnAttackFrameEvent(FGameplayEventData EventData);
 	
 	/** Begin tracing for targets during the attack frames. For attacks with multiple attack frames, this should either recreate the task or decide when overlap traces are valid */
 	UFUNCTION(BlueprintCallable) virtual void OnBeginAttackFrames();

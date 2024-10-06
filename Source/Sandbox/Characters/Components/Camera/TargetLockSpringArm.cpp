@@ -3,6 +3,7 @@
 
 #include "Sandbox/Characters/Components/Camera/TargetLockSpringArm.h"
 
+#include "Kismet/KismetMathLibrary.h"
 #include "Sandbox/Characters/Components/Camera/CharacterCameraLogic.h"
 #include "PhysicsEngine/PhysicsSettings.h"
 
@@ -30,10 +31,10 @@ void UTargetLockSpringArm::UpdateDesiredArmLocation(bool bDoTrace, bool bDoLocat
 			bTargetTransition = true;
 		}
 		
+		// If they just selected a target or are transitioning between targets we're going to add interpolation which is going to cause some lag until it finishes the transition
 		if (CurrentTarget)
 		{
-			// If they just selected a target or are transitioning between targets we're going to add interpolation which is going to cause some lag until it finishes the transition
-			FVector TargetLocation = CurrentTarget->GetActorLocation() + TargetLockOffset;
+			FVector TargetLocation = CurrentTarget->GetActorLocation() + UKismetMathLibrary::Quat_RotateVector(CurrentTarget->GetActorQuat(), TargetLockOffset);
 			FRotator TargetRotation = (TargetLocation - PreviousDesiredLoc).Rotation();
 			if (bTargetTransition)
 			{
@@ -97,7 +98,6 @@ void UTargetLockSpringArm::UpdateDesiredArmLocation(bool bDoTrace, bool bDoLocat
 				RemainingTime -= LerpAmount;
 
 				DesiredLoc = FMath::VInterpTo(PreviousDesiredLoc, LerpTarget, LerpAmount, CameraLagSpeed);
-				PreviousDesiredLoc = DesiredLoc;
 			}
 		}
 		else
@@ -169,7 +169,7 @@ void UTargetLockSpringArm::UpdateDesiredArmLocation(bool bDoTrace, bool bDoLocat
 	FTransform WorldCamTM(DesiredRotation, ResultLoc);
 	// Convert to relative to component
 	FTransform RelCamTM = WorldCamTM.GetRelativeTransform(GetComponentTransform());
-
+	
 	// Update socket location/rotation
 	RelativeSocketLocation = RelCamTM.GetLocation();
 	RelativeSocketRotation = RelCamTM.GetRotation();

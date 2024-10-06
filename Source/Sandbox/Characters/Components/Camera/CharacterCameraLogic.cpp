@@ -425,8 +425,6 @@ void ACharacterCameraLogic::OnTargetLockCharacterUpdated()
 	{
 		SetCurrentTarget(nullptr);
 	}
-
-	CameraArm->UpdateTargetLockOffset(FVector(0, 0, 25));
 	
 	// blueprint logic
 	BP_OnTargetLockCharacterUpdated();

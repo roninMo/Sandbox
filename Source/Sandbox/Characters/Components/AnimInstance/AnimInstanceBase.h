@@ -3,12 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayEffectTypes.h"
 #include "Animation/AnimInstance.h"
 #include "Sandbox/Data/Enums/InverseKinematicsState.h"
 #include "Sandbox/Data/Enums/MovementAnimCurveValues.h"
 #include "Sandbox/Data/Enums/MovementTypes.h"
 #include "AnimInstanceBase.generated.h"
 
+class UAbilitySystemComponent;
 DECLARE_LOG_CATEGORY_EXTERN(LogAnimationBlueprint, Log, NoLogging);
 
 #define EMD_Forward EMovementDirection::MD_Forward
@@ -35,7 +37,7 @@ class SANDBOX_API UAnimInstanceBase : public UAnimInstance
 
 public:
 	virtual void NativeInitializeAnimation() override;
-	// virtual void InitializeAbilitySystem(UAbilitySystemComponent* ASC);
+	virtual void InitializeAbilitySystem(UAbilitySystemComponent* Asc);
 	virtual void NativeUpdateAnimation(float DeltaTime) override;
 	
 
@@ -1370,7 +1372,7 @@ protected:
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Movement|Utility") bool bLocallyControlled;
 	
 	// Gameplay tags that can be mapped to blueprint variables. The variables will automatically update as the tags are added or removed
-	// UPROPERTY(EditDefaultsOnly, Category = "GameplayTags") FGameplayTagBlueprintPropertyMap GameplayTagPropertyMap;
+	UPROPERTY(EditDefaultsOnly, Category = "GameplayTags") FGameplayTagBlueprintPropertyMap GameplayTagPropertyMap;
 
 	/** Actors that are ignored during inverse kinematic traces */
 	UPROPERTY(Transient, BlueprintReadWrite, Category = "Inverse Kinematics|Utility") TArray<AActor*> IgnoredActors;

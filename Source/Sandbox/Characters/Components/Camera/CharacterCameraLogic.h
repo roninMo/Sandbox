@@ -90,7 +90,6 @@ protected:
 	/** How much of the current camera zoom should be factored during target locking camera style? */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera|Zooming|Camera Style", meta=(UIMin= 0.1, UIMax= 1)) float TargetLockingZoomMultiplier = 0.1;
 	
-	
 	/** The target camera zoom. Different camera modes can adjust the zoom for different camera modes during @ref AdjustCameraFOV() */
 	UPROPERTY(BlueprintReadWrite, Category = "Camera|Zooming", meta=(UIMin= 0.1, UIMax= 10)) float CameraZoom = 1;
 

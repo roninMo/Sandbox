@@ -22,6 +22,16 @@ void UAnimInstanceBase::NativeInitializeAnimation()
 }
 
 
+void UAnimInstanceBase::InitializeAbilitySystem(UAbilitySystemComponent* Asc)
+{
+	if (Asc)
+	{
+		// check(ASC);
+		GameplayTagPropertyMap.Initialize(this, Asc);
+	}
+}
+
+
 void UAnimInstanceBase::NativeUpdateAnimation(float DeltaTime)
 {
 	Super::NativeUpdateAnimation(DeltaTime);

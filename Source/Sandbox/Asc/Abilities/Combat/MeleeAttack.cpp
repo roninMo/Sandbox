@@ -5,6 +5,7 @@
 
 #include "Abilities/Tasks/AbilityTask_WaitInputRelease.h"
 #include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
+#include "Abilities/Tasks/AbilityTask_WaitGameplayEvent.h"
 #include "Abilities/Tasks/AbilityTask_WaitGameplayTag.h"
 #include "Sandbox/Asc/Tasks/AbilityTask_TargetOverlap.h"
 #include "Logging/StructuredLog.h"
@@ -32,6 +33,8 @@ UMeleeAttack::UMeleeAttack()
 
 	AllowMovementTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AllowMovement);
 	AttackFramesTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames);
+	AttackFramesEndTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_End);
+	AttackFramesBeginTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_Begin);
 }
 
 
@@ -95,10 +98,40 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		return;
 	}
-	
+
 	
 	// Add the combo information and attack calculations
 	InitCombatInformation();
+	
+	// Attack State ->  (Allow movement, begin overlap trace logic, etc.)
+	// FGameplayTagQuery AttackFramesQuery = FGameplayTagQuery::BuildQuery(FGameplayTagQueryExpression().AllTagsMatch().AddTag(AttackFramesTag));
+	// AttackFramesHandle = UAbilityTask_WaitGameplayTagQuery::WaitGameplayTagQuery(
+	// 	this,
+	// 	AttackFramesQuery,
+	// 	nullptr,
+	// 	EWaitGameplayTagQueryTriggerCondition::WhenTrue
+	// );
+
+	// AttackFramesBeginHandle = UAbilityTask_WaitGameplayTagAdded::WaitGameplayTagAdd(this, AttackFramesTag);
+	// AttackFramesBeginHandle->Added.AddDynamic(this, &UMeleeAttack::OnBeginAttackFrames);
+	// AttackFramesBeginHandle->ReadyForActivation();
+	//
+	// AttackFramesEndHandle = UAbilityTask_WaitGameplayTagRemoved::WaitGameplayTagRemove(this, AttackFramesTag);
+	// AttackFramesEndHandle->Removed.AddDynamic(this, &UMeleeAttack::OnEndAttackFrames);
+	// AttackFramesEndHandle->ReadyForActivation();
+
+	AttackFramesHandle = UAbilityTask_WaitGameplayEvent::WaitGameplayEvent(this, AttackFramesTag, nullptr, false, false);
+	AttackFramesHandle->EventReceived.AddDynamic(this, &UMeleeAttack::OnAttackFrameEvent);
+	AttackFramesHandle->ReadyForActivation();
+
+	
+	// Overlap Trace ->  Have the server handle the attack logic with client prediction
+	MeleeOverlapHandle = UAbilityTask_TargetOverlap::CreateOverlapDataTask(this, Armament->GetArmamentHitboxes());
+	MeleeOverlapHandle->OnValidOverlap.AddDynamic(this, &UMeleeAttack::OnOverlappedTarget);
+	// MeleeOverlapHandle->ReadyForActivation(); // During attack frames
+
+	
+	// Attack montage
 	AttackMontageHandle = UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(
 		this,
 		FName("AttackMontageHandle"),
@@ -111,35 +144,25 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 	AttackMontageHandle->OnBlendOut.AddDynamic(this, &UMeleeAttack::OnEndOfMontage);
 	AttackMontageHandle->OnInterrupted.AddDynamic(this, &UMeleeAttack::OnEndOfMontage);
 	AttackMontageHandle->ReadyForActivation();
-
-	// Attack State (Allow movement, begin overlap trace logic, etc.)
-	// FGameplayTagQuery AttackFramesQuery = FGameplayTagQuery::BuildQuery(FGameplayTagQueryExpression().AllTagsMatch().AddTag(AttackFramesTag));
-	// AttackFramesHandle = UAbilityTask_WaitGameplayTagQuery::WaitGameplayTagQuery(
-	// 	this,
-	// 	AttackFramesQuery,
-	// 	nullptr,
-	// 	EWaitGameplayTagQueryTriggerCondition::WhenTrue
-	// );
-
-	AttackFramesBeginHandle = UAbilityTask_WaitGameplayTagAdded::WaitGameplayTagAdd(this, AttackFramesTag);
-	AttackFramesBeginHandle->Added.AddDynamic(this, &UMeleeAttack::OnBeginAttackFrames);
-	AttackFramesBeginHandle->ReadyForActivation();
-
-	AttackFramesEndHandle = UAbilityTask_WaitGameplayTagRemoved::WaitGameplayTagRemove(this, AttackFramesTag);
-	AttackFramesEndHandle->Removed.AddDynamic(this, &UMeleeAttack::OnEndAttackFrames);
-	AttackFramesEndHandle->ReadyForActivation();
-	
-	
-	// Overlap Trace ->  Have the server handle the attack logic with client prediction
-	MeleeOverlapHandle = UAbilityTask_TargetOverlap::CreateOverlapDataTask(this, Armament->GetArmamentHitboxes());
-	MeleeOverlapHandle->OnValidOverlap.AddDynamic(this, &UMeleeAttack::OnOverlappedTarget);
-	// MeleeOverlapHandle->ReadyForActivation(); // During attack frames
 }
 
 
 void UMeleeAttack::OnInputReleased(float TimeHeld)
 {
 	// Transition out of charging attack!
+}
+
+
+void UMeleeAttack::OnAttackFrameEvent(const FGameplayEventData EventData)
+{
+	if (EventData.EventTag == AttackFramesEndTag)
+	{
+		OnEndAttackFrames();
+	}
+	else if (EventData.EventTag == AttackFramesBeginTag)
+	{
+		OnBeginAttackFrames();
+	}
 }
 
 
@@ -168,8 +191,9 @@ void UMeleeAttack::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGa
 {
 	if (InputReleasedHandle) InputReleasedHandle->EndTask();
 	if (AttackMontageHandle) AttackMontageHandle->EndTask();
-	if (AttackFramesEndHandle) AttackFramesEndHandle->EndTask();
-	if (AttackFramesBeginHandle) AttackFramesBeginHandle->EndTask();
+	// if (AttackFramesEndHandle) AttackFramesEndHandle->EndTask();
+	// if (AttackFramesBeginHandle) AttackFramesBeginHandle->EndTask();
+	if (AttackFramesHandle) AttackFramesHandle->EndTask();
 	if (MeleeOverlapHandle) MeleeOverlapHandle->EndTask();
 
 	SetComboIndex();
