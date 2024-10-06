@@ -24,11 +24,19 @@ void UCombatAbility::OnAvatarSet(const FGameplayAbilityActorInfo* ActorInfo, con
 {
 	Super::OnAvatarSet(ActorInfo, Spec);
 
-	UCombatComponent* CombatComponent = GetCombatComponent();
+	ACharacterBase* Character = Cast<ACharacterBase>(ActorInfo->AvatarActor.Get());
+	if (!Character)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the character while retrieving the combat component!!",
+			UEnum::GetValueAsString(ActorInfo->OwnerActor.Get()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(ActorInfo->OwnerActor.Get()));
+		return;
+	}
+	
+	UCombatComponent* CombatComponent = Character->GetCombatComponent();
 	if (!CombatComponent)
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component during {2}'s initialization while binding to unequipped events!",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+			UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character), *GetName());
 		return;
 	}
 

@@ -19,11 +19,12 @@ AAbilitySystemPlayerState::AAbilitySystemPlayerState(const FObjectInitializer& O
 	// Adding it as a subobject of the owning actor of an AbilitySystemComponent
 	// automatically registers the AttributeSet with the AbilitySystemComponent
 	// AttributeSet = CreateDefaultSubobject<UAttributeLogic>(TEXT("AttributeSet"));
-
-	// Set PlayerState's NetUpdateFrequency to the same as the Character.
-	// Default is very low for PlayerStates and introduces perceived lag in the ability system.
-	// 100 is probably way too high for a shipping game, you can adjust to fit your needs.
-	// NetUpdateFrequency = 66.0f;
+	
+	//////////////////////// Replication stuff (Server/Client rendering) 
+	NetUpdateFrequency = 66.f; // default update character on other machines 66 times a second (general fps defaults)
+	MinNetUpdateFrequency = 33.f; // To help with bandwidth and lagginess, allow a minNetUpdateFrequency, which is generally 33 in fps games
+	// The other value is the server config tick rate, which is in the project defaultEngine.ini -> [/Script/OnlineSubsystemUtils.IpNetDriver] NetServerMaxTickRate = 60
+	// also this which is especially crucial for implementing the gameplay ability system defaultEngine.ini -> [SystemSettings] net.UseAdaptiveNetUpdateFrequency = 1
 }
 
 
