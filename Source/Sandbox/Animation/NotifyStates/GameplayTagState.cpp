@@ -19,22 +19,27 @@ void UGameplayTagState::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSeque
 	Super::NotifyBegin(MeshComp, Animation, TotalDuration, EventReference);
 	UAbilitySystem* AbilitySystem;
 	ACharacterBase* Character;
-	if (!GetCharacterAndAbilitySystem(MeshComp, Character, AbilitySystem) || !TagState.IsValid()) // TODO: Find out if this is valid (technically this should be a const function, and this might cause problems)
+	if (!GetCharacterAndAbilitySystem(MeshComp, Character, AbilitySystem)) // TODO: Find out if this is valid (technically this should be a const function, and this might cause problems)
 	{
 		return;
 	}
 
 	// UE_LOGFMT(LogTemp, Warning, "{0}: {1} added to {2}_{3}", *UEnum::GetValueAsString(Character->GetLocalRole()), *TagState.ToString(), *GetNameSafe(Character), Character->CharacterId);
+
+	// Gameplay tag state
 	if (bAddGameplayTagToActor)
 	{
-		AbilitySystem->AddReplicatedLooseGameplayTag(TagState);
+		AbilitySystem->AddReplicatedLooseGameplayTag(GameplayTagState);
 	}
 
-	
-	if (bSendGameplayEventToActor)
+	// Gameplay event state 
+	if (bNotifyBeginSendGameplayEventToActor && NotifyBeginGameplayEventTag.IsValid())
 	{
+		FGameplayEventData EventData;
+		EventData.Instigator = Character;
+		
 		// if (!Character->HasAuthority() && Cast<ANPC>(Character)) return; // Do not activate on npc clients
-		UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(Character, TagState, FGameplayEventData());
+		UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(Character, NotifyBeginGameplayEventTag, EventData);
 	}
 }
 
@@ -44,14 +49,25 @@ void UGameplayTagState::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimSequenc
 	Super::NotifyEnd(MeshComp, Animation, EventReference);
 	UAbilitySystem* AbilitySystem;
 	ACharacterBase* Character;
-	if (!GetCharacterAndAbilitySystem(MeshComp, Character, AbilitySystem) || !TagState.IsValid())
+	if (!GetCharacterAndAbilitySystem(MeshComp, Character, AbilitySystem))
 	{
 		return;
 	}
-	
-	if (bAddGameplayTagToActor && AbilitySystem->HasMatchingGameplayTag(TagState))
+
+	// Gameplay tag state
+	if (bAddGameplayTagToActor && GameplayTagState.IsValid() && AbilitySystem->HasMatchingGameplayTag(GameplayTagState))
 	{
-		AbilitySystem->RemoveReplicatedLooseGameplayTag(TagState);
+		AbilitySystem->RemoveReplicatedLooseGameplayTag(GameplayTagState);
+	}
+	
+	// Gameplay event state 
+	if (bNotifyEndSendGameplayEventToActor && NotifyEndGameplayEventTag.IsValid())
+	{
+		FGameplayEventData EventData;
+		EventData.Instigator = Character;
+		
+		// if (!Character->HasAuthority() && Cast<ANPC>(Character)) return; // Do not activate on npc clients
+		UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(Character, NotifyEndGameplayEventTag, EventData);
 	}
 }
 

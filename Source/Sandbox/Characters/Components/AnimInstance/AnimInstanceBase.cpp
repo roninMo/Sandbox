@@ -3,6 +3,7 @@
 
 #include "AnimInstanceBase.h"
 
+#include "AbilitySystemGlobals.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Characters/CharacterBase.h"

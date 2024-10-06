@@ -21,14 +21,23 @@ class SANDBOX_API UGameplayTagState : public UAnimNotifyStateBase
 
 protected: // TODO: Check if this is safe!
 	UPROPERTY(EditAnywhere, meta = (ToolTip = "Send gameplay event to player actors (and server actors)"))
-	bool bSendGameplayEventToActor;
+	bool bNotifyBeginSendGameplayEventToActor;
+
+	UPROPERTY(EditAnywhere, meta = (ToolTip = "The tag that's added for the duration of the notify state", EditCondition="bNotifyBeginSendGameplayEventToActor", EditConditionHides))
+	FGameplayTag NotifyBeginGameplayEventTag;
+
+	UPROPERTY(EditAnywhere, meta = (ToolTip = "Send gameplay event to player actors (and server actors)"))
+	bool bNotifyEndSendGameplayEventToActor;
+
+	UPROPERTY(EditAnywhere, meta = (ToolTip = "The tag that's added for the duration of the notify state", EditCondition="bNotifyEndSendGameplayEventToActor", EditConditionHides))
+	FGameplayTag NotifyEndGameplayEventTag;
 	
 	UPROPERTY(EditAnywhere, meta = (ToolTip = "Add gameplay tag to player actors (and server actors)"))
 	bool bAddGameplayTagToActor;
 
-	UPROPERTY(EditAnywhere, meta = (ToolTip = "The tag that's added for the duration of the notify state"))
-	FGameplayTag TagState;
-
+	UPROPERTY(EditAnywhere, meta = (ToolTip = "The tag that's added for the duration of the notify state", EditCondition="bAddGameplayTagToActor", EditConditionHides))
+	FGameplayTag GameplayTagState;
+	
 
 public:
 	UGameplayTagState();

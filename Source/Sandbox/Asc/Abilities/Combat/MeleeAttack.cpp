@@ -13,6 +13,7 @@
 #include "Sandbox/Asc/Information/SandboxTags.h"
 #include "Sandbox/Data/Enums/ArmamentTypes.h"
 #include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Asc/Tasks/AbilityTask_WaitGameplayTagState.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 #include "Sandbox/Combat/CombatComponent.h"
@@ -104,7 +105,7 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 	InitCombatInformation();
 	
 	// Attack State ->  (Allow movement, begin overlap trace logic, etc.)
-	// FGameplayTagQuery AttackFramesQuery = FGameplayTagQuery::BuildQuery(FGameplayTagQueryExpression().AllTagsMatch().AddTag(AttackFramesTag));
+	const FGameplayTagQuery AttackFramesQuery = FGameplayTagQuery::BuildQuery(FGameplayTagQueryExpression().AllTagsMatch().AddTag(AttackFramesTag));
 	// AttackFramesHandle = UAbilityTask_WaitGameplayTagQuery::WaitGameplayTagQuery(
 	// 	this,
 	// 	AttackFramesQuery,
@@ -120,10 +121,14 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 	// AttackFramesEndHandle->Removed.AddDynamic(this, &UMeleeAttack::OnEndAttackFrames);
 	// AttackFramesEndHandle->ReadyForActivation();
 
-	AttackFramesHandle = UAbilityTask_WaitGameplayEvent::WaitGameplayEvent(this, AttackFramesTag, nullptr, false, false);
-	AttackFramesHandle->EventReceived.AddDynamic(this, &UMeleeAttack::OnAttackFrameEvent);
-	AttackFramesHandle->ReadyForActivation();
+	// AttackFramesHandle = UAbilityTask_WaitGameplayEvent::WaitGameplayEvent(this, AttackFramesTag, nullptr, false, false);
+	// AttackFramesHandle->EventReceived.AddDynamic(this, &UMeleeAttack::OnAttackFrameEvent);
+	// AttackFramesHandle->ReadyForActivation();
 
+	AttackFramesHandle = UAbilityTask_WaitGameplayTagState::WaitGameplayTagState(this, AttackFramesQuery);
+	AttackFramesHandle->UpdatedState.AddDynamic(this, &UMeleeAttack::OnAttackFramesStateUpdates);
+	AttackFramesHandle->ReadyForActivation();
+	
 	
 	// Overlap Trace ->  Have the server handle the attack logic with client prediction
 	MeleeOverlapHandle = UAbilityTask_TargetOverlap::CreateOverlapDataTask(this, Armament->GetArmamentHitboxes());
@@ -162,6 +167,24 @@ void UMeleeAttack::OnAttackFrameEvent(const FGameplayEventData EventData)
 	else if (EventData.EventTag == AttackFramesBeginTag)
 	{
 		OnBeginAttackFrames();
+	}
+}
+
+
+void UMeleeAttack::OnAttackFramesStateUpdates(bool bQueryStateValid)
+{
+	// If the attack frames have begun
+	if (bQueryStateValid)
+	{
+		OnBeginAttackFrames();
+
+		// TODO: if there's an attack with multiple attack frame locations, add logic for handling recreating the task
+	}
+
+	// If the attack frames have ended
+	if (!bQueryStateValid)
+	{
+		OnEndAttackFrames();
 	}
 }
 

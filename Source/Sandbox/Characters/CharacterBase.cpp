@@ -4,6 +4,7 @@
 #include "Sandbox/Characters/CharacterBase.h"
 
 #include "EnhancedInputComponent.h"
+#include "Components/AnimInstance/AnimInstanceBase.h"
 #include "Components/Inventory/InventoryComponent.h"
 #include "GameFramework/PlayerState.h"
 #include "Sandbox/Asc/AbilitySystem.h"
@@ -112,6 +113,13 @@ void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvat
 	{
 		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(this);
 		if (!AbilitySystemComponent) return;
+	}
+
+	// Add ability system state to the anim instance
+	UAnimInstanceBase* AnimInstance = GetMesh() ? Cast<UAnimInstanceBase>(GetMesh()->GetAnimInstance()) : nullptr;
+	if (AnimInstance)
+	{
+		AnimInstance->InitializeAbilitySystem(AbilitySystemComponent);
 	}
 	
 	// Add the ability input bindings
