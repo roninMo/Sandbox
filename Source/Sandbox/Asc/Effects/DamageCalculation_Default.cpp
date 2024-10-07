@@ -4,6 +4,7 @@
 #include "DamageCalculation_Default.h"
 
 #include "AbilitySystemComponent.h"
+#include "Logging/StructuredLog.h"
 #include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
 
 
@@ -211,6 +212,7 @@ void UDamageCalculation_Default::Execute_Implementation(const FGameplayEffectCus
 	// Retrieve the attribute information
 	FDamageCalculation_Attributes AttributeInformation;
 	CalculateCapturedRelevantAttributes(EvaluationParameters, ExecutionParams, AttributeInformation);
+	
 	const FDamageCalculations_AttackInformation& AttackInfo = AttributeInformation.AttackInformation;
 	const FDamageCalculations_Attributes_Target& PlayerStats = AttributeInformation.TargetAttributes;
 
@@ -281,7 +283,7 @@ void UDamageCalculation_Default::Execute_Implementation(const FGameplayEffectCus
 	CalculatedDamage.Damage_Fire = DamageCalculation(AttackInfo.Damage_Fire, PlayerStats.Resistance_Fire, PlayerStats.Negation_Fire);
 	CalculatedDamage.Damage_Holy = DamageCalculation(AttackInfo.Damage_Holy, PlayerStats.Resistance_Holy, PlayerStats.Negation_Holy);
 	CalculatedDamage.Damage_Lightning = DamageCalculation(AttackInfo.Damage_Lightning, PlayerStats.Resistance_Lightning, PlayerStats.Negation_Lightning);
-
+	
 	CalculatedDamage.Curse = StatusCalculation(AttackInfo.Curse, PlayerStats.Immunity, 0);
 	CalculatedDamage.Bleed = StatusCalculation(AttackInfo.Bleed, PlayerStats.Robustness, 0);
 	CalculatedDamage.Frostbite = StatusCalculation(AttackInfo.Frostbite, PlayerStats.Robustness, 0);
@@ -298,23 +300,23 @@ void UDamageCalculation_Default::Execute_Implementation(const FGameplayEffectCus
 
 
 	// Add the calculated damages to output modifications
-	const FGameplayModifierEvaluatedData Eval_Damage_Standard(UMMOAttributeSet::GetDamage_StandardAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Standard);
-	const FGameplayModifierEvaluatedData Eval_Damage_Slash(UMMOAttributeSet::GetDamage_SlashAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Slash);
-	const FGameplayModifierEvaluatedData Eval_Damage_Pierce(UMMOAttributeSet::GetDamage_PierceAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Pierce);
-	const FGameplayModifierEvaluatedData Eval_Damage_Strike(UMMOAttributeSet::GetDamage_StrikeAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Strike);
+	const FGameplayModifierEvaluatedData Eval_Damage_Standard(UMMOAttributeSet::GetDamage_StandardAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Standard);
+	const FGameplayModifierEvaluatedData Eval_Damage_Slash(UMMOAttributeSet::GetDamage_SlashAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Slash);
+	const FGameplayModifierEvaluatedData Eval_Damage_Pierce(UMMOAttributeSet::GetDamage_PierceAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Pierce);
+	const FGameplayModifierEvaluatedData Eval_Damage_Strike(UMMOAttributeSet::GetDamage_StrikeAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Strike);
 				
-	const FGameplayModifierEvaluatedData Eval_Damage_Magic(UMMOAttributeSet::GetDamage_MagicAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Magic);
-	const FGameplayModifierEvaluatedData Eval_Damage_Ice(UMMOAttributeSet::GetDamage_IceAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Ice);
-	const FGameplayModifierEvaluatedData Eval_Damage_Fire(UMMOAttributeSet::GetDamage_FireAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Fire);
-	const FGameplayModifierEvaluatedData Eval_Damage_Holy(UMMOAttributeSet::GetDamage_HolyAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Holy);
-	const FGameplayModifierEvaluatedData Eval_Damage_Lightning(UMMOAttributeSet::GetDamage_LightningAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Lightning);
+	const FGameplayModifierEvaluatedData Eval_Damage_Magic(UMMOAttributeSet::GetDamage_MagicAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Magic);
+	const FGameplayModifierEvaluatedData Eval_Damage_Ice(UMMOAttributeSet::GetDamage_IceAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Ice);
+	const FGameplayModifierEvaluatedData Eval_Damage_Fire(UMMOAttributeSet::GetDamage_FireAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Fire);
+	const FGameplayModifierEvaluatedData Eval_Damage_Holy(UMMOAttributeSet::GetDamage_HolyAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Holy);
+	const FGameplayModifierEvaluatedData Eval_Damage_Lightning(UMMOAttributeSet::GetDamage_LightningAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Lightning);
 				
-	const FGameplayModifierEvaluatedData Eval_Curse(UMMOAttributeSet::GetCurseAttribute(), EGameplayModOp::Additive, CalculatedDamage.Curse);
-	const FGameplayModifierEvaluatedData Eval_Bleed(UMMOAttributeSet::GetBleedAttribute(), EGameplayModOp::Additive, CalculatedDamage.Bleed);
-	const FGameplayModifierEvaluatedData Eval_Frostbite(UMMOAttributeSet::GetFrostbiteAttribute(), EGameplayModOp::Additive, CalculatedDamage.Frostbite);
-	const FGameplayModifierEvaluatedData Eval_Poison(UMMOAttributeSet::GetPoisonAttribute(), EGameplayModOp::Additive, CalculatedDamage.Poison);
-	const FGameplayModifierEvaluatedData Eval_Madness(UMMOAttributeSet::GetMadnessAttribute(), EGameplayModOp::Additive, CalculatedDamage.Madness);
-	const FGameplayModifierEvaluatedData Eval_Sleep(UMMOAttributeSet::GetSleepAttribute(), EGameplayModOp::Additive, CalculatedDamage.Sleep);
+	const FGameplayModifierEvaluatedData Eval_Curse(UMMOAttributeSet::GetCurseAttribute(), EGameplayModOp::Override, CalculatedDamage.Curse);
+	const FGameplayModifierEvaluatedData Eval_Bleed(UMMOAttributeSet::GetBleedAttribute(), EGameplayModOp::Override, CalculatedDamage.Bleed);
+	const FGameplayModifierEvaluatedData Eval_Frostbite(UMMOAttributeSet::GetFrostbiteAttribute(), EGameplayModOp::Override, CalculatedDamage.Frostbite);
+	const FGameplayModifierEvaluatedData Eval_Poison(UMMOAttributeSet::GetPoisonAttribute(), EGameplayModOp::Override, CalculatedDamage.Poison);
+	const FGameplayModifierEvaluatedData Eval_Madness(UMMOAttributeSet::GetMadnessAttribute(), EGameplayModOp::Override, CalculatedDamage.Madness);
+	const FGameplayModifierEvaluatedData Eval_Sleep(UMMOAttributeSet::GetSleepAttribute(), EGameplayModOp::Override, CalculatedDamage.Sleep);
 
 	// Each calculation is done individually. The effect context handles these in the same order they're created
 	// They however, use the same effect context which might be helpful for how you handle calculations
@@ -397,7 +399,12 @@ void UDamageCalculation_Default::CalculateCapturedRelevantAttributes(
 
 float UDamageCalculation_Default::DamageCalculation(const float IncomingDamage, const float Defence, const float DamageNegation) const
 {
-	return FMath::Clamp(IncomingDamage - Defence, 0, IncomingDamage) * ((100 - DamageNegation) / 100);
+	float DamageAfterArmor = FMath::Clamp(IncomingDamage - Defence, 0, IncomingDamage);
+	float DamageNegationCalc = (100 - DamageNegation) * 0.01;
+	float MitigatedDamage = DamageAfterArmor * DamageNegationCalc;
+
+	// UE_LOGFMT(LogTemp, Log, "DamageAfterArmor: {0}, DamageNegationCalc: {1}, MitigatedDamage: {3}", DamageAfterArmor, DamageNegationCalc, MitigatedDamage);
+	return MitigatedDamage;
 }
 
 

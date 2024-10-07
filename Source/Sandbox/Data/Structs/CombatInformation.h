@@ -49,10 +49,10 @@ struct F_AttackInformation
 	// UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FGameplayAttribute, float> BaseDamagesOrMultipliers;
 	
 	/** The motion value of the current attack  */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) float MotionValue;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float MotionValue = 1;
 	
 	/** The motion value for statuses of the current attack  */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) float StatusMotionValue;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float StatusMotionValue = 1;
 };
 
 

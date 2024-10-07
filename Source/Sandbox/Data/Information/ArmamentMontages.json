@@ -23,17 +23,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue": 1,
-										"MotionValue": 1
-									},										
-									"StaminaCost": 11,
-									"CustomMontageSection": "None"
-								},
-								{
-									"AttackInformation":
-									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -41,8 +32,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -50,8 +41,17 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
+									},
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -75,8 +75,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -84,8 +84,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -93,8 +93,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -102,8 +102,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -127,8 +127,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -152,8 +152,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -161,8 +161,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -170,8 +170,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -198,8 +198,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -207,8 +207,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -216,8 +216,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -225,8 +225,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -265,8 +265,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -290,8 +290,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -299,8 +299,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -308,8 +308,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -336,8 +336,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -345,8 +345,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -354,8 +354,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -363,8 +363,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -388,8 +388,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -397,8 +397,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -406,8 +406,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -415,8 +415,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -440,8 +440,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -465,8 +465,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -474,8 +474,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -483,8 +483,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -545,8 +545,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -554,8 +554,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -563,8 +563,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -572,8 +572,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -597,8 +597,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -606,8 +606,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -615,8 +615,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -624,8 +624,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -649,8 +649,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -674,8 +674,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -683,8 +683,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -711,8 +711,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -720,8 +720,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -729,8 +729,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -738,8 +738,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -778,8 +778,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -803,8 +803,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -812,8 +812,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -821,8 +821,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -849,8 +849,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -858,8 +858,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -867,8 +867,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -876,8 +876,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -901,8 +901,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -910,8 +910,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -919,8 +919,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -928,8 +928,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -953,8 +953,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -978,8 +978,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -987,8 +987,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -996,8 +996,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1102,8 +1102,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1111,8 +1111,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1120,8 +1120,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1145,8 +1145,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1154,8 +1154,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1163,8 +1163,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1172,8 +1172,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1197,8 +1197,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1222,8 +1222,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1231,8 +1231,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1240,8 +1240,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1268,8 +1268,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1277,8 +1277,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1286,8 +1286,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1295,8 +1295,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1335,8 +1335,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1360,8 +1360,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1369,8 +1369,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1378,8 +1378,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1406,8 +1406,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1415,8 +1415,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1424,8 +1424,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1433,8 +1433,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1458,8 +1458,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1467,8 +1467,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1476,8 +1476,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1485,8 +1485,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1510,8 +1510,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1535,8 +1535,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1544,8 +1544,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1553,8 +1553,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1615,8 +1615,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1624,8 +1624,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1633,8 +1633,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1642,8 +1642,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1667,8 +1667,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1676,8 +1676,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1685,8 +1685,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1694,8 +1694,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1719,8 +1719,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1744,8 +1744,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1753,8 +1753,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1781,8 +1781,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1790,8 +1790,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1799,8 +1799,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1808,8 +1808,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1848,8 +1848,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1873,8 +1873,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1882,8 +1882,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1891,8 +1891,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1919,8 +1919,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1928,8 +1928,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1937,8 +1937,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1946,8 +1946,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1971,8 +1971,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1980,8 +1980,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1989,8 +1989,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1998,8 +1998,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2023,8 +2023,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2048,8 +2048,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2057,8 +2057,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2066,8 +2066,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2128,8 +2128,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2137,8 +2137,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2146,8 +2146,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2155,8 +2155,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2180,8 +2180,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2189,8 +2189,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2198,8 +2198,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2207,8 +2207,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2232,8 +2232,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2257,8 +2257,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2266,8 +2266,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2294,8 +2294,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2303,8 +2303,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2312,8 +2312,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2321,8 +2321,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2361,8 +2361,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2386,8 +2386,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2395,8 +2395,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2404,8 +2404,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2432,8 +2432,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2441,8 +2441,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2450,8 +2450,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2459,8 +2459,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2484,8 +2484,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2493,8 +2493,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2502,8 +2502,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2511,8 +2511,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2536,8 +2536,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2561,8 +2561,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2570,8 +2570,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2579,8 +2579,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2663,8 +2663,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2672,8 +2672,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2681,8 +2681,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2706,8 +2706,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2715,8 +2715,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2724,8 +2724,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2733,8 +2733,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2758,8 +2758,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2783,8 +2783,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2792,8 +2792,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2820,8 +2820,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2829,8 +2829,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2838,8 +2838,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2847,8 +2847,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2887,8 +2887,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2912,8 +2912,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2921,8 +2921,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2930,8 +2930,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2958,8 +2958,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2967,8 +2967,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2976,8 +2976,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2985,8 +2985,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3010,8 +3010,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3019,8 +3019,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3028,8 +3028,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3037,8 +3037,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3062,8 +3062,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3087,8 +3087,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3096,8 +3096,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3105,8 +3105,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3167,8 +3167,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3176,8 +3176,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3185,8 +3185,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3210,8 +3210,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3219,8 +3219,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3228,8 +3228,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3237,8 +3237,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3262,8 +3262,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3287,8 +3287,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3296,8 +3296,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3305,8 +3305,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3333,8 +3333,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3342,8 +3342,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3351,8 +3351,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3360,8 +3360,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3400,8 +3400,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3425,8 +3425,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3434,8 +3434,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3443,8 +3443,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3471,8 +3471,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3480,8 +3480,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3489,8 +3489,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3498,8 +3498,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3523,8 +3523,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3532,8 +3532,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3541,8 +3541,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3550,8 +3550,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3575,8 +3575,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3600,8 +3600,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3609,8 +3609,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3618,8 +3618,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3680,8 +3680,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3689,8 +3689,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3698,8 +3698,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3707,8 +3707,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3732,8 +3732,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3741,8 +3741,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3766,8 +3766,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3791,8 +3791,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3800,8 +3800,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3828,8 +3828,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3837,8 +3837,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3846,8 +3846,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3855,8 +3855,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3885,7 +3885,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_SpecialAttacks.AM_Manny_ZabuzaSword_SpecialAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
 							}
 						},
 						"Combo":
@@ -3895,8 +3895,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3920,8 +3920,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3929,8 +3929,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3938,8 +3938,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -3966,8 +3966,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3975,8 +3975,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3984,8 +3984,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3993,8 +3993,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4018,8 +4018,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4027,8 +4027,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4036,8 +4036,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4045,8 +4045,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4070,8 +4070,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4095,8 +4095,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -4104,8 +4104,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -4113,8 +4113,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -4175,8 +4175,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4184,8 +4184,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4193,8 +4193,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4202,8 +4202,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4227,8 +4227,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4236,8 +4236,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4261,8 +4261,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4286,8 +4286,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4295,8 +4295,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4323,8 +4323,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4332,8 +4332,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4341,8 +4341,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4350,8 +4350,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4390,8 +4390,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4415,8 +4415,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4424,8 +4424,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4433,8 +4433,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4442,8 +4442,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4470,8 +4470,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4479,8 +4479,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4488,8 +4488,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4497,8 +4497,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4522,8 +4522,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4531,8 +4531,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4540,8 +4540,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4549,8 +4549,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4574,8 +4574,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4599,8 +4599,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -4608,8 +4608,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -4617,8 +4617,8 @@
 								{
 									"AttackInformation":
 									{
-										"StatusMotionValue":  1,
-										"MotionValue":  1
+										"MotionValue": 1,
+										"StatusMotionValue": 1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"

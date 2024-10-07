@@ -424,7 +424,7 @@
 			"DamageCalculations": "Armament",
 			"BaseDamageStats":
 			{
-				"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 100
+				"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 164
 			},
 			"Passives": [],
 			"StateInformation":

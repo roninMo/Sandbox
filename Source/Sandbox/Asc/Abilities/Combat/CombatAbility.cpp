@@ -142,13 +142,14 @@ void UCombatAbility::SetComboAttack()
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Failed to retrieve the combat component during {2} while getting the combo attack",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while getting the combo attack",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
 		return;
 	}
 	
 	// Retrieve the current attack
-	if (ComboCount <= 1 || CombatComponent->GetComboIndex() + 1 >= ComboAttacks.ComboAttacks.Num())
+	ComboIndex = CombatComponent->GetComboIndex();
+	if (ComboCount <= 1 || ComboIndex + 1 >= ComboAttacks.ComboAttacks.Num())
 	{
 		if (!ComboAttacks.ComboAttacks.IsEmpty())
 		{
@@ -168,14 +169,16 @@ void UCombatAbility::SetComboIndex()
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Failed to retrieve the combat component during {2} while adjusting the combo index",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while adjusting the combo index",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
 		return;
 	}
 	
-	if (CombatComponent->GetComboIndex() + 1 >= ComboAttacks.ComboAttacks.Num()) ComboIndex = 0;
-	else ComboIndex += 1;
-	CombatComponent->SetComboIndex(ComboIndex);
+	if (CombatComponent->GetComboIndex() + 1 >= ComboAttacks.ComboAttacks.Num()) CombatComponent->SetComboIndex(0);
+	else CombatComponent->SetComboIndex(CombatComponent->GetComboIndex() + 1);
+	
+	UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Adjusted combo index from {3} to {4}",
+		UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), ComboIndex, CombatComponent->GetComboIndex());
 }
 
 
@@ -284,22 +287,14 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 	}
 	
 	// Validity Checks
-	if (!TargetData.IsValid(0))
+	if (!TargetData.IsValid(0)) // TODO: This is happening sometimes and it's either the client not attacking another client, or an addition trace when prediction isn't valid. Fix traces to always have valid prediction
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2}'s Target data is not valid! ",
-			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
+		// UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2}'s Target data is not valid! ",
+		// 	*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 		return;
 	}
-
-	UAbilitySystemComponent* Asc = GetAbilitySystemComponentFromActorInfo();
-	if (!Asc)
-	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() Something happened to the ({2})'s ability system while trying to handle a melee attack",
-			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
-		return;
-	}
-
-	const UMMOAttributeSet* AttributeSet = Cast<UMMOAttributeSet>(Asc->GetAttributeSet(UMMOAttributeSet::StaticClass()));
+	
+	const UMMOAttributeSet* AttributeSet = Cast<UMMOAttributeSet>(TargetAsc->GetAttributeSet(UMMOAttributeSet::StaticClass()));
 	if (!AttributeSet)
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() Something happened to the ({2})'s attribute set while trying to handle a melee attack",
@@ -330,8 +325,8 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 		return;
 	}
 	
-	UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Landed an attack on {3}",
-		*UEnum::GetValueAsString(GetAvatarActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetAvatarActorFromActorInfo()), *GetNameSafe(TargetCharacter));
+	// UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Landed an attack on {3}",
+	// 	*UEnum::GetValueAsString(GetAvatarActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetAvatarActorFromActorInfo()), *GetNameSafe(TargetCharacter));
 
 	// Prep and send an exec calc to the target
 	const FGameplayEffectSpecHandle ExecCalcHandle = PrepExecCalcForTarget(
@@ -379,7 +374,7 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 	
 	// Create the execution calculation and add any additional information to the handle
 	const FGameplayEffectSpec* ExecCalc = ExecCalcHandle.Data.Get();
-	UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(ExecCalcHandle, FGameplayTag::RequestGameplayTag(Tag_Event_Montage_Action), 1);
+	// UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(ExecCalcHandle, FGameplayTag::RequestGameplayTag(Tag_Event_Montage_Action), 1);
 	
 	// const float CalculatedDamage = GetCalculatedDamage();
 	// FHitResult Impact = UAbilitySystemBlueprintLibrary::GetHitResultFromTargetData(TargetData, 0);
@@ -436,6 +431,7 @@ void UCombatAbility::CheckAndAttackIfAlreadyOverlappingAnything(TArray<AActor*>&
 			TargetData.Add(Data);
 	
 			HandleMeleeAttack(TargetData, TargetCharacter->GetAbilitySystem<UAbilitySystem>());
+			AlreadyHitActors.Add(TargetCharacter);
 		}
 	}
 }

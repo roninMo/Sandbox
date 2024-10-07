@@ -24,7 +24,7 @@ void UAbilityTask_TargetOverlap::Activate()
 	// One interesting thing that the ability system component does for handling client side prediction is create a way to reference sending information from client to server using ability tasks and a target data object
 	// The way you handle it is by sending the information on the client while listening for it on the server when an ability has been activated and prediction is valid, here's how you should go about it
 
-	const AActor* Character = Ability->GetCurrentActorInfo()->AvatarActor.Get();
+	const AActor* Character = Ability && Ability->GetCurrentActorInfo() ? Ability->GetCurrentActorInfo()->AvatarActor.Get() : nullptr;
 	UAbilitySystem* ASC = Cast<UAbilitySystem>(AbilitySystemComponent.Get());
 	if (!Character || !ASC || OverlapComponents.IsEmpty())
 	{
@@ -66,7 +66,7 @@ void UAbilityTask_TargetOverlap::Activate()
 	for (UPrimitiveComponent* OverlapComponent : OverlapComponents)
 	{
 		if (!OverlapComponent) continue;
-		
+	
 		OverlapComponent->OnComponentBeginOverlap.AddDynamic(this, &UAbilityTask_TargetOverlap::OnTraceOverlap);
 	}
 }
