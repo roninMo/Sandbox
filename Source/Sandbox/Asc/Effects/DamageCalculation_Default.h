@@ -46,12 +46,21 @@ struct FDamageCalculations_AttackInformation
 	
 	/** The bleed damage */
 	UPROPERTY() float Bleed;
+
+	/** The frostbite damage */
+	UPROPERTY() float Frostbite;
 	
 	/** The poison damage */
 	UPROPERTY() float Poison;
 	
 	/** The curse damage */
 	UPROPERTY() float Curse;
+	
+	/** The madness damage */
+	UPROPERTY() float Madness;
+	
+	/** The sleep damage */
+	UPROPERTY() float Sleep;
 };
 
 

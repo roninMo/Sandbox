@@ -3,9 +3,11 @@
 
 #include "Sandbox/Asc/Abilities/Combat/CombatAbility.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
+#include "Sandbox/Asc/Information/SandboxTags.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Combat/Weapons/Armament.h"
@@ -209,24 +211,59 @@ void UCombatAbility::CalculateAttributeModifications()
 	if (!Armament) return;
 
 	// Empty out the previous attack's attribute calculations
-	AdjustedAttributes.Empty();
+	AttackInfo.Empty();
 	
 	// Weapon damage and attribute calculations
 	const F_ArmamentInformation& ArmamentInformation = Armament->GetArmamentInformation();
-	const TMap<FGameplayAttribute, float>& DamageMultipliers = CurrentAttack.AttackInformation.BaseDamagesOrMultipliers;
+	// const TMap<FGameplayAttribute, float>& DamageMultipliers = CurrentAttack.AttackInformation.BaseDamagesOrMultipliers;
 	if (ArmamentInformation.DamageCalculations == EDamageInformationSource::Armament)
 	{
 		// Armament/Skill based -> retrieve the armament's base damage, add damage scaling, and the current attack multiplier
 		for (auto &[Attribute, Value] : ArmamentInformation.BaseDamageStats)
 		{
-			const float CurrentAttackMultiplier = DamageMultipliers.Contains(Attribute) ? DamageMultipliers[Attribute] : 1;
-			AdjustedAttributes.Add(Attribute, Value * CurrentAttackMultiplier);
+			// Damages
+			if (Attribute == UMMOAttributeSet::GetDamage_StandardAttribute() ||
+				Attribute == UMMOAttributeSet::GetDamage_SlashAttribute() ||
+				Attribute == UMMOAttributeSet::GetDamage_PierceAttribute() ||
+				Attribute == UMMOAttributeSet::GetDamage_StrikeAttribute())
+			{
+				float EquipmentMultiplier = 1;
+				float AttackMotionValue = CurrentAttack.AttackInformation.MotionValue;
+				AttackInfo.Add(Attribute, (Value * EquipmentMultiplier) * AttackMotionValue);
+			}
+
+			if (Attribute == UMMOAttributeSet::GetDamage_MagicAttribute() ||
+				Attribute == UMMOAttributeSet::GetDamage_IceAttribute() ||
+				Attribute == UMMOAttributeSet::GetDamage_FireAttribute() ||
+				Attribute == UMMOAttributeSet::GetDamage_HolyAttribute() ||
+				Attribute == UMMOAttributeSet::GetDamage_LightningAttribute())
+			{
+				float EquipmentMultiplier = 1;
+				float AttackMotionValue = CurrentAttack.AttackInformation.MotionValue;
+				AttackInfo.Add(Attribute, (Value * EquipmentMultiplier) * AttackMotionValue);
+			}
+			
+			// Statuses
+			if (Attribute == UMMOAttributeSet::GetCurseAttribute() ||
+				Attribute == UMMOAttributeSet::GetBleedAttribute() ||
+				Attribute == UMMOAttributeSet::GetFrostbiteAttribute() ||
+				Attribute == UMMOAttributeSet::GetPoisonAttribute() ||
+				Attribute == UMMOAttributeSet::GetMadnessAttribute() ||
+				Attribute == UMMOAttributeSet::GetSleepAttribute())
+			{
+				float EquipmentMultiplier = 1;
+				float AttackMotionValue = CurrentAttack.AttackInformation.StatusMotionValue;
+				AttackInfo.Add(Attribute, (Value * EquipmentMultiplier) * AttackMotionValue);
+			}
+
+			// Add any custom attribute information here
+			
 		}
 	}
 	else if (ArmamentInformation.DamageCalculations == EDamageInformationSource::Combo)
 	{
 		// Combo based -> retrieve the damage from the combo attack, and add damage scaling from attributes
-		AdjustedAttributes = CurrentAttack.AttackInformation.BaseDamagesOrMultipliers;
+		AttackInfo.Add(UMMOAttributeSet::GetDamage_StandardAttribute(), CurrentAttack.AttackInformation.MotionValue);
 	}
 
 	// TODO: Add a function from the combat component that handles attribute adjustments based on the weapon stats, current attack, and armament stance
@@ -316,22 +353,33 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 	// Custom gameplay effect information. Modifying gameplay effect spec is valid, but dangerous when retrieving the owning spec for pre execute -> /* Non const access. Be careful with this, especially when modifying a spec after attribute capture. */
 	// ValidTransientAggregatorIdentifiers -> The ExecutionCalculation reads this value in using special capture functions similar to the Attribute capture functions. (ExecutionParams.AttemptCalculateTransientAggregatorMagnitude())
 	
-	// We're just going to use attributes, valid client side prediction attack calculations, and if we need any other information let's just use the custom gameplay effect (I'm going to find out if this is safe)
+	// We're just going to use attributes, valid client side prediction attack calculations, and if we need any other information let's just use the custom gameplay effect
 	UMMOAttributeSet* Attributes = const_cast<UMMOAttributeSet*>(AttributeSet);
 	if (Attributes)
 	{
-		if (AdjustedAttributes.Contains(Attributes->GetDamage_StandardAttribute()))
-		{
-			Attributes->SetDamage_Standard(AdjustedAttributes[Attributes->GetDamage_StandardAttribute()]);
-			UE_LOGFMT(AbilityLog, Warning, "{0}::{1}() {2} attacked with a damage of {3}, updated the attribte: {4}!",
-				*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()),
-				AdjustedAttributes[Attributes->GetDamage_StandardAttribute()], Attributes->GetDamage_Standard()
-			);
-		}
+		if (AttackInfo.Contains(Attributes->GetDamage_StandardAttribute())) Attributes->SetDamage_Standard(AttackInfo[Attributes->GetDamage_StandardAttribute()]);
+		if (AttackInfo.Contains(Attributes->GetDamage_SlashAttribute())) Attributes->SetDamage_Slash(AttackInfo[Attributes->GetDamage_SlashAttribute()]);
+		if (AttackInfo.Contains(Attributes->GetDamage_PierceAttribute())) Attributes->SetDamage_Pierce(AttackInfo[Attributes->GetDamage_PierceAttribute()]);
+		if (AttackInfo.Contains(Attributes->GetDamage_StrikeAttribute())) Attributes->SetDamage_Strike(AttackInfo[Attributes->GetDamage_StrikeAttribute()]);
+
+		if (AttackInfo.Contains(Attributes->GetDamage_MagicAttribute())) Attributes->SetDamage_Magic(AttackInfo[Attributes->GetDamage_MagicAttribute()]);
+		if (AttackInfo.Contains(Attributes->GetDamage_IceAttribute())) Attributes->SetDamage_Ice(AttackInfo[Attributes->GetDamage_IceAttribute()]);
+		if (AttackInfo.Contains(Attributes->GetDamage_FireAttribute())) Attributes->SetDamage_Fire(AttackInfo[Attributes->GetDamage_FireAttribute()]);
+		if (AttackInfo.Contains(Attributes->GetDamage_HolyAttribute())) Attributes->SetDamage_Holy(AttackInfo[Attributes->GetDamage_HolyAttribute()]);
+		if (AttackInfo.Contains(Attributes->GetDamage_LightningAttribute())) Attributes->SetDamage_Lightning(AttackInfo[Attributes->GetDamage_LightningAttribute()]);
+		
+		if (AttackInfo.Contains(Attributes->GetBleedAttribute())) Attributes->SetBleed(AttackInfo[Attributes->GetBleedAttribute()]);
+		if (AttackInfo.Contains(Attributes->GetPoisonAttribute())) Attributes->SetPoison(AttackInfo[Attributes->GetPoisonAttribute()]);
+		if (AttackInfo.Contains(Attributes->GetFrostbiteAttribute())) Attributes->SetFrostbite(AttackInfo[Attributes->GetFrostbiteAttribute()]);
+		if (AttackInfo.Contains(Attributes->GetCurseAttribute())) Attributes->SetCurse(AttackInfo[Attributes->GetCurseAttribute()]);
+		if (AttackInfo.Contains(Attributes->GetMadnessAttribute())) Attributes->SetMadness(AttackInfo[Attributes->GetMadnessAttribute()]);
+		if (AttackInfo.Contains(Attributes->GetSleepAttribute())) Attributes->SetSleep(AttackInfo[Attributes->GetSleepAttribute()]);
+
 	}
 	
 	// Create the execution calculation and add any additional information to the handle
 	const FGameplayEffectSpec* ExecCalc = ExecCalcHandle.Data.Get();
+	UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(ExecCalcHandle, FGameplayTag::RequestGameplayTag(Tag_Event_Montage_Action), 1);
 	
 	// const float CalculatedDamage = GetCalculatedDamage();
 	// FHitResult Impact = UAbilitySystemBlueprintLibrary::GetHitResultFromTargetData(TargetData, 0);

@@ -151,11 +151,15 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Fire) FGameplayAttributeData Damage_Fire;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Holy) FGameplayAttributeData Damage_Holy;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Lightning) FGameplayAttributeData Damage_Lightning;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Lightning) FGameplayAttributeData DamageCalculation;
 
 	/**** Statuses ****/
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Bleed) FGameplayAttributeData Bleed;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Poison) FGameplayAttributeData Poison;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Poison) FGameplayAttributeData Frostbite;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Curse) FGameplayAttributeData Curse;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Poison) FGameplayAttributeData Madness;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Curse) FGameplayAttributeData Sleep;
 	
 	
 
@@ -241,9 +245,14 @@ public:
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Fire)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Holy)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Lightning)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, DamageCalculation)
+	
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Bleed)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Poison)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Frostbite)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Curse)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Madness)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Sleep)
 	
 	
 protected:
@@ -325,10 +334,13 @@ protected:
 	UFUNCTION() virtual void OnRep_Damage_Fire(const FGameplayAttributeData OldDamage_Fire) const;
 	UFUNCTION() virtual void OnRep_Damage_Holy(const FGameplayAttributeData OldDamage_Holy) const;
 	UFUNCTION() virtual void OnRep_Damage_Lightning(const FGameplayAttributeData OldDamage_Lightning) const;
+	UFUNCTION() virtual void OnRep_DamageCalculation(const FGameplayAttributeData OldDamageCalculation) const;
 	UFUNCTION() virtual void OnRep_Bleed(const FGameplayAttributeData OldBleed) const;
 	UFUNCTION() virtual void OnRep_Poison(const FGameplayAttributeData OldPoison) const;
+	UFUNCTION() virtual void OnRep_Frostbite(const FGameplayAttributeData OldFrostbite) const;
 	UFUNCTION() virtual void OnRep_Curse(const FGameplayAttributeData OldCurse) const;
-
+	UFUNCTION() virtual void OnRep_Madness(const FGameplayAttributeData OldMadness) const;
+	UFUNCTION() virtual void OnRep_Sleep(const FGameplayAttributeData OldSleep) const;
 
 
 

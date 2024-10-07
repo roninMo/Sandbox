@@ -14,7 +14,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		Status calculations
 			- status buildup
 				- Status effect (Take damage / slow / poison)
-				- Hit reaction
+				- Hit reactionz
 
 		Damage calculations
 			- Take damage
@@ -35,8 +35,8 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 	 */
 
 
-	// Is there a way to find out when we've finished handling the adjusted attributes of a single gameplay effect? They're sent in individually, (0) -> (0, 1) -> (0, 1, 2) -> (0, 1, 2, 3)
-	// I don't want to handle any of the logic outside of attribute modifications until it's finished. One solution (if they always come in the same order) is to have an attribute to denote when to handle the calculations
+	
+
 	
 
 	OnPostGameplayEffectExecute.Broadcast(Props);

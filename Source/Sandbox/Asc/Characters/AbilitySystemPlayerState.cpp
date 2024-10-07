@@ -4,6 +4,7 @@
 #include "AbilitySystemPlayerState.h"
 
 #include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Asc/Attributes/MMOAttributeLogic.h"
 
 AAbilitySystemPlayerState::AAbilitySystemPlayerState(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -18,7 +19,7 @@ AAbilitySystemPlayerState::AAbilitySystemPlayerState(const FObjectInitializer& O
 	// Create the attribute set, this replicates by default
 	// Adding it as a subobject of the owning actor of an AbilitySystemComponent
 	// automatically registers the AttributeSet with the AbilitySystemComponent
-	// AttributeSet = CreateDefaultSubobject<UAttributeLogic>(TEXT("AttributeSet"));
+	AttributeSet = CreateDefaultSubobject<UMMOAttributeLogic>(TEXT("AttributeSet"));
 	
 	//////////////////////// Replication stuff (Server/Client rendering) 
 	NetUpdateFrequency = 66.f; // default update character on other machines 66 times a second (general fps defaults)

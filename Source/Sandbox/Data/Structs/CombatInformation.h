@@ -46,7 +46,13 @@ struct F_AttackInformation
 	F_AttackInformation() = default;
 
 	/** The base damages or damage multipliers for of the combo attack. @note You can use this for multipliers for different attacks, or actual damage for attacks that don't factor in the armament's based damage  */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FGameplayAttribute, float> BaseDamagesOrMultipliers;
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FGameplayAttribute, float> BaseDamagesOrMultipliers;
+	
+	/** The motion value of the current attack  */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float MotionValue;
+	
+	/** The motion value for statuses of the current attack  */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float StatusMotionValue;
 };
 
 

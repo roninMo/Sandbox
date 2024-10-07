@@ -31,7 +31,7 @@ protected:
 	/** Combat information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") F_ComboAttacks ComboAttacks;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") F_ComboAttack CurrentAttack;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") TMap<FGameplayAttribute, float> AdjustedAttributes;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") TMap<FGameplayAttribute, float> AttackInfo;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") FName DefaultMontageSection;
 	UPROPERTY(Transient, BlueprintReadWrite) FName MontageStartSection;
 	UPROPERTY(Transient, BlueprintReadWrite) bool bComboAbility = true;

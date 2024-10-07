@@ -3,10 +3,12 @@
 
 #include "Sandbox/Asc/Abilities/Combat/MeleeAttack.h"
 
+#include "AbilitySystemGlobals.h"
 #include "Abilities/Tasks/AbilityTask_WaitInputRelease.h"
 #include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
 #include "Abilities/Tasks/AbilityTask_WaitGameplayEvent.h"
 #include "Abilities/Tasks/AbilityTask_WaitGameplayTag.h"
+#include "Kismet/GameplayStatics.h"
 #include "Sandbox/Asc/Tasks/AbilityTask_TargetOverlap.h"
 #include "Logging/StructuredLog.h"
 

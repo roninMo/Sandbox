@@ -227,13 +227,14 @@ void UGameplayAbilityUtilities::TryAddAttributes(UAbilitySystemComponent* Abilit
 	}
 	
 	// Prevent adding the same attribute set multiple times (if already registered by another GF or on Actor ASC directly)
-	if (UAttributeSet* AttributeSet = GetAttributeSet(AbilitySystemComponent, AttributeSetType))
-	{
-		OutAttributeSet = AttributeSet;
-		// UE_LOGFMT(AbilityLog, Warning, "{0}::{1}'s AttributeSet has already been created for {2}",
-		// 	*UEnum::GetValueAsString(OwnerActor->GetLocalRole()), *AttributeSetType->GetName(), *OwnerActor->GetName()
-		// );
-	}
+	// TODO: Check if this adds the subobject while saving the proper reference -> players should handle this in the player state, and everything else should be on the character
+	// if (UAttributeSet* AttributeSet = GetAttributeSet(AbilitySystemComponent, AttributeSetType))
+	// {
+	// 	OutAttributeSet = AttributeSet;
+	// 	// UE_LOGFMT(AbilityLog, Warning, "{0}::{1}'s AttributeSet has already been created for {2}",
+	// 	// 	*UEnum::GetValueAsString(OwnerActor->GetLocalRole()), *AttributeSetType->GetName(), *OwnerActor->GetName()
+	// 	// );
+	// }
 	
 	OutAttributeSet = NewObject<UAttributeSet>(OwnerActor, AttributeSetType);
 	if (!InAttributeSetMapping.InitializationData.IsNull())

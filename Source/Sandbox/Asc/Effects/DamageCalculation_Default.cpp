@@ -263,7 +263,7 @@ void UDamageCalculation_Default::Execute_Implementation(const FGameplayEffectCus
 		// Attack motion values are multiplicative and inherently tied to the overall damage of the weapon itself.
 		// Leveling the appropriate stat still makes the skill stronger, sure, but that's only because scaling affects the entire weapon and not just the skill.
 		// If a skill has something that is represented by a flat damage value in one of these categories here, that means it's independent from the weapon's damage and receives that much more power from leveling the appropriate stat.
-		// The damage of Ghost Flame Ignition is almost entirely made up of flat damage numbers, meaning a very large chunk of its potential power will be determined by your character's intelligence.
+		// The damage of Flame Ignition is almost entirely made up of flat damage numbers, meaning a very large chunk of its potential power will be determined by your character's intelligence.
 
 
 	*/
@@ -284,7 +284,11 @@ void UDamageCalculation_Default::Execute_Implementation(const FGameplayEffectCus
 
 	CalculatedDamage.Curse = StatusCalculation(AttackInfo.Curse, PlayerStats.Immunity, 0);
 	CalculatedDamage.Bleed = StatusCalculation(AttackInfo.Bleed, PlayerStats.Robustness, 0);
+	CalculatedDamage.Frostbite = StatusCalculation(AttackInfo.Frostbite, PlayerStats.Robustness, 0);
 	CalculatedDamage.Poison = StatusCalculation(AttackInfo.Poison, PlayerStats.Immunity, 0);
+	CalculatedDamage.Madness = StatusCalculation(AttackInfo.Madness, PlayerStats.Focus, 0);
+	CalculatedDamage.Sleep = StatusCalculation(AttackInfo.Sleep, PlayerStats.Focus, 0);
+	
 
 	
 	// If there's anything we need to add to the gameplay effect before the attribute handles it, here is the place to handle it
@@ -307,22 +311,29 @@ void UDamageCalculation_Default::Execute_Implementation(const FGameplayEffectCus
 				
 	const FGameplayModifierEvaluatedData Eval_Curse(UMMOAttributeSet::GetCurseAttribute(), EGameplayModOp::Additive, CalculatedDamage.Curse);
 	const FGameplayModifierEvaluatedData Eval_Bleed(UMMOAttributeSet::GetBleedAttribute(), EGameplayModOp::Additive, CalculatedDamage.Bleed);
+	const FGameplayModifierEvaluatedData Eval_Frostbite(UMMOAttributeSet::GetFrostbiteAttribute(), EGameplayModOp::Additive, CalculatedDamage.Frostbite);
 	const FGameplayModifierEvaluatedData Eval_Poison(UMMOAttributeSet::GetPoisonAttribute(), EGameplayModOp::Additive, CalculatedDamage.Poison);
+	const FGameplayModifierEvaluatedData Eval_Madness(UMMOAttributeSet::GetMadnessAttribute(), EGameplayModOp::Additive, CalculatedDamage.Madness);
+	const FGameplayModifierEvaluatedData Eval_Sleep(UMMOAttributeSet::GetSleepAttribute(), EGameplayModOp::Additive, CalculatedDamage.Sleep);
 
-	// Each calculation is done individually. The effect context handles these in the same order they're created (I think),
+	// Each calculation is done individually. The effect context handles these in the same order they're created
 	// They however, use the same effect context which might be helpful for how you handle calculations
-	if (CalculatedDamage.Damage_Standard != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Standard);
-	if (CalculatedDamage.Damage_Slash != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Slash);
-	if (CalculatedDamage.Damage_Pierce != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Pierce);
-	if (CalculatedDamage.Damage_Strike != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Strike);
-	if (CalculatedDamage.Damage_Magic != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Magic);
-	if (CalculatedDamage.Damage_Ice != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Ice);
-	if (CalculatedDamage.Damage_Fire != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Fire);
-	if (CalculatedDamage.Damage_Holy != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Holy);
-	if (CalculatedDamage.Damage_Lightning != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Lightning);
-	if (CalculatedDamage.Curse != 0) OutExecutionOutput.AddOutputModifier(Eval_Curse);
-	if (CalculatedDamage.Bleed != 0) OutExecutionOutput.AddOutputModifier(Eval_Bleed);
-	if (CalculatedDamage.Poison != 0) OutExecutionOutput.AddOutputModifier(Eval_Poison);
+	/* if (CalculatedDamage.Damage_Standard != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Standard);
+	/* if (CalculatedDamage.Damage_Slash != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Slash);
+	/* if (CalculatedDamage.Damage_Pierce != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Pierce);
+	/* if (CalculatedDamage.Damage_Strike != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Strike);
+	/* if (CalculatedDamage.Damage_Magic != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Magic);
+	/* if (CalculatedDamage.Damage_Ice != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Ice);
+	/* if (CalculatedDamage.Damage_Fire != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Fire);
+	/* if (CalculatedDamage.Damage_Holy != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Holy);
+	/* if (CalculatedDamage.Damage_Lightning != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Lightning);
+	/* if (CalculatedDamage.Curse != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Curse);
+	/* if (CalculatedDamage.Bleed != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Bleed);
+	/* if (CalculatedDamage.Frostbite != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Frostbite);
+	/* if (CalculatedDamage.Poison != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Poison);
+	/* if (CalculatedDamage.Madness != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Madness);
+	/* if (CalculatedDamage.Sleep != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Sleep);
+	OutExecutionOutput.AddOutputModifier(FGameplayModifierEvaluatedData(UMMOAttributeSet::GetDamageCalculationAttribute(), EGameplayModOp::Multiplicitive, 1));
 }
 
 
@@ -386,12 +397,12 @@ void UDamageCalculation_Default::CalculateCapturedRelevantAttributes(
 
 float UDamageCalculation_Default::DamageCalculation(const float IncomingDamage, const float Defence, const float DamageNegation) const
 {
-	return FMath::Clamp(IncomingDamage - Defence, 0, IncomingDamage) * DamageNegation;
+	return FMath::Clamp(IncomingDamage - Defence, 0, IncomingDamage) * ((100 - DamageNegation) / 100);
 }
 
 
-float UDamageCalculation_Default::StatusCalculation(float StatusDamage, float Resistance, float StatusNegation) const
+float UDamageCalculation_Default::StatusCalculation(const float StatusDamage, const float Resistance, const float StatusNegation) const
 {
-	return FMath::Clamp(StatusDamage - Resistance, 0, StatusDamage) * StatusNegation; 
+	return FMath::Clamp(StatusDamage - Resistance, 0, StatusDamage) * ((100 - StatusNegation) / 100); 
 }
 

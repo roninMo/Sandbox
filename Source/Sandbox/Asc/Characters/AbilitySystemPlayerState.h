@@ -8,7 +8,7 @@
 #include "AbilitySystemPlayerState.generated.h"
 
 class UAbilitySystem;
-class UMMOAttributeLogic;
+class UAttributeLogic;
 
 
 /**
@@ -22,7 +22,7 @@ class SANDBOX_API AAbilitySystemPlayerState : public APlayerState, public IAbili
 protected:
 	/** Stored references */
 	UPROPERTY(BlueprintReadWrite) TObjectPtr<UAbilitySystem> AbilitySystemComponent;
-	UPROPERTY(BlueprintReadWrite) TObjectPtr<UMMOAttributeLogic> AttributeSet;
+	UPROPERTY(BlueprintReadWrite) TObjectPtr<UAttributeLogic> AttributeSet;
 
 	
 public:

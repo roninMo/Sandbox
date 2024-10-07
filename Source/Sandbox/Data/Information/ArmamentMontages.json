@@ -23,10 +23,17 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue": 1,
+										"MotionValue": 1
+									},										
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								},
+								{
+									"AttackInformation":
+									{
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -34,10 +41,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -45,21 +50,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
-									},
-									"StaminaCost": 11,
-									"CustomMontageSection": "None"
-								},
-								{
-									"AttackInformation":
-									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -83,10 +75,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -94,10 +84,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -105,10 +93,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -116,10 +102,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -143,10 +127,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -170,10 +152,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -181,10 +161,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -192,10 +170,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -222,10 +198,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -233,10 +207,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -244,10 +216,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -255,10 +225,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -297,10 +265,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -324,10 +290,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -335,10 +299,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -346,10 +308,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -376,10 +336,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -387,10 +345,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -398,10 +354,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -409,10 +363,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -436,10 +388,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -447,10 +397,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -458,10 +406,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -469,10 +415,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -496,10 +440,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -523,10 +465,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -534,10 +474,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -545,10 +483,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -609,10 +545,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -620,10 +554,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -631,10 +563,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -642,10 +572,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -669,10 +597,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -680,10 +606,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -691,10 +615,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -702,10 +624,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -729,10 +649,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -756,10 +674,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -767,10 +683,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -797,10 +711,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -808,10 +720,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -819,10 +729,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -830,10 +738,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -872,10 +778,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -899,10 +803,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -910,10 +812,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -921,10 +821,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -951,10 +849,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -962,10 +858,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -973,10 +867,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -984,10 +876,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1011,10 +901,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1022,10 +910,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1033,10 +919,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1044,10 +928,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1071,10 +953,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1098,10 +978,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1109,10 +987,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1120,10 +996,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1228,10 +1102,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1239,10 +1111,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1250,10 +1120,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1277,10 +1145,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1288,10 +1154,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1299,10 +1163,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1310,10 +1172,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1337,10 +1197,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1364,10 +1222,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1375,10 +1231,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1386,10 +1240,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1416,10 +1268,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1427,10 +1277,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1438,10 +1286,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1449,10 +1295,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1491,10 +1335,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1518,10 +1360,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1529,10 +1369,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1540,10 +1378,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1570,10 +1406,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1581,10 +1415,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1592,10 +1424,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1603,10 +1433,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1630,10 +1458,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1641,10 +1467,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1652,10 +1476,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1663,10 +1485,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1690,10 +1510,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1717,10 +1535,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1728,10 +1544,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1739,10 +1553,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1803,10 +1615,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1814,10 +1624,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1825,10 +1633,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1836,10 +1642,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1863,10 +1667,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1874,10 +1676,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1885,10 +1685,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1896,10 +1694,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1923,10 +1719,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -1950,10 +1744,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1961,10 +1753,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -1991,10 +1781,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2002,10 +1790,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2013,10 +1799,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2024,10 +1808,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2066,10 +1848,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2093,10 +1873,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2104,10 +1882,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2115,10 +1891,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2145,10 +1919,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2156,10 +1928,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2167,10 +1937,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2178,10 +1946,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2205,10 +1971,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2216,10 +1980,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2227,10 +1989,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2238,10 +1998,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2265,10 +2023,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2292,10 +2048,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2303,10 +2057,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2314,10 +2066,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2378,10 +2128,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2389,10 +2137,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2400,10 +2146,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2411,10 +2155,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2438,10 +2180,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2449,10 +2189,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2460,10 +2198,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2471,10 +2207,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2498,10 +2232,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2525,10 +2257,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2536,10 +2266,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2566,10 +2294,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2577,10 +2303,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2588,10 +2312,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2599,10 +2321,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2641,10 +2361,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2668,10 +2386,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2679,10 +2395,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2690,10 +2404,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2720,10 +2432,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2731,10 +2441,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2742,10 +2450,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2753,10 +2459,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2780,10 +2484,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2791,10 +2493,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2802,10 +2502,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2813,10 +2511,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2840,10 +2536,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2867,10 +2561,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2878,10 +2570,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2889,10 +2579,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -2975,10 +2663,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2986,10 +2672,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -2997,10 +2681,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3024,10 +2706,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3035,10 +2715,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3046,10 +2724,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3057,10 +2733,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3084,10 +2758,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3111,10 +2783,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3122,10 +2792,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3152,10 +2820,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3163,10 +2829,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3174,10 +2838,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3185,10 +2847,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3227,10 +2887,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3254,10 +2912,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3265,10 +2921,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3276,10 +2930,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3306,10 +2958,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3317,10 +2967,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3328,10 +2976,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3339,10 +2985,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3366,10 +3010,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3377,10 +3019,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3388,10 +3028,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3399,10 +3037,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3426,10 +3062,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3453,10 +3087,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3464,10 +3096,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3475,10 +3105,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3539,10 +3167,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3550,10 +3176,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3561,10 +3185,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3588,10 +3210,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3599,10 +3219,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3610,10 +3228,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3621,10 +3237,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3648,10 +3262,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3675,10 +3287,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3686,10 +3296,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3697,10 +3305,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3727,10 +3333,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3738,10 +3342,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3749,10 +3351,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3760,10 +3360,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3802,10 +3400,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3829,10 +3425,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3840,10 +3434,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3851,10 +3443,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -3881,10 +3471,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3892,10 +3480,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3903,10 +3489,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3914,10 +3498,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3941,10 +3523,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3952,10 +3532,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3963,10 +3541,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -3974,10 +3550,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4001,10 +3575,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4028,10 +3600,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -4039,10 +3609,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -4050,10 +3618,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -4114,10 +3680,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4125,10 +3689,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4136,10 +3698,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4147,10 +3707,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4174,10 +3732,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4185,10 +3741,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4212,10 +3766,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4239,10 +3791,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4250,10 +3800,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4280,10 +3828,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4291,10 +3837,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4302,10 +3846,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4313,10 +3855,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4355,10 +3895,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4382,10 +3920,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4393,10 +3929,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4404,10 +3938,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4434,10 +3966,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4445,10 +3975,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4456,10 +3984,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4467,10 +3993,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4494,10 +4018,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4505,10 +4027,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4516,10 +4036,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4527,10 +4045,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4554,10 +4070,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -4581,10 +4095,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -4592,10 +4104,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -4603,10 +4113,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -4667,10 +4175,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4678,10 +4184,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4689,10 +4193,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4700,10 +4202,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4727,10 +4227,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4738,10 +4236,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4765,10 +4261,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4792,10 +4286,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4803,10 +4295,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
@@ -4833,10 +4323,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4844,10 +4332,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4855,10 +4341,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4866,10 +4350,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4908,10 +4390,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4935,10 +4415,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4946,10 +4424,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4957,10 +4433,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4968,10 +4442,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
@@ -4998,10 +4470,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -5009,10 +4479,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -5020,10 +4488,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -5031,10 +4497,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -5058,10 +4522,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -5069,10 +4531,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -5080,10 +4540,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -5091,10 +4549,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -5118,10 +4574,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -5145,10 +4599,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -5156,10 +4608,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
@@ -5167,10 +4617,8 @@
 								{
 									"AttackInformation":
 									{
-										"BaseDamagesOrMultipliers":
-										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
-										}
+										"StatusMotionValue":  1,
+										"MotionValue":  1
 									},
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
