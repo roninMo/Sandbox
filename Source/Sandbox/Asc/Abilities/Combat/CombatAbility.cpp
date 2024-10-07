@@ -9,6 +9,7 @@
 #include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
 #include "Sandbox/Asc/Information/SandboxTags.h"
 #include "Sandbox/Characters/CharacterBase.h"
+#include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Combat/Weapons/Armament.h"
 
@@ -178,8 +179,8 @@ void UCombatAbility::SetComboIndex()
 	if (CombatComponent->GetComboIndex() + 1 >= ComboAttacks.ComboAttacks.Num()) CombatComponent->SetComboIndex(0);
 	else CombatComponent->SetComboIndex(CombatComponent->GetComboIndex() + 1);
 	
-	UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Adjusted combo index from {3} to {4}",
-		UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), ComboIndex, CombatComponent->GetComboIndex());
+	// UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Adjusted combo index from {3} to {4}",
+	// 	UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), ComboIndex, CombatComponent->GetComboIndex());
 }
 
 

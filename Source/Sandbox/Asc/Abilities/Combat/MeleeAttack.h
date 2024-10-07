@@ -6,6 +6,7 @@
 #include "Sandbox/Asc/Abilities/Combat/CombatAbility.h"
 #include "MeleeAttack.generated.h"
 
+class UAbilityTask_ApplyRootMotionConstantForce;
 class UAbilityTask_WaitInputRelease;
 class UAbilityTask_PlayMontageAndWait;
 class UAbilityTask_WaitGameplayEvent;
@@ -44,6 +45,7 @@ protected: // TODO: Either adjust the ability task limit, or create additional t
 	/** The handle for the beginning and ending of attack frames logic */
 	// UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayTagState* AttackFramesHandle;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUsingRootMotionAnimations = true;
 	
 	/**** Cached tags ****/
 	/** When we should allow rotation movement during the attack */

@@ -4,6 +4,7 @@
 #include "Sandbox/Asc/Abilities/Combat/MeleeAttack.h"
 
 #include "AbilitySystemGlobals.h"
+#include "Abilities/Tasks/AbilityTask_ApplyRootMotionConstantForce.h"
 #include "Abilities/Tasks/AbilityTask_WaitInputRelease.h"
 #include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
 #include "Abilities/Tasks/AbilityTask_WaitGameplayEvent.h"
@@ -251,8 +252,10 @@ void UMeleeAttack::SetAttackMontage(AArmament* Weapon)
 			return;
 		}
 	}
-
+	
+	
 	// Primary Attack
+	UAnimMontage* WeaponMontage = Weapon->GetCombatMontage(AttackPattern);
 	if (AttackPattern == EInputAbilities::PrimaryAttack || AttackPattern == EInputAbilities::StrongAttack)
 	{
 		// Handle running attack variations (Just add them to the montage)
@@ -264,11 +267,11 @@ void UMeleeAttack::SetAttackMontage(AArmament* Weapon)
 		}
 		else
 		{
-			SetCurrentMontage(Weapon->GetCombatMontage(AttackPattern));
+			SetCurrentMontage(WeaponMontage);
 		}
 	}
 	else
 	{
-		SetCurrentMontage(Weapon->GetCombatMontage(AttackPattern));
+		SetCurrentMontage(WeaponMontage);
 	}
 }

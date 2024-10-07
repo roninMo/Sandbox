@@ -707,11 +707,18 @@ protected:
 
 	
 //----------------------------------------------------------------------------------------------------------------------------------//
+// Root Motion																														//
+//----------------------------------------------------------------------------------------------------------------------------------//
+protected:
+
+	
+//----------------------------------------------------------------------------------------------------------------------------------//
 // Other																															//
 //----------------------------------------------------------------------------------------------------------------------------------//
 protected:
 	/** The physics channel for tracing against objects in the world */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)") TEnumAsByte<ETraceTypeQuery> MovementChannel;
+
 	
 	/** land movement and information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement: Debugging") bool bDebugWallJump;
@@ -1224,34 +1231,12 @@ public:
 	virtual bool CanAttemptJump() const override;
 	
 	
-//------------------------------------------------------------------------------//
-// Crouch Logic																	//
-//------------------------------------------------------------------------------//
-public:
-	/**
-	 * Checks if new capsule size fits (no encroachment), and call CharacterOwner->OnStartCrouch() if successful.
-	 * In general you should set bWantsToCrouch instead to have the crouch persist during movement, or just use the crouch functions on the owning Character.
-	 * @param	bClientSimulation	true when called when bIsCrouched is replicated to non owned clients, to update collision cylinder and offset.
-	 */
-	virtual void Crouch(bool bClientSimulation) override;
-	
-	/**
-	 * Checks if default capsule size fits (no encroachment), and trigger OnEndCrouch() on the owner if successful.
-	 * @param	bClientSimulation	true when called when bIsCrouched is replicated to non owned clients, to update collision cylinder and offset.
-	 */
-	virtual void UnCrouch(bool bClientSimulation) override;
-	
-	/** Add State tags for whether the character is crouching */
-	virtual void HandleCrouchLogic();
-	
 
+	
 //------------------------------------------------------------------------------//
 // Get And Set functions														//
 //------------------------------------------------------------------------------//
 public:
-	/** Simulate movement on a non-owning client. Called by SimulatedTick(). */
-	virtual void SimulateMovement(float DeltaTime) override;
-	
 	/** Returns maximum acceleration for the current state. */
 	virtual float GetMaxAcceleration() const override;
 	
