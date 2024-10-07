@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AttributeSet.h"
 #include "AbilitySystemComponent.h"
+#include "AttributeLogic.h"
 #include "DefaultAttributes.generated.h"
 
 
@@ -21,7 +21,7 @@ DECLARE_DELEGATE_RetVal(FGameplayAttribute, FAttributeSignature);
  * 
  */
 UCLASS()
-class SANDBOX_API UDefaultAttributes : public UAttributeSet
+class SANDBOX_API UDefaultAttributes : public UAttributeLogic
 {
 	GENERATED_BODY()
 
@@ -29,7 +29,7 @@ class SANDBOX_API UDefaultAttributes : public UAttributeSet
 //---------------------------------------------------------------------------------------------------------------------------------------------------//
 // In game status attributes																														 //
 //---------------------------------------------------------------------------------------------------------------------------------------------------//
-protected:
+public:
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat", ReplicatedUsing = OnRep_Health) FGameplayAttributeData Health;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Health", ReplicatedUsing = OnRep_MaxHealth) FGameplayAttributeData MaxHealth;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Health", ReplicatedUsing = OnRep_HealthRegenRate) FGameplayAttributeData HealthRegenRate;

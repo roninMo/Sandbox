@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemComponent.h"
-#include "AttributeSet.h"
+#include "DefaultAttributes.h"
 #include "FPSAttributeSet.generated.h"
 
 // Uses macros from AttributeSet.h
@@ -20,7 +20,7 @@ DECLARE_DELEGATE_RetVal(FGameplayAttribute, FAttributeSignature);
  * 
  */
 UCLASS()
-class SANDBOX_API UFPSAttributeSet : public UAttributeSet
+class SANDBOX_API UFPSAttributeSet : public UDefaultAttributes
 {
 	GENERATED_BODY()
 
@@ -28,7 +28,7 @@ class SANDBOX_API UFPSAttributeSet : public UAttributeSet
 //--------------------------------------------------------------------------------------------------------------//
 // In game status attributes																					//
 //--------------------------------------------------------------------------------------------------------------//
-protected:
+public:
 	/** Armor plates, in the form of float values hidden by the attribute set infrastructure (that keeps you trapped in a box) */
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat", ReplicatedUsing = OnRep_Armor) FGameplayAttributeData Armor;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat", ReplicatedUsing = OnRep_Damage) FGameplayAttributeData Damage;

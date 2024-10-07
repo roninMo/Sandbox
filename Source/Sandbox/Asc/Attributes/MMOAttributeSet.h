@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemComponent.h"
-#include "AttributeSet.h"
+#include "DefaultAttributes.h"
 #include "MMOAttributeSet.generated.h"
 
 // Uses macros from AttributeSet.h
@@ -20,7 +20,7 @@ DECLARE_DELEGATE_RetVal(FGameplayAttribute, FAttributeSignature);
  * We're speeding this up. Refactor this or add your own for additional stats based on the player's attributes, or if you inspired and loved the dark souls franchise (you take all their good ideas)
  */
 UCLASS()
-class SANDBOX_API UMMOAttributeSet : public UAttributeSet
+class SANDBOX_API UMMOAttributeSet : public UDefaultAttributes
 {
 	GENERATED_BODY()
 	
@@ -28,7 +28,7 @@ class SANDBOX_API UMMOAttributeSet : public UAttributeSet
 //--------------------------------------------------------------------------------------------------------------//
 // In game status attributes																					//
 //--------------------------------------------------------------------------------------------------------------//
-protected:
+public:
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat", ReplicatedUsing = OnRep_Mana) FGameplayAttributeData Mana;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Mana", ReplicatedUsing = OnRep_MaxMana) FGameplayAttributeData MaxMana;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Mana", ReplicatedUsing = OnRep_ManaRegenRate) FGameplayAttributeData ManaRegenRate;
@@ -61,7 +61,7 @@ protected:
 //--------------------------------------------------------------------------------------------------------------//
 // Level attributes																								//
 //--------------------------------------------------------------------------------------------------------------//
-	protected:
+public:
 	// TODO: Find out if you can use curve tables to multiply based on level for an easier visualization -> (lvl 1 == +1), (lvl 10 == +4), instead of (lvl 1 == 1), (lvl 10 == 10) 
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Vitality) FGameplayAttributeData Vitality;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Endurance) FGameplayAttributeData Endurance;
@@ -97,7 +97,7 @@ protected:
 	 *	I don't know a good way for combat calculations or how most MMO's have their attributes put together for gameplay, however I'd just take from this for reference, hopefully this helps!
 	 */
 	
-protected:
+public:
 	/**** Defenses ****/
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Defence_Standard) FGameplayAttributeData Defence_Standard;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats|Secondary", ReplicatedUsing = OnRep_Defence_Slash) FGameplayAttributeData Defence_Slash;
@@ -139,7 +139,7 @@ protected:
 //------------------------------------------------------------------//
 // Meta attributes													//
 //------------------------------------------------------------------//
-protected:
+public:
 	/**** Damage ****/
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Standard) FGameplayAttributeData Damage_Standard;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Slash) FGameplayAttributeData Damage_Slash;

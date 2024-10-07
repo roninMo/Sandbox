@@ -4,48 +4,122 @@
 #include "DamageCalculation_Default.h"
 
 #include "AbilitySystemComponent.h"
+#include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
 
 
 // Declare the attributes to capture and define how we want to capture them from the Source and Target.
 struct FDamageStatics
 {
-	// Calculations based on target attributes
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MaxHealth);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MaxMana);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MaxStamina);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MaxPoise);
+	/**** Damage info ****/
+	// Physical
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Damage_Standard);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Damage_Slash);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Damage_Pierce);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Damage_Strike);
 
-	// Damage calculations based on the source's attributes
-	DECLARE_ATTRIBUTE_CAPTUREDEF(Atr_Health);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(Atr_Endurance);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(Atr_Mind);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(Atr_Dexterity);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(Atr_Strength);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(Atr_Intelligence);
+	// Magic
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Damage_Magic);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Damage_Ice);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Damage_Fire);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Damage_Holy);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Damage_Lightning);
 
-	// Calculations for damage reduction and amplification based on target attributes
-	DECLARE_ATTRIBUTE_CAPTUREDEF(Poise);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(PhysicalArmor);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MagicalArmor);
+	// Statuses
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Bleed);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Poison);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Curse);
+
 	
+	/**** Target's attributes ****/
+	// Health, mana, etc.
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Health);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Mana);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Stamina);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Poise);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(PoisonBuildup);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(BleedBuildup);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(FrostbiteBuildup);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(SleepBuildup);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(MadnessBuildup);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(CurseBuildup);
+
+	// Defences/Resistances
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Defence_Standard);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Defence_Slash);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Defence_Pierce);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Defence_Strike);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Resistance_Magic);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Resistance_Ice);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Resistance_Fire);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Resistance_Holy);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Resistance_Lightning);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Immunity);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Robustness);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Focus);
+
+	// Damage megatrons
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Negation_Standard);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Negation_Slash);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Negation_Pierce);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Negation_Strike);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Negation_Magic);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Negation_Ice);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Negation_Fire);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Negation_Holy);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Negation_Lightning);
+	
+	// Snapshot happens at time of GESpec creation
 	FDamageStatics()
 	{
-		// Snapshot happens at time of GESpec creation
-		// DEFINE_ATTRIBUTE_CAPTUREDEF(UAttributeSet, MaxHealth, Target, true);
-		// DEFINE_ATTRIBUTE_CAPTUREDEF(UAttributeSet, MaxMana, Target, true);
-		// DEFINE_ATTRIBUTE_CAPTUREDEF(UAttributeSet, MaxStamina, Target, true);
-		// DEFINE_ATTRIBUTE_CAPTUREDEF(UAttributeSet, MaxPoise, Target, true);
-		//
-		// DEFINE_ATTRIBUTE_CAPTUREDEF(UAttributeSet, Poise, Target, false);
-		// DEFINE_ATTRIBUTE_CAPTUREDEF(UAttributeSet, PhysicalArmor, Target, false);
-		// DEFINE_ATTRIBUTE_CAPTUREDEF(UAttributeSet, MagicalArmor, Target, false);
-		//
-		// DEFINE_ATTRIBUTE_CAPTUREDEF(UAttributeSet, Atr_Health, Source, true);
-		// DEFINE_ATTRIBUTE_CAPTUREDEF(UAttributeSet, Atr_Endurance, Source, true);
-		// DEFINE_ATTRIBUTE_CAPTUREDEF(UAttributeSet, Atr_Mind, Source, true);
-		// DEFINE_ATTRIBUTE_CAPTUREDEF(UAttributeSet, Atr_Dexterity, Source, true);
-		// DEFINE_ATTRIBUTE_CAPTUREDEF(UAttributeSet, Atr_Strength, Source, true);
-		// DEFINE_ATTRIBUTE_CAPTUREDEF(UAttributeSet, Atr_Intelligence, Source, true);
+		// Target information
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Health, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Mana, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Stamina, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Poise, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, PoisonBuildup, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, BleedBuildup, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, FrostbiteBuildup, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, SleepBuildup, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, MadnessBuildup, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, CurseBuildup, Target, true);
+
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Defence_Standard, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Defence_Slash, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Defence_Pierce, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Defence_Strike, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Resistance_Magic, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Resistance_Ice, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Resistance_Fire, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Resistance_Holy, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Resistance_Lightning, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Immunity, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Robustness, Target, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Focus, Target, true);
+
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Negation_Standard, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Negation_Slash, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Negation_Pierce, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Negation_Strike, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Negation_Magic, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Negation_Ice, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Negation_Fire, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Negation_Holy, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Negation_Lightning, Target, false);
+
+
+		// Damage information
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Standard, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Slash, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Pierce, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Strike, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Magic, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Ice, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Fire, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Holy, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Lightning, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Bleed, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Poison, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Curse, Source, true);
 	}
 };
 
@@ -59,22 +133,55 @@ static const FDamageStatics& DamageStatics()
 
 UDamageCalculation_Default::UDamageCalculation_Default()
 {
-	// Capture the relevant attributes to run your execution calculations
-	RelevantAttributesToCapture.Add(DamageStatics().MaxHealthDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MaxManaDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MaxStaminaDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MaxPoiseDef);
-	
-	RelevantAttributesToCapture.Add(DamageStatics().Atr_HealthDef);
-	RelevantAttributesToCapture.Add(DamageStatics().Atr_EnduranceDef);
-	RelevantAttributesToCapture.Add(DamageStatics().Atr_MindDef);
-	RelevantAttributesToCapture.Add(DamageStatics().Atr_DexterityDef);
-	RelevantAttributesToCapture.Add(DamageStatics().Atr_StrengthDef);
-	RelevantAttributesToCapture.Add(DamageStatics().Atr_IntelligenceDef);
-	
+	// Target information
+	RelevantAttributesToCapture.Add(DamageStatics().HealthDef);
+	RelevantAttributesToCapture.Add(DamageStatics().ManaDef);
+	RelevantAttributesToCapture.Add(DamageStatics().StaminaDef);
 	RelevantAttributesToCapture.Add(DamageStatics().PoiseDef);
-	RelevantAttributesToCapture.Add(DamageStatics().PhysicalArmorDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MagicalArmorDef);
+	RelevantAttributesToCapture.Add(DamageStatics().PoisonBuildupDef);
+	RelevantAttributesToCapture.Add(DamageStatics().BleedBuildupDef);
+	RelevantAttributesToCapture.Add(DamageStatics().FrostbiteBuildupDef);
+	RelevantAttributesToCapture.Add(DamageStatics().SleepBuildupDef);
+	RelevantAttributesToCapture.Add(DamageStatics().MadnessBuildupDef);
+	RelevantAttributesToCapture.Add(DamageStatics().CurseBuildupDef);
+
+	RelevantAttributesToCapture.Add(DamageStatics().Defence_StandardDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Defence_SlashDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Defence_PierceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Defence_StrikeDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Resistance_MagicDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Resistance_IceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Resistance_FireDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Resistance_HolyDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Resistance_LightningDef);
+	RelevantAttributesToCapture.Add(DamageStatics().ImmunityDef);
+	RelevantAttributesToCapture.Add(DamageStatics().RobustnessDef);
+	RelevantAttributesToCapture.Add(DamageStatics().FocusDef);
+
+	RelevantAttributesToCapture.Add(DamageStatics().Negation_StandardDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Negation_SlashDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Negation_PierceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Negation_StrikeDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Negation_MagicDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Negation_IceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Negation_FireDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Negation_HolyDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Negation_LightningDef);
+
+
+	// Damage information
+	RelevantAttributesToCapture.Add(DamageStatics().Damage_StandardDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Damage_SlashDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Damage_PierceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Damage_StrikeDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Damage_MagicDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Damage_IceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Damage_FireDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Damage_HolyDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Damage_LightningDef);
+	RelevantAttributesToCapture.Add(DamageStatics().BleedDef);
+	RelevantAttributesToCapture.Add(DamageStatics().PoisonDef);
+	RelevantAttributesToCapture.Add(DamageStatics().CurseDef);
 }
 
 
@@ -96,71 +203,195 @@ void UDamageCalculation_Default::Execute_Implementation(const FGameplayEffectCus
 	EvaluationParameters.SourceTags = SourceTags;
 	EvaluationParameters.TargetTags = TargetTags;
 
-	//----------------------------------------------------------------------------------------------//
-	// Save the attribute information																//
-	//----------------------------------------------------------------------------------------------//
-	float MitigatedDamage = 0.0f;
-	float PoiseDamage = 0.0f;
-	float Damage = 0.0f;
-	float RawDamage = 0.0f;
+	// Create your own combat calculations and configurations using this as a reference. I'd create individual execution calculations for different types of combat, or different kinds of attacks
+	// This isn't something you need to handle right now, however the idea is use meta attributes for capturing damage from the player, and then capture the target's attributes and use it for calculations
+	// Once you've captured the attributes you just add the output to a gameplay effect and this gets calculated on the target's attribute. If you need any additional info just attach it to a custom gameplay effect
 	
-	float MaxHealth = 0.0f;
-	float MaxMana = 0.0f;
-	float MaxStamina = 0.0f;
-	float MaxPoise = 0.0f;
 	
-	float Poise = 0.0f; // USanboxAscLibrary::GetPoiseDamage(EffectContextHandle);
-	float PhysicalArmor = 0.0f;
-	float MagicalArmor = 0.0f;
-	
-	// Get the tag data for this specific attack
-	Damage += FMath::Max<float>(Spec->GetSetByCallerMagnitude(FGameplayTag::RequestGameplayTag(FName("IncomingPhysicalDamageTag")), false, -1.0f), 0.0f);
-	RawDamage = Damage;
-	
-	// Get the captured attribute information for the source and target
-	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().MaxHealthDef, EvaluationParameters, MaxHealth); 
-	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().MaxManaDef, EvaluationParameters, MaxMana); 
-	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().MaxStaminaDef, EvaluationParameters, MaxStamina); 
-	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().MaxPoiseDef, EvaluationParameters, MaxPoise);
-	
-	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().PoiseDef, EvaluationParameters, Poise); 
-	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().PhysicalArmorDef, EvaluationParameters, PhysicalArmor); 
-	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().MagicalArmorDef, EvaluationParameters, MagicalArmor);
-	
-	// Capture optional damage value set on the damage GE as a CalculationModifier under the ExecutionCalculation
+	// Retrieve the attribute information
+	FDamageCalculation_Attributes AttributeInformation;
+	CalculateCapturedRelevantAttributes(EvaluationParameters, ExecutionParams, AttributeInformation);
+	const FDamageCalculations_AttackInformation& AttackInfo = AttributeInformation.AttackInformation;
+	const FDamageCalculations_Attributes_Target& PlayerStats = AttributeInformation.TargetAttributes;
 
+	// Retrieve any information from gameplay effects
+	
+
+	
 	
 	//----------------------------------------------------------------------------------------------//
 	// Damage Calculations																			//
 	//----------------------------------------------------------------------------------------------//
-	// Armor mitigation // Set the Target's damage meta attribute
-	MitigatedDamage = (RawDamage) * (100 / (100 + PhysicalArmor));
+	FDamageCalculations_AttackInformation CalculatedDamage;
 
-	// The only values we set here are persisted information based on the target attributes, everything else is done while prepping the exec calc
-	// USanboxAscLibrary::SetPhysicalArmor(EffectContextHandle, PhysicalArmor);
-	// USanboxAscLibrary::SetMagicalArmor(EffectContextHandle, MagicalArmor);
+	/**
+		Weapon damage calculations (calculated before the execution calculation) -> needs server validation to be safe
 
-	// This information is captured for debugging purposes. There may be frame and replication differences between the target's tags for whether they're blocking and parrying, and I'd like to know what's happening here
-	// So far I haven't had any complications with this, but I haven't done a lot of multiplayer testing with client prediction yet
-	// if (TargetTags->HasTag(FGameplayTag::RequestGameplayTag(Tag_State_Blocking))) USanboxAscLibrary::SetBlockedAttack(EffectContextHandle, true);
-	// if (TargetTags->HasTag(FGameplayTag::RequestGameplayTag(Tag_State_Parrying)))
-	// {
-	// 	if (TargetTags->HasTag(FGameplayTag::RequestGameplayTag(Tag_State_Parrying_Perfect))) USanboxAscLibrary::SetPerfectParriedAttack(EffectContextHandle, true);
-	// 	else USanboxAscLibrary::SetParriedAttack(EffectContextHandle, true);
-	// }
+			Player
+				- Weapon stats
+				- Weapon attribute scaling
+				- Motion values (multipliers specific to motion -> multi hit, charged attacks, etc)
+				- additional multipliers from equipment
+
+			Enemies
+				- Weapon stats
+				- Weapon attribute scaling
+				- Motion values (multipliers specific to motion -> multi hit, charged attacks, etc)
+				- additonal multipliers from equipment
+				- enemy level (NG+)
+				- area level
+
+
+		Armor calculations (factored in during the damage calculation)
+
+			Player
+				- Armor stats (Should armor scale with attributes or level?) 
+				- damage negation
+
+			Enemies
+				- Armor stats
+				- new game leveling
+				- area level
+				- damage negation
+
+
+		// Just be careful that armor scales evenly with different attacks, and find a good way to add armor and damage reduction based on attributes/equipment
+		// The primary attack by itself, when left to expire, detonates for 140 magic damage.
+		// However, we're dealing with an entirely different beast here, because this number is not a motion value, but rather an instance of Flat Magic Damage.
+		// The follow-up R2 has a flat damage modifier of 200 and the bullets from the R1 each deal a flat magic damage of 150.
+		// The reason this is so important is because this vastly affects how the unique skill scales with certain stats.
+		// Attack motion values are multiplicative and inherently tied to the overall damage of the weapon itself.
+		// Leveling the appropriate stat still makes the skill stronger, sure, but that's only because scaling affects the entire weapon and not just the skill.
+		// If a skill has something that is represented by a flat damage value in one of these categories here, that means it's independent from the weapon's damage and receives that much more power from leveling the appropriate stat.
+		// The damage of Ghost Flame Ignition is almost entirely made up of flat damage numbers, meaning a very large chunk of its potential power will be determined by your character's intelligence.
+
+		// Subclass this class to create custom calculations for different attacks and adjust things to only retrieve what's needed for each attack
+
+
+	*/
+
 	
+
+	// damage - defence stats // remaining damage * damage negation
+	CalculatedDamage.Damage_Standard = DamageCalculation(AttackInfo.Damage_Standard, PlayerStats.Defence_Standard, PlayerStats.Negation_Standard);
+	CalculatedDamage.Damage_Slash = DamageCalculation(AttackInfo.Damage_Slash, PlayerStats.Defence_Slash, PlayerStats.Negation_Slash);
+	CalculatedDamage.Damage_Pierce = DamageCalculation(AttackInfo.Damage_Pierce, PlayerStats.Defence_Pierce, PlayerStats.Negation_Pierce);
+	CalculatedDamage.Damage_Strike = DamageCalculation(AttackInfo.Damage_Strike, PlayerStats.Defence_Strike, PlayerStats.Negation_Strike);
 	
-	// UE_LOGFMT(AbilityLog, Warning, "{0} {1}() RawDamage: {2}, MitigatedDamage: {3}, PoiseDamage: {4} calculated and dealt to {5}",
-	// 	*FString(__FUNCTION__), *GetNameSafe(SourceActor),
-	// 	RawDamage, MitigatedDamage, PoiseDamage,
-	// 	*GetNameSafe(TargetActor)
-	// );
+	CalculatedDamage.Damage_Magic = DamageCalculation(AttackInfo.Damage_Magic, PlayerStats.Resistance_Magic, PlayerStats.Negation_Magic);
+	CalculatedDamage.Damage_Ice = DamageCalculation(AttackInfo.Damage_Ice, PlayerStats.Resistance_Ice, PlayerStats.Negation_Ice);
+	CalculatedDamage.Damage_Fire = DamageCalculation(AttackInfo.Damage_Fire, PlayerStats.Resistance_Fire, PlayerStats.Negation_Fire);
+	CalculatedDamage.Damage_Holy = DamageCalculation(AttackInfo.Damage_Holy, PlayerStats.Resistance_Holy, PlayerStats.Negation_Holy);
+	CalculatedDamage.Damage_Lightning = DamageCalculation(AttackInfo.Damage_Lightning, PlayerStats.Resistance_Lightning, PlayerStats.Negation_Lightning);
+
+	CalculatedDamage.Curse = StatusCalculation(AttackInfo.Curse, PlayerStats.Immunity, 0);
+	CalculatedDamage.Bleed = StatusCalculation(AttackInfo.Bleed, PlayerStats.Robustness, 0);
+	CalculatedDamage.Poison = StatusCalculation(AttackInfo.Poison, PlayerStats.Immunity, 0);
+
 	
-	// Everything else related to damage gets passed along with the effect context handle, and is tied to this attribute
-	if (MitigatedDamage > 0.f)
-	{
-		// const FGameplayModifierEvaluatedData EvaluatedData(UBaseAttributeSet::GetIncomingDamageAttribute(), EGameplayModOp::Additive, MitigatedDamage);
-		OutExecutionOutput.AddOutputModifier(FGameplayModifierEvaluatedData());
-	}
+	// If there's anything we need to add to the gameplay effect before the attribute handles it, here is the place to handle it
+
+	
+	// Gameplay effect executes handle attributes individually, and I still need to learn how it handles this properly
+
+
+	// Add the calculated damages to output modifications
+	const FGameplayModifierEvaluatedData Eval_Damage_Standard(UMMOAttributeSet::GetDamage_StandardAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Standard);
+	const FGameplayModifierEvaluatedData Eval_Damage_Slash(UMMOAttributeSet::GetDamage_SlashAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Slash);
+	const FGameplayModifierEvaluatedData Eval_Damage_Pierce(UMMOAttributeSet::GetDamage_PierceAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Pierce);
+	const FGameplayModifierEvaluatedData Eval_Damage_Strike(UMMOAttributeSet::GetDamage_StrikeAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Strike);
+				
+	const FGameplayModifierEvaluatedData Eval_Damage_Magic(UMMOAttributeSet::GetDamage_MagicAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Magic);
+	const FGameplayModifierEvaluatedData Eval_Damage_Ice(UMMOAttributeSet::GetDamage_IceAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Ice);
+	const FGameplayModifierEvaluatedData Eval_Damage_Fire(UMMOAttributeSet::GetDamage_FireAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Fire);
+	const FGameplayModifierEvaluatedData Eval_Damage_Holy(UMMOAttributeSet::GetDamage_HolyAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Holy);
+	const FGameplayModifierEvaluatedData Eval_Damage_Lightning(UMMOAttributeSet::GetDamage_LightningAttribute(), EGameplayModOp::Additive, CalculatedDamage.Damage_Lightning);
+				
+	const FGameplayModifierEvaluatedData Eval_Curse(UMMOAttributeSet::GetCurseAttribute(), EGameplayModOp::Additive, CalculatedDamage.Curse);
+	const FGameplayModifierEvaluatedData Eval_Bleed(UMMOAttributeSet::GetBleedAttribute(), EGameplayModOp::Additive, CalculatedDamage.Bleed);
+	const FGameplayModifierEvaluatedData Eval_Poison(UMMOAttributeSet::GetPoisonAttribute(), EGameplayModOp::Additive, CalculatedDamage.Poison);
+	
+	OutExecutionOutput.AddOutputModifier(Eval_Damage_Standard);
+	OutExecutionOutput.AddOutputModifier(Eval_Damage_Slash);
+	OutExecutionOutput.AddOutputModifier(Eval_Damage_Pierce);
+	OutExecutionOutput.AddOutputModifier(Eval_Damage_Strike);
+	OutExecutionOutput.AddOutputModifier(Eval_Damage_Magic);
+	OutExecutionOutput.AddOutputModifier(Eval_Damage_Ice);
+	OutExecutionOutput.AddOutputModifier(Eval_Damage_Fire);
+	OutExecutionOutput.AddOutputModifier(Eval_Damage_Holy);
+	OutExecutionOutput.AddOutputModifier(Eval_Damage_Lightning);
+	OutExecutionOutput.AddOutputModifier(Eval_Curse);
+	OutExecutionOutput.AddOutputModifier(Eval_Bleed);
+	OutExecutionOutput.AddOutputModifier(Eval_Poison);
+}
+
+
+void UDamageCalculation_Default::CalculateCapturedRelevantAttributes(
+	const FAggregatorEvaluateParameters& EvaluationParameters,
+	const FGameplayEffectCustomExecutionParameters& ExecutionParams,
+	FDamageCalculation_Attributes& AttributeInformation) const
+{
+	
+	// Target information
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().HealthDef, EvaluationParameters, AttributeInformation.TargetAttributes.Health);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().ManaDef, EvaluationParameters, AttributeInformation.TargetAttributes.Mana);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().StaminaDef, EvaluationParameters, AttributeInformation.TargetAttributes.Stamina);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().PoiseDef, EvaluationParameters, AttributeInformation.TargetAttributes.Poise);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().PoisonBuildupDef, EvaluationParameters, AttributeInformation.TargetAttributes.PoisonBuildup);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().BleedBuildupDef, EvaluationParameters, AttributeInformation.TargetAttributes.BleedBuildup);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().FrostbiteBuildupDef, EvaluationParameters, AttributeInformation.TargetAttributes.FrostbiteBuildup);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().SleepBuildupDef, EvaluationParameters, AttributeInformation.TargetAttributes.SleepBuildup);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().MadnessBuildupDef, EvaluationParameters, AttributeInformation.TargetAttributes.MadnessBuildup);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().CurseBuildupDef, EvaluationParameters, AttributeInformation.TargetAttributes.CurseBuildup);
+
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Defence_StandardDef, EvaluationParameters, AttributeInformation.TargetAttributes.Defence_Standard);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Defence_SlashDef, EvaluationParameters, AttributeInformation.TargetAttributes.Defence_Slash);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Defence_PierceDef, EvaluationParameters, AttributeInformation.TargetAttributes.Defence_Pierce);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Defence_StrikeDef, EvaluationParameters, AttributeInformation.TargetAttributes.Defence_Strike);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Resistance_MagicDef, EvaluationParameters, AttributeInformation.TargetAttributes.Resistance_Magic);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Resistance_IceDef, EvaluationParameters, AttributeInformation.TargetAttributes.Resistance_Ice);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Resistance_FireDef, EvaluationParameters, AttributeInformation.TargetAttributes.Resistance_Fire);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Resistance_HolyDef, EvaluationParameters, AttributeInformation.TargetAttributes.Resistance_Holy);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Resistance_LightningDef, EvaluationParameters, AttributeInformation.TargetAttributes.Resistance_Lightning);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().ImmunityDef, EvaluationParameters, AttributeInformation.TargetAttributes.Immunity);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().RobustnessDef, EvaluationParameters, AttributeInformation.TargetAttributes.Robustness);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().FocusDef, EvaluationParameters, AttributeInformation.TargetAttributes.Focus);
+
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Negation_StandardDef, EvaluationParameters, AttributeInformation.TargetAttributes.Negation_Standard);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Negation_SlashDef, EvaluationParameters, AttributeInformation.TargetAttributes.Negation_Slash);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Negation_PierceDef, EvaluationParameters, AttributeInformation.TargetAttributes.Negation_Pierce);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Negation_StrikeDef, EvaluationParameters, AttributeInformation.TargetAttributes.Negation_Strike);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Negation_MagicDef, EvaluationParameters, AttributeInformation.TargetAttributes.Negation_Magic);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Negation_IceDef, EvaluationParameters, AttributeInformation.TargetAttributes.Negation_Ice);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Negation_FireDef, EvaluationParameters, AttributeInformation.TargetAttributes.Negation_Fire);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Negation_HolyDef, EvaluationParameters, AttributeInformation.TargetAttributes.Negation_Holy);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Negation_LightningDef, EvaluationParameters, AttributeInformation.TargetAttributes.Negation_Lightning);
+
+
+	// Damage information
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_StandardDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Standard);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_SlashDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Slash);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_PierceDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Pierce);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_StrikeDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Strike);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_MagicDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Magic);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_IceDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Ice);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_FireDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Fire);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_HolyDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Holy);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_LightningDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Lightning);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().BleedDef, EvaluationParameters, AttributeInformation.AttackInformation.Bleed);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().PoisonDef, EvaluationParameters, AttributeInformation.AttackInformation.Poison);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().CurseDef, EvaluationParameters, AttributeInformation.AttackInformation.Curse);
+}
+
+
+float UDamageCalculation_Default::DamageCalculation(const float IncomingDamage, const float Defence, const float DamageNegation) const
+{
+	return FMath::Clamp(IncomingDamage - Defence, 0, IncomingDamage) * DamageNegation;
+}
+
+
+float UDamageCalculation_Default::StatusCalculation(float StatusDamage, float Resistance, float StatusNegation) const
+{
+	return FMath::Clamp(StatusDamage - Resistance, 0, StatusDamage) * StatusNegation; 
 }
 

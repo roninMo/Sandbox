@@ -269,7 +269,9 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 		return;
 	}
 	
-	// UE_LOGFMT(LogTemp, Log, "{0} {1}() {2} Landed an attack on {3}", *UEnum::GetValueAsString(BaseCharacter->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(BaseCharacter), *GetNameSafe(TargetCharacter));
+	UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Landed an attack on {3}",
+		*UEnum::GetValueAsString(GetAvatarActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetAvatarActorFromActorInfo()), *GetNameSafe(TargetCharacter));
+
 	// Prep and send an exec calc to the target
 	const FGameplayEffectSpecHandle ExecCalcHandle = PrepExecCalcForTarget(
 		GetCurrentAbilitySpecHandle(),
