@@ -209,7 +209,7 @@
 		{
 			"Id": "Plate_Chest",
 			"ArmorSlot": "Chest",
-			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Plate/SKM_Armor_Plate_Chest.SKM_Armor_Plate_Chest'",
+			"ArmorMesh": "/Script/Engine.SkeletalMesh'/Game/_Imports/Characters/Mannequins/Modular/Armors/Plate/SK_Armor_Plate_Chest.SK_Armor_Plate_Chest'",
 			"ArmorStats":
 			{
 				"Effect": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armors/Plate/GE_Attributes_Plate_Chest.GE_Attributes_Plate_Chest_C'",

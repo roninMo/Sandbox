@@ -25,7 +25,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -36,7 +36,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -47,7 +47,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -58,7 +58,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -85,7 +85,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -96,7 +96,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -107,7 +107,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -118,7 +118,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -145,7 +145,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -160,7 +160,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_StrongAttacks.AM_Manny_Katana_1H_StrongAttacks'"
 							}
 						},
 						"Combo":
@@ -172,7 +172,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -183,7 +183,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -194,7 +194,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -224,7 +224,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -235,7 +235,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -246,7 +246,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -257,7 +257,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -299,7 +299,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -326,7 +326,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -337,7 +337,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -348,7 +348,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -378,7 +378,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -389,7 +389,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -400,7 +400,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -411,7 +411,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -438,7 +438,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -449,7 +449,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -460,7 +460,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -471,7 +471,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -498,7 +498,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -525,7 +525,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -536,7 +536,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -547,7 +547,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -611,7 +611,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -622,7 +622,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -633,7 +633,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -644,7 +644,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -671,7 +671,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -682,7 +682,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -693,7 +693,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -704,7 +704,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -731,7 +731,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -758,7 +758,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -769,7 +769,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -799,7 +799,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -810,7 +810,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -821,7 +821,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -832,7 +832,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -874,7 +874,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -901,7 +901,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -912,7 +912,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -923,7 +923,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -953,7 +953,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -964,7 +964,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -975,7 +975,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -986,7 +986,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1013,7 +1013,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1024,7 +1024,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1035,7 +1035,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1046,7 +1046,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1073,7 +1073,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1100,7 +1100,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1111,7 +1111,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1122,7 +1122,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1218,7 +1218,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_1.AM_Manny_Sword_1H_PrimaryAttacks_1'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_PrimaryAttacks.AM_Manny_Katana_1H_PrimaryAttacks'"
 							}
 						},
 						"Combo":
@@ -1230,7 +1230,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1241,7 +1241,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1252,7 +1252,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1279,7 +1279,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1290,7 +1290,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1301,7 +1301,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1312,7 +1312,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1339,7 +1339,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1354,7 +1354,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_StrongAttacks.AM_Manny_Katana_1H_StrongAttacks'"
 							}
 						},
 						"Combo":
@@ -1366,7 +1366,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1377,7 +1377,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1388,7 +1388,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1418,7 +1418,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1429,7 +1429,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1440,7 +1440,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1451,7 +1451,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1493,7 +1493,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1520,7 +1520,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1531,7 +1531,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1542,7 +1542,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1572,7 +1572,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1583,7 +1583,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1594,7 +1594,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1605,7 +1605,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1632,7 +1632,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1643,7 +1643,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1654,7 +1654,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1665,7 +1665,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1692,7 +1692,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1719,7 +1719,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1730,7 +1730,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1741,7 +1741,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1805,7 +1805,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1816,7 +1816,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1827,7 +1827,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1838,7 +1838,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1865,7 +1865,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1876,7 +1876,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1887,7 +1887,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1898,7 +1898,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1925,7 +1925,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -1952,7 +1952,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1963,7 +1963,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -1993,7 +1993,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2004,7 +2004,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2015,7 +2015,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2026,7 +2026,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2068,7 +2068,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2095,7 +2095,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -2106,7 +2106,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -2117,7 +2117,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -2147,7 +2147,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2158,7 +2158,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2169,7 +2169,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2180,7 +2180,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2207,7 +2207,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2218,7 +2218,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2229,7 +2229,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2240,7 +2240,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2267,7 +2267,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2294,7 +2294,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -2305,7 +2305,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -2316,7 +2316,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -2380,7 +2380,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2391,7 +2391,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2402,7 +2402,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2413,7 +2413,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2440,7 +2440,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2451,7 +2451,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2462,7 +2462,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2473,7 +2473,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2500,7 +2500,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -2515,7 +2515,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_StrongAttacks.AM_Manny_Katana_1H_StrongAttacks'"
 							}
 						},
 						"Combo":
@@ -2527,7 +2527,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2538,7 +2538,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2568,7 +2568,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2579,7 +2579,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2590,7 +2590,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2601,7 +2601,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2643,7 +2643,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2670,7 +2670,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -2681,7 +2681,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -2692,7 +2692,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -2722,7 +2722,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2733,7 +2733,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2744,7 +2744,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2755,7 +2755,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2782,7 +2782,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2793,7 +2793,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2804,7 +2804,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2815,7 +2815,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2842,7 +2842,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2869,7 +2869,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -2880,7 +2880,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -2891,7 +2891,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -2965,7 +2965,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_2.AM_Manny_Sword_1H_PrimaryAttacks_2'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_PrimaryAttacks.AM_Manny_Katana_1H_PrimaryAttacks'"
 							}
 						},
 						"Combo":
@@ -2977,7 +2977,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2988,7 +2988,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -2999,7 +2999,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3026,7 +3026,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3037,7 +3037,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3048,7 +3048,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3059,7 +3059,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3086,7 +3086,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3101,7 +3101,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_StrongAttacks.AM_Manny_Katana_1H_StrongAttacks'"
 							}
 						},
 						"Combo":
@@ -3113,7 +3113,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3124,7 +3124,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3154,7 +3154,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3165,7 +3165,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3176,7 +3176,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3187,7 +3187,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3229,7 +3229,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3256,7 +3256,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3267,7 +3267,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3278,7 +3278,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3308,7 +3308,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3319,7 +3319,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3330,7 +3330,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3341,7 +3341,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3368,7 +3368,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3379,7 +3379,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3390,7 +3390,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3401,7 +3401,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3428,7 +3428,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3455,7 +3455,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3466,7 +3466,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3477,7 +3477,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3529,7 +3529,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_1.AM_Manny_Sword_1H_PrimaryAttacks_1'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_PrimaryAttacks.AM_Manny_Katana_1H_PrimaryAttacks'"
 							}
 						},
 						"Combo":
@@ -3541,7 +3541,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3552,7 +3552,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3563,7 +3563,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3590,7 +3590,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3601,7 +3601,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3612,7 +3612,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3623,7 +3623,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3650,7 +3650,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3665,7 +3665,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_StrongAttacks.AM_Manny_Katana_1H_StrongAttacks'"
 							}
 						},
 						"Combo":
@@ -3677,7 +3677,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3688,7 +3688,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3699,7 +3699,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3729,7 +3729,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3740,7 +3740,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3751,7 +3751,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3762,7 +3762,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3804,7 +3804,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3831,7 +3831,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3842,7 +3842,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3853,7 +3853,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -3883,7 +3883,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3894,7 +3894,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3905,7 +3905,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3916,7 +3916,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3943,7 +3943,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3954,7 +3954,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3965,7 +3965,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -3976,7 +3976,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -4003,7 +4003,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -4030,7 +4030,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -4041,7 +4041,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -4052,7 +4052,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -4104,7 +4104,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_PrimaryAttacks.AM_Manny_Greatsword_1H_PrimaryAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_PrimaryAttacks.AM_Manny_ZabuzaSword_PrimaryAttacks'"
 							}
 						},
 						"Combo":
@@ -4116,7 +4116,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4127,7 +4127,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4138,7 +4138,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4149,7 +4149,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4176,7 +4176,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4187,7 +4187,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4214,7 +4214,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4229,7 +4229,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_StrongAttacks.AM_Manny_Greatsword_1H_StrongAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_StrongAttacks.AM_Manny_ZabuzaSword_StrongAttacks'"
 							}
 						},
 						"Combo":
@@ -4241,7 +4241,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4252,7 +4252,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4282,7 +4282,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4293,7 +4293,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4304,7 +4304,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4315,7 +4315,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4357,7 +4357,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4384,7 +4384,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4395,7 +4395,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4406,7 +4406,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4436,7 +4436,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -4447,7 +4447,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -4458,7 +4458,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -4469,7 +4469,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -4496,7 +4496,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -4507,7 +4507,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -4518,7 +4518,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -4529,7 +4529,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -4556,7 +4556,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -4583,7 +4583,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -4594,7 +4594,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -4605,7 +4605,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -4657,7 +4657,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_PrimaryAttacks.AM_Manny_Greatsword_1H_PrimaryAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_PrimaryAttacks.AM_Manny_ZabuzaSword_PrimaryAttacks'"
 							}
 						},
 						"Combo":
@@ -4669,7 +4669,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4680,7 +4680,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4691,7 +4691,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4702,7 +4702,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4729,7 +4729,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4740,7 +4740,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4767,7 +4767,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4782,7 +4782,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_StrongAttacks.AM_Manny_Greatsword_1H_StrongAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_StrongAttacks.AM_Manny_ZabuzaSword_StrongAttacks'"
 							}
 						},
 						"Combo":
@@ -4794,7 +4794,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4805,7 +4805,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 27,
@@ -4835,7 +4835,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 16,
@@ -4846,7 +4846,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 16,
@@ -4857,7 +4857,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 16,
@@ -4868,7 +4868,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 16,
@@ -4910,7 +4910,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 16,
@@ -4937,7 +4937,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 16,
@@ -4948,7 +4948,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 16,
@@ -4959,7 +4959,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 16,
@@ -4970,7 +4970,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 16,
@@ -5000,7 +5000,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -5011,7 +5011,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -5022,7 +5022,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -5033,7 +5033,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -5060,7 +5060,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -5071,7 +5071,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -5082,7 +5082,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -5093,7 +5093,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -5120,7 +5120,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 13,
@@ -5147,7 +5147,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -5158,7 +5158,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,
@@ -5169,7 +5169,7 @@
 									{
 										"BaseDamagesOrMultipliers":
 										{
-											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=None)": 1
+											"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Defence_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 1
 										}
 									},
 									"StaminaCost": 11,

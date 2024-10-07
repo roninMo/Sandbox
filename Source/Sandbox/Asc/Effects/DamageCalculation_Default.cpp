@@ -265,8 +265,6 @@ void UDamageCalculation_Default::Execute_Implementation(const FGameplayEffectCus
 		// If a skill has something that is represented by a flat damage value in one of these categories here, that means it's independent from the weapon's damage and receives that much more power from leveling the appropriate stat.
 		// The damage of Ghost Flame Ignition is almost entirely made up of flat damage numbers, meaning a very large chunk of its potential power will be determined by your character's intelligence.
 
-		// Subclass this class to create custom calculations for different attacks and adjust things to only retrieve what's needed for each attack
-
 
 	*/
 
@@ -310,19 +308,21 @@ void UDamageCalculation_Default::Execute_Implementation(const FGameplayEffectCus
 	const FGameplayModifierEvaluatedData Eval_Curse(UMMOAttributeSet::GetCurseAttribute(), EGameplayModOp::Additive, CalculatedDamage.Curse);
 	const FGameplayModifierEvaluatedData Eval_Bleed(UMMOAttributeSet::GetBleedAttribute(), EGameplayModOp::Additive, CalculatedDamage.Bleed);
 	const FGameplayModifierEvaluatedData Eval_Poison(UMMOAttributeSet::GetPoisonAttribute(), EGameplayModOp::Additive, CalculatedDamage.Poison);
-	
-	OutExecutionOutput.AddOutputModifier(Eval_Damage_Standard);
-	OutExecutionOutput.AddOutputModifier(Eval_Damage_Slash);
-	OutExecutionOutput.AddOutputModifier(Eval_Damage_Pierce);
-	OutExecutionOutput.AddOutputModifier(Eval_Damage_Strike);
-	OutExecutionOutput.AddOutputModifier(Eval_Damage_Magic);
-	OutExecutionOutput.AddOutputModifier(Eval_Damage_Ice);
-	OutExecutionOutput.AddOutputModifier(Eval_Damage_Fire);
-	OutExecutionOutput.AddOutputModifier(Eval_Damage_Holy);
-	OutExecutionOutput.AddOutputModifier(Eval_Damage_Lightning);
-	OutExecutionOutput.AddOutputModifier(Eval_Curse);
-	OutExecutionOutput.AddOutputModifier(Eval_Bleed);
-	OutExecutionOutput.AddOutputModifier(Eval_Poison);
+
+	// Each calculation is done individually. The effect context handles these in the same order they're created (I think),
+	// They however, use the same effect context which might be helpful for how you handle calculations
+	if (CalculatedDamage.Damage_Standard != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Standard);
+	if (CalculatedDamage.Damage_Slash != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Slash);
+	if (CalculatedDamage.Damage_Pierce != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Pierce);
+	if (CalculatedDamage.Damage_Strike != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Strike);
+	if (CalculatedDamage.Damage_Magic != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Magic);
+	if (CalculatedDamage.Damage_Ice != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Ice);
+	if (CalculatedDamage.Damage_Fire != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Fire);
+	if (CalculatedDamage.Damage_Holy != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Holy);
+	if (CalculatedDamage.Damage_Lightning != 0) OutExecutionOutput.AddOutputModifier(Eval_Damage_Lightning);
+	if (CalculatedDamage.Curse != 0) OutExecutionOutput.AddOutputModifier(Eval_Curse);
+	if (CalculatedDamage.Bleed != 0) OutExecutionOutput.AddOutputModifier(Eval_Bleed);
+	if (CalculatedDamage.Poison != 0) OutExecutionOutput.AddOutputModifier(Eval_Poison);
 }
 
 

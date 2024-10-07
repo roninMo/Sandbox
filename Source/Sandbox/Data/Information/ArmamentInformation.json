@@ -1,1498 +1,883 @@
 [
 	{
 		"Name": "Uchigatana",
-		"ArmamentMontages":
+		"ArmamentInformation":
 		{
-			"MeleeMontages":
+			"Id": "Uchigatana",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Uchigatana/BPA_Uchigatana.BPA_Uchigatana_C'",
+			"Classification": "Knifes",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
 			{
-				"OneHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_3.AM_Manny_Sword_1H_PrimaryAttacks_3'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SecondaryAttacks.AM_Manny_Sword_1H_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"TwoHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"DualWieldMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				}
+				"(AttributeName=\"Damage_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
 			},
-			"Montages":
+			"Passives": [],
+			"StateInformation":
 			{
-				"Unequip":
+				"Effect": "None",
+				"Level": 1
+			},
+			"MeleeAbilities": [
 				{
-					"MontageMappings":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
 					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'"
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
 					}
 				},
-				"Equip":
 				{
-					"MontageMappings":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
 					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'"
-					}
-				},
-				"BlockReactions":
-				{
-					"MontageMappings":
-					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks_RM.AM_Manny_Sword_Blocks_RM'"
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
 					}
 				}
-			}
+			]
 		},
 		"DevDescription": ""
 	},
 	{
 		"Name": "Katana",
-		"ArmamentMontages":
+		"ArmamentInformation":
 		{
-			"MeleeMontages":
+			"Id": "Katana",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Katana/BPA_Katana.BPA_Katana_C'",
+			"Classification": "Katanas",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
 			{
-				"OneHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_PrimaryAttacks.AM_Manny_Katana_1H_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_SecondaryAttacks.AM_Manny_Katana_1H_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"TwoHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"DualWieldMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				}
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
 			},
-			"Montages":
+			"Passives": [],
+			"StateInformation":
 			{
-				"Unequip":
+				"Effect": "None",
+				"Level": 1
+			},
+			"MeleeAbilities": [
 				{
-					"MontageMappings":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
 					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'"
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
 					}
 				},
-				"Equip":
 				{
-					"MontageMappings":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
 					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'"
-					}
-				},
-				"BlockReactions":
-				{
-					"MontageMappings":
-					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks_RM.AM_Manny_Sword_Blocks_RM'"
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
 					}
 				}
-			}
+			]
 		},
 		"DevDescription": ""
 	},
 	{
 		"Name": "WindmillShuriken",
-		"ArmamentMontages":
+		"ArmamentInformation":
 		{
-			"MeleeMontages":
+			"Id": "WindmillShuriken",
+			"Armament": "None",
+			"Classification": "Shurikens",
+			"EquipRestrictions": "TwoHandOnly",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
 			{
-				"OneHandMontages":
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"MeleeAbilities": [],
+			"Abilities": [
 				{
-					"Montages":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
 					{
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "None",
-						"ComboAttacks": []
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
 					}
 				},
-				"TwoHandMontages":
 				{
-					"Montages":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
 					{
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "None",
-						"ComboAttacks": []
-					}
-				},
-				"DualWieldMontages":
-				{
-					"Montages":
-					{
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "None",
-						"ComboAttacks": []
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
 					}
 				}
-			},
-			"Montages":
-			{
-			}
+			]
 		},
 		"DevDescription": ""
 	},
 	{
 		"Name": "Shuriken",
-		"ArmamentMontages":
+		"ArmamentInformation":
 		{
-			"MeleeMontages":
+			"Id": "Shuriken",
+			"Armament": "None",
+			"Classification": "Shurikens",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
 			{
-				"OneHandMontages":
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"MeleeAbilities": [],
+			"Abilities": [
 				{
-					"Montages":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
 					{
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "None",
-						"ComboAttacks": []
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
 					}
 				},
-				"TwoHandMontages":
 				{
-					"Montages":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
 					{
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "None",
-						"ComboAttacks": []
-					}
-				},
-				"DualWieldMontages":
-				{
-					"Montages":
-					{
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "None",
-						"ComboAttacks": []
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
 					}
 				}
-			},
-			"Montages":
-			{
-			}
+			]
 		},
 		"DevDescription": ""
 	},
 	{
 		"Name": "Shortsword",
-		"ArmamentMontages":
+		"ArmamentInformation":
 		{
-			"MeleeMontages":
+			"Id": "Shortsword",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/Swords/ShortSword/BPA_ShortSword.BPA_ShortSword_C'",
+			"Classification": "Knifes",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
 			{
-				"OneHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_1.AM_Manny_Sword_1H_PrimaryAttacks_1'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SecondaryAttacks.AM_Manny_Sword_1H_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"TwoHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"DualWieldMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				}
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
 			},
-			"Montages":
+			"Passives": [],
+			"StateInformation":
 			{
-				"Unequip":
+				"Effect": "None",
+				"Level": 1
+			},
+			"MeleeAbilities": [
 				{
-					"MontageMappings":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
 					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'"
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
 					}
 				},
-				"Equip":
 				{
-					"MontageMappings":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
 					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'"
-					}
-				},
-				"BlockReactions":
-				{
-					"MontageMappings":
-					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks_RM.AM_Manny_Sword_Blocks_RM'"
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
 					}
 				}
-			}
+			]
 		},
 		"DevDescription": ""
 	},
 	{
 		"Name": "Longsword",
-		"ArmamentMontages":
+		"ArmamentInformation":
 		{
-			"MeleeMontages":
+			"Id": "Longsword",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/Swords/LongSword/BPA_LongSword.BPA_LongSword_C'",
+			"Classification": "StraightSwords",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
 			{
-				"OneHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_PrimaryAttacks.AM_Manny_Katana_1H_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_SecondaryAttacks.AM_Manny_Katana_1H_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"TwoHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"DualWieldMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				}
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
 			},
-			"Montages":
+			"Passives": [],
+			"StateInformation":
 			{
-				"Unequip":
-				{
-					"MontageMappings":
-					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'"
-					}
-				},
-				"Equip":
-				{
-					"MontageMappings":
-					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'"
-					}
-				},
-				"BlockReactions":
-				{
-					"MontageMappings":
-					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks_RM.AM_Manny_Sword_Blocks_RM'"
-					}
-				}
-			}
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "SasukeSword",
-		"ArmamentMontages":
-		{
-			"MeleeMontages":
-			{
-				"OneHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_PrimaryAttacks.AM_Manny_Katana_1H_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_SecondaryAttacks.AM_Manny_Katana_1H_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_StrongAttacks.AM_Manny_Katana_1H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"TwoHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"DualWieldMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				}
+				"Effect": "None",
+				"Level": 1
 			},
-			"Montages":
-			{
-				"Unequip":
+			"MeleeAbilities": [
 				{
-					"MontageMappings":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
 					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'"
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
 					}
 				},
-				"Equip":
 				{
-					"MontageMappings":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
 					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'"
-					}
-				},
-				"BlockReactions":
-				{
-					"MontageMappings":
-					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks_RM.AM_Manny_Sword_Blocks_RM'"
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
 					}
 				}
-			}
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "AdamantineNyoi",
-		"ArmamentMontages":
-		{
-			"MeleeMontages":
-			{
-				"OneHandMontages":
-				{
-					"Montages":
-					{
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"TwoHandMontages":
-				{
-					"Montages":
-					{
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"DualWieldMontages":
-				{
-					"Montages":
-					{
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				}
-			},
-			"Montages":
-			{
-			}
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "Kurosawa",
-		"ArmamentMontages":
-		{
-			"MeleeMontages":
-			{
-				"OneHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_2.AM_Manny_Sword_1H_PrimaryAttacks_2'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SecondaryAttacks.AM_Manny_Sword_1H_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"TwoHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"DualWieldMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				}
-			},
-			"Montages":
-			{
-				"Unequip":
-				{
-					"MontageMappings":
-					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'"
-					}
-				},
-				"Equip":
-				{
-					"MontageMappings":
-					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'"
-					}
-				},
-				"BlockReactions":
-				{
-					"MontageMappings":
-					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks_RM.AM_Manny_Sword_Blocks_RM'"
-					}
-				}
-			}
-		},
-		"DevDescription": ""
-	},
-	{
-		"Name": "ItachiAnbuBlade",
-		"ArmamentMontages":
-		{
-			"MeleeMontages":
-			{
-				"OneHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_1.AM_Manny_Sword_1H_PrimaryAttacks_1'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SecondaryAttacks.AM_Manny_Sword_1H_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks.AM_Manny_Sword_1H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"TwoHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_PrimaryAttacks.AM_Manny_Sword_2H_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks.AM_Manny_Sword_Blocks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_SpecialAttacks.AM_Manny_Sword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_2H/AM_Manny_Sword_2H_StrongAttacks.AM_Manny_Sword_2H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"DualWieldMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				}
-			},
-			"Montages":
-			{
-				"Unequip":
-				{
-					"MontageMappings":
-					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'"
-					}
-				},
-				"Equip":
-				{
-					"MontageMappings":
-					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/_Equips/AM_Manny_Armament_1H_Equip.AM_Manny_Armament_1H_Equip'"
-					}
-				},
-				"BlockReactions":
-				{
-					"MontageMappings":
-					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_Blocks_RM.AM_Manny_Sword_Blocks_RM'"
-					}
-				}
-			}
+			]
 		},
 		"DevDescription": ""
 	},
 	{
 		"Name": "ZabuzaSword",
-		"ArmamentMontages":
+		"ArmamentInformation":
 		{
-			"MeleeMontages":
+			"Id": "ZabuzaSword",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/ZabuzaSword/BPA_ZabuzaSword.BPA_ZabuzaSword_C'",
+			"Classification": "GreatSwords",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
 			{
-				"OneHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_PrimaryAttacks.AM_Manny_Greatsword_1H_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks_Offhand.AM_Manny_Sword_1H_StrongAttacks_Offhand'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_SpecialAttacks.AM_Manny_Greatsword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_StrongAttacks.AM_Manny_Greatsword_1H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"TwoHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_PrimaryAttacks.AM_Manny_ZabuzaSword_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks.AM_Manny_GreatSword_Blocks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_SpecialAttacks.AM_Manny_ZabuzaSword_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_StrongAttacks.AM_Manny_ZabuzaSword_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"DualWieldMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				}
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
 			},
-			"Montages":
+			"Passives": [],
+			"StateInformation":
 			{
-				"Unequip":
+				"Effect": "None",
+				"Level": 1
+			},
+			"MeleeAbilities": [
 				{
-					"MontageMappings":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
 					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/_Equips/AM_Manny_GreatSword_Equip.AM_Manny_GreatSword_Equip'"
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
 					}
 				},
-				"Equip":
 				{
-					"MontageMappings":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
 					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/_Equips/AM_Manny_GreatSword_Equip.AM_Manny_GreatSword_Equip'"
-					}
-				},
-				"BlockReactions":
-				{
-					"MontageMappings":
-					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks_RM.AM_Manny_GreatSword_Blocks_RM'"
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
 					}
 				}
-			}
+			]
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "SasukeSword",
+		"ArmamentInformation":
+		{
+			"Id": "SasukeSword",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/SasukeSword/BPA_SasukeSword.BPA_SasukeSword_C'",
+			"Classification": "StraightSwords",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"MeleeAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "Kurosawa",
+		"ArmamentInformation":
+		{
+			"Id": "Kurosawa",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/Kurosawa/BPA_Kurosawa.BPA_Kurosawa_C'",
+			"Classification": "Katanas",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"MeleeAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "AdamantineNyoi",
+		"ArmamentInformation":
+		{
+			"Id": "AdamantineNyoi",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/AdamantineNyoi/BPA_AdamantineNyoi.BPA_AdamantineNyoi_C'",
+			"Classification": "Halberds",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"MeleeAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
+		},
+		"DevDescription": ""
+	},
+	{
+		"Name": "ItachiAnbuBlade",
+		"ArmamentInformation":
+		{
+			"Id": "ItachiAnbuBlade",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Naruto/ItachiAnbuBlade/BPA_ItachiAnbuBlade.BPA_ItachiAnbuBlade_C'",
+			"Classification": "Knifes",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
+			{
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
+			},
+			"Passives": [],
+			"StateInformation":
+			{
+				"Effect": "None",
+				"Level": 1
+			},
+			"MeleeAbilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
+					}
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
+					{
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
+					}
+				}
+			]
 		},
 		"DevDescription": ""
 	},
 	{
 		"Name": "GreatSword",
-		"ArmamentMontages":
+		"ArmamentInformation":
 		{
-			"MeleeMontages":
+			"Id": "GreatSword",
+			"Armament": "/Script/Engine.BlueprintGeneratedClass'/Game/Props/Armaments/Medieval/Swords/GreatSword/BPA_GreatSword.BPA_GreatSword_C'",
+			"Classification": "GreatSwords",
+			"EquipRestrictions": "Default",
+			"DamageCalculations": "Armament",
+			"BaseDamageStats":
 			{
-				"OneHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_PrimaryAttacks.AM_Manny_Greatsword_1H_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks_Offhand.AM_Manny_Sword_1H_StrongAttacks_Offhand'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_SpecialAttacks.AM_Manny_Greatsword_1H_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/OneHand/AM_Manny_Greatsword_1H_StrongAttacks.AM_Manny_Greatsword_1H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"TwoHandMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/AM_Manny_Greatsword_2H_PrimaryAttacks_2.AM_Manny_Greatsword_2H_PrimaryAttacks_2'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks.AM_Manny_GreatSword_Blocks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_SpecialAttacks.AM_Manny_ZabuzaSword_SpecialAttacks'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/AM_Manny_GreatSword_2H_StrongAttacks.AM_Manny_GreatSword_2H_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				},
-				"DualWieldMontages":
-				{
-					"Montages":
-					{
-						"PrimaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
-							}
-						},
-						"SecondaryAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
-							}
-						},
-						"SpecialAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
-							}
-						},
-						"StrongAttack":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
-							}
-						}
-					},
-					"Combo":
-					{
-						"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-						"ComboAttacks": []
-					}
-				}
+				"(AttributeName=\"Defence_Standard\",Attribute=/Script/Sandbox.MMOAttributeSet:Damage_Standard,AttributeOwner=/Script/CoreUObject.Class'\"/Script/Sandbox.MMOAttributeSet\"')": 10
 			},
-			"Montages":
+			"Passives": [],
+			"StateInformation":
 			{
-				"Unequip":
+				"Effect": "None",
+				"Level": 1
+			},
+			"MeleeAbilities": [
 				{
-					"MontageMappings":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"InputId": "PrimaryAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"InputId": "SecondaryAttack",
+					"InvalidStances": [
+						"TwoHanding"
+					],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"InputId": "SpecialAttack",
+					"InvalidStances": [],
+					"Level": 1
+				},
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"InputId": "StrongAttack",
+					"InvalidStances": [],
+					"Level": 1
+				}
+			],
+			"Abilities": [
+				{
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Level": 1,
+					"InputId": "Reload",
+					"ObjectInformation": "None",
+					"Id":
 					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/_Equips/AM_Manny_GreatSword_Equip.AM_Manny_GreatSword_Equip'"
+						"A": 1292463157,
+						"B": 1301786911,
+						"C": 840835508,
+						"D": -532560950
 					}
 				},
-				"Equip":
 				{
-					"MontageMappings":
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Level": 1,
+					"InputId": "PrimaryAttack",
+					"ObjectInformation": "None",
+					"Id":
 					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/_Equips/AM_Manny_GreatSword_Equip.AM_Manny_GreatSword_Equip'"
-					}
-				},
-				"BlockReactions":
-				{
-					"MontageMappings":
-					{
-						"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks_RM.AM_Manny_GreatSword_Blocks_RM'"
+						"A": -598788085,
+						"B": 1236584901,
+						"C": -108401015,
+						"D": 169823844
 					}
 				}
-			}
+			]
 		},
 		"DevDescription": ""
 	}

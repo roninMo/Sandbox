@@ -5,6 +5,7 @@
 
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Combat/Weapons/Armament.h"
@@ -154,7 +155,8 @@ void UCombatAbility::SetComboAttack()
 	}
 	else
 	{
-		CurrentAttack = ComboAttacks.ComboAttacks[ComboIndex];
+		if (ComboAttacks.ComboAttacks.IsValidIndex(ComboIndex)) CurrentAttack = ComboAttacks.ComboAttacks[ComboIndex];
+		else CurrentAttack = ComboAttacks.ComboAttacks.Num() > 0 ? ComboAttacks.ComboAttacks[0] : F_ComboAttack();
 	}
 }
 
@@ -238,10 +240,32 @@ void UCombatAbility::CalculateAttributeModifications()
 #pragma region Combat functions
 void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& TargetData, UAbilitySystem* TargetAsc)
 {
+	const FGameplayAbilityActivationInfo ActivationInfo = GetCurrentActivationInfo();
+	if (!HasAuthorityOrPredictionKey(GetCurrentActorInfo(), &ActivationInfo))
+	{
+		return;
+	}
+	
 	// Validity Checks
 	if (!TargetData.IsValid(0))
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2}'s Target data is not valid! ",
+			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
+		return;
+	}
+
+	UAbilitySystemComponent* Asc = GetAbilitySystemComponentFromActorInfo();
+	if (!Asc)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() Something happened to the ({2})'s ability system while trying to handle a melee attack",
+			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
+		return;
+	}
+
+	const UMMOAttributeSet* AttributeSet = Cast<UMMOAttributeSet>(Asc->GetAttributeSet(UMMOAttributeSet::StaticClass()));
+	if (!AttributeSet)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() Something happened to the ({2})'s attribute set while trying to handle a melee attack",
 			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 		return;
 	}
@@ -287,12 +311,28 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 		return;
 	}
 
-	// This is just to have the context handle information also (for the client) passed to other events like the character blocking, parrying, etc.
+	// There are a few ways to send data to an ExecutionCalculation in addition to capturing Attributes.
+	// Any SetByCallers set on the GameplayEffectSpec can be directly read in the ExecutionCalculation, CalculationModifiers let you add static values
+	// Custom gameplay effect information. Modifying gameplay effect spec is valid, but dangerous when retrieving the owning spec for pre execute -> /* Non const access. Be careful with this, especially when modifying a spec after attribute capture. */
+	// ValidTransientAggregatorIdentifiers -> The ExecutionCalculation reads this value in using special capture functions similar to the Attribute capture functions. (ExecutionParams.AttemptCalculateTransientAggregatorMagnitude())
+	
+	// We're just going to use attributes, valid client side prediction attack calculations, and if we need any other information let's just use the custom gameplay effect (I'm going to find out if this is safe)
+	UMMOAttributeSet* Attributes = const_cast<UMMOAttributeSet*>(AttributeSet);
+	if (Attributes)
+	{
+		if (AdjustedAttributes.Contains(Attributes->GetDamage_StandardAttribute()))
+		{
+			Attributes->SetDamage_Standard(AdjustedAttributes[Attributes->GetDamage_StandardAttribute()]);
+			UE_LOGFMT(AbilityLog, Warning, "{0}::{1}() {2} attacked with a damage of {3}, updated the attribte: {4}!",
+				*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()),
+				AdjustedAttributes[Attributes->GetDamage_StandardAttribute()], Attributes->GetDamage_Standard()
+			);
+		}
+	}
+	
+	// Create the execution calculation and add any additional information to the handle
 	const FGameplayEffectSpec* ExecCalc = ExecCalcHandle.Data.Get();
-	FGameplayEffectContextHandle ContextHandle = FGameplayEffectContextHandle();
-	if (ExecCalc) ContextHandle = ExecCalc->GetContext();
-
-	// Create the execution calculation and add the attack information to the context handle
+	
 	// const float CalculatedDamage = GetCalculatedDamage();
 	// FHitResult Impact = UAbilitySystemBlueprintLibrary::GetHitResultFromTargetData(TargetData, 0);
 	// Impact.ImpactPoint = Armament->GetActorLocation();
@@ -307,8 +347,7 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 	// USanboxAscLibrary::SetHitReactDirection(ContextHandle, HitReactDirection);
 	// USanboxAscLibrary::SetKnockbackForce(ContextHandle, FVector(13.0f)); // TODO: add combat calculations for knock back amounts for different attacks?
 
-	// Only calculate on the authority
-	const FGameplayAbilityActivationInfo ActivationInfo = GetCurrentActivationInfo();
+	// Retrieve the gameplay effect attributes, and additional information to the specification
 	if (HasAuthorityOrPredictionKey(GetCurrentActorInfo(), &ActivationInfo))
 	{
 		TArray<FActiveGameplayEffectHandle> EffectHandles = ApplyExecCalcToTarget(
