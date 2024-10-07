@@ -173,7 +173,8 @@ void UCombatAbility::SetComboIndex()
 			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
 		return;
 	}
-	
+
+	// Either have separate combo indexing for normal / strong attacks, or when transitioning from one to the other have that finish the combo. Having both combined would be interesting I just think it'd be tough to balance
 	if (CombatComponent->GetComboIndex() + 1 >= ComboAttacks.ComboAttacks.Num()) CombatComponent->SetComboIndex(0);
 	else CombatComponent->SetComboIndex(CombatComponent->GetComboIndex() + 1);
 	
