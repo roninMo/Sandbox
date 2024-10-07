@@ -4,19 +4,19 @@
 #include "Sandbox/Characters/CharacterBase.h"
 
 #include "EnhancedInputComponent.h"
+#include "Components/AdvancedMovement/CombatMovementComponent.h"
 #include "Components/AnimInstance/AnimInstanceBase.h"
 #include "Components/Inventory/InventoryComponent.h"
 #include "GameFramework/PlayerState.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
-#include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 #include "Sandbox/Data/Enums/SkeletonMappings.h"
 #include "Net/UnrealNetwork.h"
 #include "Sandbox/Data/Enums/ArmorTypes.h"
 
 
 ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Super(
-	ObjectInitializer.SetDefaultSubobjectClass<UAdvancedMovementComponent>(ACharacter::CharacterMovementComponentName)
+	ObjectInitializer.SetDefaultSubobjectClass<UCombatMovementComponent>(ACharacter::CharacterMovementComponentName)
 )
 {
 	SpawnCollisionHandlingMethod = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;

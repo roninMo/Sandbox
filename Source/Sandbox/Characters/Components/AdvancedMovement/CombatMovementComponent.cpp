@@ -161,7 +161,7 @@ FVector UCombatMovementComponent::CalcAnimRootMotionVelocity(const FVector& Root
 		*RootMotionVelocity.ToString()
 	);
 	
-	return RootMotionVelocity;
+	return RootMotionVelocity; 
 }
 
 
@@ -264,7 +264,7 @@ void UCombatMovementComponent::PerformMovement(float DeltaSeconds)
 		const bool bHasRootMotionSources = HasRootMotionSources();
 		if (bHasRootMotionSources && !CharacterOwner->bClientUpdating && !CharacterOwner->bServerMoveIgnoreRootMotion)
 		{
-			SCOPE_CYCLE_COUNTER(STAT_CharacterMovementRootMotionSourceCalculate);
+			// SCOPE_CYCLE_COUNTER(STAT_CharacterMovementRootMotionSourceCalculate);
 
 			const FVector VelocityBeforeCleanup = Velocity;
 			CurrentRootMotion.CleanUpInvalidRootMotion(DeltaSeconds, *CharacterOwner, *this);
@@ -355,7 +355,7 @@ void UCombatMovementComponent::PerformMovement(float DeltaSeconds)
 
 			// Generates root motion to be used this frame from sources other than animation
 			{
-				SCOPE_CYCLE_COUNTER(STAT_CharacterMovementRootMotionSourceCalculate);
+				// SCOPE_CYCLE_COUNTER(STAT_CharacterMovementRootMotionSourceCalculate);
 				CurrentRootMotion.PrepareRootMotion(DeltaSeconds, *CharacterOwner, *this, true);
 			}
 
@@ -827,8 +827,8 @@ void UCombatMovementComponent::UnCrouch(bool bClientSimulation)
 
 void UCombatMovementComponent::HandleCrouchLogic()
 {
-	ACharacterBase* Character = Cast<ACharacterBase>(CharacterOwner);
-	UAbilitySystem* AbilitySystem = Character ? Character->GetAbilitySystem<UAbilitySystem>() : nullptr;
+	ACharacterBase* PlayerCharacter = Cast<ACharacterBase>(CharacterOwner);
+	UAbilitySystem* AbilitySystem = PlayerCharacter ? PlayerCharacter->GetAbilitySystem<UAbilitySystem>() : nullptr;
 	if (!AbilitySystem) return;
 	
 	if (IsCrouching())
