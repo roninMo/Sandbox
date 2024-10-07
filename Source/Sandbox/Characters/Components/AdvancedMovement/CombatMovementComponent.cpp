@@ -440,7 +440,10 @@ void UCombatMovementComponent::PerformMovement(float DeltaSeconds)
 
 		// NaN tracking
 		// devCode(ensureMsgf(!Velocity.ContainsNaN(), TEXT("UCharacterMovementComponent::PerformMovement: Velocity contains NaN (%s)\n%s"), *GetPathNameSafe(this), *Velocity.ToString()));
-		UE_LOGFMT(Movement, Error, "{0}::{1}() Velocity contains NaN ({2})\n {3}", *UEnum::GetValueAsString(CharacterOwner->GetLocalRole()), *FString(__FUNCTION__), *GetPathNameSafe(this), Velocity.ToString());
+		if (Velocity.ContainsNaN())
+		{
+			UE_LOGFMT(Movement, Error, "{0}::{1}() Velocity contains NaN ({2})\n {3}", *UEnum::GetValueAsString(CharacterOwner->GetLocalRole()), *FString(__FUNCTION__), *GetPathNameSafe(this), Velocity.ToString());
+		}
 
 		// Clear jump input now, to allow movement events to trigger it for next update.
 		CharacterOwner->ClearJumpInput(DeltaSeconds);
