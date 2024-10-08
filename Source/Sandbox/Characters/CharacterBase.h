@@ -263,6 +263,7 @@
 		Ability Handling, Attribute Handling, Input Handling
 
 
+	Add combat logic, and information for displaying status, Everything else is already done except for the fun stuff and complex combat abilities
 
 
 	Abilities should be retrieved for each game, and added/removed based on the player's current equipment

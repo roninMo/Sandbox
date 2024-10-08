@@ -39,21 +39,21 @@ enum class EInputAbilities : uint8;
 /**
  *  Attack information for an armament or an individual combo attack. These are the objects created after retrieving the weapons current information from different armament stances
  */
-USTRUCT(BlueprintType)
-struct F_AttackInformation
-{
-	GENERATED_USTRUCT_BODY()
-	F_AttackInformation() = default;
-
-	/** The base damages or damage multipliers for of the combo attack. @note You can use this for multipliers for different attacks, or actual damage for attacks that don't factor in the armament's based damage  */
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FGameplayAttribute, float> BaseDamagesOrMultipliers;
-	
-	/** The motion value of the current attack  */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) float MotionValue = 1;
-	
-	/** The motion value for statuses of the current attack  */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) float StatusMotionValue = 1;
-};
+// USTRUCT(BlueprintType)
+// struct F_AttackInformation
+// {
+// 	GENERATED_USTRUCT_BODY()
+// 	F_AttackInformation() = default;
+//
+// 	/** The base damages or damage multipliers for of the combo attack. @note You can use this for multipliers for different attacks, or actual damage for attacks that don't factor in the armament's based damage  */
+// 	// UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FGameplayAttribute, float> BaseDamagesOrMultipliers;
+// 	
+// 	/** The motion value of the current attack  */
+// 	UPROPERTY(EditAnywhere, BlueprintReadWrite) float MotionValue = 1;
+// 	
+// 	/** The motion value for statuses of the current attack  */
+// 	UPROPERTY(EditAnywhere, BlueprintReadWrite) float StatusMotionValue = 1;
+// };
 
 
 /**
@@ -65,14 +65,18 @@ struct F_ComboAttack
 	GENERATED_USTRUCT_BODY()
 	F_ComboAttack() = default;
 	
-	/** The attack information specific to this combo attack */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_AttackInformation AttackInformation;
+	/** The motion value of the current attack  */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float MotionValue = 1;
+	
+	/** The motion value for statuses of the current attack  */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float StatusMotionValue = 1;
 	
 	/** The stamina cost of the attack */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) float StaminaCost;
 	
 	/** If there's a custom montage section for this combo attack */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FName CustomMontageSection;
+	
 };
 
 
@@ -86,10 +90,13 @@ struct F_ComboAttacks
 	F_ComboAttacks() = default;
 
 	/** The  class that handles the damage effect calculations */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TSubclassOf<UGameplayEffect> DamageEffectClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<UGameplayEffect> DamageEffectClass;
 	
 	/** The combos of a specific attack */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<F_ComboAttack> ComboAttacks;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(TitleProperty="MotionValues: ({MotionValue}/{StatusMotionValue}) -> StaminaCost: ({StaminaCost})"))
+	TArray<F_ComboAttack> ComboAttacks;
+	
 };
 
 
@@ -268,16 +275,16 @@ struct F_ArmamentInformation
 	// TODO: Add attribute damage scaling
 	
 	/** The armament's passives */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayEffectInfo> Passives;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(TitleProperty=Effect)) TArray<FGameplayEffectInfo> Passives;
 	
 	/** The armament's state information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayEffectInfo StateInformation;
 
 	/** The armament's abilities */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<F_ArmamentAbilityInformation> MeleeAbilities;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(TitleProperty="{InputId} ->  {Ability}")) TArray<F_ArmamentAbilityInformation> MeleeAbilities;
 	
 	/** The armament's abilities */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayAbilityInfo> Abilities;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(TitleProperty=Ability)) TArray<FGameplayAbilityInfo> Abilities;
 
 	/** There needs to be a valid reference to retrieve the armament/item */
 	virtual bool IsValid() const

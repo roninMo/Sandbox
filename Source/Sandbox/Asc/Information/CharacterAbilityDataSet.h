@@ -37,9 +37,17 @@ struct FCharacterAbilityDataSetHandle
 	UPROPERTY()
 	TArray<FActiveGameplayEffectHandle> EffectHandles;
 
+	/** Handles adding and removing attributes. After the gameplay effect has been added, it then retrieves the effect handle without creating another handle
+	 * We're using Gameplay effects for handling attributes because I don't want to create another attribute set every time we add attributes, that would be too complex
+	 * Adding attributes the normal way is better, and the values are actually being replicated to the client. You should use instant effects for attribute adjustments, and infinite for stats adjustments
+	 * Treat this as something that's reset on spawn, and save the handles for the time that happens, because it isn't replicated to the client, and that seems to slip devs minds while they explore gameplay ability scenarios
+	 * Anyways it'll be alright, you just don't need to use attribute logic for adding attributes unless you're handling combat
+	 */
+	TArray<FActiveGameplayEffectHandle> Attributes;
+	
 	/** Pointers to the granted attribute sets */
-	UPROPERTY()
-	TArray<TObjectPtr<UAttributeSet>> Attributes;
+	// UPROPERTY()
+	// TArray<TObjectPtr<UAttributeSet>> Attributes;
 
 	/** Copy of the tag container that was used for OwnedTags */
 	UPROPERTY()
@@ -103,9 +111,13 @@ struct FCharacterAbilityDataSetHandle
 		}
 		
 		Results.Add(FString::Printf(TEXT("Attribute Sets: %d"), Attributes.Num()));
-		for (const UAttributeSet* AttributeSet : Attributes)
+		// for (const UAttributeSet* AttributeSet : Attributes)
+		// {
+		// 	Results.Add(FString::Printf(TEXT("\t - Attribute Set: %s"), *GetNameSafe(AttributeSet)));
+		// }
+		for (const FActiveGameplayEffectHandle& EffectHandle : EffectHandles)
 		{
-			Results.Add(FString::Printf(TEXT("\t - Attribute Set: %s"), *GetNameSafe(AttributeSet)));
+			Results.Add(FString::Printf(TEXT("\t - Effect Handle: %s"), *EffectHandle.ToString())); // I don't know how many times I've gotten false positives here, however it's good to explore scenarios
 		}
 
 		Results.Add(FString::Printf(TEXT("Owned Tags: %d"), OwnedTags.Num()));
@@ -152,8 +164,9 @@ public:
 	TArray<FGameplayAbilityInfo> GrantedAbilities;
 
 	/** List of Attribute Sets to grant when the Ability System Component is initialized, with optional initialization data */
-	UPROPERTY(EditDefaultsOnly, Category="Attributes", meta=(TitleProperty=AttributeSet))
-	TArray<FGameplayAttributeInfo> GrantedAttributes;
+	UPROPERTY(EditDefaultsOnly, Category="Attributes", meta=(TitleProperty=Effect))
+	// TArray<FGameplayAttributeInfo> GrantedAttributes;
+	TArray<FGameplayEffectInfo> GrantedAttributes;
 
 	/** List of GameplayEffects to apply when the Ability System Component is initialized (typically on begin play) */
 	UPROPERTY(EditDefaultsOnly, Category="Effects", meta=(TitleProperty=Effect))

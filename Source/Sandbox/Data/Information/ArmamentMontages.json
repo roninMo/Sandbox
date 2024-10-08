@@ -21,38 +21,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -73,38 +61,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -125,11 +101,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -150,29 +123,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -196,38 +160,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -263,11 +215,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -288,29 +237,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -334,38 +274,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -386,38 +314,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -438,11 +354,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -463,29 +376,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -543,38 +447,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -595,38 +487,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -647,11 +527,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -672,20 +549,14 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -709,38 +580,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -776,11 +635,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -801,29 +657,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -847,38 +694,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -899,38 +734,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -951,11 +774,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -976,29 +796,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -1100,29 +911,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -1143,38 +945,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -1195,11 +985,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -1220,29 +1007,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -1266,38 +1044,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -1333,11 +1099,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -1358,29 +1121,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -1404,38 +1158,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -1456,38 +1198,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -1508,11 +1238,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -1533,29 +1260,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -1613,38 +1331,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -1665,38 +1371,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -1717,11 +1411,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -1742,20 +1433,14 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -1779,38 +1464,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -1846,11 +1519,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -1871,29 +1541,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -1917,38 +1578,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -1969,38 +1618,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -2021,11 +1658,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -2046,29 +1680,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -2126,38 +1751,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -2178,38 +1791,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -2230,11 +1831,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -2255,20 +1853,14 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -2292,38 +1884,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -2359,11 +1939,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -2384,29 +1961,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -2430,38 +1998,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -2482,38 +2038,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -2534,11 +2078,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -2559,29 +2100,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -2661,29 +2193,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -2704,38 +2227,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -2756,11 +2267,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -2781,20 +2289,14 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -2818,38 +2320,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -2885,11 +2375,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -2910,29 +2397,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -2956,38 +2434,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -3008,38 +2474,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -3060,11 +2514,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -3085,29 +2536,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -3165,29 +2607,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -3208,38 +2641,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -3260,11 +2681,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -3285,29 +2703,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -3331,38 +2740,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -3398,11 +2795,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -3423,29 +2817,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -3469,38 +2854,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -3521,38 +2894,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -3573,11 +2934,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -3598,29 +2956,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -3678,38 +3027,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								}
@@ -3730,20 +3067,14 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								}
@@ -3764,11 +3095,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								}
@@ -3789,20 +3117,14 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								}
@@ -3826,38 +3148,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								}
@@ -3893,11 +3203,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								}
@@ -3918,29 +3225,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								}
@@ -3964,38 +3262,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -4016,38 +3302,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -4068,11 +3342,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -4093,29 +3364,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -4173,38 +3435,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								}
@@ -4225,20 +3475,14 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								}
@@ -4259,11 +3503,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								}
@@ -4284,20 +3525,14 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								}
@@ -4321,38 +3556,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								}
@@ -4388,11 +3611,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								}
@@ -4413,38 +3633,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								}
@@ -4468,38 +3676,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -4520,38 +3716,26 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -4572,11 +3756,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -4597,29 +3778,20 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
-									"AttackInformation":
-									{
-										"MotionValue": 1,
-										"StatusMotionValue": 1
-									},
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}

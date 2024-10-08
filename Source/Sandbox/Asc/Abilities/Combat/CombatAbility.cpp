@@ -233,7 +233,7 @@ void UCombatAbility::CalculateAttributeModifications()
 				Attribute == UMMOAttributeSet::GetDamage_StrikeAttribute())
 			{
 				float EquipmentMultiplier = 1;
-				float AttackMotionValue = CurrentAttack.AttackInformation.MotionValue;
+				float AttackMotionValue = CurrentAttack.MotionValue;
 				AttackInfo.Add(Attribute, (Value * EquipmentMultiplier) * AttackMotionValue);
 			}
 
@@ -244,7 +244,7 @@ void UCombatAbility::CalculateAttributeModifications()
 				Attribute == UMMOAttributeSet::GetDamage_LightningAttribute())
 			{
 				float EquipmentMultiplier = 1;
-				float AttackMotionValue = CurrentAttack.AttackInformation.MotionValue;
+				float AttackMotionValue = CurrentAttack.MotionValue;
 				AttackInfo.Add(Attribute, (Value * EquipmentMultiplier) * AttackMotionValue);
 			}
 			
@@ -257,7 +257,7 @@ void UCombatAbility::CalculateAttributeModifications()
 				Attribute == UMMOAttributeSet::GetSleepAttribute())
 			{
 				float EquipmentMultiplier = 1;
-				float AttackMotionValue = CurrentAttack.AttackInformation.StatusMotionValue;
+				float AttackMotionValue = CurrentAttack.StatusMotionValue;
 				AttackInfo.Add(Attribute, (Value * EquipmentMultiplier) * AttackMotionValue);
 			}
 
@@ -268,7 +268,7 @@ void UCombatAbility::CalculateAttributeModifications()
 	else if (ArmamentInformation.DamageCalculations == EDamageInformationSource::Combo)
 	{
 		// Combo based -> retrieve the damage from the combo attack, and add damage scaling from attributes
-		AttackInfo.Add(UMMOAttributeSet::GetDamage_StandardAttribute(), CurrentAttack.AttackInformation.MotionValue);
+		AttackInfo.Add(UMMOAttributeSet::GetDamage_StandardAttribute(), CurrentAttack.MotionValue);
 	}
 
 	// TODO: Add a function from the combat component that handles attribute adjustments based on the weapon stats, current attack, and armament stance

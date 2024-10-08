@@ -110,9 +110,10 @@ bool UCharacterAbilityDataSet::RemoveFromAbilitySystem(UAbilitySystemComponent* 
 	}
 	
 	// Remove Attributes
-	for (UAttributeSet* AttributeSet : InAbilitySetHandle.Attributes)
+	// for (UAttributeSet* AttributeSet : InAbilitySetHandle.Attributes) InASC->RemoveSpawnedAttribute(AttributeSet);
+	for (const FActiveGameplayEffectHandle& AttributeHandle : InAbilitySetHandle.Attributes)
 	{
-		InASC->RemoveSpawnedAttribute(AttributeSet);
+		InASC->RemoveActiveGameplayEffect(AttributeHandle);
 	}
 
 	// Remove Owned Gameplay Tags

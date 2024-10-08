@@ -62,6 +62,7 @@ public:
 
 	static void TryAddAbility(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayAbilityInfo& InAbilityMapping, FGameplayAbilitySpecHandle& OutAbilityHandle, FGameplayAbilitySpec& OutAbilitySpec);
 	static void TryAddAttributes(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayAttributeInfo& InAttributeSetMapping, UAttributeSet*& OutAttributeSet);
+	static void TryAddAttributes(UAbilitySystemComponent* AbilitySystemComponent, const TSubclassOf<UGameplayEffect> InEffectType, const float InLevel, TArray<FActiveGameplayEffectHandle>& OutEffectHandles);
 	static void TryAddGameplayEffect(UAbilitySystemComponent* AbilitySystemComponent, const TSubclassOf<UGameplayEffect> InEffectType, const float InLevel, TArray<FActiveGameplayEffectHandle>& OutEffectHandles);
 
 	/** Helper to return the AttributeSet UObject as a non const pointer, if the passed in ASC has it granted */

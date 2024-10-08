@@ -75,13 +75,14 @@ bool UGameplayAbilityUtilities::TryAddAbilitySet(UAbilitySystemComponent* Abilit
 		OutAbilitySetHandle.Abilities.Add(AbilityHandle);
 	}
 	
-	// Add Attributes
+	// Add Attributes 
 	int32 AttributesIndex = 0;
-	for (const FGameplayAttributeInfo& Attributes : InAbilitySet->GrantedAttributes)
+	// for (const FGameplayAttributeInfo& Attributes : InAbilitySet->GrantedAttributes)
+	for (const FGameplayEffectInfo& Attributes : InAbilitySet->GrantedAttributes)
 	{
 		AttributesIndex++;
 	
-		if (Attributes.AttributeSet.IsNull())
+		if (!Attributes.Effect)
 		{
 			UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s GrantedAttributes AttributeSet on ability set {2} is not valid at Index {3}",
 				*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()), *GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *GetNameSafe(InAbilitySet), AttributesIndex  - 1
@@ -89,13 +90,7 @@ bool UGameplayAbilityUtilities::TryAddAbilitySet(UAbilitySystemComponent* Abilit
 			continue;
 		}
 	
-		UAttributeSet* AddedAttributeSet = nullptr;
-		TryAddAttributes(AbilitySystemComponent, Attributes, AddedAttributeSet);
-	
-		if (AddedAttributeSet)
-		{
-			OutAbilitySetHandle.Attributes.Add(AddedAttributeSet);
-		}
+		TryAddAttributes(AbilitySystemComponent, Attributes.Effect, Attributes.Level, OutAbilitySetHandle.Attributes);
 	}
 	
 	// Add Effects
@@ -228,13 +223,13 @@ void UGameplayAbilityUtilities::TryAddAttributes(UAbilitySystemComponent* Abilit
 	
 	// Prevent adding the same attribute set multiple times (if already registered by another GF or on Actor ASC directly)
 	// TODO: Check if this adds the subobject while saving the proper reference -> players should handle this in the player state, and everything else should be on the character
-	// if (UAttributeSet* AttributeSet = GetAttributeSet(AbilitySystemComponent, AttributeSetType))
-	// {
-	// 	OutAttributeSet = AttributeSet;
-	// 	// UE_LOGFMT(AbilityLog, Warning, "{0}::{1}'s AttributeSet has already been created for {2}",
-	// 	// 	*UEnum::GetValueAsString(OwnerActor->GetLocalRole()), *AttributeSetType->GetName(), *OwnerActor->GetName()
-	// 	// );
-	// }
+	if (UAttributeSet* AttributeSet = GetAttributeSet(AbilitySystemComponent, AttributeSetType))
+	{
+		OutAttributeSet = AttributeSet;
+		// UE_LOGFMT(AbilityLog, Warning, "{0}::{1}'s AttributeSet has already been created for {2}",
+		// 	*UEnum::GetValueAsString(OwnerActor->GetLocalRole()), *AttributeSetType->GetName(), *OwnerActor->GetName()
+		// );
+	}
 	
 	OutAttributeSet = NewObject<UAttributeSet>(OwnerActor, AttributeSetType);
 	if (!InAttributeSetMapping.InitializationData.IsNull())
@@ -250,10 +245,17 @@ void UGameplayAbilityUtilities::TryAddAttributes(UAbilitySystemComponent* Abilit
 	AbilitySystemComponent->AddAttributeSetSubobject(OutAttributeSet);
 }
 
-
-void UGameplayAbilityUtilities::TryAddGameplayEffect(UAbilitySystemComponent* AbilitySystemComponent,
+void UGameplayAbilityUtilities::TryAddAttributes(UAbilitySystemComponent* AbilitySystemComponent,
 	const TSubclassOf<UGameplayEffect> InEffectType, const float InLevel,
 	TArray<FActiveGameplayEffectHandle>& OutEffectHandles)
+{
+	TryAddGameplayEffect(AbilitySystemComponent, InEffectType, InLevel, OutEffectHandles);
+}
+
+
+void UGameplayAbilityUtilities::TryAddGameplayEffect(UAbilitySystemComponent* AbilitySystemComponent,
+                                                     const TSubclassOf<UGameplayEffect> InEffectType, const float InLevel,
+                                                     TArray<FActiveGameplayEffectHandle>& OutEffectHandles)
 {
 	check(AbilitySystemComponent);
 	
