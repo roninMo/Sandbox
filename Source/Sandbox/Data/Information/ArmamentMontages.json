@@ -157,8 +157,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -179,8 +179,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -337,8 +337,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.2,
-									"StatusMotionValue": 1.1,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -498,7 +498,7 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1,
+									"MotionValue": 1.1,
 									"StatusMotionValue": 1,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
@@ -520,8 +520,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.2,
-									"StatusMotionValue": 1.1,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
 									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
@@ -661,7 +661,7 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -709,9 +709,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -731,9 +731,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -758,25 +758,25 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -813,7 +813,7 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -835,19 +835,19 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -867,9 +867,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -889,9 +889,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1018,19 +1018,19 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1050,9 +1050,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1072,9 +1072,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1167,7 +1167,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_PrimaryAttacks.AM_Manny_Katana_1H_PrimaryAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_3.AM_Manny_Sword_1H_PrimaryAttacks_3'"
 							}
 						},
 						"Combo":
@@ -1305,8 +1305,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
+									"MotionValue": 1.1,
+									"StatusMotionValue": -1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -1327,8 +1327,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -1431,19 +1431,19 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1463,9 +1463,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1485,9 +1485,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1512,25 +1512,25 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1552,25 +1552,25 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1592,7 +1592,7 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1646,8 +1646,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -1668,8 +1668,8 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
 									"StaminaCost": 11,
 									"CustomMontageSection": "None"
 								}
@@ -1857,9 +1857,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1879,9 +1879,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1906,25 +1906,25 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1961,7 +1961,7 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1983,19 +1983,19 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2015,9 +2015,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 0.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2037,9 +2037,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2166,19 +2166,19 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2198,9 +2198,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2220,9 +2220,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2361,7 +2361,7 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2409,9 +2409,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2431,9 +2431,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2458,25 +2458,25 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2513,7 +2513,7 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2535,19 +2535,19 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2567,9 +2567,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2589,9 +2589,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2718,19 +2718,19 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2750,9 +2750,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2772,9 +2772,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2929,7 +2929,7 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2977,9 +2977,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2999,9 +2999,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3026,25 +3026,25 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3081,7 +3081,7 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3103,19 +3103,19 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3135,9 +3135,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3157,9 +3157,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3286,19 +3286,19 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3318,9 +3318,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3340,9 +3340,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3391,7 +3391,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/Katana/AM_Manny_Katana_1H_PrimaryAttacks.AM_Manny_Katana_1H_PrimaryAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_PrimaryAttacks_3.AM_Manny_Sword_1H_PrimaryAttacks_3'"
 							}
 						},
 						"Combo":
@@ -3953,25 +3953,25 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 27,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 27,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 27,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 27,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3993,13 +3993,13 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 27,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 27,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4021,7 +4021,7 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 27,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4043,13 +4043,13 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 27,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 27,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4061,7 +4061,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_CrouchAttacks.AM_Manny_Sword_1H_CrouchAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/AM_Manny_GreatSword_CrouchAttacks.AM_Manny_GreatSword_CrouchAttacks'"
 							}
 						},
 						"Combo":
@@ -4069,9 +4069,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4083,7 +4083,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_RunningAttacks.AM_Manny_Sword_1H_RunningAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/AM_Manny_GreatSword_RunningAttacks.AM_Manny_GreatSword_RunningAttacks'"
 							}
 						},
 						"Combo":
@@ -4091,9 +4091,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
+									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4219,7 +4219,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_CrouchAttacks.AM_Manny_Sword_1H_CrouchAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/AM_Manny_GreatSword_CrouchAttacks.AM_Manny_GreatSword_CrouchAttacks'"
 							}
 						},
 						"Combo":
@@ -4229,7 +4229,7 @@
 								{
 									"MotionValue": 1.3,
 									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4241,7 +4241,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_RunningAttacks.AM_Manny_Sword_1H_RunningAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/AM_Manny_GreatSword_RunningAttacks.AM_Manny_GreatSword_RunningAttacks'"
 							}
 						},
 						"Combo":
@@ -4251,7 +4251,7 @@
 								{
 									"MotionValue": 1.1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 27,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4276,25 +4276,25 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4316,25 +4316,25 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4356,7 +4356,7 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4378,19 +4378,19 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4402,7 +4402,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_CrouchAttacks.AM_Manny_Sword_1H_CrouchAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/AM_Manny_GreatSword_CrouchAttacks.AM_Manny_GreatSword_CrouchAttacks'"
 							}
 						},
 						"Combo":
@@ -4410,9 +4410,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4424,7 +4424,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_RunningAttacks.AM_Manny_Sword_1H_RunningAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/AM_Manny_GreatSword_RunningAttacks.AM_Manny_GreatSword_RunningAttacks'"
 							}
 						},
 						"Combo":
@@ -4432,9 +4432,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.1,
+									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 20,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4483,171 +4483,6 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_PrimaryAttacks.AM_Manny_ZabuzaSword_PrimaryAttacks'"
-							}
-						},
-						"Combo":
-						{
-							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-							"ComboAttacks": [
-								{
-									"MotionValue": 1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 27,
-									"CustomMontageSection": "None"
-								},
-								{
-									"MotionValue": 1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 27,
-									"CustomMontageSection": "None"
-								},
-								{
-									"MotionValue": 1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 27,
-									"CustomMontageSection": "None"
-								},
-								{
-									"MotionValue": 1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 27,
-									"CustomMontageSection": "None"
-								}
-							]
-						}
-					},
-					"SecondaryAttack":
-					{
-						"Montage":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks_Offhand.AM_Manny_Sword_1H_StrongAttacks_Offhand'"
-							}
-						},
-						"Combo":
-						{
-							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-							"ComboAttacks": [
-								{
-									"MotionValue": 1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 27,
-									"CustomMontageSection": "None"
-								},
-								{
-									"MotionValue": 1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 27,
-									"CustomMontageSection": "None"
-								}
-							]
-						}
-					},
-					"SpecialAttack":
-					{
-						"Montage":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
-							}
-						},
-						"Combo":
-						{
-							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-							"ComboAttacks": [
-								{
-									"MotionValue": 1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 27,
-									"CustomMontageSection": "None"
-								}
-							]
-						}
-					},
-					"StrongAttack":
-					{
-						"Montage":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_StrongAttacks.AM_Manny_ZabuzaSword_StrongAttacks'"
-							}
-						},
-						"Combo":
-						{
-							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-							"ComboAttacks": [
-								{
-									"MotionValue": 1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 27,
-									"CustomMontageSection": "None"
-								},
-								{
-									"MotionValue": 1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 27,
-									"CustomMontageSection": "None"
-								}
-							]
-						}
-					},
-					"Crouch":
-					{
-						"Montage":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_CrouchAttacks.AM_Manny_Sword_1H_CrouchAttacks'"
-							}
-						},
-						"Combo":
-						{
-							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-							"ComboAttacks": [
-								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
-									"CustomMontageSection": "None"
-								}
-							]
-						}
-					},
-					"Sprint":
-					{
-						"Montage":
-						{
-							"MontageMappings":
-							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_RunningAttacks.AM_Manny_Sword_1H_RunningAttacks'"
-							}
-						},
-						"Combo":
-						{
-							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
-							"ComboAttacks": [
-								{
-									"MotionValue": 1.1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 11,
-									"CustomMontageSection": "None"
-								}
-							]
-						}
-					}
-				},
-				"TwoHandMontages":
-				{
-					"PrimaryAttack":
-					{
-						"Montage":
-						{
-							"MontageMappings":
-							{
 								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/GreatSwords/AM_Manny_Greatsword_2H_PrimaryAttacks_2.AM_Manny_Greatsword_2H_PrimaryAttacks_2'"
 							}
 						},
@@ -4688,13 +4523,26 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks.AM_Manny_GreatSword_Blocks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_StrongAttacks_Offhand.AM_Manny_Sword_1H_StrongAttacks_Offhand'"
 							}
 						},
 						"Combo":
 						{
-							"DamageEffectClass": "None",
-							"ComboAttacks": []
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 16,
+									"CustomMontageSection": "None"
+								},
+								{
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 16,
+									"CustomMontageSection": "None"
+								}
+							]
 						}
 					},
 					"SpecialAttack":
@@ -4703,7 +4551,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_SpecialAttacks.AM_Manny_ZabuzaSword_SpecialAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
 							}
 						},
 						"Combo":
@@ -4743,18 +4591,6 @@
 									"StatusMotionValue": 1,
 									"StaminaCost": 16,
 									"CustomMontageSection": "None"
-								},
-								{
-									"MotionValue": 1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 16,
-									"CustomMontageSection": "None"
-								},
-								{
-									"MotionValue": 1,
-									"StatusMotionValue": 1,
-									"StaminaCost": 16,
-									"CustomMontageSection": "None"
 								}
 							]
 						}
@@ -4765,7 +4601,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_CrouchAttacks.AM_Manny_Sword_1H_CrouchAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/AM_Manny_GreatSword_CrouchAttacks.AM_Manny_GreatSword_CrouchAttacks'"
 							}
 						},
 						"Combo":
@@ -4773,9 +4609,9 @@
 							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
 							"ComboAttacks": [
 								{
-									"MotionValue": 1.3,
-									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4787,7 +4623,171 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_RunningAttacks.AM_Manny_Sword_1H_RunningAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/AM_Manny_GreatSword_RunningAttacks.AM_Manny_GreatSword_RunningAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 16,
+									"CustomMontageSection": "None"
+								}
+							]
+						}
+					}
+				},
+				"TwoHandMontages":
+				{
+					"PrimaryAttack":
+					{
+						"Montage":
+						{
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_PrimaryAttacks.AM_Manny_ZabuzaSword_PrimaryAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 17,
+									"CustomMontageSection": "None"
+								},
+								{
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 17,
+									"CustomMontageSection": "None"
+								},
+								{
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 17,
+									"CustomMontageSection": "None"
+								},
+								{
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 17,
+									"CustomMontageSection": "None"
+								}
+							]
+						}
+					},
+					"SecondaryAttack":
+					{
+						"Montage":
+						{
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Blocks/AM_Manny_GreatSword_Blocks.AM_Manny_GreatSword_Blocks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "None",
+							"ComboAttacks": []
+						}
+					},
+					"SpecialAttack":
+					{
+						"Montage":
+						{
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_SpecialAttacks.AM_Manny_ZabuzaSword_SpecialAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 17,
+									"CustomMontageSection": "None"
+								}
+							]
+						}
+					},
+					"StrongAttack":
+					{
+						"Montage":
+						{
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/UltraGreatSwords/AM_Manny_ZabuzaSword_StrongAttacks.AM_Manny_ZabuzaSword_StrongAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 17,
+									"CustomMontageSection": "None"
+								},
+								{
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 17,
+									"CustomMontageSection": "None"
+								},
+								{
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 17,
+									"CustomMontageSection": "None"
+								},
+								{
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 17,
+									"CustomMontageSection": "None"
+								}
+							]
+						}
+					},
+					"Crouch":
+					{
+						"Montage":
+						{
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/AM_Manny_GreatSword_CrouchAttacks.AM_Manny_GreatSword_CrouchAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 17,
+									"CustomMontageSection": "None"
+								}
+							]
+						}
+					},
+					"Sprint":
+					{
+						"Montage":
+						{
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/AM_Manny_GreatSword_RunningAttacks.AM_Manny_GreatSword_RunningAttacks'"
 							}
 						},
 						"Combo":
@@ -4797,7 +4797,7 @@
 								{
 									"MotionValue": 1.1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 17,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4822,25 +4822,25 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4862,25 +4862,25 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4902,7 +4902,7 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 13,
+									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4924,19 +4924,19 @@
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4948,7 +4948,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_CrouchAttacks.AM_Manny_Sword_1H_CrouchAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/AM_Manny_GreatSword_CrouchAttacks.AM_Manny_GreatSword_CrouchAttacks'"
 							}
 						},
 						"Combo":
@@ -4958,7 +4958,7 @@
 								{
 									"MotionValue": 1.3,
 									"StatusMotionValue": 1.2,
-									"StaminaCost": 11,
+									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4970,7 +4970,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_RunningAttacks.AM_Manny_Sword_1H_RunningAttacks'"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/AM_Manny_GreatSword_RunningAttacks.AM_Manny_GreatSword_RunningAttacks'"
 							}
 						},
 						"Combo":
@@ -4980,7 +4980,7 @@
 								{
 									"MotionValue": 1.1,
 									"StatusMotionValue": 1,
-									"StaminaCost": 11,
+									"StaminaCost": 16,
 									"CustomMontageSection": "None"
 								}
 							]
