@@ -224,8 +224,133 @@ void UMeleeAttack::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGa
 }
 
 
+
+
+bool UMeleeAttack::SetComboAndArmamentInformation()
+{
+	bool bSetComboAndArmamentInformation = Super::SetComboAndArmamentInformation();
+	if (!Armament || !bSetComboAndArmamentInformation)
+	{
+		CrouchingAttackInformation = F_ComboAttacks();
+		RunningAttackInformation = F_ComboAttacks();
+		return bSetComboAndArmamentInformation;
+	}
+
+	
+	const F_ArmamentInformation& ArmamentInformation = Armament->GetArmamentInformation();
+	for (const auto& [Ability, InputId, InvalidStances, Level] : ArmamentInformation.MeleeAbilities)
+	{
+		if (AttackPattern != InputId || InvalidStances.Contains(CurrentStance)) continue;
+
+		// crouching and running attacks
+		CrouchingAttackInformation = Armament->GetComboAttacks(EInputAbilities::Crouch);
+		RunningAttackInformation = Armament->GetComboAttacks(EInputAbilities::Sprint);
+	}
+
+	return bSetComboAndArmamentInformation;
+}
+
+
+void UMeleeAttack::InitCombatInformation()
+{
+	// Reset state using handle
+	bCrouchingAttack = false;
+	bRunningAttack = false;
+
+	
+	// Handle running / crouching attack variations
+	ACharacterBase* Character = Cast<ACharacterBase>(GetAvatarActorFromActorInfo());
+	UAdvancedMovementComponent* MovementComponent = Character ? Character->GetMovementComp<UAdvancedMovementComponent>() : nullptr;
+	if (Character && MovementComponent)
+	{
+		// Check if it's a running attack
+		if (MovementComponent->GetLastUpdateVelocity().Length() >= MovementComponent->GetMaxWalkSpeed() * MovementComponent->SprintSpeedMultiplier)
+		{
+			bRunningAttack = true;
+		}
+		// Check if it's a crouching attack
+		else if (MovementComponent->IsCrouching())
+		{
+			bCrouchingAttack = true;
+		}
+
+	}
+	
+	
+	Super::InitCombatInformation();
+	// Attack information
+	// Attack Montage
+	// Montage start section
+	// Damage calculations
+}
+
+
+void UMeleeAttack::SetComboAttack()
+{
+	// Standard attack information
+	if (!Armament || (!bRunningAttack && !bCrouchingAttack))
+	{
+		Super::SetComboAttack();
+		return;
+	}
+
+
+	// Retrieve the current attack
+	const TArray<F_ComboAttack>& Attacks = bRunningAttack ? RunningAttackInformation.ComboAttacks : CrouchingAttackInformation.ComboAttacks; 
+	if (ComboCount <= 1 || ComboIndex + 1 >= Attacks.Num())
+	{
+		if (!Attacks.IsEmpty())
+		{
+			CurrentAttack = Attacks[0];
+		}
+	}
+	else
+	{
+		if (Attacks.IsValidIndex(ComboIndex))
+		{
+			CurrentAttack = Attacks[ComboIndex];
+		}
+		else
+		{
+			CurrentAttack = Attacks.Num() > 0 ? Attacks[0] : F_ComboAttack();
+		}
+	}
+}
+
+
+void UMeleeAttack::SetComboIndex()
+{
+	if (!Armament || (!bRunningAttack && !bCrouchingAttack))
+	{
+		Super::SetComboIndex();
+		return;
+	}
+	
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while adjusting the combo index",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+		return;
+	}
+
+	
+	// Either have separate combo indexing for normal / strong attacks, or when transitioning from one to the other have that finish the combo, both combined would be interesting I just think it'd be tough to balance
+	const TArray<F_ComboAttack>& Attacks = bRunningAttack ? RunningAttackInformation.ComboAttacks : CrouchingAttackInformation.ComboAttacks; 
+	if (CombatComponent->GetComboIndex() + 1 >= Attacks.Num())
+	{
+		CombatComponent->SetComboIndex(0);
+	}
+	else
+	{
+		CombatComponent->SetComboIndex(CombatComponent->GetComboIndex() + 1);
+	}
+}
+
+
 void UMeleeAttack::SetAttackMontage(AArmament* Weapon)
 {
+	Super::SetAttackMontage(Weapon);
 	ACharacterBase* Character = Cast<ACharacterBase>(GetAvatarActorFromActorInfo());
 	if (!Character)
 	{
@@ -253,25 +378,31 @@ void UMeleeAttack::SetAttackMontage(AArmament* Weapon)
 		}
 	}
 	
-	
-	// Primary Attack
-	UAnimMontage* WeaponMontage = Weapon->GetCombatMontage(AttackPattern);
-	if (AttackPattern == EInputAbilities::PrimaryAttack || AttackPattern == EInputAbilities::StrongAttack)
+	SetCurrentMontage(Weapon->GetCombatMontage(AttackPattern));
+}
+
+
+void UMeleeAttack::SetMontageStartSection(bool ChargeAttack)
+{
+	if (!bRunningAttack && !bCrouchingAttack)
 	{
-		// Handle running attack variations (Just add them to the montage)
-		UAdvancedMovementComponent* MovementComponent = Character->GetMovementComp<UAdvancedMovementComponent>();
-		if (MovementComponent && MovementComponent->IsRunning() &&
-			MovementComponent->GetLastUpdateVelocity().Length() >= MovementComponent->GetMaxWalkSpeed() * MovementComponent->SprintSpeedMultiplier)
-		{
-			// Running attack
-		}
-		else
-		{
-			SetCurrentMontage(WeaponMontage);
-		}
+		Super::SetMontageStartSection(ChargeAttack);
+		return;
 	}
-	else
+	
+	if (bCrouchingAttack)
 	{
-		SetCurrentMontage(WeaponMontage);
+		MontageStartSection = Montage_Section_CrouchAttack;
+	}
+
+	if (bRunningAttack)
+	{
+		MontageStartSection = Montage_Section_RunningAttack;
+	}
+
+	// Charged attacks
+	if (ChargeAttack)
+	{
+		MontageStartSection = FName(MontageStartSection.ToString() + Montage_Section_Charge);
 	}
 }

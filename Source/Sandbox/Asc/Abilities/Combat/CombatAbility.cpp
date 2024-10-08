@@ -105,10 +105,11 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 		ComboAttacks = F_ComboAttacks();
 		CurrentAttack = F_ComboAttack();
 		ComboCount = 0;
+		SetCurrentMontage(nullptr);
 		EquipSlot = EEquipSlot::None;
 	}
 	
-	// Retrieve the attacks for the current stance
+	// Retrieve the attacks for the current stance. If the armament has a specific attack pattern ability without combat information, notify us to prevent any problems
 	const F_ArmamentInformation& ArmamentInformation = EquippedArmament->GetArmamentInformation();
 	for (const auto& [Ability, InputId, InvalidStances, Level] : ArmamentInformation.MeleeAbilities)
 	{
@@ -120,17 +121,24 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 		ComboCount = ComboAttacks.ComboAttacks.Num();
 		SetCurrentMontage(EquippedArmament->GetCombatMontage(AttackPattern));
 		EquipSlot = EquippedArmament->GetEquipSlot();
-
-		ensure(!ComboAttacks.ComboAttacks.IsEmpty());
 		return true;
 	}
 
+	ensure(!ComboAttacks.ComboAttacks.IsEmpty());
 	return false;
 }
 
 
 void UCombatAbility::InitCombatInformation()
 {
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while getting the combo attack",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+	}
+	
+	ComboIndex = CombatComponent ? CombatComponent->GetComboIndex() : 0;
 	SetComboAttack(); // Current attack and combo index
 	SetAttackMontage(Armament); // Current montage
 	SetMontageStartSection(); // montage start section (customization for different types of attacks
@@ -140,16 +148,7 @@ void UCombatAbility::InitCombatInformation()
 
 void UCombatAbility::SetComboAttack()
 {
-	UCombatComponent* CombatComponent = GetCombatComponent();
-	if (!CombatComponent)
-	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while getting the combo attack",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
-		return;
-	}
-	
 	// Retrieve the current attack
-	ComboIndex = CombatComponent->GetComboIndex();
 	if (ComboCount <= 1 || ComboIndex + 1 >= ComboAttacks.ComboAttacks.Num())
 	{
 		if (!ComboAttacks.ComboAttacks.IsEmpty())
@@ -159,8 +158,14 @@ void UCombatAbility::SetComboAttack()
 	}
 	else
 	{
-		if (ComboAttacks.ComboAttacks.IsValidIndex(ComboIndex)) CurrentAttack = ComboAttacks.ComboAttacks[ComboIndex];
-		else CurrentAttack = ComboAttacks.ComboAttacks.Num() > 0 ? ComboAttacks.ComboAttacks[0] : F_ComboAttack();
+		if (ComboAttacks.ComboAttacks.IsValidIndex(ComboIndex))
+		{
+			CurrentAttack = ComboAttacks.ComboAttacks[ComboIndex];
+		}
+		else
+		{
+			CurrentAttack = ComboAttacks.ComboAttacks.Num() > 0 ? ComboAttacks.ComboAttacks[0] : F_ComboAttack();
+		}
 	}
 }
 
@@ -176,8 +181,14 @@ void UCombatAbility::SetComboIndex()
 	}
 
 	// Either have separate combo indexing for normal / strong attacks, or when transitioning from one to the other have that finish the combo. Having both combined would be interesting I just think it'd be tough to balance
-	if (CombatComponent->GetComboIndex() + 1 >= ComboAttacks.ComboAttacks.Num()) CombatComponent->SetComboIndex(0);
-	else CombatComponent->SetComboIndex(CombatComponent->GetComboIndex() + 1);
+	if (CombatComponent->GetComboIndex() + 1 >= ComboAttacks.ComboAttacks.Num())
+	{
+		CombatComponent->SetComboIndex(0);
+	}
+	else
+	{
+		CombatComponent->SetComboIndex(CombatComponent->GetComboIndex() + 1);
+	}
 	
 	// UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Adjusted combo index from {3} to {4}",
 	// 	UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), ComboIndex, CombatComponent->GetComboIndex());
@@ -295,8 +306,24 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 		// 	*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 		return;
 	}
+
+	ACharacterBase* Character = Cast<ACharacterBase>(GetAvatarActorFromActorInfo());
+	if (!Character)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the character while handling a melee attack",
+			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
+		return;
+	}
+
+	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
+	if (!AbilitySystem)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the charcter's ability system while handling a melee attack",
+			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
+		return;
+	}
 	
-	const UMMOAttributeSet* AttributeSet = Cast<UMMOAttributeSet>(TargetAsc->GetAttributeSet(UMMOAttributeSet::StaticClass()));
+	const UMMOAttributeSet* AttributeSet = Cast<UMMOAttributeSet>(AbilitySystem->GetAttributeSet(UMMOAttributeSet::StaticClass()));
 	if (!AttributeSet)
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() Something happened to the ({2})'s attribute set while trying to handle a melee attack",

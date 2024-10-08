@@ -142,6 +142,50 @@
 								}
 							]
 						}
+					},
+					"Crouch":
+					{
+						"Montage":
+						{
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_CrouchAttacks.AM_Manny_Sword_1H_CrouchAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"MotionValue": 1.3,
+									"StatusMotionValue": 1.2,
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
+						}
+					},
+					"Sprint":
+					{
+						"Montage":
+						{
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_RunningAttacks.AM_Manny_Sword_1H_RunningAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
+						}
 					}
 				},
 				"TwoHandMontages":
@@ -252,6 +296,50 @@
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
 									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
+						}
+					},
+					"Crouch":
+					{
+						"Montage":
+						{
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_CrouchAttacks.AM_Manny_Sword_1H_CrouchAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"MotionValue": 1.1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
+						}
+					},
+					"Sprint":
+					{
+						"Montage":
+						{
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_RunningAttacks.AM_Manny_Sword_1H_RunningAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"MotionValue": 1.2,
+									"StatusMotionValue": 1.1,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -391,6 +479,50 @@
 									"MotionValue": 1,
 									"StatusMotionValue": 1,
 									"StaminaCost": 11,
+									"CustomMontageSection": "None"
+								}
+							]
+						}
+					},
+					"Crouch":
+					{
+						"Montage":
+						{
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_CrouchAttacks.AM_Manny_Sword_1H_CrouchAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"MotionValue": 1,
+									"StatusMotionValue": 1,
+									"StaminaCost": 13,
+									"CustomMontageSection": "None"
+								}
+							]
+						}
+					},
+					"Sprint":
+					{
+						"Montage":
+						{
+							"MontageMappings":
+							{
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/Sword_1H/AM_Manny_Sword_1H_RunningAttacks.AM_Manny_Sword_1H_RunningAttacks'"
+							}
+						},
+						"Combo":
+						{
+							"DamageEffectClass": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/GameplayEffects/ExecCalcs/GE_DamageCalculation.GE_DamageCalculation_C'",
+							"ComboAttacks": [
+								{
+									"MotionValue": 1.2,
+									"StatusMotionValue": 1.1,
+									"StaminaCost": 13,
 									"CustomMontageSection": "None"
 								}
 							]

@@ -20,6 +20,8 @@ enum class EInputAbilities : uint8;
 // Montage information
 #define Montage_ComboSections TArray<FName> {FName("1"), FName("2"), FName("3"), FName("4"), FName("5"), FName("6"), FName("7"), FName("8"), FName("9"), FName("10"), FName("1")}
 #define Montage_Section_Charge FString("_C")
+#define Montage_Section_CrouchAttack FName("RunningAttack")
+#define Montage_Section_RunningAttack FName("CrouchAttack")
 
 // Montages
 #define Montage_Equip FName("Equip")
@@ -162,6 +164,7 @@ struct F_ArmamentMeleeMontage
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_ComboAttacks Combo;
 	
 };
+
 
 /**
  * An object containing the different attack patterns and combo information with a montage map reference to each character.
@@ -318,7 +321,7 @@ struct F_Table_ArmamentInformation : public FTableRowBase
 			- Melee damage information
 
 	->
-	-> Damage information (varying attribute set modifiers)
+	-> Damage information (varying attribute and equipment modifiers)
 
 	
 	Weapon

@@ -45,7 +45,6 @@ protected: // TODO: Either adjust the ability task limit, or create additional t
 	/** The handle for the beginning and ending of attack frames logic */
 	// UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayTagState* AttackFramesHandle;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUsingRootMotionAnimations = true;
 	
 	/**** Cached tags ****/
 	/** When we should allow rotation movement during the attack */
@@ -60,6 +59,17 @@ protected: // TODO: Either adjust the ability task limit, or create additional t
 	/** The tag to notify the begin of attack frames for a specific animation */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AttackFramesBeginTag;
 
+
+	/**** Combat logic ****/
+	/** Whether this attack is a crouching attack */
+	UPROPERTY(Transient, BlueprintReadWrite) bool bCrouchingAttack;
+	
+	/** Whether this attack is a running attack */
+	UPROPERTY(Transient, BlueprintReadWrite) bool bRunningAttack;
+
+	UPROPERTY(Transient, BlueprintReadWrite) F_ComboAttacks CrouchingAttackInformation;
+	UPROPERTY(Transient, BlueprintReadWrite) F_ComboAttacks RunningAttackInformation;
+
 	
 public:
 	UMeleeAttack();
@@ -72,7 +82,9 @@ public:
 
 	/** Native function, called if an ability ends normally or abnormally. If bReplicate is set to true, try to replicate the ending to the client/server */
 	virtual void EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled) override;
-	
+
+
+protected:
 	/** Input released event for multiplayer replication */
 	UFUNCTION() virtual void OnInputReleased(float TimeHeld);
 
@@ -94,8 +106,26 @@ public:
 	/** This is a delegate binding for gameplay event information that's sent to this character during this task */
 	UFUNCTION(BlueprintCallable) virtual void OnEndOfMontage();
 
+protected:
+	/**** Combat functions ****/
+	/** Retrieves the armament's combat information for this ability. Only updates if the player switches weapons or updates his stance */
+	virtual bool SetComboAndArmamentInformation() override;
+	
+	/** Retrieves all the necessary information for an attack. Call this during ActivateAbility to retrieve the attack information for the current attack */
+	virtual void InitCombatInformation() override;
+
+	/** Calculates the current attack information */
+	virtual void SetComboAttack() override;
+
 	/** Retrieves the attack montage from the armament based on different conditions */
 	virtual void SetAttackMontage(AArmament* Weapon) override;
+	
+	/** Calculates the montage section for the current combo attack */
+	virtual void SetMontageStartSection(bool ChargeAttack = false) override;
+
+	/** Increments the combo index based on the combo attacks */
+	virtual void SetComboIndex() override;
+	
 
 	
 };

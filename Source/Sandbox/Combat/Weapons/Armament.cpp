@@ -192,6 +192,7 @@ void AArmament::SetArmamentMontagesFromDB(UDataTable* ArmamentMontageDB, ECharac
 		{
 			if (MontageMap.Montage.MontageMappings.Contains(Link))
 			{
+				// Attack pattern
 				F_ArmamentComboInformation MeleeMontageInfo;
 				MeleeMontageInfo.Montage = MontageMap.Montage.MontageMappings[Link];
 				MeleeMontageInfo.Combo = MontageMap.Combo;
@@ -205,6 +206,7 @@ void AArmament::SetArmamentMontagesFromDB(UDataTable* ArmamentMontageDB, ECharac
 		{
 			if (MontageMap.Montage.MontageMappings.Contains(Link))
 			{
+				// Attack pattern
 				F_ArmamentComboInformation MeleeMontageInfo;
 				MeleeMontageInfo.Montage = MontageMap.Montage.MontageMappings[Link];
 				MeleeMontageInfo.Combo = MontageMap.Combo;
@@ -218,6 +220,7 @@ void AArmament::SetArmamentMontagesFromDB(UDataTable* ArmamentMontageDB, ECharac
 		{
 			if (MontageMap.Montage.MontageMappings.Contains(Link))
 			{
+				// Attack pattern
 				F_ArmamentComboInformation MeleeMontageInfo;
 				MeleeMontageInfo.Montage = MontageMap.Montage.MontageMappings[Link];
 				MeleeMontageInfo.Combo = MontageMap.Combo;

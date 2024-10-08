@@ -71,14 +71,14 @@ protected:
 	/** Calculates the current attack information */
 	UFUNCTION(BlueprintCallable) virtual void SetComboAttack();
 
-	/** Increments the combo index based on the combo attacks */
-	UFUNCTION(BlueprintCallable) virtual void SetComboIndex();
-
 	/** Retrieves the attack montage from the armament based on different conditions */
 	UFUNCTION(BlueprintCallable) virtual void SetAttackMontage(AArmament* Weapon);
 	
 	/** Calculates the montage section for the current combo attack */
 	UFUNCTION(BlueprintCallable) virtual void SetMontageStartSection(bool ChargeAttack = false);
+
+	/** Increments the combo index based on the combo attacks */
+	UFUNCTION(BlueprintCallable) virtual void SetComboIndex();
 	
 	/** Retrieves the attributes (mainly attack damages) and calculates the damage using multiple different calculations for attribute / weapon scaling. */
 	UFUNCTION(BlueprintCallable) virtual void CalculateAttributeModifications();

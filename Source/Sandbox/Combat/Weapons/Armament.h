@@ -151,6 +151,7 @@ private:
 
 
 public:
+	// TODO: Refactor because this is specific to melee armaments, or create functions to differentiate
 	/**
 	 * Retrieves the armament montages from the armament montage database, and adds them to the armament. If you need to retrieve a montage, use one of the get functions
 	 *
