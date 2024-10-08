@@ -11,12 +11,6 @@ UAttributeLogic::UAttributeLogic()
 }
 
 
-bool UAttributeLogic::PreGameplayEffectExecute(FGameplayEffectModCallbackData& Data)
-{
-	return Super::PreGameplayEffectExecute(Data);
-}
-
-
 void UAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
 	Super::PostGameplayEffectExecute(Data);

@@ -137,7 +137,6 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item
 
 	Combat
 		- Weapon retrieves it's attack information
-			- Branching logic is okay here, it ends up adjusting attributes which can easily be added to both
 		- Weapon creates a damage calculation and sends it to the attribute logic
 		- AttributeLogic handles adjusting attributes
 

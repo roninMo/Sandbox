@@ -24,16 +24,16 @@ struct F_Information_Armor_Handle
     GENERATED_USTRUCT_BODY()
 
 	/** The id of the armor from table */
-	UPROPERTY() FGuid Id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGuid Id;
 	
 	/** The attributes that were granted from the armor */
-	UPROPERTY() FActiveGameplayEffectHandle ArmorStats;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FActiveGameplayEffectHandle ArmorStats;
 	
 	/** The stored passives that were granted from the armor */
-	UPROPERTY() TArray<FActiveGameplayEffectHandle> PassiveHandles;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FActiveGameplayEffectHandle> PassiveHandles;
 
 	/** The stored abilities that were granted from the armor */
-	UPROPERTY() TArray<FGameplayAbilitySpecHandle> AbilityHandles;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FGameplayAbilitySpecHandle> AbilityHandles;
 	
 	/** Default constructor */
 	F_Information_Armor_Handle() = default;

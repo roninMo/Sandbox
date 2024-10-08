@@ -160,7 +160,7 @@ public:
 	UCharacterAbilityDataSet() = default;
 
 	/** List of Gameplay Abilities to grant when the Ability System Component is initialized */
-	UPROPERTY(EditDefaultsOnly, Category="Abilities", meta=(TitleProperty=Ability))
+	UPROPERTY(EditDefaultsOnly, Category="Abilities", meta=(TitleProperty="{InputId}: {Ability}"))
 	TArray<FGameplayAbilityInfo> GrantedAbilities;
 
 	/** List of Attribute Sets to grant when the Ability System Component is initialized, with optional initialization data */
