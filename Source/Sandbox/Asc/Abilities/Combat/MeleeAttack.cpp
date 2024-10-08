@@ -350,12 +350,9 @@ void UMeleeAttack::SetComboIndex()
 
 void UMeleeAttack::SetAttackMontage(AArmament* Weapon)
 {
-	Super::SetAttackMontage(Weapon);
-	ACharacterBase* Character = Cast<ACharacterBase>(GetAvatarActorFromActorInfo());
-	if (!Character)
+	if (!bRunningAttack && !bCrouchingAttack)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the character while retrieving the weapon's montage!",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
+		Super::SetAttackMontage(Weapon);
 		return;
 	}
 	
@@ -377,8 +374,15 @@ void UMeleeAttack::SetAttackMontage(AArmament* Weapon)
 			return;
 		}
 	}
-	
-	SetCurrentMontage(Weapon->GetCombatMontage(AttackPattern));
+
+	if (bCrouchingAttack)
+	{
+		SetCurrentMontage(Weapon->GetCombatMontage(EInputAbilities::Crouch));
+	}
+	if (bRunningAttack)
+	{
+		SetCurrentMontage(Weapon->GetCombatMontage(EInputAbilities::Sprint));
+	}
 }
 
 
