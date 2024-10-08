@@ -38,36 +38,64 @@ enum class EEquipSlot : uint8;
 enum class EArmorSlot : uint8;
 
 
-/*
-
-	One Hand Attack Pattern
-		Primary Attack
-		Special Attack
-		Strong Attack
-		
-	Two Hand Attack Pattern
-		Primary Attack
-		Block (Two handing)
-		Special Attack
-		Strong Attack
-	
-	Dual Wield (or two handing) Attack Pattern
-		Primary Attack
-		Dual wield Primary Attack (Secondary input)
-		Secondary Attack (Two weapons)
-		Special Attack
-		Strong Attack
-
-
-	
-
-*/
-
-
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FArmamentEquippedSignature, AArmament*, Armament, EEquipSlot, EquipSlot);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmamentUnequippedSignature, FName, Armament, FGuid, Id, EEquipSlot, EquipSlot);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorEquippedSignature, F_Item, Information, F_Information_Armor, Abilities, EArmorSlot, EquipSlot);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item, Information, F_Information_Armor, Abilities, EArmorSlot, EquipSlot);
+
+
+
+
+/*
+
+	Health: 300
+	Stamina: 90
+
+					1h / 2h
+
+	Shortswords
+		- Damage:	100
+		- Stamina:	11 / 13
+
+	Longswords
+		- Damage:	110
+		- Stamina:	12 / 15
+
+	Greatswords
+		- Damage:	150
+		- Stamina:	16 / 17
+
+	UltraGreatsword
+		- Damage:	164
+		- Stamina:	20 / 27
+
+
+
+	1h montages
+
+	Uchigatana: 1h primary 3
+	Katana: 1h katana
+	Shortsword: 1h primary 1
+	Longsword: 1h katana
+	SasukeSword: 1h katana
+	Kurosawa: 1h primary 2
+	ItachiAnbuBlade: 1h primary 1
+	ZabuzaSword: ultra greatsword
+	Greatsword: 1h greatsword primary
+
+
+
+
+	2h montages
+		- primary: 2h primary attacks
+		- secondary: block
+		- special: 1h special
+		- strong: 2h strong attacks
+
+
+
+
+*/
 
 
 /**
@@ -426,101 +454,3 @@ public:
 
 
 
-
-
-/*
-
-	Weapon
-		- Ranged Information / Damage
-			- Weapon / Attachment config
-			- Ranged damage information
-			
-		- Melee Information / Damage
-			- Combo retrieval
-			- Melee damage information
-
-	->
-	-> Damage information (varying attribute set modifiers)
-
-	
-	Weapon
-		- Equip slot mapping
-		- Anim montage mapping
-		- Ability mapping
-		- Character to Weapon information mapping
-		- 
-
-
-
-
-
-
-
-	Combat Component
-		- Attribute damage calculation
-
-
-
-	Combat
-		- Weapon retrieves it's attack information
-			- Branching logic is okay here, it ends up adjusting attributes which can easily be added to both
-		- Weapon creates a damage calculation and sends it to the attribute logic
-		- AttributeLogic handles adjusting attributes
-
- 
-*/
-
-
-
-
-
-/*
-
-	Health: 300
-	Stamina: 90
-
-					1h / 2h
-
-	Shortswords
-		- Damage:	100
-		- Stamina:	11 / 13
-
-	Longswords
-		- Damage:	110
-		- Stamina:	12 / 15
-
-	Greatswords
-		- Damage:	150
-		- Stamina:	16 / 17
-
-	UltraGreatsword
-		- Damage:	164
-		- Stamina:	20 / 27
-
-
-
-	1h montages
-
-	Uchigatana: 1h primary 3
-	Katana: 1h katana
-	Shortsword: 1h primary 1
-	Longsword: 1h katana
-	SasukeSword: 1h katana
-	Kurosawa: 1h primary 2
-	ItachiAnbuBlade: 1h primary 1
-	ZabuzaSword: ultra greatsword
-	Greatsword: 1h greatsword primary
-
-
-
-
-	2h montages
-		- primary: 2h primary attacks
-		- secondary: block
-		- special: 1h special
-		- strong: 2h strong attacks
-
-
-
-
-*/

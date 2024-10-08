@@ -236,7 +236,7 @@ bool UMeleeAttack::SetComboAndArmamentInformation()
 		return bSetComboAndArmamentInformation;
 	}
 
-	
+
 	const F_ArmamentInformation& ArmamentInformation = Armament->GetArmamentInformation();
 	for (const auto& [Ability, InputId, InvalidStances, Level] : ArmamentInformation.MeleeAbilities)
 	{
@@ -263,17 +263,18 @@ void UMeleeAttack::InitCombatInformation()
 	UAdvancedMovementComponent* MovementComponent = Character ? Character->GetMovementComp<UAdvancedMovementComponent>() : nullptr;
 	if (Character && MovementComponent)
 	{
-		// Check if it's a running attack
-		if (MovementComponent->GetLastUpdateVelocity().Length() >= MovementComponent->GetMaxWalkSpeed() * MovementComponent->SprintSpeedMultiplier)
-		{
-			bRunningAttack = true;
-		}
 		// Check if it's a crouching attack
-		else if (MovementComponent->IsCrouching())
+		if (MovementComponent->IsCrouching() && bUseCrouchingAttacks)
 		{
 			bCrouchingAttack = true;
 		}
 
+		// Check if it's a running attack
+		if (MovementComponent->IsWalking() && bUseRunningAttacks &&
+			MovementComponent->GetLastUpdateVelocity().Length() >= MovementComponent->GetMaxWalkSpeed() * MovementComponent->SprintSpeedMultiplier)
+		{
+			bRunningAttack = true;
+		}
 	}
 	
 	
@@ -337,13 +338,13 @@ void UMeleeAttack::SetComboIndex()
 	
 	// Either have separate combo indexing for normal / strong attacks, or when transitioning from one to the other have that finish the combo, both combined would be interesting I just think it'd be tough to balance
 	const TArray<F_ComboAttack>& Attacks = bRunningAttack ? RunningAttackInformation.ComboAttacks : CrouchingAttackInformation.ComboAttacks; 
-	if (CombatComponent->GetComboIndex() + 1 >= Attacks.Num())
+	if (ComboIndex + 1 >= Attacks.Num())
 	{
 		CombatComponent->SetComboIndex(0);
 	}
 	else
 	{
-		CombatComponent->SetComboIndex(CombatComponent->GetComboIndex() + 1);
+		CombatComponent->SetComboIndex(ComboIndex + 1);
 	}
 }
 

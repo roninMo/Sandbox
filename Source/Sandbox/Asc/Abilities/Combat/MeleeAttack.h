@@ -61,6 +61,9 @@ protected: // TODO: Either adjust the ability task limit, or create additional t
 
 
 	/**** Combat logic ****/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUseCrouchingAttacks = true;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUseRunningAttacks = true;
+	
 	/** Whether this attack is a crouching attack */
 	UPROPERTY(Transient, BlueprintReadWrite) bool bCrouchingAttack;
 	
