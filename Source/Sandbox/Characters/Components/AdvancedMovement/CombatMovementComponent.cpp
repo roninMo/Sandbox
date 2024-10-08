@@ -28,16 +28,6 @@ UCombatMovementComponent::UCombatMovementComponent()
 }
 
 
-void UCombatMovementComponent::UpdateCharacterStateBeforeMovement(float DeltaSeconds)
-{
-	Super::UpdateCharacterStateBeforeMovement(DeltaSeconds);
-
-	// Root motion animations adjustments to still move while in air
-	AdjustAccelerationDuringRootMotion();
-	
-}
-
-
 
 
 #pragma region Root Motion
@@ -136,57 +126,103 @@ FVector UCombatMovementComponent::CalcAnimRootMotionVelocity(const FVector& Root
 		return Super::CalcAnimRootMotionVelocity(RootMotionDeltaMove, DeltaTime, CurrentVelocity);
 	}
 	
-	// if (ensure(DeltaSeconds > 0.f))
-	// {
-	// 	FVector RootMotionVelocity = RootMotionDeltaMove / DeltaSeconds;
-	// 	return RootMotionVelocity;
-	// }
-	// else
-	// {
-	// 	return CurrentVelocity;
-	// }
+	// Don't remove velocity if the player isn't pressing any inputs, just use the current velocity in that case
+	FVector AccelDirection = Acceleration.GetSafeNormal();
+	if (AccelDirection.IsNearlyZero())
+	{
+		AccelDirection = Velocity.GetSafeNormal();
+	}
 	
-
-	// Preserve the current movement, add player input to allow movement
-	FVector RootMotionVelocity = CurrentVelocity.Length() * Acceleration.GetSafeNormal();
-
+	// Preserve the current movement, add player input to allow movement // Alright scooby, let's use our brain here, time to play along
+	FVector RootMotionVelocity = RootMotionAirVelocity + (RootMotionDeltaMove / DeltaTime); // CurrentVelocity.Length() * Acceleration.GetSafeNormal();
 	
 	
-	UE_LOGFMT(Movement, Log, "{0}::RootMotion ({1}) ->  ({2})({3}) Accel/Vel: ({4})({5}), RootMotionVelocity: ({6})",
+	UE_LOGFMT(Movement, Log, "{0}::RootMotion ({1}) ->  ({2})({3}) Accel/Vel: ({4})({5}), RootMotion/AirVel: ({6})({7})",
 		CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"), *FString::SanitizeFloat(Time),
 		*GetMovementDirection(PlayerInput),
 		FMath::CeilToInt(Velocity.Size2D()),
 		*FVector2D(FMath::CeilToInt(Acceleration.X), FMath::CeilToInt(Acceleration.Y)).ToString(),
 		*FVector2D(FMath::CeilToInt(Velocity.X), FMath::CeilToInt(Velocity.Y)).ToString(),
-		*RootMotionVelocity.ToString()
+		*RootMotionVelocity.ToString(),
+		*RootMotionAirVelocity.ToString()
 	);
 	
 	return RootMotionVelocity; 
 }
 
 
-void UCombatMovementComponent::AdjustAccelerationDuringRootMotion()
+void UCombatMovementComponent::AirVelocityDuringRootMotion(const float DeltaSeconds)
 {
-	ACharacterBase* PlayerCharacter = Cast<ACharacterBase>(CharacterOwner);
-	UAbilitySystem* AbilitySystem = PlayerCharacter ? PlayerCharacter->GetAbilitySystem<UAbilitySystem>() : nullptr;
-	if (!PlayerCharacter || !AbilitySystem)
+	// Yeet
+	if ( HasAnimRootMotion() )
 	{
-		return;
-	}
+		if (EnterAnimRootMotionAirVelocity == FVector::ZeroVector)
+		{
+			EnterAnimRootMotionAirVelocity = Velocity;
+			RootMotionAirVelocity = EnterAnimRootMotionAirVelocity;
+		}
 
-	// TODO: Check if there's a valid rm montage
-	if (IsFalling() && AbilitySystem->HasMatchingGameplayTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking"))))
-	{
-		// Prevent movement acceleration
-		FRotator MovementRotation(0, UpdatedComponent->GetComponentRotation().Yaw, 0);
-		const FVector AccelDir = (UKismetMathLibrary::GetRightVector(MovementRotation) * PlayerInput.Y).GetSafeNormal(); // Allow sideways movements, however don't add to the velocity
-		
-		// Acceleration = Acceleration * AccelDir;
+		if (IsFalling()) RotationRate = RootMotionAirRotationRate;
+		else RotationRate = BhopRotationRate;
 	}
 	else
 	{
-		
+		EnterAnimRootMotionAirVelocity = FVector::ZeroVector;
+		RootMotionAirVelocity = FVector::ZeroVector;
+		RotationRate = BhopRotationRate;
 	}
+	
+	// If there's root motion while in air, let's add friction to the velocity
+	FVector RootMotionAcceleration = Acceleration.GetClampedToMaxSize(AnimRootMotionMaxAcceleration);
+	FVector AccelerationDir = RootMotionAcceleration.GetSafeNormal();
+	const float VelSize = EnterAnimRootMotionAirVelocity.Size();
+
+	// Apply braking friction
+	if (Acceleration.IsNearlyZero(0.1))
+	{
+		const float FrictionFactor = FMath::Max(0.f, BrakingFrictionFactor);
+		const float Friction = FMath::Max(0.f, AnimRootMotionVelocityAirFriction * FrictionFactor);
+		const float BrakingDeceleration = FMath::Max(0.f, BrakingDecelerationFalling);
+		const bool bZeroFriction = (Friction == 0.f);
+		const bool bZeroBraking = (BrakingDeceleration == 0.f);
+
+		const FVector OldVel = RootMotionAirVelocity;
+
+		// subdivide braking to get reasonably consistent results at lower frame rates
+		// (important for packet loss situations w/ networking)
+		float RemainingTime = DeltaSeconds;
+		const float MaxTimeStep = FMath::Clamp(BrakingSubStepTime, 1.0f / 75.0f, 1.0f / 20.0f);
+
+		// Decelerate to brake to a stop
+		const FVector RevAccel = (bZeroBraking ? FVector::ZeroVector : (-BrakingDeceleration * Velocity.GetSafeNormal()));
+		while( RemainingTime >= MIN_TICK_TIME )
+		{
+			// Zero friction uses constant deceleration, so no need for iteration.
+			const float dt = ((RemainingTime > MaxTimeStep && !bZeroFriction) ? FMath::Min(MaxTimeStep, RemainingTime * 0.5f) : RemainingTime);
+			RemainingTime -= dt;
+
+			// apply friction and braking
+			RootMotionAirVelocity = RootMotionAirVelocity + ((-Friction) * RootMotionAirVelocity + RevAccel) * dt ; 
+			
+			// Don't reverse direction
+			if ((RootMotionAirVelocity | OldVel) <= 0.f)
+			{
+				RootMotionAirVelocity = FVector::ZeroVector;
+			}
+		}
+
+		// Clamp to zero if nearly zero, or if below min threshold and braking.
+		const float VSizeSq = RootMotionAirVelocity.SizeSquared();
+		if (VSizeSq <= UE_KINDA_SMALL_NUMBER || (!bZeroBraking && VSizeSq <= FMath::Square(BRAKE_TO_STOP_VELOCITY)))
+		{
+			RootMotionAirVelocity = FVector::ZeroVector;
+		}
+	}
+	
+	// Apply input acceleration
+	const float NewMaxInputSpeed = IsExceedingMaxSpeed(VelSize) ? EnterAnimRootMotionAirVelocity.Size() : VelSize;
+	RootMotionAirVelocity += RootMotionAcceleration * DeltaSeconds;
+	RootMotionAirVelocity = RootMotionAirVelocity.GetClampedToMaxSize(NewMaxInputSpeed);
 }
 #pragma endregion 
 
@@ -316,7 +352,7 @@ void UCombatMovementComponent::PerformMovement(float DeltaSeconds)
 		// Update saved LastPreAdditiveVelocity with any external changes to character Velocity that happened due to ApplyAccumulatedForces/HandlePendingLaunch
 		if( CurrentRootMotion.HasAdditiveVelocity() )
 		{
-			const FVector Adjustment = (Velocity - OldVelocity);
+			const FVector Adjustment = FVector(); // (Velocity - OldVelocity);
 			CurrentRootMotion.LastPreAdditiveVelocity += Adjustment;
 
 			#if ROOT_MOTION_DEBUG
@@ -366,12 +402,16 @@ void UCombatMovementComponent::PerformMovement(float DeltaSeconds)
 			}
 		}
 
+		// Save the current root motion velocity for air movement
+		AirVelocityDuringRootMotion(DeltaSeconds);
+		
 		// Apply Root Motion to Velocity
 		if( CurrentRootMotion.HasOverrideVelocity() || HasAnimRootMotion() )
 		{
 			// Animation root motion overrides Velocity and currently doesn't allow any other root motion sources
 			if( HasAnimRootMotion() )
 			{
+				
 				// Convert to world space (animation root motion is always local)
 				USkeletalMeshComponent * SkelMeshComp = CharacterOwner->GetMesh();
 				if( SkelMeshComp )
@@ -478,7 +518,7 @@ void UCombatMovementComponent::PerformMovement(float DeltaSeconds)
 
 			#if !(UE_BUILD_SHIPPING)
 			// debug
-			if (true)
+			if (false)
 			{
 				const FRotator OldActorRotation = OldActorRotationQuat.Rotator();
 				const FVector ResultingLocation = UpdatedComponent->GetComponentLocation();
@@ -491,13 +531,13 @@ void UCombatMovementComponent::PerformMovement(float DeltaSeconds)
 				DrawDebugLine(MyWorld, OldLocation, ResultingLocation, FColor::Red, false, 10.f);
 
 				// Log details.
-				UE_LOG(LogRootMotion, Warning,  TEXT("PerformMovement Resulting DeltaMove Translation: %s, Rotation: %s, MovementBase: %s"), //-V595
-					*(ResultingLocation - OldLocation).ToCompactString(), *(ResultingRotation - OldActorRotation).GetNormalized().ToCompactString(), *GetNameSafe(CharacterOwner->GetMovementBase()) );
+				// UE_LOG(LogRootMotion, Warning,  TEXT("PerformMovement Resulting DeltaMove Translation: %s, Rotation: %s, MovementBase: %s"), //-V595
+				// 	*(ResultingLocation - OldLocation).ToCompactString(), *(ResultingRotation - OldActorRotation).GetNormalized().ToCompactString(), *GetNameSafe(CharacterOwner->GetMovementBase()) );
 
 				const FVector RMTranslation = RootMotionParams.GetRootMotionTransform().GetTranslation();
 				const FRotator RMRotation = RootMotionParams.GetRootMotionTransform().GetRotation().Rotator();
-				UE_LOG(LogRootMotion, Warning,  TEXT("PerformMovement Resulting DeltaError Translation: %s, Rotation: %s"),
-					*(ResultingLocation - OldLocation - RMTranslation).ToCompactString(), *(ResultingRotation - OldActorRotation - RMRotation).GetNormalized().ToCompactString() );
+				// UE_LOG(LogRootMotion, Warning,  TEXT("PerformMovement Resulting DeltaError Translation: %s, Rotation: %s"),
+				// 	*(ResultingLocation - OldLocation - RMTranslation).ToCompactString(), *(ResultingRotation - OldActorRotation - RMRotation).GetNormalized().ToCompactString() );
 			}
 			#endif // !(UE_BUILD_SHIPPING)
 

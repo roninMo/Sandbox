@@ -231,6 +231,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe|Air Strafe Lurch", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "5", EditCondition = "bUseBhopping", EditConditionHides))
 	float StrafeLurchFriction;
 
+	/** Change in rotation per second, used when UseControllerDesiredRotation or OrientRotationToMovement are true. Set a negative value for infinite rotation rate and instant turns. */
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category="Character Movement (General Settings)|Air Strafe")
+	FRotator BhopRotationRate;
 	
 	/** air strafing */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= "Character Movement (General Settings)|Air Strafe|Debug", meta=(EditCondition = "bUseBhopping", EditConditionHides))

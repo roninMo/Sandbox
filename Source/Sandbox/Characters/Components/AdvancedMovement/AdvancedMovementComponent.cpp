@@ -38,6 +38,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	StrafingMaxAcceleration = 6400;
 	AirStrafeSpeedGainMultiplier = 1.64;
 	AirStrafeRotationRate = 3;
+	BhopRotationRate = FRotator(0.0, 690, 0.0);
 
 	// Strafe Swaying
 	StrafeSwayDuration = 0.2;
@@ -139,7 +140,7 @@ UAdvancedMovementComponent::UAdvancedMovementComponent()
 	Mass = 100;
 	DefaultLandMovementMode = EMovementMode::MOVE_Walking;
 	DefaultWaterMovementMode = EMovementMode::MOVE_Swimming;
-	RotationRate = FRotator(0.0, 690.0, 0.0);
+	RotationRate = BhopRotationRate;
 	
 	// Character Movement: Walking
 	MaxStepHeight = 45;
@@ -1252,23 +1253,11 @@ void UAdvancedMovementComponent::HandleFallingFunctionality(float deltaTime, flo
 	
 	// Apply gravity
 	Velocity = NewFallVelocity(Velocity, Gravity, GravityTime);
-	FVector SavedMovementVelocity = Velocity;
 	// UE_LOG(Movement, Log, TEXT("dt=(%.6f) OldLocation=(%s) OldVelocity=(%s) OldVelocityWithRootMotion=(%s) NewVelocity=(%s)"), timeTick, *(UpdatedComponent->GetComponentLocation()).ToString(), *OldVelocity.ToString(), *OldVelocityWithRootMotion.ToString(), *Velocity.ToString());
 
 	// Root motion and friction
 	ApplyRootMotionToVelocity(timeTick);
 	DecayFormerBaseVelocity(timeTick);
-
-	// I don't know how they handle root motion, and right now I just want to retrieve the current velocity and apply it to the movement. Refactor if there's anything complex that needs to be handled here
-	const ACharacterBase* PlayerCharacter = Cast<ACharacterBase>(CharacterOwner);
-	if (PlayerCharacter)
-	{
-		const UAbilitySystem* AbilitySystem = PlayerCharacter->GetAbilitySystem<UAbilitySystem>();
-		if (AbilitySystem && AbilitySystem->HasMatchingGameplayTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking"))))
-		{
-		}
-	}
-	
 	
 	// See if we need to sub-step to exactly reach the apex. This is important for avoiding "cutting off the top" of the trajectory as framerate varies.
 	if (/* CharacterMovementCVars::ForceJumpPeakSubstep && */ OldVelocityWithRootMotion.Z > 0.f && Velocity.Z <= 0.f && NumJumpApexAttempts < MaxJumpApexAttemptsPerSimulation)
