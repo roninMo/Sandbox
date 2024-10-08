@@ -30,8 +30,8 @@ void UCombatAbility::OnAvatarSet(const FGameplayAbilityActorInfo* ActorInfo, con
 	ACharacterBase* Character = Cast<ACharacterBase>(ActorInfo->AvatarActor.Get());
 	if (!Character)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the character while retrieving the combat component!!",
-			UEnum::GetValueAsString(ActorInfo->OwnerActor.Get()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(ActorInfo->OwnerActor.Get()));
+		// UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the character while retrieving the combat component!!",
+		// 	UEnum::GetValueAsString(ActorInfo->OwnerActor.Get()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(ActorInfo->OwnerActor.Get()));
 		return;
 	}
 	
@@ -39,7 +39,7 @@ void UCombatAbility::OnAvatarSet(const FGameplayAbilityActorInfo* ActorInfo, con
 	if (!CombatComponent)
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component during {2}'s initialization while binding to unequipped events!",
-			UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character), *GetName());
+			UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character));
 		return;
 	}
 
@@ -189,8 +189,8 @@ void UCombatAbility::SetComboIndex()
 		CombatComponent->SetComboIndex(ComboIndex + 1);
 	}
 	
-	UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Adjusted combo index from {3} to {4}",
-		UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), ComboIndex, CombatComponent->GetComboIndex());
+	// UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Adjusted combo index from {3} to {4}",
+	// 	UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), ComboIndex, CombatComponent->GetComboIndex());
 }
 
 

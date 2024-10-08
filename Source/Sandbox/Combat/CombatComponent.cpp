@@ -110,10 +110,10 @@ AArmament* UCombatComponent::CreateArmament(const EEquipSlot EquipSlot)
 	
 	// Retrieve the armament information
 	F_Item ArmamentItemData = GetArmamentInventoryInformation(EquipSlot);
-	if (!ArmamentItemData.ActualClass)
+	if (!ArmamentItemData.ActualClass || !ArmamentItemData.ItemName.IsValid())
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve valid armament class while creating the armament!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve valid armament class while creating the armament! Item: {3} ->  {4}",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), ArmamentItemData.ItemName, *GetNameSafe(ArmamentItemData.ActualClass));
 		return nullptr;
 	}
 
@@ -520,6 +520,11 @@ F_Item UCombatComponent::GetArmamentInventoryInformation(const EEquipSlot Slot)
 
 F_ArmamentInformation UCombatComponent::GetArmamentInformationFromDatabase(const FName ArmamentId)
 {
+	if (ArmamentId.IsNone())
+	{
+		return F_ArmamentInformation();
+	}
+	
 	if (ArmamentInformationTable)
 	{
 		const FString RowContext(TEXT("Armament Information Context"));

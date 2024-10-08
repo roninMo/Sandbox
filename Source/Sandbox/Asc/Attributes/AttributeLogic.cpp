@@ -27,18 +27,6 @@ void UAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallback
 }
 
 
-void UAttributeLogic::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
-{
-	Super::PreAttributeChange(Attribute, NewValue);
-}
-
-
-void UAttributeLogic::PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue)
-{
-	Super::PostAttributeChange(Attribute, OldValue, NewValue);
-}
-
-
 void UAttributeLogic::GetExecutionData(const FGameplayEffectModCallbackData& Data, FGAttributeSetExecutionData& OutExecutionData)
 {
 	OutExecutionData.Context = Data.EffectSpec.GetContext();

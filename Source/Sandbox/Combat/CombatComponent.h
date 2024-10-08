@@ -98,6 +98,8 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item
 */
 
 
+
+
 /**
  * Combat component for characters and enemies in the game
 
@@ -147,7 +149,6 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item
 
  
 */
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SANDBOX_API UCombatComponent : public UActorComponent
 {
