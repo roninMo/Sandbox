@@ -59,7 +59,10 @@ protected: // TODO: Either adjust the ability task limit, or create additional t
 	/** The tag to notify the begin of attack frames for a specific animation */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AttackFramesBeginTag;
 
+	/** The stamina cost's gameplay effect tag */
+	UPROPERTY(Transient, BlueprintReadWrite) FGameplayTag StaminaCostEffectTag;
 
+	
 	/**** Combat logic ****/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUseCrouchingAttacks = true;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUseRunningAttacks = true;

@@ -14,6 +14,7 @@
 #include "Sandbox/Asc/Information/SandboxTags.h"
 #include "Sandbox/Data/Enums/ArmamentTypes.h"
 #include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 #include "Sandbox/Combat/CombatComponent.h"
@@ -36,6 +37,7 @@ UMeleeAttack::UMeleeAttack()
 	AttackFramesTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames);
 	AttackFramesEndTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_End);
 	AttackFramesBeginTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_Begin);
+	StaminaCostEffectTag = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Drain_Stamina);
 }
 
 
@@ -100,9 +102,46 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 		return;
 	}
 
-	
 	// Add the combo information and attack calculations
 	InitCombatInformation();
+
+	// If we don't have any stamina don't attack
+	UAbilitySystemComponent* AbilitySystem = ActorInfo->AbilitySystemComponent.Get();
+	const UMMOAttributeSet* Attributes = Cast<UMMOAttributeSet>(AbilitySystem->GetAttributeSet(UMMOAttributeSet::StaticClass()));
+	if (Attributes && Attributes->GetStamina() == 0)
+	{
+		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
+		return;
+	}
+
+	// Create a gameplay effect for the stamina cost of the current attack
+	FName StaminaCostEffect = FName(UEnum::GetValueAsString(AttackPattern).Append("_StaminaCost"));
+	UGameplayEffect* StaminaCost = NewObject<UGameplayEffect>(ActorInfo->OwnerActor.Get(), StaminaCostEffect);
+	if (StaminaCost)
+	{
+		StaminaCost->DurationPolicy = EGameplayEffectDurationType::Instant;
+		
+		FGameplayModifierInfo StaminaDrain = FGameplayModifierInfo();
+		StaminaDrain.Attribute = UMMOAttributeSet::GetStaminaAttribute();
+		StaminaDrain.ModifierOp = EGameplayModOp::Additive;
+		StaminaDrain.ModifierMagnitude = FGameplayEffectModifierMagnitude(FScalableFloat(-CurrentAttack.StaminaCost));
+		StaminaCost->Modifiers.Add(StaminaDrain);
+		
+		// UAbilitySystemComponent* const AbilitySystemComponent = ActorInfo->AbilitySystemComponent.Get();
+		// check(AbilitySystemComponent != nullptr);
+		// if (!AbilitySystemComponent->CanApplyAttributeModifiers(StaminaCost, GetAbilityLevel(Handle, ActorInfo), MakeEffectContext(Handle, ActorInfo)))
+		// {
+		// 	EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
+		// 	return;
+		// }
+
+		
+		FGameplayEffectSpec* StaminaCostSpec = new FGameplayEffectSpec(StaminaCost, MakeEffectContext(Handle, ActorInfo), 1);
+		FGameplayEffectSpecHandle StaminaCostHandle = FGameplayEffectSpecHandle(StaminaCostSpec);
+		ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, StaminaCostHandle);
+	}
+
+	
 	
 	// Attack State ->  (Allow movement, begin overlap trace logic, etc.)
 	const FGameplayTagQuery AttackFramesQuery = FGameplayTagQuery::BuildQuery(FGameplayTagQueryExpression().AllTagsMatch().AddTag(AttackFramesTag));

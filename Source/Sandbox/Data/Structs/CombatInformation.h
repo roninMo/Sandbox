@@ -68,13 +68,13 @@ struct F_ComboAttack
 	F_ComboAttack() = default;
 	
 	/** The motion value of the current attack  */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) float MotionValue = 1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float MotionValue = 100;
 
 	/** The motion value for poise of the current attack */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) float PoiseMotionValue = 1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float PoiseMotionValue = 100;
 
 	/** The motion value for statuses of the current attack  */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) float StatusMotionValue = 1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float StatusMotionValue = 100;
 
 	/** The stamina cost of the attack */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) float StaminaCost;
@@ -99,7 +99,7 @@ struct F_ComboAttacks
 	TSubclassOf<UGameplayEffect> DamageEffectClass;
 	
 	/** The combos of a specific attack */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(TitleProperty="MotionValues: ({MotionValue}/{PoiseMotionValue/{StatusMotionValue}) -> StaminaCost: ({StaminaCost})"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(TitleProperty="MotionValues: ({MotionValue}/{PoiseMotionValue}/{StatusMotionValue}) -> StaminaCost: ({StaminaCost})"))
 	TArray<F_ComboAttack> ComboAttacks;
 	
 };

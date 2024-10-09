@@ -9,7 +9,16 @@
 
 bool UMMOAttributeLogic::PreGameplayEffectExecute(FGameplayEffectModCallbackData& Data)
 {
-	return Super::PreGameplayEffectExecute(Data);
+	/**
+	 *  This should apply 'gamewide' rules. Such as clamping Health to MaxHealth or granting +3 health for every point of strength, etc
+	 *	PreAttributeModify can return false to 'throw out' this modification.
+	 */
+	if (!Super::PreGameplayEffectExecute(Data))
+	{
+		return false;
+	}
+
+	return true;
 }
 
 
@@ -18,7 +27,7 @@ void UMMOAttributeLogic::PreAttributeChange(const FGameplayAttribute& Attribute,
 	// Any clamping that happens here does not permanently change the modifier on the ASC. It only changes the value returned from querying the modifier.
 	// This means anything that recalculates the CurrentValue from all of the modifiers like GameplayEffectExecutionCalculations and ModifierMagnitudeCalculations need to implement clamping again.
 	Super::PreAttributeChange(Attribute, NewValue);
-	AttributeClamping(Attribute, NewValue, false);
+	AttributeClamping(Attribute, NewValue, false); // TODO: add attribute clamping for both instant effect and duration, and find out where to handle it
 }
 
 
@@ -41,6 +50,10 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 	GetExecutionData(Data, Props);
 	AttributeClamping(Data.EvaluatedData.Attribute, Data.EvaluatedData.Magnitude);
 	
+	if (Data.EvaluatedData.Attribute == GetStaminaAttribute())
+	{
+		UE_LOGFMT(LogTemp, Log, "{0}::{1}() Stamina attribute adjustment: {2}!", *UEnum::GetValueAsString(Props.SourceActor->GetLocalRole()), *FString(__FUNCTION__), GetStamina());
+	}
 	
 	/**
 
