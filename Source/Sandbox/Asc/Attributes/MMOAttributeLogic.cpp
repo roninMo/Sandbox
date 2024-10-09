@@ -56,133 +56,90 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 	}
 
 
-	
-	const TArray<FGameplayEffectModifiedAttribute>& DamageAttributes = Data.EffectSpec.ModifiedAttributes;
-	
-
-	
-	/**
-
-		Status calculations
-			- status buildup
-				- Status effect (Take damage / slow / poison)
-				- Hit reactionz
-	*/
-	if (Data.EvaluatedData.Attribute == GetCurseAttribute() ||
-		Data.EvaluatedData.Attribute == GetBleedAttribute() ||
-		Data.EvaluatedData.Attribute == GetFrostbiteAttribute() ||
-		Data.EvaluatedData.Attribute == GetPoisonAttribute() ||
-		Data.EvaluatedData.Attribute == GetMadnessAttribute() ||
-		Data.EvaluatedData.Attribute == GetSleepAttribute())
+	// Combat calculations
+	if (Data.EvaluatedData.Attribute == GetDamageCalculationAttribute())
 	{
-
-		if (Data.EvaluatedData.Attribute == GetCurseAttribute())
-		{
-			float Buildup = GetCurseBuildup() + Data.EvaluatedData.Magnitude;
-			SetCurseBuildup(FMath::Clamp(GetCurseBuildup(), 0, Buildup));
-		}
-
-		if (Data.EvaluatedData.Attribute == GetBleedAttribute())
-		{
-			float Buildup = GetBleedBuildup() + Data.EvaluatedData.Magnitude;
-			SetBleedBuildup(FMath::Clamp(GetBleedBuildup(), 0, Buildup));
-		}
-
-		if (Data.EvaluatedData.Attribute == GetFrostbiteAttribute())
-		{
-			float Buildup = GetFrostbiteBuildup() + Data.EvaluatedData.Magnitude;
-			SetFrostbiteBuildup(FMath::Clamp(GetFrostbiteBuildup(), 0, Buildup));
-		}
+		float MagicDamageTaken = 0.0;
+		float DamageTaken = 0.0;
 		
-		if (Data.EvaluatedData.Attribute == GetPoisonAttribute())
+		// Retrieve the damage calculations
+		for (auto &[Attribute, Value] : Data.EffectSpec.ModifiedAttributes)
 		{
-			float Buildup = GetPoisonBuildup() + Data.EvaluatedData.Magnitude;
-			SetPoisonBuildup(FMath::Clamp(GetPoisonBuildup(), 0, Buildup));
+			/**
+				Status calculations
+					- status buildup
+					- Status effect (Take damage / slow / poison)
+			*/
+			if (Attribute == GetCurseAttribute()) SetCurseBuildup(FMath::Clamp(GetCurseBuildup() + Value, 0, GetMaxCurseBuildup()));
+			if (Attribute == GetBleedAttribute()) SetBleedBuildup(FMath::Clamp(GetBleedBuildup() + Value, 0, GetMaxBleedBuildup()));
+			if (Attribute == GetFrostbiteAttribute()) SetFrostbiteBuildup(FMath::Clamp(GetFrostbiteBuildup() + Value, 0, GetMaxFrostbiteBuildup()));
+			if (Attribute == GetPoisonAttribute()) SetPoisonBuildup(FMath::Clamp(GetPoisonBuildup() + Value, 0, GetMaxPoisonBuildup()));
+			if (Attribute == GetPoisonAttribute()) SetMadnessBuildup(FMath::Clamp(GetMadnessBuildup() + Value, 0, GetMaxMadnessBuildup()));
+			if (Attribute == GetPoisonAttribute()) SetSleepBuildup(FMath::Clamp(GetSleepBuildup() + Value, 0, GetMaxSleepBuildup()));
+
+			
+			/**
+				Damage calculations
+					- Take damage
+					- Hit reaction based on the attack
+					- Handle taking damage / dying
+			*/
+			if (Attribute == GetDamage_StandardAttribute()) DamageTaken += GetDamage_Standard();
+			if (Attribute == GetDamage_SlashAttribute()) DamageTaken += GetDamage_Slash();
+			if (Attribute == GetDamage_PierceAttribute()) DamageTaken += GetDamage_Pierce();
+			if (Attribute == GetDamage_StrikeAttribute()) DamageTaken += GetDamage_Strike();
+
+			if (Attribute == GetDamage_MagicAttribute()) MagicDamageTaken += GetDamage_Magic();
+			if (Attribute == GetDamage_IceAttribute()) MagicDamageTaken += GetDamage_Ice();
+			if (Attribute == GetDamage_FireAttribute()) MagicDamageTaken += GetDamage_Fire();
+			if (Attribute == GetDamage_HolyAttribute()) MagicDamageTaken += GetDamage_Holy();
+			if (Attribute == GetDamage_LightningAttribute()) MagicDamageTaken += GetDamage_Lightning();
+
+			
+			/**
+				Poise damage
+					- Damage poise
+					- Handle poise break / effect for regenerating poise
+					- Handle hit reactions
+			*/
+
+			
+			/**
+				Any other effects to attributes
+					- stamina drain, etc.
+			*/
+
+			
 		}
+
 		
-		if (Data.EvaluatedData.Attribute == GetPoisonAttribute())
-		{
-			float Buildup = GetMadnessBuildup() + Data.EvaluatedData.Magnitude;
-			SetMadnessBuildup(FMath::Clamp(GetMadnessBuildup(), 0, Buildup));
-		}
+		// Damage multipliers for weapon stats and player equipment, and any other status effects should be handled here
+
+
+
 		
-		if (Data.EvaluatedData.Attribute == GetPoisonAttribute())
+		// Take damage
+		float CurrentHealth = GetHealth() - MagicDamageTaken - DamageTaken;
+		if (CurrentHealth <= 0.0)
 		{
-			float Buildup = GetSleepBuildup() + Data.EvaluatedData.Magnitude;
-			SetSleepBuildup(FMath::Clamp(GetSleepBuildup(), 0, Buildup));
+			SetHealth(0);
+
+			// Handle death
 		}
-	}
+		else
+		{
+			SetHealth(CurrentHealth);
 
-	
-	/**
-		Damage calculations
-			- Take damage
-			- Hit reaction based on the attack
-			- Handle taking damage / dying
-	*/
-	float MagicDamageTaken = 0.0;
-	float DamageTaken = 0.0;
-	if (Data.EvaluatedData.Attribute == GetDamage_StandardAttribute() ||
-		Data.EvaluatedData.Attribute == GetDamage_SlashAttribute() ||
-		Data.EvaluatedData.Attribute == GetDamage_PierceAttribute() ||
-		Data.EvaluatedData.Attribute == GetDamage_StrikeAttribute())
-	{
-		if (Data.EvaluatedData.Attribute == GetDamage_StandardAttribute()) DamageTaken += GetDamage_Standard();
-		if (Data.EvaluatedData.Attribute == GetDamage_SlashAttribute()) DamageTaken += GetDamage_Slash();
-		if (Data.EvaluatedData.Attribute == GetDamage_PierceAttribute()) DamageTaken += GetDamage_Pierce();
-		if (Data.EvaluatedData.Attribute == GetDamage_StrikeAttribute()) DamageTaken += GetDamage_Strike();
-	}
+			// Handle any other take damage logic
+		}
+			
+		
+		// Player reactions / other handling
 
-	if (Data.EvaluatedData.Attribute == GetDamage_MagicAttribute() ||
-		Data.EvaluatedData.Attribute == GetDamage_IceAttribute() ||
-		Data.EvaluatedData.Attribute == GetDamage_FireAttribute() ||
-		Data.EvaluatedData.Attribute == GetDamage_HolyAttribute() ||
-		Data.EvaluatedData.Attribute == GetDamage_LightningAttribute())
-	{
-		if (Data.EvaluatedData.Attribute == GetDamage_MagicAttribute()) MagicDamageTaken += GetDamage_Magic();
-		if (Data.EvaluatedData.Attribute == GetDamage_IceAttribute()) MagicDamageTaken += GetDamage_Ice();
-		if (Data.EvaluatedData.Attribute == GetDamage_FireAttribute()) MagicDamageTaken += GetDamage_Fire();
-		if (Data.EvaluatedData.Attribute == GetDamage_HolyAttribute()) MagicDamageTaken += GetDamage_Holy();
-		if (Data.EvaluatedData.Attribute == GetDamage_LightningAttribute()) MagicDamageTaken += GetDamage_Lightning();
-	}
-
-	// Damage multipliers for weapon stats and player equipment, and any other status effects should be handled here
-	float CurrentHealth = GetHealth() - MagicDamageTaken - DamageTaken;
-
-	if (CurrentHealth <= 0.0)
-	{
-		SetHealth(0);
-
-		// Handle death
-	}
-	else
-	{
-		SetHealth(CurrentHealth);
-
-		// Handle any other take damage logic
-	}
-
-
-	
-	/**
-		Poise damage
-			- Damage poise
-			- Handle poise break / effect for regenerating poise
-			- Handle hit reactions
-	*/
-
-	
-	/**
-		Any other effects to attributes
-			- stamina drain, etc.
-	*/
-
-	
-
-	if (Data.EvaluatedData.Attribute == GetDamage_StandardAttribute())
-	{
+		
 		UE_LOGFMT(LogTemp, Log, "{0}::{1}() {2} dealt {3} damage to {4}!", *UEnum::GetValueAsString(Props.SourceActor->GetLocalRole()), *FString(__FUNCTION__),
-			*GetNameSafe(Props.SourceActor), GetDamage_Standard(), *GetNameSafe(Props.TargetActor));
+			*GetNameSafe(Props.SourceActor), MagicDamageTaken + DamageTaken, *GetNameSafe(Props.TargetActor));
+		
 	}
 	
 
