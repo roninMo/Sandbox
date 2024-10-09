@@ -127,6 +127,7 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 	InitCombatInformation();
 
 	// Create a gameplay effect for the stamina cost of the current attack
+	// This isn't something that's replicated so you'll need a duration once the player's stamina has been drained to prevent them from spamming and causing lag from ability activation discrepancies
 	FName StaminaCostEffect = FName(UEnum::GetValueAsString(AttackPattern).Append("_StaminaCost"));
 	UGameplayEffect* StaminaCost = NewObject<UGameplayEffect>(ActorInfo->OwnerActor.Get(), StaminaCostEffect);
 	if (StaminaCost)
@@ -151,11 +152,7 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 		ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, StaminaCostHandle);
 	}
 
-
 	
-
-	// Once we've already handled combat calculations
-	SetComboIndex();
 
 	
 	// Attack montage

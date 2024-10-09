@@ -168,7 +168,7 @@ protected:
 	UPROPERTY(Transient, BlueprintReadWrite) TArray<FGameplayAbilitySpecHandle> CombatAbilityHandles;
 	
 	/** The current combo index the player is on */
-	UPROPERTY(BlueprintReadWrite, Replicated, Category = "Combat Component|Armaments") int32 ComboIndex;
+	UPROPERTY(BlueprintReadWrite, Replicated, Category = "Combat Component|Armaments") int32 ComboIndex = 0;
 
 	// TODO: Should these be replicated, or should we just use the inventory events to handle this?
 	/** The armament information for the armament in the left hand's first equip slot */

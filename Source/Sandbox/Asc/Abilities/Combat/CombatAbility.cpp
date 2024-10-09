@@ -137,6 +137,7 @@ void UCombatAbility::InitCombatInformation()
 	}
 	
 	ComboIndex = CombatComponent ? CombatComponent->GetComboIndex() : 0;
+	SetComboIndex();
 	SetComboAttack(); // Current attack and combo index
 	SetAttackMontage(Armament); // Current montage
 	SetMontageStartSection(); // montage start section (customization for different types of attacks
