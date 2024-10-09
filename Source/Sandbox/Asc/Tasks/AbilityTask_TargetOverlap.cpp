@@ -7,11 +7,12 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Combat/Weapons/Armament.h"
 
-UAbilityTask_TargetOverlap* UAbilityTask_TargetOverlap::CreateOverlapDataTask(UGameplayAbility* OwningAbility, TArray<UPrimitiveComponent*> CollisionComponents, bool bDebug)
+UAbilityTask_TargetOverlap* UAbilityTask_TargetOverlap::CreateOverlapDataTask(UGameplayAbility* OwningAbility, const TArray<AArmament*> Armaments, const bool bDebug)
 {
 	UAbilityTask_TargetOverlap* Task = NewAbilityTask<UAbilityTask_TargetOverlap>(OwningAbility);
-	Task->OverlapComponents = CollisionComponents;
+	Task->Armaments = Armaments;
 	Task->bDebugTask = bDebug;
 	return Task;
 }
@@ -27,11 +28,11 @@ void UAbilityTask_TargetOverlap::Activate()
 
 	const AActor* Character = Ability && Ability->GetCurrentActorInfo() ? Ability->GetCurrentActorInfo()->AvatarActor.Get() : nullptr;
 	UAbilitySystem* ASC = Cast<UAbilitySystem>(AbilitySystemComponent.Get());
-	if (!Character || !ASC || OverlapComponents.IsEmpty())
+	if (!Character || !ASC || Armaments.IsEmpty())
 	{
-		if (!Character) UE_LOGFMT(AbilityLog, Error, "{0}() The character wasn't valid on the ability while retrieving input information! {1}", *FString(__FUNCTION__), *GetName());
 		if (!ASC) UE_LOGFMT(AbilityLog, Error, "{0}() The ability system wasn't valid on the ability while retrieving input information! {1}", *FString(__FUNCTION__), *GetName());
-		if (OverlapComponents.IsEmpty()) UE_LOGFMT(AbilityLog, Error, "{0}() The hitbox wasn't valid on the ability while retrieving input information! {1}", *FString(__FUNCTION__), *GetName());
+		if (Armaments.IsEmpty()) UE_LOGFMT(AbilityLog, Error, "{0}() The armament wasn't valid on the ability while retrieving input information! {1}", *FString(__FUNCTION__), *GetName());
+		if (!Character) UE_LOGFMT(AbilityLog, Error, "{0}() The character wasn't valid on the ability while retrieving input information! {1}", *FString(__FUNCTION__), *GetName());
 		EndTask();
 		return;
 	}
@@ -44,6 +45,26 @@ void UAbilityTask_TargetOverlap::Activate()
 			IsPredictingClient() ? FString("true") : FString("False"),
 			IsForRemoteClient() ? FString("true") : FString("False")
 		);
+	}
+
+	// Retrieve the armament hitboxes
+	TMap<AArmament*, TArray<UPrimitiveComponent*>> ArmamentHitboxes;
+	for (AArmament* Armament : Armaments)
+	{
+		if (!Armament) continue;
+
+		TArray<UPrimitiveComponent*> Hitboxes = Armament->GetArmamentHitboxes();
+		if (Hitboxes.IsEmpty()) continue;
+
+		ArmamentHitboxes.Add(Armament, Hitboxes);
+	}
+
+	if (ArmamentHitboxes.IsEmpty())
+	{
+		UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} none of the armaments had any hitboxes! {3}",
+			*UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character), *GetNameSafe(Ability));
+		EndTask();
+		return;
 	}
 	
 	// Have the client's attack be the target data and what's determined on the client and the server
@@ -64,11 +85,14 @@ void UAbilityTask_TargetOverlap::Activate()
 	}
 	
 	// TODO: Client side prediction
-	for (UPrimitiveComponent* OverlapComponent : OverlapComponents)
+	for (auto &[Armament, Hitboxes] : ArmamentHitboxes)
 	{
-		if (!OverlapComponent) continue;
-	
-		OverlapComponent->OnComponentBeginOverlap.AddDynamic(this, &UAbilityTask_TargetOverlap::OnTraceOverlap);
+		for (UPrimitiveComponent* OverlapComponent : Hitboxes)
+		{
+			if (!OverlapComponent) continue;
+		
+			OverlapComponent->OnComponentBeginOverlap.AddDynamic(this, &UAbilityTask_TargetOverlap::OnTraceOverlap);
+		}
 	}
 }
 
@@ -109,35 +133,42 @@ void UAbilityTask_TargetOverlap::OnTraceOverlap(UPrimitiveComponent* OverlappedC
 				FString(__FUNCTION__)
 			);
 		}
-		
 
-		// This is dummy hit result data, just use the armament location
-		// TODO: Find out how to send valid information across the server
-		FGameplayAbilityTargetDataHandle TargetData = FGameplayAbilityTargetDataHandle();
-		FGameplayAbilityTargetData_SingleTargetHit* Data = new FGameplayAbilityTargetData_SingleTargetHit();
-		Data->HitResult = SweepResult;
-
-		TArray<TWeakObjectPtr<AActor>> Targets;
-		Targets.Add(OtherActor);
-		Data->SetActors(Targets);
-		TargetData.Add(Data);
-		
-		// Send the replicated data to the server'
-		if (AbilitySystemComponent.Get())
-		{
-			AbilitySystemComponent->ServerSetReplicatedTargetData(
-				GetAbilitySpecHandle(),
-				GetActivationPredictionKey(),
-				TargetData,
-				FGameplayTag(),
-				AbilitySystemComponent->ScopedPredictionKey
-			);
-		}
 
 		// UE_LOGFMT(AbilityLog, Log, "{0} overlapped with {1}", *GetNameSafe(Character), *GetNameSafe(Target));
 		if (ShouldBroadcastAbilityTaskDelegates())
 		{
-			OnValidOverlap.Broadcast(TargetData, TargetAsc);
+			for (AArmament* Armament : Armaments)
+			{
+				// Search for the armament we attacked with using it's hitboxes
+				if (Armament && Armament->GetArmamentHitboxes().Contains(OverlappedComponent))
+				{
+					// TODO: Find out how to send valid information across the server
+					FGameplayAbilityTargetDataHandle TargetData = FGameplayAbilityTargetDataHandle();
+					FGameplayAbilityTargetData_SingleTargetHit* Data = new FGameplayAbilityTargetData_SingleTargetHit();
+					Data->HitResult = SweepResult;
+
+					TArray<TWeakObjectPtr<AActor>> TargetInformation;
+					TargetInformation.Add(OtherActor); // Add the target character
+					TargetInformation.Add(Armament); // Add the armament that we attacked with
+					Data->SetActors(TargetInformation);
+					TargetData.Add(Data);
+					
+					// Send the replicated data to the server
+					if (AbilitySystemComponent.Get())
+					{
+						AbilitySystemComponent->ServerSetReplicatedTargetData(
+							GetAbilitySpecHandle(),
+							GetActivationPredictionKey(),
+							TargetData,
+							FGameplayTag(),
+							AbilitySystemComponent->ScopedPredictionKey
+						);
+					}
+					
+					OnValidOverlap.Broadcast(TargetData, Armament, TargetAsc);
+				}
+			}
 		}
 		else if (bDebugTask) UE_LOGFMT(AbilityLog, Warning, "{0} did not broadcast overlap event!: {1} {2}()", *GetNameSafe(Character), *GetName(), *FString(__FUNCTION__));
 	}
@@ -146,38 +177,80 @@ void UAbilityTask_TargetOverlap::OnTraceOverlap(UPrimitiveComponent* OverlappedC
 
 void UAbilityTask_TargetOverlap::OnTargetDataReplicatedCallback(const FGameplayAbilityTargetDataHandle& DataHandle, FGameplayTag ActivationTag)
 {
+	ACharacterBase* Character = AbilitySystemComponent.Get() ? Cast<ACharacterBase>(AbilitySystemComponent->GetAvatarActor()) : nullptr;
+	if (!Character)
+	{
+		UE_LOGFMT(AbilityLog, Log, "{1}() {2}'s Replicated weapon overlap target data was sent when the character information wasn't valid!",
+			*FString(__FUNCTION__), *GetNameSafe(AbilitySystemComponent.Get()));
+		return;
+	}
+	
+	
+	// Use up the target data
+	AbilitySystemComponent->ConsumeClientReplicatedTargetData(GetAbilitySpecHandle(), GetActivationPredictionKey());
+
+	// Retrieve the target information
 	FHitResult HitResult;
-	TArray<TWeakObjectPtr<AActor>> TargetActors;
+	TArray<TWeakObjectPtr<AActor>> TargetInformation;
 	for (TSharedPtr<FGameplayAbilityTargetData> Data : DataHandle.Data)
 	{
 		if (!Data.IsValid()) continue;
-		TargetActors = Data->GetActors();
+		TargetInformation = Data->GetActors();
 		HitResult = *Data->GetHitResult();
 	}
 
-	if (TargetActors.IsEmpty()) return;
+	if (TargetInformation.IsEmpty())
+	{
+		UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2}'s Replicated weapon overlap target data was sent without any information!",
+			*UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character));
+		return;
+	}
 	
-	AActor* TargetActor = TargetActors[0].Get();
-	if (!TargetActor) return;
+	// Retrieve the character and the weapon
+	AArmament* OverlappedWeapon = nullptr;
+	ACharacterBase* TargetCharacter = nullptr;
+	for (TWeakObjectPtr<AActor> Actor : TargetInformation)
+	{
+		if (!Actor.Get()) continue;
 
-	UAbilitySystem* TargetAsc = Cast<UAbilitySystem>(AbilitySystemComponent.Get());
-	if (!TargetAsc) return;
-	
-	AbilitySystemComponent->ConsumeClientReplicatedTargetData(GetAbilitySpecHandle(), GetActivationPredictionKey());
+		// Check if this is the target we attacked
+		if (Cast<ACharacterBase>(Actor.Get())) TargetCharacter = Cast<ACharacterBase>(Actor.Get());
+
+		// Check if this is the weapon we attacked with
+		if (Cast<AArmament>(Actor.Get())) OverlappedWeapon = Cast<AArmament>(Actor.Get());
+		
+	}
+
+	UAbilitySystem* TargetAsc = TargetCharacter->GetAbilitySystem<UAbilitySystem>();
+	if (!TargetAsc)
+	{
+		// AI character replicated information on clients (shouldn't happen)
+		UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2}'s weapon overlap attacked a character without an ability system!",
+			*UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character));
+		// return;
+	}
+
 	if (ShouldBroadcastAbilityTaskDelegates())
 	{
-		OnValidOverlap.Broadcast(DataHandle, TargetAsc);
+		// AbilitySystemComponent->ConsumeClientReplicatedTargetData(GetAbilitySpecHandle(), GetActivationPredictionKey());
+		OnValidOverlap.Broadcast(DataHandle, OverlappedWeapon, TargetAsc);
 	}
 }
 
 
 void UAbilityTask_TargetOverlap::OnDestroy(bool AbilityEnded)
 {
-	for (UPrimitiveComponent* OverlapComponent : OverlapComponents)
+	for (AArmament* Armament : Armaments)
 	{
-		if (!OverlapComponent) continue;
-		
-		OverlapComponent->OnComponentBeginOverlap.RemoveDynamic(this, &UAbilityTask_TargetOverlap::OnTraceOverlap);
+		if (!Armament) continue;
+
+		TArray<UPrimitiveComponent*> Hitboxes = Armament->GetArmamentHitboxes();
+		for (UPrimitiveComponent* OverlapComponent : Hitboxes)
+		{
+			if (!OverlapComponent) continue;
+			
+			OverlapComponent->OnComponentBeginOverlap.RemoveDynamic(this, &UAbilityTask_TargetOverlap::OnTraceOverlap);
+		}
 	}
 	
 	Super::OnDestroy(AbilityEnded);

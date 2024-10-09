@@ -18,6 +18,7 @@
 #include "Sandbox/Characters/Components/AdvancedMovement/AdvancedMovementComponent.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Combat/Weapons/Armament.h"
+#include "Sandbox/Data/Enums/AttackFramesState.h"
 
 
 UMeleeAttack::UMeleeAttack()
@@ -35,7 +36,11 @@ UMeleeAttack::UMeleeAttack()
 	AllowMovementTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AllowMovement);
 	AttackFramesTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames);
 	AttackFramesEndTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_End);
+	LeftHandAttackFramesEndTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_End);
+	RightHandAttackFramesEndTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_End);
 	AttackFramesBeginTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_Begin);
+	LeftHandAttackFramesBeginTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_Begin);
+	RightHandAttackFramesBeginTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_Begin);
 	StaminaCostEffectTag = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Drain_Stamina);
 }
 
@@ -101,8 +106,13 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 		return;
 	}
 
-	// Add the combo information and attack calculations
-	InitCombatInformation();
+	// Retrieve the combat component for overlap logic
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
+	{
+		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
+		return;
+	}
 
 	// If we don't have any stamina don't attack
 	UAbilitySystemComponent* AbilitySystem = ActorInfo->AbilitySystemComponent.Get();
@@ -112,6 +122,9 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		return;
 	}
+	
+	// Add the combo information and attack calculations
+	InitCombatInformation();
 
 	// Create a gameplay effect for the stamina cost of the current attack
 	FName StaminaCostEffect = FName(UEnum::GetValueAsString(AttackPattern).Append("_StaminaCost"));
@@ -119,7 +132,6 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 	if (StaminaCost)
 	{
 		StaminaCost->DurationPolicy = EGameplayEffectDurationType::Instant;
-		
 		FGameplayModifierInfo StaminaDrain = FGameplayModifierInfo();
 		StaminaDrain.Attribute = UMMOAttributeSet::GetStaminaAttribute();
 		StaminaDrain.ModifierOp = EGameplayModOp::Additive;
@@ -133,43 +145,36 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 		// 	EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		// 	return;
 		// }
-
 		
 		FGameplayEffectSpec* StaminaCostSpec = new FGameplayEffectSpec(StaminaCost, MakeEffectContext(Handle, ActorInfo), 1);
 		FGameplayEffectSpecHandle StaminaCostHandle = FGameplayEffectSpecHandle(StaminaCostSpec);
 		ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, StaminaCostHandle);
 	}
 
+
+	
+
+	// Once we've already handled combat calculations
+	SetComboIndex();
 	
 	
 	// Attack State ->  (Allow movement, begin overlap trace logic, etc.)
-	const FGameplayTagQuery AttackFramesQuery = FGameplayTagQuery::BuildQuery(FGameplayTagQueryExpression().AllTagsMatch().AddTag(AttackFramesTag));
-	// AttackFramesHandle = UAbilityTask_WaitGameplayTagQuery::WaitGameplayTagQuery(
-	// 	this,
-	// 	AttackFramesQuery,
-	// 	nullptr,
-	// 	EWaitGameplayTagQueryTriggerCondition::WhenTrue
-	// );
-	
-	// AttackFramesHandle = UAbilityTask_WaitGameplayTagState::WaitGameplayTagState(this, AttackFramesQuery);
-	// AttackFramesHandle->UpdatedState.AddDynamic(this, &UMeleeAttack::OnAttackFramesStateUpdates);
-	// AttackFramesHandle->ReadyForActivation();
-
-	// AttackFramesBeginHandle = UAbilityTask_WaitGameplayTagAdded::WaitGameplayTagAdd(this, AttackFramesTag);
-	// AttackFramesBeginHandle->Added.AddDynamic(this, &UMeleeAttack::OnBeginAttackFrames);
-	// AttackFramesBeginHandle->ReadyForActivation();
-	//
-	// AttackFramesEndHandle = UAbilityTask_WaitGameplayTagRemoved::WaitGameplayTagRemove(this, AttackFramesTag);
-	// AttackFramesEndHandle->Removed.AddDynamic(this, &UMeleeAttack::OnEndAttackFrames);
-	// AttackFramesEndHandle->ReadyForActivation();
-
 	AttackFramesHandle = UAbilityTask_WaitGameplayEvent::WaitGameplayEvent(this, AttackFramesTag, nullptr, false, false);
 	AttackFramesHandle->EventReceived.AddDynamic(this, &UMeleeAttack::OnAttackFrameEvent);
 	AttackFramesHandle->ReadyForActivation();
-	
+
 	
 	// Overlap Trace ->  Have the server handle the attack logic with client prediction
-	MeleeOverlapHandle = UAbilityTask_TargetOverlap::CreateOverlapDataTask(this, Armament->GetArmamentHitboxes());
+	TArray<AArmament*> TracedWeapons;
+	if (CurrentStance == EArmamentStance::DualWielding || CurrentStance == EArmamentStance::TwoWeapons)
+	{
+		TracedWeapons.Add(CombatComponent->GetArmament(false));
+		TracedWeapons.Add(CombatComponent->GetArmament());
+	}
+	else if (!IsRightHandAbility()) TracedWeapons.Add(CombatComponent->GetArmament(false));
+	else TracedWeapons.Add(CombatComponent->GetArmament());
+	
+	MeleeOverlapHandle = UAbilityTask_TargetOverlap::CreateOverlapDataTask(this, TracedWeapons);
 	MeleeOverlapHandle->OnValidOverlap.AddDynamic(this, &UMeleeAttack::OnOverlappedTarget);
 	// MeleeOverlapHandle->ReadyForActivation(); // During attack frames
 
@@ -198,57 +203,191 @@ void UMeleeAttack::OnInputReleased(float TimeHeld)
 
 void UMeleeAttack::OnAttackFrameEvent(const FGameplayEventData EventData)
 {
-	if (EventData.EventTag == AttackFramesEndTag)
+	/**
+		One hand / Two hand
+			- Attack frames
+				- Begin attack frames
+				- End attack frames
+
+		At the beginning of the attack we're just searching for frames
+		The overlap component mediates attacks without notifying the weapon
+		The weapon checks for traces and sends the data to the server before it gets deleted
+		Once it's deleted, the replicated data is sent to the server regardless of the current combat logic
+		This data is used for combat for the entirety of the attack
+
+
+
+			Dual wield attack
+				- Attack frames
+					- Left hand
+						- Begin attack frames
+						- End attack frames
+					- Right hand
+						- Begin attack frames
+						- End attack frames
+
+		At the beginning of the attack we handle both weapons, and activate when we find attack frames for one of the weapons
+		All the values persist, and we do traces specific to each weapon using only one overlap component (There's a limit to these, and it's okay to be inefficient because this is more fun)
+		The weapon checks for traces, calculates combat logic, and sends it to each armament to handle individual attack calculations specific to the trace frame
+
+		
+	*/
+
+	if (CurrentStance == EArmamentStance::OneHanding || CurrentStance == EArmamentStance::TwoHanding)
 	{
-		OnEndAttackFrames();
+		if (EventData.EventTag.MatchesTag(AttackFramesEndTag))
+		{
+			OnEndAttackFrames(IsRightHandAbility());
+		}
+		else if (EventData.EventTag.MatchesTag(AttackFramesBeginTag))
+		{
+			OnBeginAttackFrames(IsRightHandAbility());
+		}
 	}
-	else if (EventData.EventTag == AttackFramesBeginTag)
+	else
 	{
-		OnBeginAttackFrames();
+		// Two weapons that aren't dual wielding don't normally attack together, however combat is much more intricate than that, and it's easy to prioritize the logic properly
+
+		
+		// End attack frames (war is never over)
+		if (EventData.EventTag.MatchesTag(AttackFramesEndTag))
+		{
+			if (EventData.EventTag.MatchesTag(LeftHandAttackFramesEndTag) && SecondaryAttackState == EAttackFramesState::Enabled)
+			{
+				OnEndAttackFrames(IsRightHandAbility());
+			}
+			if (EventData.EventTag.MatchesTag(RightHandAttackFramesEndTag) && PrimaryAttackState == EAttackFramesState::Enabled)
+			{
+				OnEndAttackFrames(IsRightHandAbility());
+			}
+		}
+		// Begin attack frames (I'm always ready)
+		else if (EventData.EventTag.MatchesTag(AttackFramesBeginTag))
+		{
+			OnBeginAttackFrames(IsRightHandAbility());
+
+			// We're only enabling the frames for one attack, if you have animations with multiple frames you'll have to adjust this logic, specifically for enemies
+			if (EventData.EventTag.MatchesTag(LeftHandAttackFramesBeginTag) && SecondaryAttackState == EAttackFramesState::Disabled)
+			{
+				OnBeginAttackFrames(IsRightHandAbility());
+			}
+			if (EventData.EventTag.MatchesTag(RightHandAttackFramesBeginTag) && PrimaryAttackState == EAttackFramesState::Disabled)
+			{
+				OnBeginAttackFrames(IsRightHandAbility());
+			}
+		}
 	}
 }
 
 
-void UMeleeAttack::OnAttackFramesStateUpdates(bool bQueryStateValid)
+void UMeleeAttack::OnBeginAttackFrames(bool bRightHand)
 {
-	// If the attack frames have begun
-	if (bQueryStateValid)
+	// Initialize the attack frames if it hasn't been activated yet
+	if (PrimaryAttackState == EAttackFramesState::Disabled && SecondaryAttackState == EAttackFramesState::Disabled)
 	{
-		OnBeginAttackFrames();
-
-		// TODO: if there's an attack with multiple attack frame locations, add logic for handling recreating the task
+		if (MeleeOverlapHandle && !MeleeOverlapHandle->IsActive())
+		{
+			MeleeOverlapHandle->ReadyForActivation();
+		}
 	}
 
-	// If the attack frames have ended
-	if (!bQueryStateValid)
+	// Update the attack frames state
+	if (!bRightHand) SecondaryAttackState = EAttackFramesState::Enabled;
+	else PrimaryAttackState = EAttackFramesState::Enabled;
+
+
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
 	{
-		OnEndAttackFrames();
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component to check for already traced enemies the beginning of the attack frames!",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+		return;
+	}
+
+	
+	if (!bRightHand)
+	{
+		CheckAndAttackIfAlreadyOverlappingAnything(CombatComponent->GetArmament(false), SecondaryHitActors);
+	}
+	else
+	{
+		CheckAndAttackIfAlreadyOverlappingAnything(CombatComponent->GetArmament(), PrimaryHitActors);
 	}
 }
 
 
-void UMeleeAttack::OnBeginAttackFrames()
+void UMeleeAttack::OnEndAttackFrames(bool bRightHand)
 {
-	if (MeleeOverlapHandle) MeleeOverlapHandle->ReadyForActivation();
-	CheckAndAttackIfAlreadyOverlappingAnything(AlreadyHitActors);
-}
+	if (!bRightHand) SecondaryAttackState = EAttackFramesState::Finished;
+	else PrimaryAttackState = EAttackFramesState::Finished;
 
-
-void UMeleeAttack::OnEndAttackFrames()
-{
-	if (MeleeOverlapHandle) MeleeOverlapHandle->EndTask();
-}
-
-
-void UMeleeAttack::OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& TargetData, UAbilitySystem* TargetAsc)
-{
-	if (AlreadyHitActors.Contains(TargetAsc->GetAvatarActor())) return;
-
-	if (TargetAsc->GetAvatarActor())
+	// If the attack frames have finished for the weapons just end the overlap task
+	if (CurrentStance == EArmamentStance::DualWielding || CurrentStance == EArmamentStance::TwoWeapons)
 	{
-		AlreadyHitActors.AddUnique(TargetAsc->GetAvatarActor());
-		HandleMeleeAttack(TargetData, TargetAsc);
+		if (MeleeOverlapHandle && PrimaryAttackState == EAttackFramesState::Finished && SecondaryAttackState == EAttackFramesState::Finished)
+		{
+			MeleeOverlapHandle->EndTask();
+		}
 	}
+	else if (MeleeOverlapHandle)
+	{
+		MeleeOverlapHandle->EndTask();
+	}
+	
+}
+
+
+
+
+void UMeleeAttack::OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& TargetData, AArmament* OverlappedArmament, UAbilitySystem* TargetAsc)
+{
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while overlapping a target! Defaulting to one of the armament's hitboxes!",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+	}
+
+
+	const bool bRightHandArmament = CombatComponent && OverlappedArmament == CombatComponent->GetArmament(false) ? false : true;
+	TArray<AActor*>& ArmamentHitActors = !bRightHandArmament ? SecondaryHitActors :PrimaryHitActors;
+	if (CurrentStance == EArmamentStance::DualWielding || CurrentStance == EArmamentStance::TwoWeapons)
+	{
+		// Check if there's attack frames for the current attack
+		const EAttackFramesState& AttackFramesState = bRightHandArmament ? PrimaryAttackState : SecondaryAttackState;
+		if ((!bRightHandArmament && AttackFramesState == EAttackFramesState::Enabled) ||
+			(bRightHandArmament && AttackFramesState == EAttackFramesState::Enabled))
+		{
+			
+			if (ArmamentHitActors.Contains(TargetAsc->GetAvatarActor()))
+			{
+				return;
+			}
+
+			// Handle the attack logic
+			if (TargetAsc->GetAvatarActor())
+			{
+				ArmamentHitActors.AddUnique(TargetAsc->GetAvatarActor());
+				HandleMeleeAttack(TargetData, TargetAsc);
+			}
+		}
+	}
+	else
+	{
+		// Don't attack twice, just continue // TODO: this should be handled on the overlap task to prevent extra replication
+		if (ArmamentHitActors.Contains(TargetAsc->GetAvatarActor()))
+		{
+			return;
+		}
+
+		// Handle the attack logic
+		if (TargetAsc->GetAvatarActor())
+		{
+			ArmamentHitActors.AddUnique(TargetAsc->GetAvatarActor());
+			HandleMeleeAttack(TargetData, TargetAsc);
+		}
+	}
+
 }
 
 
@@ -262,7 +401,6 @@ void UMeleeAttack::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGa
 	if (AttackFramesHandle) AttackFramesHandle->EndTask();
 	if (MeleeOverlapHandle) MeleeOverlapHandle->EndTask();
 
-	SetComboIndex();
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
 }
 
@@ -297,6 +435,8 @@ bool UMeleeAttack::SetComboAndArmamentInformation()
 void UMeleeAttack::InitCombatInformation()
 {
 	// Reset state using handle
+	PrimaryAttackState = EAttackFramesState::Disabled;
+	SecondaryAttackState = EAttackFramesState::Disabled;
 	bCrouchingAttack = false;
 	bRunningAttack = false;
 
@@ -332,6 +472,8 @@ void UMeleeAttack::InitCombatInformation()
 void UMeleeAttack::SetComboAttack()
 {
 	// Standard attack information
+	SecondaryHitActors.Empty();
+	PrimaryHitActors.Empty();
 	if (!Armament || (!bRunningAttack && !bCrouchingAttack))
 	{
 		Super::SetComboAttack();

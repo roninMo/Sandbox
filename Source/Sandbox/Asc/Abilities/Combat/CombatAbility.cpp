@@ -52,7 +52,6 @@ void UCombatAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle, co
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 
 	// Abilities that need to be reset during activation
-	AlreadyHitActors.Empty();
 	bCancelledToEquipArmament = false;
 	bIsFinalComboAttack = false;
 }
@@ -435,11 +434,11 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 }
 
 
-void UCombatAbility::CheckAndAttackIfAlreadyOverlappingAnything(TArray<AActor*>& Actors)
+void UCombatAbility::CheckAndAttackIfAlreadyOverlappingAnything(AArmament* OverlappedArmament, TArray<AActor*>& AlreadyHitActors)
 {
 	// Check if there are any targets that are already overlapping that haven't been attacked during the attack frames yet
 	TArray<AActor*> TargetActors;
-	for (const UPrimitiveComponent* Hitbox : Armament->GetArmamentHitboxes())
+	for (const UPrimitiveComponent* Hitbox : OverlappedArmament->GetArmamentHitboxes())
 	{
 		Hitbox->GetOverlappingActors(TargetActors);
 	}
@@ -450,7 +449,7 @@ void UCombatAbility::CheckAndAttackIfAlreadyOverlappingAnything(TArray<AActor*>&
 		ACharacterBase* TargetCharacter = Cast<ACharacterBase>(TargetActor);
 		if (!TargetCharacter || TargetActor == GetAvatarActorFromActorInfo()) continue;
 			
-		if (!Actors.Contains(TargetCharacter) && TargetCharacter->GetAbilitySystemComponent())
+		if (!AlreadyHitActors.Contains(TargetCharacter) && TargetCharacter->GetAbilitySystemComponent())
 		{
 			FGameplayAbilityTargetDataHandle TargetData = FGameplayAbilityTargetDataHandle();
 			FGameplayAbilityTargetData_SingleTargetHit* Data = new FGameplayAbilityTargetData_SingleTargetHit();
@@ -491,12 +490,6 @@ int32 UCombatAbility::GetNumMontageSections() const
 {
 	if (GetCurrentMontage() == nullptr) return 1;
 	return GetCurrentMontage()->CompositeSections.Num();
-}
-
-
-TArray<AActor*>& UCombatAbility::GetAlreadyHitActors()
-{
-	return AlreadyHitActors;
 }
 
 

@@ -41,7 +41,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") FGameplayTagContainer EventReceivedTags;
 	
 	/** Current attack information */
-	UPROPERTY(Transient, BlueprintReadWrite) TArray<AActor*> AlreadyHitActors;
 	UPROPERTY(Transient, BlueprintReadWrite) int32 ComboCount = 0;
 	UPROPERTY(Transient, BlueprintReadWrite) int32 ComboIndex = 0; // This value needs to be sent to the client
 	UPROPERTY(Transient, BlueprintReadWrite) bool bCancelledToEquipArmament = false;
@@ -89,7 +88,7 @@ protected:
 	UFUNCTION(BlueprintCallable) virtual void HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& TargetData, UAbilitySystem* TargetAsc);
 
 	/** During the first frame of the character's attack, check if they've already attacked any characters and attacks if so */
-	UFUNCTION(BlueprintCallable) virtual void CheckAndAttackIfAlreadyOverlappingAnything(TArray<AActor*>& Actors);
+	UFUNCTION(BlueprintCallable) virtual void CheckAndAttackIfAlreadyOverlappingAnything(AArmament* OverlappedArmament, TArray<AActor*>& AlreadyHitActors);
 
 	
 //--------------------------------------------------------------------------------------//
@@ -104,9 +103,6 @@ protected:
 
 	/** Retrieves the number of montage sections for the current montage */
 	UFUNCTION(BlueprintCallable) virtual int32 GetNumMontageSections() const;
-
-	/** Retrieves the actors we've already attacked on this swing */
-	UFUNCTION(BlueprintCallable) virtual TArray<AActor*>& GetAlreadyHitActors();
 
 	/** Returns true if the current ability is a right hand ability */
 	UFUNCTION(BlueprintCallable) virtual bool IsRightHandAbility() const;

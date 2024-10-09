@@ -100,7 +100,11 @@
 #define Tag_State_Attacking_Startup FName("State.Attacking.Startup")
 #define Tag_State_Attacking_AttackFrames FName("State.Attacking.AttackFrames")
 #define Tag_State_Attacking_AttackFrames_End FName("State.Attacking.AttackFrames.End")
+#define Tag_State_Attacking_AttackFrames_End_L FName("State.Attacking.AttackFrames.End.L")
+#define Tag_State_Attacking_AttackFrames_End_R FName("State.Attacking.AttackFrames.End.R")
 #define Tag_State_Attacking_AttackFrames_Begin FName("State.Attacking.AttackFrames.Begin")
+#define Tag_State_Attacking_AttackFrames_Begin_L FName("State.Attacking.AttackFrames.Begin.L")
+#define Tag_State_Attacking_AttackFrames_Begin_R FName("State.Attacking.AttackFrames.Begin.R")
 #define Tag_State_Attacking_AllowMovement FName("State.Attacking.AllowMovement")
 
 
