@@ -174,10 +174,10 @@ void UAbilityTask_TargetOverlap::OnTraceOverlap(UPrimitiveComponent* OverlappedC
 
 					if (OnValidOverlap.IsBound())
 					{
-						UE_LOGFMT(AbilityLog, Log, "{0} sending attack information from weapon {1}", *GetNameSafe(Character), *GetNameSafe(Armament));
+						if (bDebugTask) UE_LOGFMT(AbilityLog, Log, "{0} sending attack information from weapon {1}", *GetNameSafe(Character), *GetNameSafe(Armament));
 						OnValidOverlap.Broadcast(TargetData, Armament, TargetAsc);
 					}
-					else
+					else if (bDebugTask)
 					{
 						UE_LOGFMT(AbilityLog, Log, "{0}'s {1} traced a target without any listeners. Target {2}", *GetNameSafe(Character), *GetNameSafe(Armament), *GetNameSafe(OtherActor));
 					}

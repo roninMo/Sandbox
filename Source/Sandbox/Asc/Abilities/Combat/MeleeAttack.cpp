@@ -195,7 +195,10 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 		// MeleeOverlapHandle->ReadyForActivation(); // During attack frames
 	}
 
-	UE_LOGFMT(AbilityLog, Log, " ");
+	if (bDebug)
+	{
+		UE_LOGFMT(AbilityLog, Log, " ");
+	}
 }
 
 
@@ -256,7 +259,10 @@ void UMeleeAttack::OnAttackFrameEvent(const FGameplayEventData EventData)
 		// End attack frames (war is never over)
 		if (EventData.EventTag.MatchesTag(AttackFramesEndTag))
 		{
-			UE_LOGFMT(AbilityLog, Log, "{0}::AttackFrames End, {1}", GetOwningActorFromActorInfo()->HasAuthority() ? FString("Server") : FString("Client"), *EventData.EventTag.ToString());
+			if (bDebug)
+			{
+				UE_LOGFMT(AbilityLog, Log, "{0}::AttackFrames End, {1}", GetOwningActorFromActorInfo()->HasAuthority() ? FString("Server") : FString("Client"), *EventData.EventTag.ToString());
+			}
 			if (EventData.EventTag.MatchesTag(LeftHandAttackFramesEndTag) && SecondaryAttackState == EAttackFramesState::Enabled)
 			{
 				OnEndAttackFrames(false);
@@ -279,7 +285,11 @@ void UMeleeAttack::OnAttackFrameEvent(const FGameplayEventData EventData)
 		// Begin attack frames (I'm always ready)
 		else if (EventData.EventTag.MatchesTag(AttackFramesBeginTag))
 		{
-			UE_LOGFMT(AbilityLog, Log, "{0}::AttackFrames Begin, {1}", GetOwningActorFromActorInfo()->HasAuthority() ? FString("Server") : FString("Client"), *EventData.EventTag.ToString());
+			if (bDebug)
+			{
+				UE_LOGFMT(AbilityLog, Log, "{0}::AttackFrames Begin, {1}", GetOwningActorFromActorInfo()->HasAuthority() ? FString("Server") : FString("Client"), *EventData.EventTag.ToString());
+			}
+			
 			// We're only enabling the frames for one attack, if you have animations with multiple frames you'll have to adjust this logic, specifically for enemies
 			if (EventData.EventTag.MatchesTag(LeftHandAttackFramesBeginTag) && SecondaryAttackState == EAttackFramesState::Disabled)
 			{
@@ -373,8 +383,11 @@ void UMeleeAttack::OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& Ta
 			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 	}
 
-	UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} OnOverlapped event, checking if they've already attacked the player!",
-		*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(OverlappedArmament));
+	if (bDebug)
+	{
+		UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} OnOverlapped event, checking if they've already attacked the player!",
+			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(OverlappedArmament));
+	}
 
 	
 	const bool bRightHandArmament = CombatComponent && OverlappedArmament == CombatComponent->GetArmament(false) ? false : true;
@@ -388,7 +401,11 @@ void UMeleeAttack::OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& Ta
 		{
 			if (ArmamentHitActors.Contains(TargetAsc->GetAvatarActor()))
 			{
-				UE_LOGFMT(AbilityLog, Log, "{0} already overlapping with {1}", *GetNameSafe(OverlappedArmament), *GetNameSafe(TargetAsc->GetAvatarActor()));
+				if (bDebug)
+				{
+					UE_LOGFMT(AbilityLog, Log, "{0} already overlapping with {1}", *GetNameSafe(OverlappedArmament), *GetNameSafe(TargetAsc->GetAvatarActor()));
+				}
+				
 				return;
 			}
 
@@ -399,7 +416,7 @@ void UMeleeAttack::OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& Ta
 				HandleMeleeAttack(TargetData, OverlappedArmament, TargetAsc);
 			}
 		}
-		else
+		else if (bDebug)
 		{
 			UE_LOGFMT(AbilityLog, Log, "{0} invalid attack frame state: {1}, rightHandArmament({2}): {3}", *GetNameSafe(OverlappedArmament),
 				*UEnum::GetValueAsString(AttackFramesState), bRightHandArmament ? *FString("true") : *FString("false"), GetNameSafe(CombatComponent->GetArmament(bRightHandArmament)));
