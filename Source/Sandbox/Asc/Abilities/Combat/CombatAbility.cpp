@@ -445,6 +445,13 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 
 void UCombatAbility::CheckAndAttackIfAlreadyOverlappingAnything(AArmament* OverlappedArmament, TArray<AActor*>& AlreadyHitActors)
 {
+	if (!OverlappedArmament)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Tried attacking without a valid armament! {3}{4}", *UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()),
+			*FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *UEnum::GetValueAsString(CurrentStance), *UEnum::GetValueAsString(AttackPattern));
+		return;
+	}
+
 	// Check if there are any targets that are already overlapping that haven't been attacked during the attack frames yet
 	TArray<AActor*> TargetActors;
 	for (const UPrimitiveComponent* Hitbox : OverlappedArmament->GetArmamentHitboxes())

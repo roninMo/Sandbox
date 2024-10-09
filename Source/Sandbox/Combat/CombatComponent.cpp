@@ -94,8 +94,8 @@ AArmament* UCombatComponent::CreateArmament(const EEquipSlot EquipSlot)
 
 	if (!Character->HasAuthority())
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Only create the armament on the server!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		// UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Only create the armament on the server!",
+		// 	UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return nullptr;
 	}
 

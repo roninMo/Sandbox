@@ -102,7 +102,7 @@ bool AArmament::ConstructArmament()
 	}
 
 	// Add armament state and passives
-	StateInformationHandle = AbilitySystemComponent->AddGameplayEffect(ArmamentInformation.StateInformation);
+	if (ArmamentInformation.StateInformation.Effect) StateInformationHandle = AbilitySystemComponent->AddGameplayEffect(ArmamentInformation.StateInformation);
 	for (const FGameplayEffectInfo& Passive : ArmamentInformation.Passives)
 	{
 		PassiveHandles.Add(AbilitySystemComponent->AddGameplayEffect(Passive));
@@ -172,7 +172,7 @@ bool AArmament::IsValidArmanent()
 #pragma region Montages
 void AArmament::SetArmamentMontagesFromDB(UDataTable* ArmamentMontageDB, ECharacterSkeletonMapping Link)
 {
-	if (!ArmamentMontageDB) return;
+	if (!ArmamentMontageDB || ArmamentInformation.Id.IsNone()) return;
 	
 	const FString RowContext(TEXT("Armament Montage Information Context"));
 	if (const F_Table_ArmamentMontages* Data = ArmamentMontageDB->FindRow<F_Table_ArmamentMontages>(ArmamentInformation.Id, RowContext))
@@ -493,13 +493,16 @@ void AArmament::OnRep_CreatedArmament()
 	
 	// Retrieve the armament information
 	Execute_SetItem(this, CombatComponent->GetArmamentInventoryInformation(EquipSlot));
-	SetArmamentInformation(CombatComponent->GetArmamentInformationFromDatabase(Item.ItemName));
-	SetArmamentMontagesFromDB(CombatComponent->GetArmamentMontageTable(), Character->GetCharacterSkeletonMapping());
-	
-	if (!Item.IsValid() || !ArmamentInformation.IsValid())
+	if (!Item.ItemName.IsNone())
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2}  tried to add the armament information on the client after creation and something happened!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		SetArmamentInformation(CombatComponent->GetArmamentInformationFromDatabase(Item.ItemName));
+		SetArmamentMontagesFromDB(CombatComponent->GetArmamentMontageTable(), Character->GetCharacterSkeletonMapping());
+		
+		if (!Item.IsValid() || !ArmamentInformation.IsValid())
+		{
+			UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2}  tried to add the armament information on the client after creation and something happened!",
+				UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		}
 	}
 }
 
