@@ -54,6 +54,12 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 	{
 		UE_LOGFMT(LogTemp, Log, "{0}::{1}() Stamina attribute adjustment: {2}!", *UEnum::GetValueAsString(Props.SourceActor->GetLocalRole()), *FString(__FUNCTION__), GetStamina());
 	}
+
+
+	
+	const TArray<FGameplayEffectModifiedAttribute>& DamageAttributes = Data.EffectSpec.ModifiedAttributes;
+	
+
 	
 	/**
 
@@ -69,8 +75,42 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		Data.EvaluatedData.Attribute == GetMadnessAttribute() ||
 		Data.EvaluatedData.Attribute == GetSleepAttribute())
 	{
-		
 
+		if (Data.EvaluatedData.Attribute == GetCurseAttribute())
+		{
+			float Buildup = GetCurseBuildup() + Data.EvaluatedData.Magnitude;
+			SetCurseBuildup(FMath::Clamp(GetCurseBuildup(), 0, Buildup));
+		}
+
+		if (Data.EvaluatedData.Attribute == GetBleedAttribute())
+		{
+			float Buildup = GetBleedBuildup() + Data.EvaluatedData.Magnitude;
+			SetBleedBuildup(FMath::Clamp(GetBleedBuildup(), 0, Buildup));
+		}
+
+		if (Data.EvaluatedData.Attribute == GetFrostbiteAttribute())
+		{
+			float Buildup = GetFrostbiteBuildup() + Data.EvaluatedData.Magnitude;
+			SetFrostbiteBuildup(FMath::Clamp(GetFrostbiteBuildup(), 0, Buildup));
+		}
+		
+		if (Data.EvaluatedData.Attribute == GetPoisonAttribute())
+		{
+			float Buildup = GetPoisonBuildup() + Data.EvaluatedData.Magnitude;
+			SetPoisonBuildup(FMath::Clamp(GetPoisonBuildup(), 0, Buildup));
+		}
+		
+		if (Data.EvaluatedData.Attribute == GetPoisonAttribute())
+		{
+			float Buildup = GetMadnessBuildup() + Data.EvaluatedData.Magnitude;
+			SetMadnessBuildup(FMath::Clamp(GetMadnessBuildup(), 0, Buildup));
+		}
+		
+		if (Data.EvaluatedData.Attribute == GetPoisonAttribute())
+		{
+			float Buildup = GetSleepBuildup() + Data.EvaluatedData.Magnitude;
+			SetSleepBuildup(FMath::Clamp(GetSleepBuildup(), 0, Buildup));
+		}
 	}
 
 	
@@ -80,12 +120,17 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 			- Hit reaction based on the attack
 			- Handle taking damage / dying
 	*/
+	float MagicDamageTaken = 0.0;
+	float DamageTaken = 0.0;
 	if (Data.EvaluatedData.Attribute == GetDamage_StandardAttribute() ||
 		Data.EvaluatedData.Attribute == GetDamage_SlashAttribute() ||
 		Data.EvaluatedData.Attribute == GetDamage_PierceAttribute() ||
 		Data.EvaluatedData.Attribute == GetDamage_StrikeAttribute())
 	{
-		
+		if (Data.EvaluatedData.Attribute == GetDamage_StandardAttribute()) DamageTaken += GetDamage_Standard();
+		if (Data.EvaluatedData.Attribute == GetDamage_SlashAttribute()) DamageTaken += GetDamage_Slash();
+		if (Data.EvaluatedData.Attribute == GetDamage_PierceAttribute()) DamageTaken += GetDamage_Pierce();
+		if (Data.EvaluatedData.Attribute == GetDamage_StrikeAttribute()) DamageTaken += GetDamage_Strike();
 	}
 
 	if (Data.EvaluatedData.Attribute == GetDamage_MagicAttribute() ||
@@ -94,9 +139,29 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		Data.EvaluatedData.Attribute == GetDamage_HolyAttribute() ||
 		Data.EvaluatedData.Attribute == GetDamage_LightningAttribute())
 	{
-		
+		if (Data.EvaluatedData.Attribute == GetDamage_MagicAttribute()) MagicDamageTaken += GetDamage_Magic();
+		if (Data.EvaluatedData.Attribute == GetDamage_IceAttribute()) MagicDamageTaken += GetDamage_Ice();
+		if (Data.EvaluatedData.Attribute == GetDamage_FireAttribute()) MagicDamageTaken += GetDamage_Fire();
+		if (Data.EvaluatedData.Attribute == GetDamage_HolyAttribute()) MagicDamageTaken += GetDamage_Holy();
+		if (Data.EvaluatedData.Attribute == GetDamage_LightningAttribute()) MagicDamageTaken += GetDamage_Lightning();
 	}
-		
+
+	// Damage multipliers for weapon stats and player equipment, and any other status effects should be handled here
+	float CurrentHealth = GetHealth() - MagicDamageTaken - DamageTaken;
+
+	if (CurrentHealth <= 0.0)
+	{
+		SetHealth(0);
+
+		// Handle death
+	}
+	else
+	{
+		SetHealth(CurrentHealth);
+
+		// Handle any other take damage logic
+	}
+
 
 	
 	/**
@@ -105,7 +170,6 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 			- Handle poise break / effect for regenerating poise
 			- Handle hit reactions
 	*/
-
 
 	
 	/**
@@ -120,16 +184,9 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		UE_LOGFMT(LogTemp, Log, "{0}::{1}() {2} dealt {3} damage to {4}!", *UEnum::GetValueAsString(Props.SourceActor->GetLocalRole()), *FString(__FUNCTION__),
 			*GetNameSafe(Props.SourceActor), GetDamage_Standard(), *GetNameSafe(Props.TargetActor));
 	}
-
-	
-
 	
 
 	OnPostGameplayEffectExecute.Broadcast(Props);
-	
-
-	
-	
 }
 
 

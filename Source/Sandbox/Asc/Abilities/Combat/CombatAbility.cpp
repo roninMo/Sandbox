@@ -237,6 +237,8 @@ void UCombatAbility::CalculateAttributeModifications()
 		for (auto &[Attribute, Value] : ArmamentInformation.BaseDamageStats)
 		{
 			// Damages
+			AttackInfo.Add(UMMOAttributeSet::GetPoiseAttribute(), CurrentAttack.PoiseDamage);
+			
 			if (Attribute == UMMOAttributeSet::GetDamage_StandardAttribute() ||
 				Attribute == UMMOAttributeSet::GetDamage_SlashAttribute() ||
 				Attribute == UMMOAttributeSet::GetDamage_PierceAttribute() ||
@@ -272,6 +274,7 @@ void UCombatAbility::CalculateAttributeModifications()
 			}
 
 			// Add any custom attribute information here
+			
 			
 		}
 	}

@@ -29,23 +29,23 @@
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -66,30 +66,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -110,9 +110,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -133,23 +133,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -170,9 +170,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -193,9 +193,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -219,30 +219,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -278,9 +278,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -301,23 +301,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -338,9 +338,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -361,9 +361,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -387,30 +387,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -431,30 +431,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -475,9 +475,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -498,23 +498,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -535,9 +535,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -558,9 +558,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -618,30 +618,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -662,30 +662,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -706,9 +706,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -729,16 +729,16 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -759,9 +759,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -782,9 +782,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -808,30 +808,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -867,9 +867,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -890,23 +890,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -927,9 +927,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -950,9 +950,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -976,30 +976,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1020,30 +1020,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1064,9 +1064,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1087,23 +1087,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1124,9 +1124,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1147,9 +1147,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1251,23 +1251,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1288,30 +1288,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1332,9 +1332,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1355,23 +1355,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1392,9 +1392,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": -1,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1415,9 +1415,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1441,30 +1441,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1500,9 +1500,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1523,23 +1523,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1560,9 +1560,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1583,9 +1583,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1609,30 +1609,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1653,30 +1653,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1697,9 +1697,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1720,23 +1720,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1757,9 +1757,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1780,9 +1780,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1840,30 +1840,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1884,30 +1884,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1928,9 +1928,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1951,16 +1951,16 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1981,9 +1981,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2004,9 +2004,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2030,30 +2030,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2089,9 +2089,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2112,23 +2112,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2149,9 +2149,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 0.1,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2172,9 +2172,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2198,30 +2198,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2242,30 +2242,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2286,9 +2286,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2309,23 +2309,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2346,9 +2346,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2369,9 +2369,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2429,30 +2429,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2473,30 +2473,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2517,9 +2517,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2540,16 +2540,16 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2570,9 +2570,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2593,9 +2593,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2619,30 +2619,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2678,9 +2678,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2701,23 +2701,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2738,9 +2738,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2761,9 +2761,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2787,30 +2787,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2831,30 +2831,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2875,9 +2875,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2898,23 +2898,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2935,9 +2935,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2958,9 +2958,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3040,23 +3040,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3077,30 +3077,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3121,9 +3121,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3144,16 +3144,16 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3174,9 +3174,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3197,9 +3197,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3223,30 +3223,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3282,9 +3282,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3305,23 +3305,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3342,9 +3342,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3365,9 +3365,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 15,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3391,30 +3391,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3435,30 +3435,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3479,9 +3479,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3502,23 +3502,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3539,9 +3539,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3562,9 +3562,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3622,23 +3622,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3659,30 +3659,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3703,9 +3703,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3726,23 +3726,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3763,9 +3763,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3786,9 +3786,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3812,30 +3812,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3871,9 +3871,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3894,23 +3894,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3931,9 +3931,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3954,9 +3954,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3980,30 +3980,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4024,30 +4024,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4068,9 +4068,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4091,23 +4091,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4128,9 +4128,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4151,9 +4151,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4211,30 +4211,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4255,16 +4255,16 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4285,9 +4285,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4308,16 +4308,16 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4338,9 +4338,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4361,9 +4361,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4387,30 +4387,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4446,9 +4446,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4469,23 +4469,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4506,9 +4506,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 27,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4529,9 +4529,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4555,30 +4555,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4599,30 +4599,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4643,9 +4643,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4666,23 +4666,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4703,9 +4703,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4726,9 +4726,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4786,30 +4786,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4830,16 +4830,16 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4860,9 +4860,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4883,16 +4883,16 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4913,9 +4913,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4936,9 +4936,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4962,30 +4962,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5021,9 +5021,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5044,30 +5044,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5088,9 +5088,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 17,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5111,9 +5111,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5137,30 +5137,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5181,30 +5181,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5225,9 +5225,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5248,23 +5248,23 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5285,9 +5285,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 130,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 120,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5308,9 +5308,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"PoiseMotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
+									"PoiseMotionValue": 0,
 									"CustomMontageSection": "None"
 								}
 							]
