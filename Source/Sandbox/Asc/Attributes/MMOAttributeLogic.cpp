@@ -5,6 +5,8 @@
 
 #include "GameplayEffectExtension.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Characters/CharacterBase.h"
+#include "Sandbox/Combat/Weapons/Armament.h"
 
 
 bool UMMOAttributeLogic::PreGameplayEffectExecute(FGameplayEffectModCallbackData& Data)
@@ -128,8 +130,20 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 			// Handle any other take damage logic
 		}
 			
+
+
 		
 		// Player reactions / other handling
+		ACharacterBase* Character = Cast<ACharacterBase>(Props.TargetActor);
+		AArmament* Armament = Cast<AArmament>(Props.Context.GetSourceObject());
+		if (Armament && Character)
+		{
+			UAnimMontage* Montage = Character->GetHitReactMontage();
+			FVector WeaponLocation = Armament->GetActorLocation();
+			FName HitReact = Character->GetHitReactSection(Character, Character->GetActorLocation(), WeaponLocation);
+			
+			Character->NetMulticast_PlayMontage(Montage, HitReact);
+		}
 
 		
 		UE_LOGFMT(LogTemp, Warning, "{0}::{1}() {2} attacked {3} with {4}! Remaining health: {5}({6})", *UEnum::GetValueAsString(Props.SourceActor->GetLocalRole()), *FString(__FUNCTION__),

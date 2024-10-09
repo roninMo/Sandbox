@@ -100,3 +100,58 @@ struct F_RangedArmamentStats
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) EFireRateType FireRateType;
 };
 
+
+
+
+//--------------------------------------------------------------------------------------//
+// Armament Montages																	//
+//--------------------------------------------------------------------------------------//
+/**
+ * This object holds all the montages that a melee armament needs
+ */
+USTRUCT(BlueprintType)
+struct FM_RangedArmamentMontages
+{
+	GENERATED_USTRUCT_BODY()
+		FM_RangedArmamentMontages(
+			UAnimMontage* FireWeapon = nullptr,
+			UAnimMontage* Reload = nullptr,
+			UAnimMontage* Aim = nullptr,
+			UAnimMontage* Holster = nullptr,
+			UAnimMontage* Equip = nullptr,
+			
+			UAnimMontage* FP_FireWeapon = nullptr,
+			UAnimMontage* FP_Reload = nullptr,
+			UAnimMontage* FP_Aim = nullptr,
+			UAnimMontage* FP_Holster = nullptr,
+			UAnimMontage* FP_Equip = nullptr
+		) :
+
+		FireWeapon(FireWeapon),
+		Reload(Reload),
+		Aim(Aim),
+		Holster(Holster),
+		Equip(Equip),
+
+		FP_FireWeapon(FP_FireWeapon),
+		FP_Reload(FP_Reload),
+		FP_Aim(FP_Aim),
+		FP_Holster(FP_Holster),
+		FP_Equip(FP_Equip)
+	{}
+
+public:
+	// Main
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)                     UAnimMontage* FireWeapon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)                     UAnimMontage* Reload;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)                     UAnimMontage* Aim;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)                     UAnimMontage* Holster;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)                     UAnimMontage* Equip;
+	
+	// First Person
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) 					UAnimMontage* FP_FireWeapon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) 					UAnimMontage* FP_Reload;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) 					UAnimMontage* FP_Aim;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) 					UAnimMontage* FP_Holster;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) 					UAnimMontage* FP_Equip;
+};

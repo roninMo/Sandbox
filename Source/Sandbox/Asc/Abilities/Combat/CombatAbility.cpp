@@ -153,6 +153,8 @@ void UCombatAbility::SetComboAttack()
 		if (!ComboAttacks.ComboAttacks.IsEmpty())
 		{
 			CurrentAttack = ComboAttacks.ComboAttacks[0];
+			UCombatComponent* CombatComponent = GetCombatComponent();
+			if (CombatComponent) CombatComponent->SetComboIndex(0);
 		}
 	}
 	else

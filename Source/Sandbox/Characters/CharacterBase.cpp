@@ -8,11 +8,13 @@
 #include "Components/AnimInstance/AnimInstanceBase.h"
 #include "Components/Inventory/InventoryComponent.h"
 #include "GameFramework/PlayerState.h"
+#include "Logging/StructuredLog.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
 #include "Sandbox/Data/Enums/SkeletonMappings.h"
 #include "Net/UnrealNetwork.h"
 #include "Sandbox/Data/Enums/ArmorTypes.h"
+#include "Sandbox/Data/Enums/HitDirection.h"
 
 
 ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Super(
@@ -29,6 +31,10 @@ ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Su
 	MinNetUpdateFrequency = 33.f; // To help with bandwidth and lagginess, allow a minNetUpdateFrequency, which is generally 33 in fps games
 	// The other value is the server config tick rate, which is in the project defaultEngine.ini -> [/Script/OnlineSubsystemUtils.IpNetDriver] NetServerMaxTickRate = 60
 	// also this which is especially crucial for implementing the gameplay ability system defaultEngine.ini -> [SystemSettings] net.UseAdaptiveNetUpdateFrequency = 1
+
+	// Character montages
+	CharacterSkeletonMapping = ECharacterSkeletonMapping::Manny;
+	CharacterMontageId = FName("Manny");
 	
 	// Character armor
 	Gauntlets = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Gauntlets"));
@@ -116,6 +122,7 @@ void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvat
 	}
 
 	// Add ability system state to the anim instance
+	SetCharacterMontages();
 	UAnimInstanceBase* AnimInstance = GetMesh() ? Cast<UAnimInstanceBase>(GetMesh()->GetAnimInstance()) : nullptr;
 	if (AnimInstance)
 	{
@@ -246,6 +253,7 @@ void ACharacterBase::OnRep_Armor_Leggings() { Leggings->SetSkeletalMesh(Armor_Le
 void ACharacterBase::OnRep_Armor_Helm() { Helm->SetSkeletalMesh(Armor_Helm); }
 void ACharacterBase::OnRep_Armor_Chest() { Chest->SetSkeletalMesh(Armor_Chest); }
 
+
 void ACharacterBase::ConstructArmorInformation(USkeletalMeshComponent* MeshComponent) const
 {
 	if (MeshComponent)
@@ -273,9 +281,81 @@ UCombatComponent* ACharacterBase::GetCombatComponent() const
 	return CombatComponent;
 }
 
+
+EHitDirection ACharacterBase::GetHitReactDirection(AActor* Actor, const FVector& ActorLocation, const FVector& ImpactLocation) const
+{
+	const float DistanceToFrontBackPlane = FVector::PointPlaneDist(ImpactLocation, ActorLocation, Actor->GetActorRightVector());
+	const float DistanceToRightLeftPlane = FVector::PointPlaneDist(ImpactLocation, ActorLocation, Actor->GetActorForwardVector());
+	//UE_LOG(LogTemp, Warning, TEXT("DistanceToFrontBackPlane: %f, DistanceToRightLeftPlane: %f"), DistanceToFrontBackPlane, DistanceToRightLeftPlane);
+
+	EHitDirection HitDirection;
+	if (FMath::Abs(DistanceToFrontBackPlane) <= FMath::Abs(DistanceToRightLeftPlane))
+	{
+		HitDirection = DistanceToRightLeftPlane >= 0 ? EHitDirection::Front : EHitDirection::Back; // Front or back
+	}
+	else
+	{
+		HitDirection = DistanceToFrontBackPlane >= 0 ? EHitDirection::Right : EHitDirection::Left; // Determine if Right or Left
+	}
+	return HitDirection;
+}
+
+
 UInventoryComponent* ACharacterBase::GetInventoryComponent() const
 {
 	return Inventory;
+}
+
+
+FM_CharacterMontages& ACharacterBase::GetCharacterMontages()
+{
+	return Montages;
+}
+
+
+UAnimMontage* ACharacterBase::GetHitReactMontage() const
+{
+	return Montages.HitReactMontage;
+}
+
+
+void ACharacterBase::SetCharacterMontages()
+{
+	if (!CharacterMontageTable || CharacterMontageId.IsNone())
+	{
+		UE_LOGFMT(LogTemp, Error, "{0}::{1}() {2} Failed to retrieve montages because the id or montage db is null!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	
+	const FString RowContext(TEXT("Character Montage Context"));
+	if (const F_Table_CharacterMontages* Data = CharacterMontageTable->FindRow<F_Table_CharacterMontages>(CharacterMontageId, RowContext))
+	{
+		Montages = Data->Montages;
+	}
+}
+
+FName ACharacterBase::GetHitReactSection(AActor* Actor, const FVector& ActorLocation, const FVector& ImpactLocation) const
+{
+	const EHitDirection HitReact = GetHitReactDirection(Actor, ActorLocation, ImpactLocation);
+	if (HitReact == EHitDirection::Back) return FName("Back");
+	if (HitReact == EHitDirection::Front) return FName("Front");
+	if (HitReact == EHitDirection::Left) return FName("Left");
+	if (HitReact == EHitDirection::Right) return FName("Right");
+	return FName();
+}
+
+
+void ACharacterBase::NetMulticast_PlayMontage_Implementation(UAnimMontage* Montage, FName StartSection, float PlayRate)
+{
+	PlayAnimMontage(Montage, PlayRate, StartSection);
+}
+
+
+void ACharacterBase::Client_PlayMontage_Implementation(UAnimMontage* Montage, FName StartSection, float PlayRate)
+{
+	PlayAnimMontage(Montage, PlayRate, StartSection);
 }
 
 

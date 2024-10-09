@@ -1,0 +1,13 @@
+[
+	{
+		"Name": "Manny",
+		"Montages":
+		{
+			"RollMontage": "None",
+			"HitReactMontage": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/HitReaction/AM_Manny_HitReact.AM_Manny_HitReact'",
+			"DeathMontage": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/HitReaction/Death/Death_Retargeted_Montage.Death_Retargeted_Montage'",
+			"BlockMontage": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Unarmed/Block/AM_Manny_Guard.AM_Manny_Guard'"
+		},
+		"DevDescription": ""
+	}
+]

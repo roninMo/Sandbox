@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "Perception/AISightTargetInterface.h"
 #include "Sandbox/Data/Structs/AbilityInformation.h"
+#include "Sandbox/Data/Structs/CharacterMontages.h"
 #include "CharacterBase.generated.h"
 
 /*
@@ -274,6 +275,7 @@
 */
 
 
+enum class EHitDirection : uint8;
 enum class EArmorSlot : uint8;
 enum class ECharacterSkeletonMapping : uint8;
 class UCombatComponent;
@@ -485,10 +487,12 @@ public:
 	template<class T> T* GetCombatComponent(void) const { return Cast<T>(GetCombatComponent()); }
 
 	/** Retrieves the combat component */
-	UFUNCTION(BlueprintCallable, Category="Combat", DisplayName="Get Combat Component")
+	UFUNCTION(BlueprintCallable, Category = "Combat", DisplayName = "Get Combat Component")
 	virtual UCombatComponent* GetCombatComponent() const;
-	
 
+	/** Returns the hit react direction based on the location of the player and the weapon's impact location */
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	virtual EHitDirection GetHitReactDirection(AActor* Actor, const FVector& ActorLocation, const FVector& ImpactLocation) const;
 
 	
 //----------------------------------------------------------------------------------//
@@ -509,6 +513,43 @@ public:
 
 
 	
+	
+//-------------------------------------------------------------------------------------//
+// Montages																			   //
+//-------------------------------------------------------------------------------------//
+public:
+	/** The data table for character montages */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation|Montage") UDataTable* CharacterMontageTable;
+
+	/** The character to montage id */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation|Montage") FName CharacterMontageId;
+	
+	/** The data table for character montages */
+	UPROPERTY(BlueprintReadWrite, Category = "Animation|Montage") FM_CharacterMontages Montages;
+
+
+public:
+	/** Retrieves the list of the character's montages */
+	UFUNCTION(BlueprintCallable, Category = "Animation|Montage") virtual FM_CharacterMontages& GetCharacterMontages();
+
+	/** Retrieves the character's hit react montage */
+	UFUNCTION(BlueprintCallable, Category = "Animation|Montage") virtual UAnimMontage* GetHitReactMontage() const;
+	
+	/** Retrieves the character montages from the database */
+	virtual void SetCharacterMontages();
+
+	/** Plays a montage on all clients */
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable, Category = "Animation|Montage")
+	virtual void NetMulticast_PlayMontage(UAnimMontage* Montage, FName StartSection = NAME_None, float PlayRate = 1);
+
+	/** Plays a montage on a specific client */
+	UFUNCTION(Client, Reliable, BlueprintCallable, Category = "Animation|Montage")
+	virtual void Client_PlayMontage(UAnimMontage* Montage, FName StartSection = NAME_None, float PlayRate = 1);
+	
+	/** Returns the hit react direction montage section based on the location of the player and the weapon's impact location */
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	virtual FName GetHitReactSection(AActor* Actor, const FVector& ActorLocation, const FVector& ImpactLocation) const;
+
 	
 //-------------------------------------------------------------------------------------//
 // Utility																			   //
