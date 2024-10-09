@@ -4,7 +4,6 @@
 #include "Sandbox/Asc/Abilities/Combat/MeleeAttack.h"
 
 #include "AbilitySystemGlobals.h"
-#include "Abilities/Tasks/AbilityTask_ApplyRootMotionConstantForce.h"
 #include "Abilities/Tasks/AbilityTask_WaitInputRelease.h"
 #include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
 #include "Abilities/Tasks/AbilityTask_WaitGameplayEvent.h"
@@ -243,8 +242,13 @@ void UMeleeAttack::OnEndAttackFrames()
 
 void UMeleeAttack::OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& TargetData, UAbilitySystem* TargetAsc)
 {
-	AlreadyHitActors.AddUnique(TargetAsc->GetAvatarActor());
-	HandleMeleeAttack(TargetData, TargetAsc);
+	if (AlreadyHitActors.Contains(TargetAsc->GetAvatarActor())) return;
+
+	if (TargetAsc->GetAvatarActor())
+	{
+		AlreadyHitActors.AddUnique(TargetAsc->GetAvatarActor());
+		HandleMeleeAttack(TargetData, TargetAsc);
+	}
 }
 
 

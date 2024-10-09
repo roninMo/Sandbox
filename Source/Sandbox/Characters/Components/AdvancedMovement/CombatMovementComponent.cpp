@@ -136,16 +136,19 @@ FVector UCombatMovementComponent::CalcAnimRootMotionVelocity(const FVector& Root
 	// Preserve the current movement, add player input to allow movement // Alright scooby, let's use our brain here, time to play along
 	FVector RootMotionVelocity = RootMotionAirVelocity + (RootMotionDeltaMove / DeltaTime); // CurrentVelocity.Length() * Acceleration.GetSafeNormal();
 	
-	
-	UE_LOGFMT(Movement, Log, "{0}::RootMotion ({1}) ->  ({2})({3}) Accel/Vel: ({4})({5}), RootMotion/AirVel: ({6})({7})",
-		CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"), *FString::SanitizeFloat(Time),
-		*GetMovementDirection(PlayerInput),
-		FMath::CeilToInt(Velocity.Size2D()),
-		*FVector2D(FMath::CeilToInt(Acceleration.X), FMath::CeilToInt(Acceleration.Y)).ToString(),
-		*FVector2D(FMath::CeilToInt(Velocity.X), FMath::CeilToInt(Velocity.Y)).ToString(),
-		*RootMotionVelocity.ToString(),
-		*RootMotionAirVelocity.ToString()
-	);
+
+	if (bDebugRootMotion)
+	{
+		UE_LOGFMT(Movement, Log, "{0}::RootMotion ({1}) ->  ({2})({3}) Accel/Vel: ({4})({5}), RootMotion/AirVel: ({6})({7})",
+			CharacterOwner->HasAuthority() ? *FString("Server") : *FString("Client"), *FString::SanitizeFloat(Time),
+			*GetMovementDirection(PlayerInput),
+			FMath::CeilToInt(Velocity.Size2D()),
+			*FVector2D(FMath::CeilToInt(Acceleration.X), FMath::CeilToInt(Acceleration.Y)).ToString(),
+			*FVector2D(FMath::CeilToInt(Velocity.X), FMath::CeilToInt(Velocity.Y)).ToString(),
+			*RootMotionVelocity.ToString(),
+			*RootMotionAirVelocity.ToString()
+		);
+	}
 	
 	return RootMotionVelocity; 
 }

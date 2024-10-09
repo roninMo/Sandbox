@@ -49,14 +49,9 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 	// Retrieve the player and target's information, and handle attribute clamping during damage calculations
 	GetExecutionData(Data, Props);
 	AttributeClamping(Data.EvaluatedData.Attribute, Data.EvaluatedData.Magnitude);
-	
-	if (Data.EvaluatedData.Attribute == GetStaminaAttribute())
-	{
-		UE_LOGFMT(LogTemp, Log, "{0}::{1}() Stamina attribute adjustment: {2}!", *UEnum::GetValueAsString(Props.SourceActor->GetLocalRole()), *FString(__FUNCTION__), GetStamina());
-	}
 
 
-	// Combat calculations
+	/**** Combat calculations ****/
 	if (Data.EvaluatedData.Attribute == GetDamageCalculationAttribute())
 	{
 		float MagicDamageTaken = 0.0;
@@ -137,8 +132,8 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		// Player reactions / other handling
 
 		
-		UE_LOGFMT(LogTemp, Log, "{0}::{1}() {2} dealt {3} damage to {4}!", *UEnum::GetValueAsString(Props.SourceActor->GetLocalRole()), *FString(__FUNCTION__),
-			*GetNameSafe(Props.SourceActor), MagicDamageTaken + DamageTaken, *GetNameSafe(Props.TargetActor));
+		UE_LOGFMT(LogTemp, Log, "{0}::{1}() {2} dealt {3} damage to {4}! Remaining health: {5}", *UEnum::GetValueAsString(Props.SourceActor->GetLocalRole()), *FString(__FUNCTION__),
+			*GetNameSafe(Props.SourceActor), MagicDamageTaken + DamageTaken, *GetNameSafe(Props.TargetActor), GetHealth());
 		
 	}
 	

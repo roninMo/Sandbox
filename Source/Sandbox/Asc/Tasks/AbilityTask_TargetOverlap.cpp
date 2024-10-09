@@ -5,6 +5,7 @@
 
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "AbilitySystemBlueprintLibrary.h"
+#include "Sandbox/Characters/CharacterBase.h"
 #include "Logging/StructuredLog.h"
 
 UAbilityTask_TargetOverlap* UAbilityTask_TargetOverlap::CreateOverlapDataTask(UGameplayAbility* OwningAbility, TArray<UPrimitiveComponent*> CollisionComponents, bool bDebug)
@@ -76,12 +77,21 @@ void UAbilityTask_TargetOverlap::OnTraceOverlap(UPrimitiveComponent* OverlappedC
 {
 	const AActor* Character = Ability->GetAvatarActorFromActorInfo();
  	if (Character == OtherActor) return;
+
+	ACharacterBase* Target = Cast<ACharacterBase>(OtherActor);
+	if (!Target) return;
+
+	UAbilitySystem* TargetAsc = Target->GetAbilitySystem<UAbilitySystem>();
+	if (!TargetAsc)
+	{
+		UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Attacked a character with an invalid ability system component! Target: {3}",
+			*UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character), *GetNameSafe(Target)
+		);
+		return;
+	}
 	
 	if (IsPredictingClient() || IsLocallyControlled())
 	{
-		UAbilitySystem* TargetAsc = Cast<UAbilitySystem>(AbilitySystemComponent.Get());
-		if (!TargetAsc) return;
-		
 		// This might need to always activate so every attack has their data mapped to an individual place in the AbilityTargetDataMap
 		if (!GetActivationPredictionKey().IsValidForMorePrediction())
 		{
@@ -112,15 +122,19 @@ void UAbilityTask_TargetOverlap::OnTraceOverlap(UPrimitiveComponent* OverlappedC
 		Data->SetActors(Targets);
 		TargetData.Add(Data);
 		
-		// Send the replicated data to the server
-		AbilitySystemComponent->ServerSetReplicatedTargetData(
-			GetAbilitySpecHandle(),
-			GetActivationPredictionKey(),
-			TargetData,
-			FGameplayTag(),
-			AbilitySystemComponent->ScopedPredictionKey
-		);
-			
+		// Send the replicated data to the server'
+		if (AbilitySystemComponent.Get())
+		{
+			AbilitySystemComponent->ServerSetReplicatedTargetData(
+				GetAbilitySpecHandle(),
+				GetActivationPredictionKey(),
+				TargetData,
+				FGameplayTag(),
+				AbilitySystemComponent->ScopedPredictionKey
+			);
+		}
+
+		// UE_LOGFMT(AbilityLog, Log, "{0} overlapped with {1}", *GetNameSafe(Character), *GetNameSafe(Target));
 		if (ShouldBroadcastAbilityTaskDelegates())
 		{
 			OnValidOverlap.Broadcast(TargetData, TargetAsc);

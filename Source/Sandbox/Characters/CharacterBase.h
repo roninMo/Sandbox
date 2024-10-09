@@ -202,7 +202,6 @@
 
 	Ability System Component
 		- Ability Retrieval and Activation
-		- Ability delegates handling (Learn how to handle adding and removing delegate and ability system logic during play)
 		- Create modular characters/attributes/abilities with game features for different characters and games
 		- GSCGameFeatureAction_AddAbilities, GSCGameFeatureAction_AddAnimLayers, GSCGameFeatureAction_AddInputMappingContext
 			Abilities should be retrieved for each game, and added/removed based on the player's current equipment
