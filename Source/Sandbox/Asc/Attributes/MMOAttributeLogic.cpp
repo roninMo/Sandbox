@@ -132,8 +132,8 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		// Player reactions / other handling
 
 		
-		UE_LOGFMT(LogTemp, Log, "{0}::{1}() {2} dealt {3} damage to {4}! Remaining health: {5}", *UEnum::GetValueAsString(Props.SourceActor->GetLocalRole()), *FString(__FUNCTION__),
-			*GetNameSafe(Props.SourceActor), MagicDamageTaken + DamageTaken, *GetNameSafe(Props.TargetActor), GetHealth());
+		UE_LOGFMT(LogTemp, Warning, "{0}::{1}() {2} attacked {3} with {4}! Remaining health: {5}({6})", *UEnum::GetValueAsString(Props.SourceActor->GetLocalRole()), *FString(__FUNCTION__),
+			*GetNameSafe(Props.SourceActor), *GetNameSafe(Props.TargetActor), *GetNameSafe(Props.Context.GetSourceObject()), GetHealth(), -(MagicDamageTaken + DamageTaken));
 		
 	}
 	

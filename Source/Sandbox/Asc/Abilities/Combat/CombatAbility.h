@@ -85,7 +85,7 @@ protected:
 
 protected:
 	/** Handles melee attack target data and creating an exec calc effect context to pass to damage calculations */
-	UFUNCTION(BlueprintCallable) virtual void HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& TargetData, UAbilitySystem* TargetAsc);
+	UFUNCTION(BlueprintCallable) virtual void HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& TargetData, AArmament* OverlappedArmament, UAbilitySystem* TargetAsc);
 
 	/** During the first frame of the character's attack, check if they've already attacked any characters and attacks if so */
 	UFUNCTION(BlueprintCallable) virtual void CheckAndAttackIfAlreadyOverlappingAnything(AArmament* OverlappedArmament, TArray<AActor*>& AlreadyHitActors);

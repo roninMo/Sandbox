@@ -96,7 +96,7 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 	}
 	
 	// Retrieve the combo information if the player's equipped an armament or their stance has updated
-	if (EquippedArmament == Armament && CurrentStance == CombatComponent->GetCurrentStance()) return true;
+	if (EquippedArmament == Armament && CurrentStance == CombatComponent->GetCurrentStance() && EquipSlot == EquippedArmament->GetEquipSlot()) return true;
 	else
 	{
 		Armament = nullptr;
@@ -292,11 +292,14 @@ void UCombatAbility::CalculateAttributeModifications()
 
 
 #pragma region Combat functions
-void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& TargetData, UAbilitySystem* TargetAsc)
+void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& TargetData, AArmament* OverlappedArmament, UAbilitySystem* TargetAsc)
 {
+
 	const FGameplayAbilityActivationInfo ActivationInfo = GetCurrentActivationInfo();
 	if (!HasAuthorityOrPredictionKey(GetCurrentActorInfo(), &ActivationInfo))
 	{
+		// UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2}'s handle melee attack({3}) is only valid on the server! ",
+		// 	*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetNameSafe(OverlappedArmament));
 		return;
 	}
 	
@@ -404,8 +407,13 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 	
 	// Create the execution calculation and add any additional information to the handle
 	const FGameplayEffectSpec* ExecCalc = ExecCalcHandle.Data.Get();
-	// UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(ExecCalcHandle, FGameplayTag::RequestGameplayTag(Tag_Event_Montage_Action), 1);
+
+	// Add the weapon to the effect context
+	FGameplayEffectContextHandle EffectContext = ExecCalc->GetContext();
+	EffectContext.AddSourceObject(OverlappedArmament);
+
 	
+	// If we want to handle hit reacts here to prevent any problems with montages, here is the place we should handle it
 	// const float CalculatedDamage = GetCalculatedDamage();
 	// FHitResult Impact = UAbilitySystemBlueprintLibrary::GetHitResultFromTargetData(TargetData, 0);
 	// Impact.ImpactPoint = Armament->GetActorLocation();
@@ -420,17 +428,18 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 	// USanboxAscLibrary::SetHitReactDirection(ContextHandle, HitReactDirection);
 	// USanboxAscLibrary::SetKnockbackForce(ContextHandle, FVector(13.0f)); // TODO: add combat calculations for knock back amounts for different attacks?
 
+	
 	// Retrieve the gameplay effect attributes, and additional information to the specification
-	if (HasAuthorityOrPredictionKey(GetCurrentActorInfo(), &ActivationInfo))
-	{
-		TArray<FActiveGameplayEffectHandle> EffectHandles = ApplyExecCalcToTarget(
-			GetCurrentAbilitySpecHandle(),
-			GetCurrentActorInfo(),
-			GetCurrentActivationInfo(),
-			TargetData,
-			ExecCalcHandle
-		);
-	}
+
+	
+	// Handle damage calculations
+	TArray<FActiveGameplayEffectHandle> EffectHandles = ApplyExecCalcToTarget(
+		GetCurrentAbilitySpecHandle(),
+		GetCurrentActorInfo(),
+		GetCurrentActivationInfo(),
+		TargetData,
+		ExecCalcHandle
+	);
 }
 
 
@@ -460,7 +469,7 @@ void UCombatAbility::CheckAndAttackIfAlreadyOverlappingAnything(AArmament* Overl
 			Data->SetActors(Targets);
 			TargetData.Add(Data);
 	
-			HandleMeleeAttack(TargetData, TargetCharacter->GetAbilitySystem<UAbilitySystem>());
+			HandleMeleeAttack(TargetData, OverlappedArmament, TargetCharacter->GetAbilitySystem<UAbilitySystem>());
 			AlreadyHitActors.Add(TargetCharacter);
 		}
 	}

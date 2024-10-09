@@ -36,11 +36,11 @@ UMeleeAttack::UMeleeAttack()
 	AllowMovementTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AllowMovement);
 	AttackFramesTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames);
 	AttackFramesEndTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_End);
-	LeftHandAttackFramesEndTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_End);
-	RightHandAttackFramesEndTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_End);
+	LeftHandAttackFramesEndTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_End_L);
+	RightHandAttackFramesEndTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_End_R);
 	AttackFramesBeginTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_Begin);
-	LeftHandAttackFramesBeginTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_Begin);
-	RightHandAttackFramesBeginTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_Begin);
+	LeftHandAttackFramesBeginTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_Begin_L);
+	RightHandAttackFramesBeginTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_Begin_R);
 	StaminaCostEffectTag = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Drain_Stamina);
 }
 
@@ -156,27 +156,6 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 
 	// Once we've already handled combat calculations
 	SetComboIndex();
-	
-	
-	// Attack State ->  (Allow movement, begin overlap trace logic, etc.)
-	AttackFramesHandle = UAbilityTask_WaitGameplayEvent::WaitGameplayEvent(this, AttackFramesTag, nullptr, false, false);
-	AttackFramesHandle->EventReceived.AddDynamic(this, &UMeleeAttack::OnAttackFrameEvent);
-	AttackFramesHandle->ReadyForActivation();
-
-	
-	// Overlap Trace ->  Have the server handle the attack logic with client prediction
-	TArray<AArmament*> TracedWeapons;
-	if (CurrentStance == EArmamentStance::DualWielding || CurrentStance == EArmamentStance::TwoWeapons)
-	{
-		TracedWeapons.Add(CombatComponent->GetArmament(false));
-		TracedWeapons.Add(CombatComponent->GetArmament());
-	}
-	else if (!IsRightHandAbility()) TracedWeapons.Add(CombatComponent->GetArmament(false));
-	else TracedWeapons.Add(CombatComponent->GetArmament());
-	
-	MeleeOverlapHandle = UAbilityTask_TargetOverlap::CreateOverlapDataTask(this, TracedWeapons);
-	MeleeOverlapHandle->OnValidOverlap.AddDynamic(this, &UMeleeAttack::OnOverlappedTarget);
-	// MeleeOverlapHandle->ReadyForActivation(); // During attack frames
 
 	
 	// Attack montage
@@ -192,6 +171,31 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 	AttackMontageHandle->OnBlendOut.AddDynamic(this, &UMeleeAttack::OnEndOfMontage);
 	AttackMontageHandle->OnInterrupted.AddDynamic(this, &UMeleeAttack::OnEndOfMontage);
 	AttackMontageHandle->ReadyForActivation();
+	
+	if (IsPredictingClient() || HasAuthority(&ActivationInfo))
+	{
+		// Attack State ->  (Allow movement, begin overlap trace logic, etc.)
+		AttackFramesHandle = UAbilityTask_WaitGameplayEvent::WaitGameplayEvent(this, AttackFramesTag, nullptr, false, false);
+		AttackFramesHandle->EventReceived.AddDynamic(this, &UMeleeAttack::OnAttackFrameEvent);
+		AttackFramesHandle->ReadyForActivation();
+
+		
+		// Overlap Trace ->  Have the server handle the attack logic with client prediction
+		TArray<AArmament*> TracedWeapons = {};
+		if (CurrentStance == EArmamentStance::DualWielding || CurrentStance == EArmamentStance::TwoWeapons)
+		{
+			TracedWeapons.Add(CombatComponent->GetArmament(false));
+			TracedWeapons.Add(CombatComponent->GetArmament());
+		}
+		else if (!IsRightHandAbility()) TracedWeapons.Add(CombatComponent->GetArmament(false));
+		else TracedWeapons.Add(CombatComponent->GetArmament());
+		
+		MeleeOverlapHandle = UAbilityTask_TargetOverlap::CreateOverlapDataTask(this, TracedWeapons);
+		MeleeOverlapHandle->OnValidOverlap.AddDynamic(this, &UMeleeAttack::OnOverlappedTarget);
+		// MeleeOverlapHandle->ReadyForActivation(); // During attack frames
+	}
+
+	UE_LOGFMT(AbilityLog, Log, " ");
 }
 
 
@@ -252,27 +256,47 @@ void UMeleeAttack::OnAttackFrameEvent(const FGameplayEventData EventData)
 		// End attack frames (war is never over)
 		if (EventData.EventTag.MatchesTag(AttackFramesEndTag))
 		{
+			UE_LOGFMT(AbilityLog, Log, "{0}::AttackFrames End, {1}", GetOwningActorFromActorInfo()->HasAuthority() ? FString("Server") : FString("Client"), *EventData.EventTag.ToString());
 			if (EventData.EventTag.MatchesTag(LeftHandAttackFramesEndTag) && SecondaryAttackState == EAttackFramesState::Enabled)
 			{
-				OnEndAttackFrames(IsRightHandAbility());
+				OnEndAttackFrames(false);
 			}
-			if (EventData.EventTag.MatchesTag(RightHandAttackFramesEndTag) && PrimaryAttackState == EAttackFramesState::Enabled)
+			else if (EventData.EventTag.MatchesTag(RightHandAttackFramesEndTag) && PrimaryAttackState == EAttackFramesState::Enabled)
 			{
+				OnEndAttackFrames(true);
+			}
+			// This shouldn't happen, however some auxiliary attacks (like crouching and other ones non specific to attack patterns) could cause it to happen
+			else if (EventData.EventTag.MatchesTagExact(AttackFramesEndTag))
+			{
+				UE_LOGFMT(AbilityLog, Error, "{0}::{1}() Something broke with the attack frame logic! {2}, Stance: {3}, AtkP: {4}, Montage: {5}, EventTag: {6}",
+					*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()),
+					*UEnum::GetValueAsString(CurrentStance), *UEnum::GetValueAsString(AttackPattern), *GetNameSafe(GetCurrentMontage()), *EventData.EventTag.ToString()
+				);
+				
 				OnEndAttackFrames(IsRightHandAbility());
 			}
 		}
 		// Begin attack frames (I'm always ready)
 		else if (EventData.EventTag.MatchesTag(AttackFramesBeginTag))
 		{
-			OnBeginAttackFrames(IsRightHandAbility());
-
+			UE_LOGFMT(AbilityLog, Log, "{0}::AttackFrames Begin, {1}", GetOwningActorFromActorInfo()->HasAuthority() ? FString("Server") : FString("Client"), *EventData.EventTag.ToString());
 			// We're only enabling the frames for one attack, if you have animations with multiple frames you'll have to adjust this logic, specifically for enemies
 			if (EventData.EventTag.MatchesTag(LeftHandAttackFramesBeginTag) && SecondaryAttackState == EAttackFramesState::Disabled)
 			{
-				OnBeginAttackFrames(IsRightHandAbility());
+				OnBeginAttackFrames(false);
 			}
-			if (EventData.EventTag.MatchesTag(RightHandAttackFramesBeginTag) && PrimaryAttackState == EAttackFramesState::Disabled)
+			else if (EventData.EventTag.MatchesTag(RightHandAttackFramesBeginTag) && PrimaryAttackState == EAttackFramesState::Disabled)
 			{
+				OnBeginAttackFrames(true);
+			}
+			// This shouldn't happen, however some auxiliary attacks (like crouching and other ones non specific to attack patterns) could cause it to happen
+			else if (EventData.EventTag.MatchesTagExact(AttackFramesBeginTag))
+			{
+				UE_LOGFMT(AbilityLog, Error, "{0}::{1}() Something broke with the attack frame logic! {2}, Stance: {3}, AtkP: {4}, Montage: {5}, EventTag: {6}",
+					*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()),
+					*UEnum::GetValueAsString(CurrentStance), *UEnum::GetValueAsString(AttackPattern), *GetNameSafe(GetCurrentMontage()), *EventData.EventTag.ToString()
+				);
+
 				OnBeginAttackFrames(IsRightHandAbility());
 			}
 		}
@@ -282,18 +306,20 @@ void UMeleeAttack::OnAttackFrameEvent(const FGameplayEventData EventData)
 
 void UMeleeAttack::OnBeginAttackFrames(bool bRightHand)
 {
+	// Update the attack frames state (and capture the previous attack frame state to properly capture frame one calculations
+	const bool bOverlapPreviouslyDisabled = PrimaryAttackState == EAttackFramesState::Disabled && SecondaryAttackState == EAttackFramesState::Disabled;
+	if (!bRightHand) SecondaryAttackState = EAttackFramesState::Enabled;
+	else PrimaryAttackState = EAttackFramesState::Enabled;
+	
+	
 	// Initialize the attack frames if it hasn't been activated yet
-	if (PrimaryAttackState == EAttackFramesState::Disabled && SecondaryAttackState == EAttackFramesState::Disabled)
+	if (bOverlapPreviouslyDisabled)
 	{
 		if (MeleeOverlapHandle && !MeleeOverlapHandle->IsActive())
 		{
 			MeleeOverlapHandle->ReadyForActivation();
 		}
 	}
-
-	// Update the attack frames state
-	if (!bRightHand) SecondaryAttackState = EAttackFramesState::Enabled;
-	else PrimaryAttackState = EAttackFramesState::Enabled;
 
 
 	UCombatComponent* CombatComponent = GetCombatComponent();
@@ -303,7 +329,6 @@ void UMeleeAttack::OnBeginAttackFrames(bool bRightHand)
 			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
 		return;
 	}
-
 	
 	if (!bRightHand)
 	{
@@ -345,12 +370,15 @@ void UMeleeAttack::OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& Ta
 	if (!CombatComponent)
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while overlapping a target! Defaulting to one of the armament's hitboxes!",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 	}
 
+	UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} OnOverlapped event, checking if they've already attacked the player!",
+		*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(OverlappedArmament));
 
+	
 	const bool bRightHandArmament = CombatComponent && OverlappedArmament == CombatComponent->GetArmament(false) ? false : true;
-	TArray<AActor*>& ArmamentHitActors = !bRightHandArmament ? SecondaryHitActors :PrimaryHitActors;
+	TArray<AActor*>& ArmamentHitActors = !bRightHandArmament ? SecondaryHitActors : PrimaryHitActors;
 	if (CurrentStance == EArmamentStance::DualWielding || CurrentStance == EArmamentStance::TwoWeapons)
 	{
 		// Check if there's attack frames for the current attack
@@ -358,9 +386,9 @@ void UMeleeAttack::OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& Ta
 		if ((!bRightHandArmament && AttackFramesState == EAttackFramesState::Enabled) ||
 			(bRightHandArmament && AttackFramesState == EAttackFramesState::Enabled))
 		{
-			
 			if (ArmamentHitActors.Contains(TargetAsc->GetAvatarActor()))
 			{
+				UE_LOGFMT(AbilityLog, Log, "{0} already overlapping with {1}", *GetNameSafe(OverlappedArmament), *GetNameSafe(TargetAsc->GetAvatarActor()));
 				return;
 			}
 
@@ -368,8 +396,13 @@ void UMeleeAttack::OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& Ta
 			if (TargetAsc->GetAvatarActor())
 			{
 				ArmamentHitActors.AddUnique(TargetAsc->GetAvatarActor());
-				HandleMeleeAttack(TargetData, TargetAsc);
+				HandleMeleeAttack(TargetData, OverlappedArmament, TargetAsc);
 			}
+		}
+		else
+		{
+			UE_LOGFMT(AbilityLog, Log, "{0} invalid attack frame state: {1}, rightHandArmament({2}): {3}", *GetNameSafe(OverlappedArmament),
+				*UEnum::GetValueAsString(AttackFramesState), bRightHandArmament ? *FString("true") : *FString("false"), GetNameSafe(CombatComponent->GetArmament(bRightHandArmament)));
 		}
 	}
 	else
@@ -384,7 +417,7 @@ void UMeleeAttack::OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& Ta
 		if (TargetAsc->GetAvatarActor())
 		{
 			ArmamentHitActors.AddUnique(TargetAsc->GetAvatarActor());
-			HandleMeleeAttack(TargetData, TargetAsc);
+			HandleMeleeAttack(TargetData, OverlappedArmament, TargetAsc);
 		}
 	}
 
@@ -426,6 +459,7 @@ bool UMeleeAttack::SetComboAndArmamentInformation()
 		// crouching and running attacks
 		CrouchingAttackInformation = Armament->GetComboAttacks(EInputAbilities::Crouch);
 		RunningAttackInformation = Armament->GetComboAttacks(EInputAbilities::Sprint);
+		return bSetComboAndArmamentInformation;
 	}
 
 	return bSetComboAndArmamentInformation;
