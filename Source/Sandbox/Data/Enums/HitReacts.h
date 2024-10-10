@@ -34,6 +34,7 @@ enum class EHitStun : uint8
 	
   	/** Burger Flip | Giant Hunt */
 	FrontFlip = 6			UMETA(DisplayName = "FrontFlip"),
-	
+
+	MAX = 7
 };
 

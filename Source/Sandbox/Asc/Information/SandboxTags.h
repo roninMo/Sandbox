@@ -120,6 +120,14 @@
 
 
 // ; States
+#define Tag_Status FName("Status")
+#define Tag_Status_Poison FName("Status.Poison")
+#define Tag_Status_Curse FName("Status.Curse")
+#define Tag_Status_Madness FName("Status.Madness")
+#define Tag_Status_Sleep FName("Status.Sleep")
+
+
+// ; States
 #define Tag_State FName("State")
 #define Tag_State_Slowed FName("State.Slowed")
 #define Tag_State_HitStun FName("State.HitStun")

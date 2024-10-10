@@ -141,6 +141,7 @@ public:
 //------------------------------------------------------------------//
 public:
 	/**** Damage ****/
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Standard) FGameplayAttributeData Damage_Poise;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Standard) FGameplayAttributeData Damage_Standard;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Slash) FGameplayAttributeData Damage_Slash;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Pierce) FGameplayAttributeData Damage_Pierce;
@@ -236,6 +237,7 @@ public:
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Negation_Lightning)
 
 	// Meta
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Poise)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Standard)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Slash)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Pierce)
@@ -325,6 +327,7 @@ protected:
 	UFUNCTION() virtual void OnRep_Negation_Lightning(const FGameplayAttributeData OldNegation_Lightning) const;
 
 	// Meta Attributes
+	UFUNCTION() virtual void OnRep_Damage_Poise(const FGameplayAttributeData OldDamage_Poise) const;
 	UFUNCTION() virtual void OnRep_Damage_Standard(const FGameplayAttributeData OldDamage_Standard) const;
 	UFUNCTION() virtual void OnRep_Damage_Slash(const FGameplayAttributeData OldDamage_Slash) const;
 	UFUNCTION() virtual void OnRep_Damage_Pierce(const FGameplayAttributeData OldDamage_Pierce) const;

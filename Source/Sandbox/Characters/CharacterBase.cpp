@@ -336,13 +336,12 @@ void ACharacterBase::SetCharacterMontages()
 	}
 }
 
-FName ACharacterBase::GetHitReactSection(AActor* Actor, const FVector& ActorLocation, const FVector& ImpactLocation) const
+FName ACharacterBase::GetHitReactSection(EHitDirection HitReactDirection) const
 {
-	const EHitDirection HitReact = GetHitReactDirection(Actor, ActorLocation, ImpactLocation);
-	if (HitReact == EHitDirection::Back) return FName("Back");
-	if (HitReact == EHitDirection::Front) return FName("Front");
-	if (HitReact == EHitDirection::Left) return FName("Left");
-	if (HitReact == EHitDirection::Right) return FName("Right");
+	if (HitReactDirection == EHitDirection::Back) return FName("Back");
+	if (HitReactDirection == EHitDirection::Front) return FName("Front");
+	if (HitReactDirection == EHitDirection::Left) return FName("Left");
+	if (HitReactDirection == EHitDirection::Right) return FName("Right");
 	return FName();
 }
 

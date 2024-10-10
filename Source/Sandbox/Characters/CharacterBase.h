@@ -548,7 +548,7 @@ public:
 	
 	/** Returns the hit react direction montage section based on the location of the player and the weapon's impact location */
 	UFUNCTION(BlueprintCallable, Category = "Combat")
-	virtual FName GetHitReactSection(AActor* Actor, const FVector& ActorLocation, const FVector& ImpactLocation) const;
+	virtual FName GetHitReactSection(EHitDirection HitReactDirection) const;
 
 	
 //-------------------------------------------------------------------------------------//

@@ -855,6 +855,12 @@ void UCombatComponent::PoiseBreak(ACharacterBase* Enemy, AActor* Source, float P
 	EffectContextHandle.AddSourceObject(Source);
 	AbilitySystem->ApplyGameplayEffectToSelf(HitStunDuration, 1, EffectContextHandle);
 	
+	UAnimMontage* HitReactMontage = Character->GetCharacterMontages().HitReactMontage;
+	if (HitReactMontage)
+	{
+		Character->NetMulticast_PlayMontage(HitReactMontage, Character->GetHitReactSection(HitDirection));
+	}
+
 	OnPoiseBroken.Broadcast(Character, Enemy, HitStun, HitDirection, PoiseDamage);
 }
 

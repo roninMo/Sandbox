@@ -27,9 +27,14 @@ enum class EInputAbilities : uint8;
 #define Montage_Equip FName("Equip")
 #define Montage_Unequip FName("Unequip")
 
+// Death montages
+#define Montage_Section_Death FName("Death")
+#define Montage_Section_Curse FName("Curse")
+
 // Equip Montage sections
 #define Montage_EquipSection FName("Equip")
 #define Montage_UnequipSection FName("Unequip")
+
 
 
 

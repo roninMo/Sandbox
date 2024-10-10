@@ -5,8 +5,11 @@
 
 #include "GameplayEffectExtension.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Characters/CharacterBase.h"
+#include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Combat/Weapons/Armament.h"
+#include "Sandbox/Data/Enums/HitReacts.h"
 
 
 bool UMMOAttributeLogic::PreGameplayEffectExecute(FGameplayEffectModCallbackData& Data)
@@ -56,17 +59,67 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 
 			https://fextralife.com/forums/t52683/poise-explanation-general-pvp-tips
 			https://www.reddit.com/r/Eldenring/comments/pjemv1/which_poise_system_do_you_prefer_the_most_and/
-			
 
+			
+			- Status calculations
+				- status buildup
+				- Status effect (Take damage / slow / poison)
+
+			- Take damage
+				- Hit reaction based on the attack
+				- Handle taking damage / dying
+
+			- Poise damage
+				- Damage poise
+				- Handle poise break / effect for regenerating poise
+				- Handle hit reactions
+			
+			- Any other effects to attributes
+				- stamina drain, etc.
+
+
+			CombatComponent
+				- Status buildup
+					- Curse -> Death / Montage / etc.
+					- Bleed -> Bleed damage / Hit react / gameplay cue
+					- Poison -> Poise damage / drain / gameplay cue
+					- Frostbite -> Frostbite damage / Hit react / Damage received debuff / gameplay cue
+					- Madness -> Madness damage / Reaction / gameplay cue
+					- Sleep -> Sleep debuff / Montage / gameplay cue
+
+				- Take damage
+					- Hit reactions during poise break
+						- variations based on weapon and attack location
+					- Dying and respawning
+
+
+			- Gameplay logic for handling durations
+				- Prevent characters from attacking after they've just been attacked (Check if this is something that doesn't cause network problems, or if it's something we should handle independently)
+				- Things like preventing stamina regeneration for a duration after the player's attacked, sprinted, etc.
+				
 	*/
 
+	
 	// Retrieve the player and target's information, and handle attribute clamping during damage calculations
 	GetExecutionData(Data, Props);
+	ACharacterBase* Character = Cast<ACharacterBase>(Props.TargetActor);
+	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
+	AArmament* Armament = Cast<AArmament>(Props.Context.GetSourceObject());
+	UCombatComponent* CombatComponent = Character ? Character->GetCombatComponent();
 
+	// Weapon and attack information
+	FVector WeaponLocation = Armament ? Armament->GetCenterLocation() : Props.SourceActor.Get()->GetActorLocation(); // TODO: create a custom target data object for returning the proper information
+	EHitDirection HitDirection = Character->GetHitReactDirection(Character, Character->GetActorLocation(), WeaponLocation);
+	EHitStun HitStun = EHitStun::None;
 
+	
 	/**** Combat calculations ****/
 	if (Data.EvaluatedData.Attribute == GetDamageCalculationAttribute())
 	{
+		bool bWasCursed = false;
+		bool bWasFrosbitten = false;
+		bool bCharacterBled = false;
+		bool bPoiseBroken = false;
 		float MagicDamageTaken = 0.0;
 		float DamageTaken = 0.0;
 		
@@ -78,12 +131,66 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 					- status buildup
 					- Status effect (Take damage / slow / poison)
 			*/
-			if (Attribute == GetCurseAttribute()) SetCurseBuildup(FMath::Clamp(GetCurseBuildup() + Value, 0, GetMaxCurseBuildup()));
-			if (Attribute == GetBleedAttribute()) SetBleedBuildup(FMath::Clamp(GetBleedBuildup() + Value, 0, GetMaxBleedBuildup()));
-			if (Attribute == GetPoisonAttribute()) SetPoisonBuildup(FMath::Clamp(GetPoisonBuildup() + Value, 0, GetMaxPoisonBuildup()));
-			if (Attribute == GetFrostbiteAttribute()) SetFrostbiteBuildup(FMath::Clamp(GetFrostbiteBuildup() + Value, 0, GetMaxFrostbiteBuildup()));
-			if (Attribute == GetMadnessAttribute()) SetMadnessBuildup(FMath::Clamp(GetMadnessBuildup() + Value, 0, GetMaxMadnessBuildup()));
-			if (Attribute == GetSleepAttribute()) SetSleepBuildup(FMath::Clamp(GetSleepBuildup() + Value, 0, GetMaxSleepBuildup()));
+			if (Attribute == GetCurseAttribute() && !AbilitySystem->HasMatchingGameplayTag(CursedTag))
+			{
+				SetCurseBuildup(FMath::Clamp(GetCurseBuildup() + Value, 0, GetMaxCurseBuildup()));
+
+				if (GetCurseBuildup() == GetMaxCurseBuildup())
+				{
+					bWasCursed = true;
+					SetHealth(0.0);
+					CombatComponent->HandleCurse(Props.SourceActor, Character);
+				}
+			}
+			else if (Attribute == GetBleedAttribute())
+			{
+				SetBleedBuildup(FMath::Clamp(GetBleedBuildup() + Value, 0, GetMaxBleedBuildup()));
+
+				if (GetBleedBuildup() == GetMaxBleedBuildup())
+				{
+					bCharacterBled = true;
+					SetBleedBuildup(0.0);
+					CombatComponent->HandleBleed(Props.SourceActor, Character);
+				}
+			}
+			else if (Attribute == GetPoisonAttribute() && !AbilitySystem->HasMatchingGameplayTag(PoisonedTag))
+			{
+				SetPoisonBuildup(FMath::Clamp(GetPoisonBuildup() + Value, 0, GetMaxPoisonBuildup()));
+
+				if (GetPoisonBuildup() == GetMaxPoisonBuildup())
+				{
+					CombatComponent->HandlePoisoned(Props.SourceActor, Character);
+				}
+			}
+			else if (Attribute == GetFrostbiteAttribute())
+			{
+				SetFrostbiteBuildup(FMath::Clamp(GetFrostbiteBuildup() + Value, 0, GetMaxFrostbiteBuildup()));
+
+				if (GetFrostbiteBuildup() == GetMaxFrostbiteBuildup())
+				{
+					bWasFrosbitten = true;
+					SetFrostbiteBuildup(0.0);
+					CombatComponent->HandleFrostbite(Props.SourceActor, Character);
+				}
+			}
+			else if (Attribute == GetMadnessAttribute() && !AbilitySystem->HasMatchingGameplayTag(MaddenedTag))
+			{
+				SetMadnessBuildup(FMath::Clamp(GetMadnessBuildup() + Value, 0, GetMaxMadnessBuildup()));
+				
+				if (GetMadnessBuildup() == GetMaxMadnessBuildup())
+				{
+					CombatComponent->HandleMadness(Props.SourceActor, Character);
+				}
+			}
+			else if (Attribute == GetSleepAttribute() && !AbilitySystem->HasMatchingGameplayTag(SleepTag))
+			{
+				SetSleepBuildup(FMath::Clamp(GetSleepBuildup() + Value, 0, GetMaxSleepBuildup()));
+
+				if (GetSleepBuildup() == GetMaxSleepBuildup())
+				{
+					CombatComponent->HandleSleep(Props.SourceActor, Character);
+				}
+			}
 
 			
 			/**
@@ -93,16 +200,16 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 					- Handle taking damage / dying
 			*/
 			if (Attribute == GetDamage_StandardAttribute()) DamageTaken += GetDamage_Standard();
-			if (Attribute == GetDamage_SlashAttribute()) DamageTaken += GetDamage_Slash();
-			if (Attribute == GetDamage_PierceAttribute()) DamageTaken += GetDamage_Pierce();
-			if (Attribute == GetDamage_StrikeAttribute()) DamageTaken += GetDamage_Strike();
+			else if (Attribute == GetDamage_SlashAttribute()) DamageTaken += GetDamage_Slash();
+			else if (Attribute == GetDamage_PierceAttribute()) DamageTaken += GetDamage_Pierce();
+			else if (Attribute == GetDamage_StrikeAttribute()) DamageTaken += GetDamage_Strike();
 
-			if (Attribute == GetDamage_MagicAttribute()) MagicDamageTaken += GetDamage_Magic();
-			if (Attribute == GetDamage_IceAttribute()) MagicDamageTaken += GetDamage_Ice();
-			if (Attribute == GetDamage_FireAttribute()) MagicDamageTaken += GetDamage_Fire();
-			if (Attribute == GetDamage_HolyAttribute()) MagicDamageTaken += GetDamage_Holy();
-			if (Attribute == GetDamage_LightningAttribute()) MagicDamageTaken += GetDamage_Lightning();
-
+			else if (Attribute == GetDamage_MagicAttribute()) MagicDamageTaken += GetDamage_Magic();
+			else if (Attribute == GetDamage_IceAttribute()) MagicDamageTaken += GetDamage_Ice();
+			else if (Attribute == GetDamage_FireAttribute()) MagicDamageTaken += GetDamage_Fire();
+			else if (Attribute == GetDamage_HolyAttribute()) MagicDamageTaken += GetDamage_Holy();
+			else if (Attribute == GetDamage_LightningAttribute()) MagicDamageTaken += GetDamage_Lightning();
+			
 			
 			/**
 				Poise damage
@@ -110,6 +217,17 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 					- Handle poise break / effect for regenerating poise
 					- Handle hit reactions
 			*/
+			else if (Attribute == GetDamage_PoiseAttribute())
+			{
+				float CurrentPoise = GetPoise() - GetDamage_Poise();
+				if (CurrentPoise <= 0.0)
+				{
+					bPoiseBroken = true;
+					CurrentPoise = GetMaxPoise();
+				}
+				
+				SetPoise(CurrentPoise);
+			}
 
 			
 			/**
@@ -119,87 +237,51 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 
 			
 		}
+		
 
+		
+
+		/**** Take damage calculations ****/
+		// Physical / Magic damage
+		float CurrentHealth = GetHealth() - MagicDamageTaken - DamageTaken;
+		
+		// Bleed damage
+		if (bCharacterBled)
+		{
+			DamageTaken += 100 + (GetMaxHealth() * 0.15);
+			if (HitStun < EHitStun::Medium) HitStun = EHitStun::Medium;
+		}
+
+		// Curse damage
+		if (bWasCursed)
+		{
+			DamageTaken += GetHealth();
+		}
+
+		// Frostbite damage
+		if (bWasFrosbitten)
+		{
+			DamageTaken += 100 + (GetMaxHealth() * 0.15);
+			if (HitStun < EHitStun::Medium) HitStun = EHitStun::Medium;
+		}
 		
 		// Damage multipliers for weapon stats and player equipment, and any other status effects should be handled here
-
-
-
 		
-		// Take damage
-		float CurrentHealth = GetHealth() - MagicDamageTaken - DamageTaken;
+		
+		// Handle take damage
+		CombatComponent->HandleDamageTaken(Props.SourceActor, Props.Context.GetSourceObject(), DamageTaken, Data.EvaluatedData.Attribute);
 		if (CurrentHealth <= 0.0)
 		{
 			SetHealth(0);
-
-			// Handle death
+			CombatComponent->HandleDeath(Props.SourceActor, Character, bWasCursed ? Montage_Section_Curse : Montage_Section_Death);
 		}
 		else
 		{	
 			SetHealth(CurrentHealth);
-
-			// Handle any other take damage logic
-		}
-
-
-		/**
-
-
-				- Status calculations
-					- status buildup
-					- Status effect (Take damage / slow / poison)
-
-				- Take damage
-					- Hit reaction based on the attack
-					- Handle taking damage / dying
-
-
-				- Poise damage
-					- Damage poise
-					- Handle poise break / effect for regenerating poise
-					- Handle hit reactions
-				
-
-				- Any other effects to attributes
-					- stamina drain, etc.
-
-
-
-				CombatComponent
-					- Status buildup
-						- Curse -> Death / Montage / etc.
-						- Bleed -> Bleed damage / Hit react / gameplay cue
-						- Poison -> Poise damage / drain / gameplay cue
-						- Frostbite -> Frostbite damage / Hit react / Damage received debuff / gameplay cue
-						- Madness -> Madness damage / Reaction / gameplay cue
-						- Sleep -> Sleep debuff / Montage / gameplay cue
-
-					- Take damage
-						- Hit reactions during poise break
-							- variations based on weapon and attack location
-						- Dying and respawning
-
-
-					- Gameplay logic for handling durations
-						- Prevent characters from attacking after they've just been attacked (Check if this is something that doesn't cause network problems, or if it's something we should handle independently)
-						- Things like preventing stamina regeneration for a duration after the player's attacked, sprinted, etc.
-
-
-		 */
-			
-
-
-		
-		// Player reactions / other handling
-		ACharacterBase* Character = Cast<ACharacterBase>(Props.TargetActor);
-		AArmament* Armament = Cast<AArmament>(Props.Context.GetSourceObject());
-		if (Character)
-		{
-			UAnimMontage* Montage = Character->GetHitReactMontage();
-			FVector WeaponLocation = Armament ? Armament->GetCenterLocation() : Props.SourceActor.Get()->GetActorLocation(); // TODO: create a custom target data object for returning the proper information
-			FName HitReact = Character->GetHitReactSection(Character, Character->GetActorLocation(), WeaponLocation);
-			
-			Character->NetMulticast_PlayMontage(Montage, HitReact);
+			if (bPoiseBroken)
+			{
+				CombatComponent->PoiseBreak(Props.SourceActor, Character, GetDamage_Poise(), HitStun, HitDirection);
+			}
 		}
 
 		
