@@ -3,18 +3,31 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "Components/ActorComponent.h"
 #include "Sandbox/Data/Enums/ArmamentTypes.h"
 #include "Sandbox/Data/Structs/ArmorInformation.h"
 #include "Sandbox/Data/Structs/InventoryInformation.h"
 #include "CombatComponent.generated.h"
 
-struct FGameplayAttribute;
-struct FCharacterAbilityDataSet;
+class ACharacterBase;
+enum class ECombatAttribute : uint8;
 enum class EHitDirection : uint8;
 enum class EHitStun : uint8;
-struct F_ArmamentAbilityInformation;
 DECLARE_LOG_CATEGORY_EXTERN(CombatComponentLog, Log, All);
+
+
+class AArmament;
+class UDataTable;
+class UCharacterAbilityDataSet;
+enum class ECharacterSkeletonMapping : uint8;
+enum class EEquipSlot : uint8;
+enum class EArmorSlot : uint8;
+struct FGameplayAttribute;
+struct F_ArmamentAbilityInformation;
+struct F_ArmamentInformation;	
+struct FGAttributeSetExecutionData;
+
 
 // Equip Sockets
 #define Socket_LeftHandEquip FName("hand_lSocket")
@@ -33,13 +46,13 @@ DECLARE_LOG_CATEGORY_EXTERN(CombatComponentLog, Log, All);
 #define Socket_Holster_shotgun FName("holster_shotgun");
 
 
-class AArmament;
-class UDataTable;
-struct F_ArmamentInformation;	
-struct FGAttributeSetExecutionData;
-enum class ECharacterSkeletonMapping : uint8;
-enum class EEquipSlot : uint8;
-enum class EArmorSlot : uint8;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FCombatNotificationSignature, ACharacterBase*, Character, AActor*, Instigator);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnDeathSignature, ACharacterBase*, Character, AActor*, Instigator, float, AccumulatedDamage);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnRespawnSignature, ACharacterBase*, Character, FVector, Location);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FCombatDamageNotificationSignature, ACharacterBase*, Character, AActor*, Instigator, float, AccumulatedDamage);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FCombatDamagesNotificationSignature, ACharacterBase*, Character, AActor*, Instigator, float, AccumulatedDamage, const FGameplayAttribute&, DamageAffinities);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_FiveParams(FCombatPoiseBrokenSignature, ACharacterBase*, Character, AActor*, Instigator, EHitStun, HitStun, EHitDirection, HitDirection, float, PoiseDamage);
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FArmamentEquippedSignature, AArmament*, Armament, EEquipSlot, EquipSlot);
@@ -392,6 +405,12 @@ public:
 	virtual bool EquipArmor(F_Item Armor);
 
 	
+protected:
+	/** Synchronization RPC's */
+	UFUNCTION(Server, Reliable) virtual void Server_EquipArmor(const F_Item& Armor);
+
+
+public:
 	/** Retrieves the armor's information from the database */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Equipping")
 	virtual F_Item GetArmorItemInformation(EArmorSlot ArmorSlot);
@@ -409,120 +428,176 @@ public:
 	virtual const F_Information_Armor GetArmorFromDatabase(const FName Id) const;
 	
 	
-protected:
-	/** Synchronization RPC's */
-	UFUNCTION(Server, Reliable) virtual void Server_EquipArmor(const F_Item& Armor);
 
 	
-	
-
 //-------------------------------------------------------------------------------------//
 // Combat																			   //
 //-------------------------------------------------------------------------------------//
 protected:
-	/**
+	/** The durations for the different HitStuns */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") TMap<EHitStun, float> HitStunDurations;
 
-			- Status calculations
-				- status buildup
-				- Status effect (Take damage / slow / poison)
+	/** Gameplay effect for handling cleaning up/adding state and information when the player dies */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") UGameplayEffect* DeathEffect;
 
-			- Take damage
-				- Hit reaction based on the attack
-				- Handle taking damage / dying
+	/** Gameplay effect for handling cleaning up/adding state and information when the player respawns */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") UGameplayEffect* RespawnEffect;
+	
+	/** Status effect for state and information when the player is cursed */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") UGameplayEffect* CursedState;
 
+	
+	/** Status effect for state and information when the player has taken bleed damage */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") UGameplayEffect* GE_Bled;
 
-			- Poise damage
-				- Damage poise
-				- Handle poise break / effect for regenerating poise
-				- Handle hit reactions
-			
+	/** Status effect for state and information when the player is poisoned */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") UGameplayEffect* GE_Poisoned;
 
-			- Any other effects to attributes
-				- stamina drain, etc.
+	/** Status effect for state and information when the player is frostbitten */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") UGameplayEffect* GE_Frostbitten;
 
-
-
-			CombatComponent
-				- Status buildup
-					- Curse -> Death / Montage / etc.
-					- Bleed -> Bleed damage / Hit react / gameplay cue
-					- Poison -> Poise damage / drain / gameplay cue
-					- Frostbite -> Frostbite damage / Hit react / Damage received debuff / gameplay cue
-					- Madness -> Madness damage / Reaction / gameplay cue
-					- Sleep -> Sleep debuff / Montage / gameplay cue
-
-				- Take damage
-					- Hit reactions during poise break
-						- variations based on weapon and attack location
-					- Dying and respawning
+	/** Status effect for state and information when the player is maddened */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") UGameplayEffect* GE_Maddened;
+	
+	/** Status effect for state and information when the player has received the sleep effect */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") UGameplayEffect* GE_Slept;
 
 
-				- Gameplay logic for handling durations
-					- Prevent characters from attacking after they've just been attacked (Check if this is something that doesn't cause network problems, or if it's something we should handle independently)
-					- Things like preventing stamina regeneration for a duration after the player's attacked, sprinted, etc.
+	/**** Cached tags ****/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag HitStunEffectTag;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag HitStunTag;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventHealthRegenEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventHealthRegen;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventPoiseRegenEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventPoiseRegen;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventStaminaRegenEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventStaminaRegen;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventManaRegenEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventManaRegen;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventCurseBuildupEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventCurseBuildup;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventBleedBuildupEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventBleedBuildup;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventPoisonBuildupEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventPoisonBuildup;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventFrostbiteBuildupEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventFrostbiteBuildup;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventMadnessBuildupEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventMadnessBuildup;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventSleepBuildupEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PreventSleepBuildup;
 
 
-			On player cursed
-			On player bled
-			On player poisoned
-			On player frostbitten
-			On player maddened
-			On player slept
-			
-			On player attacked
-			On player poise broken
-			On player death
-			On player respawn
 
-	 */
+	
+public:
+	/** On player attacked (player, instigator, accumulatedDamage, damageAffinities) */
+	UPROPERTY(BlueprintAssignable) FCombatDamagesNotificationSignature OnPlayerAttacked;
+
+	/** On player poise broken (player, instigator, hitStun, hitDirection) */
+	UPROPERTY(BlueprintAssignable) FCombatPoiseBrokenSignature OnPoiseBroken;
+
+	/** On player death (player, instigator, damage) */
+	UPROPERTY(BlueprintAssignable) FOnDeathSignature OnDeath;
+
+	/** On player respawn (player, location) */
+	UPROPERTY(BlueprintAssignable) FOnRespawnSignature OnRespawn;
+
+	
+	/** On player cursed (player, instigator) */
+	UPROPERTY(BlueprintAssignable) FCombatNotificationSignature OnCursed;
+	
+	/** On player bled (player, instigator, accumulatedDamage) */
+	UPROPERTY(BlueprintAssignable) FCombatDamageNotificationSignature OnBled;
+
+	/** On player poisoned (player, instigator) */
+	UPROPERTY(BlueprintAssignable) FCombatNotificationSignature OnPoisoned;
+
+	/** On player frostbitten (player, instigator, accumulatedDamage) */
+	UPROPERTY(BlueprintAssignable) FCombatDamageNotificationSignature OnFrostBitten;
+
+	/** On player maddened (player, instigator) */
+	UPROPERTY(BlueprintAssignable) FCombatNotificationSignature OnMaddened;
+
+	/** On player slept (player, instigator) */
+	UPROPERTY(BlueprintAssignable) FCombatNotificationSignature OnSlept;
 
 
+public:
 	/** Logic for when a player takes damage */
-	// UFUNCTION(BlueprintCallable, Category = "Combat")
-	// virtual void HandleDamageTaken(float Value, const FGameplayAttribute Attribute);
-	//
-	// /** Handle varying hit reactions when a player's poise is broken */
-	// UFUNCTION(BlueprintCallable, Category = "Combat")
-	// virtual void PoiseBreak(float PoiseDamage, EHitStun HitStun, EHitDirection HitDirection);
-	//
-	// /** Logic for handling when the player dies */
-	// UFUNCTION(BlueprintCallable, Category = "Combat")
-	// virtual void HandleDeath();
-	//
-	// /** Logic for handling when the player respawns */
-	// UFUNCTION(BlueprintCallable, Category = "Combat")
-	// virtual void HandleRespawn(const FCharacterAbilityDataSet& RespawnData);
-	//
-	//
-	// /** Handle the logic that happens when the player is cursed */
-	// UFUNCTION(BlueprintCallable, Category = "Combat")
-	// virtual void HandleCurse();
-	//
-	// /** Logic when the player takes bleed damage */
-	// UFUNCTION(BlueprintCallable, Category = "Combat")
-	// virtual void HandleBleed();
-	//
-	// /** Logic for when the player is poisoned */
-	// UFUNCTION(BlueprintCallable, Category = "Combat")
-	// virtual void HandlePoisoned();
-	//
-	// /** Handle the logic when the player is frostbitten */
-	// UFUNCTION(BlueprintCallable, Category = "Combat")
-	// virtual void HandleFrostbite();
-	//
-	// /** Handle the logic when the player receives madness status */
-	// UFUNCTION(BlueprintCallable, Category = "Combat")
-	// virtual void HandleMadness();
-	//
-	// /** Handle the logic when the player receives sleep status */
-	// UFUNCTION(BlueprintCallable, Category = "Combat")
-	// virtual void HandleSleep();
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	virtual void HandleDamageTaken(ACharacterBase* Enemy, AActor* Source, float Value, const FGameplayAttribute Attribute);
 
+	/** Handle varying hit reactions when a player's poise is broken */
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	virtual void PoiseBreak(ACharacterBase* Enemy, AActor* Source, float PoiseDamage, EHitStun HitStun, EHitDirection HitDirection);
+
+	/** Logic for handling when the player dies */
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	virtual void HandleDeath(ACharacterBase* Enemy, AActor* Source, FName MontageSection);
+
+	/** Logic for handling when the player respawns */
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	virtual void HandleRespawn(ACharacterBase* Enemy, AActor* Source, const UCharacterAbilityDataSet* RespawnInformation);
+
+
+	// TODO: These can all be handled in the same function
+	/** Handle the logic that happens when the player is cursed */
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	virtual void HandleCurse(ACharacterBase* Enemy, AActor* Source);
+
+	/** Logic when the player takes bleed damage */
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	virtual void HandleBleed(ACharacterBase* Enemy, AActor* Source);
+	
+	/** Logic for when the player is poisoned */
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	virtual void HandlePoisoned(ACharacterBase* Enemy, AActor* Source);
+	
+	/** Handle the logic when the player is frostbitten */
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	virtual void HandleFrostbite(ACharacterBase* Enemy, AActor* Source);
+	
+	/** Handle the logic when the player receives madness status */
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	virtual void HandleMadness(ACharacterBase* Enemy, AActor* Source);
+	
+	/** Handle the logic when the player receives sleep status */
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	virtual void HandleSleep(ACharacterBase* Enemy, AActor* Source);
+	
+
+	/**
+	 * Returns a gameplay effect to prevent an attribute from regenerating for a specific duration
+	 *
+	 * @param Duration							The duration that the attribute isn't allowed to regenerate for
+	 * @param Attribute							The attribute we're preventing from regenerating
+	 * @returns									A gameplay effect for preventing attribute regeneration
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Combat|Utils")
+	virtual UGameplayEffect* GetPreventAttributeAccumulationEffect(float Duration, const ECombatAttribute Attribute) const;
+	
+	/**
+	 * Returns a gameplay effect for handling the hitstun duration once a player's been attacked.
+	 * TODO: This needs to be a value that's sent across the net from the server, or we need to find a way to predict this
+	 *
+	 * @param HitStun							The variation of HitStun, used to determine the duration of a hitstun, to keep in sync with the montage
+	 * @returns									A gameplay effect for adding a HitStun duration to the player
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Combat|Utils")
+	virtual UGameplayEffect* GetHitStunDurationEffect(EHitStun HitStun) const;
+
+	/**
+	 * Returns a gameplay effect to prevent certain attributes from regenerating for a specific duration
+	 *
+	 * @param Duration							The duration that the attributes aren't allowed to regenerate for
+	 * @param Attributes						The attributes we're preventing from regenerating
+	 * @returns									A gameplay effect for preventing attribute regeneration
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Combat|Utils")
+	virtual UGameplayEffect* GetPreventAttributesAccumulationEffect(float Duration, const TArray<ECombatAttribute>& Attributes) const;
 	
 	
-
-
-
 
 	
 //-------------------------------------------------------------------------------------//
@@ -540,16 +615,18 @@ public:
 
 	/** Adds a combat ability if the ability is valid for the player's current stance. This is a utility function for adding the combat abilities */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils") virtual void AddCombatAbilityIfValidStance(TMap<EInputAbilities, F_ArmamentAbilityInformation>& Map, const F_ArmamentAbilityInformation& Ability);
-	
-	/** Retrieves the armament's montage table */
-	UFUNCTION(BlueprintCallable) virtual UDataTable* GetArmamentMontageTable() const;
+
+	/** Retrieves the attribute prevention tag for a specific attribute */
+	virtual FGameplayTag GetAttributePreventionTag(ECombatAttribute Attribute, bool bStateTag = true) const;
 	
 	/** Sets the player's current combo index */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Combat") virtual void SetComboIndex(const int32 Index);
 
 	/** Retrieves the current combo index */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component|Combat") virtual int32 GetComboIndex() const;
-
+	
+	/** Retrieves the armament's montage table */
+	UFUNCTION(BlueprintCallable) virtual UDataTable* GetArmamentMontageTable() const;
 	
 };
 

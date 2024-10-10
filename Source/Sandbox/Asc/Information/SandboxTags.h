@@ -52,6 +52,23 @@
 #define Tag_GameplayEffect_Regen_Health FName("GameplayEffect.Regen.Health")
 #define Tag_GameplayEffect_Regen_Stamina FName("GameplayEffect.Regen.Stamina")
 
+#define Tag_GameplayEffect_Attack FName("GameplayEffect.Attack")
+#define Tag_GameplayEffect_Attack_HitStun FName("GameplayEffect.Attack.HitStun")
+
+#define Tag_GameplayEffect_Block FName("GameplayEffect.Block")
+#define Tag_GameplayEffect_Block_Regen FName("GameplayEffect.Block.Regen")
+#define Tag_GameplayEffect_Block_Regen_Health FName("GameplayEffect.Block.Regen.Health")
+#define Tag_GameplayEffect_Block_Regen_Poise FName("GameplayEffect.Block.Regen.Poise")
+#define Tag_GameplayEffect_Block_Regen_Stamina FName("GameplayEffect.Block.Regen.Stamina")
+#define Tag_GameplayEffect_Block_Regen_Mana FName("GameplayEffect.Block.Regen.Mana")
+#define Tag_GameplayEffect_Block_Buildup FName("GameplayEffect.Block.Buildup")
+#define Tag_GameplayEffect_Block_Buildup_Curse FName("GameplayEffect.Block.Buildup.Curse")
+#define Tag_GameplayEffect_Block_Buildup_Bleed FName("GameplayEffect.Block.Buildup.Bleed")
+#define Tag_GameplayEffect_Block_Buildup_Poison FName("GameplayEffect.Block.Buildup.Poison")
+#define Tag_GameplayEffect_Block_Buildup_Frostbite FName("GameplayEffect.Block.Buildup.Frostbite")
+#define Tag_GameplayEffect_Block_Buildup_Madness FName("GameplayEffect.Block.Buildup.Madness")
+#define Tag_GameplayEffect_Block_Buildup_Sleep FName("GameplayEffect.Block.Buildup.Sleep")
+
 
 // ; Gameplay Ability Tag Events
 #define Tag_Event_Montage FName("Event.Montage")
@@ -74,6 +91,23 @@
 #define Tag_Movement_WallLedgeClimbing FName("Movement.WallLedgeClimbing")
 
 
+// ; Blocks (state handles for preventing things like regen and status buildups)
+#define Tag_Block FName("Block")
+#define Tag_Block_Regen FName("Block.Regen")
+#define Tag_Block_Regen_Health FName("Block.Regen.Health")
+#define Tag_Block_Regen_Poise FName("Block.Regen.Poise")
+#define Tag_Block_Regen_Stamina FName("Block.Regen.Stamina")
+#define Tag_Block_Regen_Mana FName("Block.Regen.Mana")
+
+#define Tag_Block_Buildup FName("Block.Buildup")
+#define Tag_Block_Buildup_Curse FName("Block.Buildup.Curse")
+#define Tag_Block_Buildup_Bleed FName("Block.Buildup.Bleed")
+#define Tag_Block_Buildup_Poison FName("Block.Buildup.Poison")
+#define Tag_Block_Buildup_Frostbite FName("Block.Buildup.Frostbite")
+#define Tag_Block_Buildup_Madness FName("Block.Buildup.Madness")
+#define Tag_Block_Buildup_Sleep FName("Block.Buildup.Sleep")
+
+
 // ; Passives
 #define Tag_Passive FName("Passive")
 #define Tag_Passive_Drain FName("Passive.Drain")
@@ -88,6 +122,7 @@
 // ; States
 #define Tag_State FName("State")
 #define Tag_State_Slowed FName("State.Slowed")
+#define Tag_State_HitStun FName("State.HitStun")
 #define Tag_State_Dead FName("State.Dead")
 #define Tag_State_Stunned FName("State.Stunned")
 

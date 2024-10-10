@@ -10,7 +10,7 @@
  * A list of the combat attributes as an enum type
  */
 UENUM(BlueprintType)
-enum class ECombatAttributes : uint8
+enum class ECombatAttribute : uint8
 {
 	None,
 	Health,

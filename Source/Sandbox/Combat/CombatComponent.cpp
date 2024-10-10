@@ -8,21 +8,59 @@
 
 #include "Net/UnrealNetwork.h"
 #include "Engine/SkeletalMeshSocket.h"
+#include "GameFramework/PlayerState.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Asc/Attributes/AttributeLogic.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Weapons/Armament.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Asc/Information/SandboxTags.h"
+#include "Sandbox/Data/Enums/AttributeTypes.h"
+#include "Sandbox/Data/Enums/HitReacts.h"
 
 DEFINE_LOG_CATEGORY(CombatComponentLog);
 // TODO: Custom logging to remove the extra message logic for clarification
 
 
+#pragma region Constructors
 UCombatComponent::UCombatComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 	PrimaryComponentTick.bStartWithTickEnabled = false;
+
+
+	HitStunDurations.Add(EHitStun::None, 0);
+	HitStunDurations.Add(EHitStun::VeryShort, 0.1);
+	HitStunDurations.Add(EHitStun::Short, 0.2);
+	HitStunDurations.Add(EHitStun::Medium, 0.45);
+	HitStunDurations.Add(EHitStun::Long, 0.64);
+	HitStunDurations.Add(EHitStun::Knockdown, 0.9);
+	HitStunDurations.Add(EHitStun::FacePlant, 1.5);
+	HitStunDurations.Add(EHitStun::FrontFlip, 2);
 	
+	// Cached tags
+	HitStunEffectTag = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Attack_HitStun);
+	HitStunTag = FGameplayTag::RequestGameplayTag(Tag_State_HitStun);
+	PreventHealthRegenEffect = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Block_Regen_Health);
+	PreventHealthRegen = FGameplayTag::RequestGameplayTag(Tag_Block_Regen_Health);
+	PreventPoiseRegenEffect = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Block_Regen_Poise);
+	PreventPoiseRegen = FGameplayTag::RequestGameplayTag(Tag_Block_Regen_Poise);
+	PreventStaminaRegenEffect = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Block_Regen_Stamina);
+	PreventStaminaRegen = FGameplayTag::RequestGameplayTag(Tag_Block_Regen_Stamina);
+	PreventManaRegenEffect = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Block_Regen_Mana);
+	PreventManaRegen = FGameplayTag::RequestGameplayTag(Tag_Block_Regen_Mana);
+	PreventCurseBuildupEffect = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Block_Buildup_Curse);
+	PreventCurseBuildup = FGameplayTag::RequestGameplayTag(Tag_Block_Buildup_Curse);
+	PreventBleedBuildupEffect = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Block_Buildup_Bleed);
+	PreventBleedBuildup = FGameplayTag::RequestGameplayTag(Tag_Block_Buildup_Bleed);
+	PreventPoisonBuildupEffect = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Block_Buildup_Poison);
+	PreventPoisonBuildup = FGameplayTag::RequestGameplayTag(Tag_Block_Buildup_Poison);
+	PreventFrostbiteBuildupEffect = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Block_Buildup_Frostbite);
+	PreventFrostbiteBuildup = FGameplayTag::RequestGameplayTag(Tag_Block_Buildup_Frostbite);
+	PreventMadnessBuildupEffect = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Block_Buildup_Madness);
+	PreventMadnessBuildup = FGameplayTag::RequestGameplayTag(Tag_Block_Buildup_Madness);
+	PreventSleepBuildupEffect = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Block_Buildup_Sleep);
+	PreventSleepBuildup = FGameplayTag::RequestGameplayTag(Tag_Block_Buildup_Sleep);
 }
 
 
@@ -52,11 +90,12 @@ void UCombatComponent::CombatCalculations(const FGAttributeSetExecutionData& Pro
 void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	UE_LOGFMT(CombatComponentLog, Log, "{0}::{1}() {2}'s combo index: {2}", *UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), ComboIndex);
 }
+#pragma endregion 
 
 
+
+#pragma region Armaments
 void UCombatComponent::AddArmamentToEquipSlot(const F_Item& ArmamentInventoryInformation, const EEquipSlot EquipSlot)
 {
 	if (!ArmamentInventoryInformation.IsValid()) return;
@@ -564,8 +603,12 @@ void UCombatComponent::Server_CreateArmament_Implementation(const EEquipSlot Equ
 {
 	CreateArmament(EquipSlot);
 }
+#pragma endregion 
 
 
+
+
+#pragma region Armors
 bool UCombatComponent::UnequipArmor(EArmorSlot ArmorSlot)
 {
 	// Sanity checks
@@ -768,8 +811,500 @@ void UCombatComponent::Server_EquipArmor_Implementation(const F_Item& Armor)
 {
 	EquipArmor(Armor);
 }
+#pragma endregion 
 
 
+
+
+#pragma region Combat Logic
+void UCombatComponent::HandleDamageTaken(ACharacterBase* Enemy, AActor* Source, float Value, const FGameplayAttribute Attribute) {}
+
+
+void UCombatComponent::PoiseBreak(ACharacterBase* Enemy, AActor* Source, float PoiseDamage, EHitStun HitStun, EHitDirection HitDirection)
+{
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to add a HitStun duration when the character wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
+	if (!AbilitySystem)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to add a HitStun duration when the ability system component wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	UGameplayEffect* HitStunDuration = GetHitStunDurationEffect(HitStun);
+	if (!HitStunDuration) return;
+
+	// If we need to handle removing abilities or add other extra configuration, handle it here, when we have direct access to the gameplay effect
+
+	
+	// Don't try to interact with effects after they've been applied, or during other handling like when it hasn't been initialized yet.
+	// You're just going to break it and cause other problems with replication, even if nothing's wrong. Don't be overly pervasive with these things
+
+	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
+	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
+
+	FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
+	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
+	EffectContextHandle.AddSourceObject(Source);
+	AbilitySystem->ApplyGameplayEffectToSelf(HitStunDuration, 1, EffectContextHandle);
+	
+	OnPoiseBroken.Broadcast(Character, Enemy, HitStun, HitDirection, PoiseDamage);
+}
+
+
+void UCombatComponent::HandleDeath(ACharacterBase* Enemy, AActor* Source, FName MontageSection)
+{
+	if (!DeathEffect)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle death when the effect information wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+	
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle death when the character wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
+	if (!AbilitySystem)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle death when the ability system component wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	// Add the GE for handling death state and information
+	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
+	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
+
+	FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
+	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
+	EffectContextHandle.AddSourceObject(Source);
+	AbilitySystem->ApplyGameplayEffectToSelf(DeathEffect, 1, EffectContextHandle);
+
+
+	UAnimMontage* DeathMontage = Character->GetCharacterMontages().DeathMontage;
+	if (!DeathMontage) Character->GetMesh()->SetHiddenInGame(true, true);
+	else
+	{
+		Character->NetMulticast_PlayMontage(DeathMontage, MontageSection);
+	}
+}
+
+
+void UCombatComponent::HandleRespawn(ACharacterBase* Enemy, AActor* Source, const UCharacterAbilityDataSet* RespawnInformation)
+{
+	if (!RespawnInformation)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to respawn when the character's respawn information wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle curse when the character wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	if (!Character->HasAuthority())
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Only respawn the character on authority!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
+	if (!AbilitySystem)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle curse when the ability system component wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+
+	// Respawn, reset state, abilities, and equipment
+	// Retrieve the character's save information, and respawn the character
+	
+}
+
+
+void UCombatComponent::HandleCurse(ACharacterBase* Enemy, AActor* Source)
+{
+	if (!CursedState)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle curse status when the effect information wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+	
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle curse  when the character wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
+	if (!AbilitySystem)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle curse when the ability system component wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	// Add the GE for handling death state and information
+	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
+	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
+
+	FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
+	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
+	EffectContextHandle.AddSourceObject(Source);
+	AbilitySystem->ApplyGameplayEffectToSelf(CursedState, 1, EffectContextHandle);
+}
+
+
+void UCombatComponent::HandleBleed(ACharacterBase* Enemy, AActor* Source)
+{
+	if (!GE_Bled)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle bleed when the effect information wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+	
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle bleed when the character wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
+	if (!AbilitySystem)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle bleed when the ability system component wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	// Add the GE for handling death state and information
+	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
+	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
+
+	FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
+	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
+	EffectContextHandle.AddSourceObject(Source);
+	AbilitySystem->ApplyGameplayEffectToSelf(GE_Bled, 1, EffectContextHandle);
+}
+
+
+void UCombatComponent::HandlePoisoned(ACharacterBase* Enemy, AActor* Source)
+{
+	if (!GE_Poisoned)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle poison when the effect information wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+	
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle poison when the character wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
+	if (!AbilitySystem)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle poison when the ability system component wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	// Add the GE for handling death state and information
+	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
+	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
+
+	FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
+	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
+	EffectContextHandle.AddSourceObject(Source);
+	AbilitySystem->ApplyGameplayEffectToSelf(GE_Poisoned, 1, EffectContextHandle);
+}
+
+
+void UCombatComponent::HandleFrostbite(ACharacterBase* Enemy, AActor* Source)
+{
+	if (!GE_Frostbitten)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle frostbite when the effect information wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+	
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle frostbite when the character wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
+	if (!AbilitySystem)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle frostbite when the ability system component wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	// Add the GE for handling death state and information
+	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
+	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
+
+	FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
+	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
+	EffectContextHandle.AddSourceObject(Source);
+	AbilitySystem->ApplyGameplayEffectToSelf(GE_Frostbitten, 1, EffectContextHandle);
+}
+
+
+void UCombatComponent::HandleMadness(ACharacterBase* Enemy, AActor* Source)
+{
+	if (!GE_Maddened)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle madness when the effect information wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+	
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle madness when the character wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
+	if (!AbilitySystem)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle madness when the ability system component wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	// Add the GE for handling death state and information
+	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
+	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
+
+	FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
+	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
+	EffectContextHandle.AddSourceObject(Source);
+	AbilitySystem->ApplyGameplayEffectToSelf(GE_Maddened, 1, EffectContextHandle);
+}
+
+
+void UCombatComponent::HandleSleep(ACharacterBase* Enemy, AActor* Source)
+{
+	if (!GE_Slept)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle sleep when the effect information wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+	
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle sleep when the character wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
+	if (!AbilitySystem)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle sleep when the ability system component wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	// Add the GE for handling death state and information
+	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
+	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
+
+	FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
+	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
+	EffectContextHandle.AddSourceObject(Source);
+	AbilitySystem->ApplyGameplayEffectToSelf(GE_Slept, 1, EffectContextHandle);
+}
+
+
+UGameplayEffect* UCombatComponent::GetPreventAttributeAccumulationEffect(float Duration, const ECombatAttribute Attribute) const
+{
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to create a prevent regen effect when the character wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return nullptr;
+	}
+
+	const FGameplayTag AttributeTag = GetAttributePreventionTag(Attribute);
+	if (!AttributeTag.IsValid() || Duration <= 0)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to create a prevent regen effect when the attribute or duration isn't valid! Duration: {3}, Attribute: {4}",
+			*UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character), Duration, *UEnum::GetValueAsString(Attribute));
+		return nullptr;
+	}
+
+	const FName PreventAttribute = FName(*GetNameSafe(Character) + FString("_PreventAccumulation_").Append(UEnum::GetValueAsString(Attribute)));
+	UGameplayEffect* PreventRegenOrBuildup = NewObject<UGameplayEffect>(Character, PreventAttribute);
+	if (PreventRegenOrBuildup)
+	{
+		PreventRegenOrBuildup->DurationPolicy = EGameplayEffectDurationType::HasDuration;
+		PreventRegenOrBuildup->DurationMagnitude = FGameplayEffectModifierMagnitude(Duration);
+		PreventRegenOrBuildup->StackDurationRefreshPolicy = EGameplayEffectStackingDurationPolicy::RefreshOnSuccessfulApplication;
+
+		PreventRegenOrBuildup->InheritableGameplayEffectTags.AddTag(GetAttributePreventionTag(Attribute, false));
+		PreventRegenOrBuildup->InheritableOwnedTagsContainer.AddTag(AttributeTag);
+
+		return PreventRegenOrBuildup;
+	}
+	
+	// FGameplayEffectSpec* StaminaCostSpec = new FGameplayEffectSpec(StaminaCost, MakeEffectContext(Handle, ActorInfo), 1);
+	// FGameplayEffectSpecHandle StaminaCostHandle = FGameplayEffectSpecHandle(StaminaCostSpec);
+	// ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, StaminaCostHandle);
+	return nullptr;
+}
+
+
+UGameplayEffect* UCombatComponent::GetHitStunDurationEffect(EHitStun HitStun) const
+{
+	if (HitStun == EHitStun::None)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to add a hitstun duration without a valid hitstun!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return nullptr;
+	}
+
+	if (!HitStunDurations.Contains(HitStun))
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2}'s HitStun duration for {3} hasn't been setup yet!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), *UEnum::GetValueAsString(HitStun));
+		return nullptr;
+	}
+
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to create a poise broken effect when the character wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return nullptr;
+	}
+
+	const FName HitStunEffect = FName(*GetNameSafe(Character) + FString("_HitStun_").Append(UEnum::GetValueAsString(HitStun)));
+	UGameplayEffect* HitStunDuration = NewObject<UGameplayEffect>(Character, HitStunEffect);
+	if (HitStunDuration)
+	{
+		HitStunDuration->DurationPolicy = EGameplayEffectDurationType::HasDuration;
+		HitStunDuration->DurationMagnitude = FGameplayEffectModifierMagnitude(HitStunDurations[HitStun]);
+		HitStunDuration->StackDurationRefreshPolicy = EGameplayEffectStackingDurationPolicy::RefreshOnSuccessfulApplication;
+
+		HitStunDuration->InheritableGameplayEffectTags.AddTag(HitStunEffectTag);
+		HitStunDuration->InheritableOwnedTagsContainer.AddTag(HitStunTag);
+
+		return HitStunDuration;
+	}
+	
+	// FGameplayEffectSpec* StaminaCostSpec = new FGameplayEffectSpec(StaminaCost, MakeEffectContext(Handle, ActorInfo), 1);
+	// FGameplayEffectSpecHandle StaminaCostHandle = FGameplayEffectSpecHandle(StaminaCostSpec);
+	// ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, StaminaCostHandle);
+	return nullptr;
+}
+
+
+UGameplayEffect* UCombatComponent::GetPreventAttributesAccumulationEffect(float Duration, const TArray<ECombatAttribute>& Attributes) const
+{
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to create a prevent regen effect when the character wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return nullptr;
+	}
+
+	if (!Duration <= 0)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to create a prevent regen effect when the duration wasn't valid! Duration: {3}",
+			*UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character), Duration);
+		return nullptr;
+	}
+	
+	TArray<FGameplayTag> AttributeTags = {};
+	for (const ECombatAttribute Attribute : Attributes)
+	{
+		const FGameplayTag AttributeTag = GetAttributePreventionTag(Attribute);
+		if (!AttributeTag.IsValid())
+		{
+			UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Creating a prevent regen effect with an invalid tag reference! Attribute: {3}",
+				*UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character), *UEnum::GetValueAsString(Attribute));
+		}
+
+		AttributeTags.Add(AttributeTag);
+	}
+
+	
+	const FName PreventAttributes = FName(*GetNameSafe(Character) + FString("_PreventMultipleAttributeAccumulation_").Append(FString().FromInt(Attributes.Num())));
+	UGameplayEffect* PreventRegenOrBuildup = NewObject<UGameplayEffect>(Character, PreventAttributes);
+	if (PreventRegenOrBuildup)
+	{
+		PreventRegenOrBuildup->DurationPolicy = EGameplayEffectDurationType::HasDuration;
+		PreventRegenOrBuildup->DurationMagnitude = FGameplayEffectModifierMagnitude(Duration);
+		PreventRegenOrBuildup->StackDurationRefreshPolicy = EGameplayEffectStackingDurationPolicy::RefreshOnSuccessfulApplication;
+
+		for (const ECombatAttribute Attribute : Attributes)
+		{
+			PreventRegenOrBuildup->InheritableGameplayEffectTags.AddTag(GetAttributePreventionTag(Attribute, false));
+		}
+		
+		for (const FGameplayTag& AttributeTag : AttributeTags)
+		{
+			PreventRegenOrBuildup->InheritableOwnedTagsContainer.AddTag(AttributeTag);
+		}
+
+		return PreventRegenOrBuildup;
+	}
+	
+	// FGameplayEffectSpec* StaminaCostSpec = new FGameplayEffectSpec(StaminaCost, MakeEffectContext(Handle, ActorInfo), 1);
+	// FGameplayEffectSpecHandle StaminaCostHandle = FGameplayEffectSpecHandle(StaminaCostSpec);
+	// ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, StaminaCostHandle);
+	return nullptr;
+}
+#pragma endregion 
+
+
+
+
+#pragma region Utility
 const USkeletalMeshSocket* UCombatComponent::GetSkeletalSocket(const FName SocketName) const
 {
 	const ACharacterBase* OwningCharacter = Cast<ACharacterBase>(GetOwner());
@@ -801,6 +1336,7 @@ EArmamentStance UCombatComponent::GetCurrentStance() const
 	return CurrentStance;
 }
 
+
 void UCombatComponent::AddCombatAbilityIfValidStance(TMap<EInputAbilities, F_ArmamentAbilityInformation>& Map, const F_ArmamentAbilityInformation& Ability)
 {
 	if (!Ability.InvalidStances.Contains(GetCurrentStance()))
@@ -809,9 +1345,21 @@ void UCombatComponent::AddCombatAbilityIfValidStance(TMap<EInputAbilities, F_Arm
 	}
 }
 
-UDataTable* UCombatComponent::GetArmamentMontageTable() const
+
+FGameplayTag UCombatComponent::GetAttributePreventionTag(const ECombatAttribute Attribute, const bool bStateTag) const
 {
-	return MontageInformationTable;
+	if (Attribute == ECombatAttribute::Health) return bStateTag ? PreventHealthRegen : PreventHealthRegenEffect;
+	if (Attribute == ECombatAttribute::Poise) return bStateTag ? PreventPoiseRegen : PreventHealthRegenEffect;
+	if (Attribute == ECombatAttribute::Stamina) return bStateTag ? PreventStaminaRegen : PreventHealthRegenEffect;
+	if (Attribute == ECombatAttribute::Mana) return bStateTag ? PreventManaRegen : PreventHealthRegenEffect;
+
+	if (Attribute == ECombatAttribute::CurseBuildup) return bStateTag ? PreventCurseBuildup : PreventHealthRegenEffect;
+	if (Attribute == ECombatAttribute::BleedBuildup) return bStateTag ? PreventBleedBuildup : PreventHealthRegenEffect;
+	if (Attribute == ECombatAttribute::PoisonBuildup) return bStateTag ? PreventPoisonBuildup : PreventHealthRegenEffect;
+	if (Attribute == ECombatAttribute::FrostbiteBuildup) return bStateTag ? PreventFrostbiteBuildup : PreventHealthRegenEffect;
+	if (Attribute == ECombatAttribute::MadnessBuildup) return bStateTag ? PreventMadnessBuildup : PreventHealthRegenEffect;
+	if (Attribute == ECombatAttribute::SleepBuildup) return bStateTag ? PreventSleepBuildup : PreventHealthRegenEffect;
+	return FGameplayTag();
 }
 
 
@@ -825,3 +1373,10 @@ int32 UCombatComponent::GetComboIndex() const
 {
 	return ComboIndex;
 }
+
+
+UDataTable* UCombatComponent::GetArmamentMontageTable() const
+{
+	return MontageInformationTable;
+}
+#pragma endregion
