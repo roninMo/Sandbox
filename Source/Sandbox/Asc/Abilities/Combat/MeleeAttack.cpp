@@ -30,18 +30,22 @@ UMeleeAttack::UMeleeAttack()
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Armament_Unequipping));
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Armament_Equipping));
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Attacking));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_HitStun));
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Sliding));
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Rolling));
-
+	
 	AllowMovementTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AllowMovement);
 	AttackFramesTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames);
+	HitStunTag = FGameplayTag::RequestGameplayTag(Tag_State_HitStun);
+	StaminaCostEffectTag = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Drain_Stamina);
+	
 	AttackFramesEndTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_End);
 	LeftHandAttackFramesEndTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_End_L);
 	RightHandAttackFramesEndTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_End_R);
+	
 	AttackFramesBeginTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_Begin);
 	LeftHandAttackFramesBeginTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_Begin_L);
 	RightHandAttackFramesBeginTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames_Begin_R);
-	StaminaCostEffectTag = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Drain_Stamina);
 }
 
 
@@ -60,6 +64,13 @@ bool UMeleeAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, c
 	
 	UCombatComponent* CombatComponent = Character->GetCombatComponent();
 	if (!CombatComponent)
+	{
+		return false;
+	}
+
+	// This prevents clients from activating an ability on the server when a duration is still blocking it on the client. The only problem is that when they activate is the duration and the latency from when it receives the duration
+	// Adding values you send across the network that are based on the server fix this, however I'd only doing for crucial information (like attack frames or hit stun)
+	if (!ActorInfo->AbilitySystemComponent.Get() || ActorInfo->AbilitySystemComponent->HasMatchingGameplayTag(HitStunTag))
 	{
 		return false;
 	}

@@ -16,8 +16,9 @@ UMovementAbility_Sprint_Stamina::UMovementAbility_Sprint_Stamina()
 	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_Sprint));
 	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Sprinting));
 	
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Rolling));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_HitStun));
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Attacking));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Rolling));
 }
 
 

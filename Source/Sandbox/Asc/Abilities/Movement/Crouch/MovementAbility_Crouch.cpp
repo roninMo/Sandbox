@@ -14,6 +14,7 @@ UMovementAbility_Crouch::UMovementAbility_Crouch()
 	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_Crouch));
 	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Crouching));
 	
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_HitStun));
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Rolling));
 }
 

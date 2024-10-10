@@ -15,11 +15,11 @@ UGameplayAbility_Aim::UGameplayAbility_Aim()
 	// Non instanced abilities for player aiming logic.
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::NonInstanced;
 
-	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("GameplayAbility.Aim")));
-	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Movement.Aiming")));
+	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_Aim));
+	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Aiming));
 	
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Stunned")));
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_HitStun));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Attacking));
 	// ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Reloading")));
 }
 

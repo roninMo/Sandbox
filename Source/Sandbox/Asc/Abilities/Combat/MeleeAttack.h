@@ -73,6 +73,9 @@ protected: // TODO: Either adjust the ability task limit, or create additional t
 	UPROPERTY(Transient, BlueprintReadWrite) FGameplayTag StaminaCostEffectTag;
 	
 	/** When we should allow rotation movement during the attack */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag HitStunTag;
+	
+	/** When we should allow rotation movement during the attack */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AllowMovementTag;
 	
 	/** When we should actually trace for enemies during an attack animations */
