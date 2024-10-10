@@ -289,8 +289,8 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 
 		
 		// Health/Poise: 100/10, Damage/Poise: -10/10 ->  Bleed / Frostbite / Cursed
-		UE_LOGFMT(LogTemp, Warning, "{0}::{1}() {2} attacked {3} with {4}! \n"
-			"Health/Poise: ({5})({6}), Damage: ({7})({8}) {9}  {10} {11} {12}",
+		UE_LOGFMT(LogTemp, Warning, "{0}::AttributeLogic() {1} attacked {2} with {3}! \n"
+			"Health/Poise: ({4})({5}), Damage: ({6})({7}) {8}  {9} {10} {11}",
 
 			*UEnum::GetValueAsString(Props.SourceCharacter->GetLocalRole()), *FString(__FUNCTION__),
 			*GetNameSafe(Props.SourceCharacter), *GetNameSafe(Props.TargetCharacter), *GetNameSafe(Props.Context.GetSourceObject()),

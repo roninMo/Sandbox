@@ -75,6 +75,14 @@ bool UMeleeAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, c
 		return false;
 	}
 
+	// If we don't have any stamina don't attack
+	const UMMOAttributeSet* Attributes = Cast<UMMOAttributeSet>(ActorInfo->AbilitySystemComponent->GetAttributeSet(UMMOAttributeSet::StaticClass()));
+	if (Attributes && Attributes->GetStamina() == 0)
+	{
+		return false;;
+	}
+	
+
 	// The ability still needs to retrieve the weapon information
 	if (AttackPattern == EInputAbilities::None)
 	{
@@ -124,19 +132,11 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		return;
 	}
-
-	// If we don't have any stamina don't attack
-	UAbilitySystemComponent* AbilitySystem = ActorInfo->AbilitySystemComponent.Get();
-	const UMMOAttributeSet* Attributes = Cast<UMMOAttributeSet>(AbilitySystem->GetAttributeSet(UMMOAttributeSet::StaticClass()));
-	if (Attributes && Attributes->GetStamina() == 0)
-	{
-		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
-		return;
-	}
 	
 	// Add the combo information and attack calculations
 	InitCombatInformation();
 
+	
 	// Create a gameplay effect for the stamina cost of the current attack
 	// This isn't something that's replicated so you'll need a duration once the player's stamina has been drained to prevent them from spamming and causing lag from ability activation discrepancies
 	FName StaminaCostEffect = FName(UEnum::GetValueAsString(AttackPattern).Append("_StaminaCost"));
@@ -162,8 +162,6 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 		FGameplayEffectSpecHandle StaminaCostHandle = FGameplayEffectSpecHandle(StaminaCostSpec);
 		ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, StaminaCostHandle);
 	}
-
-	
 
 	
 	// Attack montage
@@ -201,11 +199,6 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 		MeleeOverlapHandle = UAbilityTask_TargetOverlap::CreateOverlapDataTask(this, TracedWeapons);
 		MeleeOverlapHandle->OnValidOverlap.AddDynamic(this, &UMeleeAttack::OnOverlappedTarget);
 		// MeleeOverlapHandle->ReadyForActivation(); // During attack frames
-	}
-
-	if (bDebug)
-	{
-		UE_LOGFMT(AbilityLog, Log, " ");
 	}
 }
 
