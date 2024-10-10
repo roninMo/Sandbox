@@ -444,6 +444,18 @@ TArray<UPrimitiveComponent*> AArmament::GetArmamentHitboxes() const
 	return {};
 }
 
+
+FVector AArmament::GetCenterLocation() const
+{
+	if (!ArmamentMesh)
+	{
+		return GetActorLocation();
+	}
+
+	return ArmamentMesh->GetSocketLocation(WeaponCenterLocationSocket);
+}
+
+
 void AArmament::SetOwnerNoSee(const bool bHide)
 {
 	if (ArmamentMesh)

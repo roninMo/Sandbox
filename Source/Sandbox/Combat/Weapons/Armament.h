@@ -86,6 +86,7 @@ protected:
 	
 	/** The armament's state information handle */
 	UPROPERTY(BlueprintReadWrite) FActiveGameplayEffectHandle StateInformationHandle;
+
 	
 	/**** Equip Information ****/
 	/** The socket location for the left hand weapon when it's unequipped */
@@ -99,6 +100,9 @@ protected:
 	
 	/** The socket location for the right hand weapon's holster */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament|Equipping") FName RightHandHolsterSocket;
+
+	/** We need a socket location for finding the center of the armament for impact calculations. This avoids sending extra information to the server */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Armament|Equipping") FName WeaponCenterLocationSocket = FName("center");;
 
 	
 //-------------------------------------------------------------------------------------//
@@ -241,6 +245,9 @@ public:
 	
 	/** Returns the armament's overlap components for their armament. */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual TArray<UPrimitiveComponent*> GetArmamentHitboxes() const;
+
+	/** Returns the location of the center of the armament */
+	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual FVector GetCenterLocation() const;
 
 	/** Shows or hides the armament and it's components for the player */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual void SetOwnerNoSee(const bool bHide = true);

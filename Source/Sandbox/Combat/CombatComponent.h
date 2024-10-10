@@ -48,26 +48,45 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item
 
 /*
 
-	Health: 300
-	Stamina: 90
 
-					1h / 2h
+	Player 
+		- Health: 300
+		- Stamina: 90
+		- Poise: 45
+
+
+		
+
+	Weapon
+		Stats			1h / 2h
+
 
 	Shortswords
-		- Damage:	100
-		- Stamina:	11 / 13
+		- Damage:		100
+		- Stamina:		11 / 13
+		- Poise:		5 / 6.4
+		- Poise (PvP):	67 / 87  (110 / 143) fh
 
 	Longswords
-		- Damage:	110
-		- Stamina:	12 / 15
+		- Damage:		110
+		- Stamina:		12 / 15
+		- Poise:		5 / 6.4
+		- Poise (PvP):	67 / 87  (110 / 143) fh
 
 	Greatswords
-		- Damage:	150
-		- Stamina:	16 / 17
+		- Damage:		150
+		- Stamina:		16 / 17
+		- Poise:		10 / 14 
+		- Poise (PvP):	114 / 149  (228 / 297) fh
 
 	UltraGreatsword
-		- Damage:	164
-		- Stamina:	20 / 27
+		- Damage:		164
+		- Stamina:		20 / 27
+		- Poise:		14 / 18 
+		- Poise (PvP):	354 / 458  (504 / 655) fh
+
+
+
 
 
 
@@ -91,7 +110,6 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item
 		- secondary: block
 		- special: 1h special
 		- strong: 2h strong attacks
-
 
 
 

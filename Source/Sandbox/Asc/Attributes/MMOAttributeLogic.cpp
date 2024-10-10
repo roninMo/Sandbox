@@ -124,7 +124,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 			// Handle death
 		}
 		else
-		{
+		{	
 			SetHealth(CurrentHealth);
 
 			// Handle any other take damage logic
@@ -136,10 +136,10 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		// Player reactions / other handling
 		ACharacterBase* Character = Cast<ACharacterBase>(Props.TargetActor);
 		AArmament* Armament = Cast<AArmament>(Props.Context.GetSourceObject());
-		if (Armament && Character)
+		if (Character)
 		{
 			UAnimMontage* Montage = Character->GetHitReactMontage();
-			FVector WeaponLocation = Armament->GetActorLocation();
+			FVector WeaponLocation = Armament ? Armament->GetCenterLocation() : Props.SourceActor.Get()->GetActorLocation(); // TODO: create a custom target data object for returning the proper information
 			FName HitReact = Character->GetHitReactSection(Character, Character->GetActorLocation(), WeaponLocation);
 			
 			Character->NetMulticast_PlayMontage(Montage, HitReact);

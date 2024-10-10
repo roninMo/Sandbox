@@ -22,30 +22,30 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 100,
-									"PoiseMotionValue":100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -68,28 +68,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -112,7 +112,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 30,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -135,21 +135,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -172,7 +172,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -195,7 +195,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -221,28 +221,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 0,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -280,7 +280,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -303,21 +303,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -340,7 +340,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -363,7 +363,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -378,7 +378,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -389,28 +389,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -422,7 +422,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -433,28 +433,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -466,7 +466,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -477,7 +477,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -489,7 +489,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -500,21 +500,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -537,7 +537,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -560,7 +560,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -620,28 +620,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -664,28 +664,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -708,7 +708,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -731,14 +731,14 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -761,7 +761,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -784,7 +784,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -810,28 +810,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -869,7 +869,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -892,21 +892,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -929,7 +929,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -952,7 +952,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 12,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -967,7 +967,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -978,28 +978,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1011,7 +1011,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -1022,28 +1022,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1055,7 +1055,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -1066,7 +1066,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1078,7 +1078,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -1089,21 +1089,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1126,7 +1126,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1149,7 +1149,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1253,21 +1253,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1290,28 +1290,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1334,7 +1334,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1357,21 +1357,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1392,9 +1392,9 @@
 							"ComboAttacks": [
 								{
 									"MotionValue": 110,
-									"StatusMotionValue": -1,
+									"StatusMotionValue": 1,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1417,7 +1417,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1443,28 +1443,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1502,7 +1502,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1525,21 +1525,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1562,7 +1562,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1585,7 +1585,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 12,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1600,7 +1600,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -1611,28 +1611,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1644,7 +1644,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -1655,28 +1655,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1688,7 +1688,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -1699,7 +1699,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1711,7 +1711,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -1722,21 +1722,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1759,7 +1759,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1782,7 +1782,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1842,28 +1842,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1886,28 +1886,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1930,7 +1930,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1953,14 +1953,14 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -1983,7 +1983,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2006,7 +2006,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2032,28 +2032,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2091,7 +2091,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2114,21 +2114,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2151,7 +2151,7 @@
 									"MotionValue": 0.1,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2174,7 +2174,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 13,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2189,7 +2189,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -2200,28 +2200,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2233,7 +2233,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -2244,28 +2244,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2277,7 +2277,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -2288,7 +2288,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2300,7 +2300,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -2311,21 +2311,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2348,7 +2348,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2371,7 +2371,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2431,28 +2431,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2475,28 +2475,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2519,7 +2519,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2542,14 +2542,14 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2572,7 +2572,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2595,7 +2595,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2621,28 +2621,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
-									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"StaminaCost": 6.4,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2680,7 +2680,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2703,21 +2703,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2740,7 +2740,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2763,7 +2763,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 12,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2778,7 +2778,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -2789,28 +2789,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2822,7 +2822,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -2833,28 +2833,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2866,7 +2866,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -2877,7 +2877,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2889,7 +2889,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -2900,21 +2900,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2937,7 +2937,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -2960,7 +2960,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3042,21 +3042,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3079,28 +3079,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3123,7 +3123,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3146,14 +3146,14 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3176,7 +3176,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3199,7 +3199,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3225,28 +3225,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3284,7 +3284,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3307,21 +3307,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3344,7 +3344,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3367,7 +3367,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 15,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 12,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3382,7 +3382,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -3393,28 +3393,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3426,7 +3426,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -3437,28 +3437,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3470,7 +3470,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -3481,7 +3481,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3493,7 +3493,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -3504,21 +3504,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3541,7 +3541,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3564,7 +3564,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3624,21 +3624,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3661,28 +3661,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3705,7 +3705,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3728,21 +3728,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3765,7 +3765,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3788,7 +3788,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3814,28 +3814,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3873,7 +3873,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3896,21 +3896,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3933,7 +3933,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 6.4,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3956,7 +3956,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 12,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -3971,7 +3971,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -3982,28 +3982,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4015,7 +4015,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -4026,28 +4026,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4059,7 +4059,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -4070,7 +4070,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 13,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4082,7 +4082,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -4093,21 +4093,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 15,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4130,7 +4130,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 5,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4153,7 +4153,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 11,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4213,28 +4213,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4257,14 +4257,14 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4276,7 +4276,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -4287,7 +4287,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 64,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4310,14 +4310,14 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 45,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 45,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4340,7 +4340,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4363,7 +4363,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 29,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4389,28 +4389,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4437,7 +4437,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -4448,7 +4448,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 90,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4471,21 +4471,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 54,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 54,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 54,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4508,7 +4508,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 27,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 18,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4531,7 +4531,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 27,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 36,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4546,7 +4546,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -4557,28 +4557,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4590,7 +4590,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -4601,28 +4601,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4634,7 +4634,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -4645,7 +4645,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 64,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4657,7 +4657,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -4668,21 +4668,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4705,7 +4705,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4728,7 +4728,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 20,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 29,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4788,28 +4788,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4832,14 +4832,14 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4851,7 +4851,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -4862,7 +4862,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 54,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4885,14 +4885,14 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 30,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 30,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4915,7 +4915,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4938,7 +4938,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 20,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -4964,28 +4964,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5023,7 +5023,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 70,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5046,28 +5046,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 40,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 0,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5090,7 +5090,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 17,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 14,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5113,7 +5113,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 17,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 29,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5128,7 +5128,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks.AM_Manny_Sword_DW_PrimaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -5139,28 +5139,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5172,7 +5172,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks.AM_Manny_Sword_DW_SecondaryAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -5183,28 +5183,28 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5216,7 +5216,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack.AM_Manny_Sword_DW_SpecialAttack'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -5227,7 +5227,7 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 54,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5239,7 +5239,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks.AM_Manny_Sword_DW_StrongAttacks'"
+								"Manny": "None"
 							}
 						},
 						"Combo":
@@ -5250,21 +5250,21 @@
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 30,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 30,
 									"CustomMontageSection": "None"
 								},
 								{
 									"MotionValue": 100,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 30,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5287,7 +5287,7 @@
 									"MotionValue": 130,
 									"StatusMotionValue": 120,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 10,
 									"CustomMontageSection": "None"
 								}
 							]
@@ -5310,7 +5310,7 @@
 									"MotionValue": 110,
 									"StatusMotionValue": 100,
 									"StaminaCost": 16,
-									"PoiseMotionValue": 0,
+									"PoiseDamage": 20,
 									"CustomMontageSection": "None"
 								}
 							]
