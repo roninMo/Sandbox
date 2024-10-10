@@ -86,33 +86,6 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item
 		- Poise (PvP):	354 / 458  (504 / 655) fh
 
 
-
-
-
-
-	1h montages
-
-	Uchigatana: 1h primary 3
-	Katana: 1h katana
-	Shortsword: 1h primary 1
-	Longsword: 1h katana
-	SasukeSword: 1h katana
-	Kurosawa: 1h primary 2
-	ItachiAnbuBlade: 1h primary 1
-	ZabuzaSword: ultra greatsword
-	Greatsword: 1h greatsword primary
-
-
-
-
-	2h montages
-		- primary: 2h primary attacks
-		- secondary: block
-		- special: 1h special
-		- strong: 2h strong attacks
-
-
-
 */
 
 
