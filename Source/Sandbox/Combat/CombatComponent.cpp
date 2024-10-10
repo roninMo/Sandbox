@@ -28,15 +28,16 @@ UCombatComponent::UCombatComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 	PrimaryComponentTick.bStartWithTickEnabled = false;
 
+	// Prev hitstun durations
+	// HitStunDurations.Add(EHitStun::None, 0);
+	// HitStunDurations.Add(EHitStun::VeryShort, 0.1);
+	// HitStunDurations.Add(EHitStun::Short, 0.2);
+	// HitStunDurations.Add(EHitStun::Medium, 0.45);
+	// HitStunDurations.Add(EHitStun::Long, 0.64);
+	// HitStunDurations.Add(EHitStun::Knockdown, 0.9);
+	// HitStunDurations.Add(EHitStun::FacePlant, 1.5);
+	// HitStunDurations.Add(EHitStun::FrontFlip, 2);
 
-	HitStunDurations.Add(EHitStun::None, 0);
-	HitStunDurations.Add(EHitStun::VeryShort, 0.1);
-	HitStunDurations.Add(EHitStun::Short, 0.2);
-	HitStunDurations.Add(EHitStun::Medium, 0.45);
-	HitStunDurations.Add(EHitStun::Long, 0.64);
-	HitStunDurations.Add(EHitStun::Knockdown, 0.9);
-	HitStunDurations.Add(EHitStun::FacePlant, 1.5);
-	HitStunDurations.Add(EHitStun::FrontFlip, 2);
 	
 	// Cached tags
 	HitStunEffectTag = FGameplayTag::RequestGameplayTag(Tag_GameplayEffect_Attack_HitStun);
@@ -817,7 +818,10 @@ void UCombatComponent::Server_EquipArmor_Implementation(const F_Item& Armor)
 
 
 #pragma region Combat Logic
-void UCombatComponent::HandleDamageTaken(ACharacterBase* Enemy, AActor* Source, float Value, const FGameplayAttribute Attribute) {}
+void UCombatComponent::HandleDamageTaken(ACharacterBase* Enemy, UObject* Source, float Value, const FGameplayAttribute Attribute)
+{
+	OnPlayerAttacked.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Source, Value, Attribute);
+}
 
 
 void UCombatComponent::PoiseBreak(ACharacterBase* Enemy, AActor* Source, float PoiseDamage, EHitStun HitStun, EHitDirection HitDirection)
@@ -838,27 +842,35 @@ void UCombatComponent::PoiseBreak(ACharacterBase* Enemy, AActor* Source, float P
 		return;
 	}
 
-	UGameplayEffect* HitStunDuration = GetHitStunDurationEffect(HitStun);
-	if (!HitStunDuration) return;
-
-	// If we need to handle removing abilities or add other extra configuration, handle it here, when we have direct access to the gameplay effect
-
 	
-	// Don't try to interact with effects after they've been applied, or during other handling like when it hasn't been initialized yet.
-	// You're just going to break it and cause other problems with replication, even if nothing's wrong. Don't be overly pervasive with these things
-
-	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
-	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
-
-	FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
-	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
-	EffectContextHandle.AddSourceObject(Source);
-	AbilitySystem->ApplyGameplayEffectToSelf(HitStunDuration, 1, EffectContextHandle);
-	
-	UAnimMontage* HitReactMontage = Character->GetCharacterMontages().HitReactMontage;
-	if (HitReactMontage)
+	// Hit react
+	if (HitStun != EHitStun::None)
 	{
-		Character->NetMulticast_PlayMontage(HitReactMontage, Character->GetHitReactSection(HitDirection));
+		TSubclassOf<UGameplayEffect> HitStunDurationClass = GetHitStunDurationEffect(HitStun);
+		UGameplayEffect* HitStunDuration = HitStunDurationClass ? HitStunDurationClass->GetDefaultObject<UGameplayEffect>() : nullptr;
+		if (HitStunDuration)
+		{
+			// If we need to handle removing abilities or add other extra configuration, handle it here, when we have direct access to the gameplay effect (do not edit blueprint tsubclasses, it adjusts values in the editor
+
+			
+			// Don't try to interact with effects after they've been applied, or during other handling like when it hasn't been initialized yet.
+			// You're just going to break it and cause other problems with replication, even if nothing's wrong. Don't be overly pervasive with these things
+
+			AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
+			AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
+			
+			FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
+			EffectContextHandle.AddInstigator(Instigator, EffectCauser);
+			EffectContextHandle.AddSourceObject(Source);
+			AbilitySystem->ApplyGameplayEffectToSelf(HitStunDuration, 1, EffectContextHandle);
+		}
+		
+		// Hit react montage
+		UAnimMontage* HitReactMontage = Character->GetCharacterMontages().HitReactMontage;
+		if (HitReactMontage)
+		{
+			Character->NetMulticast_PlayMontage(HitReactMontage, Character->GetHitReactSection(HitDirection));
+		}
 	}
 
 	OnPoiseBroken.Broadcast(Character, Enemy, HitStun, HitDirection, PoiseDamage);
@@ -906,6 +918,8 @@ void UCombatComponent::HandleDeath(ACharacterBase* Enemy, AActor* Source, FName 
 	{
 		Character->NetMulticast_PlayMontage(DeathMontage, MontageSection);
 	}
+
+	OnDeath.Broadcast(Character, Enemy);
 }
 
 
@@ -944,7 +958,9 @@ void UCombatComponent::HandleRespawn(ACharacterBase* Enemy, AActor* Source, cons
 
 	// Respawn, reset state, abilities, and equipment
 	// Retrieve the character's save information, and respawn the character
-	
+
+
+	OnRespawn.Broadcast(Character, Character->GetActorLocation());
 }
 
 
@@ -981,6 +997,8 @@ void UCombatComponent::HandleCurse(ACharacterBase* Enemy, AActor* Source)
 	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
 	EffectContextHandle.AddSourceObject(Source);
 	AbilitySystem->ApplyGameplayEffectToSelf(CursedState, 1, EffectContextHandle);
+
+	OnCursed.Broadcast(Character, Enemy);
 }
 
 
@@ -1017,6 +1035,8 @@ void UCombatComponent::HandleBleed(ACharacterBase* Enemy, AActor* Source)
 	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
 	EffectContextHandle.AddSourceObject(Source);
 	AbilitySystem->ApplyGameplayEffectToSelf(GE_Bled, 1, EffectContextHandle);
+
+	OnBled.Broadcast(Character, Enemy);
 }
 
 
@@ -1053,6 +1073,8 @@ void UCombatComponent::HandlePoisoned(ACharacterBase* Enemy, AActor* Source)
 	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
 	EffectContextHandle.AddSourceObject(Source);
 	AbilitySystem->ApplyGameplayEffectToSelf(GE_Poisoned, 1, EffectContextHandle);
+
+	OnPoisoned.Broadcast(Character, Enemy);
 }
 
 
@@ -1089,6 +1111,8 @@ void UCombatComponent::HandleFrostbite(ACharacterBase* Enemy, AActor* Source)
 	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
 	EffectContextHandle.AddSourceObject(Source);
 	AbilitySystem->ApplyGameplayEffectToSelf(GE_Frostbitten, 1, EffectContextHandle);
+
+	OnFrostBitten.Broadcast(Character, Enemy);
 }
 
 
@@ -1125,6 +1149,8 @@ void UCombatComponent::HandleMadness(ACharacterBase* Enemy, AActor* Source)
 	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
 	EffectContextHandle.AddSourceObject(Source);
 	AbilitySystem->ApplyGameplayEffectToSelf(GE_Maddened, 1, EffectContextHandle);
+
+	OnMaddened.Broadcast(Character, Enemy);
 }
 
 
@@ -1161,6 +1187,8 @@ void UCombatComponent::HandleSleep(ACharacterBase* Enemy, AActor* Source)
 	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
 	EffectContextHandle.AddSourceObject(Source);
 	AbilitySystem->ApplyGameplayEffectToSelf(GE_Slept, 1, EffectContextHandle);
+
+	OnSlept.Broadcast(Character, Enemy);
 }
 
 
@@ -1203,7 +1231,7 @@ UGameplayEffect* UCombatComponent::GetPreventAttributeAccumulationEffect(float D
 }
 
 
-UGameplayEffect* UCombatComponent::GetHitStunDurationEffect(EHitStun HitStun) const
+TSubclassOf<UGameplayEffect> UCombatComponent::GetHitStunDurationEffect(EHitStun HitStun) const
 {
 	if (HitStun == EHitStun::None)
 	{
@@ -1212,38 +1240,43 @@ UGameplayEffect* UCombatComponent::GetHitStunDurationEffect(EHitStun HitStun) co
 		return nullptr;
 	}
 
-	if (!HitStunDurations.Contains(HitStun))
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2}'s HitStun duration for {3} hasn't been setup yet!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), *UEnum::GetValueAsString(HitStun));
-		return nullptr;
-	}
+	// Unreal sucks and doesn't let you add replicated custom gameplay effects because there isn't a reference to it on the client, so we're creating one for every hit react
+	/*
+		if (!HitStunDurations.Contains(HitStun))
+		{
+			UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2}'s HitStun duration for {3} hasn't been setup yet!",
+				*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), *UEnum::GetValueAsString(HitStun));
+			return nullptr;
+		}
 
-	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
-	if (!Character)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to create a poise broken effect when the character wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return nullptr;
-	}
+		ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+		if (!Character)
+		{
+			UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to create a poise broken effect when the character wasn't valid!",
+				*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+			return nullptr;
+		}
 
-	const FName HitStunEffect = FName(*GetNameSafe(Character) + FString("_HitStun_").Append(UEnum::GetValueAsString(HitStun)));
-	UGameplayEffect* HitStunDuration = NewObject<UGameplayEffect>(Character, HitStunEffect);
-	if (HitStunDuration)
-	{
-		HitStunDuration->DurationPolicy = EGameplayEffectDurationType::HasDuration;
-		HitStunDuration->DurationMagnitude = FGameplayEffectModifierMagnitude(HitStunDurations[HitStun]);
-		HitStunDuration->StackDurationRefreshPolicy = EGameplayEffectStackingDurationPolicy::RefreshOnSuccessfulApplication;
-
-		HitStunDuration->InheritableGameplayEffectTags.AddTag(HitStunEffectTag);
-		HitStunDuration->InheritableOwnedTagsContainer.AddTag(HitStunTag);
-
-		return HitStunDuration;
-	}
+		const FName HitStunEffect = FName(*GetNameSafe(Character) + FString("_HitStun_").Append(UEnum::GetValueAsString(HitStun)));
+		UGameplayEffect* HitStunDuration = NewObject<UGameplayEffect>(Character, HitStunEffect);
+		if (HitStunDuration)
+		{
+			HitStunDuration->DurationPolicy = EGameplayEffectDurationType::HasDuration;
+			HitStunDuration->DurationMagnitude = FGameplayEffectModifierMagnitude(HitStunDurations[HitStun]);
+			HitStunDuration->StackDurationRefreshPolicy = EGameplayEffectStackingDurationPolicy::RefreshOnSuccessfulApplication;
+		
+			HitStunDuration->InheritableGameplayEffectTags.AddTag(HitStunEffectTag);
+			HitStunDuration->InheritableOwnedTagsContainer.AddTag(HitStunTag);
+		
+			return HitStunDuration;
+		}
+	*/
 	
 	// FGameplayEffectSpec* StaminaCostSpec = new FGameplayEffectSpec(StaminaCost, MakeEffectContext(Handle, ActorInfo), 1);
 	// FGameplayEffectSpecHandle StaminaCostHandle = FGameplayEffectSpecHandle(StaminaCostSpec);
 	// ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, StaminaCostHandle);
+	
+	if (HitStunDurations.Contains(HitStun)) return HitStunDurations[HitStun];
 	return nullptr;
 }
 
@@ -1258,7 +1291,7 @@ UGameplayEffect* UCombatComponent::GetPreventAttributesAccumulationEffect(float 
 		return nullptr;
 	}
 
-	if (!Duration <= 0)
+	if (Duration <= 0)
 	{
 		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to create a prevent regen effect when the duration wasn't valid! Duration: {3}",
 			*UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character), Duration);

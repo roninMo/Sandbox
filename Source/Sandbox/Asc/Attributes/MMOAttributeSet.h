@@ -141,17 +141,16 @@ public:
 //------------------------------------------------------------------//
 public:
 	/**** Damage ****/
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Standard) FGameplayAttributeData Damage_Poise;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Standard) FGameplayAttributeData Damage_Standard;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Slash) FGameplayAttributeData Damage_Slash;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Pierce) FGameplayAttributeData Damage_Pierce;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Strike) FGameplayAttributeData Damage_Strike;
-	
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Magic) FGameplayAttributeData Damage_Magic;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Ice) FGameplayAttributeData Damage_Ice;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Fire) FGameplayAttributeData Damage_Fire;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Holy) FGameplayAttributeData Damage_Holy;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Lightning) FGameplayAttributeData Damage_Lightning;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Standard) FGameplayAttributeData Damage_Poise;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Damage_Lightning) FGameplayAttributeData DamageCalculation;
 
 	/**** Statuses ****/
@@ -237,7 +236,6 @@ public:
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Negation_Lightning)
 
 	// Meta
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Poise)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Standard)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Slash)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Pierce)
@@ -247,6 +245,7 @@ public:
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Fire)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Holy)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Lightning)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Damage_Poise)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, DamageCalculation)
 	
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, Bleed)
@@ -327,7 +326,6 @@ protected:
 	UFUNCTION() virtual void OnRep_Negation_Lightning(const FGameplayAttributeData OldNegation_Lightning) const;
 
 	// Meta Attributes
-	UFUNCTION() virtual void OnRep_Damage_Poise(const FGameplayAttributeData OldDamage_Poise) const;
 	UFUNCTION() virtual void OnRep_Damage_Standard(const FGameplayAttributeData OldDamage_Standard) const;
 	UFUNCTION() virtual void OnRep_Damage_Slash(const FGameplayAttributeData OldDamage_Slash) const;
 	UFUNCTION() virtual void OnRep_Damage_Pierce(const FGameplayAttributeData OldDamage_Pierce) const;
@@ -337,7 +335,9 @@ protected:
 	UFUNCTION() virtual void OnRep_Damage_Fire(const FGameplayAttributeData OldDamage_Fire) const;
 	UFUNCTION() virtual void OnRep_Damage_Holy(const FGameplayAttributeData OldDamage_Holy) const;
 	UFUNCTION() virtual void OnRep_Damage_Lightning(const FGameplayAttributeData OldDamage_Lightning) const;
+	UFUNCTION() virtual void OnRep_Damage_Poise(const FGameplayAttributeData OldDamage_Poise) const;
 	UFUNCTION() virtual void OnRep_DamageCalculation(const FGameplayAttributeData OldDamageCalculation) const;
+	
 	UFUNCTION() virtual void OnRep_Bleed(const FGameplayAttributeData OldBleed) const;
 	UFUNCTION() virtual void OnRep_Poison(const FGameplayAttributeData OldPoison) const;
 	UFUNCTION() virtual void OnRep_Frostbite(const FGameplayAttributeData OldFrostbite) const;

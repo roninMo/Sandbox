@@ -44,6 +44,9 @@ struct FDamageCalculations_AttackInformation
 	/** The lightning damage */
 	UPROPERTY() float Damage_Lightning;
 	
+	/** The poise damage */
+	UPROPERTY() float Damage_Poise;
+	
 	/** The bleed damage */
 	UPROPERTY() float Bleed;
 

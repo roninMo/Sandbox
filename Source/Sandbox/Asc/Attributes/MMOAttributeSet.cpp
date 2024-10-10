@@ -75,7 +75,6 @@ void UMMOAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, Negation_Lightning, COND_None, REPNOTIFY_Always);
 	
 	// Meta
-	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, Damage_Poise, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, Damage_Standard, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, Damage_Slash, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, Damage_Pierce, COND_None, REPNOTIFY_Always);
@@ -85,6 +84,7 @@ void UMMOAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, Damage_Fire, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, Damage_Holy, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, Damage_Lightning, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, Damage_Poise, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, DamageCalculation, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, Bleed, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, Frostbite, COND_None, REPNOTIFY_Always);
@@ -171,7 +171,6 @@ void UMMOAttributeSet::OnRep_Negation_Lightning(const FGameplayAttributeData Old
 
 
 // Meta Attributes
-void UMMOAttributeSet::OnRep_Damage_Poise(const FGameplayAttributeData OldDamage_Poise) const 								{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, Damage_Standard, OldDamage_Poise); }
 void UMMOAttributeSet::OnRep_Damage_Standard(const FGameplayAttributeData OldDamage_Standard) const 						{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, Damage_Standard, OldDamage_Standard); }
 void UMMOAttributeSet::OnRep_Damage_Slash(const FGameplayAttributeData OldDamage_Slash) const 								{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, Damage_Slash, OldDamage_Slash); }
 void UMMOAttributeSet::OnRep_Damage_Pierce(const FGameplayAttributeData OldDamage_Pierce) const 							{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, Damage_Pierce, OldDamage_Pierce); }
@@ -181,7 +180,9 @@ void UMMOAttributeSet::OnRep_Damage_Ice(const FGameplayAttributeData OldDamage_I
 void UMMOAttributeSet::OnRep_Damage_Fire(const FGameplayAttributeData OldDamage_Fire) const 								{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, Damage_Fire, OldDamage_Fire); }
 void UMMOAttributeSet::OnRep_Damage_Holy(const FGameplayAttributeData OldDamage_Holy) const 								{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, Damage_Holy, OldDamage_Holy); }
 void UMMOAttributeSet::OnRep_Damage_Lightning(const FGameplayAttributeData OldDamage_Lightning) const 						{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, Damage_Lightning, OldDamage_Lightning); }
+void UMMOAttributeSet::OnRep_Damage_Poise(const FGameplayAttributeData OldDamage_Poise) const 								{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, Damage_Standard, OldDamage_Poise); }
 void UMMOAttributeSet::OnRep_DamageCalculation(const FGameplayAttributeData OldDamageCalculation) const 					{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, DamageCalculation, OldDamageCalculation); }
+
 void UMMOAttributeSet::OnRep_Frostbite(const FGameplayAttributeData OldFrostbite) const 									{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, Frostbite, OldFrostbite); }
 void UMMOAttributeSet::OnRep_Madness(const FGameplayAttributeData OldMadness) const 										{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, Madness, OldMadness); }
 void UMMOAttributeSet::OnRep_Sleep(const FGameplayAttributeData OldSleep) const 											{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, Sleep, OldSleep); }

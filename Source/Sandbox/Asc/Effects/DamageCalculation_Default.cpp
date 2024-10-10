@@ -17,6 +17,7 @@ struct FDamageStatics
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Damage_Slash);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Damage_Pierce);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Damage_Strike);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Damage_Poise);
 
 	// Magic
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Damage_Magic);
@@ -26,9 +27,12 @@ struct FDamageStatics
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Damage_Lightning);
 
 	// Statuses
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Curse);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Bleed);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Poison);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(Curse);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Frostbite);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Madness);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(Sleep);
 
 	
 	/**** Target's attributes ****/
@@ -113,14 +117,18 @@ struct FDamageStatics
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Slash, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Pierce, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Strike, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Poise, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Magic, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Ice, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Fire, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Holy, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Lightning, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Curse, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Bleed, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Poison, Source, true);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Curse, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Frostbite, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Madness, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Sleep, Source, true);
 	}
 };
 
@@ -175,14 +183,20 @@ UDamageCalculation_Default::UDamageCalculation_Default()
 	RelevantAttributesToCapture.Add(DamageStatics().Damage_SlashDef);
 	RelevantAttributesToCapture.Add(DamageStatics().Damage_PierceDef);
 	RelevantAttributesToCapture.Add(DamageStatics().Damage_StrikeDef);
+	RelevantAttributesToCapture.Add(DamageStatics().Damage_PoiseDef);
+	
 	RelevantAttributesToCapture.Add(DamageStatics().Damage_MagicDef);
 	RelevantAttributesToCapture.Add(DamageStatics().Damage_IceDef);
 	RelevantAttributesToCapture.Add(DamageStatics().Damage_FireDef);
 	RelevantAttributesToCapture.Add(DamageStatics().Damage_HolyDef);
 	RelevantAttributesToCapture.Add(DamageStatics().Damage_LightningDef);
+	
+	RelevantAttributesToCapture.Add(DamageStatics().CurseDef);
 	RelevantAttributesToCapture.Add(DamageStatics().BleedDef);
 	RelevantAttributesToCapture.Add(DamageStatics().PoisonDef);
-	RelevantAttributesToCapture.Add(DamageStatics().CurseDef);
+	RelevantAttributesToCapture.Add(DamageStatics().FrostbiteDef);
+	RelevantAttributesToCapture.Add(DamageStatics().MadnessDef);
+	RelevantAttributesToCapture.Add(DamageStatics().SleepDef);
 }
 
 
@@ -258,6 +272,8 @@ void UDamageCalculation_Default::Execute_Implementation(const FGameplayEffectCus
 
 
 		// Just be careful that armor scales evenly with different attacks, and find a good way to add armor and damage reduction based on attributes/equipment
+		// https://steamcommunity.com/sharedfiles/filedetails/?id=3155117973
+		
 		// The primary attack by itself, when left to expire, detonates for 140 magic damage.
 		// However, we're dealing with an entirely different beast here, because this number is not a motion value, but rather an instance of Flat Magic Damage.
 		// The follow-up R2 has a flat damage modifier of 200 and the bullets from the R1 each deal a flat magic damage of 150.
@@ -277,6 +293,7 @@ void UDamageCalculation_Default::Execute_Implementation(const FGameplayEffectCus
 	CalculatedDamage.Damage_Slash = DamageCalculation(AttackInfo.Damage_Slash, PlayerStats.Defence_Slash, PlayerStats.Negation_Slash);
 	CalculatedDamage.Damage_Pierce = DamageCalculation(AttackInfo.Damage_Pierce, PlayerStats.Defence_Pierce, PlayerStats.Negation_Pierce);
 	CalculatedDamage.Damage_Strike = DamageCalculation(AttackInfo.Damage_Strike, PlayerStats.Defence_Strike, PlayerStats.Negation_Strike);
+	CalculatedDamage.Damage_Poise = AttackInfo.Damage_Poise;
 	
 	CalculatedDamage.Damage_Magic = DamageCalculation(AttackInfo.Damage_Magic, PlayerStats.Resistance_Magic, PlayerStats.Negation_Magic);
 	CalculatedDamage.Damage_Ice = DamageCalculation(AttackInfo.Damage_Ice, PlayerStats.Resistance_Ice, PlayerStats.Negation_Ice);
@@ -286,17 +303,16 @@ void UDamageCalculation_Default::Execute_Implementation(const FGameplayEffectCus
 	
 	CalculatedDamage.Curse = StatusCalculation(AttackInfo.Curse, PlayerStats.Immunity, 0);
 	CalculatedDamage.Bleed = StatusCalculation(AttackInfo.Bleed, PlayerStats.Robustness, 0);
-	CalculatedDamage.Frostbite = StatusCalculation(AttackInfo.Frostbite, PlayerStats.Robustness, 0);
 	CalculatedDamage.Poison = StatusCalculation(AttackInfo.Poison, PlayerStats.Immunity, 0);
+	CalculatedDamage.Frostbite = StatusCalculation(AttackInfo.Frostbite, PlayerStats.Robustness, 0);
 	CalculatedDamage.Madness = StatusCalculation(AttackInfo.Madness, PlayerStats.Focus, 0);
 	CalculatedDamage.Sleep = StatusCalculation(AttackInfo.Sleep, PlayerStats.Focus, 0);
 	
 
-	
 	// If there's anything we need to add to the gameplay effect before the attribute handles it, here is the place to handle it
 
 	
-	// Gameplay effect executes handle attributes individually, and I still need to learn how it handles this properly
+	
 
 
 	// Add the calculated damages to output modifications
@@ -304,17 +320,18 @@ void UDamageCalculation_Default::Execute_Implementation(const FGameplayEffectCus
 	const FGameplayModifierEvaluatedData Eval_Damage_Slash(UMMOAttributeSet::GetDamage_SlashAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Slash);
 	const FGameplayModifierEvaluatedData Eval_Damage_Pierce(UMMOAttributeSet::GetDamage_PierceAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Pierce);
 	const FGameplayModifierEvaluatedData Eval_Damage_Strike(UMMOAttributeSet::GetDamage_StrikeAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Strike);
-				
+	const FGameplayModifierEvaluatedData Eval_Damage_Poise(UMMOAttributeSet::GetDamage_PoiseAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Poise);
+	
 	const FGameplayModifierEvaluatedData Eval_Damage_Magic(UMMOAttributeSet::GetDamage_MagicAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Magic);
 	const FGameplayModifierEvaluatedData Eval_Damage_Ice(UMMOAttributeSet::GetDamage_IceAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Ice);
 	const FGameplayModifierEvaluatedData Eval_Damage_Fire(UMMOAttributeSet::GetDamage_FireAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Fire);
 	const FGameplayModifierEvaluatedData Eval_Damage_Holy(UMMOAttributeSet::GetDamage_HolyAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Holy);
 	const FGameplayModifierEvaluatedData Eval_Damage_Lightning(UMMOAttributeSet::GetDamage_LightningAttribute(), EGameplayModOp::Override, CalculatedDamage.Damage_Lightning);
-				
+
 	const FGameplayModifierEvaluatedData Eval_Curse(UMMOAttributeSet::GetCurseAttribute(), EGameplayModOp::Override, CalculatedDamage.Curse);
 	const FGameplayModifierEvaluatedData Eval_Bleed(UMMOAttributeSet::GetBleedAttribute(), EGameplayModOp::Override, CalculatedDamage.Bleed);
-	const FGameplayModifierEvaluatedData Eval_Frostbite(UMMOAttributeSet::GetFrostbiteAttribute(), EGameplayModOp::Override, CalculatedDamage.Frostbite);
 	const FGameplayModifierEvaluatedData Eval_Poison(UMMOAttributeSet::GetPoisonAttribute(), EGameplayModOp::Override, CalculatedDamage.Poison);
+	const FGameplayModifierEvaluatedData Eval_Frostbite(UMMOAttributeSet::GetFrostbiteAttribute(), EGameplayModOp::Override, CalculatedDamage.Frostbite);
 	const FGameplayModifierEvaluatedData Eval_Madness(UMMOAttributeSet::GetMadnessAttribute(), EGameplayModOp::Override, CalculatedDamage.Madness);
 	const FGameplayModifierEvaluatedData Eval_Sleep(UMMOAttributeSet::GetSleepAttribute(), EGameplayModOp::Override, CalculatedDamage.Sleep);
 
@@ -324,15 +341,18 @@ void UDamageCalculation_Default::Execute_Implementation(const FGameplayEffectCus
 	/* if (CalculatedDamage.Damage_Slash != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Slash);
 	/* if (CalculatedDamage.Damage_Pierce != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Pierce);
 	/* if (CalculatedDamage.Damage_Strike != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Strike);
+	/* if (CalculatedDamage.Damage_Strike != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Poise);
+	
 	/* if (CalculatedDamage.Damage_Magic != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Magic);
 	/* if (CalculatedDamage.Damage_Ice != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Ice);
 	/* if (CalculatedDamage.Damage_Fire != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Fire);
 	/* if (CalculatedDamage.Damage_Holy != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Holy);
 	/* if (CalculatedDamage.Damage_Lightning != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Damage_Lightning);
+	
 	/* if (CalculatedDamage.Curse != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Curse);
 	/* if (CalculatedDamage.Bleed != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Bleed);
-	/* if (CalculatedDamage.Frostbite != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Frostbite);
 	/* if (CalculatedDamage.Poison != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Poison);
+	/* if (CalculatedDamage.Frostbite != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Frostbite);
 	/* if (CalculatedDamage.Madness != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Madness);
 	/* if (CalculatedDamage.Sleep != 0) */ OutExecutionOutput.AddOutputModifier(Eval_Sleep);
 	OutExecutionOutput.AddOutputModifier(FGameplayModifierEvaluatedData(UMMOAttributeSet::GetDamageCalculationAttribute(), EGameplayModOp::Multiplicitive, 1));
@@ -386,14 +406,19 @@ void UDamageCalculation_Default::CalculateCapturedRelevantAttributes(
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_SlashDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Slash);
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_PierceDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Pierce);
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_StrikeDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Strike);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_PoiseDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Poise);
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_MagicDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Magic);
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_IceDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Ice);
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_FireDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Fire);
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_HolyDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Holy);
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().Damage_LightningDef, EvaluationParameters, AttributeInformation.AttackInformation.Damage_Lightning);
+	
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().CurseDef, EvaluationParameters, AttributeInformation.AttackInformation.Curse);
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().BleedDef, EvaluationParameters, AttributeInformation.AttackInformation.Bleed);
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().PoisonDef, EvaluationParameters, AttributeInformation.AttackInformation.Poison);
-	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().CurseDef, EvaluationParameters, AttributeInformation.AttackInformation.Curse);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().FrostbiteDef, EvaluationParameters, AttributeInformation.AttackInformation.Frostbite);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().MadnessDef, EvaluationParameters, AttributeInformation.AttackInformation.Madness);
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().SleepDef, EvaluationParameters, AttributeInformation.AttackInformation.Sleep);
 }
 
 

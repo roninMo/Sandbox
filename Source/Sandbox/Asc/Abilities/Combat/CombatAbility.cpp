@@ -239,7 +239,7 @@ void UCombatAbility::CalculateAttributeModifications()
 		for (auto &[Attribute, Value] : ArmamentInformation.BaseDamageStats)
 		{
 			// Damages
-			AttackInfo.Add(UMMOAttributeSet::GetPoiseAttribute(), CurrentAttack.PoiseDamage);
+			AttackInfo.Add(UMMOAttributeSet::GetDamage_PoiseAttribute(), CurrentAttack.PoiseDamage);
 			
 			if (Attribute == UMMOAttributeSet::GetDamage_StandardAttribute() ||
 				Attribute == UMMOAttributeSet::GetDamage_SlashAttribute() ||
@@ -392,6 +392,7 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 		if (AttackInfo.Contains(Attributes->GetDamage_SlashAttribute())) Attributes->SetDamage_Slash(AttackInfo[Attributes->GetDamage_SlashAttribute()]);
 		if (AttackInfo.Contains(Attributes->GetDamage_PierceAttribute())) Attributes->SetDamage_Pierce(AttackInfo[Attributes->GetDamage_PierceAttribute()]);
 		if (AttackInfo.Contains(Attributes->GetDamage_StrikeAttribute())) Attributes->SetDamage_Strike(AttackInfo[Attributes->GetDamage_StrikeAttribute()]);
+		if (AttackInfo.Contains(Attributes->GetDamage_PoiseAttribute())) Attributes->SetDamage_Poise(AttackInfo[Attributes->GetDamage_PoiseAttribute()]);
 
 		if (AttackInfo.Contains(Attributes->GetDamage_MagicAttribute())) Attributes->SetDamage_Magic(AttackInfo[Attributes->GetDamage_MagicAttribute()]);
 		if (AttackInfo.Contains(Attributes->GetDamage_IceAttribute())) Attributes->SetDamage_Ice(AttackInfo[Attributes->GetDamage_IceAttribute()]);

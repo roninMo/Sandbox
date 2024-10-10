@@ -23,11 +23,9 @@ bool UMMOAttributeLogic::PreGameplayEffectExecute(FGameplayEffectModCallbackData
 		return false;
 	}
 	
-	
 	ClampEvaluatedAttribute(GetManaAttribute(), Data.EvaluatedData, -GetMana(), GetMaxMana() - GetMana());
 	ClampEvaluatedAttribute(GetHealthAttribute(), Data.EvaluatedData, -GetHealth(), GetMaxHealth() - GetHealth());
 	ClampEvaluatedAttribute(GetStaminaAttribute(), Data.EvaluatedData, -GetStamina(), GetMaxStamina() - GetStamina());
-
 
 	ClampEvaluatedAttribute(GetPoisonBuildupAttribute(), Data.EvaluatedData, -GetPoisonBuildup(), GetMaxPoisonBuildup() - GetPoisonBuildup());
 	ClampEvaluatedAttribute(GetBleedBuildupAttribute(), Data.EvaluatedData, -GetBleedBuildup(), GetMaxBleedBuildup() - GetBleedBuildup());
@@ -102,16 +100,12 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 	
 	// Retrieve the player and target's information, and handle attribute clamping during damage calculations
 	GetExecutionData(Data, Props);
-	ACharacterBase* Character = Cast<ACharacterBase>(Props.TargetActor);
-	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
-	AArmament* Armament = Cast<AArmament>(Props.Context.GetSourceObject());
-	UCombatComponent* CombatComponent = Character ? Character->GetCombatComponent();
+	ACharacterBase* Character = Props.TargetCharacter;
+	UAbilitySystem* AbilitySystem = Props.TargetAbilitySystem;
+	UCombatComponent* CombatComponent = Props.TargetCombatComponent;
 
-	// Weapon and attack information
-	FVector WeaponLocation = Armament ? Armament->GetCenterLocation() : Props.SourceActor.Get()->GetActorLocation(); // TODO: create a custom target data object for returning the proper information
-	EHitDirection HitDirection = Character->GetHitReactDirection(Character, Character->GetActorLocation(), WeaponLocation);
-	EHitStun HitStun = EHitStun::None;
 
+	
 	
 	/**** Combat calculations ****/
 	if (Data.EvaluatedData.Attribute == GetDamageCalculationAttribute())
@@ -121,7 +115,15 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		bool bCharacterBled = false;
 		bool bPoiseBroken = false;
 		float MagicDamageTaken = 0.0;
+		float PoiseDamageTaken = 0.0;
 		float DamageTaken = 0.0;
+
+		// Weapon and attack information
+		AArmament* Armament = Cast<AArmament>(Props.Context.GetSourceObject());
+		FVector WeaponLocation = Armament ? Armament->GetCenterLocation() : Props.SourceCharacter.Get()->GetActorLocation(); // TODO: create a custom target data object for returning the proper information
+		EHitDirection HitDirection = Character->GetHitReactDirection(Character, Character->GetActorLocation(), WeaponLocation);
+		EHitStun HitStun = EHitStun::Short;
+		
 		
 		// Retrieve the damage calculations
 		for (auto &[Attribute, Value] : Data.EffectSpec.ModifiedAttributes)
@@ -139,7 +141,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 				{
 					bWasCursed = true;
 					SetHealth(0.0);
-					CombatComponent->HandleCurse(Props.SourceActor, Character);
+					CombatComponent->HandleCurse(Props.SourceCharacter, Character);
 				}
 			}
 			else if (Attribute == GetBleedAttribute())
@@ -150,7 +152,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 				{
 					bCharacterBled = true;
 					SetBleedBuildup(0.0);
-					CombatComponent->HandleBleed(Props.SourceActor, Character);
+					CombatComponent->HandleBleed(Props.SourceCharacter, Character);
 				}
 			}
 			else if (Attribute == GetPoisonAttribute() && !AbilitySystem->HasMatchingGameplayTag(PoisonedTag))
@@ -159,7 +161,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 
 				if (GetPoisonBuildup() == GetMaxPoisonBuildup())
 				{
-					CombatComponent->HandlePoisoned(Props.SourceActor, Character);
+					CombatComponent->HandlePoisoned(Props.SourceCharacter, Character);
 				}
 			}
 			else if (Attribute == GetFrostbiteAttribute())
@@ -170,7 +172,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 				{
 					bWasFrosbitten = true;
 					SetFrostbiteBuildup(0.0);
-					CombatComponent->HandleFrostbite(Props.SourceActor, Character);
+					CombatComponent->HandleFrostbite(Props.SourceCharacter, Character);
 				}
 			}
 			else if (Attribute == GetMadnessAttribute() && !AbilitySystem->HasMatchingGameplayTag(MaddenedTag))
@@ -179,7 +181,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 				
 				if (GetMadnessBuildup() == GetMaxMadnessBuildup())
 				{
-					CombatComponent->HandleMadness(Props.SourceActor, Character);
+					CombatComponent->HandleMadness(Props.SourceCharacter, Character);
 				}
 			}
 			else if (Attribute == GetSleepAttribute() && !AbilitySystem->HasMatchingGameplayTag(SleepTag))
@@ -188,7 +190,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 
 				if (GetSleepBuildup() == GetMaxSleepBuildup())
 				{
-					CombatComponent->HandleSleep(Props.SourceActor, Character);
+					CombatComponent->HandleSleep(Props.SourceCharacter, Character);
 				}
 			}
 
@@ -219,7 +221,8 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 			*/
 			else if (Attribute == GetDamage_PoiseAttribute())
 			{
-				float CurrentPoise = GetPoise() - GetDamage_Poise();
+				PoiseDamageTaken = GetDamage_Poise();
+				float CurrentPoise = GetPoise() - PoiseDamageTaken;
 				if (CurrentPoise <= 0.0)
 				{
 					bPoiseBroken = true;
@@ -269,25 +272,36 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		
 		
 		// Handle take damage
-		CombatComponent->HandleDamageTaken(Props.SourceActor, Props.Context.GetSourceObject(), DamageTaken, Data.EvaluatedData.Attribute);
-		if (CurrentHealth <= 0.0)
-		{
-			SetHealth(0);
-			CombatComponent->HandleDeath(Props.SourceActor, Character, bWasCursed ? Montage_Section_Curse : Montage_Section_Death);
-		}
-		else
+		CombatComponent->HandleDamageTaken(Props.SourceCharacter, Props.Context.GetSourceObject(), DamageTaken, Data.EvaluatedData.Attribute);
+		// if (CurrentHealth <= 0.0)
+		// {
+		// 	SetHealth(0);
+		// 	CombatComponent->HandleDeath(Props.SourceCharacter, Character, bWasCursed ? Montage_Section_Curse : Montage_Section_Death);
+		// }
+		// else
 		{	
 			SetHealth(CurrentHealth);
 			if (bPoiseBroken)
 			{
-				CombatComponent->PoiseBreak(Props.SourceActor, Character, GetDamage_Poise(), HitStun, HitDirection);
+				CombatComponent->PoiseBreak(Props.SourceCharacter, Character, GetDamage_Poise(), HitStun, HitDirection);
 			}
 		}
 
 		
-		UE_LOGFMT(LogTemp, Warning, "{0}::{1}() {2} attacked {3} with {4}! Remaining health: {5}({6})", *UEnum::GetValueAsString(Props.SourceActor->GetLocalRole()), *FString(__FUNCTION__),
-			*GetNameSafe(Props.SourceActor), *GetNameSafe(Props.TargetActor), *GetNameSafe(Props.Context.GetSourceObject()), GetHealth(), -(MagicDamageTaken + DamageTaken));
-		
+		// Health/Poise: 100/10, Damage/Poise: -10/10 ->  Bleed / Frostbite / Cursed
+		UE_LOGFMT(LogTemp, Warning, "{0}::{1}() {2} attacked {3} with {4}! \n"
+			"Health/Poise: ({5})({6}), Damage: ({7})({8}) {9}  {10} {11} {12}",
+
+			*UEnum::GetValueAsString(Props.SourceCharacter->GetLocalRole()), *FString(__FUNCTION__),
+			*GetNameSafe(Props.SourceCharacter), *GetNameSafe(Props.TargetCharacter), *GetNameSafe(Props.Context.GetSourceObject()),
+			
+			FMath::CeilToInt(GetHealth()), FMath::CeilToInt(GetPoise()),
+			FMath::CeilToInt(-MagicDamageTaken - DamageTaken), FMath::CeilToInt(-PoiseDamageTaken),
+			bCharacterBled || bWasFrosbitten || bWasCursed ? FString("->  ") : FString(""),
+			bCharacterBled ? FString("Bleed /") : FString(""),
+			bWasFrosbitten ? FString("Frostbite /") : FString(""),
+			bWasCursed ? FString("Cursed ") : FString("")
+		);
 	}
 	
 

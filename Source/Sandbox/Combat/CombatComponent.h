@@ -48,10 +48,10 @@ struct FGAttributeSetExecutionData;
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FCombatNotificationSignature, ACharacterBase*, Character, AActor*, Instigator);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnDeathSignature, ACharacterBase*, Character, AActor*, Instigator, float, AccumulatedDamage);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnDeathSignature, ACharacterBase*, Character, AActor*, Instigator);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnRespawnSignature, ACharacterBase*, Character, FVector, Location);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FCombatDamageNotificationSignature, ACharacterBase*, Character, AActor*, Instigator, float, AccumulatedDamage);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FCombatDamagesNotificationSignature, ACharacterBase*, Character, AActor*, Instigator, float, AccumulatedDamage, const FGameplayAttribute&, DamageAffinities);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_FiveParams(FCombatDamagesNotificationSignature, ACharacterBase*, Character, AActor*, Instigator, UObject*, Source, float, AccumulatedDamage, const FGameplayAttribute&, DamageAffinities);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_FiveParams(FCombatPoiseBrokenSignature, ACharacterBase*, Character, AActor*, Instigator, EHitStun, HitStun, EHitDirection, HitDirection, float, PoiseDamage);
 
 
@@ -435,7 +435,7 @@ public:
 //-------------------------------------------------------------------------------------//
 protected:
 	/** The durations for the different HitStuns */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") TMap<EHitStun, float> HitStunDurations;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") TMap<EHitStun, TSubclassOf<UGameplayEffect>> HitStunDurations;
 
 	/** Gameplay effect for handling cleaning up/adding state and information when the player dies */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") UGameplayEffect* DeathEffect;
@@ -508,13 +508,13 @@ public:
 	UPROPERTY(BlueprintAssignable) FCombatNotificationSignature OnCursed;
 	
 	/** On player bled (player, instigator, accumulatedDamage) */
-	UPROPERTY(BlueprintAssignable) FCombatDamageNotificationSignature OnBled;
+	UPROPERTY(BlueprintAssignable) FCombatNotificationSignature OnBled;
 
 	/** On player poisoned (player, instigator) */
 	UPROPERTY(BlueprintAssignable) FCombatNotificationSignature OnPoisoned;
 
 	/** On player frostbitten (player, instigator, accumulatedDamage) */
-	UPROPERTY(BlueprintAssignable) FCombatDamageNotificationSignature OnFrostBitten;
+	UPROPERTY(BlueprintAssignable) FCombatNotificationSignature OnFrostBitten;
 
 	/** On player maddened (player, instigator) */
 	UPROPERTY(BlueprintAssignable) FCombatNotificationSignature OnMaddened;
@@ -526,7 +526,7 @@ public:
 public:
 	/** Logic for when a player takes damage */
 	UFUNCTION(BlueprintCallable, Category = "Combat")
-	virtual void HandleDamageTaken(ACharacterBase* Enemy, AActor* Source, float Value, const FGameplayAttribute Attribute);
+	virtual void HandleDamageTaken(ACharacterBase* Enemy, UObject* Source, float Value, const FGameplayAttribute Attribute);
 
 	/** Handle varying hit reactions when a player's poise is broken */
 	UFUNCTION(BlueprintCallable, Category = "Combat")
@@ -585,7 +585,7 @@ public:
 	 * @returns									A gameplay effect for adding a HitStun duration to the player
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Combat|Utils")
-	virtual UGameplayEffect* GetHitStunDurationEffect(EHitStun HitStun) const;
+	virtual TSubclassOf<UGameplayEffect> GetHitStunDurationEffect(EHitStun HitStun) const;
 
 	/**
 	 * Returns a gameplay effect to prevent certain attributes from regenerating for a specific duration
