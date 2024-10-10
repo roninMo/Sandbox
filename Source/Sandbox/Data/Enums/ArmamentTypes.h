@@ -130,20 +130,3 @@ enum class EEquipStatus : uint8
 // 	AT_None									UMETA(DisplayName = "None"),
 // };
 
-
-/*
-
-0 ⇨ No hitstun | Poison Mist
-1 ⇨ Short hitstun | Straight Sword R1
-2 ⇨ Medium hitstun | Greatsword R1
-3 ⇨ Long hitstun | Colossal Sword R1
-4 ⇨ Knockdown | Ancient Lightning Spear
-5 ⇨ Puch and Long hitstun | Kick
-6 ⇨ Faceplant | Lion's Claw
-7 ⇨ Knockdown | Placidusax's Ruin
-8 ⇨ Very short hitstun | Dagger R1
-9 ⇨ Burger Flip | Giant Hunt
-10 ⇨ Knockdown | Onyx Lord's Repulsion
-11 ⇨ Knockdown | Wave of Gold
-
-*/

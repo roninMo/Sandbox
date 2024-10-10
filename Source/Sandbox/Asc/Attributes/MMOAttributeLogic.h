@@ -43,15 +43,8 @@ protected:
 
 
 protected:
-	/**
-	 * Handles the attribute clamping of the player's stats. This is to prevent regeneration from going past it's limits
-	 *
-	 * Any clamping that happens here does not permanently change the modifier on the ASC. It only changes the value returned from querying the modifier.
-	 * This means anything that recalculates the CurrentValue from all of the modifiers like GameplayEffectExecutionCalculations and ModifierMagnitudeCalculations need to implement clamping again.
-	 *
-	 * Update attributes if adjusting the attribute instead of the value
-	 */
-	virtual void AttributeClamping(const FGameplayAttribute& Attribute, float& NewValue, bool bUpdateAttributes = true);
+	/** Handles clamping attribute adjustments */
+	virtual void ClampEvaluatedAttribute(const FGameplayAttribute& AttributeToClamp, FGameplayModifierEvaluatedData& EvaluatedAttribute, const float MinValue, const float MaxValue);
 
 
 	

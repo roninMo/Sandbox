@@ -9,6 +9,10 @@
 #include "Sandbox/Data/Structs/InventoryInformation.h"
 #include "CombatComponent.generated.h"
 
+struct FGameplayAttribute;
+struct FCharacterAbilityDataSet;
+enum class EHitDirection : uint8;
+enum class EHitStun : uint8;
 struct F_ArmamentAbilityInformation;
 DECLARE_LOG_CATEGORY_EXTERN(CombatComponentLog, Log, All);
 
@@ -408,10 +412,118 @@ public:
 protected:
 	/** Synchronization RPC's */
 	UFUNCTION(Server, Reliable) virtual void Server_EquipArmor(const F_Item& Armor);
+
 	
 	
 
+//-------------------------------------------------------------------------------------//
+// Combat																			   //
+//-------------------------------------------------------------------------------------//
+protected:
+	/**
+
+			- Status calculations
+				- status buildup
+				- Status effect (Take damage / slow / poison)
+
+			- Take damage
+				- Hit reaction based on the attack
+				- Handle taking damage / dying
+
+
+			- Poise damage
+				- Damage poise
+				- Handle poise break / effect for regenerating poise
+				- Handle hit reactions
+			
+
+			- Any other effects to attributes
+				- stamina drain, etc.
+
+
+
+			CombatComponent
+				- Status buildup
+					- Curse -> Death / Montage / etc.
+					- Bleed -> Bleed damage / Hit react / gameplay cue
+					- Poison -> Poise damage / drain / gameplay cue
+					- Frostbite -> Frostbite damage / Hit react / Damage received debuff / gameplay cue
+					- Madness -> Madness damage / Reaction / gameplay cue
+					- Sleep -> Sleep debuff / Montage / gameplay cue
+
+				- Take damage
+					- Hit reactions during poise break
+						- variations based on weapon and attack location
+					- Dying and respawning
+
+
+				- Gameplay logic for handling durations
+					- Prevent characters from attacking after they've just been attacked (Check if this is something that doesn't cause network problems, or if it's something we should handle independently)
+					- Things like preventing stamina regeneration for a duration after the player's attacked, sprinted, etc.
+
+
+			On player cursed
+			On player bled
+			On player poisoned
+			On player frostbitten
+			On player maddened
+			On player slept
+			
+			On player attacked
+			On player poise broken
+			On player death
+			On player respawn
+
+	 */
+
+
+	/** Logic for when a player takes damage */
+	// UFUNCTION(BlueprintCallable, Category = "Combat")
+	// virtual void HandleDamageTaken(float Value, const FGameplayAttribute Attribute);
+	//
+	// /** Handle varying hit reactions when a player's poise is broken */
+	// UFUNCTION(BlueprintCallable, Category = "Combat")
+	// virtual void PoiseBreak(float PoiseDamage, EHitStun HitStun, EHitDirection HitDirection);
+	//
+	// /** Logic for handling when the player dies */
+	// UFUNCTION(BlueprintCallable, Category = "Combat")
+	// virtual void HandleDeath();
+	//
+	// /** Logic for handling when the player respawns */
+	// UFUNCTION(BlueprintCallable, Category = "Combat")
+	// virtual void HandleRespawn(const FCharacterAbilityDataSet& RespawnData);
+	//
+	//
+	// /** Handle the logic that happens when the player is cursed */
+	// UFUNCTION(BlueprintCallable, Category = "Combat")
+	// virtual void HandleCurse();
+	//
+	// /** Logic when the player takes bleed damage */
+	// UFUNCTION(BlueprintCallable, Category = "Combat")
+	// virtual void HandleBleed();
+	//
+	// /** Logic for when the player is poisoned */
+	// UFUNCTION(BlueprintCallable, Category = "Combat")
+	// virtual void HandlePoisoned();
+	//
+	// /** Handle the logic when the player is frostbitten */
+	// UFUNCTION(BlueprintCallable, Category = "Combat")
+	// virtual void HandleFrostbite();
+	//
+	// /** Handle the logic when the player receives madness status */
+	// UFUNCTION(BlueprintCallable, Category = "Combat")
+	// virtual void HandleMadness();
+	//
+	// /** Handle the logic when the player receives sleep status */
+	// UFUNCTION(BlueprintCallable, Category = "Combat")
+	// virtual void HandleSleep();
+
 	
+	
+
+
+
+
 	
 //-------------------------------------------------------------------------------------//
 // Utility																			   //

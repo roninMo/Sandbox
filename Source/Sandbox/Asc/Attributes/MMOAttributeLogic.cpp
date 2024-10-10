@@ -19,7 +19,20 @@ bool UMMOAttributeLogic::PreGameplayEffectExecute(FGameplayEffectModCallbackData
 	{
 		return false;
 	}
+	
+	
+	ClampEvaluatedAttribute(GetManaAttribute(), Data.EvaluatedData, -GetMana(), GetMaxMana() - GetMana());
+	ClampEvaluatedAttribute(GetHealthAttribute(), Data.EvaluatedData, -GetHealth(), GetMaxHealth() - GetHealth());
+	ClampEvaluatedAttribute(GetStaminaAttribute(), Data.EvaluatedData, -GetStamina(), GetMaxStamina() - GetStamina());
 
+
+	ClampEvaluatedAttribute(GetPoisonBuildupAttribute(), Data.EvaluatedData, -GetPoisonBuildup(), GetMaxPoisonBuildup() - GetPoisonBuildup());
+	ClampEvaluatedAttribute(GetBleedBuildupAttribute(), Data.EvaluatedData, -GetBleedBuildup(), GetMaxBleedBuildup() - GetBleedBuildup());
+	ClampEvaluatedAttribute(GetFrostbiteBuildupAttribute(), Data.EvaluatedData, -GetFrostbiteBuildup(), GetMaxFrostbiteBuildup() - GetFrostbiteBuildup());
+	ClampEvaluatedAttribute(GetSleepBuildupAttribute(), Data.EvaluatedData, -GetSleepBuildup(), GetMaxSleepBuildup() - GetSleepBuildup());
+	ClampEvaluatedAttribute(GetMadnessBuildupAttribute(), Data.EvaluatedData, -GetMadnessBuildup(), GetMaxMadnessBuildup() - GetMadnessBuildup());
+	ClampEvaluatedAttribute(GetCurseBuildupAttribute(), Data.EvaluatedData, -GetCurseBuildup(), GetMaxCurseBuildup() - GetCurseBuildup());
+	
 	return true;
 }
 
@@ -29,7 +42,6 @@ void UMMOAttributeLogic::PreAttributeChange(const FGameplayAttribute& Attribute,
 	// Any clamping that happens here does not permanently change the modifier on the ASC. It only changes the value returned from querying the modifier.
 	// This means anything that recalculates the CurrentValue from all of the modifiers like GameplayEffectExecutionCalculations and ModifierMagnitudeCalculations need to implement clamping again.
 	Super::PreAttributeChange(Attribute, NewValue);
-	AttributeClamping(Attribute, NewValue, false); // TODO: add attribute clamping for both instant effect and duration, and find out where to handle it
 }
 
 
@@ -50,7 +62,6 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 
 	// Retrieve the player and target's information, and handle attribute clamping during damage calculations
 	GetExecutionData(Data, Props);
-	AttributeClamping(Data.EvaluatedData.Attribute, Data.EvaluatedData.Magnitude);
 
 
 	/**** Combat calculations ****/
@@ -69,10 +80,10 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 			*/
 			if (Attribute == GetCurseAttribute()) SetCurseBuildup(FMath::Clamp(GetCurseBuildup() + Value, 0, GetMaxCurseBuildup()));
 			if (Attribute == GetBleedAttribute()) SetBleedBuildup(FMath::Clamp(GetBleedBuildup() + Value, 0, GetMaxBleedBuildup()));
-			if (Attribute == GetFrostbiteAttribute()) SetFrostbiteBuildup(FMath::Clamp(GetFrostbiteBuildup() + Value, 0, GetMaxFrostbiteBuildup()));
 			if (Attribute == GetPoisonAttribute()) SetPoisonBuildup(FMath::Clamp(GetPoisonBuildup() + Value, 0, GetMaxPoisonBuildup()));
-			if (Attribute == GetPoisonAttribute()) SetMadnessBuildup(FMath::Clamp(GetMadnessBuildup() + Value, 0, GetMaxMadnessBuildup()));
-			if (Attribute == GetPoisonAttribute()) SetSleepBuildup(FMath::Clamp(GetSleepBuildup() + Value, 0, GetMaxSleepBuildup()));
+			if (Attribute == GetFrostbiteAttribute()) SetFrostbiteBuildup(FMath::Clamp(GetFrostbiteBuildup() + Value, 0, GetMaxFrostbiteBuildup()));
+			if (Attribute == GetMadnessAttribute()) SetMadnessBuildup(FMath::Clamp(GetMadnessBuildup() + Value, 0, GetMaxMadnessBuildup()));
+			if (Attribute == GetSleepAttribute()) SetSleepBuildup(FMath::Clamp(GetSleepBuildup() + Value, 0, GetMaxSleepBuildup()));
 
 			
 			/**
@@ -129,6 +140,52 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 
 			// Handle any other take damage logic
 		}
+
+
+		/**
+
+
+				- Status calculations
+					- status buildup
+					- Status effect (Take damage / slow / poison)
+
+				- Take damage
+					- Hit reaction based on the attack
+					- Handle taking damage / dying
+
+
+				- Poise damage
+					- Damage poise
+					- Handle poise break / effect for regenerating poise
+					- Handle hit reactions
+				
+
+				- Any other effects to attributes
+					- stamina drain, etc.
+
+
+
+				CombatComponent
+					- Status buildup
+						- Curse -> Death / Montage / etc.
+						- Bleed -> Bleed damage / Hit react / gameplay cue
+						- Poison -> Poise damage / drain / gameplay cue
+						- Frostbite -> Frostbite damage / Hit react / Damage received debuff / gameplay cue
+						- Madness -> Madness damage / Reaction / gameplay cue
+						- Sleep -> Sleep debuff / Montage / gameplay cue
+
+					- Take damage
+						- Hit reactions during poise break
+							- variations based on weapon and attack location
+						- Dying and respawning
+
+
+					- Gameplay logic for handling durations
+						- Prevent characters from attacking after they've just been attacked (Check if this is something that doesn't cause network problems, or if it's something we should handle independently)
+						- Things like preventing stamina regeneration for a duration after the player's attacked, sprinted, etc.
+
+
+		 */
 			
 
 
@@ -162,34 +219,10 @@ void UMMOAttributeLogic::PostAttributeChange(const FGameplayAttribute& Attribute
 }
 
 
-void UMMOAttributeLogic::AttributeClamping(const FGameplayAttribute& Attribute, float& NewValue, const bool bUpdateAttributes)
+void UMMOAttributeLogic::ClampEvaluatedAttribute(const FGameplayAttribute& AttributeToClamp, FGameplayModifierEvaluatedData& EvaluatedAttribute, const float MinValue, const float MaxValue)
 {
-	if (bUpdateAttributes)
+	if (EvaluatedAttribute.Attribute == AttributeToClamp)
 	{
-		if (Attribute == GetHealthAttribute()) SetHealth( FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
-		if (Attribute == GetStaminaAttribute()) SetStamina( FMath::Clamp(GetStamina(), 0.f, GetMaxStamina()));
-		if (Attribute == GetPoiseAttribute()) SetPoise( FMath::Clamp(GetPoise(), 0.f, GetMaxPoise()));
-		if (Attribute == GetManaAttribute()) SetMana( FMath::Clamp(GetMana(), 0.f, GetMaxMana()));
-		
-		if (Attribute == GetPoisonBuildupAttribute()) SetPoisonBuildup( FMath::Clamp(GetPoisonBuildup(), 0.f, GetMaxPoisonBuildup() * 2));
-		if (Attribute == GetBleedBuildupAttribute()) SetBleedBuildup( FMath::Clamp(GetBleedBuildup(), 0.f, GetMaxBleedBuildup() * 2));
-		if (Attribute == GetFrostbiteBuildupAttribute()) SetFrostbiteBuildup( FMath::Clamp(GetFrostbiteBuildup(), 0.f, GetMaxFrostbiteBuildup() * 2));
-		if (Attribute == GetSleepBuildupAttribute()) SetSleepBuildup( FMath::Clamp(GetSleepBuildup(), 0.f, GetMaxSleepBuildup() * 2));
-		if (Attribute == GetMadnessBuildupAttribute()) SetMadnessBuildup( FMath::Clamp(GetMadnessBuildup(), 0.f, GetMaxMadnessBuildup() * 2));
-		if (Attribute == GetCurseBuildupAttribute()) SetCurseBuildup( FMath::Clamp(GetCurseBuildup(), 0.f, GetMaxCurseBuildup() * 2));
-	}
-	else
-	{
-		if (Attribute == GetHealthAttribute()) NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
-		if (Attribute == GetStaminaAttribute()) NewValue = FMath::Clamp(NewValue, 0.f, GetMaxStamina());
-		if (Attribute == GetPoiseAttribute()) NewValue = FMath::Clamp(NewValue, 0.f, GetMaxPoise());
-		if (Attribute == GetManaAttribute()) NewValue = FMath::Clamp(NewValue, 0.f, GetMaxMana());
-		
-		if (Attribute == GetPoisonBuildupAttribute()) NewValue = FMath::Clamp(NewValue, 0.f, GetMaxPoisonBuildup() * 2);
-		if (Attribute == GetBleedBuildupAttribute()) NewValue = FMath::Clamp(NewValue, 0.f, GetMaxBleedBuildup() * 2);
-		if (Attribute == GetFrostbiteBuildupAttribute()) NewValue = FMath::Clamp(NewValue, 0.f, GetMaxFrostbiteBuildup() * 2);
-		if (Attribute == GetSleepBuildupAttribute()) NewValue = FMath::Clamp(NewValue, 0.f, GetMaxSleepBuildup() * 2);
-		if (Attribute == GetMadnessBuildupAttribute()) NewValue = FMath::Clamp(NewValue, 0.f, GetMaxMadnessBuildup() * 2);
-		if (Attribute == GetCurseBuildupAttribute()) NewValue = FMath::Clamp(NewValue, 0.f, GetMaxCurseBuildup() * 2);
+		EvaluatedAttribute.Magnitude = FMath::Clamp(EvaluatedAttribute.Magnitude, MinValue, MaxValue);
 	}
 }
