@@ -77,6 +77,9 @@ class SANDBOX_API UMMOAttributeLogic : public UMMOAttributeSet
 	GENERATED_BODY()
 
 protected:
+	UMMOAttributeLogic();
+	
+
 	//~ Begin UAttributeSet interface
 	/**
 	 *	Called just before modifying the value of an attribute. AttributeSet can make additional modifications here. Return true to continue, or false to throw out the modification.
@@ -123,11 +126,14 @@ private:
 	/** State when the character is poisoned */
 	FGameplayTag PoisonedTag;
 	
-	/** State when the character has been cursed */
-	FGameplayTag CursedTag;
+	/** State when the character is frostbitten */
+	FGameplayTag FrostbiteTag;
 	
 	/** State when the character has gone mad */
 	FGameplayTag MaddenedTag;
+	
+	/** State when the character has been cursed */
+	FGameplayTag CursedTag;
 	
 	/** State tags for the sleepy king */
 	FGameplayTag SleepTag;

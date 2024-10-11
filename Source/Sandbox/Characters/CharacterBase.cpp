@@ -351,8 +351,8 @@ FName ACharacterBase::GetHitReactSection(EHitDirection HitDirection, EHitStun Hi
 	{
 		if (HitDirection == EHitDirection::Back) MontageSection = FName(MontageSection.ToString().Append(Montage_Section_HitReact_Back.ToString()));
 		if (HitDirection == EHitDirection::Front) MontageSection = FName(MontageSection.ToString().Append(Montage_Section_HitReact_Front.ToString()));
-		if (HitDirection == EHitDirection::Left) MontageSection = FName(MontageSection.ToString().Append(Montage_Section_HitReact_Left.ToString()));
-		if (HitDirection == EHitDirection::Right) MontageSection = FName(MontageSection.ToString().Append(Montage_Section_HitReact_Right.ToString()));
+		if (HitDirection == EHitDirection::Left) MontageSection = FName(MontageSection.ToString().Append(Montage_Section_HitReact_Front.ToString()));
+		if (HitDirection == EHitDirection::Right) MontageSection = FName(MontageSection.ToString().Append(Montage_Section_HitReact_Front.ToString()));
 	}
 	
 	return MontageSection;

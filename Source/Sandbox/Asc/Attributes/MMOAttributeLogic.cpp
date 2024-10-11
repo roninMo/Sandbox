@@ -6,6 +6,7 @@
 #include "GameplayEffectExtension.h"
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Asc/Information/SandboxTags.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Combat/Weapons/Armament.h"
@@ -156,7 +157,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		// Bleed damage
 		if (Statuses.bCharacterBled)
 		{
-			CombatInfo.DamageTaken += 100 + (GetMaxHealth() * 0.15);
+			CurrentHealth -= 100 + (GetMaxHealth() * 0.15);
 			if (CombatInfo.HitStun < EHitStun::Medium)
 			{
 				CombatInfo.HitStun = EHitStun::Medium;
@@ -172,7 +173,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		// Frostbite damage
 		if (Statuses.bWasFrostbitten)
 		{
-			CombatInfo.DamageTaken += 100 + (GetMaxHealth() * 0.15);
+			CurrentHealth -= 100 + (GetMaxHealth() * 0.15);
 			if (CombatInfo.HitStun < EHitStun::Medium)
 			{
 				CombatInfo.HitStun = EHitStun::Medium;
@@ -238,25 +239,25 @@ void UMMOAttributeLogic::DamageCalculations(const FGAttributeSetExecutionData& P
 	ACharacterBase* Character = Props.TargetCharacter;
 	
 	// Physical damages // TODO: we need to check whether the different damage calculations are handled
-	if (Attribute == GetDamage_StandardAttribute()) CombatInformation.DamageTaken += GetDamage_Standard();
-	else if (Attribute == GetDamage_SlashAttribute()) CombatInformation.DamageTaken += GetDamage_Slash();
-	else if (Attribute == GetDamage_PierceAttribute()) CombatInformation.DamageTaken += GetDamage_Pierce();
-	else if (Attribute == GetDamage_StrikeAttribute()) CombatInformation.DamageTaken += GetDamage_Strike();
+	if (Attribute == GetDamage_StandardAttribute() && GetDamage_Standard() != 0.0) CombatInformation.DamageTaken += GetDamage_Standard();
+	else if (Attribute == GetDamage_SlashAttribute() && GetDamage_Slash() != 0.0) CombatInformation.DamageTaken += GetDamage_Slash();
+	else if (Attribute == GetDamage_PierceAttribute() && GetDamage_Pierce() != 0.0) CombatInformation.DamageTaken += GetDamage_Pierce();
+	else if (Attribute == GetDamage_StrikeAttribute() && GetDamage_Strike() != 0.0) CombatInformation.DamageTaken += GetDamage_Strike();
 
 	// Magic damages
-	else if (Attribute == GetDamage_MagicAttribute()) CombatInformation.MagicDamageTaken += GetDamage_Magic();
-	else if (Attribute == GetDamage_IceAttribute()) CombatInformation.MagicDamageTaken += GetDamage_Ice();
-	else if (Attribute == GetDamage_FireAttribute())
+	else if (Attribute == GetDamage_MagicAttribute() && GetDamage_Magic() != 0.0) CombatInformation.MagicDamageTaken += GetDamage_Magic();
+	else if (Attribute == GetDamage_IceAttribute() && GetDamage_Ice() != 0.0) CombatInformation.MagicDamageTaken += GetDamage_Ice();
+	else if (Attribute == GetDamage_FireAttribute() && GetDamage_Fire() != 0.0)
 	{
 		CombatInformation.MagicDamageTaken += GetDamage_Fire();
 		SetFrostbiteBuildup(0.0);
 	}
-	else if (Attribute == GetDamage_HolyAttribute())
+	else if (Attribute == GetDamage_HolyAttribute() && GetDamage_Holy() != 0.0)
 	{
 		CombatInformation.MagicDamageTaken += GetDamage_Holy();
 		SetCurseBuildup(0.0);
 	}
-	else if (Attribute == GetDamage_LightningAttribute()) CombatInformation.MagicDamageTaken += GetDamage_Lightning();
+	else if (Attribute == GetDamage_LightningAttribute() && GetDamage_Lightning() != 0.0) CombatInformation.MagicDamageTaken += GetDamage_Lightning();
 
 	// Poise damages
 	else if (Attribute == GetDamage_PoiseAttribute())
@@ -317,7 +318,9 @@ void UMMOAttributeLogic::StatusCalculations(const FGAttributeSetExecutionData& P
 				CombatComponent->HandleBleed(Props.SourceCharacter, Character, GetBleedBuildupAttribute(), GetBleedBuildup());
 			}
 		}
-		else if (Attribute == GetFrostbiteAttribute() || Attribute == GetFrostbiteBuildupAttribute())
+		else if ((Attribute == GetFrostbiteAttribute() ||
+				Attribute == GetFrostbiteBuildupAttribute()) &&
+				!AbilitySystem->HasMatchingGameplayTag(FrostbiteTag))
 		{
 			Statuses.FrostbiteBuildup = Value;
 			SetFrostbiteBuildup(FMath::Clamp(GetFrostbiteBuildup() + Statuses.FrostbiteBuildup, 0, GetMaxFrostbiteBuildup()));
@@ -460,4 +463,14 @@ void UMMOAttributeLogic::ClampEvaluatedAttribute(const FGameplayAttribute& Attri
 	{
 		EvaluatedAttribute.Magnitude = FMath::Clamp(EvaluatedAttribute.Magnitude, MinValue, MaxValue);
 	}
+}
+
+
+UMMOAttributeLogic::UMMOAttributeLogic()
+{
+	PoisonedTag = FGameplayTag::RequestGameplayTag(Tag_Status_Poison);
+	FrostbiteTag = FGameplayTag::RequestGameplayTag(Tag_Status_Frostbite);
+	MaddenedTag = FGameplayTag::RequestGameplayTag(Tag_Status_Madness);
+	CursedTag = FGameplayTag::RequestGameplayTag(Tag_Status_Curse);
+	SleepTag = FGameplayTag::RequestGameplayTag(Tag_Status_Sleep);
 }

@@ -130,7 +130,7 @@
 #define Tag_Status FName("Status")
 #define Tag_Status_Poison FName("Status.Poison")
 #define Tag_Status_Curse FName("Status.Curse")
-#define Tag_Status_Frostbitten FName("Status.Frostbitten")
+#define Tag_Status_Frostbite FName("Status.Frostbite")
 #define Tag_Status_Madness FName("Status.Madness")
 #define Tag_Status_Sleep FName("Status.Sleep")
 

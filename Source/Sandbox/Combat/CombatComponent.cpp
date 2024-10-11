@@ -854,10 +854,7 @@ void UCombatComponent::PoiseBreak(ACharacterBase* Enemy, AActor* Source, float P
 		if (HitStunDuration)
 		{
 			// If we need to handle removing abilities or add other extra configuration, handle it here, when we have direct access to the gameplay effect (do not edit blueprint tsubclasses, it adjusts values in the editor
-
 			
-			// Don't try to interact with effects after they've been applied, or during other handling like when it hasn't been initialized yet.
-			// You're just going to break it and cause other problems with replication, even if nothing's wrong. Don't be overly pervasive with these things
 
 			AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
 			AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
