@@ -14,6 +14,7 @@
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Weapons/Armament.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
 #include "Sandbox/Asc/Information/SandboxTags.h"
 #include "Sandbox/Data/Enums/AttributeTypes.h"
 #include "Sandbox/Data/Enums/HitReacts.h"
@@ -964,11 +965,31 @@ void UCombatComponent::HandleRespawn(ACharacterBase* Enemy, AActor* Source, cons
 }
 
 
-void UCombatComponent::HandleCurse(ACharacterBase* Enemy, AActor* Source)
+void UCombatComponent::StatusProc(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source)
 {
-	if (!CursedState)
+	if (!(Attribute == UMMOAttributeSet::GetCurseAttribute() ||
+		Attribute == UMMOAttributeSet::GetBleedAttribute() ||
+		Attribute == UMMOAttributeSet::GetPoisonAttribute() ||
+		Attribute == UMMOAttributeSet::GetFrostbiteAttribute() ||
+		Attribute == UMMOAttributeSet::GetMadnessAttribute() ||
+		Attribute == UMMOAttributeSet::GetSleepAttribute()))
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle curse status when the effect information wasn't valid!",
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle a statuc proc with an invalid attribute!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	const TSubclassOf<UGameplayEffect>& StatusEffectClass = Attribute == UMMOAttributeSet::GetCurseAttribute() ? CursedState :
+		                                                        Attribute == UMMOAttributeSet::GetBleedAttribute() ? GE_Bled :
+		                                                        Attribute == UMMOAttributeSet::GetPoisonAttribute() ? GE_Poisoned :
+		                                                        Attribute == UMMOAttributeSet::GetFrostbiteAttribute() ? GE_Frostbitten :
+		                                                        Attribute == UMMOAttributeSet::GetMadnessAttribute() ? GE_Maddened : GE_Slept;
+
+
+	UGameplayEffect* StatusEffect = StatusEffectClass ? StatusEffectClass->GetDefaultObject<UGameplayEffect>() : nullptr;
+	if (!StatusEffect)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to add a status proc when the effect information wasn't valid!",
 			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return;
 	}
@@ -989,6 +1010,7 @@ void UCombatComponent::HandleCurse(ACharacterBase* Enemy, AActor* Source)
 		return;
 	}
 
+	
 	// Add the GE for handling death state and information
 	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
 	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
@@ -996,199 +1018,64 @@ void UCombatComponent::HandleCurse(ACharacterBase* Enemy, AActor* Source)
 	FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
 	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
 	EffectContextHandle.AddSourceObject(Source);
-	AbilitySystem->ApplyGameplayEffectToSelf(CursedState, 1, EffectContextHandle);
+	AbilitySystem->ApplyGameplayEffectToSelf(StatusEffect, 1, EffectContextHandle);
 
-	OnCursed.Broadcast(Character, Enemy);
+	BP_StatusProc(Attribute, NewValue, Enemy, Source);
+	OnStatusUpdate.Broadcast(Character, Enemy, Attribute, NewValue);
 }
 
 
-void UCombatComponent::HandleBleed(ACharacterBase* Enemy, AActor* Source)
+void UCombatComponent::HandleCurse(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source)
 {
-	if (!GE_Bled)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle bleed when the effect information wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
-	
-	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
-	if (!Character)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle bleed when the character wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
+	StatusProc(Attribute, NewValue, Enemy, Source);
 
-	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
-	if (!AbilitySystem)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle bleed when the ability system component wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
-
-	// Add the GE for handling death state and information
-	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
-	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
-
-	FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
-	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
-	EffectContextHandle.AddSourceObject(Source);
-	AbilitySystem->ApplyGameplayEffectToSelf(GE_Bled, 1, EffectContextHandle);
-
-	OnBled.Broadcast(Character, Enemy);
+	BP_HandleCurse(Attribute, NewValue, Enemy, Source);
+	OnCursed.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
 }
 
 
-void UCombatComponent::HandlePoisoned(ACharacterBase* Enemy, AActor* Source)
+void UCombatComponent::HandleBleed(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source)
 {
-	if (!GE_Poisoned)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle poison when the effect information wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
+	StatusProc(Attribute, NewValue, Enemy, Source);
 	
-	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
-	if (!Character)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle poison when the character wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
-
-	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
-	if (!AbilitySystem)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle poison when the ability system component wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
-
-	// Add the GE for handling death state and information
-	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
-	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
-
-	FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
-	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
-	EffectContextHandle.AddSourceObject(Source);
-	AbilitySystem->ApplyGameplayEffectToSelf(GE_Poisoned, 1, EffectContextHandle);
-
-	OnPoisoned.Broadcast(Character, Enemy);
+	BP_HandleBleed(Attribute, NewValue, Enemy, Source);
+	OnBled.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
 }
 
 
-void UCombatComponent::HandleFrostbite(ACharacterBase* Enemy, AActor* Source)
+void UCombatComponent::HandlePoisoned(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source)
 {
-	if (!GE_Frostbitten)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle frostbite when the effect information wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
+	StatusProc(Attribute, NewValue, Enemy, Source);
 	
-	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
-	if (!Character)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle frostbite when the character wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
-
-	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
-	if (!AbilitySystem)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle frostbite when the ability system component wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
-
-	// Add the GE for handling death state and information
-	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
-	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
-
-	FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
-	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
-	EffectContextHandle.AddSourceObject(Source);
-	AbilitySystem->ApplyGameplayEffectToSelf(GE_Frostbitten, 1, EffectContextHandle);
-
-	OnFrostBitten.Broadcast(Character, Enemy);
+	BP_HandlePoisoned(Attribute, NewValue, Enemy, Source);
+	OnPoisoned.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
 }
 
 
-void UCombatComponent::HandleMadness(ACharacterBase* Enemy, AActor* Source)
+void UCombatComponent::HandleFrostbite(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source)
 {
-	if (!GE_Maddened)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle madness when the effect information wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
+	StatusProc(Attribute, NewValue, Enemy, Source);
 	
-	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
-	if (!Character)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle madness when the character wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
-
-	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
-	if (!AbilitySystem)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle madness when the ability system component wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
-
-	// Add the GE for handling death state and information
-	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
-	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
-
-	FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
-	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
-	EffectContextHandle.AddSourceObject(Source);
-	AbilitySystem->ApplyGameplayEffectToSelf(GE_Maddened, 1, EffectContextHandle);
-
-	OnMaddened.Broadcast(Character, Enemy);
+	BP_HandleFrostbite(Attribute, NewValue, Enemy, Source);
+	OnFrostBitten.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
 }
 
 
-void UCombatComponent::HandleSleep(ACharacterBase* Enemy, AActor* Source)
+void UCombatComponent::HandleMadness(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source)
 {
-	if (!GE_Slept)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle sleep when the effect information wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
+	StatusProc(Attribute, NewValue, Enemy, Source);
 	
-	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
-	if (!Character)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle sleep when the character wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
+	BP_HandleMadness(Attribute, NewValue, Enemy, Source);
+	OnMaddened.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
+}
 
-	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
-	if (!AbilitySystem)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle sleep when the ability system component wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
 
-	// Add the GE for handling death state and information
-	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
-	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
-
-	FGameplayEffectContextHandle EffectContextHandle = AbilitySystem->MakeEffectContext();
-	EffectContextHandle.AddInstigator(Instigator, EffectCauser);
-	EffectContextHandle.AddSourceObject(Source);
-	AbilitySystem->ApplyGameplayEffectToSelf(GE_Slept, 1, EffectContextHandle);
-
-	OnSlept.Broadcast(Character, Enemy);
+void UCombatComponent::HandleSleep(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source)
+{
+	StatusProc(Attribute, NewValue, Enemy, Source);
+	
+	BP_HandleSleep(Attribute, NewValue, Enemy, Source);
+	OnSlept.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
 }
 
 

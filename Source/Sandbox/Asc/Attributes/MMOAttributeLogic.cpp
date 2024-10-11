@@ -104,7 +104,8 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 	UAbilitySystem* AbilitySystem = Props.TargetAbilitySystem;
 	UCombatComponent* CombatComponent = Props.TargetCombatComponent;
 
-
+	// TODO: Add attack pattern to effect context
+	// TODO: Add weapons/hitstun/hitLocation to effect context
 	
 	
 	/**** Combat calculations ****/
@@ -122,7 +123,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		AArmament* Armament = Cast<AArmament>(Props.Context.GetSourceObject());
 		FVector WeaponLocation = Armament ? Armament->GetCenterLocation() : Props.SourceCharacter.Get()->GetActorLocation(); // TODO: create a custom target data object for returning the proper information
 		EHitDirection HitDirection = Character->GetHitReactDirection(Character, Character->GetActorLocation(), WeaponLocation);
-		EHitStun HitStun = EHitStun::Short;
+		EHitStun HitStun = EHitStun::None;
 		
 		
 		// Retrieve the damage calculations
@@ -222,6 +223,8 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 			else if (Attribute == GetDamage_PoiseAttribute())
 			{
 				PoiseDamageTaken = GetDamage_Poise();
+				HitStun = Armament ? Armament->GetHitStun(EInputAbilities::None, PoiseDamageTaken) : HitStun;
+
 				float CurrentPoise = GetPoise() - PoiseDamageTaken;
 				if (CurrentPoise <= 0.0)
 				{
@@ -292,7 +295,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		UE_LOGFMT(LogTemp, Warning, "{0}::AttributeLogic() {1} attacked {2} with {3}! \n"
 			"Health/Poise: ({4})({5}), Damage: ({6})({7}) {8}  {9} {10} {11}",
 
-			*UEnum::GetValueAsString(Props.SourceCharacter->GetLocalRole()), *FString(__FUNCTION__),
+			*UEnum::GetValueAsString(Props.SourceCharacter->GetLocalRole()),
 			*GetNameSafe(Props.SourceCharacter), *GetNameSafe(Props.TargetCharacter), *GetNameSafe(Props.Context.GetSourceObject()),
 			
 			FMath::CeilToInt(GetHealth()), FMath::CeilToInt(GetPoise()),

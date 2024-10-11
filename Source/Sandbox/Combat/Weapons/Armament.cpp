@@ -11,6 +11,7 @@
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Data/Enums/HitReacts.h"
 
 DEFINE_LOG_CATEGORY(ArmamentLog);
 
@@ -412,6 +413,18 @@ FGameplayEffectInfo AArmament::GetStateInformation() const
 const TMap<FGameplayAttribute, float>& AArmament::GetBaseDamageStats() const
 {
 	return ArmamentInformation.BaseDamageStats;
+}
+
+EHitStun AArmament::GetHitStun(EInputAbilities AttackPattern, float PoiseDamage) const
+{
+	if (PoiseDamage <= 0.0) return EHitStun::None;
+	if (PoiseDamage <= 2) return EHitStun::VeryShort;
+	if (PoiseDamage <= 4) return EHitStun::Short;
+	if (PoiseDamage <= 7) return EHitStun::Medium;
+	if (PoiseDamage <= 10) return EHitStun::Long;
+	if (PoiseDamage <= 15) return EHitStun::FacePlant;
+	if (PoiseDamage <= 20) return EHitStun::FrontFlip;
+	return EHitStun::None;
 }
 
 

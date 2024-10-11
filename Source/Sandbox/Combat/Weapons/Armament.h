@@ -9,6 +9,7 @@
 #include "Sandbox/Data/Structs/CombatInformation.h"
 #include "Armament.generated.h"
 
+enum class EHitStun : uint8;
 DECLARE_LOG_CATEGORY_EXTERN(ArmamentLog, Log, All);
 
 
@@ -230,6 +231,9 @@ public:
 	
 	/** Retrieves the armament's base attack information */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual const TMap<FGameplayAttribute, float>& GetBaseDamageStats() const;
+
+	/** Returns different hitstuns based on the poise damage, the attack, the type of weapon, and other custom configurations */
+	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual EHitStun GetHitStun(EInputAbilities AttackPattern, float PoiseDamage) const;
 	
 	/** Retrieves the armament's skeletal mesh */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual USkeletalMeshComponent* GetArmamentMesh() const;
