@@ -418,13 +418,11 @@ const TMap<FGameplayAttribute, float>& AArmament::GetBaseDamageStats() const
 EHitStun AArmament::GetHitStun(EInputAbilities AttackPattern, float PoiseDamage) const
 {
 	if (PoiseDamage <= 0.0) return EHitStun::None;
-	if (PoiseDamage <= 2) return EHitStun::VeryShort;
-	if (PoiseDamage <= 4.5) return EHitStun::Short;
-	if (PoiseDamage <= 10) return EHitStun::Medium;
-	if (PoiseDamage <= 20) return EHitStun::Long;
-	if (PoiseDamage <= 30) return EHitStun::FacePlant;
-	if (PoiseDamage <= 40) return EHitStun::FrontFlip;
-	return EHitStun::None;
+	if (PoiseDamage <= 4) return EHitStun::VeryShort;
+	if (PoiseDamage <= 10) return EHitStun::Short;
+	if (PoiseDamage <= 20) return EHitStun::Medium;
+	if (PoiseDamage <= 30) return EHitStun::Long;
+	return EHitStun::FacePlant;
 }
 
 

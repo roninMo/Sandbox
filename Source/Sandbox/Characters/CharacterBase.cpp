@@ -346,7 +346,6 @@ FName ACharacterBase::GetHitReactSection(EHitDirection HitDirection, EHitStun Hi
 	if (HitStun == EHitStun::Medium) MontageSection = Montage_Section_HitStun_M;
 	if (HitStun == EHitStun::Long) MontageSection = Montage_Section_HitStun_L;
 	if (HitStun == EHitStun::FacePlant) MontageSection = Montage_Section_HitStun_FP;
-	if (HitStun == EHitStun::FrontFlip) MontageSection = Montage_Section_HitStun_FF;
 
 	if (!MontageSection.IsNone())
 	{
