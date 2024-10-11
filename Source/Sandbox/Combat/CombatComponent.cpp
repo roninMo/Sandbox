@@ -1066,23 +1066,23 @@ void UCombatComponent::StatusProc(ACharacterBase* Enemy, AActor* Source, const F
 	}
 
 	// Yeah
-	const TSubclassOf<UGameplayEffect>& StatusEffectClass = Attribute == UMMOAttributeSet::GetCurseAttribute() ? CursedStateClass :
-		                                                        Attribute == UMMOAttributeSet::GetBleedAttribute() ? GE_Bled :
-		                                                        Attribute == UMMOAttributeSet::GetPoisonAttribute() ? GE_Poisoned :
-		                                                        Attribute == UMMOAttributeSet::GetFrostbiteAttribute() ? GE_Frostbitten :
-		                                                        Attribute == UMMOAttributeSet::GetMadnessAttribute() ? GE_Maddened : GE_Slept;
+	const TSubclassOf<UGameplayEffect>& StatusEffectClass = Attribute == UMMOAttributeSet::GetCurseBuildupAttribute() ? CursedStateClass :
+		                                                        Attribute == UMMOAttributeSet::GetBleedBuildupAttribute() ? GE_Bled :
+		                                                        Attribute == UMMOAttributeSet::GetPoisonBuildupAttribute() ? GE_Poisoned :
+		                                                        Attribute == UMMOAttributeSet::GetFrostbiteBuildupAttribute() ? GE_Frostbitten :
+		                                                        Attribute == UMMOAttributeSet::GetMadnessBuildupAttribute() ? GE_Maddened : GE_Slept;
 
-	FActiveGameplayEffectHandle& EffectHandle = Attribute == UMMOAttributeSet::GetCurseAttribute() ? CursedHandle :
-												Attribute == UMMOAttributeSet::GetBleedAttribute() ? BleedHandle :
-												Attribute == UMMOAttributeSet::GetPoisonAttribute() ? PoisonedHandle :
-												Attribute == UMMOAttributeSet::GetFrostbiteAttribute() ? FrostbittenHandle :
-												Attribute == UMMOAttributeSet::GetMadnessAttribute() ? MaddenedHandle : SleepHandle;
+	FActiveGameplayEffectHandle& EffectHandle = Attribute == UMMOAttributeSet::GetCurseBuildupAttribute() ? CursedHandle :
+												Attribute == UMMOAttributeSet::GetBleedBuildupAttribute() ? BleedHandle :
+												Attribute == UMMOAttributeSet::GetPoisonBuildupAttribute() ? PoisonedHandle :
+												Attribute == UMMOAttributeSet::GetFrostbiteBuildupAttribute() ? FrostbittenHandle :
+												Attribute == UMMOAttributeSet::GetMadnessBuildupAttribute() ? MaddenedHandle : SleepHandle;
 
-	ECombatAttribute BP_Attribute = Attribute == UMMOAttributeSet::GetCurseAttribute() ? ECombatAttribute::CurseBuildup :
-									Attribute == UMMOAttributeSet::GetBleedAttribute() ? ECombatAttribute::BleedBuildup :
-									Attribute == UMMOAttributeSet::GetPoisonAttribute() ? ECombatAttribute::PoisonBuildup :
-									Attribute == UMMOAttributeSet::GetFrostbiteAttribute() ? ECombatAttribute::FrostbiteBuildup :
-									Attribute == UMMOAttributeSet::GetMadnessAttribute() ? ECombatAttribute::MadnessBuildup : ECombatAttribute::SleepBuildup;
+	ECombatAttribute BP_Attribute = Attribute == UMMOAttributeSet::GetCurseBuildupAttribute() ? ECombatAttribute::Curse :
+									Attribute == UMMOAttributeSet::GetBleedBuildupAttribute() ? ECombatAttribute::Bleed :
+									Attribute == UMMOAttributeSet::GetPoisonBuildupAttribute() ? ECombatAttribute::Poison :
+									Attribute == UMMOAttributeSet::GetFrostbiteBuildupAttribute() ? ECombatAttribute::Frostbite :
+									Attribute == UMMOAttributeSet::GetMadnessBuildupAttribute() ? ECombatAttribute::Madness : ECombatAttribute::Sleep;
 	
 	
 	UGameplayEffect* StatusEffect = StatusEffectClass ? StatusEffectClass->GetDefaultObject<UGameplayEffect>() : nullptr;
@@ -1177,6 +1177,14 @@ void UCombatComponent::HandleSleep(ACharacterBase* Enemy, AActor* Source, const 
 	BP_HandleSleep(Enemy, Source, NewValue);
 	OnSlept.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
 }
+
+
+bool UCombatComponent::IsImmuneToCurses_Implementation(ACharacterBase* Enemy, UObject* Source, const ECombatAttribute Attribute, float Value) { return false; }
+bool UCombatComponent::IsImmuneToBleed_Implementation(ACharacterBase* Enemy, UObject* Source, const ECombatAttribute Attribute, float Value) { return false; }
+bool UCombatComponent::IsImmuneToPoison_Implementation(ACharacterBase* Enemy, UObject* Source, const ECombatAttribute Attribute, float Value) { return false; }
+bool UCombatComponent::IsImmuneToFrostbite_Implementation(ACharacterBase* Enemy, UObject* Source, const ECombatAttribute Attribute, float Value) { return false; }
+bool UCombatComponent::IsImmuneToMadness_Implementation(ACharacterBase* Enemy, UObject* Source, const ECombatAttribute Attribute, float Value) { return false; }
+bool UCombatComponent::IsImmuneToSleep_Implementation(ACharacterBase* Enemy, UObject* Source, const ECombatAttribute Attribute, float Value) { return false; }
 
 
 UGameplayEffect* UCombatComponent::GetPreventAttributeAccumulationEffect(float Duration, const ECombatAttribute Attribute) const

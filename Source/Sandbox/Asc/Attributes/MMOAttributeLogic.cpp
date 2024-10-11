@@ -9,6 +9,7 @@
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Combat/Weapons/Armament.h"
+#include "Sandbox/Data/Enums/AttributeTypes.h"
 #include "Sandbox/Data/Enums/HitDirection.h"
 #include "Sandbox/Data/Enums/HitReacts.h"
 
@@ -119,9 +120,8 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 	//--------------------------------------------------------------------------------------//
 	if (Data.EffectSpec.Def->Executions.Num() == 0)
 	{
-		float NewValue = Data.EvaluatedData.Magnitude;
-		StatusCalculations(Props, Data.EvaluatedData.Attribute, NewValue, Statuses);
-		DamageCalculations(Props, Data.EvaluatedData.Attribute, NewValue, CombatInfo);
+		StatusCalculations(Props, Data.EvaluatedData.Attribute, Statuses);
+		DamageCalculations(Props, Data.EvaluatedData.Attribute, CombatInfo);
 	}
 	
 
@@ -133,8 +133,8 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		// Retrieve the damage calculations
 		for (auto &[Attribute, Value] : Data.EffectSpec.ModifiedAttributes)
 		{
-			StatusCalculations(Props, Attribute, Value, Statuses);
-			DamageCalculations(Props, Attribute, Value, CombatInfo);
+			StatusCalculations(Props, Attribute, Statuses);
+			DamageCalculations(Props, Attribute, CombatInfo);
 			// TODO: Any other effects to attributes - stamina drain, etc.
 		}
 	}
@@ -148,7 +148,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		CombatInfo.PoiseDamageTaken > 0.0 ||
 		CombatInfo.bPoiseBroken ||
 		Statuses.bCharacterBled ||
-		Statuses.bWasFrosbitten)
+		Statuses.bWasFrostbitten)
 	{
 		// Physical / Magic damage
 		float CurrentHealth = GetHealth() - CombatInfo.MagicDamageTaken - CombatInfo.DamageTaken;
@@ -170,7 +170,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		}
 
 		// Frostbite damage
-		if (Statuses.bWasFrosbitten)
+		if (Statuses.bWasFrostbitten)
 		{
 			CombatInfo.DamageTaken += 100 + (GetMaxHealth() * 0.15);
 			if (CombatInfo.HitStun < EHitStun::Medium)
@@ -208,9 +208,9 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 			
 			FMath::CeilToInt(GetHealth()), FMath::CeilToInt(GetPoise()),
 			FMath::CeilToInt(-CombatInfo.MagicDamageTaken - CombatInfo.DamageTaken), FMath::CeilToInt(-CombatInfo.PoiseDamageTaken),
-			Statuses.bCharacterBled || Statuses.bWasFrosbitten || Statuses.bWasCursed ? FString("->  ") : FString(""),
+			Statuses.bCharacterBled || Statuses.bWasFrostbitten || Statuses.bWasCursed ? FString("->  ") : FString(""),
 			Statuses.bCharacterBled ? FString("Bleed /") : FString(""),
-			Statuses.bWasFrosbitten ? FString("Frostbite /") : FString(""),
+			Statuses.bWasFrostbitten ? FString("Frostbite /") : FString(""),
 			Statuses.bWasCursed ? FString("Cursed ") : FString("")
 		);
 	}
@@ -220,7 +220,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 
 
 void UMMOAttributeLogic::DamageCalculations(const FGAttributeSetExecutionData& Props,
-	const FGameplayAttribute& Attribute, const float Value, FAttributeCombatInformation& CombatInformation)
+	const FGameplayAttribute& Attribute, FAttributeCombatInformation& CombatInformation)
 {
 	ACharacterBase* Character = Props.TargetCharacter;
 
@@ -270,87 +270,154 @@ void UMMOAttributeLogic::DamageCalculations(const FGAttributeSetExecutionData& P
 
 
 void UMMOAttributeLogic::StatusCalculations(const FGAttributeSetExecutionData& Props,
-	const FGameplayAttribute& Attribute, const float Value, FAttributeStatusInformation& Statuses)
+	const FGameplayAttribute& Attribute, FAttributeStatusInformation& Statuses)
 {
+	bool ImmuneToAttribute = IsImmuneToAttribute(Props, Attribute);
+	ACharacterBase* Character = Props.TargetCharacter;
 	UAbilitySystem* AbilitySystem = Props.TargetAbilitySystem;
 	UCombatComponent* CombatComponent = Props.TargetCombatComponent;
-	ACharacterBase* Character = Props.TargetCharacter;
 
 	/**
 		Status calculations
 			- status buildup
 			- Status effect (Take damage / slow / poison)
 	*/
-	if ((Attribute == GetCurseAttribute() ||
-		Attribute == GetCurseBuildupAttribute()) &&
-		!AbilitySystem->HasMatchingGameplayTag(CursedTag))
+	if (!ImmuneToAttribute)
 	{
-		SetCurseBuildup(FMath::Clamp(GetCurseBuildup() + Value, 0, GetMaxCurseBuildup()));
-
-		if (GetCurseBuildup() == GetMaxCurseBuildup())
+		if ((Attribute == GetCurseAttribute() ||
+			Attribute == GetCurseBuildupAttribute()) &&
+			!AbilitySystem->HasMatchingGameplayTag(CursedTag))
 		{
-			Statuses.bWasCursed = true;
-			SetHealth(0.0);
-			CombatComponent->HandleCurse(Props.SourceCharacter, Character, GetCurseBuildupAttribute(), GetCurseBuildup());
+			SetCurseBuildup(FMath::Clamp(GetCurseBuildup() + Props.DeltaValue, 0, GetMaxCurseBuildup()));
+
+			if (GetCurseBuildup() == GetMaxCurseBuildup())
+			{
+				Statuses.bWasCursed = true;
+				SetHealth(0.0);
+				CombatComponent->HandleCurse(Props.SourceCharacter, Character, GetCurseBuildupAttribute(), GetCurseBuildup());
+			}
+		}
+		else if (Attribute == GetBleedAttribute() || Attribute == GetBleedBuildupAttribute())
+		{
+			SetBleedBuildup(FMath::Clamp(GetBleedBuildup() + Props.DeltaValue, 0, GetMaxBleedBuildup()));
+
+			if (GetBleedBuildup() == GetMaxBleedBuildup())
+			{
+				Statuses.bCharacterBled = true;
+				SetBleedBuildup(0.0);
+				CombatComponent->HandleBleed(Props.SourceCharacter, Character, GetBleedBuildupAttribute(), GetBleedBuildup());
+			}
+		}
+		else if ((Attribute == GetPoisonAttribute() ||
+				Attribute == GetPoisonBuildupAttribute()) &&
+				!AbilitySystem->HasMatchingGameplayTag(PoisonedTag))
+		{
+			SetPoisonBuildup(FMath::Clamp(GetPoisonBuildup() + Props.DeltaValue, 0, GetMaxPoisonBuildup()));
+
+			if (GetPoisonBuildup() == GetMaxPoisonBuildup())
+			{
+				Statuses.bWasPoisoned = true;
+				CombatComponent->HandlePoisoned(Props.SourceCharacter, Character, GetPoisonBuildupAttribute(), GetPoisonBuildup());
+			}
+		}
+		else if (Attribute == GetFrostbiteAttribute() || Attribute == GetFrostbiteBuildupAttribute())
+		{
+			SetFrostbiteBuildup(FMath::Clamp(GetFrostbiteBuildup() + Props.DeltaValue, 0, GetMaxFrostbiteBuildup()));
+
+			if (GetFrostbiteBuildup() == GetMaxFrostbiteBuildup())
+			{
+				Statuses.bWasFrostbitten = true;
+				CombatComponent->HandleFrostbite(Props.SourceCharacter, Character, GetFrostbiteBuildupAttribute(), GetFrostbiteBuildup());
+			}
+		}
+		else if ((Attribute == GetMadnessAttribute() ||
+				Attribute == GetMadnessBuildupAttribute()) &&
+				!AbilitySystem->HasMatchingGameplayTag(MaddenedTag))
+		{
+			SetMadnessBuildup(FMath::Clamp(GetMadnessBuildup() + Props.DeltaValue, 0, GetMaxMadnessBuildup()));
+			
+			if (GetMadnessBuildup() == GetMaxMadnessBuildup())
+			{
+				Statuses.bWasMaddened = true;
+				CombatComponent->HandleMadness(Props.SourceCharacter, Character, GetMadnessBuildupAttribute(), GetMadnessBuildup());
+			}
+		}
+		else if ((Attribute == GetSleepAttribute() ||
+				Attribute == GetSleepBuildupAttribute()) &&
+				!AbilitySystem->HasMatchingGameplayTag(SleepTag))
+		{
+			SetSleepBuildup(FMath::Clamp(GetSleepBuildup() + Props.DeltaValue, 0, GetMaxSleepBuildup()));
+
+			if (GetSleepBuildup() == GetMaxSleepBuildup())
+			{
+				Statuses.bSlept = true;
+				CombatComponent->HandleSleep(Props.SourceCharacter, Character, GetSleepBuildupAttribute(), GetSleepBuildup());
+			}
 		}
 	}
-	else if (Attribute == GetBleedAttribute() || Attribute == GetBleedBuildupAttribute())
-	{
-		SetBleedBuildup(FMath::Clamp(GetBleedBuildup() + Value, 0, GetMaxBleedBuildup()));
+}
 
-		if (GetBleedBuildup() == GetMaxBleedBuildup())
-		{
-			Statuses.bCharacterBled = true;
-			SetBleedBuildup(0.0);
-			CombatComponent->HandleBleed(Props.SourceCharacter, Character, GetBleedBuildupAttribute(), GetBleedBuildup());
-		}
-	}
-	else if ((Attribute == GetPoisonAttribute() ||
-			Attribute == GetPoisonBuildupAttribute()) &&
-			!AbilitySystem->HasMatchingGameplayTag(PoisonedTag))
-	{
-		SetPoisonBuildup(FMath::Clamp(GetPoisonBuildup() + Value, 0, GetMaxPoisonBuildup()));
 
-		if (GetPoisonBuildup() == GetMaxPoisonBuildup())
-		{
-			Statuses.bWasPoisoned = true;
-			CombatComponent->HandlePoisoned(Props.SourceCharacter, Character, GetPoisonBuildupAttribute(), GetPoisonBuildup());
-		}
-	}
-	else if (Attribute == GetFrostbiteAttribute() || Attribute == GetFrostbiteBuildupAttribute())
-	{
-		SetFrostbiteBuildup(FMath::Clamp(GetFrostbiteBuildup() + Value, 0, GetMaxFrostbiteBuildup()));
+bool UMMOAttributeLogic::IsImmuneToAttribute(const FGAttributeSetExecutionData& Props, const FGameplayAttribute& Attribute) const
+{
+	UCombatComponent* Character = Props.TargetCombatComponent;
 
-		if (GetFrostbiteBuildup() == GetMaxFrostbiteBuildup())
-		{
-			Statuses.bWasFrosbitten = true;
-			CombatComponent->HandleFrostbite(Props.SourceCharacter, Character, GetFrostbiteBuildupAttribute(), GetFrostbiteBuildup());
-		}
-	}
-	else if ((Attribute == GetMadnessAttribute() ||
-			Attribute == GetMadnessBuildupAttribute()) &&
-			!AbilitySystem->HasMatchingGameplayTag(MaddenedTag))
+	if (Attribute == GetCurseBuildupAttribute() || Attribute == GetCurseAttribute())
 	{
-		SetMadnessBuildup(FMath::Clamp(GetMadnessBuildup() + Value, 0, GetMaxMadnessBuildup()));
+		if (Character && Character->IsImmuneToCurses(Props.SourceCharacter, Props.Context.GetSourceObject(), ECombatAttribute::Curse, Props.DeltaValue)) 
+		{
+			return true;
+		}
 		
-		if (GetMadnessBuildup() == GetMaxMadnessBuildup())
-		{
-			Statuses.bWasMaddened = true;
-			CombatComponent->HandleMadness(Props.SourceCharacter, Character, GetMadnessBuildupAttribute(), GetMadnessBuildup());
-		}
+		return GetMaxCurseBuildup() <= 0;
 	}
-	else if ((Attribute == GetSleepAttribute() ||
-			Attribute == GetSleepBuildupAttribute()) &&
-			!AbilitySystem->HasMatchingGameplayTag(SleepTag))
+	if (Attribute == GetBleedBuildupAttribute() || Attribute == GetBleedAttribute())
 	{
-		SetSleepBuildup(FMath::Clamp(GetSleepBuildup() + Value, 0, GetMaxSleepBuildup()));
-
-		if (GetSleepBuildup() == GetMaxSleepBuildup())
+		if (Character && Character->IsImmuneToBleed(Props.SourceCharacter, Props.Context.GetSourceObject(), ECombatAttribute::Bleed, Props.DeltaValue)) 
 		{
-			Statuses.bSlept = true;
-			CombatComponent->HandleSleep(Props.SourceCharacter, Character, GetSleepBuildupAttribute(), GetSleepBuildup());
+			return true;
 		}
+		
+		return GetMaxBleedBuildup() <= 0;
 	}
+	if (Attribute == GetPoisonBuildupAttribute() || Attribute == GetPoisonAttribute())
+	{
+		if (Character && Character->IsImmuneToPoison(Props.SourceCharacter, Props.Context.GetSourceObject(), ECombatAttribute::Poison, Props.DeltaValue)) 
+		{
+			return true;
+		}
+		
+		return GetMaxPoisonBuildup() <= 0;
+	}
+	if (Attribute == GetFrostbiteBuildupAttribute() || Attribute == GetFrostbiteAttribute())
+	{
+		if (Character && Character->IsImmuneToFrostbite(Props.SourceCharacter, Props.Context.GetSourceObject(), ECombatAttribute::Frostbite, Props.DeltaValue)) 
+		{
+			return true;
+		}
+		
+		return GetMaxFrostbiteBuildup() <= 0;
+	}
+	if (Attribute == GetMadnessBuildupAttribute() || Attribute == GetMadnessAttribute())
+	{
+		if (Character && Character->IsImmuneToMadness(Props.SourceCharacter, Props.Context.GetSourceObject(), ECombatAttribute::Madness, Props.DeltaValue)) 
+		{
+			return true;
+		}
+		
+		return GetMaxMadnessBuildup() <= 0;
+	}
+	if (Attribute == GetSleepBuildupAttribute() || Attribute == GetSleepAttribute())
+	{
+		if (Character && Character->IsImmuneToSleep(Props.SourceCharacter, Props.Context.GetSourceObject(), ECombatAttribute::Sleep, Props.DeltaValue)) 
+		{
+			return true;
+		}
+		
+		return GetMaxSleepBuildup() <= 0;
+	}
+
+	return false;
 }
 
 

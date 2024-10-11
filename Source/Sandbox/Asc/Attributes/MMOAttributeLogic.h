@@ -34,7 +34,7 @@ struct FAttributeStatusInformation
 	UPROPERTY() bool bWasCursed = false;
 	UPROPERTY() bool bCharacterBled = false;
 	UPROPERTY() bool bWasPoisoned = false;
-	UPROPERTY() bool bWasFrosbitten = false;
+	UPROPERTY() bool bWasFrostbitten = false;
 	UPROPERTY() bool bWasMaddened = false;
 	UPROPERTY() bool bSlept = false;
 };
@@ -76,13 +76,15 @@ protected:
 	//~ End UAttribute interface
 
 	/** Damage calculations */
-	virtual void DamageCalculations(const FGAttributeSetExecutionData& Props, const FGameplayAttribute& Attribute, const float Value, FAttributeCombatInformation& CombatInformation);
+	virtual void DamageCalculations(const FGAttributeSetExecutionData& Props, const FGameplayAttribute& Attribute, FAttributeCombatInformation& CombatInformation);
 	
 	/** Attribute calculations for statuses */
-	virtual void StatusCalculations(const FGAttributeSetExecutionData& Props, const FGameplayAttribute& Attribute, const float Value, FAttributeStatusInformation& Statuses);
+	virtual void StatusCalculations(const FGAttributeSetExecutionData& Props, const FGameplayAttribute& Attribute, FAttributeStatusInformation& Statuses);
+
+	/** Returns whether the player is immune to the specific debuff */
+	virtual bool IsImmuneToAttribute(const FGAttributeSetExecutionData& Props, const FGameplayAttribute& Attribute) const;
 
 	
-
 protected:
 	/** Handles clamping attribute adjustments */
 	virtual void ClampEvaluatedAttribute(const FGameplayAttribute& AttributeToClamp, FGameplayModifierEvaluatedData& EvaluatedAttribute, const float MinValue, const float MaxValue);

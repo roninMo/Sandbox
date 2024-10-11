@@ -57,9 +57,12 @@ enum class ECombatAttribute : uint8
 	Damage_Fire,
 	Damage_Holy,
 	Damage_Lightning,
+	Curse,
 	Bleed,
 	Poison,
-	Curse,
+	Frostbite,
+	Madness,
+	Sleep,
 };
 
 
