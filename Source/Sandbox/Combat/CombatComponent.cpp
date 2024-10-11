@@ -3,21 +3,20 @@
 
 #include "Sandbox/Combat/CombatComponent.h"
 
+#include "Sandbox/Data/Enums/HitReacts.h"
 #include "Sandbox/Data/Enums/EquipSlot.h"
 #include "Sandbox/Data/Enums/ArmorTypes.h"
+#include "Sandbox/Data/Enums/AttributeTypes.h"
+#include "Sandbox/Asc/Information/SandboxTags.h"
 
 #include "Net/UnrealNetwork.h"
 #include "Engine/SkeletalMeshSocket.h"
-#include "GameFramework/PlayerState.h"
+#include "Logging/StructuredLog.h"
+
 #include "Sandbox/Characters/CharacterBase.h"
-#include "Sandbox/Asc/Attributes/AttributeLogic.h"
+#include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Weapons/Armament.h"
-#include "Logging/StructuredLog.h"
-#include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
-#include "Sandbox/Asc/Information/SandboxTags.h"
-#include "Sandbox/Data/Enums/AttributeTypes.h"
-#include "Sandbox/Data/Enums/HitReacts.h"
 
 DEFINE_LOG_CATEGORY(CombatComponentLog);
 // TODO: Custom logging to remove the extra message logic for clarification
@@ -87,13 +86,16 @@ void UCombatComponent::BeginPlay()
 void UCombatComponent::CombatCalculations(const FGAttributeSetExecutionData& Props)
 {
 }
+#pragma endregion 
+
 
 
 void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	HandleClearingStatuses();
 }
-#pragma endregion 
+
 
 
 
@@ -880,6 +882,7 @@ void UCombatComponent::PoiseBreak(ACharacterBase* Enemy, AActor* Source, float P
 
 void UCombatComponent::HandleDeath(ACharacterBase* Enemy, AActor* Source, FName MontageSection)
 {
+	UGameplayEffect* DeathEffect = DeathEffectClass ? DeathEffectClass->GetDefaultObject<UGameplayEffect>() : nullptr;
 	if (!DeathEffect)
 	{
 		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to handle death when the effect information wasn't valid!",
@@ -965,7 +968,90 @@ void UCombatComponent::HandleRespawn(ACharacterBase* Enemy, AActor* Source, cons
 }
 
 
-void UCombatComponent::StatusProc(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source)
+void UCombatComponent::HandleClearingStatuses()
+{
+	// Sanity checks
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried clearing statuses when the character wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	if (!Character->HasAuthority())
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried clearing statuses when it wasn't on authority!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
+	if (!AbilitySystem)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried clearing statuses when the ability system component wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	const UMMOAttributeSet* Attributes = Cast<UMMOAttributeSet>(AbilitySystem->GetAttributeSet(UMMOAttributeSet::StaticClass()));
+	if (!Attributes)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried clearing statuses when the attribute set wasn't valid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	
+	// Try to remove the status effects, and notify the player
+	if (CursedHandle.IsValid() && Attributes->GetCurseBuildup() == 0.0)
+	{
+		if (AbilitySystem->RemoveActiveGameplayEffect(CursedHandle))
+		{
+			CursedHandle.Invalidate();
+			OnStatusCleared.Broadcast(Character, Attributes->GetCurseBuildupAttribute(), 0.0);
+		}
+	}
+
+	if (PoisonedHandle.IsValid() && Attributes->GetPoisonBuildup() == 0.0)
+	{
+		if (AbilitySystem->RemoveActiveGameplayEffect(PoisonedHandle))
+		{
+			PoisonedHandle.Invalidate();
+			OnStatusCleared.Broadcast(Character, Attributes->GetPoisonBuildupAttribute(), 0.0);
+		}
+	}
+
+	if (FrostbittenHandle.IsValid() && Attributes->GetFrostbiteBuildup() == 0.0)
+	{
+		if (AbilitySystem->RemoveActiveGameplayEffect(FrostbittenHandle))
+		{
+			FrostbittenHandle.Invalidate();
+			OnStatusCleared.Broadcast(Character, Attributes->GetFrostbiteBuildupAttribute(), 0.0);
+		}
+	}
+
+	if (MaddenedHandle.IsValid() && Attributes->GetMadnessBuildup() == 0.0)
+	{
+		if (AbilitySystem->RemoveActiveGameplayEffect(MaddenedHandle))
+		{
+			MaddenedHandle.Invalidate();
+			OnStatusCleared.Broadcast(Character, Attributes->GetMadnessBuildupAttribute(), 0.0);
+		}
+	}
+
+	if (SleepHandle.IsValid() && Attributes->GetSleepBuildup() == 0.0)
+	{
+		if (AbilitySystem->RemoveActiveGameplayEffect(SleepHandle))
+		{
+			SleepHandle.Invalidate();
+			OnStatusCleared.Broadcast(Character, Attributes->GetSleepBuildupAttribute(), 0.0);
+		}
+	}
+}
+
+
+void UCombatComponent::StatusProc(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue)
 {
 	if (!(Attribute == UMMOAttributeSet::GetCurseAttribute() ||
 		Attribute == UMMOAttributeSet::GetBleedAttribute() ||
@@ -979,7 +1065,7 @@ void UCombatComponent::StatusProc(const FGameplayAttribute& Attribute, float New
 		return;
 	}
 
-	const TSubclassOf<UGameplayEffect>& StatusEffectClass = Attribute == UMMOAttributeSet::GetCurseAttribute() ? CursedState :
+	const TSubclassOf<UGameplayEffect>& StatusEffectClass = Attribute == UMMOAttributeSet::GetCurseAttribute() ? CursedStateClass :
 		                                                        Attribute == UMMOAttributeSet::GetBleedAttribute() ? GE_Bled :
 		                                                        Attribute == UMMOAttributeSet::GetPoisonAttribute() ? GE_Poisoned :
 		                                                        Attribute == UMMOAttributeSet::GetFrostbiteAttribute() ? GE_Frostbitten :
@@ -1020,61 +1106,61 @@ void UCombatComponent::StatusProc(const FGameplayAttribute& Attribute, float New
 	EffectContextHandle.AddSourceObject(Source);
 	AbilitySystem->ApplyGameplayEffectToSelf(StatusEffect, 1, EffectContextHandle);
 
-	BP_StatusProc(Attribute, NewValue, Enemy, Source);
+	BP_StatusProc(Enemy, Source, Attribute, NewValue);
 	OnStatusUpdate.Broadcast(Character, Enemy, Attribute, NewValue);
 }
 
 
-void UCombatComponent::HandleCurse(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source)
+void UCombatComponent::HandleCurse(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue)
 {
-	StatusProc(Attribute, NewValue, Enemy, Source);
+	StatusProc(Enemy, Source, Attribute, NewValue);
 
-	BP_HandleCurse(Attribute, NewValue, Enemy, Source);
+	BP_HandleCurse(Enemy, Source, Attribute, NewValue);
 	OnCursed.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
 }
 
 
-void UCombatComponent::HandleBleed(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source)
+void UCombatComponent::HandleBleed(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue)
 {
-	StatusProc(Attribute, NewValue, Enemy, Source);
+	StatusProc(Enemy, Source, Attribute, NewValue);
 	
-	BP_HandleBleed(Attribute, NewValue, Enemy, Source);
+	BP_HandleBleed(Enemy, Source, Attribute, NewValue);
 	OnBled.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
 }
 
 
-void UCombatComponent::HandlePoisoned(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source)
+void UCombatComponent::HandlePoisoned(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue)
 {
-	StatusProc(Attribute, NewValue, Enemy, Source);
+	StatusProc(Enemy, Source, Attribute, NewValue);
 	
-	BP_HandlePoisoned(Attribute, NewValue, Enemy, Source);
+	BP_HandlePoisoned(Enemy, Source, Attribute, NewValue);
 	OnPoisoned.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
 }
 
 
-void UCombatComponent::HandleFrostbite(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source)
+void UCombatComponent::HandleFrostbite(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue)
 {
-	StatusProc(Attribute, NewValue, Enemy, Source);
+	StatusProc(Enemy, Source, Attribute, NewValue);
 	
-	BP_HandleFrostbite(Attribute, NewValue, Enemy, Source);
+	BP_HandleFrostbite(Enemy, Source, Attribute, NewValue);
 	OnFrostBitten.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
 }
 
 
-void UCombatComponent::HandleMadness(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source)
+void UCombatComponent::HandleMadness(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue)
 {
-	StatusProc(Attribute, NewValue, Enemy, Source);
+	StatusProc(Enemy, Source, Attribute, NewValue);
 	
-	BP_HandleMadness(Attribute, NewValue, Enemy, Source);
+	BP_HandleMadness(Enemy, Source, Attribute, NewValue);
 	OnMaddened.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
 }
 
 
-void UCombatComponent::HandleSleep(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source)
+void UCombatComponent::HandleSleep(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue)
 {
-	StatusProc(Attribute, NewValue, Enemy, Source);
+	StatusProc(Enemy, Source, Attribute, NewValue);
 	
-	BP_HandleSleep(Attribute, NewValue, Enemy, Source);
+	BP_HandleSleep(Enemy, Source, Attribute, NewValue);
 	OnSlept.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
 }
 

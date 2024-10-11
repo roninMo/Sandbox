@@ -50,6 +50,7 @@ struct FGAttributeSetExecutionData;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FCombatNotificationSignature, ACharacterBase*, Character, AActor*, Instigator);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FStatusNotificationSignature, ACharacterBase*, Character, AActor*, Instigator, FGameplayAttribute, Attribute, float, NewValue);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FStatusClearedSignature, ACharacterBase*, Character, FGameplayAttribute, Attribute, float, NewValue);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnDeathSignature, ACharacterBase*, Character, AActor*, Instigator);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnRespawnSignature, ACharacterBase*, Character, FVector, Location);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FCombatDamageNotificationSignature, ACharacterBase*, Character, AActor*, Instigator, float, AccumulatedDamage);
@@ -440,13 +441,13 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") TMap<EHitStun, TSubclassOf<UGameplayEffect>> HitStunDurations;
 
 	/** Gameplay effect for handling cleaning up/adding state and information when the player dies */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") TSubclassOf<UGameplayEffect> DeathEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") TSubclassOf<UGameplayEffect> DeathEffectClass;
 
 	/** Gameplay effect for handling cleaning up/adding state and information when the player respawns */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") TSubclassOf<UGameplayEffect> RespawnEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") TSubclassOf<UGameplayEffect> RespawnEffectClass;
 	
 	/** Status effect for state and information when the player is cursed */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") TSubclassOf<UGameplayEffect> CursedState;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") TSubclassOf<UGameplayEffect> CursedStateClass;
 
 	
 	/** Status effect for state and information when the player has taken bleed damage */
@@ -464,7 +465,15 @@ protected:
 	/** Status effect for state and information when the player has received the sleep effect */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Statuses") TSubclassOf<UGameplayEffect> GE_Slept;
 
+	
+	/** Status handles */
+	UPROPERTY(BlueprintReadWrite, Category = "Combat|Statuses") FActiveGameplayEffectHandle CursedHandle;
+	UPROPERTY(BlueprintReadWrite, Category = "Combat|Statuses") FActiveGameplayEffectHandle PoisonedHandle;
+	UPROPERTY(BlueprintReadWrite, Category = "Combat|Statuses") FActiveGameplayEffectHandle FrostbittenHandle;
+	UPROPERTY(BlueprintReadWrite, Category = "Combat|Statuses") FActiveGameplayEffectHandle MaddenedHandle;
+	UPROPERTY(BlueprintReadWrite, Category = "Combat|Statuses") FActiveGameplayEffectHandle SleepHandle;
 
+	
 	/**** Cached tags ****/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag HitStunEffectTag;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag HitStunTag;
@@ -508,6 +517,9 @@ public:
 	
 	/** On player cursed (player, instigator) */
 	UPROPERTY(BlueprintAssignable) FStatusNotificationSignature OnStatusUpdate;
+	
+	/** On player cursed (player, instigator) */
+	UPROPERTY(BlueprintAssignable) FStatusClearedSignature OnStatusCleared;
 
 	/** On player cursed (player, instigator) */
 	UPROPERTY(BlueprintAssignable) FStatusNotificationSignature OnCursed;
@@ -547,63 +559,67 @@ public:
 
 
 	/**** Status logic ****/
+	/** Handles removing any status effects if the status is finished. There's not a way to calculate the duration based on an attribute, so they're infinite durations */
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	virtual void HandleClearingStatuses();
+
 	/** Handle the logic that happens when the player is cursed / bleeds / poisoned / frostbitten / maddened / slept */
 	UFUNCTION(BlueprintCallable, Category = "Combat")
-	virtual void StatusProc(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source);
+	virtual void StatusProc(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue);
 	
 	/** Handle the logic that happens when the player is cursed */
 	UFUNCTION(BlueprintCallable, Category = "Combat")
-	virtual void HandleCurse(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source);
+	virtual void HandleCurse(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue);
 
 	/** Logic when the player takes bleed damage */
 	UFUNCTION(BlueprintCallable, Category = "Combat")
-	virtual void HandleBleed(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source);
+	virtual void HandleBleed(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue);
 	
 	/** Logic for when the player is poisoned */
 	UFUNCTION(BlueprintCallable, Category = "Combat")
-	virtual void HandlePoisoned(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source);
+	virtual void HandlePoisoned(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue);
 	
 	/** Handle the logic when the player is frostbitten */
 	UFUNCTION(BlueprintCallable, Category = "Combat")
-	virtual void HandleFrostbite(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source);
+	virtual void HandleFrostbite(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue);
 	
 	/** Handle the logic when the player receives madness status */
 	UFUNCTION(BlueprintCallable, Category = "Combat")
-	virtual void HandleMadness(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source);
+	virtual void HandleMadness(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue);
 	
 	/** Handle the logic when the player receives sleep status */
 	UFUNCTION(BlueprintCallable, Category = "Combat")
-	virtual void HandleSleep(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source);
+	virtual void HandleSleep(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue);
 	
 
 	/**** Blueprint functions ****/
 	/** Blueprint function for when the player is cursed / bleeds / poisoned / frostbitten / maddened / slept */
 	UFUNCTION(BlueprintImplementableEvent, Category = "Combat", DisplayName = "Player Status Proc")
-	void BP_StatusProc(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source);
+	void BP_StatusProc(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue);
 
 	/** Blueprint function for when the player is cursed */
 	UFUNCTION(BlueprintImplementableEvent, Category = "Combat", DisplayName = "Player Cursed")
-	void BP_HandleCurse(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source);
+	void BP_HandleCurse(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue);
 
 	/** Blueprint function for when the player takes bleed damage */
 	UFUNCTION(BlueprintImplementableEvent, Category = "Combat", DisplayName = "Player Bled")
-	void BP_HandleBleed(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source);
+	void BP_HandleBleed(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue);
 	
 	/** Blueprint function for when the player is poisoned */
 	UFUNCTION(BlueprintImplementableEvent, Category = "Combat", DisplayName = "Player Poisoned")
-	void BP_HandlePoisoned(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source);
+	void BP_HandlePoisoned(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue);
 	
 	/** Handle the logic when the player is frostbitten */
 	UFUNCTION(BlueprintImplementableEvent, Category = "Combat", DisplayName = "Player Frostbitten")
-	void BP_HandleFrostbite(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source);
+	void BP_HandleFrostbite(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue);
 	
 	/** Handle the logic when the player receives madness status */
 	UFUNCTION(BlueprintImplementableEvent, Category = "Combat", DisplayName = "Player Maddened")
-	void BP_HandleMadness(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source);
+	void BP_HandleMadness(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue);
 	
 	/** Handle the logic when the player receives sleep status */
 	UFUNCTION(BlueprintImplementableEvent, Category = "Combat", DisplayName = "Player Slept")
-	void BP_HandleSleep(const FGameplayAttribute& Attribute, float NewValue, ACharacterBase* Enemy, AActor* Source);
+	void BP_HandleSleep(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue);
 	
 
 

@@ -69,6 +69,13 @@
 #define Tag_GameplayEffect_Block_Buildup_Madness FName("GameplayEffect.Block.Buildup.Madness")
 #define Tag_GameplayEffect_Block_Buildup_Sleep FName("GameplayEffect.Block.Buildup.Sleep")
 
+#define Tag_GameplayEffect_Status FName("GameplayEffect.Status")
+#define Tag_GameplayEffect_Status_Poison FName("GameplayEffect.Status.Poison")
+#define Tag_GameplayEffect_Status_Curse FName("GameplayEffect.Status.Curse")
+#define Tag_GameplayEffect_Status_Frostbitten FName("GameplayEffect.Status.Frostbitten")
+#define Tag_GameplayEffect_Status_Madness FName("GameplayEffect.Status.Madness")
+#define Tag_GameplayEffect_Status_Sleep FName("GameplayEffect.Status.Sleep")
+
 
 // ; Gameplay Ability Tag Events
 #define Tag_Event_Montage FName("Event.Montage")
@@ -123,6 +130,7 @@
 #define Tag_Status FName("Status")
 #define Tag_Status_Poison FName("Status.Poison")
 #define Tag_Status_Curse FName("Status.Curse")
+#define Tag_Status_Frostbitten FName("Status.Frostbitten")
 #define Tag_Status_Madness FName("Status.Madness")
 #define Tag_Status_Sleep FName("Status.Sleep")
 

@@ -142,7 +142,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 				{
 					bWasCursed = true;
 					SetHealth(0.0);
-					CombatComponent->HandleCurse(Props.SourceCharacter, Character);
+					CombatComponent->HandleCurse(Props.SourceCharacter, Character, GetCurseBuildupAttribute(), GetCurseBuildup());
 				}
 			}
 			else if (Attribute == GetBleedAttribute())
@@ -153,7 +153,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 				{
 					bCharacterBled = true;
 					SetBleedBuildup(0.0);
-					CombatComponent->HandleBleed(Props.SourceCharacter, Character);
+					CombatComponent->HandleBleed(Props.SourceCharacter, Character, GetBleedBuildupAttribute(), GetBleedBuildup());
 				}
 			}
 			else if (Attribute == GetPoisonAttribute() && !AbilitySystem->HasMatchingGameplayTag(PoisonedTag))
@@ -162,7 +162,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 
 				if (GetPoisonBuildup() == GetMaxPoisonBuildup())
 				{
-					CombatComponent->HandlePoisoned(Props.SourceCharacter, Character);
+					CombatComponent->HandlePoisoned(Props.SourceCharacter, Character, GetPoisonBuildupAttribute(), GetPoisonBuildup());
 				}
 			}
 			else if (Attribute == GetFrostbiteAttribute())
@@ -172,8 +172,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 				if (GetFrostbiteBuildup() == GetMaxFrostbiteBuildup())
 				{
 					bWasFrosbitten = true;
-					SetFrostbiteBuildup(0.0);
-					CombatComponent->HandleFrostbite(Props.SourceCharacter, Character);
+					CombatComponent->HandleFrostbite(Props.SourceCharacter, Character, GetFrostbiteBuildupAttribute(), GetFrostbiteBuildup());
 				}
 			}
 			else if (Attribute == GetMadnessAttribute() && !AbilitySystem->HasMatchingGameplayTag(MaddenedTag))
@@ -182,7 +181,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 				
 				if (GetMadnessBuildup() == GetMaxMadnessBuildup())
 				{
-					CombatComponent->HandleMadness(Props.SourceCharacter, Character);
+					CombatComponent->HandleMadness(Props.SourceCharacter, Character, GetMadnessBuildupAttribute(), GetMadnessBuildup());
 				}
 			}
 			else if (Attribute == GetSleepAttribute() && !AbilitySystem->HasMatchingGameplayTag(SleepTag))
@@ -191,7 +190,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 
 				if (GetSleepBuildup() == GetMaxSleepBuildup())
 				{
-					CombatComponent->HandleSleep(Props.SourceCharacter, Character);
+					CombatComponent->HandleSleep(Props.SourceCharacter, Character, GetSleepBuildupAttribute(), GetSleepBuildup());
 				}
 			}
 
@@ -293,7 +292,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		
 		// Health/Poise: 100/10, Damage/Poise: -10/10 ->  Bleed / Frostbite / Cursed
 		UE_LOGFMT(LogTemp, Warning, "{0}::AttributeLogic() {1} attacked {2} with {3}! \n"
-			"Health/Poise: ({4})({5}), Damage: ({6})({7}) {8}  {9} {10} {11}",
+			"Health/Poise: ({4})({5}), Damage: ({6})({7}) {8}  {9} {10} {11} \n",
 
 			*UEnum::GetValueAsString(Props.SourceCharacter->GetLocalRole()),
 			*GetNameSafe(Props.SourceCharacter), *GetNameSafe(Props.TargetCharacter), *GetNameSafe(Props.Context.GetSourceObject()),

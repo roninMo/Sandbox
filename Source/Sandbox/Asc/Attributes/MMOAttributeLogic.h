@@ -47,19 +47,19 @@ protected:
 	virtual void ClampEvaluatedAttribute(const FGameplayAttribute& AttributeToClamp, FGameplayModifierEvaluatedData& EvaluatedAttribute, const float MinValue, const float MaxValue);
 
 
-protected:
+private:
 	/**** Cached tags ****/
 	/** State when the character is poisoned */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag PoisonedTag;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags", meta=(AllowPrivateAccess)) FGameplayTag PoisonedTag;
 	
 	/** State when the character has been cursed */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag CursedTag;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags", meta=(AllowPrivateAccess)) FGameplayTag CursedTag;
 	
 	/** State when the character has gone mad */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag MaddenedTag;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags", meta=(AllowPrivateAccess)) FGameplayTag MaddenedTag;
 	
 	/** State tags for the sleepy king */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags") FGameplayTag SleepTag;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags", meta=(AllowPrivateAccess)) FGameplayTag SleepTag;
 	
 	
 };
