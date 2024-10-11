@@ -6,6 +6,40 @@
 #include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
 #include "MMOAttributeLogic.generated.h"
 
+
+enum class EHitDirection : uint8;
+enum class EHitStun : uint8;
+
+
+/** Object for containing combat information during attribute calculations */
+USTRUCT()
+struct FAttributeCombatInformation
+{
+	GENERATED_BODY()
+	
+	UPROPERTY() float MagicDamageTaken = 0.0;
+	UPROPERTY() float DamageTaken = 0.0;
+	UPROPERTY() float PoiseDamageTaken = 0.0;
+	UPROPERTY() bool bPoiseBroken = false;
+	UPROPERTY() EHitDirection HitDirection;
+	UPROPERTY() EHitStun HitStun;
+};
+
+/** Object for containing status information during attribute calculations */
+USTRUCT()
+struct FAttributeStatusInformation
+{
+	GENERATED_BODY()
+	
+	UPROPERTY() bool bWasCursed = false;
+	UPROPERTY() bool bCharacterBled = false;
+	UPROPERTY() bool bWasPoisoned = false;
+	UPROPERTY() bool bWasFrosbitten = false;
+	UPROPERTY() bool bWasMaddened = false;
+	UPROPERTY() bool bSlept = false;
+};
+
+
 /**
  * 
  */
@@ -41,6 +75,13 @@ protected:
 	virtual void PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue) override;
 	//~ End UAttribute interface
 
+	/** Damage calculations */
+	virtual void DamageCalculations(const FGAttributeSetExecutionData& Props, const FGameplayAttribute& Attribute, const float Value, FAttributeCombatInformation& CombatInformation);
+	
+	/** Attribute calculations for statuses */
+	virtual void StatusCalculations(const FGAttributeSetExecutionData& Props, const FGameplayAttribute& Attribute, const float Value, FAttributeStatusInformation& Statuses);
+
+	
 
 protected:
 	/** Handles clamping attribute adjustments */
@@ -50,16 +91,16 @@ protected:
 private:
 	/**** Cached tags ****/
 	/** State when the character is poisoned */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags", meta=(AllowPrivateAccess)) FGameplayTag PoisonedTag;
+	FGameplayTag PoisonedTag;
 	
 	/** State when the character has been cursed */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags", meta=(AllowPrivateAccess)) FGameplayTag CursedTag;
+	FGameplayTag CursedTag;
 	
 	/** State when the character has gone mad */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags", meta=(AllowPrivateAccess)) FGameplayTag MaddenedTag;
+	FGameplayTag MaddenedTag;
 	
 	/** State tags for the sleepy king */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Tags", meta=(AllowPrivateAccess)) FGameplayTag SleepTag;
+	FGameplayTag SleepTag;
 	
 	
 };
