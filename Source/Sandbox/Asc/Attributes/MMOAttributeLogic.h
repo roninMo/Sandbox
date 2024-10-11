@@ -37,6 +37,34 @@ struct FAttributeStatusInformation
 	UPROPERTY() bool bWasFrostbitten = false;
 	UPROPERTY() bool bWasMaddened = false;
 	UPROPERTY() bool bSlept = false;
+	
+	UPROPERTY() float CurseBuildup = 0.0;
+	UPROPERTY() float BleedBuildup = 0.0;
+	UPROPERTY() float PoisonBuildup = 0.0;
+	UPROPERTY() float FrostbiteBuildup = 0.0;
+	UPROPERTY() float MadnessBuildup = 0.0;
+	UPROPERTY() float SleepBuildup = 0.0;
+
+	bool StatusProc() const
+	{
+		return this->bWasCursed || 
+				this->bCharacterBled || 
+				this->bWasCursed || 
+				this->bWasFrostbitten || 
+				this->bWasMaddened || 
+				this->bSlept;
+	}
+
+	bool StatusDamage() const
+	{
+		return
+			this->CurseBuildup >= 0.0 ||
+	 		this->BleedBuildup >= 0.0 ||
+	  		this->PoisonBuildup >= 0.0 ||
+	   		this->FrostbiteBuildup >= 0.0 ||
+	   		this->MadnessBuildup >= 0.0 ||
+			this->SleepBuildup >= 0.0;
+	}
 };
 
 
@@ -76,10 +104,10 @@ protected:
 	//~ End UAttribute interface
 
 	/** Damage calculations */
-	virtual void DamageCalculations(const FGAttributeSetExecutionData& Props, const FGameplayAttribute& Attribute, FAttributeCombatInformation& CombatInformation);
+	virtual void DamageCalculations(const FGAttributeSetExecutionData& Props, const FGameplayAttribute& Attribute, FAttributeCombatInformation& CombatInformation, const float Value);
 	
 	/** Attribute calculations for statuses */
-	virtual void StatusCalculations(const FGAttributeSetExecutionData& Props, const FGameplayAttribute& Attribute, FAttributeStatusInformation& Statuses);
+	virtual void StatusCalculations(const FGAttributeSetExecutionData& Props, const FGameplayAttribute& Attribute, FAttributeStatusInformation& Statuses, const float Value);
 
 	/** Returns whether the player is immune to the specific debuff */
 	virtual bool IsImmuneToAttribute(const FGAttributeSetExecutionData& Props, const FGameplayAttribute& Attribute) const;

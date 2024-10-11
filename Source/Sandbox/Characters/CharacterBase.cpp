@@ -15,6 +15,8 @@
 #include "Net/UnrealNetwork.h"
 #include "Sandbox/Data/Enums/ArmorTypes.h"
 #include "Sandbox/Data/Enums/HitDirection.h"
+#include "Sandbox/Data/Enums/HitReacts.h"
+#include "Sandbox/Data/Structs/CombatInformation.h"
 
 
 ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Super(
@@ -336,13 +338,25 @@ void ACharacterBase::SetCharacterMontages()
 	}
 }
 
-FName ACharacterBase::GetHitReactSection(EHitDirection HitReactDirection) const
+FName ACharacterBase::GetHitReactSection(EHitDirection HitDirection, EHitStun HitStun) const
 {
-	if (HitReactDirection == EHitDirection::Back) return FName("Back");
-	if (HitReactDirection == EHitDirection::Front) return FName("Front");
-	if (HitReactDirection == EHitDirection::Left) return FName("Left");
-	if (HitReactDirection == EHitDirection::Right) return FName("Right");
-	return FName();
+	FName MontageSection = FName();
+	if (HitStun == EHitStun::VeryShort) MontageSection = Montage_Section_HitStun_VS;
+	if (HitStun == EHitStun::Short) MontageSection = Montage_Section_HitStun_V;
+	if (HitStun == EHitStun::Medium) MontageSection = Montage_Section_HitStun_M;
+	if (HitStun == EHitStun::Long) MontageSection = Montage_Section_HitStun_L;
+	if (HitStun == EHitStun::FacePlant) MontageSection = Montage_Section_HitStun_FP;
+	if (HitStun == EHitStun::FrontFlip) MontageSection = Montage_Section_HitStun_FF;
+
+	if (!MontageSection.IsNone())
+	{
+		if (HitDirection == EHitDirection::Back) MontageSection = FName(MontageSection.ToString().Append(Montage_Section_HitReact_Back.ToString()));
+		if (HitDirection == EHitDirection::Front) MontageSection = FName(MontageSection.ToString().Append(Montage_Section_HitReact_Front.ToString()));
+		if (HitDirection == EHitDirection::Left) MontageSection = FName(MontageSection.ToString().Append(Montage_Section_HitReact_Left.ToString()));
+		if (HitDirection == EHitDirection::Right) MontageSection = FName(MontageSection.ToString().Append(Montage_Section_HitReact_Right.ToString()));
+	}
+	
+	return MontageSection;
 }
 
 

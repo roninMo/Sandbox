@@ -22,31 +22,62 @@ class SANDBOX_API UCombatAbility : public UCharacterGameplayAbility
 	GENERATED_BODY()
 
 protected:
-	/** Armament information */
+	/**** Armament information ****/
+	/** The attack pattern that's specific to this ability (Primary attack, Strong attack, etc.) */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat") EInputAbilities AttackPattern;
+
+	/** The armament that's used during this attack */
 	UPROPERTY(Transient, BlueprintReadWrite) AArmament* Armament;
+
+	/** The current armament stance. If we're dual wielding combat calculations are retrieved from both armaments */ // TODO Fix this
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite) EArmamentStance CurrentStance;
+
+	/** The equip slot of the armament */
 	UPROPERTY(Transient, BlueprintReadWrite) EEquipSlot EquipSlot;
+
 	
-	/** Combat information */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") F_ComboAttacks ComboAttacks;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") F_ComboAttack CurrentAttack;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") TMap<FGameplayAttribute, float> AttackInfo;
+	/**** Combat information ****/
+	/** Whether this combat ability is based on a combo */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bComboAbility = true;
+	
+	/** The combo attacks for this attack pattern */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat") F_ComboAttacks ComboAttacks;
+	
+	/** The attack information of the current swing */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat") F_ComboAttack CurrentAttack;
+
+	/** The attack information (damages and any other attribute modifications) for the armament, */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat") TMap<FGameplayAttribute, float> AttackInfo;
+
+	/** The default montage section used when a combat montage is activated */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") FName DefaultMontageSection;
+	
+	/** The montage section of the current combo */
 	UPROPERTY(Transient, BlueprintReadWrite) FName MontageStartSection;
-	UPROPERTY(Transient, BlueprintReadWrite) bool bComboAbility = true;
-	UPROPERTY(Transient, BlueprintReadWrite) bool bUseRightHandArmament = true;
 
-	/** Event received tags for this ability's tasks to listen for multiple gameplay delegates */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") FGameplayTagContainer EventReceivedTags;
 	
-	/** Current attack information */
+	/**** Current attack information ****/
+	/** The number of attacks for a specific attack pattern (Primary attack, Strong attack, etc.) This is fixed to the specific montage */
 	UPROPERTY(Transient, BlueprintReadWrite) int32 ComboCount = 0;
-	UPROPERTY(Transient, BlueprintReadWrite) int32 ComboIndex = 0; // This value needs to be sent to the client
-	UPROPERTY(Transient, BlueprintReadWrite) bool bCancelledToEquipArmament = false;
-	UPROPERTY(Transient, BlueprintReadWrite) bool bIsFinalComboAttack = false;
-	
 
+	/** The current combo attack index */
+	UPROPERTY(Transient, BlueprintReadWrite) int32 ComboIndex = 0; // This value needs to be sent to the client
+	
+	/** Whether this is the final attack of the attack pattern */
+	UPROPERTY(Transient, BlueprintReadWrite) bool bIsFinalComboAttack = false;
+
+
+	/**** ****/
+	/** Whether to use the blueprint's defined combat information */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUseBPCombatInformation;
+
+	/** The combat calculations for a specific weapon */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") TMap<FGameplayAttribute, float> BP_DamageStats;
+
+	/** The attack information of the current swing */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") F_ComboAttack BP_AttackInformation;
+
+	
 public:
 	UCombatAbility();
 	

@@ -17,18 +17,18 @@ void UMMOAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, MaxPoise, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, PoiseRegenRate, COND_None, REPNOTIFY_Always);
 
-	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, PoisonBuildup, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, MaxPoisonBuildup, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, BleedBuildup, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, MaxBleedBuildup, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, FrostbiteBuildup, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, MaxFrostbiteBuildup, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, SleepBuildup, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, MaxSleepBuildup, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, PoisonBuildup, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, MaxPoisonBuildup, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, MadnessBuildup, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, MaxMadnessBuildup, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, CurseBuildup, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, MaxCurseBuildup, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, SleepBuildup, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, MaxSleepBuildup, COND_None, REPNOTIFY_Always);
 	
 	// Level Attributes
 	DOREPLIFETIME_CONDITION_NOTIFY(UMMOAttributeSet, Vitality, COND_None, REPNOTIFY_Always);
@@ -104,23 +104,23 @@ void UMMOAttributeSet::OnRep_Poise(const FGameplayAttributeData& OldPoise) const
 void UMMOAttributeSet::OnRep_MaxPoise(const FGameplayAttributeData& OldMaxPoise) const										{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, MaxPoise, OldMaxPoise); }
 void UMMOAttributeSet::OnRep_PoiseRegenRate(const FGameplayAttributeData& OldPoiseRegenRate) const							{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, PoiseRegenRate, OldPoiseRegenRate); }
 
-void UMMOAttributeSet::OnRep_PoisonBuildup(const FGameplayAttributeData& OldPoisonBuildup) const 							{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, PoisonBuildup, OldPoisonBuildup); }
-void UMMOAttributeSet::OnRep_MaxPoisonBuildup(const FGameplayAttributeData& OldMaxPoisonBuildup) const						{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, MaxPoisonBuildup, OldMaxPoisonBuildup); }
-
 void UMMOAttributeSet::OnRep_BleedBuildup(const FGameplayAttributeData& OldBleedBuildup) const 								{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, BleedBuildup, OldBleedBuildup); }
 void UMMOAttributeSet::OnRep_MaxBleedBuildup(const FGameplayAttributeData& OldMaxBleedBuildup) const						{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, MaxBleedBuildup, OldMaxBleedBuildup); }
 
 void UMMOAttributeSet::OnRep_FrostbiteBuildup(const FGameplayAttributeData& OldFrostbiteBuildup) const 						{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, FrostbiteBuildup, OldFrostbiteBuildup); }
 void UMMOAttributeSet::OnRep_MaxFrostbiteBuildup(const FGameplayAttributeData& OldMaxFrostbiteBuildup) const				{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, MaxFrostbiteBuildup, OldMaxFrostbiteBuildup); }
 
-void UMMOAttributeSet::OnRep_SleepBuildup(const FGameplayAttributeData& OldSleepBuildup) const 								{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, SleepBuildup, OldSleepBuildup); }
-void UMMOAttributeSet::OnRep_MaxSleepBuildup(const FGameplayAttributeData& OldMaxSleepBuildup) const						{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, MaxSleepBuildup, OldMaxSleepBuildup); }
+void UMMOAttributeSet::OnRep_PoisonBuildup(const FGameplayAttributeData& OldPoisonBuildup) const 							{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, PoisonBuildup, OldPoisonBuildup); }
+void UMMOAttributeSet::OnRep_MaxPoisonBuildup(const FGameplayAttributeData& OldMaxPoisonBuildup) const						{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, MaxPoisonBuildup, OldMaxPoisonBuildup); }
 
 void UMMOAttributeSet::OnRep_MadnessBuildup(const FGameplayAttributeData& OldMadnessBuildup) const 							{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, MadnessBuildup, OldMadnessBuildup); }
 void UMMOAttributeSet::OnRep_MaxMadnessBuildup(const FGameplayAttributeData& OldMaxMadnessBuildup) const					{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, MaxMadnessBuildup, OldMaxMadnessBuildup); }
 
 void UMMOAttributeSet::OnRep_CurseBuildup(const FGameplayAttributeData& OldCurseBuildup) const								{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, CurseBuildup, OldCurseBuildup); }
 void UMMOAttributeSet::OnRep_MaxCurseBuildup(const FGameplayAttributeData& OldMaxCurseBuildup) const						{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, MaxCurseBuildup, OldMaxCurseBuildup); }
+
+void UMMOAttributeSet::OnRep_SleepBuildup(const FGameplayAttributeData& OldSleepBuildup) const 								{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, SleepBuildup, OldSleepBuildup); }
+void UMMOAttributeSet::OnRep_MaxSleepBuildup(const FGameplayAttributeData& OldMaxSleepBuildup) const						{ GAMEPLAYATTRIBUTE_REPNOTIFY(UMMOAttributeSet, MaxSleepBuildup, OldMaxSleepBuildup); }
 
 
 // Level Attributes

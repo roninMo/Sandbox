@@ -872,7 +872,7 @@ void UCombatComponent::PoiseBreak(ACharacterBase* Enemy, AActor* Source, float P
 		UAnimMontage* HitReactMontage = Character->GetCharacterMontages().HitReactMontage;
 		if (HitReactMontage)
 		{
-			Character->NetMulticast_PlayMontage(HitReactMontage, Character->GetHitReactSection(HitDirection));
+			Character->NetMulticast_PlayMontage(HitReactMontage, Character->GetHitReactSection(HitDirection, HitStun));
 		}
 	}
 
@@ -1004,15 +1004,6 @@ void UCombatComponent::HandleClearingStatuses()
 
 	
 	// Try to remove the status effects, and notify the player
-	if (CursedHandle.IsValid() && Attributes->GetCurseBuildup() == 0.0)
-	{
-		if (AbilitySystem->RemoveActiveGameplayEffect(CursedHandle))
-		{
-			CursedHandle.Invalidate();
-			OnStatusCleared.Broadcast(Character, Attributes->GetCurseBuildupAttribute(), 0.0);
-		}
-	}
-
 	if (PoisonedHandle.IsValid() && Attributes->GetPoisonBuildup() == 0.0)
 	{
 		if (AbilitySystem->RemoveActiveGameplayEffect(PoisonedHandle))
@@ -1037,6 +1028,15 @@ void UCombatComponent::HandleClearingStatuses()
 		{
 			MaddenedHandle.Invalidate();
 			OnStatusCleared.Broadcast(Character, Attributes->GetMadnessBuildupAttribute(), 0.0);
+		}
+	}
+
+	if (CursedHandle.IsValid() && Attributes->GetCurseBuildup() == 0.0)
+	{
+		if (AbilitySystem->RemoveActiveGameplayEffect(CursedHandle))
+		{
+			CursedHandle.Invalidate();
+			OnStatusCleared.Broadcast(Character, Attributes->GetCurseBuildupAttribute(), 0.0);
 		}
 	}
 
@@ -1125,30 +1125,12 @@ void UCombatComponent::StatusProc(ACharacterBase* Enemy, AActor* Source, const F
 }
 
 
-void UCombatComponent::HandleCurse(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue)
-{
-	StatusProc(Enemy, Source, Attribute, NewValue);
-
-	BP_HandleCurse(Enemy, Source, NewValue);
-	OnCursed.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
-}
-
-
 void UCombatComponent::HandleBleed(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue)
 {
 	StatusProc(Enemy, Source, Attribute, NewValue);
 	
 	BP_HandleBleed(Enemy, Source, NewValue);
 	OnBled.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
-}
-
-
-void UCombatComponent::HandlePoisoned(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue)
-{
-	StatusProc(Enemy, Source, Attribute, NewValue);
-	
-	BP_HandlePoisoned(Enemy, Source, NewValue);
-	OnPoisoned.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
 }
 
 
@@ -1161,12 +1143,30 @@ void UCombatComponent::HandleFrostbite(ACharacterBase* Enemy, AActor* Source, co
 }
 
 
+void UCombatComponent::HandlePoisoned(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue)
+{
+	StatusProc(Enemy, Source, Attribute, NewValue);
+	
+	BP_HandlePoisoned(Enemy, Source, NewValue);
+	OnPoisoned.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
+}
+
+
 void UCombatComponent::HandleMadness(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue)
 {
 	StatusProc(Enemy, Source, Attribute, NewValue);
 	
 	BP_HandleMadness(Enemy, Source, NewValue);
 	OnMaddened.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
+}
+
+
+void UCombatComponent::HandleCurse(ACharacterBase* Enemy, AActor* Source, const FGameplayAttribute& Attribute, float NewValue)
+{
+	StatusProc(Enemy, Source, Attribute, NewValue);
+
+	BP_HandleCurse(Enemy, Source, NewValue);
+	OnCursed.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Attribute, NewValue);
 }
 
 
@@ -1179,11 +1179,11 @@ void UCombatComponent::HandleSleep(ACharacterBase* Enemy, AActor* Source, const 
 }
 
 
-bool UCombatComponent::IsImmuneToCurses_Implementation(ACharacterBase* Enemy, UObject* Source, const ECombatAttribute Attribute, float Value) { return false; }
 bool UCombatComponent::IsImmuneToBleed_Implementation(ACharacterBase* Enemy, UObject* Source, const ECombatAttribute Attribute, float Value) { return false; }
-bool UCombatComponent::IsImmuneToPoison_Implementation(ACharacterBase* Enemy, UObject* Source, const ECombatAttribute Attribute, float Value) { return false; }
 bool UCombatComponent::IsImmuneToFrostbite_Implementation(ACharacterBase* Enemy, UObject* Source, const ECombatAttribute Attribute, float Value) { return false; }
+bool UCombatComponent::IsImmuneToPoison_Implementation(ACharacterBase* Enemy, UObject* Source, const ECombatAttribute Attribute, float Value) { return false; }
 bool UCombatComponent::IsImmuneToMadness_Implementation(ACharacterBase* Enemy, UObject* Source, const ECombatAttribute Attribute, float Value) { return false; }
+bool UCombatComponent::IsImmuneToCurses_Implementation(ACharacterBase* Enemy, UObject* Source, const ECombatAttribute Attribute, float Value) { return false; }
 bool UCombatComponent::IsImmuneToSleep_Implementation(ACharacterBase* Enemy, UObject* Source, const ECombatAttribute Attribute, float Value) { return false; }
 
 

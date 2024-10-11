@@ -37,23 +37,23 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Poise", ReplicatedUsing = OnRep_MaxPoise) FGameplayAttributeData MaxPoise;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Poise", ReplicatedUsing = OnRep_PoiseRegenRate) FGameplayAttributeData PoiseRegenRate;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_PoisonBuildup) FGameplayAttributeData PoisonBuildup;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MaxPoisonBuildup) FGameplayAttributeData MaxPoisonBuildup;
-	
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_BleedBuildup) FGameplayAttributeData BleedBuildup;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MaxBleedBuildup) FGameplayAttributeData MaxBleedBuildup;
 	
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_FrostbiteBuildup) FGameplayAttributeData FrostbiteBuildup;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MaxFrostbiteBuildup) FGameplayAttributeData MaxFrostbiteBuildup;
 	
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_SleepBuildup) FGameplayAttributeData SleepBuildup;
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MaxSleepBuildup) FGameplayAttributeData MaxSleepBuildup;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_PoisonBuildup) FGameplayAttributeData PoisonBuildup;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MaxPoisonBuildup) FGameplayAttributeData MaxPoisonBuildup;
 	
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MadnessBuildup) FGameplayAttributeData MadnessBuildup;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MaxMadnessBuildup) FGameplayAttributeData MaxMadnessBuildup;
 	
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_CurseBuildup) FGameplayAttributeData CurseBuildup;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MaxCurseBuildup) FGameplayAttributeData MaxCurseBuildup;
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_SleepBuildup) FGameplayAttributeData SleepBuildup;
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Combat|Statuses", ReplicatedUsing = OnRep_MaxSleepBuildup) FGameplayAttributeData MaxSleepBuildup;
 	
 	
 
@@ -177,18 +177,18 @@ public:
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxPoise)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, PoiseRegenRate)
 
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, PoisonBuildup)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxPoisonBuildup)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, BleedBuildup)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxBleedBuildup)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, FrostbiteBuildup)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxFrostbiteBuildup)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, SleepBuildup)
-	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxSleepBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, PoisonBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxPoisonBuildup)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MadnessBuildup)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxMadnessBuildup)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, CurseBuildup)
 	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxCurseBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, SleepBuildup)
+	ATTRIBUTE_ACCESSORS(UMMOAttributeSet, MaxSleepBuildup)
 	
 
 	// Level Attributes
@@ -268,18 +268,18 @@ protected:
 	UFUNCTION() virtual void OnRep_MaxPoise(const FGameplayAttributeData& OldMaxPoise) const;
 	UFUNCTION() virtual void OnRep_PoiseRegenRate(const FGameplayAttributeData& OldPoiseRegenRate) const;
 
-	UFUNCTION() virtual void OnRep_PoisonBuildup(const FGameplayAttributeData& OldPoisonBuildup) const;
-	UFUNCTION() virtual void OnRep_MaxPoisonBuildup(const FGameplayAttributeData& OldMaxPoisonBuildup) const;
 	UFUNCTION() virtual void OnRep_BleedBuildup(const FGameplayAttributeData& OldBleedBuildup) const;
 	UFUNCTION() virtual void OnRep_MaxBleedBuildup(const FGameplayAttributeData& OldMaxBleedBuildup) const;
 	UFUNCTION() virtual void OnRep_FrostbiteBuildup(const FGameplayAttributeData& OldFrostbiteBuildup) const;
 	UFUNCTION() virtual void OnRep_MaxFrostbiteBuildup(const FGameplayAttributeData& OldMaxFrostbiteBuildup) const;
-	UFUNCTION() virtual void OnRep_SleepBuildup(const FGameplayAttributeData& OldSleepBuildup) const;
-	UFUNCTION() virtual void OnRep_MaxSleepBuildup(const FGameplayAttributeData& OldMaxSleepBuildup) const;
+	UFUNCTION() virtual void OnRep_PoisonBuildup(const FGameplayAttributeData& OldPoisonBuildup) const;
+	UFUNCTION() virtual void OnRep_MaxPoisonBuildup(const FGameplayAttributeData& OldMaxPoisonBuildup) const;
 	UFUNCTION() virtual void OnRep_MadnessBuildup(const FGameplayAttributeData& OldMadnessBuildup) const;
 	UFUNCTION() virtual void OnRep_MaxMadnessBuildup(const FGameplayAttributeData& OldMaxMadnessBuildup) const;
 	UFUNCTION() virtual void OnRep_CurseBuildup(const FGameplayAttributeData& OldCurseBuildup) const;
 	UFUNCTION() virtual void OnRep_MaxCurseBuildup(const FGameplayAttributeData& OldMaxCurseBuildup) const;
+	UFUNCTION() virtual void OnRep_SleepBuildup(const FGameplayAttributeData& OldSleepBuildup) const;
+	UFUNCTION() virtual void OnRep_MaxSleepBuildup(const FGameplayAttributeData& OldMaxSleepBuildup) const;
 	
 	// Attributes
 	UFUNCTION() virtual void OnRep_Vitality(const FGameplayAttributeData OldVitality) const;

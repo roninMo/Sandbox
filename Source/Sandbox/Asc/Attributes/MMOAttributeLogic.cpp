@@ -120,8 +120,8 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 	//--------------------------------------------------------------------------------------//
 	if (Data.EffectSpec.Def->Executions.Num() == 0)
 	{
-		StatusCalculations(Props, Data.EvaluatedData.Attribute, Statuses);
-		DamageCalculations(Props, Data.EvaluatedData.Attribute, CombatInfo);
+		StatusCalculations(Props, Data.EvaluatedData.Attribute, Statuses, Data.EvaluatedData.Magnitude);
+		DamageCalculations(Props, Data.EvaluatedData.Attribute, CombatInfo, Data.EvaluatedData.Magnitude);
 	}
 	
 
@@ -133,8 +133,8 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		// Retrieve the damage calculations
 		for (auto &[Attribute, Value] : Data.EffectSpec.ModifiedAttributes)
 		{
-			StatusCalculations(Props, Attribute, Statuses);
-			DamageCalculations(Props, Attribute, CombatInfo);
+			StatusCalculations(Props, Attribute, Statuses, Value);
+			DamageCalculations(Props, Attribute, CombatInfo, Value);
 			// TODO: Any other effects to attributes - stamina drain, etc.
 		}
 	}
@@ -198,20 +198,33 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 			}
 		}
 
-
-		// Health/Poise: 100/10, Damage/Poise: -10/10 ->  Bleed / Frostbite / Cursed
+		
+		// Health/Poise: (100)(10), Damage/Poise: (-10)(10) ->  Bleed: (0) / Frostbite: (0) / Cursed: (0)
+		FString BleedDamage = FString("");
+		FString FrostbiteDamage = FString("");
+		FString PoisonDamage = FString("");
+		FString MadnessDamage = FString("");
+		FString CurseDamage = FString("");
+		FString SleepDamage = FString("");
+		if (Statuses.bCharacterBled || Statuses.BleedBuildup > 0) BleedDamage = FString("Bleed(").Append(Statuses.bCharacterBled ? "Proc" : "").Append(FString::FromInt(Statuses.BleedBuildup)).Append(") / ");
+		if (Statuses.bWasFrostbitten || Statuses.FrostbiteBuildup > 0) FrostbiteDamage = FString("Frostbite(").Append(Statuses.bCharacterBled ? "Proc" : "").Append(FString::FromInt(Statuses.FrostbiteBuildup)).Append(") / ");
+		if (Statuses.bWasPoisoned || Statuses.PoisonBuildup > 0) PoisonDamage = FString("Poison(").Append(Statuses.bCharacterBled ? "Proc" : "").Append(FString::FromInt(Statuses.PoisonBuildup)).Append(") / ");
+		if (Statuses.bWasMaddened || Statuses.MadnessBuildup > 0) MadnessDamage = FString("Madness(").Append(Statuses.bCharacterBled ? "Proc" : "").Append(FString::FromInt(Statuses.MadnessBuildup)).Append(") / ");
+		if (Statuses.bWasCursed || Statuses.CurseBuildup > 0) CurseDamage = FString("Curse(").Append(Statuses.bCharacterBled ? "Proc" : "").Append(FString::FromInt(Statuses.CurseBuildup)).Append(") / ");
+		if (Statuses.bSlept || Statuses.SleepBuildup > 0) SleepDamage = FString("Sleep(").Append(Statuses.bCharacterBled ? "Proc" : "").Append(FString::FromInt(Statuses.SleepBuildup)).Append(")");
 		UE_LOGFMT(LogTemp, Warning, "{0}::AttributeLogic() {1} attacked {2} with {3}! \n"
-			"Health/Poise: ({4})({5}), Damage: ({6})({7}) {8}  {9} {10} {11} \n",
+			"Health/Poise: ({4})({5}), Damage: ({6})({7}) {8} {9} {10} {11} {12} {13} {14} \n",
 
 			*UEnum::GetValueAsString(Props.SourceCharacter->GetLocalRole()),
 			*GetNameSafe(Props.SourceCharacter), *GetNameSafe(Props.TargetCharacter), *GetNameSafe(Props.Context.GetSourceObject()),
 			
 			FMath::CeilToInt(GetHealth()), FMath::CeilToInt(GetPoise()),
-			FMath::CeilToInt(-CombatInfo.MagicDamageTaken - CombatInfo.DamageTaken), FMath::CeilToInt(-CombatInfo.PoiseDamageTaken),
-			Statuses.bCharacterBled || Statuses.bWasFrostbitten || Statuses.bWasCursed ? FString("->  ") : FString(""),
-			Statuses.bCharacterBled ? FString("Bleed /") : FString(""),
-			Statuses.bWasFrostbitten ? FString("Frostbite /") : FString(""),
-			Statuses.bWasCursed ? FString("Cursed ") : FString("")
+			FMath::CeilToInt(-CombatInfo.MagicDamageTaken - CombatInfo.DamageTaken),
+			FMath::CeilToInt(-CombatInfo.PoiseDamageTaken),
+			
+			Statuses.StatusProc() || Statuses.StatusDamage() ? FString("->  ") : FString(""),
+			
+			BleedDamage, FrostbiteDamage, CurseDamage, PoisonDamage, MadnessDamage, SleepDamage
 		);
 	}
 
@@ -220,11 +233,11 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 
 
 void UMMOAttributeLogic::DamageCalculations(const FGAttributeSetExecutionData& Props,
-	const FGameplayAttribute& Attribute, FAttributeCombatInformation& CombatInformation)
+	const FGameplayAttribute& Attribute, FAttributeCombatInformation& CombatInformation, const float Value)
 {
 	ACharacterBase* Character = Props.TargetCharacter;
-
-	// Physical damages
+	
+	// Physical damages // TODO: we need to check whether the different damage calculations are handled
 	if (Attribute == GetDamage_StandardAttribute()) CombatInformation.DamageTaken += GetDamage_Standard();
 	else if (Attribute == GetDamage_SlashAttribute()) CombatInformation.DamageTaken += GetDamage_Slash();
 	else if (Attribute == GetDamage_PierceAttribute()) CombatInformation.DamageTaken += GetDamage_Pierce();
@@ -233,8 +246,16 @@ void UMMOAttributeLogic::DamageCalculations(const FGAttributeSetExecutionData& P
 	// Magic damages
 	else if (Attribute == GetDamage_MagicAttribute()) CombatInformation.MagicDamageTaken += GetDamage_Magic();
 	else if (Attribute == GetDamage_IceAttribute()) CombatInformation.MagicDamageTaken += GetDamage_Ice();
-	else if (Attribute == GetDamage_FireAttribute()) CombatInformation.MagicDamageTaken += GetDamage_Fire();
-	else if (Attribute == GetDamage_HolyAttribute()) CombatInformation.MagicDamageTaken += GetDamage_Holy();
+	else if (Attribute == GetDamage_FireAttribute())
+	{
+		CombatInformation.MagicDamageTaken += GetDamage_Fire();
+		SetFrostbiteBuildup(0.0);
+	}
+	else if (Attribute == GetDamage_HolyAttribute())
+	{
+		CombatInformation.MagicDamageTaken += GetDamage_Holy();
+		SetCurseBuildup(0.0);
+	}
 	else if (Attribute == GetDamage_LightningAttribute()) CombatInformation.MagicDamageTaken += GetDamage_Lightning();
 
 	// Poise damages
@@ -270,7 +291,7 @@ void UMMOAttributeLogic::DamageCalculations(const FGAttributeSetExecutionData& P
 
 
 void UMMOAttributeLogic::StatusCalculations(const FGAttributeSetExecutionData& Props,
-	const FGameplayAttribute& Attribute, FAttributeStatusInformation& Statuses)
+	const FGameplayAttribute& Attribute, FAttributeStatusInformation& Statuses, const float Value)
 {
 	bool ImmuneToAttribute = IsImmuneToAttribute(Props, Attribute);
 	ACharacterBase* Character = Props.TargetCharacter;
@@ -284,22 +305,10 @@ void UMMOAttributeLogic::StatusCalculations(const FGAttributeSetExecutionData& P
 	*/
 	if (!ImmuneToAttribute)
 	{
-		if ((Attribute == GetCurseAttribute() ||
-			Attribute == GetCurseBuildupAttribute()) &&
-			!AbilitySystem->HasMatchingGameplayTag(CursedTag))
+		if (Attribute == GetBleedAttribute() || Attribute == GetBleedBuildupAttribute())
 		{
-			SetCurseBuildup(FMath::Clamp(GetCurseBuildup() + Props.DeltaValue, 0, GetMaxCurseBuildup()));
-
-			if (GetCurseBuildup() == GetMaxCurseBuildup())
-			{
-				Statuses.bWasCursed = true;
-				SetHealth(0.0);
-				CombatComponent->HandleCurse(Props.SourceCharacter, Character, GetCurseBuildupAttribute(), GetCurseBuildup());
-			}
-		}
-		else if (Attribute == GetBleedAttribute() || Attribute == GetBleedBuildupAttribute())
-		{
-			SetBleedBuildup(FMath::Clamp(GetBleedBuildup() + Props.DeltaValue, 0, GetMaxBleedBuildup()));
+			Statuses.BleedBuildup = Value;
+			SetBleedBuildup(FMath::Clamp(GetBleedBuildup() + Statuses.BleedBuildup, 0, GetMaxBleedBuildup()));
 
 			if (GetBleedBuildup() == GetMaxBleedBuildup())
 			{
@@ -308,21 +317,10 @@ void UMMOAttributeLogic::StatusCalculations(const FGAttributeSetExecutionData& P
 				CombatComponent->HandleBleed(Props.SourceCharacter, Character, GetBleedBuildupAttribute(), GetBleedBuildup());
 			}
 		}
-		else if ((Attribute == GetPoisonAttribute() ||
-				Attribute == GetPoisonBuildupAttribute()) &&
-				!AbilitySystem->HasMatchingGameplayTag(PoisonedTag))
-		{
-			SetPoisonBuildup(FMath::Clamp(GetPoisonBuildup() + Props.DeltaValue, 0, GetMaxPoisonBuildup()));
-
-			if (GetPoisonBuildup() == GetMaxPoisonBuildup())
-			{
-				Statuses.bWasPoisoned = true;
-				CombatComponent->HandlePoisoned(Props.SourceCharacter, Character, GetPoisonBuildupAttribute(), GetPoisonBuildup());
-			}
-		}
 		else if (Attribute == GetFrostbiteAttribute() || Attribute == GetFrostbiteBuildupAttribute())
 		{
-			SetFrostbiteBuildup(FMath::Clamp(GetFrostbiteBuildup() + Props.DeltaValue, 0, GetMaxFrostbiteBuildup()));
+			Statuses.FrostbiteBuildup = Value;
+			SetFrostbiteBuildup(FMath::Clamp(GetFrostbiteBuildup() + Statuses.FrostbiteBuildup, 0, GetMaxFrostbiteBuildup()));
 
 			if (GetFrostbiteBuildup() == GetMaxFrostbiteBuildup())
 			{
@@ -330,11 +328,25 @@ void UMMOAttributeLogic::StatusCalculations(const FGAttributeSetExecutionData& P
 				CombatComponent->HandleFrostbite(Props.SourceCharacter, Character, GetFrostbiteBuildupAttribute(), GetFrostbiteBuildup());
 			}
 		}
+		else if ((Attribute == GetPoisonAttribute() ||
+				Attribute == GetPoisonBuildupAttribute()) &&
+				!AbilitySystem->HasMatchingGameplayTag(PoisonedTag))
+		{
+			Statuses.PoisonBuildup = Value;
+			SetPoisonBuildup(FMath::Clamp(GetPoisonBuildup() + Statuses.PoisonBuildup, 0, GetMaxPoisonBuildup()));
+
+			if (GetPoisonBuildup() == GetMaxPoisonBuildup())
+			{
+				Statuses.bWasPoisoned = true;
+				CombatComponent->HandlePoisoned(Props.SourceCharacter, Character, GetPoisonBuildupAttribute(), GetPoisonBuildup());
+			}
+		}
 		else if ((Attribute == GetMadnessAttribute() ||
 				Attribute == GetMadnessBuildupAttribute()) &&
 				!AbilitySystem->HasMatchingGameplayTag(MaddenedTag))
 		{
-			SetMadnessBuildup(FMath::Clamp(GetMadnessBuildup() + Props.DeltaValue, 0, GetMaxMadnessBuildup()));
+			Statuses.MadnessBuildup = Value;
+			SetMadnessBuildup(FMath::Clamp(GetMadnessBuildup() + Statuses.MadnessBuildup, 0, GetMaxMadnessBuildup()));
 			
 			if (GetMadnessBuildup() == GetMaxMadnessBuildup())
 			{
@@ -342,11 +354,26 @@ void UMMOAttributeLogic::StatusCalculations(const FGAttributeSetExecutionData& P
 				CombatComponent->HandleMadness(Props.SourceCharacter, Character, GetMadnessBuildupAttribute(), GetMadnessBuildup());
 			}
 		}
+		if ((Attribute == GetCurseAttribute() ||
+			Attribute == GetCurseBuildupAttribute()) &&
+			!AbilitySystem->HasMatchingGameplayTag(CursedTag))
+		{
+			Statuses.CurseBuildup = Value;
+			SetCurseBuildup(FMath::Clamp(GetCurseBuildup() + Statuses.CurseBuildup, 0, GetMaxCurseBuildup()));
+
+			if (GetCurseBuildup() == GetMaxCurseBuildup())
+			{
+				Statuses.bWasCursed = true;
+				SetHealth(0.0);
+				CombatComponent->HandleCurse(Props.SourceCharacter, Character, GetCurseBuildupAttribute(), GetCurseBuildup());
+			}
+		}
 		else if ((Attribute == GetSleepAttribute() ||
 				Attribute == GetSleepBuildupAttribute()) &&
 				!AbilitySystem->HasMatchingGameplayTag(SleepTag))
 		{
-			SetSleepBuildup(FMath::Clamp(GetSleepBuildup() + Props.DeltaValue, 0, GetMaxSleepBuildup()));
+			Statuses.SleepBuildup = Value;
+			SetSleepBuildup(FMath::Clamp(GetSleepBuildup() + Statuses.SleepBuildup, 0, GetMaxSleepBuildup()));
 
 			if (GetSleepBuildup() == GetMaxSleepBuildup())
 			{
@@ -362,15 +389,6 @@ bool UMMOAttributeLogic::IsImmuneToAttribute(const FGAttributeSetExecutionData& 
 {
 	UCombatComponent* Character = Props.TargetCombatComponent;
 
-	if (Attribute == GetCurseBuildupAttribute() || Attribute == GetCurseAttribute())
-	{
-		if (Character && Character->IsImmuneToCurses(Props.SourceCharacter, Props.Context.GetSourceObject(), ECombatAttribute::Curse, Props.DeltaValue)) 
-		{
-			return true;
-		}
-		
-		return GetMaxCurseBuildup() <= 0;
-	}
 	if (Attribute == GetBleedBuildupAttribute() || Attribute == GetBleedAttribute())
 	{
 		if (Character && Character->IsImmuneToBleed(Props.SourceCharacter, Props.Context.GetSourceObject(), ECombatAttribute::Bleed, Props.DeltaValue)) 
@@ -379,15 +397,6 @@ bool UMMOAttributeLogic::IsImmuneToAttribute(const FGAttributeSetExecutionData& 
 		}
 		
 		return GetMaxBleedBuildup() <= 0;
-	}
-	if (Attribute == GetPoisonBuildupAttribute() || Attribute == GetPoisonAttribute())
-	{
-		if (Character && Character->IsImmuneToPoison(Props.SourceCharacter, Props.Context.GetSourceObject(), ECombatAttribute::Poison, Props.DeltaValue)) 
-		{
-			return true;
-		}
-		
-		return GetMaxPoisonBuildup() <= 0;
 	}
 	if (Attribute == GetFrostbiteBuildupAttribute() || Attribute == GetFrostbiteAttribute())
 	{
@@ -398,6 +407,15 @@ bool UMMOAttributeLogic::IsImmuneToAttribute(const FGAttributeSetExecutionData& 
 		
 		return GetMaxFrostbiteBuildup() <= 0;
 	}
+	if (Attribute == GetPoisonBuildupAttribute() || Attribute == GetPoisonAttribute())
+	{
+		if (Character && Character->IsImmuneToPoison(Props.SourceCharacter, Props.Context.GetSourceObject(), ECombatAttribute::Poison, Props.DeltaValue)) 
+		{
+			return true;
+		}
+		
+		return GetMaxPoisonBuildup() <= 0;
+	}
 	if (Attribute == GetMadnessBuildupAttribute() || Attribute == GetMadnessAttribute())
 	{
 		if (Character && Character->IsImmuneToMadness(Props.SourceCharacter, Props.Context.GetSourceObject(), ECombatAttribute::Madness, Props.DeltaValue)) 
@@ -406,6 +424,15 @@ bool UMMOAttributeLogic::IsImmuneToAttribute(const FGAttributeSetExecutionData& 
 		}
 		
 		return GetMaxMadnessBuildup() <= 0;
+	}
+	if (Attribute == GetCurseBuildupAttribute() || Attribute == GetCurseAttribute())
+	{
+		if (Character && Character->IsImmuneToCurses(Props.SourceCharacter, Props.Context.GetSourceObject(), ECombatAttribute::Curse, Props.DeltaValue)) 
+		{
+			return true;
+		}
+		
+		return GetMaxCurseBuildup() <= 0;
 	}
 	if (Attribute == GetSleepBuildupAttribute() || Attribute == GetSleepAttribute())
 	{

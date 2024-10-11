@@ -35,7 +35,18 @@ enum class EInputAbilities : uint8;
 #define Montage_EquipSection FName("Equip")
 #define Montage_UnequipSection FName("Unequip")
 
+// HitStun sections
+#define Montage_Section_HitStun_VS FName("VS")
+#define Montage_Section_HitStun_V FName("V")
+#define Montage_Section_HitStun_M FName("M")
+#define Montage_Section_HitStun_L FName("L")
+#define Montage_Section_HitStun_FP FName("FP")
+#define Montage_Section_HitStun_FF FName("FF")
 
+#define Montage_Section_HitReact_Front FName("_F")
+#define Montage_Section_HitReact_Back FName("_B")
+#define Montage_Section_HitReact_Left FName("_L")
+#define Montage_Section_HitReact_Right FName("_R")
 
 
 

@@ -41,12 +41,12 @@ struct FDamageStatics
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Mana);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Stamina);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Poise);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(PoisonBuildup);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(BleedBuildup);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(FrostbiteBuildup);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(SleepBuildup);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(PoisonBuildup);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(MadnessBuildup);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(CurseBuildup);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(SleepBuildup);
 
 	// Defences/Resistances
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Defence_Standard);
@@ -123,11 +123,11 @@ struct FDamageStatics
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Fire, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Holy, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Damage_Lightning, Source, true);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Curse, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Bleed, Source, true);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Poison, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Frostbite, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Poison, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Madness, Source, true);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Curse, Source, true);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UMMOAttributeSet, Sleep, Source, true);
 	}
 };
@@ -191,11 +191,11 @@ UDamageCalculation_Default::UDamageCalculation_Default()
 	RelevantAttributesToCapture.Add(DamageStatics().Damage_HolyDef);
 	RelevantAttributesToCapture.Add(DamageStatics().Damage_LightningDef);
 	
-	RelevantAttributesToCapture.Add(DamageStatics().CurseDef);
 	RelevantAttributesToCapture.Add(DamageStatics().BleedDef);
-	RelevantAttributesToCapture.Add(DamageStatics().PoisonDef);
 	RelevantAttributesToCapture.Add(DamageStatics().FrostbiteDef);
+	RelevantAttributesToCapture.Add(DamageStatics().PoisonDef);
 	RelevantAttributesToCapture.Add(DamageStatics().MadnessDef);
+	RelevantAttributesToCapture.Add(DamageStatics().CurseDef);
 	RelevantAttributesToCapture.Add(DamageStatics().SleepDef);
 }
 

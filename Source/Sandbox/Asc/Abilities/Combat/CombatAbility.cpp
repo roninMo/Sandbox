@@ -52,7 +52,6 @@ void UCombatAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle, co
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 
 	// Abilities that need to be reset during activation
-	bCancelledToEquipArmament = false;
 	bIsFinalComboAttack = false;
 }
 
@@ -168,6 +167,11 @@ void UCombatAbility::SetComboAttack()
 			CurrentAttack = ComboAttacks.ComboAttacks.Num() > 0 ? ComboAttacks.ComboAttacks[0] : F_ComboAttack();
 		}
 	}
+
+	if (bUseBPCombatInformation)
+	{
+		CurrentAttack = BP_AttackInformation;
+	}
 }
 
 
@@ -236,7 +240,8 @@ void UCombatAbility::CalculateAttributeModifications()
 	if (ArmamentInformation.DamageCalculations == EDamageInformationSource::Armament)
 	{
 		// Armament/Skill based -> retrieve the armament's base damage, add damage scaling, and the current attack multiplier
-		for (auto &[Attribute, Value] : ArmamentInformation.BaseDamageStats)
+		const TMap<FGameplayAttribute, float>& WeaponStats = bUseBPCombatInformation ? BP_DamageStats : ArmamentInformation.BaseDamageStats;
+		for (auto &[Attribute, Value] : WeaponStats)
 		{
 			// Damages
 			AttackInfo.Add(UMMOAttributeSet::GetDamage_PoiseAttribute(), CurrentAttack.PoiseDamage);
