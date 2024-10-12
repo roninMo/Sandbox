@@ -476,7 +476,7 @@ void UMeleeAttack::InitCombatInformation()
 
 void UMeleeAttack::SetComboIndex()
 {
-	if (!Armament || (!bRunningAttack && !bCrouchingAttack))
+	if (!bRunningAttack && !bCrouchingAttack)
 	{
 		Super::SetComboIndex();
 		return;

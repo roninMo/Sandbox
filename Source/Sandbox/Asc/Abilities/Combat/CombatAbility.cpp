@@ -164,11 +164,11 @@ void UCombatAbility::InitCombatInformation()
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while getting the combo attack",
+		ComboIndex = 0;
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while adjusting the combo index",
 			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
 	}
 	
-	ComboIndex = CombatComponent ? CombatComponent->GetComboIndex() : 0;
 	SetComboIndex();
 	SetComboAttack(); // Current attack and combo index
 	SetAttackMontage(Armament); // Current montage
@@ -184,20 +184,32 @@ void UCombatAbility::SetComboIndex()
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while adjusting the combo index",
 			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+		ComboIndex = 0;
 		return;
 	}
 
 	// Either have separate combo indexing for normal / strong attacks, or when transitioning from one to the other have that finish the combo. Having both combined would be interesting I just think it'd be tough to balance
+	ComboIndex = CombatComponent ? CombatComponent->GetComboIndex() : 0;
 	if (ComboIndex + 1 >= ComboAttacks.ComboAttacks.Num())
 	{
-		CombatComponent->SetComboIndex(0);
+
+		// We got here from another attack pattern's combo, adjust the index to 1 to prevent doing the initial attack twice
+		if (ComboIndex >= ComboAttacks.ComboAttacks.Num())
+		{
+			ComboIndex = 0;
+			CombatComponent->SetComboIndex(1);
+		}
+		else
+		{
+			CombatComponent->SetComboIndex(0);
+		}
 	}
 	else
 	{
 		CombatComponent->SetComboIndex(ComboIndex + 1);
 	}
-	
-	// UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Adjusted combo index from {3} to {4}",
+
+	// UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Combo Index: {3}, Combat Component's: {4}",
 	// 	UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), ComboIndex, CombatComponent->GetComboIndex());
 }
 
@@ -205,27 +217,16 @@ void UCombatAbility::SetComboIndex()
 void UCombatAbility::SetComboAttack()
 {
 	// Retrieve the current attack
-	if (ComboCount <= 1 || ComboIndex + 1 >= ComboAttacks.ComboAttacks.Num())
+	if (ComboAttacks.ComboAttacks.IsValidIndex(ComboIndex))
 	{
-		if (!ComboAttacks.ComboAttacks.IsEmpty())
-		{
-			CurrentAttack = ComboAttacks.ComboAttacks[0];
-			UCombatComponent* CombatComponent = GetCombatComponent();
-			if (CombatComponent) CombatComponent->SetComboIndex(0);
-		}
+		CurrentAttack = ComboAttacks.ComboAttacks[ComboIndex];
 	}
 	else
 	{
-		if (ComboAttacks.ComboAttacks.IsValidIndex(ComboIndex))
-		{
-			CurrentAttack = ComboAttacks.ComboAttacks[ComboIndex];
-		}
-		else
-		{
-			CurrentAttack = ComboAttacks.ComboAttacks.Num() > 0 ? ComboAttacks.ComboAttacks[0] : F_ComboAttack();
-		}
+		CurrentAttack = ComboAttacks.ComboAttacks.Num() > 0 ? ComboAttacks.ComboAttacks[0] : F_ComboAttack();
 	}
 
+	// custom attack information for easily handling different combat logic
 	if (bUseBPCombatInformation)
 	{
 		CurrentAttack = BP_AttackInformation;
