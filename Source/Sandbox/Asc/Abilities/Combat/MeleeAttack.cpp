@@ -76,14 +76,13 @@ bool UMeleeAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, c
 	}
 
 	// If we don't have any stamina don't attack
-	const UMMOAttributeSet* Attributes = Cast<UMMOAttributeSet>(ActorInfo->AbilitySystemComponent->GetAttributeSet(UMMOAttributeSet::StaticClass()));
-	if (Attributes && Attributes->GetStamina() == 0)
+	if (IsOutOfStamina(ActorInfo->AbilitySystemComponent.Get()))
 	{
 		return false;
 	}
 	
 	// The ability still needs to retrieve the weapon information
-	if (AttackPattern == EInputAbilities::None)
+	if (ShouldActivateAbilityToRetrieveArmament())
 	{
 		return true;
 	}
@@ -219,10 +218,8 @@ void UMeleeAttack::OnAttackFrameEvent(const FGameplayEventData EventData)
 		// End attack frames (war is never over)
 		if (EventData.EventTag.MatchesTag(AttackFramesEndTag))
 		{
-			if (bDebug)
-			{
-				UE_LOGFMT(AbilityLog, Log, "{0}::AttackFrames End, {1}", GetOwningActorFromActorInfo()->HasAuthority() ? FString("Server") : FString("Client"), *EventData.EventTag.ToString());
-			}
+			if (bDebug) UE_LOGFMT(AbilityLog, Log, "{0}::AttackFrames End, {1}", GetOwningActorFromActorInfo()->HasAuthority() ? FString("Server") : FString("Client"), *EventData.EventTag.ToString());
+			
 			if (EventData.EventTag.MatchesTag(LeftHandAttackFramesEndTag) && SecondaryAttackState == EAttackFramesState::Enabled)
 			{
 				OnEndAttackFrames(false);
@@ -245,10 +242,7 @@ void UMeleeAttack::OnAttackFrameEvent(const FGameplayEventData EventData)
 		// Begin attack frames (I'm always ready)
 		else if (EventData.EventTag.MatchesTag(AttackFramesBeginTag))
 		{
-			if (bDebug)
-			{
-				UE_LOGFMT(AbilityLog, Log, "{0}::AttackFrames Begin, {1}", GetOwningActorFromActorInfo()->HasAuthority() ? FString("Server") : FString("Client"), *EventData.EventTag.ToString());
-			}
+			if (bDebug) UE_LOGFMT(AbilityLog, Log, "{0}::AttackFrames Begin, {1}", GetOwningActorFromActorInfo()->HasAuthority() ? FString("Server") : FString("Client"), *EventData.EventTag.ToString());
 			
 			// We're only enabling the frames for one attack, if you have animations with multiple frames you'll have to adjust this logic, specifically for enemies
 			if (EventData.EventTag.MatchesTag(LeftHandAttackFramesBeginTag) && SecondaryAttackState == EAttackFramesState::Disabled)

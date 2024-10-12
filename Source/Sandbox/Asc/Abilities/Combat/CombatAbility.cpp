@@ -7,7 +7,6 @@
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
-#include "Sandbox/Asc/Information/SandboxTags.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Combat/Weapons/Armament.h"
@@ -588,6 +587,30 @@ bool UCombatAbility::IsWeaponEquipped(const EInputAbilities AbilityInput, UComba
 	}
 
 	return bCanActivateAbility;
+}
+
+bool UCombatAbility::IsOutOfStamina(UAbilitySystemComponent* AbilitySystemComponent) const
+{
+	if (!AbilitySystemComponent) return false;
+	
+	// If we don't have any stamina don't attack
+	const UMMOAttributeSet* Attributes = Cast<UMMOAttributeSet>(AbilitySystemComponent->GetAttributeSet(UMMOAttributeSet::StaticClass()));
+	if (Attributes && Attributes->GetStamina() == 0)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool UCombatAbility::ShouldActivateAbilityToRetrieveArmament() const
+{
+	if (AttackPattern == EInputAbilities::None)
+	{
+		return true;
+	}
+
+	return false;
 }
 
 

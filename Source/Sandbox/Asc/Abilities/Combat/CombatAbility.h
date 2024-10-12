@@ -148,6 +148,12 @@ protected:
 	/** Returns whether the weapon for this ability is equipped. This is safe to check before we've retrieved the weapon, should be used during CanActivateAbility() */
 	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual bool IsWeaponEquipped(EInputAbilities AbilityInput, UCombatComponent* CombatComponent) const;
 
+	/** Returns whether the player is out of stamina */
+	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual bool IsOutOfStamina(UAbilitySystemComponent* AbilitySystemComponent) const;
+
+	/** Returns whether we should activate the ability for this instance to retrieve the current armament information */
+	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual bool ShouldActivateAbilityToRetrieveArmament() const;
+
 	/** Sets the armament that's used during the ability, and the equip slot for reference to know when it's unequipped */
 	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual void SetArmament(AArmament* NewArmament);
 	

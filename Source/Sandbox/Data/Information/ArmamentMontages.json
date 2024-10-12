@@ -378,7 +378,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks_Fix.AM_Manny_Sword_DW_PrimaryAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -422,7 +422,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks_Fix.AM_Manny_Sword_DW_SecondaryAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -466,7 +466,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack_Fix.AM_Manny_Sword_DW_SpecialAttack_Fix'"
 							}
 						},
 						"Combo":
@@ -489,7 +489,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks_Fix.AM_Manny_Sword_DW_StrongAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -967,7 +967,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks_Fix.AM_Manny_Sword_DW_PrimaryAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -1011,7 +1011,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks_Fix.AM_Manny_Sword_DW_SecondaryAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -1055,7 +1055,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack_Fix.AM_Manny_Sword_DW_SpecialAttack_Fix'"
 							}
 						},
 						"Combo":
@@ -1078,7 +1078,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks_Fix.AM_Manny_Sword_DW_StrongAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -1600,7 +1600,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks_Fix.AM_Manny_Sword_DW_PrimaryAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -1644,7 +1644,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks_Fix.AM_Manny_Sword_DW_SecondaryAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -1688,7 +1688,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack_Fix.AM_Manny_Sword_DW_SpecialAttack_Fix'"
 							}
 						},
 						"Combo":
@@ -1711,7 +1711,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks_Fix.AM_Manny_Sword_DW_StrongAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -2189,7 +2189,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks_Fix.AM_Manny_Sword_DW_PrimaryAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -2233,7 +2233,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks_Fix.AM_Manny_Sword_DW_SecondaryAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -2277,7 +2277,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack_Fix.AM_Manny_Sword_DW_SpecialAttack_Fix'"
 							}
 						},
 						"Combo":
@@ -2300,7 +2300,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks_Fix.AM_Manny_Sword_DW_StrongAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -2778,7 +2778,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks_Fix.AM_Manny_Sword_DW_PrimaryAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -2822,7 +2822,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks_Fix.AM_Manny_Sword_DW_SecondaryAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -2866,7 +2866,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack_Fix.AM_Manny_Sword_DW_SpecialAttack_Fix'"
 							}
 						},
 						"Combo":
@@ -2889,7 +2889,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks_Fix.AM_Manny_Sword_DW_StrongAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -3382,7 +3382,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks_Fix.AM_Manny_Sword_DW_PrimaryAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -3426,7 +3426,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks_Fix.AM_Manny_Sword_DW_SecondaryAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -3470,7 +3470,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack_Fix.AM_Manny_Sword_DW_SpecialAttack_Fix'"
 							}
 						},
 						"Combo":
@@ -3493,7 +3493,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks_Fix.AM_Manny_Sword_DW_StrongAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -3971,7 +3971,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_PrimaryAttacks_Fix.AM_Manny_Sword_DW_PrimaryAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -4015,7 +4015,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SecondaryAttacks_Fix.AM_Manny_Sword_DW_SecondaryAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -4059,7 +4059,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_SpecialAttack_Fix.AM_Manny_Sword_DW_SpecialAttack_Fix'"
 							}
 						},
 						"Combo":
@@ -4082,7 +4082,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/Swords/DualWielding/AM_Manny_Sword_DW_StrongAttacks_Fix.AM_Manny_Sword_DW_StrongAttacks_Fix'"
 							}
 						},
 						"Combo":
@@ -4546,7 +4546,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/DualWielding/AM_Manny_GS_DW_PrimaryAttacks.AM_Manny_GS_DW_PrimaryAttacks'"
 							}
 						},
 						"Combo":
@@ -4590,7 +4590,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/DualWielding/AM_Manny_GS_DW_SecondaryAttacks.AM_Manny_GS_DW_SecondaryAttacks'"
 							}
 						},
 						"Combo":
@@ -4634,7 +4634,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/DualWielding/AM_Manny_GS_DW_SpecialAttack.AM_Manny_GS_DW_SpecialAttack'"
 							}
 						},
 						"Combo":
@@ -4657,7 +4657,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/DualWielding/AM_Manny_GS_DW_StrongAttacks.AM_Manny_GS_DW_StrongAttacks'"
 							}
 						},
 						"Combo":
@@ -5128,7 +5128,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/DualWielding/AM_Manny_GS_DW_PrimaryAttacks.AM_Manny_GS_DW_PrimaryAttacks'"
 							}
 						},
 						"Combo":
@@ -5172,7 +5172,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/DualWielding/AM_Manny_GS_DW_SecondaryAttacks.AM_Manny_GS_DW_SecondaryAttacks'"
 							}
 						},
 						"Combo":
@@ -5216,7 +5216,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/DualWielding/AM_Manny_GS_DW_SpecialAttack.AM_Manny_GS_DW_SpecialAttack'"
 							}
 						},
 						"Combo":
@@ -5239,7 +5239,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/DualWielding/AM_Manny_GS_DW_StrongAttacks.AM_Manny_GS_DW_StrongAttacks'"
 							}
 						},
 						"Combo":
