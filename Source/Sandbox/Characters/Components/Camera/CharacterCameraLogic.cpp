@@ -556,9 +556,13 @@ void ACharacterCameraLogic::UpdateCameraRotation()
 	{
 		SetRotationToCamera();
 	}
-	else if (CameraStyle == CameraStyle_ThirdPerson || CameraStyle == CameraStyle_TargetLocking)
+	else if (CameraStyle == CameraStyle_ThirdPerson)
 	{
 		SetRotationToMovement();
+	}
+	else if (CameraStyle == CameraStyle_TargetLocking)
+	{
+		SetRotationToCamera();
 	}
 }
 

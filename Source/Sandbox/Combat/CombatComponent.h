@@ -137,14 +137,8 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item
 		- 
 
 
-
-
-
-
-
 	Combat Component
 		- Attribute damage calculation
-
 
 
 	Combat
@@ -152,11 +146,6 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item
 		- Weapon creates a damage calculation and sends it to the attribute logic
 		- AttributeLogic handles adjusting attributes
 
-
-
-	Weapons have information and logic that links different characters montages and armament information based on the player's current stance to the attack, and uses the player's stats and equipment to handle damage calculations
-	Everything's captured during the attack, and there's lots of innovative logic for how you go about handling everything. Aside from the normal attacks, there's a lot of logic you can customize for making your own intersting abilities and combat
-	I don't know the specifics, there's just some things I don't agree with for how the ability system handles logic, however this is kind of wild and a good way for handling combat, it just takes a moment to build up
 
  
 */

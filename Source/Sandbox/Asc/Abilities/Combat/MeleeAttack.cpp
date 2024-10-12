@@ -68,7 +68,7 @@ bool UMeleeAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, c
 		return false;
 	}
 
-	// This prevents clients from activating an ability on the server when a duration is still blocking it on the client. The only problem is that when they activate is the duration and the latency from when it receives the duration
+	// This prevents clients from activating an ability on the server when a duration is still blocking it on the client. The only problem is that when they activate, the duration and the latency from when it receives the duration
 	// Adding values you send across the network that are based on the server fix this, however I'd only doing for crucial information (like attack frames or hit stun)
 	if (!ActorInfo->AbilitySystemComponent.Get() || ActorInfo->AbilitySystemComponent->HasMatchingGameplayTag(HitStunTag))
 	{
@@ -90,7 +90,7 @@ bool UMeleeAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, c
 	}
 
 
-	// Check if there's a valid weapon for this specific ability (This is here to prevent spamming replicated events) // TODO: Find out if this is actually beneficial
+	// Check if there's a valid weapon for this specific ability (This is here to prevent spamming replicated events)
 	bool bCanActivateAbility = false;
 	if (IsRightHandAbilityInput(AttackPattern)
 		&& CombatComponent->GetArmament()

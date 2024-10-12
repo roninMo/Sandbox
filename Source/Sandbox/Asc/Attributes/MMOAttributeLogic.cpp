@@ -60,6 +60,12 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 			https://fextralife.com/forums/t52683/poise-explanation-general-pvp-tips
 			https://www.reddit.com/r/Eldenring/comments/pjemv1/which_poise_system_do_you_prefer_the_most_and/
 
+
+			Attribute logic is strange because it's something that gameplay abilities is inherently familiar with, and it's easy to build upon.
+			At the same time, once you've finally built up the logic for handling both player stats and combat, it's easy to distribute logic for different characters and components
+			The problem is when you start having everything tangled the way it is, because first building this out sometimes feels impossible, and there's an endless list of things you have to handle
+
+
 			
 			- Status calculations
 				- status buildup

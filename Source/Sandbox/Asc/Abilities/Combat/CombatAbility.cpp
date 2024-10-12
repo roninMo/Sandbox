@@ -144,6 +144,31 @@ void UCombatAbility::InitCombatInformation()
 }
 
 
+void UCombatAbility::SetComboIndex()
+{
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while adjusting the combo index",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+		return;
+	}
+
+	// Either have separate combo indexing for normal / strong attacks, or when transitioning from one to the other have that finish the combo. Having both combined would be interesting I just think it'd be tough to balance
+	if (ComboIndex + 1 >= ComboAttacks.ComboAttacks.Num())
+	{
+		CombatComponent->SetComboIndex(0);
+	}
+	else
+	{
+		CombatComponent->SetComboIndex(ComboIndex + 1);
+	}
+	
+	// UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Adjusted combo index from {3} to {4}",
+	// 	UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), ComboIndex, CombatComponent->GetComboIndex());
+}
+
+
 void UCombatAbility::SetComboAttack()
 {
 	// Retrieve the current attack
@@ -172,31 +197,6 @@ void UCombatAbility::SetComboAttack()
 	{
 		CurrentAttack = BP_AttackInformation;
 	}
-}
-
-
-void UCombatAbility::SetComboIndex()
-{
-	UCombatComponent* CombatComponent = GetCombatComponent();
-	if (!CombatComponent)
-	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while adjusting the combo index",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
-		return;
-	}
-
-	// Either have separate combo indexing for normal / strong attacks, or when transitioning from one to the other have that finish the combo. Having both combined would be interesting I just think it'd be tough to balance
-	if (ComboIndex + 1 >= ComboAttacks.ComboAttacks.Num())
-	{
-		CombatComponent->SetComboIndex(0);
-	}
-	else
-	{
-		CombatComponent->SetComboIndex(ComboIndex + 1);
-	}
-	
-	// UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Adjusted combo index from {3} to {4}",
-	// 	UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), ComboIndex, CombatComponent->GetComboIndex());
 }
 
 
@@ -263,7 +263,7 @@ void UCombatAbility::CalculateAttributeModifications()
 				Attribute == UMMOAttributeSet::GetDamage_LightningAttribute())
 			{
 				float EquipmentMultiplier = 1;
-				float AttackMotionValue = CurrentAttack.MotionValue * 0.01;;
+				float AttackMotionValue = CurrentAttack.MotionValue * 0.01;
 				AttackInfo.Add(Attribute, (Value * EquipmentMultiplier) * AttackMotionValue);
 			}
 			
