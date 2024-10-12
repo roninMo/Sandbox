@@ -56,6 +56,40 @@ void UCombatAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle, co
 }
 
 
+void UCombatAbility::AddStaminaCostEffect(float Stamina)
+{
+	Stamina = Stamina == 0 ? CurrentAttack.StaminaCost : Stamina;
+	const FGameplayAbilitySpecHandle Handle = GetCurrentAbilitySpecHandle();
+	const FGameplayAbilityActorInfo* ActorInfo = GetCurrentActorInfo();
+	const FGameplayAbilityActivationInfo ActivationInfo = GetCurrentActivationInfo();
+	
+	// This isn't something that's replicated so you'll need a duration once the player's stamina has been drained to prevent them from spamming and causing lag from ability activation discrepancies
+	FName StaminaCostEffect = FName(UEnum::GetValueAsString(AttackPattern).Append("_StaminaCost"));
+	UGameplayEffect* StaminaCost = NewObject<UGameplayEffect>(ActorInfo->OwnerActor.Get(), StaminaCostEffect);
+	if (StaminaCost)
+	{
+		StaminaCost->DurationPolicy = EGameplayEffectDurationType::Instant;
+		FGameplayModifierInfo StaminaDrain = FGameplayModifierInfo();
+		StaminaDrain.Attribute = UMMOAttributeSet::GetStaminaAttribute();
+		StaminaDrain.ModifierOp = EGameplayModOp::Additive;
+		StaminaDrain.ModifierMagnitude = FGameplayEffectModifierMagnitude(FScalableFloat(-CurrentAttack.StaminaCost));
+		StaminaCost->Modifiers.Add(StaminaDrain);
+		
+		// UAbilitySystemComponent* const AbilitySystemComponent = ActorInfo->AbilitySystemComponent.Get();
+		// check(AbilitySystemComponent != nullptr);
+		// if (!AbilitySystemComponent->CanApplyAttributeModifiers(StaminaCost, GetAbilityLevel(Handle, ActorInfo), MakeEffectContext(Handle, ActorInfo)))
+		// {
+		// 	EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
+		// 	return;
+		// }
+		
+		FGameplayEffectSpec* StaminaCostSpec = new FGameplayEffectSpec(StaminaCost, MakeEffectContext(Handle, ActorInfo), 1);
+		FGameplayEffectSpecHandle StaminaCostHandle = FGameplayEffectSpecHandle(StaminaCostSpec);
+		ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, StaminaCostHandle);
+	}
+}
+
+
 void UCombatAbility::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled)
 {
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
@@ -531,6 +565,32 @@ bool UCombatAbility::IsRightHandAbilityInput(const EInputAbilities AbilityInput)
 }
 
 
+bool UCombatAbility::IsWeaponEquipped(const EInputAbilities AbilityInput, UCombatComponent* CombatComponent) const
+{
+	if (!CombatComponent)
+	{
+		return false;
+	}
+
+	// Check if there's a valid weapon for this specific ability (This is here to prevent spamming replicated events)
+	bool bCanActivateAbility = false;
+	if (IsRightHandAbilityInput(AbilityInput)
+		&& CombatComponent->GetArmament()
+		&& CombatComponent->GetArmament()->GetEquipStatus() == EEquipStatus::Equipped)
+	{
+		bCanActivateAbility = true;
+	}
+	else if (!IsRightHandAbilityInput(AbilityInput)
+		&& CombatComponent->GetArmament(false)
+		&& CombatComponent->GetArmament(false)->GetEquipStatus() == EEquipStatus::Equipped)
+	{
+		bCanActivateAbility = true;
+	}
+
+	return bCanActivateAbility;
+}
+
+
 void UCombatAbility::SetArmament(AArmament* NewArmament)
 {
 	Armament = NewArmament;
@@ -546,6 +606,8 @@ void UCombatAbility::OnUnequipArmament(FName ArmamentName, FGuid Id, EEquipSlot 
 		EquipSlot = EEquipSlot::None;
 		AttackPattern = EInputAbilities::None;
 	}
+	
+	BP_OnUnequipArmament(ArmamentName, Id, Slot);
 }
 
 

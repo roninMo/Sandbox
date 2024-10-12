@@ -140,6 +140,9 @@ protected:
 	/** Retrieves all the necessary information for an attack. Call this during ActivateAbility to retrieve the attack information for the current attack */
 	virtual void InitCombatInformation() override;
 
+	/** Increments the combo index based on the combo attacks */
+	virtual void SetComboIndex() override;
+	
 	/** Calculates the current attack information */
 	virtual void SetComboAttack() override;
 
@@ -148,10 +151,6 @@ protected:
 	
 	/** Calculates the montage section for the current combo attack */
 	virtual void SetMontageStartSection(bool ChargeAttack = false) override;
-
-	/** Increments the combo index based on the combo attacks */
-	virtual void SetComboIndex() override;
-	
 
 	
 };

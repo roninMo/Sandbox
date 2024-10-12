@@ -79,33 +79,17 @@ bool UMeleeAttack::CanActivateAbility(const FGameplayAbilitySpecHandle Handle, c
 	const UMMOAttributeSet* Attributes = Cast<UMMOAttributeSet>(ActorInfo->AbilitySystemComponent->GetAttributeSet(UMMOAttributeSet::StaticClass()));
 	if (Attributes && Attributes->GetStamina() == 0)
 	{
-		return false;;
+		return false;
 	}
 	
-
 	// The ability still needs to retrieve the weapon information
 	if (AttackPattern == EInputAbilities::None)
 	{
 		return true;
 	}
-
-
+	
 	// Check if there's a valid weapon for this specific ability (This is here to prevent spamming replicated events)
-	bool bCanActivateAbility = false;
-	if (IsRightHandAbilityInput(AttackPattern)
-		&& CombatComponent->GetArmament()
-		&& CombatComponent->GetArmament()->GetEquipStatus() == EEquipStatus::Equipped)
-	{
-		bCanActivateAbility = true;
-	}
-	else if (!IsRightHandAbilityInput(AttackPattern)
-		&& CombatComponent->GetArmament(false)
-		&& CombatComponent->GetArmament(false)->GetEquipStatus() == EEquipStatus::Equipped)
-	{
-		bCanActivateAbility = true;
-	}
-
-	return bCanActivateAbility;
+	return IsWeaponEquipped(AttackPattern, CombatComponent);
 }
 
 
@@ -114,7 +98,7 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 	if (!CommitAbility(Handle, ActorInfo, ActivationInfo))
 	{
-		EndAbility(GetCurrentAbilitySpecHandle(), GetCurrentActorInfo(), GetCurrentActivationInfo(), true, false);
+		EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
 		return;
 	}
 
@@ -136,33 +120,8 @@ void UMeleeAttack::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 	// Add the combo information and attack calculations
 	InitCombatInformation();
 
-	
-	// Create a gameplay effect for the stamina cost of the current attack
-	// This isn't something that's replicated so you'll need a duration once the player's stamina has been drained to prevent them from spamming and causing lag from ability activation discrepancies
-	FName StaminaCostEffect = FName(UEnum::GetValueAsString(AttackPattern).Append("_StaminaCost"));
-	UGameplayEffect* StaminaCost = NewObject<UGameplayEffect>(ActorInfo->OwnerActor.Get(), StaminaCostEffect);
-	if (StaminaCost)
-	{
-		StaminaCost->DurationPolicy = EGameplayEffectDurationType::Instant;
-		FGameplayModifierInfo StaminaDrain = FGameplayModifierInfo();
-		StaminaDrain.Attribute = UMMOAttributeSet::GetStaminaAttribute();
-		StaminaDrain.ModifierOp = EGameplayModOp::Additive;
-		StaminaDrain.ModifierMagnitude = FGameplayEffectModifierMagnitude(FScalableFloat(-CurrentAttack.StaminaCost));
-		StaminaCost->Modifiers.Add(StaminaDrain);
-		
-		// UAbilitySystemComponent* const AbilitySystemComponent = ActorInfo->AbilitySystemComponent.Get();
-		// check(AbilitySystemComponent != nullptr);
-		// if (!AbilitySystemComponent->CanApplyAttributeModifiers(StaminaCost, GetAbilityLevel(Handle, ActorInfo), MakeEffectContext(Handle, ActorInfo)))
-		// {
-		// 	EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
-		// 	return;
-		// }
-		
-		FGameplayEffectSpec* StaminaCostSpec = new FGameplayEffectSpec(StaminaCost, MakeEffectContext(Handle, ActorInfo), 1);
-		FGameplayEffectSpecHandle StaminaCostHandle = FGameplayEffectSpecHandle(StaminaCostSpec);
-		ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, StaminaCostHandle);
-	}
-
+	// Add a gameplay effect for the stamina cost of the current attack
+	AddStaminaCostEffect();
 	
 	// Attack montage
 	AttackMontageHandle = UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(
@@ -238,8 +197,8 @@ void UMeleeAttack::OnAttackFrameEvent(const FGameplayEventData EventData)
 		All the values persist, and we do traces specific to each weapon using only one overlap component (There's a limit to these, and it's okay to be inefficient because this is more fun)
 		The weapon checks for traces, calculates combat logic, and sends it to each armament to handle individual attack calculations specific to the trace frame
 
-		
 	*/
+		
 
 	if (CurrentStance == EArmamentStance::OneHanding || CurrentStance == EArmamentStance::TwoHanding)
 	{
@@ -521,6 +480,36 @@ void UMeleeAttack::InitCombatInformation()
 }
 
 
+void UMeleeAttack::SetComboIndex()
+{
+	if (!Armament || (!bRunningAttack && !bCrouchingAttack))
+	{
+		Super::SetComboIndex();
+		return;
+	}
+	
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while adjusting the combo index",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
+		return;
+	}
+
+	
+	// Either have separate combo indexing for normal / strong attacks, or when transitioning from one to the other have that finish the combo, both combined would be interesting I just think it'd be tough to balance
+	const TArray<F_ComboAttack>& Attacks = bRunningAttack ? RunningAttackInformation.ComboAttacks : CrouchingAttackInformation.ComboAttacks; 
+	if (ComboIndex + 1 >= Attacks.Num())
+	{
+		CombatComponent->SetComboIndex(0);
+	}
+	else
+	{
+		CombatComponent->SetComboIndex(ComboIndex + 1);
+	}
+}
+
+
 void UMeleeAttack::SetComboAttack()
 {
 	// Standard attack information
@@ -552,36 +541,6 @@ void UMeleeAttack::SetComboAttack()
 		{
 			CurrentAttack = Attacks.Num() > 0 ? Attacks[0] : F_ComboAttack();
 		}
-	}
-}
-
-
-void UMeleeAttack::SetComboIndex()
-{
-	if (!Armament || (!bRunningAttack && !bCrouchingAttack))
-	{
-		Super::SetComboIndex();
-		return;
-	}
-	
-	UCombatComponent* CombatComponent = GetCombatComponent();
-	if (!CombatComponent)
-	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while adjusting the combo index",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
-		return;
-	}
-
-	
-	// Either have separate combo indexing for normal / strong attacks, or when transitioning from one to the other have that finish the combo, both combined would be interesting I just think it'd be tough to balance
-	const TArray<F_ComboAttack>& Attacks = bRunningAttack ? RunningAttackInformation.ComboAttacks : CrouchingAttackInformation.ComboAttacks; 
-	if (ComboIndex + 1 >= Attacks.Num())
-	{
-		CombatComponent->SetComboIndex(0);
-	}
-	else
-	{
-		CombatComponent->SetComboIndex(ComboIndex + 1);
 	}
 }
 
@@ -640,11 +599,5 @@ void UMeleeAttack::SetMontageStartSection(bool ChargeAttack)
 	if (bRunningAttack)
 	{
 		MontageStartSection = Montage_Section_RunningAttack;
-	}
-
-	// Charged attacks
-	if (ChargeAttack)
-	{
-		MontageStartSection = FName(MontageStartSection.ToString() + Montage_Section_Charge);
 	}
 }

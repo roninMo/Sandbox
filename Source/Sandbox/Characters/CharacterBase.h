@@ -518,7 +518,7 @@ public:
 //-------------------------------------------------------------------------------------//
 // Montages																			   //
 //-------------------------------------------------------------------------------------//
-public:
+protected:
 	/** The data table for character montages */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation|Montage") UDataTable* CharacterMontageTable;
 
@@ -533,9 +533,12 @@ public:
 	/** Retrieves the list of the character's montages */
 	UFUNCTION(BlueprintCallable, Category = "Animation|Montage") virtual FM_CharacterMontages& GetCharacterMontages();
 
+	/** Retrieves the character's roll montage */
+	UFUNCTION(BlueprintCallable, Category = "Animation|Montage") virtual UAnimMontage* GetRollMontage() const;
+
 	/** Retrieves the character's hit react montage */
 	UFUNCTION(BlueprintCallable, Category = "Animation|Montage") virtual UAnimMontage* GetHitReactMontage() const;
-	
+
 	/** Retrieves the character montages from the database */
 	virtual void SetCharacterMontages();
 

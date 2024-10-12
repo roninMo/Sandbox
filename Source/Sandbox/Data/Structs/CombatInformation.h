@@ -27,13 +27,10 @@ enum class EInputAbilities : uint8;
 #define Montage_Equip FName("Equip")
 #define Montage_Unequip FName("Unequip")
 
+
 // Death montages
 #define Montage_Section_Death FName("Death")
 #define Montage_Section_Curse FName("Curse")
-
-// Equip Montage sections
-#define Montage_EquipSection FName("Equip")
-#define Montage_UnequipSection FName("Unequip")
 
 // HitStun sections
 #define Montage_Section_HitStun_VS FName("VS")
@@ -47,6 +44,20 @@ enum class EInputAbilities : uint8;
 #define Montage_Section_HitReact_Back FName("_B")
 #define Montage_Section_HitReact_Left FName("_L")
 #define Montage_Section_HitReact_Right FName("_R")
+
+// Equip Montage sections
+#define Montage_EquipSection FName("Equip")
+#define Montage_UnequipSection FName("Unequip")
+
+// Roll Montage sections
+#define Montage_Section_Roll_Forward FName("Forward")
+#define Montage_Section_Roll_Backward FName("Backward")
+#define Montage_Section_Roll_Left FName("Left")
+#define Montage_Section_Roll_Right FName("Right")
+#define Montage_Section_Roll_ForwardLeft FName("ForwardLeft")
+#define Montage_Section_Roll_ForwardRight FName("ForwardRight")
+#define Montage_Section_Roll_BackwardLeft FName("BackwardLeft")
+#define Montage_Section_Roll_BackwardRight FName("BackwardRight")
 
 
 

@@ -157,6 +157,7 @@
 #define Tag_State_Attacking_AttackFrames_Begin_L FName("State.Attacking.AttackFrames.Begin.L")
 #define Tag_State_Attacking_AttackFrames_Begin_R FName("State.Attacking.AttackFrames.Begin.R")
 #define Tag_State_Attacking_AllowMovement FName("State.Attacking.AllowMovement")
+#define Tag_State_Invincibility FName("State.Invincibility")
 
 
 // ; UI

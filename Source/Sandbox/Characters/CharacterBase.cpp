@@ -315,6 +315,12 @@ FM_CharacterMontages& ACharacterBase::GetCharacterMontages()
 }
 
 
+UAnimMontage* ACharacterBase::GetRollMontage() const
+{
+	return Montages.RollMontage;
+}
+
+
 UAnimMontage* ACharacterBase::GetHitReactMontage() const
 {
 	return Montages.HitReactMontage;
