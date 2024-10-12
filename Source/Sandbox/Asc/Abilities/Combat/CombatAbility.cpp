@@ -310,7 +310,7 @@ void UCombatAbility::CalculateAttributeModifications()
 				Attribute == UMMOAttributeSet::GetSleepAttribute())
 			{
 				float EquipmentMultiplier = 1;
-				float AttackMotionValue = CurrentAttack.StatusMotionValue * 0.01;;
+				float AttackMotionValue = CurrentAttack.StatusMotionValue * 0.01;
 				AttackInfo.Add(Attribute, (Value * EquipmentMultiplier) * AttackMotionValue);
 			}
 

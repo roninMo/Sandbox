@@ -96,7 +96,7 @@ void UMovementAbility_Roll::ActivateAbility(const FGameplayAbilitySpecHandle Han
 		return;
 	}
 
-	
+
 	InvincibilityFramesHandle = UAbilityTask_WaitGameplayEvent::WaitGameplayEvent(this, InvincibiltyFramesTag);
 	InvincibilityFramesHandle->EventReceived.AddDynamic(this, &UMovementAbility_Roll::InvincibilityFramesState);
 	InvincibilityFramesHandle->ReadyForActivation();
@@ -125,6 +125,7 @@ void UMovementAbility_Roll::ActivateAbility(const FGameplayAbilitySpecHandle Han
 	}
 	if (CameraStyle == CameraStyle_TargetLocking)
 	{
+		Character->SetRotationToMovement();
 		RotateCharacterTowardsMovement(Input, Character);
 	}
 	
@@ -146,13 +147,20 @@ void UMovementAbility_Roll::ActivateAbility(const FGameplayAbilitySpecHandle Han
 
 void UMovementAbility_Roll::InvincibilityFramesState(FGameplayEventData EventData)
 {
-	// if (EventData)
+	
 }
 
 
 void UMovementAbility_Roll::OnEndOfMontage() { EndAbility(GetCurrentAbilitySpecHandle(), GetCurrentActorInfo(), GetCurrentActivationInfo(), true, false); }
 void UMovementAbility_Roll::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled)
 {
+	ACharacterCameraLogic* Character = Cast<ACharacterCameraLogic>(ActorInfo->AvatarActor.Get());
+	if (Character)
+	{
+		Character->UpdateCameraRotation();
+	}
+	
+	if (MontageHandle) MontageHandle->EndTask();
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
 }
 

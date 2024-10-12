@@ -4276,7 +4276,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/DualWielding/AM_Manny_GS_DW_SpecialAttack.AM_Manny_GS_DW_SpecialAttack'"
 							}
 						},
 						"Combo":
@@ -4437,7 +4437,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/DualWielding/AM_Manny_GS_DW_SpecialAttack.AM_Manny_GS_DW_SpecialAttack'"
 							}
 						},
 						"Combo":
@@ -4851,7 +4851,7 @@
 						{
 							"MontageMappings":
 							{
-								"Manny": "None"
+								"Manny": "/Script/Engine.AnimMontage'/Game/_Imports/Characters/Mannequins/Animations/Melee/GreatSwords/Combos/DualWielding/AM_Manny_GS_DW_SpecialAttack.AM_Manny_GS_DW_SpecialAttack'"
 							}
 						},
 						"Combo":

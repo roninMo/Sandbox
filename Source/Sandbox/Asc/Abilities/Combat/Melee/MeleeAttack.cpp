@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Sandbox/Asc/Abilities/Combat/MeleeAttack.h"
+#include "Sandbox/Asc/Abilities/Combat/Melee/MeleeAttack.h"
 
 #include "AbilitySystemGlobals.h"
 #include "Abilities/Tasks/AbilityTask_WaitInputRelease.h"
