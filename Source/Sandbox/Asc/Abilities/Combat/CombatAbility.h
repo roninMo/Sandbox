@@ -35,17 +35,8 @@ protected:
 	/** The equip slot of the armament */
 	UPROPERTY(Transient, BlueprintReadWrite) EEquipSlot EquipSlot;
 
-	
-	/**** Combat information ****/
-	/** Whether this combat ability is based on a combo */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bComboAbility = true;
-	
-	/** The combo attacks for this attack pattern */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat") F_ComboAttacks ComboAttacks;
-	
-	/** The attack information of the current swing */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat") F_ComboAttack CurrentAttack;
 
+	/**** Combat information ****/
 	/** The attack information (damages and any other attribute modifications) for the armament, */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat") TMap<FGameplayAttribute, float> AttackInfo;
 
@@ -55,27 +46,13 @@ protected:
 	/** The montage section of the current combo */
 	UPROPERTY(Transient, BlueprintReadWrite) FName MontageStartSection;
 
-	
-	/**** Current attack information ****/
-	/** The number of attacks for a specific attack pattern (Primary attack, Strong attack, etc.) This is fixed to the specific montage */
-	UPROPERTY(Transient, BlueprintReadWrite) int32 ComboCount = 0;
 
-	/** The current combo attack index */
-	UPROPERTY(Transient, BlueprintReadWrite) int32 ComboIndex = 0; // This value needs to be sent to the client
-	
-	/** Whether this is the final attack of the attack pattern */
-	UPROPERTY(Transient, BlueprintReadWrite) bool bIsFinalComboAttack = false;
-
-
-	/**** ****/
+	/**** Combat Test Information ****/
 	/** Whether to use the blueprint's defined combat information */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUseBPCombatInformation;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUseTestCombatInformation;
 
 	/** The combat calculations for a specific weapon */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") TMap<FGameplayAttribute, float> BP_DamageStats;
-
-	/** The attack information of the current swing */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") F_ComboAttack BP_AttackInformation;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") TMap<FGameplayAttribute, float> TestDamageStats;
 
 	
 public:
@@ -84,9 +61,9 @@ public:
 	/** Actually activate ability, do not call this directly */
 	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
 
-	/** Adds a gameplay effect for stamina cost based on the player's attack information from the current attack. If you want to add a custom stamina amount, that's alright, this is just a function to help with adding logic */
+	/** Adds a gameplay effect for stamina cost to the player */
 	UFUNCTION(BlueprintCallable, Category = "Ability|Combat")
-	virtual void AddStaminaCostEffect(float Stamina = 0.0);
+	virtual void AddStaminaCostEffect(float Stamina);
 
 	/* Epic's comment: Projects should initiate passives or do other "BeginPlay" type of logic here. */
 	virtual void OnAvatarSet(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec) override;
@@ -96,77 +73,131 @@ public:
 
 
 protected:
-	/** Retrieves the armament's combat information for this ability. Only updates if the player switches weapons or updates his stance */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual bool SetComboAndArmamentInformation();
+	/**
+	 * Retrieves the armament's information for this attack pattern. Subclass this for armament information specific to melee/ranged \n\n
+	 * 
+	 * If the stance is updated or the player equips another armament, it clear's the old information. Use OnArmamentUnequipped to handle custom logic
+	 *
+	 * @returns									True if the armament and it's information was successfully retrieved
+	 */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Init") bool SetArmamentInformation();
+	virtual bool SetArmamentInformation_Implementation();
 	
-	/** Retrieves all the necessary information for an attack. Call this during ActivateAbility to retrieve the attack information for the current attack */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual void InitCombatInformation();
+	/**
+	 * Retrieves all the necessary information for an attack. The combat information, montage logic, damage calculations, etc.
+	 * @remarks Just call this during ActivateAbility to retrieve the attack information for the current attack. Calculations for different abilities
+	 */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Init") void InitCombatInformation();
+	virtual void InitCombatInformation_Implementation();
 
-	/** Calculates the current attack information */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual void SetComboAttack();
-
-	/** Retrieves the attack montage from the armament based on different conditions */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual void SetAttackMontage(AArmament* Weapon);
+	/**
+	 * Retrieves the attack montage from the armament based on the attack pattern. Subclass this for different conditions.
+	 *
+	 * @param Weapon							The weapon we're retrieving the montages from
+	 */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Init") void SetAttackMontage(AArmament* Weapon);
+	virtual void SetAttackMontage_Implementation(AArmament* Weapon);
 	
-	/** Calculates the montage section for the current combo attack */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual void SetMontageStartSection(bool ChargeAttack = false);
+	/** Calculates the montage section for the current attack. Subclass this to adjust the montage section */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Init") void SetMontageStartSection(bool ChargeAttack = false);
+	virtual void SetMontageStartSection_Implementation(bool ChargeAttack = false);
 
-	/** Increments the combo index based on the combo attacks */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual void SetComboIndex();
-	
-	/** Retrieves the attributes (mainly attack damages) and calculates the damage using multiple different calculations for attribute / weapon scaling. */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual void CalculateAttributeModifications();
+	/**
+	 *  Retrieves the combat calculations from the armament, player stats, equipment, and calculates the attack information for the current attack.
+	 *  @remarks The default just retrieves the armament's base damage information, or the custom information on the ability for testing
+	 */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat") void CalculateAttributeModifications();
+	virtual void CalculateAttributeModifications_Implementation();
 
 
 protected:
-	/** Handles melee attack target data and creating an exec calc effect context to pass to damage calculations */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual void HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& TargetData, AArmament* OverlappedArmament, UAbilitySystem* TargetAsc);
+	/**
+	 * Handles melee attack target data and creating an exec calc effect context to pass to damage calculations
+	 *
+	 * @param TargetData						Target data from the overlap trace
+	 * @param OverlappedArmament				The armament used for this melee attack
+	 * @param TargetAsc							The ability system component of the target
+	 * @param DamageCalculation					The Exec Calc that handles damage calculations
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ability|Combat")
+	virtual void HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& TargetData, AArmament* OverlappedArmament, UAbilitySystem* TargetAsc, TSubclassOf<UGameplayEffect> DamageCalculation);
 
-	/** During the first frame of the character's attack, check if they've already attacked any characters and attacks if so */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual void CheckAndAttackIfAlreadyOverlappingAnything(AArmament* OverlappedArmament, TArray<AActor*>& AlreadyHitActors);
+	/**
+	 * Used during the first frame of the character's attack. Checks if they've already attacked any characters and attacks if that's the case
+	*
+	 * @param OverlappedArmament				The armament used for this melee attack
+	 * @param AlreadyHitActors					The armament's array of already hit actors
+	 * @param DamageCalculation					The Exec Calc that handles damage calculations
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ability|Combat")
+	virtual void CheckAndAttackIfAlreadyOverlappingAnything(AArmament* OverlappedArmament, TArray<AActor*>& AlreadyHitActors, TSubclassOf<UGameplayEffect> DamageCalculation);
 
 	
 //--------------------------------------------------------------------------------------//
 // Utility																				//
 //--------------------------------------------------------------------------------------//
 protected:
-	/** Checks if it's the final attack of this combo, and returns true if that's the case */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual bool DetermineIfItsTheFinalAttack(FName MontageSection, int32 Combos) const;
+	/**
+	 * Checks if this is an ability from the player's right hand weapon using the attack pattern
+	 * 
+	 * @returns true if the current ability is a right hand ability
+	 */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Utils") bool IsRightHandAbility() const;
+	virtual bool IsRightHandAbility_Implementation() const;
 	
-	/** Retrieves the number of combo attacks or montage sections. This is a safety function */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual int32 GetNumComboCount() const;
+	/**
+	 * Checks if this is an ability from the player's right hand weapon using the attack pattern
+	 *
+	 * @remarks Safe to call on CDO/Non instanced abilities
+	 * @returns true if the current ability is a right hand ability
+	 */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Utils") bool IsRightHandAbilityInput(const EInputAbilities AbilityInput) const;
+	virtual bool IsRightHandAbilityInput_Implementation(const EInputAbilities AbilityInput) const;
 
-	/** Retrieves the number of montage sections for the current montage */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual int32 GetNumMontageSections() const;
+	/**
+	 * Checks if the player has any stamina, and returns true if he doesn't have any more.
+	 *
+	 * @param AbilitySystemComponent			The player's ability system component 
+	 * @returns whether the player is out of stamina
+	 */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Utils") bool IsOutOfStamina(UAbilitySystemComponent* AbilitySystemComponent) const;
+	virtual bool IsOutOfStamina_Implementation(UAbilitySystemComponent* AbilitySystemComponent) const;
 
-	/** Returns true if the current ability is a right hand ability */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual bool IsRightHandAbility() const;
+	/**
+	 * Checks if this instance of the ability has any armament information, or if we should activate the ability to retrieve the information and handle the rest of the validation logic
+	 *
+	 * @returns whether there's a valid armament 
+	 */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Utils") bool ShouldActivateAbilityToRetrieveArmament() const;
+	virtual bool ShouldActivateAbilityToRetrieveArmament_Implementation() const;
+
+	/**
+	 * Uses the attack pattern to find the armament on the combat component, and check's whether the weapon is equipped.
+	 * 
+	 * @returns									True if the weapon for this ability is equipped.
+	 */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Utils") bool IsWeaponEquipped(EInputAbilities AbilityInput, UCombatComponent* CombatComponent) const;
+	virtual bool IsWeaponEquipped_Implementation(EInputAbilities AbilityInput, UCombatComponent* CombatComponent) const;
+
 	
-	/** Returns true if the current ability is a right hand ability. Use this for non instanced scenarios */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual bool IsRightHandAbilityInput(const EInputAbilities AbilityInput) const;
-
-	/** Returns whether the weapon for this ability is equipped. This is safe to check before we've retrieved the weapon, should be used during CanActivateAbility() */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual bool IsWeaponEquipped(EInputAbilities AbilityInput, UCombatComponent* CombatComponent) const;
-
-	/** Returns whether the player is out of stamina */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual bool IsOutOfStamina(UAbilitySystemComponent* AbilitySystemComponent) const;
-
-	/** Returns whether we should activate the ability for this instance to retrieve the current armament information */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual bool ShouldActivateAbilityToRetrieveArmament() const;
-
 	/** Sets the armament that's used during the ability, and the equip slot for reference to know when it's unequipped */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual void SetArmament(AArmament* NewArmament);
+	UFUNCTION(BlueprintNativeEvent, Category = "Ability|Combat|Utils") void SetArmament(AArmament* NewArmament);
+	virtual void SetArmament_Implementation(AArmament* NewArmament);
 	
 	/** Handles removing the reference to the player's armament on unequip */
 	UFUNCTION() virtual void OnUnequipArmament(FName ArmamentName, FGuid Id, EEquipSlot Slot);
 
 	/** Logic when the player unequipped their weapon used for combat calculations */
-	UFUNCTION(BlueprintImplementableEvent, Category = "Ability|Combat", DisplayName = "Unequipped Armament")
+	UFUNCTION(BlueprintImplementableEvent, Category = "Ability|Combat|Utils", DisplayName = "Unequipped Armament")
 	void BP_OnUnequipArmament(FName ArmamentName, FGuid Id, EEquipSlot Slot);
-	
-	/** Retrieves the combat component from the character */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat") virtual UCombatComponent* GetCombatComponent() const;
 
+	/**
+	 * Retrieves the combat component from the character using the current actor information
+	 * 
+	 * @returns									The player's combat component
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ability|Combat|Utils")
+	virtual UCombatComponent* GetCombatComponent() const;
 
 	
 };

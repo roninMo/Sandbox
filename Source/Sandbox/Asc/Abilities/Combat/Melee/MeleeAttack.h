@@ -3,10 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Sandbox/Asc/Abilities/Combat/CombatAbility.h"
+#include "MeleeCombatAbility.h"
 #include "MeleeAttack.generated.h"
 
-enum class EAttackFramesState : uint8;
 class UAbilityTask_ApplyRootMotionConstantForce;
 class UAbilityTask_WaitInputRelease;
 class UAbilityTask_PlayMontageAndWait;
@@ -18,7 +17,7 @@ class UAbilityTask_TargetOverlap;
  * 
  */
 UCLASS()
-class SANDBOX_API UMeleeAttack : public UCombatAbility
+class SANDBOX_API UMeleeAttack : public UMeleeCombatAbility
 {
 	GENERATED_BODY()
 
@@ -47,59 +46,6 @@ protected: // TODO: Either adjust the ability task limit, or create additional t
 	// UPROPERTY(BlueprintReadWrite) UAbilityTask_WaitGameplayTagState* AttackFramesHandle;
 	
 	
-	/**** Combat logic ****/
-	UPROPERTY(Transient, BlueprintReadWrite) TArray<AActor*> PrimaryHitActors;
-	UPROPERTY(Transient, BlueprintReadWrite) TArray<AActor*> SecondaryHitActors;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUseCrouchingAttacks = true;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUseRunningAttacks = true;
-	
-	/** Whether this attack is a crouching attack */
-	UPROPERTY(Transient, BlueprintReadWrite) bool bCrouchingAttack;
-	
-	/** Whether this attack is a running attack */
-	UPROPERTY(Transient, BlueprintReadWrite) bool bRunningAttack;
-
-	UPROPERTY(Transient, BlueprintReadWrite) F_ComboAttacks CrouchingAttackInformation;
-	UPROPERTY(Transient, BlueprintReadWrite) F_ComboAttacks RunningAttackInformation;
-
-	
-	/**** If we're dual wielding, we handle each weapon's attack frames independently ****/
-	UPROPERTY(Transient, BlueprintReadWrite) EAttackFramesState PrimaryAttackState;
-	UPROPERTY(Transient, BlueprintReadWrite) EAttackFramesState SecondaryAttackState;
-
-	
-	/**** Cached tags ****/
-	/** The stamina cost's gameplay effect tag */
-	UPROPERTY(Transient, BlueprintReadWrite) FGameplayTag StaminaCostEffectTag;
-	
-	/** When we should allow rotation movement during the attack */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag HitStunTag;
-	
-	/** When we should allow rotation movement during the attack */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AllowMovementTag;
-	
-	/** When we should actually trace for enemies during an attack animations */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AttackFramesTag;
-
-	/** The tag to notify the end of attack frames for a specific animation */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AttackFramesEndTag;
-	
-	/** The tag to notify the end of attack frames for a specific left hand animation */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag LeftHandAttackFramesEndTag;
-
-	/** The tag to notify the end of attack frames for a specific right hand animation */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag RightHandAttackFramesEndTag;
-
-	/** The tag to notify the begin of attack frames for a specific animation */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag AttackFramesBeginTag;
-
-	/** The tag to notify the begin of attack frames for a specific left hand animation */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag LeftHandAttackFramesBeginTag;
-
-	/** The tag to notify the begin of attack frames for a specific right hand animation */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGameplayTag RightHandAttackFramesBeginTag;
-
-	
 public:
 	UMeleeAttack();
 	
@@ -117,40 +63,28 @@ protected:
 	/** Input released event for multiplayer replication */
 	UFUNCTION() virtual void OnInputReleased(float TimeHeld);
 
-	/** Function to retrieve gameplay events for handling attack frames during the attack montage */
-	UFUNCTION(BlueprintCallable) virtual void OnAttackFrameEvent(FGameplayEventData EventData);
 
-	/** Begin tracing for targets during the attack frames. For attacks with multiple attack frames, this should either recreate the task or decide when overlap traces are valid */
-	UFUNCTION(BlueprintCallable) virtual void OnBeginAttackFrames(bool bRightHand);
+	/**
+	 * Handles begin tracing logic for targets for a specific weapon, and checks if we're already overlapping with any targets
+	 *
+	 * @remarks Blueprint functions need to add the melee overlap task right now, or subclass this function to activate the overlap logic (if it hasn't already been activated)
+	 *
+	 * @param bRightHand						Whether we should be tracing for the left or right hand armament
+	 */
+	virtual void OnBeginAttackFrames_Implementation(bool bRightHand) override;
 	
-	/** Event for when the attack frames of the current attack are done */
-	UFUNCTION(BlueprintCallable) virtual void OnEndAttackFrames(bool bRightHand);
+	/**
+	 * Handles end tracing for targets for a specific weapon
+	 *
+	 * @remarks Blueprint functions need to remove the melee overlap task right now, or subclass this function to end the task
+	 * 
+	 * @param bRightHand						Whether we should be tracing for the left or right hand armament
+	 */
+	virtual void OnEndAttackFrames_Implementation(bool bRightHand) override;
 
-	/** This is a delegate binding for attacks that's sent to this character during this task */
-	UFUNCTION(BlueprintCallable) virtual void OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& TargetData, AArmament* OverlappedArmament, UAbilitySystem* TargetAsc);
 	
 	/** This is a delegate binding for gameplay event information that's sent to this character during this task */
 	UFUNCTION(BlueprintCallable) virtual void OnEndOfMontage();
-
-protected:
-	/**** Combat functions ****/
-	/** Retrieves the armament's combat information for this ability. Only updates if the player switches weapons or updates his stance */
-	virtual bool SetComboAndArmamentInformation() override;
-	
-	/** Retrieves all the necessary information for an attack. Call this during ActivateAbility to retrieve the attack information for the current attack */
-	virtual void InitCombatInformation() override;
-
-	/** Increments the combo index based on the combo attacks */
-	virtual void SetComboIndex() override;
-	
-	/** Calculates the current attack information */
-	virtual void SetComboAttack() override;
-
-	/** Retrieves the attack montage from the armament based on different conditions */
-	virtual void SetAttackMontage(AArmament* Weapon) override;
-	
-	/** Calculates the montage section for the current combo attack */
-	virtual void SetMontageStartSection(bool ChargeAttack = false) override;
 
 	
 };

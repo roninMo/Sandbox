@@ -3,13 +3,13 @@
 
 #include "AbilitySystemPlayerState.h"
 
-#include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Asc/CombatAbilitySystem.h"
 #include "Sandbox/Asc/Attributes/MMOAttributeLogic.h"
 
 AAbilitySystemPlayerState::AAbilitySystemPlayerState(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	// Create ability system component, and set it to be explicitly replicated
-	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystem>(TEXT("AbilitySystemComponent"));
+	AbilitySystemComponent = CreateDefaultSubobject<UCombatAbilitySystem>(TEXT("AbilitySystemComponent"));
 	AbilitySystemComponent->SetIsReplicated(true);
 	
 	// Mixed mode means we only are replicated the GEs to ourself, not the GEs to simulated proxies. If another GDPlayerState (Hero) receives a GE,

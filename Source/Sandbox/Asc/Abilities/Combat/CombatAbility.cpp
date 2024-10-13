@@ -49,15 +49,11 @@ void UCombatAbility::OnAvatarSet(const FGameplayAbilityActorInfo* ActorInfo, con
 void UCombatAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
 {
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
-
-	// Abilities that need to be reset during activation
-	bIsFinalComboAttack = false;
 }
 
 
 void UCombatAbility::AddStaminaCostEffect(float Stamina)
 {
-	Stamina = Stamina == 0 ? CurrentAttack.StaminaCost : Stamina;
 	const FGameplayAbilitySpecHandle Handle = GetCurrentAbilitySpecHandle();
 	const FGameplayAbilityActorInfo* ActorInfo = GetCurrentActorInfo();
 	const FGameplayAbilityActivationInfo ActivationInfo = GetCurrentActivationInfo();
@@ -71,7 +67,7 @@ void UCombatAbility::AddStaminaCostEffect(float Stamina)
 		FGameplayModifierInfo StaminaDrain = FGameplayModifierInfo();
 		StaminaDrain.Attribute = UMMOAttributeSet::GetStaminaAttribute();
 		StaminaDrain.ModifierOp = EGameplayModOp::Additive;
-		StaminaDrain.ModifierMagnitude = FGameplayEffectModifierMagnitude(FScalableFloat(-CurrentAttack.StaminaCost));
+		StaminaDrain.ModifierMagnitude = FGameplayEffectModifierMagnitude(FScalableFloat(-Stamina));
 		StaminaCost->Modifiers.Add(StaminaDrain);
 		
 		// UAbilitySystemComponent* const AbilitySystemComponent = ActorInfo->AbilitySystemComponent.Get();
@@ -98,7 +94,7 @@ void UCombatAbility::EndAbility(const FGameplayAbilitySpecHandle Handle, const F
 
 
 #pragma region Initialization
-bool UCombatAbility::SetComboAndArmamentInformation()
+bool UCombatAbility::SetArmamentInformation_Implementation()
 {
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
@@ -131,11 +127,8 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 	if (EquippedArmament == Armament && CurrentStance == CombatComponent->GetCurrentStance() && EquipSlot == EquippedArmament->GetEquipSlot()) return true;
 	else
 	{
-		Armament = nullptr;
-		ComboAttacks = F_ComboAttacks();
-		CurrentAttack = F_ComboAttack();
-		ComboCount = 0;
 		SetCurrentMontage(nullptr);
+		Armament = nullptr;
 		EquipSlot = EEquipSlot::None;
 	}
 	
@@ -147,120 +140,38 @@ bool UCombatAbility::SetComboAndArmamentInformation()
 
 		// If there's no combat information for this attack, then either the information is missing or the ability was added at the wrong time
 		Armament = EquippedArmament;
-		ComboAttacks = Armament->GetComboAttacks(AttackPattern);
-		ComboCount = ComboAttacks.ComboAttacks.Num();
-		SetCurrentMontage(EquippedArmament->GetCombatMontage(AttackPattern));
 		EquipSlot = EquippedArmament->GetEquipSlot();
+		SetCurrentMontage(EquippedArmament->GetCombatMontage(AttackPattern));
 		return true;
 	}
 
-	ensure(!ComboAttacks.ComboAttacks.IsEmpty());
 	return false;
 }
 
 
-void UCombatAbility::InitCombatInformation()
+void UCombatAbility::InitCombatInformation_Implementation()
 {
-	UCombatComponent* CombatComponent = GetCombatComponent();
-	if (!CombatComponent)
-	{
-		ComboIndex = 0;
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while adjusting the combo index",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
-	}
-	
-	SetComboIndex();
-	SetComboAttack(); // Current attack and combo index
-	SetAttackMontage(Armament); // Current montage
 	SetMontageStartSection(); // montage start section (customization for different types of attacks
 	CalculateAttributeModifications(); // Damage and attribute calculations
+	SetAttackMontage(Armament); // Current montage
+
+	UE_LOGFMT(LogTemp, Log, "CombatAbility::InitCombatInformation()");
 }
 
-
-void UCombatAbility::SetComboIndex()
-{
-	UCombatComponent* CombatComponent = GetCombatComponent();
-	if (!CombatComponent)
-	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the combat component while adjusting the combo index",
-			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetName());
-		ComboIndex = 0;
-		return;
-	}
-
-	// Either have separate combo indexing for normal / strong attacks, or when transitioning from one to the other have that finish the combo. Having both combined would be interesting I just think it'd be tough to balance
-	ComboIndex = CombatComponent ? CombatComponent->GetComboIndex() : 0;
-	if (ComboIndex + 1 >= ComboAttacks.ComboAttacks.Num())
-	{
-
-		// We got here from another attack pattern's combo, adjust the index to 1 to prevent doing the initial attack twice
-		if (ComboIndex >= ComboAttacks.ComboAttacks.Num())
-		{
-			ComboIndex = 0;
-			CombatComponent->SetComboIndex(1);
-		}
-		else
-		{
-			CombatComponent->SetComboIndex(0);
-		}
-	}
-	else
-	{
-		CombatComponent->SetComboIndex(ComboIndex + 1);
-	}
-
-	// UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Combo Index: {3}, Combat Component's: {4}",
-	// 	UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), ComboIndex, CombatComponent->GetComboIndex());
-}
-
-
-void UCombatAbility::SetComboAttack()
-{
-	// Retrieve the current attack
-	if (ComboAttacks.ComboAttacks.IsValidIndex(ComboIndex))
-	{
-		CurrentAttack = ComboAttacks.ComboAttacks[ComboIndex];
-	}
-	else
-	{
-		CurrentAttack = ComboAttacks.ComboAttacks.Num() > 0 ? ComboAttacks.ComboAttacks[0] : F_ComboAttack();
-	}
-
-	// custom attack information for easily handling different combat logic
-	if (bUseBPCombatInformation)
-	{
-		CurrentAttack = BP_AttackInformation;
-	}
-}
-
-
-void UCombatAbility::SetAttackMontage(AArmament* Weapon)
+void UCombatAbility::SetAttackMontage_Implementation(AArmament* Weapon)
 {
 	if (!Weapon) return;
 	SetCurrentMontage(Weapon->GetCombatMontage(AttackPattern));
 }
 
 
-void UCombatAbility::SetMontageStartSection(bool ChargeAttack)
+void UCombatAbility::SetMontageStartSection_Implementation(bool ChargeAttack)
 {
 	MontageStartSection = DefaultMontageSection;
-	
-	// Default attacks
-	if (bComboAbility)
-	{
-		if (ComboIndex < Montage_ComboSections.Num()) MontageStartSection = Montage_ComboSections[ComboIndex];
-		else MontageStartSection = Montage_ComboSections[0];
-	}
-
-	// Charged attacks
-	if (ChargeAttack)
-	{
-		MontageStartSection = FName(MontageStartSection.ToString() + Montage_Section_Charge);
-	}
 }
 
 
-void UCombatAbility::CalculateAttributeModifications()
+void UCombatAbility::CalculateAttributeModifications_Implementation()
 {
 	// Don't try to add attribute calculations if the weapon isn't valid 
 	if (!Armament) return;
@@ -270,63 +181,7 @@ void UCombatAbility::CalculateAttributeModifications()
 	
 	// Weapon damage and attribute calculations
 	const F_ArmamentInformation& ArmamentInformation = Armament->GetArmamentInformation();
-	// const TMap<FGameplayAttribute, float>& DamageMultipliers = CurrentAttack.AttackInformation.BaseDamagesOrMultipliers;
-	if (ArmamentInformation.DamageCalculations == EDamageInformationSource::Armament)
-	{
-		// Armament/Skill based -> retrieve the armament's base damage, add damage scaling, and the current attack multiplier
-		const TMap<FGameplayAttribute, float>& WeaponStats = bUseBPCombatInformation ? BP_DamageStats : ArmamentInformation.BaseDamageStats;
-		for (auto &[Attribute, Value] : WeaponStats)
-		{
-			// Damages
-			AttackInfo.Add(UMMOAttributeSet::GetDamage_PoiseAttribute(), CurrentAttack.PoiseDamage);
-			
-			if (Attribute == UMMOAttributeSet::GetDamage_StandardAttribute() ||
-				Attribute == UMMOAttributeSet::GetDamage_SlashAttribute() ||
-				Attribute == UMMOAttributeSet::GetDamage_PierceAttribute() ||
-				Attribute == UMMOAttributeSet::GetDamage_StrikeAttribute())
-			{
-				float EquipmentMultiplier = 1;
-				float AttackMotionValue = CurrentAttack.MotionValue * 0.01;
-				AttackInfo.Add(Attribute, (Value * EquipmentMultiplier) * AttackMotionValue);
-			}
-
-			if (Attribute == UMMOAttributeSet::GetDamage_MagicAttribute() ||
-				Attribute == UMMOAttributeSet::GetDamage_IceAttribute() ||
-				Attribute == UMMOAttributeSet::GetDamage_FireAttribute() ||
-				Attribute == UMMOAttributeSet::GetDamage_HolyAttribute() ||
-				Attribute == UMMOAttributeSet::GetDamage_LightningAttribute())
-			{
-				float EquipmentMultiplier = 1;
-				float AttackMotionValue = CurrentAttack.MotionValue * 0.01;
-				AttackInfo.Add(Attribute, (Value * EquipmentMultiplier) * AttackMotionValue);
-			}
-			
-			// Statuses
-			if (Attribute == UMMOAttributeSet::GetCurseAttribute() ||
-				Attribute == UMMOAttributeSet::GetBleedAttribute() ||
-				Attribute == UMMOAttributeSet::GetFrostbiteAttribute() ||
-				Attribute == UMMOAttributeSet::GetPoisonAttribute() ||
-				Attribute == UMMOAttributeSet::GetMadnessAttribute() ||
-				Attribute == UMMOAttributeSet::GetSleepAttribute())
-			{
-				float EquipmentMultiplier = 1;
-				float AttackMotionValue = CurrentAttack.StatusMotionValue * 0.01;
-				AttackInfo.Add(Attribute, (Value * EquipmentMultiplier) * AttackMotionValue);
-			}
-
-			// Add any custom attribute information here
-			
-			
-		}
-	}
-	else if (ArmamentInformation.DamageCalculations == EDamageInformationSource::Combo)
-	{
-		// Combo based -> retrieve the damage from the combo attack, and add damage scaling from attributes
-		AttackInfo.Add(UMMOAttributeSet::GetDamage_StandardAttribute(), CurrentAttack.MotionValue);
-	}
-
-	// TODO: Add a function from the combat component that handles attribute adjustments based on the weapon stats, current attack, and armament stance
-	
+	AttackInfo = bUseTestCombatInformation ? TestDamageStats : ArmamentInformation.BaseDamageStats;
 }
 #pragma endregion 
 
@@ -334,7 +189,7 @@ void UCombatAbility::CalculateAttributeModifications()
 
 
 #pragma region Combat functions
-void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& TargetData, AArmament* OverlappedArmament, UAbilitySystem* TargetAsc)
+void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& TargetData, AArmament* OverlappedArmament, UAbilitySystem* TargetAsc, TSubclassOf<UGameplayEffect> DamageCalculation)
 {
 
 	const FGameplayAbilityActivationInfo ActivationInfo = GetCurrentActivationInfo();
@@ -377,21 +232,6 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 		return;
 	}
 	
-	if (!Armament || !ComboAttacks.DamageEffectClass)
-	{
-		if (!Armament)
-		{
-			UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2}'s is missing it's armament!",
-				*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
-		}
-		else
-		{
-			UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2}'s {3} does not have a execution calculation!",
-				*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetNameSafe(Armament));
-		}
-		return;
-	}
-
 	AActor* TargetCharacter = TargetAsc->GetAvatarActor();
 	if (!TargetCharacter)
 	{
@@ -400,15 +240,25 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 		return;
 	}
 	
-	// UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Landed an attack on {3}",
-	// 	*UEnum::GetValueAsString(GetAvatarActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetAvatarActorFromActorInfo()), *GetNameSafe(TargetCharacter));
+	if (!DamageCalculation)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2}'s {3} does not have a execution calculation for the current attack!",
+			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()), *GetNameSafe(Armament));
+	}
+	
+	if (!Armament)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2}'s is missing it's armament!",
+			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
+		return;
+	}
 
 	// Prep and send an exec calc to the target
 	const FGameplayEffectSpecHandle ExecCalcHandle = PrepExecCalcForTarget(
 		GetCurrentAbilitySpecHandle(),
 		GetCurrentActorInfo(),
 		GetCurrentActivationInfo(),
-		ComboAttacks.DamageEffectClass
+		DamageCalculation
 	);
 	
 	if (!ExecCalcHandle.IsValid())
@@ -445,7 +295,6 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 		if (AttackInfo.Contains(Attributes->GetCurseAttribute())) Attributes->SetCurse(AttackInfo[Attributes->GetCurseAttribute()]);
 		if (AttackInfo.Contains(Attributes->GetMadnessAttribute())) Attributes->SetMadness(AttackInfo[Attributes->GetMadnessAttribute()]);
 		if (AttackInfo.Contains(Attributes->GetSleepAttribute())) Attributes->SetSleep(AttackInfo[Attributes->GetSleepAttribute()]);
-
 	}
 	
 	// Create the execution calculation and add any additional information to the handle
@@ -454,22 +303,12 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 	// Add the weapon to the effect context
 	FGameplayEffectContextHandle EffectContext = ExecCalc->GetContext();
 	EffectContext.AddSourceObject(OverlappedArmament);
-
 	
-	// If we want to handle hit reacts here to prevent any problems with montages, here is the place we should handle it
-	// const float CalculatedDamage = GetCalculatedDamage();
-	// FHitResult Impact = UAbilitySystemBlueprintLibrary::GetHitResultFromTargetData(TargetData, 0);
-	// Impact.ImpactPoint = Armament->GetActorLocation();
-	// Impact.ImpactNormal = Impact.ImpactPoint.GetSafeNormal();
-	// const EHitReact HitReactDirection = UCharacterBlueprintLibrary::GetHitReactDirection(TargetCharacter, TargetCharacter->GetActorLocation(), Impact.ImpactPoint);
-
-	// TODO: Some of this was just to learn some things about how calculations are handled and aren't necessary 
+	// TODO: Add custom context information
 	// ContextHandle.AddHitResult(Impact);
 	// UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(ExecCalcHandle, FGameplayTag::RequestGameplayTag(Tag_Data_IncomingDamage_Physical), CalculatedDamage);
 	// USanboxAscLibrary::SetPoiseDamage(ContextHandle, AttackInformation.PoiseDamage);
-	// USanboxAscLibrary::SetKnockbackType(ContextHandle, AttackInformation.RecoilEffect);
 	// USanboxAscLibrary::SetHitReactDirection(ContextHandle, HitReactDirection);
-	// USanboxAscLibrary::SetKnockbackForce(ContextHandle, FVector(13.0f)); // TODO: add combat calculations for knock back amounts for different attacks?
 
 	
 	// Retrieve the gameplay effect attributes, and additional information to the specification
@@ -486,7 +325,7 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 }
 
 
-void UCombatAbility::CheckAndAttackIfAlreadyOverlappingAnything(AArmament* OverlappedArmament, TArray<AActor*>& AlreadyHitActors)
+void UCombatAbility::CheckAndAttackIfAlreadyOverlappingAnything(AArmament* OverlappedArmament, TArray<AActor*>& AlreadyHitActors, TSubclassOf<UGameplayEffect> DamageCalculation)
 {
 	if (!OverlappedArmament)
 	{
@@ -511,15 +350,22 @@ void UCombatAbility::CheckAndAttackIfAlreadyOverlappingAnything(AArmament* Overl
 		if (!AlreadyHitActors.Contains(TargetCharacter) && TargetCharacter->GetAbilitySystemComponent())
 		{
 			FGameplayAbilityTargetDataHandle TargetData = FGameplayAbilityTargetDataHandle();
-			FGameplayAbilityTargetData_SingleTargetHit* Data = new FGameplayAbilityTargetData_SingleTargetHit();
-			Data->HitResult = FHitResult(TargetActor, nullptr, TargetActor->GetActorLocation(), TargetActor->GetActorLocation().GetSafeNormal());
-				
-			TArray<TWeakObjectPtr<AActor>> Targets;
-			Targets.Add(TargetActor);
-			Data->SetActors(Targets);
-			TargetData.Add(Data);
+			FGameplayAbilityTargetData_ActorArray* Data = new FGameplayAbilityTargetData_ActorArray();
+			
+            FGameplayAbilityTargetingLocationInfo LocationInfo;
+            LocationInfo.LiteralTransform.SetLocation(TargetActor->GetActorLocation());
+            LocationInfo.LocationType = EGameplayAbilityTargetingLocationType::LiteralTransform;
+            LocationInfo.SourceAbility = this;
+            LocationInfo.SourceActor = OverlappedArmament;
+            Data->SourceLocation = LocationInfo;
+            
+            TArray<TWeakObjectPtr<AActor>> TargetInformation;
+            TargetInformation.Add(OverlappedArmament); // Add the armament that we attacked with
+            TargetInformation.Add(TargetActor); // Add the target character
+            Data->SetActors(TargetInformation);
+            TargetData.Add(Data);
 	
-			HandleMeleeAttack(TargetData, OverlappedArmament, TargetCharacter->GetAbilitySystem<UAbilitySystem>());
+			HandleMeleeAttack(TargetData, OverlappedArmament, TargetCharacter->GetAbilitySystem<UAbilitySystem>(), DamageCalculation);
 			AlreadyHitActors.Add(TargetCharacter);
 		}
 	}
@@ -531,41 +377,46 @@ void UCombatAbility::CheckAndAttackIfAlreadyOverlappingAnything(AArmament* Overl
 
 
 #pragma region Utility
-bool UCombatAbility::DetermineIfItsTheFinalAttack(FName MontageSection, int32 Combos) const
-{
-	if (!bComboAbility) return true;
-	return ComboAttacks.ComboAttacks.Num() > 1 && ComboIndex + 1 == ComboAttacks.ComboAttacks.Num() ? true : false;
-}
-
-
-int32 UCombatAbility::GetNumComboCount() const
-{
-	const int32 MontageSections = GetNumMontageSections();
-	return ComboAttacks.ComboAttacks.Num() < MontageSections ? ComboAttacks.ComboAttacks.Num() : MontageSections;
-}
-
-
-int32 UCombatAbility::GetNumMontageSections() const
-{
-	if (GetCurrentMontage() == nullptr) return 1;
-	return GetCurrentMontage()->CompositeSections.Num();
-}
-
-
-bool UCombatAbility::IsRightHandAbility() const
+bool UCombatAbility::IsRightHandAbility_Implementation() const
 {
 	FGameplayAbilitySpec* Spec = GetCurrentAbilitySpec();
 	return IsRightHandAbilityInput(static_cast<EInputAbilities>(Spec->InputID));
 }
 
 
-bool UCombatAbility::IsRightHandAbilityInput(const EInputAbilities AbilityInput) const
+bool UCombatAbility::IsRightHandAbilityInput_Implementation(const EInputAbilities AbilityInput) const
 {
 	return AbilityInput != EInputAbilities::SecondaryAttack;
 }
 
 
-bool UCombatAbility::IsWeaponEquipped(const EInputAbilities AbilityInput, UCombatComponent* CombatComponent) const
+bool UCombatAbility::IsOutOfStamina_Implementation(UAbilitySystemComponent* AbilitySystemComponent) const
+{
+	if (!AbilitySystemComponent) return false;
+	
+	// If we don't have any stamina don't attack
+	const UMMOAttributeSet* Attributes = Cast<UMMOAttributeSet>(AbilitySystemComponent->GetAttributeSet(UMMOAttributeSet::StaticClass()));
+	if (Attributes && Attributes->GetStamina() == 0)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+
+bool UCombatAbility::ShouldActivateAbilityToRetrieveArmament_Implementation() const
+{
+	if (Armament == nullptr)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+
+bool UCombatAbility::IsWeaponEquipped_Implementation(const EInputAbilities AbilityInput, UCombatComponent* CombatComponent) const
 {
 	if (!CombatComponent)
 	{
@@ -590,32 +441,8 @@ bool UCombatAbility::IsWeaponEquipped(const EInputAbilities AbilityInput, UComba
 	return bCanActivateAbility;
 }
 
-bool UCombatAbility::IsOutOfStamina(UAbilitySystemComponent* AbilitySystemComponent) const
-{
-	if (!AbilitySystemComponent) return false;
-	
-	// If we don't have any stamina don't attack
-	const UMMOAttributeSet* Attributes = Cast<UMMOAttributeSet>(AbilitySystemComponent->GetAttributeSet(UMMOAttributeSet::StaticClass()));
-	if (Attributes && Attributes->GetStamina() == 0)
-	{
-		return true;
-	}
 
-	return false;
-}
-
-bool UCombatAbility::ShouldActivateAbilityToRetrieveArmament() const
-{
-	if (AttackPattern == EInputAbilities::None)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-
-void UCombatAbility::SetArmament(AArmament* NewArmament)
+void UCombatAbility::SetArmament_Implementation(AArmament* NewArmament)
 {
 	Armament = NewArmament;
 	EquipSlot = Armament ? Armament->GetEquipSlot() : EEquipSlot::None;
@@ -628,7 +455,6 @@ void UCombatAbility::OnUnequipArmament(FName ArmamentName, FGuid Id, EEquipSlot 
 	{
 		Armament = nullptr;
 		EquipSlot = EEquipSlot::None;
-		AttackPattern = EInputAbilities::None;
 	}
 	
 	BP_OnUnequipArmament(ArmamentName, Id, Slot);
@@ -648,4 +474,3 @@ UCombatComponent* UCombatAbility::GetCombatComponent() const
 	return Character->GetCombatComponent();
 }
 #pragma endregion 
-
