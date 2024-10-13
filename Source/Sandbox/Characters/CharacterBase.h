@@ -244,7 +244,6 @@
 	Weapons
 		- Handles construction of weapon
 		- Intuitive equipping and allocation of abilities and saved weapon information
-		- Each weapon should have their own logic for constructing and destroying weapons 
 		
 
 	Player Abilities
@@ -271,6 +270,12 @@
 	Attributes should be specific to game, and then the saved information
 		- Npc's retrieve saved information from databases for easy creation and reference
 		- Players retrieve references to the base attributes, and then the player's saved attributes for that game
+
+
+
+		- Add multiple different combat abilities and combo attacks
+		- Add character's with different attacks and learn how to handle combat, respawning, etc.
+		- Create a way of quickly creating logic and scenarios for combat instead of actually building characters. Handle this early so it's easy to build upon and add combat
 
 
 */
