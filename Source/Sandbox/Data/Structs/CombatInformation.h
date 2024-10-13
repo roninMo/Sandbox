@@ -21,7 +21,7 @@ enum class EInputAbilities : uint8;
 #define Montage_ComboSections TArray<FName> {FName("1"), FName("2"), FName("3"), FName("4"), FName("5"), FName("6"), FName("7"), FName("8"), FName("9"), FName("10"), FName("1")}
 #define Montage_Section_Charge FString("_C")
 #define Montage_Section_CrouchAttack FName("RunningAttack")
-#define Montage_Section_RunningAttack FName("CrouchAttack")
+#define Montage_Section_RunningAttack FName("CrouchingAttack")
 
 // Montages
 #define Montage_Equip FName("Equip")

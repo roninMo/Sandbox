@@ -154,8 +154,6 @@ void UCombatAbility::InitCombatInformation_Implementation()
 	SetMontageStartSection(); // montage start section (customization for different types of attacks
 	CalculateAttributeModifications(); // Damage and attribute calculations
 	SetAttackMontage(Armament); // Current montage
-
-	UE_LOGFMT(LogTemp, Log, "CombatAbility::InitCombatInformation()");
 }
 
 void UCombatAbility::SetAttackMontage_Implementation(AArmament* Weapon)

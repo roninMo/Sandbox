@@ -152,8 +152,12 @@ void UMeleeCombatAbility::InitCombatInformation_Implementation()
 	SetAttackMontage(Armament); // Current montage
 	SetMontageStartSection(); // montage start section (customization for different types of attacks
 	CalculateAttributeModifications(); // Damage and attribute calculations
-	
-	UE_LOGFMT(LogTemp, Log, "MeleeCombatAbility::InitCombatInformation()");
+
+	UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} {3}::{4}{5}, ComboIndex: {6}, Montage: {7}({8})",
+		UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()),
+		bRunningAttack ? FString("(RunningAttack)") : bCrouchingAttack ? FString("(CrouchAttack)") : FString(""),
+		*GetNameSafe(Armament), *UEnum::GetValueAsString(AttackPattern), ComboIndex, *GetNameSafe(GetCurrentMontage()), MontageStartSection
+	);
 }
 
 
@@ -170,7 +174,7 @@ void UMeleeCombatAbility::SetComboIndex_Implementation()
 
 	// Either have separate combo indexing for normal / strong attacks, or when transitioning from one to the other have that finish the combo. Having both combined would be interesting I just think it'd be tough to balance
 	ComboIndex = CombatComponent ? CombatComponent->GetComboIndex() : 0;
-	const TArray<F_ComboAttack>& Attacks = bRunningAttack ? RunningAttackInformation.ComboAttacks : CrouchingAttackInformation.ComboAttacks; 
+	const TArray<F_ComboAttack>& Attacks = bRunningAttack ? RunningAttackInformation.ComboAttacks : bCrouchingAttack ? CrouchingAttackInformation.ComboAttacks : ComboAttacks.ComboAttacks;
 	if (ComboIndex + 1 >= Attacks.Num())
 	{
 
@@ -201,13 +205,14 @@ void UMeleeCombatAbility::SetComboAttack_Implementation()
 	PrimaryHitActors.Empty();
 	
 	// Retrieve the current attack
-	if (ComboAttacks.ComboAttacks.IsValidIndex(ComboIndex))
+	const TArray<F_ComboAttack>& Attacks = bRunningAttack ? RunningAttackInformation.ComboAttacks : bCrouchingAttack ? CrouchingAttackInformation.ComboAttacks : ComboAttacks.ComboAttacks;
+	if (Attacks.IsValidIndex(ComboIndex))
 	{
-		CurrentAttack = ComboAttacks.ComboAttacks[ComboIndex];
+		CurrentAttack = Attacks[ComboIndex];
 	}
 	else
 	{
-		CurrentAttack = ComboAttacks.ComboAttacks.Num() > 0 ? ComboAttacks.ComboAttacks[0] : F_ComboAttack();
+		CurrentAttack = Attacks.Num() > 0 ? Attacks[0] : F_ComboAttack();
 	}
 	
 	// Retrieve the current attack
@@ -278,12 +283,14 @@ void UMeleeCombatAbility::SetMontageStartSection_Implementation(bool ChargeAttac
 		MontageStartSection = Montage_Section_RunningAttack;
 		return;
 	}
-	else if (bCrouchingAttack)
+	
+	if (bCrouchingAttack)
 	{
 		MontageStartSection = Montage_Section_CrouchAttack;
 		return;
 	}
-	else if (bComboAbility)
+	
+	if (bComboAbility)
 	{
 		if (ComboIndex < Montage_ComboSections.Num()) MontageStartSection = Montage_ComboSections[ComboIndex];
 		else MontageStartSection = Montage_ComboSections[0];
@@ -609,7 +616,7 @@ bool UMeleeCombatAbility::IsValidForCrouchAttack_Implementation() const
 	UAdvancedMovementComponent* MovementComponent = Character ? Character->GetMovementComp<UAdvancedMovementComponent>() : nullptr;
 	
 	// Check if it's a crouching attack
-	return MovementComponent && MovementComponent->IsCrouching() && bUseCrouchingAttacks;
+	return MovementComponent && MovementComponent->IsCrouching();
 }
 
 
@@ -622,9 +629,17 @@ bool UMeleeCombatAbility::IsValidForRunningAttack_Implementation() const
 
 	ACharacterBase* Character = Cast<ACharacterBase>(GetAvatarActorFromActorInfo());
 	UAdvancedMovementComponent* MovementComponent = Character ? Character->GetMovementComp<UAdvancedMovementComponent>() : nullptr;
+	if (!MovementComponent)
+	{
+		return false;
+	}
+
+	float MoveSpeed = MovementComponent->GetLastUpdateVelocity().Length();
+	float SprintSpeed = MovementComponent->GetMaxWalkSpeed() * MovementComponent->SprintSpeedMultiplier;
+	float SprintAttackSpeed = FMath::Clamp(MoveSpeed * MovementComponent->SprintSpeedMultiplier * 0.64, MovementComponent->GetMaxWalkSpeed(), SprintSpeed);
 	
 	// Check if it's a running attack
-	return MovementComponent->IsWalking() && MovementComponent->GetLastUpdateVelocity().Length() >= MovementComponent->GetMaxWalkSpeed() * MovementComponent->SprintSpeedMultiplier;
+	return MovementComponent->IsWalking() && MovementComponent->GetLastUpdateVelocity().Length() >= SprintAttackSpeed;
 }
 
 
