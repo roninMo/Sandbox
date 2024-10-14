@@ -521,10 +521,14 @@ UTargetLockSpringArm* ACharacterCameraLogic::GetCameraArm() const
 }
 
 
-FVector ACharacterCameraLogic::GetCameraLocation()
+FVector ACharacterCameraLogic::GetCameraLocation() const
 {
-	if (FollowCamera) return FollowCamera->GetComponentLocation();
-	return GetActorLocation();
+	if (!FollowCamera)
+	{
+		return Super::GetCameraLocation();
+	}
+	
+	return FollowCamera->GetComponentLocation();
 }
 
 
@@ -599,7 +603,6 @@ FRotator ACharacterCameraLogic::GetBaseAimRotation() const
 	
 	return Super::GetBaseAimRotation();
 }
-
 
 TArray<AActor*> ACharacterCameraLogic::GetTargetLockCharacters() const
 {

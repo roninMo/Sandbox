@@ -4,8 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Sandbox/Characters/CharacterBase.h"
-#include "Sandbox/Data/Structs/AISenseInformation.h"
 #include "Sandbox/Data/Structs/NpcInformation.h"
+// #include "Sandbox/Data/Structs/AISenseInformation.h" // Included in Npc Information
+// #include "Sandbox/Data/Structs/InventoryInformation.h" // Included in Npc Information
 #include "Npc.generated.h"
 
 
@@ -26,16 +27,19 @@ class SANDBOX_API ANpc : public ACharacterBase
 protected:
 	UPROPERTY(BlueprintReadWrite) 
 	TObjectPtr<AAIControllerBase> AIController;
+
 	
 	/**** The stats and equipment of the npc ****/
 	/** The information specific to an npc character */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment") F_NpcInformation CharacterInformation;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment") FName Id; // The id of this npc character
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment") UDataTable* NPCInformationTable; // The id of this npc character
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment") UDataTable* NPCInformationTable;
 
+	
 	/**** Movement values ****/
 	/** Helps with avoiding adjusting values with gameplay effects for different movement tasks */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|AI") float MoveSpeed;
+
 	
 	/**** Other ****/
 	/** Debug character information */
@@ -43,9 +47,15 @@ protected:
 
 	
 public:
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	ANpc(const FObjectInitializer& ObjectInitializer);
 
+	
 
+	
+//----------------------------------------------------------------------//
+// Initialization functions and components								//
+//----------------------------------------------------------------------//
 protected:
 	/** Called when play begins for this actor. */
 	virtual void BeginPlay() override;
@@ -55,7 +65,10 @@ protected:
 	 * @param NewController The controller possessing this pawn
 	 */
 	virtual void PossessedBy(AController* NewController) override;
-	
+
+	/** PlayerState Replication Notification Callback */ // Only use on ai character's during custom games (tdm, or anything where we need to keep track of a player information)
+	// virtual void OnRep_PlayerState() override;
+
 	/**
 	 * Initialized the Abilities' ActorInfo - the structure that holds information about who we are acting on and who controls us. \n\n
 	 * 
@@ -69,6 +82,8 @@ protected:
 	 * @param InAvatarActor			Is what physical actor in the world we are acting on. Usually a Pawn but it could be a Tower, Building, Turret, etc, may be the same as Owner
 	 */
 	virtual void OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor) override;
+
+
 
 	
 //----------------------------------------------------------------------------------------------------------------------//
@@ -92,6 +107,18 @@ protected:
 	
 	/** The overlap function for entering the periphery radius */
 	UFUNCTION() virtual void PeripheryExitRadius(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+
+
+	
+//-------------------------------------------------------------------------------------//
+// Peripheries																		   //
+//-------------------------------------------------------------------------------------//
+protected:
+	/** This calculates whether an ai character has sensed this player, and uses the default logic with an offset for accurate traces  */
+	virtual UAISense_Sight::EVisibilityResult CanBeSeenFrom(const FCanBeSeenFromContext& Context, FVector& OutSeenLocation, int32& OutNumberOfLoSChecksPerformed, int32& OutNumberOfAsyncLosCheckRequested, float& OutSightStrength, int32* UserData, const FOnPendingVisibilityQueryProcessedDelegate* Delegate) override;
+
+	
 
 	
 //-------------------------------------------------------------------------------------//

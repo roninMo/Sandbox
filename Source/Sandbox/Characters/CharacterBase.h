@@ -281,6 +281,7 @@
 */
 
 
+enum class EHitStun : uint8;
 enum class EHitDirection : uint8;
 enum class EArmorSlot : uint8;
 enum class ECharacterSkeletonMapping : uint8;
@@ -496,10 +497,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Combat", DisplayName = "Get Combat Component")
 	virtual UCombatComponent* GetCombatComponent() const;
 
-	/** Returns the hit react direction based on the location of the player and the weapon's impact location */
-	UFUNCTION(BlueprintCallable, Category = "Combat")
-	virtual EHitDirection GetHitReactDirection(AActor* Actor, const FVector& ActorLocation, const FVector& ImpactLocation) const;
-
 	
 //----------------------------------------------------------------------------------//
 // Inventory																		//
@@ -563,7 +560,9 @@ public:
 //-------------------------------------------------------------------------------------//
 // Utility																			   //
 //-------------------------------------------------------------------------------------//
-protected:
+public:
+	/** Returns player's camera location */
+	UFUNCTION(BlueprintCallable, Category = "Camera|Utilities") virtual FVector GetCameraLocation() const;
 	
 	
 };

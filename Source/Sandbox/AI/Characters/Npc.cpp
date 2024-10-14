@@ -6,7 +6,17 @@
 #include "Sandbox/AI/Controllers/AIControllerBase.h"
 #include "Components/SphereComponent.h"
 #include "Logging/StructuredLog.h"
+#include "Net/UnrealNetwork.h"
+#include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
+#include "Sandbox/Characters/Components/AnimInstance/AnimInstanceBase.h"
 #include "Sandbox/Characters/Components/Inventory/InventoryComponent.h"
+
+
+void ANpc::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+}
 
 
 ANpc::ANpc(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -31,67 +41,52 @@ ANpc::ANpc(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitialize
 
 
 #pragma region Character Initialization
+void ANpc::BeginPlay()
+{
+	Super::BeginPlay();
+}
+
+
 void ANpc::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
-	// InitCharacterGlobals(CharacterGlobals);
-	// InitCharacterComponents(true);	
-	// InitAbilitySystem(true);
-	// InitCharacterInformation();
-	// BP_InitCharacterInformation();
+
+	
+	AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(NewController);
+	if (AbilitySystemComponent)
+	{
+		AbilitySystemComponent->InitAbilityActorInfo(NewController, this);
+		OnInitAbilityActorInfo(NewController, this);
+	}
 }
 
 
 void ANpc::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 {
-	Super::OnInitAbilityActorInfo(InOwnerActor, InAvatarActor);
+	// Super::OnInitAbilityActorInfo(InOwnerActor, InAvatarActor);
 	
 	AIController = AIController ? AIController : GetController<AAIControllerBase>();
-	
-	// SetCharacterMontages();
-	// if (BaseAnimInstance) BaseAnimInstance->GetCharacterInformation();
-	
-	// GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	// GetCharacterMovement()->GravityScale = PreservedGravity;
+
+	SetCharacterMontages();
 
 	// Add the character information
 	SetNpcInformation(GetNPCCharacterInformationFromTable(Id));
 	
 	// Load the inventory items
-	for (const FS_Item ItemInformation : CharacterInformation.InventoryItems)
+	if (Inventory)
 	{
-		AddSavedItemToInventory(ItemInformation);
+		for (const FS_Item ItemInformation : CharacterInformation.InventoryItems)
+		{
+			AddSavedItemToInventory(ItemInformation);
+		}
+	
+		Inventory->SetPlayerId();
 	}
 	
-	// Update the npc stats
-	// BaseAbilitySystem->SetCharacterAbilitiesAndPassiveEffects(CharacterAbilities, CharacterInformation.Statuses);
-	// for (const TSubclassOf<UGameplayEffect> Effect : InitialEffectsState) ApplyEffectToSelf(Effect);
-	// if (CharacterInformation.PrimaryAttributes) ApplyEffectToSelf(CharacterInformation.PrimaryAttributes);
-	// if (SecondaryAttributes) ApplyEffectToSelf(SecondaryAttributes);
-	//
-	// if (BaseAttributeSet) MoveSpeed = BaseAttributeSet->GetMoveSpeed();
-
-	// Init the periphery
-	if (PeripheryRadius)
-	{
-		PeripheryRadius->OnComponentBeginOverlap.AddDynamic(this, &ANpc::PeripheryEnterRadius);
-		PeripheryRadius->OnComponentEndOverlap.AddDynamic(this, &ANpc::PeripheryExitRadius);
-		PeripheryRadius->SetGenerateOverlapEvents(true);
-		PeripheryRadius->SetCollisionObjectType(ECC_GameTraceChannel1);
-		PeripheryRadius->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-		PeripheryRadius->SetCollisionResponseToAllChannels(ECR_Ignore);
-		PeripheryRadius->SetCollisionResponseToChannel(ECC_Pawn, ECollisionResponse::ECR_Overlap);
-	}
 }
 #pragma endregion
 
 
-
-
-void ANpc::BeginPlay()
-{
-	Super::BeginPlay();
-}
 
 
 
@@ -103,7 +98,6 @@ void ANpc::PeripheryEnterRadius(UPrimitiveComponent* OverlappedComponent, AActor
 	if (!Character || this == Character) return;
 	
 	CharactersInPeriphery.AddUnique(Character);
-
 }
 
 
@@ -113,6 +107,15 @@ void ANpc::PeripheryExitRadius(UPrimitiveComponent* OverlappedComponent, AActor*
 	if (!Character || this == Character) return;
 
 	CharactersInPeriphery.Remove(Character);
+}
+
+UAISense_Sight::EVisibilityResult ANpc::CanBeSeenFrom(const FCanBeSeenFromContext& Context, FVector& OutSeenLocation,
+	int32& OutNumberOfLoSChecksPerformed, int32& OutNumberOfAsyncLosCheckRequested, float& OutSightStrength,
+	int32* UserData, const FOnPendingVisibilityQueryProcessedDelegate* Delegate)
+{
+	return Super::CanBeSeenFrom(Context, OutSeenLocation, OutNumberOfLoSChecksPerformed,
+	                            OutNumberOfAsyncLosCheckRequested,
+	                            OutSightStrength, UserData, Delegate);
 }
 
 

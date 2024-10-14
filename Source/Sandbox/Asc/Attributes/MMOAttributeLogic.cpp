@@ -243,6 +243,7 @@ void UMMOAttributeLogic::DamageCalculations(const FGAttributeSetExecutionData& P
 	const FGameplayAttribute& Attribute, FAttributeCombatInformation& CombatInformation, const float Value)
 {
 	ACharacterBase* Character = Props.TargetCharacter;
+	UCombatComponent* CombatComponent = Props.TargetCombatComponent;
 	
 	// Physical damages // TODO: we need to check whether the different damage calculations are handled
 	if (Attribute == GetDamage_StandardAttribute() && GetDamage_Standard() != 0.0) CombatInformation.DamageTaken += GetDamage_Standard();
@@ -275,7 +276,7 @@ void UMMOAttributeLogic::DamageCalculations(const FGAttributeSetExecutionData& P
 		if (Armament)
 		{
 			FVector WeaponLocation = Armament->GetCenterLocation(); // TODO: create a custom target data object for returning the proper information
-			CombatInformation.HitDirection = Character->GetHitReactDirection(Props.SourceCharacter, Props.SourceCharacter->GetActorLocation(), Props.TargetCharacter->GetActorLocation());
+			CombatInformation.HitDirection = CombatComponent->GetHitReactDirection(Props.SourceCharacter, Props.SourceCharacter->GetActorLocation(), Props.TargetCharacter->GetActorLocation());
 			CombatInformation.HitStun = Armament->GetHitStun(EInputAbilities::None, CombatInformation.PoiseDamageTaken);
 		}
 		else

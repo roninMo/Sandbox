@@ -321,7 +321,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Camera|Utilities") virtual UTargetLockSpringArm* GetCameraArm() const;
 	
 	/** Returns player's camera location */
-	UFUNCTION(BlueprintCallable, Category = "Camera|Utilities") virtual FVector GetCameraLocation();
+	virtual FVector GetCameraLocation() const override;
 
 	/** Returns the camera arm's length */
 	UFUNCTION(BlueprintCallable, Category = "Camera|Utilities") virtual float GetCameraArmLength() const;

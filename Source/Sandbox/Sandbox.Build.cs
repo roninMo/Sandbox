@@ -8,17 +8,18 @@ public class Sandbox : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "Zen" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "AIModule", "Zen" });
 
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
-			"Slate", 
-			"SlateCore", 
 			"GameplayTags",
 			"GameplayTasks",
 			"GameplayAbilities",
 			"GASCompanion", 
 			"AnimationBlueprintLibrary",
+			"Slate", 
+			"SlateCore", 
+			"CommonUI"
 		});
 
 		// Uncomment if you are using Slate UI

@@ -284,25 +284,6 @@ UCombatComponent* ACharacterBase::GetCombatComponent() const
 }
 
 
-EHitDirection ACharacterBase::GetHitReactDirection(AActor* Actor, const FVector& ActorLocation, const FVector& ImpactLocation) const
-{
-	const float DistanceToFrontBackPlane = FVector::PointPlaneDist(ImpactLocation, ActorLocation, Actor->GetActorRightVector());
-	const float DistanceToRightLeftPlane = FVector::PointPlaneDist(ImpactLocation, ActorLocation, Actor->GetActorForwardVector());
-	//UE_LOG(LogTemp, Warning, TEXT("DistanceToFrontBackPlane: %f, DistanceToRightLeftPlane: %f"), DistanceToFrontBackPlane, DistanceToRightLeftPlane);
-
-	EHitDirection HitDirection;
-	if (FMath::Abs(DistanceToFrontBackPlane) <= FMath::Abs(DistanceToRightLeftPlane))
-	{
-		HitDirection = DistanceToRightLeftPlane >= 0 ? EHitDirection::Front : EHitDirection::Back; // Front or back
-	}
-	else
-	{
-		HitDirection = DistanceToFrontBackPlane >= 0 ? EHitDirection::Right : EHitDirection::Left; // Determine if Right or Left
-	}
-	return HitDirection;
-}
-
-
 UInventoryComponent* ACharacterBase::GetInventoryComponent() const
 {
 	return Inventory;
@@ -377,15 +358,20 @@ void ACharacterBase::Client_PlayMontage_Implementation(UAnimMontage* Montage, FN
 }
 
 
-UAdvancedMovementComponent* ACharacterBase::GetAdvancedMovementComp() const
+FVector ACharacterBase::GetCameraLocation() const
 {
-	return GetMovementComp<UAdvancedMovementComponent>();
+	return GetActorLocation();
 }
-
 
 bool ACharacterBase::CanJumpInternal_Implementation() const
 {
 	return JumpIsAllowedInternal();
+}
+
+
+UAdvancedMovementComponent* ACharacterBase::GetAdvancedMovementComp() const
+{
+	return GetMovementComp<UAdvancedMovementComponent>();
 }
 #pragma endregion
 

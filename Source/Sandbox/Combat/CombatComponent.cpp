@@ -16,6 +16,7 @@
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
 #include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Data/Enums/HitDirection.h"
 #include "Weapons/Armament.h"
 
 DEFINE_LOG_CATEGORY(CombatComponentLog);
@@ -821,6 +822,26 @@ void UCombatComponent::Server_EquipArmor_Implementation(const F_Item& Armor)
 
 
 #pragma region Combat Logic
+EHitDirection UCombatComponent::GetHitReactDirection(AActor* Actor, const FVector& ActorLocation, const FVector& ImpactLocation) const
+{
+	// TODO: Refactor this logic
+	const float DistanceToFrontBackPlane = FVector::PointPlaneDist(ImpactLocation, ActorLocation, Actor->GetActorRightVector());
+	const float DistanceToRightLeftPlane = FVector::PointPlaneDist(ImpactLocation, ActorLocation, Actor->GetActorForwardVector());
+	//UE_LOG(LogTemp, Warning, TEXT("DistanceToFrontBackPlane: %f, DistanceToRightLeftPlane: %f"), DistanceToFrontBackPlane, DistanceToRightLeftPlane);
+
+	EHitDirection HitDirection;
+	if (FMath::Abs(DistanceToFrontBackPlane) <= FMath::Abs(DistanceToRightLeftPlane))
+	{
+		HitDirection = DistanceToRightLeftPlane >= 0 ? EHitDirection::Front : EHitDirection::Back; // Front or back
+	}
+	else
+	{
+		HitDirection = DistanceToFrontBackPlane >= 0 ? EHitDirection::Right : EHitDirection::Left; // Determine if Right or Left
+	}
+	return HitDirection;
+}
+
+
 void UCombatComponent::HandleDamageTaken(ACharacterBase* Enemy, UObject* Source, float Value, const FGameplayAttribute Attribute)
 {
 	OnPlayerAttacked.Broadcast(Cast<ACharacterBase>(GetOwner()), Enemy, Source, Value, Attribute);

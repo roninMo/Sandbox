@@ -5,10 +5,10 @@
 #include "AISenseInformation.h"
 #include "InventoryInformation.h"
 #include "Engine/DataTable.h"
-#include "Sandbox/Data/Enums/AISenseTypes.h"
-#include "..\Enums\EquipSlot.h"
 #include "NpcInformation.generated.h"
 
+enum class ETeamId : uint8;
+enum class EEquipSlot : uint8;
 class UGameplayEffect;
 
 
@@ -19,54 +19,10 @@ USTRUCT(BlueprintType)
 struct F_NpcInformation
 {
 	GENERATED_USTRUCT_BODY()
-		F_NpcInformation(
-			const FName NpcId = FName(),
-			const FString& PlatformId = FString(),
-			
-			const TArray<FS_Item>& InventoryItems = {},
-			// const TArray<FS_WeaponInformation>& WeaponInformation = {},
-			
-			const EEquipSlot CurrentlyEquippedActiveWeapon = EEquipSlot::None,
-			const EEquipSlot CurrentlyEquippedOffhandWeapon = EEquipSlot::None,
-			const TArray<FS_Item>& LeftHandWeapons = {},
-			const TArray<FS_Item>& RightHandWeapons = {},
-			
-			const FS_Item& Gauntlets = FS_Item(),
-			const FS_Item& Leggings = FS_Item(),
-			const FS_Item& Helm = FS_Item(),
-			const FS_Item& Chest = FS_Item(),
-			
-			// const TSubclassOf<UGameplayEffect> PrimaryAttributes = nullptr,
-			// const TArray<TSubclassOf<UGameplayEffect>>& Statuses = {},
-
-			const F_AISenseConfigurations& SenseConfiguration = F_AISenseConfigurations(),
-			ETeamId Team = ETeamId::Team_None
-		) :
-		NpcId(NpcId),
-		PlatformId(PlatformId),
 	
-		CurrentlyEquippedActiveWeapon(CurrentlyEquippedActiveWeapon),
-		CurrentlyEquippedOffhandWeapon(CurrentlyEquippedOffhandWeapon),
-		LeftHandWeapons(LeftHandWeapons),
-		RightHandWeapons(RightHandWeapons),
-	
-		Gauntlets(Gauntlets),
-		Leggings(Leggings),
-		Helm(Helm),
-		Chest(Chest),
-	
-		InventoryItems(InventoryItems),
-		// WeaponInformation(WeaponInformation),
-		
-		// PrimaryAttributes(PrimaryAttributes),
-		// Statuses(Statuses),
-		
-		SenseConfiguration(SenseConfiguration),
-		Team(Team)
-	{}
-
 public:
-	virtual ~F_NpcInformation() {}
+	F_NpcInformation() = default;
+
 	/**** Equipment, stats, and inventory information ****/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FName NpcId;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString PlatformId;

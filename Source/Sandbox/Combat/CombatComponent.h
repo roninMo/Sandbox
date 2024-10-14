@@ -532,6 +532,10 @@ public:
 	
 
 public:
+	/** Returns the hit react direction based on the location of the player and the weapon's impact location */
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	virtual EHitDirection GetHitReactDirection(AActor* Actor, const FVector& ActorLocation, const FVector& ImpactLocation) const;
+
 	/** Logic for when a player takes damage */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component")
 	virtual void HandleDamageTaken(ACharacterBase* Enemy, UObject* Source, float Value, const FGameplayAttribute Attribute);
