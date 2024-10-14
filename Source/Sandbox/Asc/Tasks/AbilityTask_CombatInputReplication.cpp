@@ -34,10 +34,12 @@ void UAbilityTask_CombatInputReplication::Activate()
 	{
 		if (bTestInitialState && IsLocallyControlled())
 		{
+			// Send the input replication events for the different attack patterns to the server, and do not overwrite the current attack pattern's input pressed event
 			const TArray<FGameplayAbilitySpec>& Abilities = ASC->GetActivatableAbilities();
 			for (const FGameplayAbilitySpec& CurrentAbility : Abilities)
 			{
 				if (!CurrentAbility.IsActive() && !CurrentAbility.InputPressed) continue;
+				// if (AttackPattern == static_cast<EInputAbilities>(CurrentAbility.InputID)) continue;
 
 				// Primary attack input
 				if (EInputAbilities::PrimaryAttack == static_cast<EInputAbilities>(CurrentAbility.InputID))
@@ -66,6 +68,7 @@ void UAbilityTask_CombatInputReplication::Activate()
 		}
 		
 
+		// Create the delegate functions to listen for input events
 		bool bWaitingOnRemotePlayerData = false;
 		if (AttackPattern != EInputAbilities::PrimaryAttack)
 		{

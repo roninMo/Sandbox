@@ -20,14 +20,27 @@ UMeleeCombatAbility::UMeleeCombatAbility()
 {
 	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_MeleeAttack));
 
-	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Attacking));
-	
+	// Abilities with these tags are blocked
+	BlockAbilitiesWithTag.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_PrimaryAttack));
+	BlockAbilitiesWithTag.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_SecondaryAttack));
+	BlockAbilitiesWithTag.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_SpecialAttack));
+	BlockAbilitiesWithTag.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_StrongAttack));
+	BlockAbilitiesWithTag.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Sprinting));
+	BlockAbilitiesWithTag.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Crouching));
+
+	// Abilities are blocking while the player has these tags
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Armament_Unequipping));
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Armament_Equipping));
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Attacking));
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_HitStun));
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Sliding));
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_Movement_Rolling));
+
+	// Cancel abilities with these tags
+	CancelAbilitiesWithTag.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_Sprint));
+	CancelAbilitiesWithTag.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayAbility_Crouch));
+	
+	ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_State_Attacking));
 	
 	AllowMovementTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AllowMovement);
 	AttackFramesTag = FGameplayTag::RequestGameplayTag(Tag_State_Attacking_AttackFrames);
@@ -118,6 +131,8 @@ bool UMeleeCombatAbility::SetArmamentInformation_Implementation()
 
 		// If there's no combat information for this attack, then either the information is missing or the ability was added at the wrong time
 		Armament = EquippedArmament;
+		RunningAttackInformation = Armament->GetComboAttacks(EInputAbilities::Sprint);
+		CrouchingAttackInformation = Armament->GetComboAttacks(EInputAbilities::Crouch);
 		ComboAttacks = Armament->GetComboAttacks(AttackPattern);
 		ComboCount = ComboAttacks.ComboAttacks.Num();
 		SetCurrentMontage(EquippedArmament->GetCombatMontage(AttackPattern));
@@ -550,7 +565,7 @@ void UMeleeCombatAbility::OnOverlappedTarget_Implementation(const FGameplayAbili
 			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(OverlappedArmament));
 	}
 
-	// Ovlerap logic
+	// Overlap logic
 	const bool bRightHandArmament = CombatComponent && OverlappedArmament == CombatComponent->GetArmament(false) ? false : true;
 	TArray<AActor*>& ArmamentHitActors = !bRightHandArmament ? SecondaryHitActors : PrimaryHitActors;
 	if (CurrentStance == EArmamentStance::DualWielding || CurrentStance == EArmamentStance::TwoWeapons)
@@ -640,6 +655,28 @@ bool UMeleeCombatAbility::IsValidForRunningAttack_Implementation() const
 	
 	// Check if it's a running attack
 	return MovementComponent->IsWalking() && MovementComponent->GetLastUpdateVelocity().Length() >= SprintAttackSpeed;
+}
+
+
+TArray<AArmament*> UMeleeCombatAbility::GetOverlapArmaments() const
+{
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
+	{
+		return {};
+	}
+
+	// Overlap Trace ->  Have the server handle the attack logic with client prediction
+	TArray<AArmament*> TracedWeapons = {};
+	if (CurrentStance == EArmamentStance::DualWielding || CurrentStance == EArmamentStance::TwoWeapons)
+	{
+		TracedWeapons.Add(CombatComponent->GetArmament(false));
+		TracedWeapons.Add(CombatComponent->GetArmament());
+	}
+	else if (!IsRightHandAbility()) TracedWeapons.Add(CombatComponent->GetArmament(false));
+	else TracedWeapons.Add(CombatComponent->GetArmament());
+
+	return TracedWeapons;
 }
 
 

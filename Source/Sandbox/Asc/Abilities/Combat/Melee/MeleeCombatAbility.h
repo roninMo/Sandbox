@@ -24,17 +24,6 @@ class SANDBOX_API UMeleeCombatAbility : public UCombatAbility
 	
 protected:
 	/**** Armament information ****/
-	/** Whether this combat ability is based on a combo */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bComboAbility = true;
-	
-	/** Whether this attack pattern allows crouching attacks */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUseCrouchingAttacks = true;
-	
-	/** Whether this attack pattern allows running attacks */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUseRunningAttacks = true;
-
-	
-	/**** Combat information ****/
 	/** The combo attacks for this attack pattern */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat") F_ComboAttacks ComboAttacks;
 	
@@ -64,7 +53,6 @@ protected:
 	/** Whether this is the final attack of the attack pattern */
 	UPROPERTY(Transient, BlueprintReadWrite) bool bIsFinalComboAttack = false;
 
-
 	
 	/**** Dual wielding information ****/
 	/** If the player is wielding two armaments, this is a stored reference of the offhand armament */
@@ -86,9 +74,20 @@ protected:
 	UPROPERTY(Transient, BlueprintReadWrite) TArray<AActor*> SecondaryHitActors;
 
 	
+	/**** Other Information ****/
+	/** Whether this combat ability is based on a combo */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bComboAbility = true;
+	
+	/** Whether this attack pattern allows crouching attacks */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUseCrouchingAttacks = true;
+	
+	/** Whether this attack pattern allows running attacks */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUseRunningAttacks = true;
+
+	
 	/**** Combat Test Information ****/
 	/** The attack information of the current swing */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") F_ComboAttack TestAttackInformation;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Test Information") F_ComboAttack TestAttackInformation;
 
 	
 	/**** Cached tags ****/
@@ -200,7 +199,7 @@ protected:
 	 * 
 	 * @param EventData							The event data that's sent from the montage. We're specifically searching for LeftHandAttackFrames and RightHandAttackFrames tags
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Combat|Attack Frames") void OnAttackFrameEvent(FGameplayEventData EventData);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Attack Frames") void OnAttackFrameEvent(FGameplayEventData EventData);
 	virtual void OnAttackFrameEvent_Implementation(FGameplayEventData EventData);
 
 	/**
@@ -210,7 +209,7 @@ protected:
 	 *
 	 * @param bRightHand						Whether we should be tracing for the left or right hand armament
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Combat|Attack Frames") void OnBeginAttackFrames(bool bRightHand);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Attack Frames") void OnBeginAttackFrames(bool bRightHand);
 	virtual void OnBeginAttackFrames_Implementation(bool bRightHand);
 	
 	/**
@@ -220,7 +219,7 @@ protected:
 	 * 
 	 * @param bRightHand						Whether we should be tracing for the left or right hand armament
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Combat|Attack Frames") void OnEndAttackFrames(bool bRightHand);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Attack Frames") void OnEndAttackFrames(bool bRightHand);
 	virtual void OnEndAttackFrames_Implementation(bool bRightHand);
 
 	/**
@@ -232,7 +231,7 @@ protected:
 	 * @param OverlappedArmament				The armament that the player attacked with
 	 * @param TargetAsc							The target's ability system component
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Combat|Attack Frames") void OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& TargetData, AArmament* OverlappedArmament, UAbilitySystem* TargetAsc);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Attack Frames") void OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& TargetData, AArmament* OverlappedArmament, UAbilitySystem* TargetAsc);
 	virtual void OnOverlappedTarget_Implementation(const FGameplayAbilityTargetDataHandle& TargetData, AArmament* OverlappedArmament, UAbilitySystem* TargetAsc);
 	
 
@@ -255,7 +254,10 @@ protected:
 	*/
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Utils") bool IsValidForRunningAttack() const;
 	virtual bool IsValidForRunningAttack_Implementation() const;
-	
+
+	/** Retrieves the armaments that are currently used for overlap tracing based on the player's current stance */
+	UFUNCTION(BlueprintCallable, Category = "Ability|Combat|Utils") TArray<AArmament*> GetOverlapArmaments() const;
+
 	/** Checks if it's the final attack of this combo, and returns true if that's the case */
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Utils") bool DetermineIfItsTheFinalAttack() const;
 	virtual bool DetermineIfItsTheFinalAttack_Implementation() const;

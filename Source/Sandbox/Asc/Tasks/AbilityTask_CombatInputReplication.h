@@ -22,8 +22,9 @@ struct FCombatInputReplicationInformation
 
 
 /**
- *	Waits until the input is pressed from activating one of the combat ability input combinations. This should be true immediately upon starting the ability, since the key was pressed to activate it.
- *	We expect server to execute this task in parallel and keep its own time.
+ *	Input replication events for combat abilities to retrieve input events from the player's attack patterns.
+ *	I only have this valid to be used on input abilities specific to attack patterns,
+ *	However this is useful for things like certain special attacks that require an input combination, and you want to attack using the primary attack button
  *	TODO: add handling for input events that haven't been finished yet, if it's required
  */
 UCLASS()

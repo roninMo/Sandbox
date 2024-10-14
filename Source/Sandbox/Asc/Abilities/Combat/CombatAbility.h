@@ -49,10 +49,10 @@ protected:
 
 	/**** Combat Test Information ****/
 	/** Whether to use the blueprint's defined combat information */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") bool bUseTestCombatInformation;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Test Information") bool bUseTestCombatInformation;
 
 	/** The combat calculations for a specific weapon */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat") TMap<FGameplayAttribute, float> TestDamageStats;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat|Test Information") TMap<FGameplayAttribute, float> TestDamageStats;
 
 	
 public:
@@ -62,7 +62,7 @@ public:
 	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
 
 	/** Adds a gameplay effect for stamina cost to the player */
-	UFUNCTION(BlueprintCallable, Category = "Ability|Combat")
+	UFUNCTION(BlueprintCallable, Category = "Ability|Combat|Init")
 	virtual void AddStaminaCostEffect(float Stamina);
 
 	/* Epic's comment: Projects should initiate passives or do other "BeginPlay" type of logic here. */
