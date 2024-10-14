@@ -39,7 +39,7 @@ void UAbilityTask_CombatInputReplication::Activate()
 			for (const FGameplayAbilitySpec& CurrentAbility : Abilities)
 			{
 				if (!CurrentAbility.IsActive() && !CurrentAbility.InputPressed) continue;
-				// if (AttackPattern == static_cast<EInputAbilities>(CurrentAbility.InputID)) continue;
+				if (AttackPattern == static_cast<EInputAbilities>(CurrentAbility.InputID)) continue;
 
 				// Primary attack input
 				if (EInputAbilities::PrimaryAttack == static_cast<EInputAbilities>(CurrentAbility.InputID))
