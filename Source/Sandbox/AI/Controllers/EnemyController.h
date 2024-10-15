@@ -6,6 +6,8 @@
 #include "Sandbox/AI/Controllers/AIControllerBase.h"
 #include "EnemyController.generated.h"
 
+class UAbilitySystem;
+class UAttributeLogic;
 /**
  * 
  */
@@ -14,8 +16,28 @@ class SANDBOX_API AEnemyController : public AAIControllerBase
 {
 	GENERATED_BODY()
 
+protected:
+	/** A stored reference to the character's ability system component */
+	UPROPERTY(BlueprintReadWrite) TObjectPtr<UAbilitySystem> AbilitySystemComponent;
 
+	/** A stored reference to the character's attributes */
+	UPROPERTY(BlueprintReadWrite) TObjectPtr<UAttributeLogic> AttributeSet;
+
+
+public:
 	AEnemyController(const FObjectInitializer& ObjectInitializer);
+
+	/** Retrieves the ability system component */
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	
+	/** Retrieves the character's attributes */
+	virtual UAttributeSet* GetAttributeSet() const override;
+	
+	/** Templated convenience version for retrieving the ability system component. */
+	template<class T> T* GetAbilitySystem(void) const { return Cast<T>(GetAbilitySystemComponent()); }
+
+	/** Templated convenience version for getting the attribute set. */
+	template<class T> T* GetAttributeSet(void) const { return Cast<T>(AttributeSet); }
 	
 
 protected:

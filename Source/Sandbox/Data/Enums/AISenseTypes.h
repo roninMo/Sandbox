@@ -12,12 +12,12 @@
 UENUM(BlueprintType)
 enum class ETeamId : uint8
 {
-	Team_Bandits			UMETA(DisplayName = "Bandits"),
-	Team_Soldiers			UMETA(DisplayName = "Soldiers"),
-	Team_Beasts				UMETA(DisplayName = "Beasts"),
-	Team_Red				UMETA(DisplayName = "Red Team"),
-	Team_Blue				UMETA(DisplayName = "Blue Team"),
-	Team_Yellow				UMETA(DisplayName = "Yellow Team"),
-	Team_Green				UMETA(DisplayName = "Green Team"),
-	Team_None = 255			UMETA(DisplayName = "None") // @ref FGenericTeamId for the default value
+	None = 255						UMETA(DisplayName = "None"), // @ref FGenericTeamId for the default value
+	Soldiers = 0					UMETA(DisplayName = "Soldiers"),
+	Beasts = 1						UMETA(DisplayName = "Beasts"),
+	Bandits = 2						UMETA(DisplayName = "Bandits"),
+	Red = 3							UMETA(DisplayName = "Red Team"),
+	Blue = 4						UMETA(DisplayName = "Blue Team"),
+	Yellow = 5						UMETA(DisplayName = "Yellow Team"),
+	Green = 6						UMETA(DisplayName = "Green Team"),
 };

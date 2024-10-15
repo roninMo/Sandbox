@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystemInterface.h"
 #include "AIController.h"
 #include "Perception/AIPerceptionComponent.h"
 // #include "GameplayTagContainer.h"
@@ -23,7 +24,7 @@ class UInventoryComponent;
  * 
  */
 UCLASS()
-class SANDBOX_API AAIControllerBase : public AAIController
+class SANDBOX_API AAIControllerBase : public AAIController, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 

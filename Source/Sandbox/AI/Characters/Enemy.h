@@ -4,8 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Sandbox/AI/Characters/Npc.h"
+#include "Sandbox/Asc/Information/CharacterAbilityDataSet.h"
 #include "Enemy.generated.h"
 
+class UCharacterAbilityDataSet;
 DECLARE_LOG_CATEGORY_EXTERN(EnemyLog, Log, All);
 
 
@@ -70,12 +72,18 @@ protected:
 	TObjectPtr<UWidgetComponentBase> StatsBarsWidgetComponent;
 
 	/** Combat information (stats, equipment, etc.) */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCharacterAbilityDataSet* AbilitiesAndStats;
+	UPROPERTY(Transient, BlueprintReadWrite) FCharacterAbilityDataSetHandle AbilitiesAndStatsHandle;
+	// TODO: Refactor this into individual components to quickly test combat with different enemies. I want variation with equipment, attributes, and attack patterns (and to easily be able to add/remove to multiple enemies with no problems)
 
 	/** We're going to diverge combat characters into two different variations, and build for both. One with specific attack patterns, and one who's combat uses the weapon's attack patterns */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FName> AttackPatterns;
 
 	/** Level and area information and adjustments */
+
+
 	
-	/** The player controlled character of interest */
+	/** The player controlled character */
 	UPROPERTY(Transient, BlueprintReadWrite) TObjectPtr<ACharacterBase> Player;
 	
 	
@@ -145,13 +153,16 @@ protected:
 	 * @param InAvatarActor			Is what physical actor in the world we are acting on. Usually a Pawn but it could be a Tower, Building, Turret, etc, may be the same as Owner
 	 */
 	virtual void OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor) override;
-	
+
+	/** Equip's the enemy's weapons and armor */
+	virtual void InitCharacterEquipment();
+
+
 	/** Update the attribute values during specific events (Players in view, or if they get close enough to the ai's periphreals) */
 	virtual void UpdateAttributeValues();
-	
 
-
-	
+	/** Retrieves the attack patterns for this enemy */
+	virtual void RetrieveAttackPatterns();	
 	
 //-------------------------------------------------------------------------------------//
 // Utility																			   //

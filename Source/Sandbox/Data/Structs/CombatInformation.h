@@ -339,27 +339,53 @@ struct F_Table_ArmamentInformation : public FTableRowBase
 };
 
 
-/*
 
-	Weapon
-		- Ranged Information / Damage
-			- Weapon / Attachment config
-			- Ranged damage information
-			
-		- Melee Information / Damage
-			- Combo retrieval
-			- Melee damage information
 
-	->
-	-> Damage information (varying attribute and equipment modifiers)
 
+
+
+
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------//
+// Combat Npc Information																//
+//--------------------------------------------------------------------------------------//
+/**
+ * An object containing the different attack patterns and combo information with a montage map reference to each character, use this for each weapon stance. It is still super tangled, good luck
+ */
+USTRUCT(BlueprintType)
+struct F_EnemyAttackPattern
+{
+	GENERATED_USTRUCT_BODY()
+	F_EnemyAttackPattern() = default;
+
+	/** The name of the attack pattern */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FName Name;
+
+	/** The montage for the attack pattern */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_CharacterToMontage Montage;
+
+	/** The combo attacks for this attack pattern */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_ComboAttacks Combo;
 	
-	Weapon
-		- Equip slot mapping
-		- Anim montage mapping
-		- Ability mapping
-		- Character to Weapon information mapping
-		- 
+};
+
+
+
+/**
+ * This is the data table to hold certain attack patterns for multiple enemies within the game.
+ */
+USTRUCT(BlueprintType)
+struct F_Table_EnemyAttackPatterns : public FTableRowBase
+{
+	GENERATED_BODY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_EnemyAttackPattern AttackPattern;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString DevDescription;
+};
 
 
 
@@ -367,17 +393,4 @@ struct F_Table_ArmamentInformation : public FTableRowBase
 
 
 
-	Combat Component
-		- Attribute damage calculation
-
-
-
-	Combat
-		- Weapon retrieves it's attack information
-			- Branching logic is okay here, it ends up adjusting attributes which can easily be added to both
-		- Weapon creates a damage calculation and sends it to the attribute logic
-		- AttributeLogic handles adjusting attributes
-
- 
-*/
 

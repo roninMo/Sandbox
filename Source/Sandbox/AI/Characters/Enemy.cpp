@@ -5,10 +5,13 @@
 
 #include "Logging/StructuredLog.h"
 #include "Net/UnrealNetwork.h"
+#include "Sandbox/AI/Controllers/EnemyController.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
 #include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
+#include "Sandbox/Characters/Components/Inventory/InventoryComponent.h"
 #include "Sandbox/Combat/CombatComponent.h"
+#include "Sandbox/Data/Enums/EquipSlot.h"
 
 DEFINE_LOG_CATEGORY(EnemyLog);
 
@@ -61,6 +64,14 @@ void AEnemy::Tick(float DeltaSeconds)
 void AEnemy::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
+	
+	AEnemyController* EnemyController = Cast<AEnemyController>(NewController);
+	AbilitySystemComponent = EnemyController ? EnemyController->GetAbilitySystem<UAbilitySystem>() : UGameplayAbilityUtilities::GetAbilitySystem(NewController);
+	if (AbilitySystemComponent)
+	{
+		AbilitySystemComponent->InitAbilityActorInfo(NewController, this);
+		OnInitAbilityActorInfo(NewController, this);
+	}
 }
 
 
@@ -159,8 +170,14 @@ void AEnemy::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(InOwnerActor);
 		if (!AbilitySystemComponent) AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(InOwnerActor);
 	}
+
+	
+	
+	// Add the character's equipment
+	InitCharacterEquipment();
 	
 	// Update the npc stats
+	UGameplayAbilityUtilities::TryAddAbilitySet(AbilitySystemComponent, AbilitiesAndStats, AbilitiesAndStatsHandle);
 	// BaseAbilitySystem->SetCharacterAbilitiesAndPassiveEffects(CharacterAbilities, CharacterInformation.Statuses);
 	// for (const TSubclassOf<UGameplayEffect> Effect : InitialEffectsState) ApplyEffectToSelf(Effect);
 	// if (CharacterInformation.PrimaryAttributes) ApplyEffectToSelf(CharacterInformation.PrimaryAttributes);
@@ -247,6 +264,106 @@ void AEnemy::UpdateAttributeValues()
 }
 
 
+
+void AEnemy::InitCharacterEquipment()
+{
+	if (!Inventory || !CombatComponent)
+	{
+		return;
+	}
+
+	// Weapons
+	if (CharacterInformation.LeftHandWeapons.Num() > 0)
+	{
+		F_Item LeftHandWeaponSlotOne;
+		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.LeftHandWeapons[0].ItemName, LeftHandWeaponSlotOne);
+		CombatComponent->AddArmamentToEquipSlot(LeftHandWeaponSlotOne, EEquipSlot::LeftHandSlotOne);
+	}
+	if (CharacterInformation.LeftHandWeapons.Num() > 1)
+	{
+		F_Item LeftHandWeaponSlotTwo;
+		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.LeftHandWeapons[1].ItemName, LeftHandWeaponSlotTwo);
+		CombatComponent->AddArmamentToEquipSlot(LeftHandWeaponSlotTwo, EEquipSlot::LeftHandSlotTwo);
+	}
+	if (CharacterInformation.LeftHandWeapons.Num() > 2)
+	{
+		F_Item LeftHandWeaponSlotThree;
+		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.LeftHandWeapons[2].ItemName, LeftHandWeaponSlotThree);
+		CombatComponent->AddArmamentToEquipSlot(LeftHandWeaponSlotThree, EEquipSlot::LeftHandSlotThree);
+	}
+	if (CharacterInformation.RightHandWeapons.Num() > 0)
+	{
+		F_Item RightHandWeaponSlotOne;
+		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.RightHandWeapons[0].ItemName, RightHandWeaponSlotOne);
+		CombatComponent->AddArmamentToEquipSlot(RightHandWeaponSlotOne, EEquipSlot::RightHandSlotOne);
+	}
+	if (CharacterInformation.RightHandWeapons.Num() > 1)
+	{
+		F_Item RightHandWeaponSlotTwo;
+		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.RightHandWeapons[1].ItemName, RightHandWeaponSlotTwo);
+		CombatComponent->AddArmamentToEquipSlot(RightHandWeaponSlotTwo, EEquipSlot::RightHandSlotTwo);
+	}
+	if (CharacterInformation.RightHandWeapons.Num() > 2)
+	{
+		F_Item RightHandWeaponSlotThree;
+		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.RightHandWeapons[2].ItemName, RightHandWeaponSlotThree);
+		CombatComponent->AddArmamentToEquipSlot(RightHandWeaponSlotThree, EEquipSlot::RightHandSlotThree);
+	}
+
+	// Equipped weapon
+	if (CharacterInformation.CurrentlyEquippedActiveWeapon != EEquipSlot::None)
+	{
+		CombatComponent->CreateArmament(CharacterInformation.CurrentlyEquippedActiveWeapon);
+	}
+
+	// TODO: Add safeguards in place for handling adding inventory items
+	// Add these items to the inventory also @note this is only being handled here because it's save information
+	// TMap<FGuid, F_Item>& InventoryArmaments = Inventory->GetInventory(EItemType::IT_Armament);
+	// for (FS_Item WeaponInformation : CharacterInformation.LeftHandWeapons)
+	// {
+	// 	F_InventoryItem Weapon;
+	// 	Inventory->GetItemFromDataTable(Weapon, WeaponInformation.RowName);
+	// 	InventoryArmaments.Add(Weapon.Id, Weapon);
+	// }
+
+	
+	// Armor
+	if (CharacterInformation.Gauntlets.IsValid())
+	{
+		F_Item GauntletsInformation;
+		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.Gauntlets.ItemName, GauntletsInformation);
+		CombatComponent->EquipArmor(GauntletsInformation);
+	}
+	if (CharacterInformation.Leggings.IsValid())
+	{
+		F_Item LeggingsInformation;
+		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.Leggings.ItemName, LeggingsInformation);
+		CombatComponent->EquipArmor(LeggingsInformation);
+	}
+	if (CharacterInformation.Helm.IsValid())
+	{
+		F_Item HelmInformation;
+		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.Helm.ItemName, HelmInformation);
+		CombatComponent->EquipArmor(HelmInformation);
+	}
+	if (CharacterInformation.Chest.IsValid())
+	{
+		F_Item ChestInformation;
+		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.Chest.ItemName, ChestInformation);
+		CombatComponent->EquipArmor(ChestInformation);
+	}
+	
+
+	// Other combat related things
+	AttackPatterns = CharacterInformation.AttackPatterns;
+	// CombatClassification = CharacterInformation.CombatClassification;
+}
+
+
+
+void AEnemy::RetrieveAttackPatterns()
+{
+}
 
 
 #pragma region Utility

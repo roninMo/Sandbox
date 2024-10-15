@@ -7,8 +7,11 @@
 #include "Engine/DataTable.h"
 #include "NpcInformation.generated.h"
 
+enum class ECombatClassification : uint8;
 enum class ETeamId : uint8;
 enum class EEquipSlot : uint8;
+struct F_ArmamentAbilityInformation;
+class UCharacterGameplayAbility;
 class UGameplayEffect;
 
 
@@ -41,11 +44,6 @@ public:
 
 	/**** Inventory ****/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FS_Item> InventoryItems;
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FS_WeaponInformation> WeaponInformation;
-
-	/**** Stats ****/
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite) TSubclassOf<UGameplayEffect> PrimaryAttributes; // Health, Mana, etc
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<TSubclassOf<UGameplayEffect>> Statuses; // Poison, buffs, etc
 	
 	/**** Behavior tree and combat npc information ****/
 	/** The values of this character's senses */
@@ -55,10 +53,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) ETeamId Team;
 
 	/** The combat classification of this character (this is mainly for how different tasks are distributed to this character */
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite) ECombatClassification CombatClassification;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) ECombatClassification CombatClassification;
 
 	/** Combo attacks that aren't specific to weapon that belong to this character */
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FName> CombatNpcComboAttacks;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FName> AttackPatterns;
 };
 
 

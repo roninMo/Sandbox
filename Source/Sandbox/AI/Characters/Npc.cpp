@@ -6,10 +6,6 @@
 #include "Sandbox/AI/Controllers/AIControllerBase.h"
 #include "Components/SphereComponent.h"
 #include "Logging/StructuredLog.h"
-#include "Net/UnrealNetwork.h"
-#include "Sandbox/Asc/AbilitySystem.h"
-#include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
-#include "Sandbox/Characters/Components/AnimInstance/AnimInstanceBase.h"
 #include "Sandbox/Characters/Components/Inventory/InventoryComponent.h"
 
 
@@ -50,14 +46,6 @@ void ANpc::BeginPlay()
 void ANpc::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
-
-	
-	AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(NewController);
-	if (AbilitySystemComponent)
-	{
-		AbilitySystemComponent->InitAbilityActorInfo(NewController, this);
-		OnInitAbilityActorInfo(NewController, this);
-	}
 }
 
 

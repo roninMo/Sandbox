@@ -17,15 +17,15 @@ class SANDBOX_API UCombatMovementComponent : public UAdvancedMovementComponent
 
 protected:
 	/** The friction for air movement when using root motion animations */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Root Motion", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "10"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Character Root Motion", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "10"))
 	float AnimRootMotionVelocityAirFriction = 1;
 	
 	/** Max Strafing Acceleration (how fast you move / strafe) */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Root Motion", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "10000"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Character Root Motion", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "10000"))
 	float AnimRootMotionMaxAcceleration = 450;
 	
 	/** The rotation rate during root motion air movement */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Root Motion", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "10000"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Character Root Motion", meta=(ClampMin="0.0", UIMin = "0.0", UIMax = "10000"))
 	FRotator RootMotionAirRotationRate = FRotator(0, 200, 0);
 	
 	/** The velocity captured for when the player begins root motion */
@@ -35,7 +35,7 @@ protected:
 	UPROPERTY(Transient, BlueprintReadWrite) FVector RootMotionAirVelocity;
 
 	/** Root motion information */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Root Motion") bool bDebugRootMotion;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|Character Root Motion") bool bDebugRootMotion;
 
 	
 	UCombatMovementComponent();

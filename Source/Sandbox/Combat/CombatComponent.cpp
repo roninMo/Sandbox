@@ -1007,8 +1007,8 @@ void UCombatComponent::HandleClearingStatuses()
 	UAbilitySystem* AbilitySystem = Character->GetAbilitySystem<UAbilitySystem>();
 	if (!AbilitySystem)
 	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried clearing statuses when the ability system component wasn't valid!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		// UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried clearing statuses when the ability system component wasn't valid!",
+		// 	*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return;
 	}
 
