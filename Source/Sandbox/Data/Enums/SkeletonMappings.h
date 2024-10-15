@@ -1,11 +1,11 @@
 #pragma once
 
 
-enum class ECharacterSkeletonMapping : uint8;
-enum class EInputAbilities : uint8;
-
 #include "CoreMinimal.h"
 #include "SkeletonMappings.generated.h"
+
+enum class ECharacterSkeletonMapping : uint8;
+enum class EInputAbilities : uint8;
 
 
 

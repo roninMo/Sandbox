@@ -13,7 +13,9 @@
 				"AIModule",
 				"AnimationModifiers",
 				"GameplayAbilities",
-				"GameplayTags"
+				"GameplayTags",
+				"UMG",
+				"CoreUObject"
 			]
 		}
 	],

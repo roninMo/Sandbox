@@ -4,7 +4,6 @@
 #include "Sandbox/AI/Characters/Enemy.h"
 
 #include "Logging/StructuredLog.h"
-#include "Components/WidgetComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"

@@ -3,20 +3,27 @@
 
 #include "Sandbox/Characters/CharacterBase.h"
 
-#include "EnhancedInputComponent.h"
-#include "Components/AdvancedMovement/CombatMovementComponent.h"
-#include "Components/AnimInstance/AnimInstanceBase.h"
-#include "Components/Inventory/InventoryComponent.h"
-#include "GameFramework/PlayerState.h"
-#include "Logging/StructuredLog.h"
-#include "Sandbox/Asc/AbilitySystem.h"
-#include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
-#include "Sandbox/Data/Enums/SkeletonMappings.h"
-#include "Net/UnrealNetwork.h"
 #include "Sandbox/Data/Enums/ArmorTypes.h"
+#include "Sandbox/Data/Structs/CombatInformation.h"
+// #include "Sandbox/Data/Enums/SkeletonMappings.h"
 #include "Sandbox/Data/Enums/HitDirection.h"
 #include "Sandbox/Data/Enums/HitReacts.h"
-#include "Sandbox/Data/Structs/CombatInformation.h"
+
+#include "Components/AdvancedMovement/CombatMovementComponent.h"
+#include "Components/Inventory/InventoryComponent.h"
+#include "Components/AnimInstance/AnimInstanceBase.h"
+#include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
+#include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Asc/Characters/AbilitySystemPlayerState.h"
+#include "GameFramework/PlayerState.h"
+#include "Sandbox/Hud/Hud/PlayerHud.h"
+
+#include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
+#include "EnhancedInputComponent.h"
+#include "Net/UnrealNetwork.h"
+#include "Logging/StructuredLog.h"
+
+
 
 
 ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Super(
@@ -130,11 +137,24 @@ void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvat
 	{
 		AnimInstance->InitializeAbilitySystem(AbilitySystemComponent);
 	}
-	
-	// Add the ability input bindings
-	// UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
-	UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
-	AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
+
+	APlayerController* PlayerController = GetController<APlayerController>();
+	if (IsLocallyControlled() && PlayerController)
+	{
+		// Initialize the player hud
+		APlayerHud* Hud = PlayerController->GetHUD<APlayerHud>();
+		if (Hud)
+		{
+			AAbilitySystemPlayerState* AscPlayerState = GetPlayerState<AAbilitySystemPlayerState>();
+			UMMOAttributeSet* Attributes = AscPlayerState ? AscPlayerState->GetAttributeSet<UMMOAttributeSet>() : nullptr;
+			Hud->InitializeHud(this, PlayerController, AscPlayerState, AbilitySystemComponent, Attributes);
+		}
+
+		// Add the ability input bindings
+		// UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
+		UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
+		AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
+	}
 
 	// Inventory component initialization
 	if (Inventory)

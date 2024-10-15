@@ -9,7 +9,7 @@
 DECLARE_LOG_CATEGORY_EXTERN(EnemyLog, Log, All);
 
 
-class UWidgetComponent;
+class UWidgetComponentBase;
 class UMMOAttributeSet;
 class UCaptainComponent;
 
@@ -66,8 +66,8 @@ class SANDBOX_API AEnemy : public ANpc
 
 protected:
 	/** The enemy's current health, stamina, poise, and mana */
-	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	// TObjectPtr<UWidgetComponent> StatsBarsWidgetComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<UWidgetComponentBase> StatsBarsWidgetComponent;
 
 	/** Combat information (stats, equipment, etc.) */
 
