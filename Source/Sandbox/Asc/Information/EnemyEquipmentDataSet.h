@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
+#include "Sandbox/Data/Structs/ArmorInformation.h"
 #include "EnemyEquipmentDataSet.generated.h"
 
 enum class EEquipSlot : uint8;
@@ -23,42 +24,42 @@ public:
 	UEnemyEquipmentDataSet() = default;
 
 	/** The character's equipped gauntlets */
-	UPROPERTY(EditDefaultsOnly, Category="Armor") FName Gauntlets;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Armor") FName Gauntlets;
 	
 	/** The character's equipped leggings */
-	UPROPERTY(EditDefaultsOnly, Category="Armor") FName Leggings;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Armor") FName Leggings;
 
 	/** The character's equipped helm */
-	UPROPERTY(EditDefaultsOnly, Category="Armor") FName Helm;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Armor") FName Helm;
 
 	/** The character's equipped chest */
-	UPROPERTY(EditDefaultsOnly, Category="Armor") FName Chest;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Armor") FName Chest;
 
 	
 	/** The character's first left hand armament */
-	UPROPERTY(EditDefaultsOnly, Category="Armaments") FName Armament_LeftHandSlotOne;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Armaments") FName Armament_LeftHandSlotOne;
 	
 	/** The character's second left hand armament */
-	UPROPERTY(EditDefaultsOnly, Category="Armaments") FName Armament_LeftHandSlotTwo;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Armaments") FName Armament_LeftHandSlotTwo;
 	
 	/** The character's third left hand armament */
-	UPROPERTY(EditDefaultsOnly, Category="Armaments") FName Armament_LeftHandSlotThree;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Armaments") FName Armament_LeftHandSlotThree;
 	
 	/** The character's first right hand armament */
-	UPROPERTY(EditDefaultsOnly, Category="Armaments") FName Armament_RightHandSlotOne;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Armaments") FName Armament_RightHandSlotOne;
 	
 	/** The character's second right hand armament */
-	UPROPERTY(EditDefaultsOnly, Category="Armaments") FName Armament_RightHandSlotTwo;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Armaments") FName Armament_RightHandSlotTwo;
 	
 	/** The character's third right hand armament */
-	UPROPERTY(EditDefaultsOnly, Category="Armaments") FName Armament_RightHandSlotThree;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Armaments") FName Armament_RightHandSlotThree;
 
 	
 	/** The currently equipped left hand armament */
-	UPROPERTY(EditDefaultsOnly, Category="Armaments") EEquipSlot EquippedLeftHandArmament;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Armaments") EEquipSlot EquippedLeftHandArmament;
 	
 	/** The currently equipped right hand armament */
-	UPROPERTY(EditDefaultsOnly, Category="Armaments") EEquipSlot EquippedRightHandArmament;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Armaments") EEquipSlot EquippedRightHandArmament;
 
 	
 	// /** Additional armor values */

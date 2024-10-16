@@ -22,19 +22,19 @@ bool UEnemyEquipmentDataSet::AddToCharacter(UAbilitySystem* AbilitySystemCompone
 	}
 
 	// Weapons
-	if (Armament_LeftHandSlotOne.IsValid())
+	if (!Armament_LeftHandSlotOne.IsNone())
 	{
 		F_Item LeftHandWeaponSlotOne;
 		InventoryComponent->Execute_GetDataBaseItem(InventoryComponent, Armament_LeftHandSlotOne, LeftHandWeaponSlotOne);
 		CombatComponent->AddArmamentToEquipSlot(LeftHandWeaponSlotOne, EEquipSlot::LeftHandSlotOne);
 	}
-	if (Armament_LeftHandSlotTwo.IsValid())
+	if (!Armament_LeftHandSlotTwo.IsNone())
 	{
 		F_Item LeftHandWeaponSlotTwo;
 		InventoryComponent->Execute_GetDataBaseItem(InventoryComponent, Armament_LeftHandSlotTwo, LeftHandWeaponSlotTwo);
 		CombatComponent->AddArmamentToEquipSlot(LeftHandWeaponSlotTwo, EEquipSlot::LeftHandSlotTwo);
 	}
-	if (Armament_LeftHandSlotThree.IsValid())
+	if (!Armament_LeftHandSlotThree.IsNone())
 	{
 		F_Item LeftHandWeaponSlotThree;
 		InventoryComponent->Execute_GetDataBaseItem(InventoryComponent, Armament_LeftHandSlotThree, LeftHandWeaponSlotThree);
@@ -42,19 +42,19 @@ bool UEnemyEquipmentDataSet::AddToCharacter(UAbilitySystem* AbilitySystemCompone
 	}
 
 	
-	if (Armament_RightHandSlotOne.IsValid())
+	if (!Armament_RightHandSlotOne.IsNone())
 	{
 		F_Item RightHandWeaponSlotOne;
 		InventoryComponent->Execute_GetDataBaseItem(InventoryComponent, Armament_RightHandSlotOne, RightHandWeaponSlotOne);
 		CombatComponent->AddArmamentToEquipSlot(RightHandWeaponSlotOne, EEquipSlot::RightHandSlotOne);
 	}
-	if (Armament_RightHandSlotTwo.IsValid())
+	if (!Armament_RightHandSlotTwo.IsNone())
 	{
 		F_Item RightHandWeaponSlotTwo;
 		InventoryComponent->Execute_GetDataBaseItem(InventoryComponent, Armament_RightHandSlotTwo, RightHandWeaponSlotTwo);
 		CombatComponent->AddArmamentToEquipSlot(RightHandWeaponSlotTwo, EEquipSlot::RightHandSlotTwo);
 	}
-	if (Armament_RightHandSlotThree.IsValid())
+	if (!Armament_RightHandSlotThree.IsNone())
 	{
 		F_Item RightHandWeaponSlotThree;
 		InventoryComponent->Execute_GetDataBaseItem(InventoryComponent, Armament_RightHandSlotThree, RightHandWeaponSlotThree);
@@ -72,25 +72,25 @@ bool UEnemyEquipmentDataSet::AddToCharacter(UAbilitySystem* AbilitySystemCompone
 	}
 	
 	// Armor
-	if (Gauntlets.IsValid())
+	if (!Gauntlets.IsNone())
 	{
 		F_Item GauntletsInformation;
 		InventoryComponent->Execute_GetDataBaseItem(InventoryComponent, Gauntlets, GauntletsInformation);
 		CombatComponent->EquipArmor(GauntletsInformation);
 	}
-	if (Leggings.IsValid())
+	if (!Leggings.IsNone())
 	{
 		F_Item LeggingsInformation;
 		InventoryComponent->Execute_GetDataBaseItem(InventoryComponent, Leggings, LeggingsInformation);
 		CombatComponent->EquipArmor(LeggingsInformation);
 	}
-	if (Helm.IsValid())
+	if (!Helm.IsNone())
 	{
 		F_Item HelmInformation;
 		InventoryComponent->Execute_GetDataBaseItem(InventoryComponent, Helm, HelmInformation);
 		CombatComponent->EquipArmor(HelmInformation);
 	}
-	if (Chest.IsValid())
+	if (!Chest.IsNone())
 	{
 		F_Item ChestInformation;
 		InventoryComponent->Execute_GetDataBaseItem(InventoryComponent, Chest, ChestInformation);

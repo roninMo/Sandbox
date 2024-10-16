@@ -1,0 +1,68 @@
+[
+	{
+		"Name": "BrigandierSoldier",
+		"Equipment": "/Script/Sandbox.EnemyEquipmentDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Equipment_Brigandier.DA_Equipment_Brigandier'",
+		"AttributeAndAbilityData": "/Script/Sandbox.CharacterAbilityDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Abilities_Soldier.DA_Abilities_Soldier'",
+		"DevDescription": ""
+	},
+	{
+		"Name": "BrigandierSoldier_Sword",
+		"Equipment": "/Script/Sandbox.EnemyEquipmentDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Equipment_Brigandier.DA_Equipment_Brigandier'",
+		"AttributeAndAbilityData": "/Script/Sandbox.CharacterAbilityDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Abilities_Soldier.DA_Abilities_Soldier'",
+		"DevDescription": ""
+	},
+	{
+		"Name": "BrigandierSoldier_Greatsword",
+		"Equipment": "/Script/Sandbox.EnemyEquipmentDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Equipment_Brigandier.DA_Equipment_Brigandier'",
+		"AttributeAndAbilityData": "/Script/Sandbox.CharacterAbilityDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Abilities_Soldier.DA_Abilities_Soldier'",
+		"DevDescription": ""
+	},
+	{
+		"Name": "BrigandierSoldier_Mage",
+		"Equipment": "/Script/Sandbox.EnemyEquipmentDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Equipment_Brigandier.DA_Equipment_Brigandier'",
+		"AttributeAndAbilityData": "/Script/Sandbox.CharacterAbilityDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Abilities_Soldier.DA_Abilities_Soldier'",
+		"DevDescription": ""
+	},
+	{
+		"Name": "Soldier",
+		"Equipment": "/Script/Sandbox.EnemyEquipmentDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Equipment_Soldier.DA_Equipment_Soldier'",
+		"AttributeAndAbilityData": "/Script/Sandbox.CharacterAbilityDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Abilities_Soldier.DA_Abilities_Soldier'",
+		"DevDescription": ""
+	},
+	{
+		"Name": "Captain",
+		"Equipment": "/Script/Sandbox.EnemyEquipmentDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Equipment_SoldierCaptain.DA_Equipment_SoldierCaptain'",
+		"AttributeAndAbilityData": "/Script/Sandbox.CharacterAbilityDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Abilities_Soldier.DA_Abilities_Soldier'",
+		"DevDescription": ""
+	},
+	{
+		"Name": "LeatherSoldier",
+		"Equipment": "/Script/Sandbox.EnemyEquipmentDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Equipment_Leather.DA_Equipment_Leather'",
+		"AttributeAndAbilityData": "/Script/Sandbox.CharacterAbilityDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Abilities_Soldier.DA_Abilities_Soldier'",
+		"DevDescription": ""
+	},
+	{
+		"Name": "PlateArmorSoldier",
+		"Equipment": "/Script/Sandbox.EnemyEquipmentDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Equipment_Plate.DA_Equipment_Plate'",
+		"AttributeAndAbilityData": "/Script/Sandbox.CharacterAbilityDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Abilities_Soldier.DA_Abilities_Soldier'",
+		"DevDescription": ""
+	},
+	{
+		"Name": "TankSoldier",
+		"Equipment": "/Script/Sandbox.EnemyEquipmentDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Equipment_Tank.DA_Equipment_Tank'",
+		"AttributeAndAbilityData": "/Script/Sandbox.CharacterAbilityDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Abilities_Soldier.DA_Abilities_Soldier'",
+		"DevDescription": ""
+	},
+	{
+		"Name": "OwlSoldier",
+		"Equipment": "/Script/Sandbox.EnemyEquipmentDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Equipment_Owl.DA_Equipment_Owl'",
+		"AttributeAndAbilityData": "/Script/Sandbox.CharacterAbilityDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Abilities_Soldier.DA_Abilities_Soldier'",
+		"DevDescription": ""
+	},
+	{
+		"Name": "KnightSoldier",
+		"Equipment": "/Script/Sandbox.EnemyEquipmentDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Equipment_Knight.DA_Equipment_Knight'",
+		"AttributeAndAbilityData": "/Script/Sandbox.CharacterAbilityDataSet'/Game/AI/Data/CombatInformation/Armors/DA_Abilities_Soldier.DA_Abilities_Soldier'",
+		"DevDescription": ""
+	}
+]

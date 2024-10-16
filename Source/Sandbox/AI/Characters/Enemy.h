@@ -185,7 +185,7 @@ public:
 	UFUNCTION(BlueprintCallable) virtual void SetActorsToIgnore(const TArray<AActor*>& Actors);
 	
 	/** Gets the npc character information from the data table */
-	UFUNCTION(BlueprintCallable) virtual void GetCombatInformationFromTable(FName RowName);
+	UFUNCTION(BlueprintCallable) virtual void GetCombatInformationFromTable(FName EquipmentId);
 	
 
 protected:

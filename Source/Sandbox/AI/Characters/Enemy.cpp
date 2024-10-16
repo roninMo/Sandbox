@@ -11,7 +11,6 @@
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
 #include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
 #include "Sandbox/Asc/Information/EnemyEquipmentDataSet.h"
-#include "Sandbox/Characters/Components/Inventory/InventoryComponent.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Hud/Widgets/WidgetBase.h"
 
@@ -45,10 +44,12 @@ AEnemy::AEnemy(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitia
 	StatsBarsWidgetComponent->SetHiddenInGame(true);
 }
 
+
 void AEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 }
+
 
 void AEnemy::Tick(float DeltaSeconds)
 {
@@ -358,18 +359,18 @@ void AEnemy::SetActorsToIgnore(const TArray<AActor*>& Actors)
 }
 
 
-void AEnemy::GetCombatInformationFromTable(FName RowName)
+void AEnemy::GetCombatInformationFromTable(FName EquipmentId)
 {
 	if (CombatInformationTable)
 	{
-		const F_Table_NpcCombatInformation* Information = CombatInformationTable->FindRow<F_Table_NpcCombatInformation>(RowName, TEXT("Npc Combat Data Context"));
+		const F_Table_NpcCombatInformation* Information = CombatInformationTable->FindRow<F_Table_NpcCombatInformation>(EquipmentId, TEXT("Npc Combat Data Context"), false);
 		if (Information)
 		{
 			EquipmentAndArmor = Information->Equipment;
 			AbilitiesAndStats = Information->AttributeAndAbilityData;
 		}
 		
-		UE_LOGFMT(LogTemp, Error, "{0}: {1} Did not find the npc character information {2}!", *UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetName(), *RowName.ToString());
+		// UE_LOGFMT(LogTemp, Error, "{0} did not find {1} within the Npc combat information table!", *GetNameSafe(CombatInformationTable), EquipmentId);
 	}
 }
 #pragma endregion 

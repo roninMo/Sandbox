@@ -1,0 +1,38 @@
+[
+	{
+		"Name": "Enemy",
+		"CharacterInformation":
+		{
+			"NpcId": "Enemy",
+			"PlatformId": "",
+			"InventoryItems": [],
+			"SenseConfiguration":
+			{
+				"HearingSenseConfig":
+				{
+					"bHasHearingSense": true,
+					"HearingRange": 3400,
+					"bDetectEnemies": true,
+					"bDetectNeutrals": true,
+					"bDetectFriendlies": true
+				},
+				"SightSenseConfig":
+				{
+					"bHasSightSense": true,
+					"SightRadius": 1640,
+					"LoseSightRadius": 2500,
+					"PeripheralVisionAngleDegrees": 85,
+					"AutoSuccessRangeFromLastSeenLocation": -1,
+					"PointOfViewBackwardOffset": 0,
+					"NearClippingRadius": 0
+				}
+			},
+			"Team": "Soldiers",
+			"CombatClassification": "Fighter",
+			"AttackPatterns": [
+				"None"
+			]
+		},
+		"DevDescription": ""
+	}
+]
