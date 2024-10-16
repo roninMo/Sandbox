@@ -23,8 +23,7 @@
 #include "Components/Periphery/PeripheryComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "Logging/StructuredLog.h"
-
-
+#include "Sandbox/Asc/Information/SandboxTags.h"
 
 
 ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Super(
@@ -167,6 +166,21 @@ void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvat
 	if (Inventory)
 	{
 		Inventory->SetPlayerId();
+	}
+
+
+	
+
+	UGameplayEffect* CustomEffect = NewObject<UGameplayEffect>(this, FName(*GetName() + FString("_CustomEffect_")));
+	if (CustomEffect)
+	{
+		CustomEffect->DurationPolicy = EGameplayEffectDurationType::Infinite;
+		CustomEffect->StackDurationRefreshPolicy = EGameplayEffectStackingDurationPolicy::RefreshOnSuccessfulApplication;
+		
+		CustomEffect->InheritableGameplayEffectTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayEffect));
+		CustomEffect->InheritableOwnedTagsContainer.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayEffect));
+		
+		AbilitySystemComponent->ApplyGameplayEffectToSelf(CustomEffect, 1, AbilitySystemComponent->MakeEffectContext());
 	}
 }
 

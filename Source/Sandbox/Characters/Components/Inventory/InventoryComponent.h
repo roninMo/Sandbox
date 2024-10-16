@@ -78,6 +78,7 @@ protected:
 // Item Addition																	//
 //----------------------------------------------------------------------------------//
 public:
+	// TODO: Refactor this to provide an id to prevent additional function calls for retrieval
 	/**
 	 * Sends the information to the server to add an item to the inventory, and handles each of the different scenarios for this action. \n\n
 	 * There's multiple delegate functions in response to each scenario, and if an error occurs while updating the inventory there's safeguards in place to revert the logic \n\n

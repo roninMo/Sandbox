@@ -116,6 +116,15 @@ void UCombatComponent::AddArmamentToEquipSlot(const F_Item& ArmamentInventoryInf
 
 void UCombatComponent::RemoveArmamentFromEquipSlot(const EEquipSlot EquipSlot)
 {
+	if (PrimaryArmament && EquipSlot == PrimaryArmament->GetEquipSlot())
+	{
+		DeleteEquippedArmament(PrimaryArmament);
+	}
+	else if (SecondaryArmament && EquipSlot == SecondaryArmament->GetEquipSlot())
+	{
+		DeleteEquippedArmament(SecondaryArmament);
+	}
+
 	if (EquipSlot == EEquipSlot::LeftHandSlotOne) LeftHandEquipSlot_One = F_Item();
 	else if (EquipSlot == EEquipSlot::LeftHandSlotTwo) LeftHandEquipSlot_Two = F_Item();
 	else if (EquipSlot == EEquipSlot::LeftHandSlotThree) LeftHandEquipSlot_Three = F_Item();
