@@ -11,7 +11,6 @@
 
 
 class AAIControllerBase;
-
 class UDataTable;
 class USphereComponent;
 
@@ -30,12 +29,15 @@ protected:
 
 	
 	/**** The stats and equipment of the npc ****/
-	/** The information specific to an npc character */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment") F_NpcInformation CharacterInformation;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment") FName Id; // The id of this npc character
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment") UDataTable* NPCInformationTable;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment") UDataTable* CombatInformationTable;
+	/** The id of this npc character */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") FName Id;
 
+	/** The data table containing the information on every npc character */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") UDataTable* NPCInformationTable;
+
+	/** The information specific to an npc character */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") F_NpcInformation CharacterInformation;
+	
 	
 	/**** Movement values ****/
 	/** Helps with avoiding adjusting values with gameplay effects for different movement tasks */

@@ -5,15 +5,21 @@
 #include "CoreMinimal.h"
 #include "Sandbox/AI/Characters/Npc.h"
 #include "Sandbox/Asc/Information/CharacterAbilityDataSet.h"
+#include "Sandbox/Data/AbilityData.h"
+#include "Sandbox/Data/AttributeData.h"
 #include "Enemy.generated.h"
 
-class UEnemyEquipmentDataSet;
 DECLARE_LOG_CATEGORY_EXTERN(EnemyLog, Log, All);
 
 
+
+class UCaptainComponent;
 class UWidgetComponent;
 class UMMOAttributeSet;
-class UCaptainComponent;
+class UEnemyEquipmentDataSet;
+class UEquipmentData;
+class UArmorData;
+
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGameplayAttributeUpdated, float, Value);
 
@@ -71,58 +77,95 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UWidgetComponent> StatsBarsWidgetComponent;
 
+
+protected:
+	/**** Combat information ****/
+	/** The id of the attribute adjustments */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") FName AttributeInformationId;
+
+	// Add ng+ leveling attribute adjustments
+
+	// Add new region attribute adjustments
+
+	/** The id of the equipment set to use */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") FName EquipmentInformationId;
 	
-	/** Combat information (stats, equipment, etc.) */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment") FName CombatInformationId;
+	/** The id of the armor set to use */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") FName ArmorInformationId;
+
+	/** The id of the armor set to use */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") FName AbilityDataId;
+
+	// Add attack patterns
+
 	
+	/**** Database information ****/
+	/** The id of the armor set to use */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") UDataTable* AbilityInformationTable;
+	
+	/** The data table containing the information on the stats for different characters */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") UDataTable* AttributeInformationTable;
+	
+	/** The data table containing the information on equipment */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") UDataTable* EquipmentInformationTable;
+
+	/** The data table containing the information on armor */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") UDataTable* ArmorInformationTable;
+
+	
+	
+	/**** Stored references ****/
+	/** The character's abilities and passive effects */
+	UPROPERTY(Transient, BlueprintReadWrite) UAbilityData* AbilityData;
+	
+	/** The character's attributes */
+	UPROPERTY(Transient, BlueprintReadWrite) UAttributeData* Stats;
+
+	/** The character's equipment */
+	UPROPERTY(Transient, BlueprintReadWrite) UEquipmentData* Equipment;
+	
+	/** The character's armor */
+	UPROPERTY(Transient, BlueprintReadWrite) UArmorData* Armor;
+
+
+	/** The handle for the character's abilities */
+	UPROPERTY(Transient, BlueprintReadWrite) FAbilityDataHandle AbilityDataHandle;
+	
+	/** The handle for the character's attributes */
+	UPROPERTY(Transient, BlueprintReadWrite) FAttributeDataHandle AttributeDataHandle;
+
+
+
+	//
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) UDataTable* CombatInformationTable;
 	UPROPERTY(Transient, BlueprintReadWrite) UCharacterAbilityDataSet* AbilitiesAndStats;
 	UPROPERTY(Transient, BlueprintReadWrite) UEnemyEquipmentDataSet* EquipmentAndArmor;
 	UPROPERTY(Transient, BlueprintReadWrite) FCharacterAbilityDataSetHandle AbilitiesAndStatsHandle;
 
 	
-	// TODO: Refactor this into individual components to quickly test combat with different enemies. I want variation with equipment, attributes, and attack patterns (and to easily be able to add/remove to multiple enemies with no problems)
+	// TODO: Refactor this into individual components to quickly test combat with different enemies.
+	//			- I want variation with equipment, attributes, and attack patterns (and to easily be able to add/remove to multiple enemies with no problems)
 
-	/** We're going to diverge combat characters into two different variations, and build for both. One with specific attack patterns, and one who's combat uses the weapon's attack patterns */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FName> AttackPatterns;
-
-	/** Level and area information and adjustments */
+	// Diverge combat characters into two different variations, and build for both. One with specific attack patterns, and one who's combat uses the weapon's attack patterns
+	// Level and area information and adjustments
 
 
 	
 	/** The player controlled character */
 	UPROPERTY(Transient, BlueprintReadWrite) TObjectPtr<ACharacterBase> Player;
 	
-	
 	/** Overlapping components */
 	UPROPERTY(Transient, BlueprintReadWrite) TArray<AActor*> ActorsToIgnore;
 
 	
-	/**** Character information replicated to the clients ****/
-	UPROPERTY(ReplicatedUsing=OnRep_CurrentHealthUpdated, BlueprintReadWrite) float CurrentHealth;
-	UPROPERTY(ReplicatedUsing=OnRep_CurrentManaUpdated, BlueprintReadWrite) float CurrentMana;
-	UPROPERTY(ReplicatedUsing=OnRep_CurrentPoiseUpdated, BlueprintReadWrite) float CurrentPoise;
-	UPROPERTY(ReplicatedUsing=OnRep_CurrentStaminaUpdated, BlueprintReadWrite) float CurrentStamina;
-	UPROPERTY(ReplicatedUsing=OnRep_MaxHealthUpdated, BlueprintReadWrite) float MaxHealth;
-	UPROPERTY(ReplicatedUsing=OnRep_MaxManaUpdated, BlueprintReadWrite) float MaxMana;
-	UPROPERTY(ReplicatedUsing=OnRep_MaxPoiseUpdated, BlueprintReadWrite) float MaxPoise;
-	UPROPERTY(ReplicatedUsing=OnRep_MaxStaminaUpdated, BlueprintReadWrite) float MaxStamina;
 
 	
-public:
-	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnMaxHealthUpdated;
-	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnMaxManaUpdated;
-	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnMaxPoiseUpdated;
-	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnMaxStaminaUpdated;
-	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnHealthUpdated;
-	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnManaUpdated;
-	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnPoiseUpdated;
-	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnStaminaUpdated;
-
-
 public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	AEnemy(const FObjectInitializer& ObjectInitializer);
 	
+
+
 	
 //----------------------------------------------------------------------//
 // Initialization functions and components								//
@@ -174,18 +217,33 @@ protected:
 	/** Logic when a character unregisters it within it's periphery */
 	virtual void OutsideOfPlayerRadiusPeriphery_Implementation(AActor* SourceCharacter, EPeripheryType PeripheryType) override;
 
-	/** Retrieves the attack patterns for this enemy */
-	virtual void RetrieveAttackPatterns();	
+
+
 	
-//-------------------------------------------------------------------------------------//
-// Utility																			   //
-//-------------------------------------------------------------------------------------//
+//--------------------------------------------------------------------------------------//
+// Replicated values																	//
+//--------------------------------------------------------------------------------------//
+protected:
+	/**** Character information replicated to the clients ****/
+	UPROPERTY(ReplicatedUsing=OnRep_CurrentHealthUpdated, BlueprintReadWrite) float CurrentHealth;
+	UPROPERTY(ReplicatedUsing=OnRep_CurrentManaUpdated, BlueprintReadWrite) float CurrentMana;
+	UPROPERTY(ReplicatedUsing=OnRep_CurrentPoiseUpdated, BlueprintReadWrite) float CurrentPoise;
+	UPROPERTY(ReplicatedUsing=OnRep_CurrentStaminaUpdated, BlueprintReadWrite) float CurrentStamina;
+	UPROPERTY(ReplicatedUsing=OnRep_MaxHealthUpdated, BlueprintReadWrite) float MaxHealth;
+	UPROPERTY(ReplicatedUsing=OnRep_MaxManaUpdated, BlueprintReadWrite) float MaxMana;
+	UPROPERTY(ReplicatedUsing=OnRep_MaxPoiseUpdated, BlueprintReadWrite) float MaxPoise;
+	UPROPERTY(ReplicatedUsing=OnRep_MaxStaminaUpdated, BlueprintReadWrite) float MaxStamina;
+
+
 public:
-	UFUNCTION(BlueprintCallable) virtual TArray<AActor*> GetActorsToIgnore();
-	UFUNCTION(BlueprintCallable) virtual void SetActorsToIgnore(const TArray<AActor*>& Actors);
-	
-	/** Gets the npc character information from the data table */
-	UFUNCTION(BlueprintCallable) virtual void GetCombatInformationFromTable(FName EquipmentId);
+	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnMaxHealthUpdated;
+	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnMaxManaUpdated;
+	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnMaxPoiseUpdated;
+	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnMaxStaminaUpdated;
+	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnHealthUpdated;
+	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnManaUpdated;
+	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnPoiseUpdated;
+	UPROPERTY(BlueprintAssignable) FOnGameplayAttributeUpdated OnStaminaUpdated;
 	
 
 protected:
@@ -199,6 +257,27 @@ protected:
 	UFUNCTION() virtual void OnRep_MaxPoiseUpdated();
 	UFUNCTION() virtual void OnRep_MaxStaminaUpdated();
 
+
+
+	
+//--------------------------------------------------------------------------------------//
+// Utility																				//
+//--------------------------------------------------------------------------------------//
+public:
+	/** Retrieves the attributes from the data table */
+	UFUNCTION(BlueprintCallable) virtual UAttributeData* GetAttributeInformationFromTable(FName AttributeId);
+	
+	/** Retrieves the equipment from the data table */
+	UFUNCTION(BlueprintCallable) virtual UEquipmentData* GetEquipmentInformationFromTable(FName EquipmentId);
+	
+	/** Retrieves the armor from the data table */
+	UFUNCTION(BlueprintCallable) virtual UArmorData* GetArmorInformationFromTable(FName ArmorId);
+	
+	/** Retrieves the ability data from the data table */
+	UFUNCTION(BlueprintCallable) virtual UAbilityData* GetAbilityInformationFromTable(FName AbilityId);
+
+	/** Gets the npc character information from the data table */
+	UFUNCTION(BlueprintCallable) virtual void GetCombatInformationFromTable(FName EquipmentId);
 	
 	
 };

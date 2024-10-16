@@ -89,9 +89,10 @@ void AEnemy::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 	}
 
 	
-	// Add the character's equipment
-	GetCombatInformationFromTable(CombatInformationId);
 	
+	
+
+
 	// Update the npc stats
 	// UGameplayAbilityUtilities::TryAddAbilitySet(AbilitySystemComponent, AbilitiesAndStats, AbilitiesAndStatsHandle);
 	// BaseAbilitySystem->SetCharacterAbilitiesAndPassiveEffects(CharacterAbilities, CharacterInformation.Statuses);
@@ -137,7 +138,7 @@ void AEnemy::InitCharacterEquipment()
 	}
 
 	// Other combat related things
-	AttackPatterns = CharacterInformation.AttackPatterns;
+	// AttackPatterns = CharacterInformation.AttackPatterns;
 	// CombatClassification = CharacterInformation.CombatClassification;
 }
 
@@ -298,6 +299,11 @@ void AEnemy::WithinPlayerRadiusPeriphery_Implementation(AActor* SourceCharacter,
 		Player = Character;
 		StatsBarsWidgetComponent->SetHiddenInGame(false);
 
+		// if (AIController)
+		// {
+		// 	AIController->SetFocus(Player);
+		// }
+
 		UWidgetBase* StatsBars = Cast<UWidgetBase>(StatsBarsWidgetComponent->GetWidget());
 		if (StatsBars)
 		{
@@ -340,25 +346,21 @@ void AEnemy::OutsideOfPlayerRadiusPeriphery_Implementation(AActor* SourceCharact
 
 
 
-void AEnemy::RetrieveAttackPatterns()
-{
-}
+#pragma region OnRep Values
+void AEnemy::OnRep_CurrentHealthUpdated() { OnHealthUpdated.Broadcast(CurrentHealth); }
+void AEnemy::OnRep_CurrentManaUpdated() { OnManaUpdated.Broadcast(CurrentMana); }
+void AEnemy::OnRep_CurrentPoiseUpdated() { OnPoiseUpdated.Broadcast(CurrentPoise); }
+void AEnemy::OnRep_CurrentStaminaUpdated() { OnStaminaUpdated.Broadcast(CurrentStamina); }
+void AEnemy::OnRep_MaxHealthUpdated() { OnMaxHealthUpdated.Broadcast(MaxHealth); }
+void AEnemy::OnRep_MaxManaUpdated() { OnMaxManaUpdated.Broadcast(MaxMana); }
+void AEnemy::OnRep_MaxPoiseUpdated() { OnMaxPoiseUpdated.Broadcast(MaxPoise); }
+void AEnemy::OnRep_MaxStaminaUpdated() { OnMaxStaminaUpdated.Broadcast(MaxStamina); }
+#pragma endregion 
+
 
 
 
 #pragma region Utility
-TArray<AActor*> AEnemy::GetActorsToIgnore()
-{
-	return ActorsToIgnore;
-}
-
-
-void AEnemy::SetActorsToIgnore(const TArray<AActor*>& Actors)
-{
-	ActorsToIgnore = Actors;
-}
-
-
 void AEnemy::GetCombatInformationFromTable(FName EquipmentId)
 {
 	if (CombatInformationTable)
@@ -373,22 +375,77 @@ void AEnemy::GetCombatInformationFromTable(FName EquipmentId)
 		// UE_LOGFMT(LogTemp, Error, "{0} did not find {1} within the Npc combat information table!", *GetNameSafe(CombatInformationTable), EquipmentId);
 	}
 }
-#pragma endregion 
 
 
-
-
-#pragma region OnRep Values
-void AEnemy::OnRep_CurrentHealthUpdated()
+UAttributeData* AEnemy::GetAttributeInformationFromTable(FName AttributeId)
 {
-	OnHealthUpdated.Broadcast(CurrentHealth);
+	if (!AttributeInformationTable)
+	{
+		UE_LOGFMT(LogTemp, Error, "{0}::{1}() {2}'s attribute data table!", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
+		return nullptr;
+	}
+
+	const F_Table_AttributeData* Information = CombatInformationTable->FindRow<F_Table_AttributeData>(AttributeId, TEXT("Npc Attribute Data Context"));
+	if (Information)
+	{
+		return Information->AttributeData;
+	}
+	
+	return nullptr;
 }
-void AEnemy::OnRep_CurrentManaUpdated() { OnManaUpdated.Broadcast(CurrentMana); }
-void AEnemy::OnRep_CurrentPoiseUpdated() { OnPoiseUpdated.Broadcast(CurrentPoise); }
-void AEnemy::OnRep_CurrentStaminaUpdated() { OnStaminaUpdated.Broadcast(CurrentStamina); }
-void AEnemy::OnRep_MaxHealthUpdated() { OnMaxHealthUpdated.Broadcast(MaxHealth); }
-void AEnemy::OnRep_MaxManaUpdated() { OnMaxManaUpdated.Broadcast(MaxMana); }
-void AEnemy::OnRep_MaxPoiseUpdated() { OnMaxPoiseUpdated.Broadcast(MaxPoise); }
-void AEnemy::OnRep_MaxStaminaUpdated() { OnMaxStaminaUpdated.Broadcast(MaxStamina); }
+
+
+UEquipmentData* AEnemy::GetEquipmentInformationFromTable(FName EquipmentId)
+{
+	if (!EquipmentInformationTable)
+	{
+		UE_LOGFMT(LogTemp, Error, "{0}::{1}() Set {2}'s equipment data table!", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
+		return nullptr;
+	}
+
+	const F_Table_EquipmentData* Information = CombatInformationTable->FindRow<F_Table_EquipmentData>(EquipmentId, TEXT("Npc Equipment Data Context"), false);
+	if (Information)
+	{
+		return Information->EquipmentData;
+	}
+	
+	return nullptr;
+}
+
+
+UArmorData* AEnemy::GetArmorInformationFromTable(FName ArmorId)
+{
+	if (!ArmorInformationTable)
+	{
+		UE_LOGFMT(LogTemp, Error, "{0}::{1}() Set {2}'s armor data table!", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
+		return nullptr;
+	}
+
+	const F_Table_ArmorData* Information = CombatInformationTable->FindRow<F_Table_ArmorData>(ArmorId, TEXT("Npc Armor Data Context"), false);
+	if (Information)
+	{
+		return Information->ArmorData;
+	}
+	
+	return nullptr;
+}
+
+
+UAbilityData* AEnemy::GetAbilityInformationFromTable(FName AbilityId)
+{
+	if (!AbilityInformationTable)
+	{
+		UE_LOGFMT(LogTemp, Error, "{0}::{1}() Set {2}'s ability data table!", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
+		return nullptr;
+	}
+
+	const F_Table_AbilityData* Information = AbilityInformationTable->FindRow<F_Table_AbilityData>(AbilityId, TEXT("Npc Ability Data Context"), false);
+	if (Information)
+	{
+		return Information->AbilityData;
+	}
+	
+	return nullptr;
+}
 #pragma endregion 
 
