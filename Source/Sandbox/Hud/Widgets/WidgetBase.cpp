@@ -15,6 +15,19 @@ void UWidgetBase::SetWidgetController(UObject* InWidgetController)
 	WidgetControllerSet();
 }
 
+void UWidgetBase::SetWidgetControllerIfNotAlreadySet(UObject* InWidgetController)
+{
+	if (!WidgetController)
+	{
+		SetWidgetController(InWidgetController);
+	}
+}
+
+UObject* UWidgetBase::GetWidgetController() const
+{
+	return WidgetController;
+}
+
 
 void UWidgetBase::ShowWidget(float ZOrder)
 {

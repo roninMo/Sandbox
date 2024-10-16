@@ -69,7 +69,6 @@ UPlayerPeripheriesComponent::UPlayerPeripheriesComponent(const FObjectInitialize
 	bTrace = false;
 	bRadius = true;
 	bItemDetection = false;
-	bInitPeripheryDuringBeginPlay = true;
 	ActivationPhase = EHandlePeripheryLogic::Server;
 	
 	/** Periphery Radius */
@@ -100,26 +99,34 @@ UPlayerPeripheriesComponent::UPlayerPeripheriesComponent(const FObjectInitialize
 
 void UPlayerPeripheriesComponent::InitPeripheryInformation()
 {
+	// Remove old delegate bindings
+	PeripheryRadius->OnComponentEndOverlap.RemoveAll(this);
+	PeripheryRadius->OnComponentBeginOverlap.RemoveAll(this);
+	ItemDetectionRadius->OnComponentEndOverlap.RemoveAll(this);
+	ItemDetectionRadius->OnComponentBeginOverlap.RemoveAll(this);
+	PeripheryCone->OnComponentEndOverlap.RemoveAll(this);
+	PeripheryCone->OnComponentBeginOverlap.RemoveAll(this);
+
 	// Initialize the periphery
 	if (PeripheryRadius && ActivatePeripheryLogic(ActivationPhase))
 	{
-		PeripheryRadius->OnComponentBeginOverlap.AddDynamic(this, &UPlayerPeripheriesComponent::OnEnterRadiusPeriphery);
 		PeripheryRadius->OnComponentEndOverlap.AddDynamic(this, &UPlayerPeripheriesComponent::OnExitRadiusPeriphery);
+		PeripheryRadius->OnComponentBeginOverlap.AddDynamic(this, &UPlayerPeripheriesComponent::OnEnterRadiusPeriphery);
 		ConfigurePeripheryCollision(PeripheryRadius, bRadius);
 	}
 
 	if (ItemDetectionRadius && ActivatePeripheryLogic(ActivationPhase))
 	{
-		ItemDetectionRadius->OnComponentBeginOverlap.AddDynamic(this, &UPlayerPeripheriesComponent::OnEnterItemDetection);
 		ItemDetectionRadius->OnComponentEndOverlap.AddDynamic(this, &UPlayerPeripheriesComponent::OnExitItemDetection);
+		ItemDetectionRadius->OnComponentBeginOverlap.AddDynamic(this, &UPlayerPeripheriesComponent::OnEnterItemDetection);
 		ConfigurePeripheryCollision(ItemDetectionRadius, bItemDetection);
 	}
 
 	// The cone, the cone of shame!
 	if (PeripheryCone && ActivatePeripheryLogic(ActivationPhase))
 	{
-		PeripheryCone->OnComponentBeginOverlap.AddDynamic(this, &UPlayerPeripheriesComponent::OnEnterConePeriphery);
 		PeripheryCone->OnComponentEndOverlap.AddDynamic(this, &UPlayerPeripheriesComponent::OnExitConePeriphery);
+		PeripheryCone->OnComponentBeginOverlap.AddDynamic(this, &UPlayerPeripheriesComponent::OnEnterConePeriphery);
 		ConfigurePeripheryCollision(PeripheryCone, bCone);
 	}
 }
@@ -135,8 +142,6 @@ void UPlayerPeripheriesComponent::BeginPlay()
 		IgnoredActors.AddUnique(GetOwner());
 		GetOwner()->GetAllChildActors(IgnoredActors);
 	}
-
-	if (bInitPeripheryDuringBeginPlay) InitPeripheryInformation();
 }
 
 

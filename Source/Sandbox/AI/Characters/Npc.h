@@ -107,14 +107,7 @@ protected:
 	
 	/** The overlap function for entering the periphery radius */
 	UFUNCTION() virtual void PeripheryExitRadius(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
-
-
 	
-//-------------------------------------------------------------------------------------//
-// Peripheries																		   //
-//-------------------------------------------------------------------------------------//
-protected:
 	/** This calculates whether an ai character has sensed this player, and uses the default logic with an offset for accurate traces  */
 	virtual UAISense_Sight::EVisibilityResult CanBeSeenFrom(const FCanBeSeenFromContext& Context, FVector& OutSeenLocation, int32& OutNumberOfLoSChecksPerformed, int32& OutNumberOfAsyncLosCheckRequested, float& OutSightStrength, int32* UserData, const FOnPendingVisibilityQueryProcessedDelegate* Delegate) override;
 

@@ -6,6 +6,7 @@
 #include "AbilitySystemInterface.h"
 #include "GameFramework/Character.h"
 #include "Perception/AISightTargetInterface.h"
+#include "Sandbox/Data/Interfaces/PeripheryObject/PeripheryObjectInterface.h"
 #include "Sandbox/Data/Structs/AbilityInformation.h"
 #include "Sandbox/Data/Structs/CharacterMontages.h"
 #include "CharacterBase.generated.h"
@@ -296,7 +297,7 @@ class UAdvancedMovementComponent;
  * The universal class for characters, npc's, and enemies in the game
  */
 UCLASS()
-class SANDBOX_API ACharacterBase : public ACharacter, public IAbilitySystemInterface, public IAISightTargetInterface
+class SANDBOX_API ACharacterBase : public ACharacter, public IAbilitySystemInterface, public IAISightTargetInterface, public IPeripheryObjectInterface
 {
 	GENERATED_BODY()
 

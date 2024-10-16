@@ -3,6 +3,7 @@
 
 #include "Sandbox/AI/Characters/Enemy.h"
 
+#include "Components/WidgetComponent.h"
 #include "Logging/StructuredLog.h"
 #include "Net/UnrealNetwork.h"
 #include "Sandbox/AI/Controllers/EnemyController.h"
@@ -12,6 +13,7 @@
 #include "Sandbox/Characters/Components/Inventory/InventoryComponent.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Data/Enums/EquipSlot.h"
+#include "Sandbox/Hud/Widgets/WidgetBase.h"
 
 DEFINE_LOG_CATEGORY(EnemyLog);
 
@@ -19,7 +21,7 @@ DEFINE_LOG_CATEGORY(EnemyLog);
 void AEnemy::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-	DOREPLIFETIME_CONDITION_NOTIFY(AEnemy, MaxHealth, COND_Custom, REPNOTIFY_OnChanged);
+	DOREPLIFETIME_CONDITION_NOTIFY(AEnemy, MaxHealth, COND_Custom, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(AEnemy, MaxMana, COND_Custom, REPNOTIFY_OnChanged);
 	DOREPLIFETIME_CONDITION_NOTIFY(AEnemy, MaxPoise, COND_Custom, REPNOTIFY_OnChanged);
 	DOREPLIFETIME_CONDITION_NOTIFY(AEnemy, MaxStamina, COND_Custom, REPNOTIFY_OnChanged);
@@ -36,11 +38,11 @@ AEnemy::AEnemy(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitia
 	CombatComponent = CreateDefaultSubobject<UCombatComponent>(TEXT("Combat Component"));
 	CombatComponent->SetIsReplicated(false);
 	
-	// StatsBarsWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("Stats Bars"));
-	// StatsBarsWidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
-	// StatsBarsWidgetComponent->SetupAttachment(GetRootComponent());
-	// StatsBarsWidgetComponent->SetIsReplicated(true);
-	// StatsBarsWidgetComponent->SetHiddenInGame(true);
+	StatsBarsWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("Stats Bars"));
+	StatsBarsWidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
+	StatsBarsWidgetComponent->SetupAttachment(GetRootComponent());
+	StatsBarsWidgetComponent->SetIsReplicated(true);
+	StatsBarsWidgetComponent->SetHiddenInGame(true);
 }
 
 void AEnemy::BeginPlay()
@@ -52,12 +54,12 @@ void AEnemy::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	
-	// if (Player && StatsBarsWidgetComponent)
-	// {
-	// 	FVector WidgetRotationVector = Player->GetCameraLocation() - GetActorLocation();
-	// 	FRotator WidgetRotation = FRotator(0, WidgetRotationVector.Rotation().Yaw, 0);
-	// 	StatsBarsWidgetComponent->SetWorldRotation(WidgetRotation);
-	// }
+	if (Player && StatsBarsWidgetComponent)
+	{
+		FVector WidgetRotationVector = Player->GetCameraLocation() - GetActorLocation();
+		FRotator WidgetRotation = FRotator(0, WidgetRotationVector.Rotation().Yaw, 0);
+		StatsBarsWidgetComponent->SetWorldRotation(WidgetRotation);
+	}
 }
 
 
@@ -75,92 +77,6 @@ void AEnemy::PossessedBy(AController* NewController)
 }
 
 
-void AEnemy::BindAttributeValuesToAscDelegates()
-{
-	if (!AbilitySystemComponent)
-	{
-		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(Controller);
-		if (!AbilitySystemComponent)
-		{
-			UE_LOGFMT(EnemyLog, Error, "{0}::{1}() {2} Failed to retrieve the ability system component while binding the enemy's attributes!",
-				*UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Controller));
-			return;
-		}
-	}
-
-	const UMMOAttributeSet* Attributes = Cast<UMMOAttributeSet>(AbilitySystemComponent->GetAttributeSet(UMMOAttributeSet::StaticClass()));
-	if (!Attributes)
-	{
-		UE_LOGFMT(EnemyLog, Error, "{0}::{1}() {2} Failed to retrieve the attributes while binding the enemy's attributes!",
-			*UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Controller));
-		return;
-	}
-
-	// TODO: Refactor this into a function that uses references to prevent DRY
-	// Bind to the attribute on change delegates (these delegates don't run on the client, and we're using delegates so that we don't have to update the values every frame)
-
-	
-	FOnGameplayAttributeValueChange& HealthAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetHealthAttribute());
-	HealthAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
-		CurrentHealth = Data.NewValue;
-		OnHealthUpdated.Broadcast(Data.NewValue); 
-	});
-	
-	FOnGameplayAttributeValueChange& ManaAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetManaAttribute());
-	ManaAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
-		CurrentMana = Data.NewValue;
-		OnManaUpdated.Broadcast(Data.NewValue); 
-	});
-	
-	FOnGameplayAttributeValueChange& PoiseAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetPoiseAttribute());
-	PoiseAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
-		CurrentPoise = Data.NewValue;
-		OnPoiseUpdated.Broadcast(Data.NewValue); 
-	});
-	
-	FOnGameplayAttributeValueChange& StaminaAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetStaminaAttribute());
-	StaminaAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
-		CurrentStamina = Data.NewValue;
-		OnStaminaUpdated.Broadcast(Data.NewValue); 
-	});
-	
-	
-	FOnGameplayAttributeValueChange& MaxHealthAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetMaxHealthAttribute());
-	MaxHealthAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
-		MaxHealth = Data.NewValue;
-		OnMaxHealthUpdated.Broadcast(Data.NewValue); 
-	});
-	
-	FOnGameplayAttributeValueChange& MaxManaAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetMaxManaAttribute());
-	MaxManaAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
-		MaxMana = Data.NewValue;
-		OnMaxManaUpdated.Broadcast(Data.NewValue); 
-	});
-	
-	FOnGameplayAttributeValueChange& MaxPoiseAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetMaxPoiseAttribute());
-	MaxPoiseAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
-		MaxPoise = Data.NewValue;
-		OnMaxPoiseUpdated.Broadcast(Data.NewValue); 
-	});
-	
-	FOnGameplayAttributeValueChange& MaxStaminaAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetMaxStaminaAttribute());
-	MaxStaminaAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
-		MaxStamina = Data.NewValue;
-		OnMaxStaminaUpdated.Broadcast(Data.NewValue); 
-	});
-	
-	// UE_LOGFMT(LogTemp, Log, "{0}: attribute values: health: {1}/{2}, stamina: {3}/{4}, poise: {5}/{6}, mana: {7}/{8}, attributeSet: {9}, Asc: {10}",
-	// 	*UEnum::GetValueAsString(GetLocalRole()),
-	// 	BaseAttributeSet->GetHealth(), BaseAttributeSet->GetMaxHealth(),
-	// 	BaseAttributeSet->GetStamina(), BaseAttributeSet->GetMaxStamina(),
-	// 	BaseAttributeSet->GetPoise(), BaseAttributeSet->GetMaxPoise(),
-	// 	BaseAttributeSet->GetMana(), BaseAttributeSet->GetMaxMana(),
-	// 	*GetNameSafe(BaseAttributeSet),
-	// 	*GetNameSafe(BaseAbilitySystem)
-	// );
-}
-
-
 void AEnemy::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 {
 	Super::OnInitAbilityActorInfo(InOwnerActor, InAvatarActor);
@@ -171,7 +87,6 @@ void AEnemy::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 		if (!AbilitySystemComponent) AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(InOwnerActor);
 	}
 
-	
 	
 	// Add the character's equipment
 	InitCharacterEquipment();
@@ -184,85 +99,22 @@ void AEnemy::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 	// if (SecondaryAttributes) ApplyEffectToSelf(SecondaryAttributes);
 	//
 	// if (BaseAttributeSet) MoveSpeed = BaseAttributeSet->GetMoveSpeed();
-	
+
+	// Because of how ai characters are replicated, we need to use the character // TODO: Find a good way for handling stats/attribute information for all npc characters
+	if (StatsBarsWidgetComponent)
+	{
+		UWidgetBase* StatsBars = Cast<UWidgetBase>(StatsBarsWidgetComponent->GetWidget());
+		if (StatsBars)
+		{
+			StatsBars->SetWidgetController(this);
+		}
+	}
+
 	// Update the attribute delegate bindings
 	BindAttributeValuesToAscDelegates();
 	UpdateAttributeValues();
 	
 }
-
-
-void AEnemy::UpdateAttributeValues()
-{
-	if (!AbilitySystemComponent)
-	{
-		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(Controller);
-		if (!AbilitySystemComponent)
-		{
-			UE_LOGFMT(EnemyLog, Error, "{0}::{1}() {2} Failed to retrieve the ability system component while updating the enemy's attributes!",
-				*UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Controller));
-			return;
-		}
-	}
-
-	const UMMOAttributeSet* Attributes = Cast<UMMOAttributeSet>(AbilitySystemComponent->GetAttributeSet(UMMOAttributeSet::StaticClass()));
-	if (!Attributes)
-	{
-		UE_LOGFMT(EnemyLog, Error, "{0}::{1}() {2} Failed to retrieve the attributes while updating the enemy's attributes!",
-			*UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Controller));
-		return;
-	}
-
-	
-	if (CurrentHealth != Attributes->GetHealth())
-	{
-		OnHealthUpdated.Broadcast(Attributes->GetHealth());
-		CurrentHealth = Attributes->GetHealth();
-	}
-	
-	if (CurrentPoise != Attributes->GetPoise())
-	{
-		OnPoiseUpdated.Broadcast(Attributes->GetPoise());
-		CurrentPoise = Attributes->GetPoise();
-	}
-
-	if (CurrentStamina != Attributes->GetStamina())
-	{
-		OnStaminaUpdated.Broadcast(Attributes->GetStamina());
-		CurrentStamina = Attributes->GetStamina();
-	}
-
-	if (CurrentMana != Attributes->GetMana())
-	{
-		OnManaUpdated.Broadcast(Attributes->GetMana());
-		CurrentMana = Attributes->GetMana();
-	}
-	
-	if (MaxHealth != Attributes->GetMaxHealth())
-	{
-		OnMaxHealthUpdated.Broadcast(Attributes->GetMaxHealth());
-		MaxHealth = Attributes->GetMaxHealth();
-	}
-
-	if (MaxPoise != Attributes->GetMaxPoise())
-	{
-		OnMaxPoiseUpdated.Broadcast(Attributes->GetMaxPoise());
-		MaxPoise = Attributes->GetMaxPoise();
-	}
-
-	if (MaxStamina != Attributes->GetMaxStamina())
-	{
-		OnMaxStaminaUpdated.Broadcast(Attributes->GetMaxStamina());
-		MaxStamina = Attributes->GetMaxStamina();
-	}
-
-	if (MaxMana != Attributes->GetMaxMana())
-	{
-		OnMaxManaUpdated.Broadcast(Attributes->GetMaxMana());
-		MaxMana = Attributes->GetMaxMana();
-	}
-}
-
 
 
 void AEnemy::InitCharacterEquipment()
@@ -361,9 +213,207 @@ void AEnemy::InitCharacterEquipment()
 
 
 
+
+#pragma region Attributes
+void AEnemy::BindAttributeValuesToAscDelegates()
+{
+	if (!HasAuthority())
+	{
+		return;
+	}
+
+	if (!AbilitySystemComponent)
+	{
+		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(Controller);
+		if (!AbilitySystemComponent)
+		{
+			UE_LOGFMT(EnemyLog, Error, "{0}::{1}() {2} Failed to retrieve the ability system component while binding the enemy's attributes!",
+				*UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Controller));
+			return;
+		}
+	}
+
+	const UMMOAttributeSet* Attributes = Cast<UMMOAttributeSet>(AbilitySystemComponent->GetAttributeSet(UMMOAttributeSet::StaticClass()));
+	if (!Attributes)
+	{
+		UE_LOGFMT(EnemyLog, Error, "{0}::{1}() {2} Failed to retrieve the attributes while binding the enemy's attributes!",
+			*UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Controller));
+		return;
+	}
+
+	// TODO: Refactor this into a function that uses references to prevent DRY
+	// Bind to the attribute on change delegates (these delegates don't run on the client, and we're using delegates so that we don't have to update the values every frame)
+
+
+	// TODO: nothing is wrong with this, investigate why the functions aren't broadcasting, or more specifically why the replicated values OnReplicated functions aren't handling any logic
+	FOnGameplayAttributeValueChange& HealthAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetHealthAttribute());
+	HealthAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
+		CurrentHealth = Data.NewValue;
+		OnHealthUpdated.Broadcast(Data.NewValue); 
+	});
+	
+	FOnGameplayAttributeValueChange& ManaAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetManaAttribute());
+	ManaAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
+		CurrentMana = Data.NewValue;
+		OnManaUpdated.Broadcast(Data.NewValue);
+	});
+	
+	FOnGameplayAttributeValueChange& PoiseAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetPoiseAttribute());
+	PoiseAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
+		CurrentPoise = Data.NewValue;
+		OnPoiseUpdated.Broadcast(Data.NewValue); 
+	});
+	
+	FOnGameplayAttributeValueChange& StaminaAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetStaminaAttribute());
+	StaminaAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
+		CurrentStamina = Data.NewValue;
+		OnStaminaUpdated.Broadcast(Data.NewValue); 
+	});
+	
+	
+	FOnGameplayAttributeValueChange& MaxHealthAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetMaxHealthAttribute());
+	MaxHealthAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
+		MaxHealth = Data.NewValue;
+		OnMaxHealthUpdated.Broadcast(Data.NewValue); 
+	});
+	
+	FOnGameplayAttributeValueChange& MaxManaAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetMaxManaAttribute());
+	MaxManaAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
+		MaxMana = Data.NewValue;
+		OnMaxManaUpdated.Broadcast(Data.NewValue); 
+	});
+	
+	FOnGameplayAttributeValueChange& MaxPoiseAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetMaxPoiseAttribute());
+	MaxPoiseAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
+		MaxPoise = Data.NewValue;
+		OnMaxPoiseUpdated.Broadcast(Data.NewValue); 
+	});
+	
+	FOnGameplayAttributeValueChange& MaxStaminaAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetMaxStaminaAttribute());
+	MaxStaminaAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
+		MaxStamina = Data.NewValue;
+		OnMaxStaminaUpdated.Broadcast(Data.NewValue); 
+	});
+	
+	// UE_LOGFMT(LogTemp, Log, "{0}: attribute values: health: {1}/{2}, stamina: {3}/{4}, poise: {5}/{6}, mana: {7}/{8}, attributeSet: {9}, Asc: {10}",
+	// 	*UEnum::GetValueAsString(GetLocalRole()),
+	// 	BaseAttributeSet->GetHealth(), BaseAttributeSet->GetMaxHealth(),
+	// 	BaseAttributeSet->GetStamina(), BaseAttributeSet->GetMaxStamina(),
+	// 	BaseAttributeSet->GetPoise(), BaseAttributeSet->GetMaxPoise(),
+	// 	BaseAttributeSet->GetMana(), BaseAttributeSet->GetMaxMana(),
+	// 	*GetNameSafe(BaseAttributeSet),
+	// 	*GetNameSafe(BaseAbilitySystem)
+	// );
+}
+
+
+void AEnemy::UpdateAttributeValues()
+{
+	if (!HasAuthority())
+	{
+		return;
+	}
+
+	if (!AbilitySystemComponent)
+	{
+		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(Controller);
+		if (!AbilitySystemComponent)
+		{
+			UE_LOGFMT(EnemyLog, Error, "{0}::{1}() {2} Failed to retrieve the ability system component while updating the enemy's attributes!",
+				*UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Controller));
+			return;
+		}
+	}
+
+	const UMMOAttributeSet* Attributes = Cast<UMMOAttributeSet>(AbilitySystemComponent->GetAttributeSet(UMMOAttributeSet::StaticClass()));
+	if (!Attributes)
+	{
+		UE_LOGFMT(EnemyLog, Error, "{0}::{1}() {2} Failed to retrieve the attributes while updating the enemy's attributes!",
+			*UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Controller));
+		return;
+	}
+
+	CurrentHealth = Attributes->GetHealth();
+	CurrentPoise = Attributes->GetPoise();
+	CurrentStamina = Attributes->GetStamina();
+	CurrentMana = Attributes->GetMana();
+	MaxHealth = Attributes->GetMaxHealth();
+	MaxPoise = Attributes->GetMaxPoise();
+	MaxStamina = Attributes->GetMaxStamina();
+	MaxMana = Attributes->GetMaxMana();
+	
+	OnHealthUpdated.Broadcast(Attributes->GetHealth());
+	OnPoiseUpdated.Broadcast(Attributes->GetPoise());
+	OnStaminaUpdated.Broadcast(Attributes->GetStamina());
+	OnManaUpdated.Broadcast(Attributes->GetMana());
+	OnMaxHealthUpdated.Broadcast(Attributes->GetMaxHealth());
+	OnMaxPoiseUpdated.Broadcast(Attributes->GetMaxPoise());
+	OnMaxStaminaUpdated.Broadcast(Attributes->GetMaxStamina());
+	OnMaxManaUpdated.Broadcast(Attributes->GetMaxMana());
+}
+#pragma endregion 
+
+
+
+
+#pragma region Periphreal Interface Functions
+void AEnemy::WithinPlayerRadiusPeriphery_Implementation(AActor* SourceCharacter, EPeripheryType PeripheryType)
+{
+	Super::WithinPlayerRadiusPeriphery_Implementation(SourceCharacter, PeripheryType);
+	if (!StatsBarsWidgetComponent) return;
+
+	ACharacterBase* Character = Cast<ACharacterBase>(SourceCharacter);
+	if (Character && Character->IsLocallyControlled())
+	{
+		Player = Character;
+		StatsBarsWidgetComponent->SetHiddenInGame(false);
+
+		UWidgetBase* StatsBars = Cast<UWidgetBase>(StatsBarsWidgetComponent->GetWidget());
+		if (StatsBars)
+		{
+			StatsBars->SetWidgetControllerIfNotAlreadySet(this);
+			UE_LOGFMT(LogTemp, Log, "{0}: attribute values: health: {1}/{2}, stamina: {3}/{4}, poise: {5}/{6}, mana: {7}/{8}, Asc: {9}",
+				*UEnum::GetValueAsString(GetLocalRole()),
+				CurrentHealth, MaxHealth,
+				CurrentStamina, MaxStamina,
+				CurrentPoise, MaxPoise,
+				CurrentMana, MaxMana,
+				*GetNameSafe(AbilitySystemComponent)
+			);
+		}
+	}
+	
+	UpdateAttributeValues();
+}
+
+
+void AEnemy::OutsideOfPlayerRadiusPeriphery_Implementation(AActor* SourceCharacter, EPeripheryType PeripheryType)
+{
+	Super::OutsideOfPlayerRadiusPeriphery_Implementation(SourceCharacter, PeripheryType);
+	if (!StatsBarsWidgetComponent) return;
+
+	if (Player == SourceCharacter)
+	{
+		StatsBarsWidgetComponent->SetHiddenInGame(true);
+	}
+	else
+	{
+		ACharacterBase* Character = Cast<ACharacterBase>(SourceCharacter);
+		if (Character && Character->IsLocallyControlled())
+		{
+			StatsBarsWidgetComponent->SetHiddenInGame(true);
+		}
+	}
+}
+#pragma endregion 
+
+
+
+
 void AEnemy::RetrieveAttackPatterns()
 {
 }
+
 
 
 #pragma region Utility
@@ -383,7 +433,10 @@ void AEnemy::SetActorsToIgnore(const TArray<AActor*>& Actors)
 
 
 #pragma region OnRep Values
-void AEnemy::OnRep_CurrentHealthUpdated() { OnHealthUpdated.Broadcast(CurrentHealth); }
+void AEnemy::OnRep_CurrentHealthUpdated()
+{
+	OnHealthUpdated.Broadcast(CurrentHealth);
+}
 void AEnemy::OnRep_CurrentManaUpdated() { OnManaUpdated.Broadcast(CurrentMana); }
 void AEnemy::OnRep_CurrentPoiseUpdated() { OnPoiseUpdated.Broadcast(CurrentPoise); }
 void AEnemy::OnRep_CurrentStaminaUpdated() { OnStaminaUpdated.Broadcast(CurrentStamina); }

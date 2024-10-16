@@ -11,7 +11,7 @@ class UCharacterAbilityDataSet;
 DECLARE_LOG_CATEGORY_EXTERN(EnemyLog, Log, All);
 
 
-class UWidgetComponentBase;
+class UWidgetComponent;
 class UMMOAttributeSet;
 class UCaptainComponent;
 
@@ -69,7 +69,7 @@ class SANDBOX_API AEnemy : public ANpc
 protected:
 	/** The enemy's current health, stamina, poise, and mana */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<UWidgetComponentBase> StatsBarsWidgetComponent;
+	TObjectPtr<UWidgetComponent> StatsBarsWidgetComponent;
 
 	/** Combat information (stats, equipment, etc.) */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCharacterAbilityDataSet* AbilitiesAndStats;
@@ -137,9 +137,6 @@ protected:
 	/** PlayerState Replication Notification Callback */ // Only use on ai character's during custom games (tdm, or anything where we need to keep track of a player information)
 	// virtual void OnRep_PlayerState() override;
 
-	/** This keeps the client in sync with the enemy's attributes for widget to have access to this information */
-	virtual void BindAttributeValuesToAscDelegates();
-	
 	/**
 	 * Initialized the Abilities' ActorInfo - the structure that holds information about who we are acting on and who controls us. \n\n
 	 * 
@@ -157,9 +154,19 @@ protected:
 	/** Equip's the enemy's weapons and armor */
 	virtual void InitCharacterEquipment();
 
+	
+	/** This keeps the client in sync with the enemy's attributes for widget to have access to this information */
+	virtual void BindAttributeValuesToAscDelegates();
+	
 
 	/** Update the attribute values during specific events (Players in view, or if they get close enough to the ai's periphreals) */
 	virtual void UpdateAttributeValues();
+	
+	/** Logic when a character registers it within it's periphery */
+	virtual void WithinPlayerRadiusPeriphery_Implementation(AActor* SourceCharacter, EPeripheryType PeripheryType) override;
+
+	/** Logic when a character unregisters it within it's periphery */
+	virtual void OutsideOfPlayerRadiusPeriphery_Implementation(AActor* SourceCharacter, EPeripheryType PeripheryType) override;
 
 	/** Retrieves the attack patterns for this enemy */
 	virtual void RetrieveAttackPatterns();	

@@ -50,9 +50,6 @@ protected:
 	
 	/** Whether to use the item detection logic */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Peripheries") bool bItemDetection;
-
-	/** Whether to initialize the periphery during BeginPlay. If this isn't set to true, you need to call InitPeripheryInformation() before any of the periphery logic initializes */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Peripheries") bool bInitPeripheryDuringBeginPlay;
 	
 	/** The radius of the character, for things like target locking */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Peripheries|Radius", meta = (EditCondition = "bRadius", EditConditionHides))
@@ -176,6 +173,14 @@ protected:
 //----------------------------------------------------------------------------------------------------------------------//
 // Periphery functions																									//
 //----------------------------------------------------------------------------------------------------------------------//
+public:
+	/**
+	 * Configures the periphery component's logic for the player \n\n
+	 * @remarks This is called automatically if bInitPeripheryDuringBeginPlay is set to true. Otherwise, this needs to be called once the character has been initialized
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Peripheries|Utilities") virtual void InitPeripheryInformation();
+
+	
 protected:
 	/**
 	 * The trace logic for the line trace periphery. This creates a trace returns the result. \n\n
@@ -272,12 +277,6 @@ protected:
 // Other																						//
 //----------------------------------------------------------------------------------------------//
 protected:
-	/**
-	 * Configures the periphery component's logic for the player \n\n
-	 * @remarks This is called automatically if bInitPeripheryDuringBeginPlay is set to true. Otherwise, this needs to be called once the character has been initialized
-	 */
-	UFUNCTION(BlueprintCallable, Category = "Peripheries|Utilities") virtual void InitPeripheryInformation();
-	
 	/** Helper function for determining the type of overlay that should be used */
 	UFUNCTION() virtual EPeripheryType FindPeripheryType(TScriptInterface<IPeripheryObjectInterface> PeripheryObject) const;
 	virtual bool GetCharacter();

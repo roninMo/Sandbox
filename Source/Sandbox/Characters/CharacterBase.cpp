@@ -20,6 +20,7 @@
 
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
 #include "EnhancedInputComponent.h"
+#include "Components/Periphery/PeripheryComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "Logging/StructuredLog.h"
 
@@ -154,6 +155,12 @@ void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvat
 		// UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
 		UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
 		AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
+	}
+
+	// Periphery component initialization
+	if (Peripheries)
+	{
+		Peripheries->InitPeripheryInformation();
 	}
 
 	// Inventory component initialization

@@ -7,6 +7,7 @@
 #include "Components/SphereComponent.h"
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Characters/Components/Inventory/InventoryComponent.h"
+#include "Sandbox/Data/Enums/CollisionChannels.h"
 
 
 void ANpc::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -71,6 +72,16 @@ void ANpc::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 		Inventory->SetPlayerId();
 	}
 	
+	// Init the periphery
+	PeripheryRadius->SetGenerateOverlapEvents(true);
+	PeripheryRadius->SetCollisionResponseToAllChannels(ECR_Ignore);
+	PeripheryRadius->SetCollisionObjectType(ECC_PeripheryComponents);
+	PeripheryRadius->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	PeripheryRadius->SetCollisionResponseToChannel(ECC_Pawn, ECollisionResponse::ECR_Overlap);
+	PeripheryRadius->OnComponentBeginOverlap.RemoveAll(this);
+	PeripheryRadius->OnComponentEndOverlap.RemoveAll(this);
+	PeripheryRadius->OnComponentBeginOverlap.AddDynamic(this, &ANpc::PeripheryEnterRadius);
+	PeripheryRadius->OnComponentEndOverlap.AddDynamic(this, &ANpc::PeripheryExitRadius);
 }
 #pragma endregion
 

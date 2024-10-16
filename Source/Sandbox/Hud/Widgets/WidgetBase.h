@@ -32,6 +32,15 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable) virtual void SetWidgetController(UObject* InWidgetController);
 
+	/**
+	 * This sets the widget controller for this widget if it isn't already set
+	 * The controller is anything, and I think the premise of this is to do logic that's associated with the Asc when set (This is epic's way of doing things)
+	 */
+	UFUNCTION(BlueprintCallable) virtual void SetWidgetControllerIfNotAlreadySet(UObject* InWidgetController);
+
+	/** Retrieves the widget controller */
+	UFUNCTION(BlueprintCallable) virtual UObject* GetWidgetController() const;
+
 	/** Function for handling information and adding to viewport */
 	UFUNCTION(BlueprintCallable) virtual void ShowWidget(float ZOrder = 0);
 	

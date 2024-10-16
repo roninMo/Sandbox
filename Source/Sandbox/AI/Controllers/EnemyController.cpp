@@ -4,7 +4,7 @@
 #include "Sandbox/AI/Controllers/EnemyController.h"
 
 #include "Sandbox/Asc/AbilitySystem.h"
-#include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
+#include "Sandbox/Asc/Attributes/MMOAttributeLogic.h"
 
 AEnemyController::AEnemyController(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -20,8 +20,9 @@ AEnemyController::AEnemyController(const FObjectInitializer& ObjectInitializer) 
 	// Create ability system component, and set it to be explicitly replicated
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystem>(TEXT("AbilitySystemComponent"));
 	AbilitySystemComponent->SetIsReplicated(true);
-	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
-	AttributeSet = CreateDefaultSubobject<UMMOAttributeSet>(TEXT("Attributes"));
+	// AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
+	AttributeSet = CreateDefaultSubobject<UMMOAttributeLogic>(TEXT("Attributes"));
 }
 
 
