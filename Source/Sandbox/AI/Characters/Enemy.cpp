@@ -12,6 +12,7 @@
 #include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
 #include "Sandbox/Asc/Information/EnemyEquipmentDataSet.h"
 #include "Sandbox/Combat/CombatComponent.h"
+#include "Sandbox/Data/Structs/CharacterInformation.h"
 #include "Sandbox/Hud/Widgets/WidgetBase.h"
 
 DEFINE_LOG_CATEGORY(EnemyLog);
@@ -80,31 +81,21 @@ void AEnemy::PossessedBy(AController* NewController)
 
 void AEnemy::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 {
-	Super::OnInitAbilityActorInfo(InOwnerActor, InAvatarActor);
-
 	if (!AbilitySystemComponent)
 	{
 		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(InOwnerActor);
 		if (!AbilitySystemComponent) AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(InOwnerActor);
 	}
 
-	
-	
-	
+	/**** Attribute, Equipment, Ability, and Armor information ****/
+	AbilityData = GetAbilityInformationFromTable(AbilityDataId);
+	Stats = GetAttributeInformationFromTable(AttributeInformationId);
+	Equipment = GetEquipmentInformationFromTable(EquipmentInformationId);
+	Armor = GetArmorInformationFromTable(ArmorInformationId);
 
-
-	// Update the npc stats
-	// UGameplayAbilityUtilities::TryAddAbilitySet(AbilitySystemComponent, AbilitiesAndStats, AbilitiesAndStatsHandle);
-	// BaseAbilitySystem->SetCharacterAbilitiesAndPassiveEffects(CharacterAbilities, CharacterInformation.Statuses);
-	// for (const TSubclassOf<UGameplayEffect> Effect : InitialEffectsState) ApplyEffectToSelf(Effect);
-	// if (CharacterInformation.PrimaryAttributes) ApplyEffectToSelf(CharacterInformation.PrimaryAttributes);
-	// if (SecondaryAttributes) ApplyEffectToSelf(SecondaryAttributes);
-	//
-	// if (BaseAttributeSet) MoveSpeed = BaseAttributeSet->GetMoveSpeed();
-	InitCharacterEquipment();
-
-	// Because of how ai characters are replicated, we need to use the character // TODO: Find a good way for handling stats/attribute information for all npc characters
-	if (StatsBarsWidgetComponent)
+	
+	/**** Character components ****/
+	if (StatsBarsWidgetComponent) // TODO: Find a good way for handling stats/attribute information for all npc characters
 	{
 		UWidgetBase* StatsBars = Cast<UWidgetBase>(StatsBarsWidgetComponent->GetWidget());
 		if (StatsBars)
@@ -112,34 +103,13 @@ void AEnemy::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 			StatsBars->SetWidgetController(this);
 		}
 	}
-
+	
 	// Update the attribute delegate bindings
 	BindAttributeValuesToAscDelegates();
 	UpdateAttributeValues();
+
 	
-}
-
-
-void AEnemy::InitCharacterEquipment()
-{
-	if (!Inventory || !CombatComponent)
-	{
-		return;
-	}
-
-	if (EquipmentAndArmor)
-	{
-		EquipmentAndArmor->AddToCharacter(AbilitySystemComponent, Inventory, CombatComponent);
-	}
-
-	if (AbilitiesAndStats)
-	{
-		AbilitiesAndStats->AddToAbilitySystem(AbilitySystemComponent, AbilitiesAndStatsHandle);
-	}
-
-	// Other combat related things
-	// AttackPatterns = CharacterInformation.AttackPatterns;
-	// CombatClassification = CharacterInformation.CombatClassification;
+	Super::OnInitAbilityActorInfo(InOwnerActor, InAvatarActor);
 }
 
 
@@ -385,7 +355,7 @@ UAttributeData* AEnemy::GetAttributeInformationFromTable(FName AttributeId)
 		return nullptr;
 	}
 
-	const F_Table_AttributeData* Information = CombatInformationTable->FindRow<F_Table_AttributeData>(AttributeId, TEXT("Npc Attribute Data Context"));
+	const F_Table_AttributeData* Information = AttributeInformationTable->FindRow<F_Table_AttributeData>(AttributeId, TEXT("Npc Attribute Data Context"));
 	if (Information)
 	{
 		return Information->AttributeData;
@@ -403,7 +373,7 @@ UEquipmentData* AEnemy::GetEquipmentInformationFromTable(FName EquipmentId)
 		return nullptr;
 	}
 
-	const F_Table_EquipmentData* Information = CombatInformationTable->FindRow<F_Table_EquipmentData>(EquipmentId, TEXT("Npc Equipment Data Context"), false);
+	const F_Table_EquipmentData* Information = EquipmentInformationTable->FindRow<F_Table_EquipmentData>(EquipmentId, TEXT("Npc Equipment Data Context"), false);
 	if (Information)
 	{
 		return Information->EquipmentData;
@@ -421,7 +391,7 @@ UArmorData* AEnemy::GetArmorInformationFromTable(FName ArmorId)
 		return nullptr;
 	}
 
-	const F_Table_ArmorData* Information = CombatInformationTable->FindRow<F_Table_ArmorData>(ArmorId, TEXT("Npc Armor Data Context"), false);
+	const F_Table_ArmorData* Information = ArmorInformationTable->FindRow<F_Table_ArmorData>(ArmorId, TEXT("Npc Armor Data Context"), false);
 	if (Information)
 	{
 		return Information->ArmorData;

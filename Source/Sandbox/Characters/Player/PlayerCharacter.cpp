@@ -3,11 +3,21 @@
 
 #include "Sandbox/Characters/Player/PlayerCharacter.h"
 
+#include "Sandbox/Data/Structs/CharacterInformation.h"
+#include "EnhancedInputComponent.h"
 #include "Components/SphereComponent.h"
+#include "Logging/StructuredLog.h"
+
+#include "Sandbox/Characters/Components/AnimInstance/AnimInstanceBase.h"
+#include "Sandbox/Asc/Characters/AbilitySystemPlayerState.h"
+#include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
+#include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Characters/Components/Inventory/InventoryComponent.h"
 #include "Sandbox/Characters/Components/Periphery/PeripheryComponent.h"
 #include "Sandbox/Characters/Components/Camera/TargetLockSpringArm.h"
-#include "Sandbox/Combat/CombatComponent.h"
+#include "Sandbox/Hud/Hud/PlayerHud.h"
+
 
 APlayerCharacter::APlayerCharacter(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -32,4 +42,141 @@ APlayerCharacter::APlayerCharacter(const FObjectInitializer& ObjectInitializer) 
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+
+void APlayerCharacter::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
+{
+	if (!AbilitySystemComponent)
+	{
+		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(this);
+		if (!AbilitySystemComponent) return;
+	}
+
+
+	/**** Character base attributes and abilities ****/
+	AbilityData = GetAbilityInformationFromTable(AbilityDataId);
+	AttributeData = GetAttributeInformationFromTable(AttributeInformationId);
+	
+	// if (AbilityData)
+	// {
+	// 	AbilityData->AddAbilityDataToCharacter(AbilitySystemComponent, AbilityDataHandle);
+	// }
+	// if (AttributeData)
+	// {
+	// 	AttributeData->AddAttributesToCharacter(AbilitySystemComponent, AttributeDataHandle);
+	// }
+
+
+	/**** Character Component logic ****/
+	// Periphery component initialization
+	if (Peripheries)
+	{
+		Peripheries->InitPeripheryInformation();
+	}
+
+	// Inventory component initialization
+	if (Inventory)
+	{
+		Inventory->SetPlayerId();
+	}
+	
+	// Add ability system state to the anim instance
+	SetCharacterMontages();
+	UAnimInstanceBase* AnimInstance = GetMesh() ? Cast<UAnimInstanceBase>(GetMesh()->GetAnimInstance()) : nullptr;
+	if (AnimInstance)
+	{
+		AnimInstance->InitializeAbilitySystem(AbilitySystemComponent);
+	}
+	
+	// Camera
+	InitCameraSettings();
+
+	
+	/**** Controller specific logic ****/
+	APlayerController* PlayerController = GetController<APlayerController>();
+	if (IsLocallyControlled() && PlayerController)
+	{
+		// Initialize the player hud
+		APlayerHud* Hud = PlayerController->GetHUD<APlayerHud>();
+		if (Hud)
+		{
+			AAbilitySystemPlayerState* AscPlayerState = GetPlayerState<AAbilitySystemPlayerState>();
+			UMMOAttributeSet* Attributes = AscPlayerState ? AscPlayerState->GetAttributeSet<UMMOAttributeSet>() : nullptr;
+			Hud->InitializeHud(this, PlayerController, AscPlayerState, AbilitySystemComponent, Attributes);
+		}
+
+		// Add the ability input bindings
+		if (IsLocallyControlled())
+		{
+			UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
+			AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
+		}
+	}
+
+	
+	// Blueprint function event
+	BP_OnInitAbilityActorInfo();
+}
+
+
+UInputComponent* APlayerCharacter::CreatePlayerInputComponent()
+{
+	return Super::CreatePlayerInputComponent();
+}
+
+
+void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	// InputComponent = PlayerInputComponent;
+	
+	
+	if (!AbilitySystemComponent)
+	{
+		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(this);
+		if (!AbilitySystemComponent) return;
+	}
+	
+	// Add the ability input bindings
+	// UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent);
+	// AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
+}
+
+
+
+
+UAttributeData* APlayerCharacter::GetAttributeInformationFromTable(FName AttributeId)
+{
+	if (!AttributeInformationTable)
+	{
+		UE_LOGFMT(LogTemp, Error, "{0}::{1}() {2}'s attribute data table!", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
+		return nullptr;
+	}
+
+	const F_Table_AttributeData* Information = AttributeInformationTable->FindRow<F_Table_AttributeData>(AttributeId, TEXT("Character Attribute Data Context"));
+	if (Information)
+	{
+		return Information->AttributeData;
+	}
+	
+	return nullptr;
+}
+
+
+UAbilityData* APlayerCharacter::GetAbilityInformationFromTable(FName AbilityId)
+{
+	if (!AbilityInformationTable)
+	{
+		UE_LOGFMT(LogTemp, Error, "{0}::{1}() Set {2}'s ability data table!", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
+		return nullptr;
+	}
+
+	const F_Table_AbilityData* Information = AbilityInformationTable->FindRow<F_Table_AbilityData>(AbilityId, TEXT("Character Ability Data Context"), false);
+	if (Information)
+	{
+		return Information->AbilityData;
+	}
+	
+	return nullptr;
 }

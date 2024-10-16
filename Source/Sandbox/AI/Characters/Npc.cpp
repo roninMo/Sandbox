@@ -26,6 +26,13 @@ ANpc::ANpc(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitialize
 	PeripheryRadius->SetupAttachment(RootComponent);
 	PeripheryRadius->InitSphereRadius(1340.0f);
 	PeripheryRadius->SetHiddenInGame(true);
+
+	PeripheryRadius->SetGenerateOverlapEvents(true);
+	PeripheryRadius->SetCollisionResponseToAllChannels(ECR_Ignore);
+	PeripheryRadius->SetCollisionObjectType(ECC_PeripheryComponents);
+	PeripheryRadius->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	PeripheryRadius->SetCollisionResponseToChannel(ECC_Pawn, ECollisionResponse::ECR_Overlap);
+	
 	
 	// Inventory
 	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
@@ -53,7 +60,6 @@ void ANpc::PossessedBy(AController* NewController)
 void ANpc::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 {
 	// Super::OnInitAbilityActorInfo(InOwnerActor, InAvatarActor);
-	
 	AIController = AIController ? AIController : GetController<AAIControllerBase>();
 
 	SetCharacterMontages();
@@ -73,15 +79,14 @@ void ANpc::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 	}
 	
 	// Init the periphery
-	PeripheryRadius->SetGenerateOverlapEvents(true);
-	PeripheryRadius->SetCollisionResponseToAllChannels(ECR_Ignore);
-	PeripheryRadius->SetCollisionObjectType(ECC_PeripheryComponents);
-	PeripheryRadius->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-	PeripheryRadius->SetCollisionResponseToChannel(ECC_Pawn, ECollisionResponse::ECR_Overlap);
 	PeripheryRadius->OnComponentBeginOverlap.RemoveAll(this);
 	PeripheryRadius->OnComponentEndOverlap.RemoveAll(this);
 	PeripheryRadius->OnComponentBeginOverlap.AddDynamic(this, &ANpc::PeripheryEnterRadius);
 	PeripheryRadius->OnComponentEndOverlap.AddDynamic(this, &ANpc::PeripheryExitRadius);
+
+	// Blueprint function event
+	BP_OnInitAbilityActorInfo();
+	
 }
 #pragma endregion
 

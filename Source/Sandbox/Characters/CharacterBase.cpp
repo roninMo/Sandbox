@@ -11,19 +11,13 @@
 
 #include "Components/AdvancedMovement/CombatMovementComponent.h"
 #include "Components/Inventory/InventoryComponent.h"
-#include "Components/AnimInstance/AnimInstanceBase.h"
-#include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
 #include "Sandbox/Asc/AbilitySystem.h"
-#include "Sandbox/Asc/Characters/AbilitySystemPlayerState.h"
 #include "GameFramework/PlayerState.h"
-#include "Sandbox/Hud/Hud/PlayerHud.h"
+#include "Components/AnimInstance/AnimInstanceBase.h"
 
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
-#include "EnhancedInputComponent.h"
-#include "Components/Periphery/PeripheryComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "Logging/StructuredLog.h"
-#include "Sandbox/Asc/Information/SandboxTags.h"
 
 
 ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Super(
@@ -121,9 +115,6 @@ void ACharacterBase::OnRep_PlayerState()
 
 void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 {
-	// Blueprint function event
-	BP_OnInitAbilityActorInfo();
-	
 	if (!AbilitySystemComponent)
 	{
 		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(this);
@@ -138,74 +129,14 @@ void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvat
 		AnimInstance->InitializeAbilitySystem(AbilitySystemComponent);
 	}
 
-	APlayerController* PlayerController = GetController<APlayerController>();
-	if (IsLocallyControlled() && PlayerController)
-	{
-		// Initialize the player hud
-		APlayerHud* Hud = PlayerController->GetHUD<APlayerHud>();
-		if (Hud)
-		{
-			AAbilitySystemPlayerState* AscPlayerState = GetPlayerState<AAbilitySystemPlayerState>();
-			UMMOAttributeSet* Attributes = AscPlayerState ? AscPlayerState->GetAttributeSet<UMMOAttributeSet>() : nullptr;
-			Hud->InitializeHud(this, PlayerController, AscPlayerState, AbilitySystemComponent, Attributes);
-		}
-
-		// Add the ability input bindings
-		// UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
-		UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
-		AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
-	}
-
-	// Periphery component initialization
-	if (Peripheries)
-	{
-		Peripheries->InitPeripheryInformation();
-	}
-
 	// Inventory component initialization
 	if (Inventory)
 	{
 		Inventory->SetPlayerId();
 	}
-
-
 	
-
-	UGameplayEffect* CustomEffect = NewObject<UGameplayEffect>(this, FName(*GetName() + FString("_CustomEffect_")));
-	if (CustomEffect)
-	{
-		CustomEffect->DurationPolicy = EGameplayEffectDurationType::Infinite;
-		CustomEffect->StackDurationRefreshPolicy = EGameplayEffectStackingDurationPolicy::RefreshOnSuccessfulApplication;
-		
-		CustomEffect->InheritableGameplayEffectTags.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayEffect));
-		CustomEffect->InheritableOwnedTagsContainer.AddTag(FGameplayTag::RequestGameplayTag(Tag_GameplayEffect));
-		
-		AbilitySystemComponent->ApplyGameplayEffectToSelf(CustomEffect, 1, AbilitySystemComponent->MakeEffectContext());
-	}
-}
-
-
-UInputComponent* ACharacterBase::CreatePlayerInputComponent()
-{
-	return Super::CreatePlayerInputComponent();
-}
-
-
-void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	// InputComponent = PlayerInputComponent;
-	
-	
-	if (!AbilitySystemComponent)
-	{
-		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(this);
-		if (!AbilitySystemComponent) return;
-	}
-	
-	// Add the ability input bindings
-	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent);
-	AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
+	// Blueprint function event
+	BP_OnInitAbilityActorInfo();
 }
 #pragma endregion 
 

@@ -339,14 +339,6 @@ protected:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ability") virtual void OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor);
 	UFUNCTION(BlueprintImplementableEvent, Category = "Ability", DisplayName = "On Init Ability Actor Info") void BP_OnInitAbilityActorInfo();
-
-	
-public:
-	/** Creates an InputComponent that can be used for custom input bindings. Called upon possession by a PlayerController. Return null if you don't want one. */
-	virtual UInputComponent* CreatePlayerInputComponent() override;
-
-	/** Allows a Pawn to set up custom input bindings. Called upon possession by a PlayerController, using the InputComponent created by CreatePlayerInputComponent(). */
-	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	
 
 
@@ -405,9 +397,6 @@ protected:
 	/** A stored reference to the player's ability system component */
 	UPROPERTY(BlueprintReadWrite, Category = "Ability System Component") TObjectPtr<UAbilitySystem> AbilitySystemComponent;
 	
-	/** Input bindings for the ability pressed and released events. Don't forget to also add input mappings to the player's input mapping context */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System Component") TArray<FInputActionAbilityMap> AbilityInputActions;
-
 
 public:
 	/** Templated convenience version for retrieving the ability system component. */

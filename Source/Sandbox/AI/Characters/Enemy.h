@@ -81,37 +81,36 @@ protected:
 protected:
 	/**** Combat information ****/
 	/** The id of the attribute adjustments */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") FName AttributeInformationId;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Stats") FName AttributeInformationId;
 
 	// Add ng+ leveling attribute adjustments
 
 	// Add new region attribute adjustments
 
 	/** The id of the equipment set to use */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") FName EquipmentInformationId;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Stats") FName EquipmentInformationId;
 	
 	/** The id of the armor set to use */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") FName ArmorInformationId;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Stats") FName ArmorInformationId;
 
 	/** The id of the armor set to use */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") FName AbilityDataId;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Stats") FName AbilityDataId;
 
 	// Add attack patterns
 
 	
 	/**** Database information ****/
 	/** The id of the armor set to use */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") UDataTable* AbilityInformationTable;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Data Tables") UDataTable* AbilityInformationTable;
 	
 	/** The data table containing the information on the stats for different characters */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") UDataTable* AttributeInformationTable;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Data Tables") UDataTable* AttributeInformationTable;
 	
 	/** The data table containing the information on equipment */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") UDataTable* EquipmentInformationTable;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Data Tables") UDataTable* EquipmentInformationTable;
 
 	/** The data table containing the information on armor */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Information") UDataTable* ArmorInformationTable;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Data Tables") UDataTable* ArmorInformationTable;
 	
 	
 	/**** Stored references ****/
@@ -150,13 +149,9 @@ protected:
 	// Level and area information and adjustments
 
 
-	
+	/**** Other ****/
 	/** The player controlled character */
 	UPROPERTY(Transient, BlueprintReadWrite) TObjectPtr<ACharacterBase> Player;
-	
-	/** Overlapping components */
-	UPROPERTY(Transient, BlueprintReadWrite) TArray<AActor*> ActorsToIgnore;
-
 	
 
 	
@@ -199,15 +194,10 @@ protected:
 	 * @param InAvatarActor			Is what physical actor in the world we are acting on. Usually a Pawn but it could be a Tower, Building, Turret, etc, may be the same as Owner
 	 */
 	virtual void OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor) override;
-
-	/** Equip's the enemy's weapons and armor */
-	virtual void InitCharacterEquipment();
-
 	
 	/** This keeps the client in sync with the enemy's attributes for widget to have access to this information */
 	virtual void BindAttributeValuesToAscDelegates();
 	
-
 	/** Update the attribute values during specific events (Players in view, or if they get close enough to the ai's periphreals) */
 	virtual void UpdateAttributeValues();
 	

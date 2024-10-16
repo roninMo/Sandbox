@@ -79,7 +79,8 @@ UCLASS()
 class SANDBOX_API UAttributeData : public UPrimaryDataAsset
 {
 	GENERATED_BODY()
-	
+
+public:
 	/** List of Attribute information to apply to the character */
 	UPROPERTY(EditDefaultsOnly, Category="Attributes", meta=(TitleProperty=Effect))
 	TArray<FGameplayEffectInfo> GrantedAttributes;
