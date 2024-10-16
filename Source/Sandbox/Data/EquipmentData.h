@@ -46,6 +46,8 @@ public:
 	/** The currently equipped right hand armament */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Armaments") EEquipSlot EquippedRightHandArmament;
 	
+	// TODO: Equipment stats adjustments
+
 	
 	/**
 	 * Adds the equipment, it's abilities, and passives to the character. If there's an inventory component, it adds the armaments to the player's inventory as well, otherwise it creates dummy data for things like AI

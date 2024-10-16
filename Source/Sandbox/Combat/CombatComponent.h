@@ -173,51 +173,54 @@ protected:
 
 	// TODO: Should these be replicated, or should we just use the inventory events to handle this?
 	/** The armament information for the armament in the left hand's first equip slot */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item LeftHandEquipSlot_One;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item LeftHandEquipSlot_One;
 	
 	/** The armament information for the armament in the left hand's second equip slot */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item LeftHandEquipSlot_Two;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item LeftHandEquipSlot_Two;
 	
 	/** The armament information for the armament in the left hand's third equip slot */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item LeftHandEquipSlot_Three;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item LeftHandEquipSlot_Three;
 	
 	/** The armament information for the armament in the right hand's first equip slot */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item RightHandEquipSlot_One;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item RightHandEquipSlot_One;
 	
 	/** The armament information for the armament in the right hand's second equip slot */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item RightHandEquipSlot_Two;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item RightHandEquipSlot_Two;
 	
 	/** The armament information for the armament in the right hand's third equip slot */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item RightHandEquipSlot_Three;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat Component|Armaments") F_Item RightHandEquipSlot_Three;
 
 	
 	/**** Armor ****/
 	/** The currently equipped gauntlets's information */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Gauntlets;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Gauntlets;
 	
 	/** The currently equipped leggings's information */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Leggings;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Leggings;
 	
 	/** The currently equipped helm's information */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Helm;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Helm;
 	
 	/** The currently equipped chest's information */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Chest;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat Component|Armors") F_Item Chest;
 
-	/** The ability handles for the currently equipped armors */
+	/** The stats, abilities, and passives for the currently equipped armors */
 	UPROPERTY(Transient, BlueprintReadWrite) TMap<EArmorSlot, F_Information_Armor> ArmorAbilities;
+	
+	/** The ability handles for the currently equipped armors */
 	UPROPERTY(Transient, BlueprintReadWrite) TMap<EArmorSlot, F_Information_Armor_Handle> ArmorAbilityHandles;
 
 	
 	/**** Data tables for information and retrieval ****/
 	/** The data table for retrieving an armament's combat information */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat Component") UDataTable* ArmamentInformationTable;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat Component|Data Tables") UDataTable* ArmamentInformationTable;
 	
 	/** The data table for retrieving information for armor */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat Component") UDataTable* ArmorInformationTable;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat Component|Data Tables") UDataTable* ArmorInformationTable;
 	
 	/** The data table for retrieving armament montages for specific characters */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat Component") TObjectPtr<UDataTable> MontageInformationTable;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat Component|Data Tables") TObjectPtr<UDataTable> MontageInformationTable;
+
 	
 	/**** Other ****/
 	/** The primary armament index These are just used specifically for handling switching weapons */
