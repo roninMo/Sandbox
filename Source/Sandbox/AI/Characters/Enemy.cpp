@@ -10,9 +10,9 @@
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
 #include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
+#include "Sandbox/Asc/Information/EnemyEquipmentDataSet.h"
 #include "Sandbox/Characters/Components/Inventory/InventoryComponent.h"
 #include "Sandbox/Combat/CombatComponent.h"
-#include "Sandbox/Data/Enums/EquipSlot.h"
 #include "Sandbox/Hud/Widgets/WidgetBase.h"
 
 DEFINE_LOG_CATEGORY(EnemyLog);
@@ -89,16 +89,17 @@ void AEnemy::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 
 	
 	// Add the character's equipment
-	InitCharacterEquipment();
+	GetCombatInformationFromTable(CombatInformationId);
 	
 	// Update the npc stats
-	UGameplayAbilityUtilities::TryAddAbilitySet(AbilitySystemComponent, AbilitiesAndStats, AbilitiesAndStatsHandle);
+	// UGameplayAbilityUtilities::TryAddAbilitySet(AbilitySystemComponent, AbilitiesAndStats, AbilitiesAndStatsHandle);
 	// BaseAbilitySystem->SetCharacterAbilitiesAndPassiveEffects(CharacterAbilities, CharacterInformation.Statuses);
 	// for (const TSubclassOf<UGameplayEffect> Effect : InitialEffectsState) ApplyEffectToSelf(Effect);
 	// if (CharacterInformation.PrimaryAttributes) ApplyEffectToSelf(CharacterInformation.PrimaryAttributes);
 	// if (SecondaryAttributes) ApplyEffectToSelf(SecondaryAttributes);
 	//
 	// if (BaseAttributeSet) MoveSpeed = BaseAttributeSet->GetMoveSpeed();
+	InitCharacterEquipment();
 
 	// Because of how ai characters are replicated, we need to use the character // TODO: Find a good way for handling stats/attribute information for all npc characters
 	if (StatsBarsWidgetComponent)
@@ -124,87 +125,15 @@ void AEnemy::InitCharacterEquipment()
 		return;
 	}
 
-	// Weapons
-	if (CharacterInformation.LeftHandWeapons.Num() > 0)
+	if (EquipmentAndArmor)
 	{
-		F_Item LeftHandWeaponSlotOne;
-		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.LeftHandWeapons[0].ItemName, LeftHandWeaponSlotOne);
-		CombatComponent->AddArmamentToEquipSlot(LeftHandWeaponSlotOne, EEquipSlot::LeftHandSlotOne);
-	}
-	if (CharacterInformation.LeftHandWeapons.Num() > 1)
-	{
-		F_Item LeftHandWeaponSlotTwo;
-		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.LeftHandWeapons[1].ItemName, LeftHandWeaponSlotTwo);
-		CombatComponent->AddArmamentToEquipSlot(LeftHandWeaponSlotTwo, EEquipSlot::LeftHandSlotTwo);
-	}
-	if (CharacterInformation.LeftHandWeapons.Num() > 2)
-	{
-		F_Item LeftHandWeaponSlotThree;
-		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.LeftHandWeapons[2].ItemName, LeftHandWeaponSlotThree);
-		CombatComponent->AddArmamentToEquipSlot(LeftHandWeaponSlotThree, EEquipSlot::LeftHandSlotThree);
-	}
-	if (CharacterInformation.RightHandWeapons.Num() > 0)
-	{
-		F_Item RightHandWeaponSlotOne;
-		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.RightHandWeapons[0].ItemName, RightHandWeaponSlotOne);
-		CombatComponent->AddArmamentToEquipSlot(RightHandWeaponSlotOne, EEquipSlot::RightHandSlotOne);
-	}
-	if (CharacterInformation.RightHandWeapons.Num() > 1)
-	{
-		F_Item RightHandWeaponSlotTwo;
-		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.RightHandWeapons[1].ItemName, RightHandWeaponSlotTwo);
-		CombatComponent->AddArmamentToEquipSlot(RightHandWeaponSlotTwo, EEquipSlot::RightHandSlotTwo);
-	}
-	if (CharacterInformation.RightHandWeapons.Num() > 2)
-	{
-		F_Item RightHandWeaponSlotThree;
-		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.RightHandWeapons[2].ItemName, RightHandWeaponSlotThree);
-		CombatComponent->AddArmamentToEquipSlot(RightHandWeaponSlotThree, EEquipSlot::RightHandSlotThree);
+		EquipmentAndArmor->AddToCharacter(AbilitySystemComponent, Inventory, CombatComponent);
 	}
 
-	// Equipped weapon
-	if (CharacterInformation.CurrentlyEquippedActiveWeapon != EEquipSlot::None)
+	if (AbilitiesAndStats)
 	{
-		CombatComponent->CreateArmament(CharacterInformation.CurrentlyEquippedActiveWeapon);
+		AbilitiesAndStats->AddToAbilitySystem(AbilitySystemComponent, AbilitiesAndStatsHandle);
 	}
-
-	// TODO: Add safeguards in place for handling adding inventory items
-	// Add these items to the inventory also @note this is only being handled here because it's save information
-	// TMap<FGuid, F_Item>& InventoryArmaments = Inventory->GetInventory(EItemType::IT_Armament);
-	// for (FS_Item WeaponInformation : CharacterInformation.LeftHandWeapons)
-	// {
-	// 	F_InventoryItem Weapon;
-	// 	Inventory->GetItemFromDataTable(Weapon, WeaponInformation.RowName);
-	// 	InventoryArmaments.Add(Weapon.Id, Weapon);
-	// }
-
-	
-	// Armor
-	if (CharacterInformation.Gauntlets.IsValid())
-	{
-		F_Item GauntletsInformation;
-		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.Gauntlets.ItemName, GauntletsInformation);
-		CombatComponent->EquipArmor(GauntletsInformation);
-	}
-	if (CharacterInformation.Leggings.IsValid())
-	{
-		F_Item LeggingsInformation;
-		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.Leggings.ItemName, LeggingsInformation);
-		CombatComponent->EquipArmor(LeggingsInformation);
-	}
-	if (CharacterInformation.Helm.IsValid())
-	{
-		F_Item HelmInformation;
-		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.Helm.ItemName, HelmInformation);
-		CombatComponent->EquipArmor(HelmInformation);
-	}
-	if (CharacterInformation.Chest.IsValid())
-	{
-		F_Item ChestInformation;
-		Inventory->Execute_GetDataBaseItem(Inventory, CharacterInformation.Chest.ItemName, ChestInformation);
-		CombatComponent->EquipArmor(ChestInformation);
-	}
-	
 
 	// Other combat related things
 	AttackPatterns = CharacterInformation.AttackPatterns;
@@ -426,6 +355,22 @@ TArray<AActor*> AEnemy::GetActorsToIgnore()
 void AEnemy::SetActorsToIgnore(const TArray<AActor*>& Actors)
 {
 	ActorsToIgnore = Actors;
+}
+
+
+void AEnemy::GetCombatInformationFromTable(FName RowName)
+{
+	if (CombatInformationTable)
+	{
+		const F_Table_NpcCombatInformation* Information = CombatInformationTable->FindRow<F_Table_NpcCombatInformation>(RowName, TEXT("Npc Combat Data Context"));
+		if (Information)
+		{
+			EquipmentAndArmor = Information->Equipment;
+			AbilitiesAndStats = Information->AttributeAndAbilityData;
+		}
+		
+		UE_LOGFMT(LogTemp, Error, "{0}: {1} Did not find the npc character information {2}!", *UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *GetName(), *RowName.ToString());
+	}
 }
 #pragma endregion 
 

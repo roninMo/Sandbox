@@ -7,6 +7,8 @@
 #include "Engine/DataTable.h"
 #include "NpcInformation.generated.h"
 
+class UCharacterAbilityDataSet;
+class UEnemyEquipmentDataSet;
 enum class ECombatClassification : uint8;
 enum class ETeamId : uint8;
 enum class EEquipSlot : uint8;
@@ -29,18 +31,6 @@ public:
 	/**** Equipment, stats, and inventory information ****/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FName NpcId;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString PlatformId;
-
-	/**** Weapons ****/
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) EEquipSlot CurrentlyEquippedActiveWeapon;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) EEquipSlot CurrentlyEquippedOffhandWeapon;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FS_Item> LeftHandWeapons;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FS_Item> RightHandWeapons;
-
-	/**** Armor ****/
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FS_Item Gauntlets;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FS_Item Leggings;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FS_Item Helm;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FS_Item Chest;
 
 	/**** Inventory ****/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FS_Item> InventoryItems;
@@ -70,4 +60,21 @@ struct F_Table_NpcInformation : public FTableRowBase
 
 public: UPROPERTY(EditAnywhere, BlueprintReadWrite) F_NpcInformation CharacterInformation;
 protected: UPROPERTY(EditAnywhere, BlueprintReadWrite) FString DevDescription;
+};
+
+
+
+
+/* Different Npc combat information */
+USTRUCT(BlueprintType)
+struct F_Table_NpcCombatInformation : public FTableRowBase
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) UEnemyEquipmentDataSet* Equipment;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCharacterAbilityDataSet* AttributeAndAbilityData;
+
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString DevDescription;
 };

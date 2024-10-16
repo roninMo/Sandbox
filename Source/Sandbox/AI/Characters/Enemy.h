@@ -7,7 +7,7 @@
 #include "Sandbox/Asc/Information/CharacterAbilityDataSet.h"
 #include "Enemy.generated.h"
 
-class UCharacterAbilityDataSet;
+class UEnemyEquipmentDataSet;
 DECLARE_LOG_CATEGORY_EXTERN(EnemyLog, Log, All);
 
 
@@ -71,9 +71,15 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UWidgetComponent> StatsBarsWidgetComponent;
 
+	
 	/** Combat information (stats, equipment, etc.) */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCharacterAbilityDataSet* AbilitiesAndStats;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment") FName CombatInformationId;
+	
+	UPROPERTY(Transient, BlueprintReadWrite) UCharacterAbilityDataSet* AbilitiesAndStats;
+	UPROPERTY(Transient, BlueprintReadWrite) UEnemyEquipmentDataSet* EquipmentAndArmor;
 	UPROPERTY(Transient, BlueprintReadWrite) FCharacterAbilityDataSetHandle AbilitiesAndStatsHandle;
+
+	
 	// TODO: Refactor this into individual components to quickly test combat with different enemies. I want variation with equipment, attributes, and attack patterns (and to easily be able to add/remove to multiple enemies with no problems)
 
 	/** We're going to diverge combat characters into two different variations, and build for both. One with specific attack patterns, and one who's combat uses the weapon's attack patterns */
@@ -177,7 +183,10 @@ protected:
 public:
 	UFUNCTION(BlueprintCallable) virtual TArray<AActor*> GetActorsToIgnore();
 	UFUNCTION(BlueprintCallable) virtual void SetActorsToIgnore(const TArray<AActor*>& Actors);
-
+	
+	/** Gets the npc character information from the data table */
+	UFUNCTION(BlueprintCallable) virtual void GetCombatInformationFromTable(FName RowName);
+	
 
 protected:
 	// Updated attribute delegates for clients

@@ -34,6 +34,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment") F_NpcInformation CharacterInformation;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment") FName Id; // The id of this npc character
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment") UDataTable* NPCInformationTable;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment") UDataTable* CombatInformationTable;
 
 	
 	/**** Movement values ****/
