@@ -168,6 +168,12 @@ void AArmament::OnRep_Item()
 {
 	Super::OnRep_Item();
 
+	if (!GetOwner())
+	{
+		// Initial replication happens before the component retrieves the owner, and causes problems. // TODO: add logging that checks against GetOwner() being valid, and handles the extra arguments
+		return;
+	}
+	
 	// Retrieve the armament's information
 	if (!IsValidArmanent())
 	{
@@ -178,6 +184,12 @@ void AArmament::OnRep_Item()
 
 void AArmament::OnRep_CreatedArmament()
 {
+	if (!GetOwner())
+	{
+		// Initial replication happens before the component retrieves the owner, and causes problems. // TODO: add logging that checks against GetOwner() being valid, and handles the extra arguments
+		return;
+	}
+	
 	// Retrieve the armament's information
 	if (!IsValidArmanent())
 	{
@@ -190,7 +202,7 @@ void AArmament::OnRep_CreatedArmament()
 	{
 		
 		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} tried to add the armament information on the client after creation and failed!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+			*UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return;
 	}
 	
@@ -199,12 +211,6 @@ void AArmament::OnRep_CreatedArmament()
 
 void AArmament::RetrieveArmamentInformationOnClient()
 {
-	if (!GetOwner())
-	{
-		// Initial replication happens before the component retrieves the owner, and causes problems. // TODO: add logging that checks against GetOwner() being valid, and handles the extra arguments
-		return;
-	}
-
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
 	if (!Character)
 	{

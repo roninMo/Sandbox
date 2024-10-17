@@ -91,7 +91,6 @@ bool UMeleeCombatAbility::SetArmamentInformation_Implementation()
 	if (Spec)
 	{
 		AttackPattern = static_cast<EInputAbilities>(Spec->InputID);
-		CurrentStance = CombatComponent->GetCurrentStance();
 	}
 	
 	AArmament* EquippedArmament = CurrentStance == EArmamentStance::DualWielding || CurrentStance == EArmamentStance::TwoWeapons ?
@@ -128,6 +127,7 @@ bool UMeleeCombatAbility::SetArmamentInformation_Implementation()
 	for (const auto& [Ability, InputId, InvalidStances, Level] : ArmamentInformation.MeleeAbilities)
 	{
 		if (AttackPattern != InputId || InvalidStances.Contains(CombatComponent->GetCurrentStance())) continue;
+		CurrentStance = CombatComponent->GetCurrentStance();
 
 		// If there's no combat information for this attack, then either the information is missing or the ability was added at the wrong time
 		Armament = EquippedArmament;
@@ -168,11 +168,18 @@ void UMeleeCombatAbility::InitCombatInformation_Implementation()
 	SetMontageStartSection(); // montage start section (customization for different types of attacks
 	CalculateAttributeModifications(); // Damage and attribute calculations
 
-	// UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} {3}::{4}{5}, ComboIndex: {6}, Montage: {7}({8})",
-	// 	UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()),
-	// 	bRunningAttack ? FString("(RunningAttack)") : bCrouchingAttack ? FString("(CrouchAttack)") : FString(""),
-	// 	*GetNameSafe(Armament), *UEnum::GetValueAsString(AttackPattern), ComboIndex, *GetNameSafe(GetCurrentMontage()), MontageStartSection
-	// );
+	UE_LOGFMT(AbilityLog, Log, "{0}::{1} Melee attack, Weapon {2}({3}) {4}, ComboIndex: {5}, Montage: {6}({7})",
+		UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()),
+		*GetNameSafe(GetOwningActorFromActorInfo()),
+	 	*GetNameSafe(Armament),
+	 	
+	 	*UEnum::GetValueAsString(CurrentStance),
+	 	bRunningAttack ? FString("(RunningAttack)") : bCrouchingAttack ? FString("(CrouchAttack)") : *UEnum::GetValueAsString(AttackPattern),
+	 	ComboIndex,
+	 	
+	 	*GetNameSafe(GetCurrentMontage()),
+	 	MontageStartSection
+	);
 }
 
 

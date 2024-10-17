@@ -72,7 +72,7 @@ void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME_CONDITION_NOTIFY(UCombatComponent, PrimaryArmament, COND_Custom, REPNOTIFY_OnChanged);
 	DOREPLIFETIME_CONDITION_NOTIFY(UCombatComponent, SecondaryArmament, COND_Custom, REPNOTIFY_OnChanged);
-	DOREPLIFETIME_CONDITION_NOTIFY(UCombatComponent, CurrentStance, COND_Custom, REPNOTIFY_OnChanged);
+	DOREPLIFETIME_CONDITION_NOTIFY(UCombatComponent, CurrentStance, COND_Custom, REPNOTIFY_OnChanged); // TODO: Investigate why my onRep conditions have suddenly stopped working
 	DOREPLIFETIME_CONDITION_NOTIFY(UCombatComponent, ComboIndex, COND_Custom, REPNOTIFY_OnChanged);
 }
 
@@ -351,6 +351,11 @@ void UCombatComponent::SetArmamentStance(const EArmamentStance Stance)
 		CurrentStance = Stance;
 		UpdateArmamentCombatAbilities(PreviousStance);
 	}
+
+	if (GetOwner() && GetOwner()->HasAuthority())
+	{
+		Client_SetCurrentStance_Implementation(Stance);
+	}
 }
 
 
@@ -562,6 +567,12 @@ void UCombatComponent::UpdateArmamentCombatAbilities(EArmamentStance PreviousSta
 void UCombatComponent::OnRep_CurrentStance()
 {
 	// Update client state based on the current stance
+	UE_LOGFMT(LogTemp, Log, "OnRepCurrentStance() new stance: {0}", *UEnum::GetValueAsString(CurrentStance));
+}
+
+void UCombatComponent::Client_SetCurrentStance_Implementation(EArmamentStance PreviousStance)
+{
+	SetArmamentStance(PreviousStance);
 }
 
 

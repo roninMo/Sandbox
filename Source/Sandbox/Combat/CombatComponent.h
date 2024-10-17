@@ -323,6 +323,7 @@ public:
 	
 	/** OnRep function for handling updating the current stance */
 	UFUNCTION() virtual void OnRep_CurrentStance();
+	UFUNCTION(Client, Reliable) virtual void Client_SetCurrentStance(EArmamentStance PreviousStance);
 	
 	/**
 	 * Retrieves the armament from one of the player's hands
