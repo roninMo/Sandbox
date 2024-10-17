@@ -20,7 +20,6 @@ DECLARE_LOG_CATEGORY_EXTERN(CombatComponentLog, Log, All);
 
 class AArmament;
 class UDataTable;
-class UCharacterAbilityDataSet;
 enum class ECharacterSkeletonMapping : uint8;
 enum class ECombatAttribute : uint8;
 enum class EEquipSlot : uint8;
@@ -553,7 +552,7 @@ public:
 
 	/** Logic for handling when the player respawns */
 	UFUNCTION(BlueprintCallable, Category = "Combat Component")
-	virtual void HandleRespawn(ACharacterBase* Enemy, AActor* Source, const UCharacterAbilityDataSet* RespawnInformation);
+	virtual void HandleRespawn(ACharacterBase* Enemy, AActor* Source);
 
 
 	/**** Status logic ****/ // Be careful about adding statuses outside of the combat component, for efficiency they're based on the handles

@@ -13,42 +13,9 @@
 #include "Sandbox/Data/EquipmentData.h"
 
 
-UAbilitySystem* UGameplayAbilityUtilities::GetAbilitySystem(const AActor* Actor)
-{
-	UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Actor);
-	if (!ASC)
-	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Did not find {2}'s Ability System!", *UEnum::GetValueAsString(Actor->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Actor));
-		return nullptr;
-	}
-
-	if (UAbilitySystem* Asc = Cast<UAbilitySystem>(ASC))
-	{
-		return Asc;
-	}
-
-	UE_LOGFMT(AbilityLog, Warning, "ASC {0} from {1} Owner is not of UAbilitySystem type.", *GetNameSafe(ASC), *GetNameSafe(Actor));
-	return nullptr;
-}
 
 
-void UGameplayAbilityUtilities::GetAllAttributes(TSubclassOf<UAttributeSet> AttributeSetClass, TArray<FGameplayAttribute>& OutAttributes)
-{
-	const UClass* Class = AttributeSetClass.Get();
-	for (TFieldIterator<FProperty> It(Class); It; ++It)
-	{
-		if (FFloatProperty* FloatProperty = CastField<FFloatProperty>(*It))
-		{
-			OutAttributes.Push(FGameplayAttribute(FloatProperty));
-		}
-		else if (FGameplayAttribute::IsGameplayAttributeDataProperty(*It))
-		{
-			OutAttributes.Push(FGameplayAttribute(*It));
-		}
-	}
-}
-
-
+#pragma region Attributes, Equipment, Abilities, and Armor
 bool UGameplayAbilityUtilities::TryAddAttributeData(UAbilitySystemComponent* InAbilitySystemComponent, const UAttributeData* AttributeData, FAttributeDataHandle& OutAttributeDataHandle, bool bPrintErrorMessages)
 {
 	check(InAbilitySystemComponent);
@@ -109,84 +76,45 @@ bool UGameplayAbilityUtilities::TryAddArmorData(UAbilitySystemComponent* InAbili
 
 	return ArmorData->AddToCharacter(Character);
 }
+#pragma endregion 
 
 
-bool UGameplayAbilityUtilities::TryAddAbilitySet(UAbilitySystemComponent* AbilitySystemComponent, const UCharacterAbilityDataSet* InAbilitySet, FCharacterAbilityDataSetHandle& OutAbilitySetHandle)
+
+
+#pragma region Ability System Component Functions
+UAbilitySystem* UGameplayAbilityUtilities::GetAbilitySystem(const AActor* Actor)
 {
-	check(AbilitySystemComponent);
-	if (!InAbilitySet)
+	UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Actor);
+	if (!ASC)
 	{
-		return false;
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Did not find {2}'s Ability System!", *UEnum::GetValueAsString(Actor->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Actor));
+		return nullptr;
 	}
-	
-	// Add Abilities
-	int32 AbilitiesIndex = 0;
-	for (const FGameplayAbilityInfo& AbilityMapping : InAbilitySet->GrantedAbilities)
+
+	if (UAbilitySystem* Asc = Cast<UAbilitySystem>(ASC))
 	{
-		AbilitiesIndex++;
-		
-		if (!AbilityMapping.Ability)
+		return Asc;
+	}
+
+	UE_LOGFMT(AbilityLog, Warning, "ASC {0} from {1} Owner is not of UAbilitySystem type.", *GetNameSafe(ASC), *GetNameSafe(Actor));
+	return nullptr;
+}
+
+
+void UGameplayAbilityUtilities::GetAllAttributes(TSubclassOf<UAttributeSet> AttributeSetClass, TArray<FGameplayAttribute>& OutAttributes)
+{
+	const UClass* Class = AttributeSetClass.Get();
+	for (TFieldIterator<FProperty> It(Class); It; ++It)
+	{
+		if (FFloatProperty* FloatProperty = CastField<FFloatProperty>(*It))
 		{
-			// UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s GrantedAbilities Ability on ability set {2} is not valid at Index {3}",
-			// 	*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()), *GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *GetNameSafe(InAbilitySet), AbilitiesIndex  - 1
-			// );
-			continue;
+			OutAttributes.Push(FGameplayAttribute(FloatProperty));
 		}
-	
-		// Try to grant the ability first
-		FGameplayAbilitySpec AbilitySpec;
-		FGameplayAbilitySpecHandle AbilityHandle;
-		TryAddAbility(AbilitySystemComponent, AbilityMapping, AbilityHandle, AbilitySpec);
-		OutAbilitySetHandle.Abilities.Add(AbilityHandle);
-	}
-	
-	// Add Attributes 
-	int32 AttributesIndex = 0;
-	// for (const FGameplayAttributeInfo& Attributes : InAbilitySet->GrantedAttributes)
-	for (const FGameplayEffectInfo& Attributes : InAbilitySet->GrantedAttributes)
-	{
-		AttributesIndex++;
-	
-		if (!Attributes.Effect)
+		else if (FGameplayAttribute::IsGameplayAttributeDataProperty(*It))
 		{
-			UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s GrantedAttributes AttributeSet on ability set {2} is not valid at Index {3}",
-				*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()), *GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *GetNameSafe(InAbilitySet), AttributesIndex  - 1
-			);
-			continue;
+			OutAttributes.Push(FGameplayAttribute(*It));
 		}
-	
-		TryAddAttributes(AbilitySystemComponent, Attributes.Effect, Attributes.Level, OutAbilitySetHandle.Attributes);
 	}
-	
-	// Add Effects
-	int32 EffectsIndex = 0;
-	for (const FGameplayEffectInfo& Effect : InAbilitySet->GrantedEffects)
-	{
-		EffectsIndex++;
-		
-		if (!Effect.Effect)
-		{
-			UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s GrantedEffects EffectType on ability set {2} is not valid at Index {3}",
-				*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()), *GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *GetNameSafe(InAbilitySet), EffectsIndex  - 1
-			);
-			continue;
-		}
-		
-		TryAddGameplayEffect(AbilitySystemComponent, Effect.Effect, Effect.Level, OutAbilitySetHandle.EffectHandles);
-	}
-	
-	// Add Owned Gameplay Tags
-	if (InAbilitySet->OwnedTags.IsValid())
-	{		
-		AddLooseGameplayTagsUnique(AbilitySystemComponent, InAbilitySet->OwnedTags);
-	
-		// Store a copy of the tags, so that they can be removed later on from handle
-		OutAbilitySetHandle.OwnedTags = InAbilitySet->OwnedTags;
-	}
-	
-	// Store the name of the Ability Set "instigator"
-	OutAbilitySetHandle.AbilitySetPathName = InAbilitySet->GetPathName();
-	return true;
 }
 
 
@@ -409,6 +337,7 @@ bool UGameplayAbilityUtilities::IsAbilityGranted(const UAbilitySystemComponent* 
 
 	return false;
 }
+#pragma endregion 
 
 
 

@@ -41,6 +41,11 @@ bool UAttributeData::AddAttributesToCharacter(UAbilitySystemComponent* InAbility
 		UGameplayAbilityUtilities::TryAddGameplayEffect(InAbilitySystemComponent, Attributes.Effect, Attributes.Level, OutAttributeDataHandle.AttributeHandles);
 	}
 	
+	if (CurrentAttributeInformation.Effect)
+	{
+		UGameplayAbilityUtilities::TryAddGameplayEffect(InAbilitySystemComponent, CurrentAttributeInformation.Effect, CurrentAttributeInformation.Level, OutAttributeDataHandle.AttributeHandles);
+	}
+	
 	return true;
 }
 

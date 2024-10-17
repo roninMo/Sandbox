@@ -16,7 +16,6 @@ DECLARE_LOG_CATEGORY_EXTERN(EnemyLog, Log, All);
 class UCaptainComponent;
 class UWidgetComponent;
 class UMMOAttributeSet;
-class UEnemyEquipmentDataSet;
 class UEquipmentData;
 class UArmorData;
 

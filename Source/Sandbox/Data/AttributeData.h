@@ -85,6 +85,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category="Attributes", meta=(TitleProperty=Effect))
 	TArray<FGameplayEffectInfo> GrantedAttributes;
 
+	/** The current health, poise, stamina, mana, etc of the character */
+	UPROPERTY(EditDefaultsOnly, Category="Attributes", meta=(TitleProperty=Effect))
+	FGameplayEffectInfo CurrentAttributeInformation;
+
 	
 	/**
 	 * Grants itself attribute adjustments and returns a handle of the attributes applied

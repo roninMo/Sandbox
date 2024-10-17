@@ -11,8 +11,6 @@ enum class ECombatClassification : uint8;
 enum class ETeamId : uint8;
 enum class EEquipSlot : uint8;
 struct F_ArmamentAbilityInformation;
-class UCharacterAbilityDataSet;
-class UEnemyEquipmentDataSet;
 class UCharacterGameplayAbility;
 class UGameplayEffect;
 
@@ -62,21 +60,3 @@ protected: UPROPERTY(EditAnywhere, BlueprintReadWrite) FString DevDescription;
 
 
 
-
-
-
-
-
-/* Different Npc combat information */
-USTRUCT(BlueprintType)
-struct F_Table_NpcCombatInformation : public FTableRowBase
-{
-	GENERATED_BODY()
-
-public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) UEnemyEquipmentDataSet* Equipment;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCharacterAbilityDataSet* AttributeAndAbilityData;
-
-protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString DevDescription;
-};

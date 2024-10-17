@@ -954,7 +954,7 @@ void UCombatComponent::HandleDeath(ACharacterBase* Enemy, AActor* Source, FName 
 }
 
 
-void UCombatComponent::HandleRespawn(ACharacterBase* Enemy, AActor* Source, const UCharacterAbilityDataSet* RespawnInformation)
+void UCombatComponent::HandleRespawn(ACharacterBase* Enemy, AActor* Source)
 {
 	if (!RespawnInformation)
 	{
