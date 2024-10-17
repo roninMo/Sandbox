@@ -103,34 +103,81 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 #pragma region Armaments
 void UCombatComponent::AddArmamentToEquipSlot(const F_Item& ArmamentInventoryInformation, const EEquipSlot EquipSlot)
 {
-	if (!ArmamentInventoryInformation.IsValid()) return;
+	if (!ArmamentInventoryInformation.IsValid())
+	{
+		return;
+	}
 	
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		return;
+	}
+
+	// Handle logic on the server
+	if (Character->IsLocallyControlled() && !Character->HasAuthority())
+	{
+		// TODO: Only send the id across the network, handle retrieving the information from the inventory
+		Server_AddArmamentToEquipSlot(ArmamentInventoryInformation, EquipSlot);
+	}
+
+	
+	// Add the armament to the equipped armaments
 	if (EquipSlot == EEquipSlot::LeftHandSlotOne) LeftHandEquipSlot_One = ArmamentInventoryInformation;
 	else if (EquipSlot == EEquipSlot::LeftHandSlotTwo) LeftHandEquipSlot_Two = ArmamentInventoryInformation;
 	else if (EquipSlot == EEquipSlot::LeftHandSlotThree) LeftHandEquipSlot_Three = ArmamentInventoryInformation;
 	else if (EquipSlot == EEquipSlot::RightHandSlotOne) RightHandEquipSlot_One = ArmamentInventoryInformation;
 	else if (EquipSlot == EEquipSlot::RightHandSlotTwo) RightHandEquipSlot_Two = ArmamentInventoryInformation;
 	else if (EquipSlot == EEquipSlot::RightHandSlotThree) RightHandEquipSlot_Three = ArmamentInventoryInformation;
+	
+	// Equip the new armament if you've updated one of the currently equipped slots
+	if (Character->HasAuthority() && (EquipSlot == PrimaryArmament->GetEquipSlot() || EquipSlot == SecondaryArmament->GetEquipSlot()))
+	{
+		CreateArmament(EquipSlot);
+	}
 }
 
 
 void UCombatComponent::RemoveArmamentFromEquipSlot(const EEquipSlot EquipSlot)
 {
-	if (PrimaryArmament && EquipSlot == PrimaryArmament->GetEquipSlot())
+	if (EquipSlot == EEquipSlot::None)
 	{
-		DeleteEquippedArmament(PrimaryArmament);
+		return;
 	}
-	else if (SecondaryArmament && EquipSlot == SecondaryArmament->GetEquipSlot())
+	
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
 	{
-		DeleteEquippedArmament(SecondaryArmament);
+		return;
 	}
 
+	// Handle logic on the server
+	if (Character->IsLocallyControlled() && !Character->HasAuthority())
+	{
+		Server_RemoveArmamentFromEquipSlot(EquipSlot);
+	}
+
+	
+	// Remove the armament from the equipped armaments
 	if (EquipSlot == EEquipSlot::LeftHandSlotOne) LeftHandEquipSlot_One = F_Item();
 	else if (EquipSlot == EEquipSlot::LeftHandSlotTwo) LeftHandEquipSlot_Two = F_Item();
 	else if (EquipSlot == EEquipSlot::LeftHandSlotThree) LeftHandEquipSlot_Three = F_Item();
 	else if (EquipSlot == EEquipSlot::RightHandSlotOne) RightHandEquipSlot_One = F_Item();
 	else if (EquipSlot == EEquipSlot::RightHandSlotTwo) RightHandEquipSlot_Two = F_Item();
 	else if (EquipSlot == EEquipSlot::RightHandSlotThree) RightHandEquipSlot_Three = F_Item();
+	
+	// Delete the armament if it's currently equipped
+	if (Character->HasAuthority())
+	{
+		if (PrimaryArmament && EquipSlot == PrimaryArmament->GetEquipSlot())
+		{
+			DeleteEquippedArmament(PrimaryArmament);
+		}
+		else if (SecondaryArmament && EquipSlot == SecondaryArmament->GetEquipSlot())
+		{
+			DeleteEquippedArmament(SecondaryArmament);
+		}
+	}
 }
 
 
@@ -638,40 +685,36 @@ bool UCombatComponent::UnequipArmor(EArmorSlot ArmorSlot)
 			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return false;
 	}
-
-	if (!Character->HasAuthority())
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Only remove the armor on the server!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return false;
-	}
-
-	UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
-	if (!AbilitySystemComponent)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the ability system while remove the armor!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return false;
-	}
-
 	
-	// Remove any of the old armor abilities
-	F_Information_Armor_Handle& OldArmor = ArmorAbilityHandles[ArmorSlot];
-	AbilitySystemComponent->RemoveGameplayAbilities(OldArmor.AbilityHandles);
-	AbilitySystemComponent->RemoveGameplayEffect(OldArmor.ArmorStats);
-	for (FActiveGameplayEffectHandle& CurrentPassive : OldArmor.PassiveHandles)
-	{
-		AbilitySystemComponent->RemoveGameplayEffect(CurrentPassive);
-	}
-	
-	// Remove the armor from the character
-	Character->SetArmorMesh(ArmorSlot, nullptr);
-
-
 	
 	// Broadcast the event
 	F_Item Information = GetArmorItemInformation(ArmorSlot);
 	OnUnequippedArmor.Broadcast(GetArmorItemInformation(ArmorSlot), ArmorAbilities[ArmorSlot], ArmorSlot);
+
+	// Handle abilities and attributes
+	if (Character->HasAuthority())
+	{
+		UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
+		if (!AbilitySystemComponent)
+		{
+			UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the ability system while remove the armor!",
+				UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+			return false;
+		}
+
+		
+		// Remove any of the old armor abilities
+		F_Information_Armor_Handle& OldArmor = ArmorAbilityHandles[ArmorSlot];
+		AbilitySystemComponent->RemoveGameplayAbilities(OldArmor.AbilityHandles);
+		AbilitySystemComponent->RemoveGameplayEffect(OldArmor.ArmorStats);
+		for (FActiveGameplayEffectHandle& CurrentPassive : OldArmor.PassiveHandles)
+		{
+			AbilitySystemComponent->RemoveGameplayEffect(CurrentPassive);
+		}
+	}
+
+	// Remove the armor from the character
+	Character->SetArmorMesh(ArmorSlot, nullptr);
 
 	// Clear the old armor information
 	if (EArmorSlot::Gauntlets == ArmorSlot) Gauntlets = F_Item();
@@ -699,21 +742,6 @@ bool UCombatComponent::EquipArmor(F_Item Armor)
 		return false;
 	}
 
-	if (!Character->HasAuthority())
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Only create the armor on the server!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return false;
-	}
-
-	UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
-	if (!AbilitySystemComponent)
-	{
-		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the ability system while creating the armor!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return false;
-	}
-	
 	F_Information_Armor ArmorInformation = GetArmorFromDatabase(Armor.ItemName);
 	if (!ArmorInformation.Id.IsValid() || ArmorInformation.ArmorSlot == EArmorSlot::None)
 	{
@@ -728,25 +756,37 @@ bool UCombatComponent::EquipArmor(F_Item Armor)
 		UnequipArmor(ArmorInformation.ArmorSlot);
 	}
 
+	
 	// Equip the armor
 	F_Information_Armor_Handle ArmorHandle;
-	ArmorHandle.ArmorStats = AbilitySystemComponent->AddGameplayEffect(ArmorInformation.ArmorStats);
-	
-	// Passives
-	for (const FGameplayEffectInfo& Passive : ArmorInformation.Passives)
+	if (Character->HasAuthority())
 	{
-		ArmorHandle.PassiveHandles.Add(AbilitySystemComponent->AddGameplayEffect(Passive));
-	}
+		UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
+		if (!AbilitySystemComponent)
+		{
+			UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the ability system while creating the armor!",
+				UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+			return false;
+		}
+		
+		ArmorHandle.ArmorStats = AbilitySystemComponent->AddGameplayEffect(ArmorInformation.ArmorStats);
+		
+		// Passives
+		for (const FGameplayEffectInfo& Passive : ArmorInformation.Passives)
+		{
+			ArmorHandle.PassiveHandles.Add(AbilitySystemComponent->AddGameplayEffect(Passive));
+		}
+		
+		// Abilities
+		for (const FGameplayAbilityInfo& Ability : ArmorInformation.Abilities)
+		{
+			ArmorHandle.AbilityHandles.Add(AbilitySystemComponent->AddAbility(Ability));
+		}
 	
-	// Abilities
-	for (const FGameplayAbilityInfo& Ability : ArmorInformation.Abilities)
-	{
-		ArmorHandle.AbilityHandles.Add(AbilitySystemComponent->AddAbility(Ability));
+
+		// Equip the armor to the character
+		Character->SetArmorMesh(ArmorInformation.ArmorSlot, ArmorInformation.ArmorMesh);
 	}
-
-	// Equip the armor to the character
-	Character->SetArmorMesh(ArmorInformation.ArmorSlot, ArmorInformation.ArmorMesh);
-
 	
 	// Broadcast the event
 	OnEquippedArmor.Broadcast(Armor, ArmorInformation, ArmorInformation.ArmorSlot);

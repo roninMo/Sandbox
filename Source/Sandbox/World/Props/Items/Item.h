@@ -19,7 +19,7 @@ protected:
 	/** Information for access this item's data */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Data Configuration") UDataTable* ItemInformationTable;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Data Configuration") FName TableId;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Item|Information") F_Item Item;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, ReplicatedUsing=OnRep_Item, Category = "Item|Information") F_Item Item;
 	
 	/**
 	 * Set to true if a player has accessed this item and is performing some action that should prevent other players from doing the same thing
@@ -36,8 +36,9 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	AItem();
 
-	/** Function for dynamically adding default information to inventory items */
-	virtual void InitializeItemGlobals();
+	/** Logic that should be handled once the item has been replicated to the client */
+	UFUNCTION() virtual void OnRep_Item();
+	
 	
 //----------------------------------------------------------------------------------------------------------//
 // Inventory item interface	(blueprint functions take priority, this just allows customization				//

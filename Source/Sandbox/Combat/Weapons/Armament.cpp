@@ -74,6 +74,12 @@ void AArmament::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetim
 }
 
 
+void AArmament::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+}
+
+
 void AArmament::BeginPlay()
 {
 	Super::BeginPlay();
@@ -158,11 +164,92 @@ bool AArmament::DeconstructArmament()
 }
 
 
+void AArmament::OnRep_Item()
+{
+	Super::OnRep_Item();
+
+	// Retrieve the armament's information
+	if (!IsValidArmanent())
+	{
+		RetrieveArmamentInformationOnClient();
+	}
+}
+
+
+void AArmament::OnRep_CreatedArmament()
+{
+	// Retrieve the armament's information
+	if (!IsValidArmanent())
+	{
+		RetrieveArmamentInformationOnClient();
+	}
+
+	// Client notification for when the armament has been created
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
+	{
+		
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} tried to add the armament information on the client after creation and failed!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+	
+	CombatComponent->OnEquippedArmament.Broadcast(this, GetEquipSlot());
+}
+
+void AArmament::RetrieveArmamentInformationOnClient()
+{
+	if (!GetOwner())
+	{
+		// Initial replication happens before the component retrieves the owner, and causes problems. // TODO: add logging that checks against GetOwner() being valid, and handles the extra arguments
+		return;
+	}
+
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while retrieving the combat component!!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+	
+	UCombatComponent* CombatComponent = GetCombatComponent();
+	if (!CombatComponent)
+	{
+		
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} tried to add the armament information on the client after creation and failed!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+
+	// Item information is universal, just retrieve the inventory id
+	FGuid Id = CombatComponent->GetArmamentInventoryInformation(EquipSlot).Id;
+	if (Id.IsValid())
+	{
+		// Execute_SetItem(this, CombatComponent->GetArmamentInventoryInformation(EquipSlot));
+		Execute_SetId(this, Id);
+	}
+
+	// We just need the combat information, nothing else really needs to be replicated, and we should already be able to retrieve that from the item information
+	if (!Item.ItemName.IsNone())
+	{
+		SetArmamentInformation(CombatComponent->GetArmamentInformationFromDatabase(Item.ItemName));
+		SetArmamentMontagesFromDB(CombatComponent->GetArmamentMontageTable(), Character->GetCharacterSkeletonMapping());
+		
+		if (!ArmamentInformation.IsValid())
+		{
+			UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2}  tried to add the armament information on the client after creation and something happened!",
+				UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		}
+	}
+}
+
+
 bool AArmament::IsValidArmanent()
 {
 	// Check if montages are valid for this specific valid
 	// For melee armaments, check if the overlap component is valid
-	return true;
+	return !ArmamentInformation.IsValid();
 }
 
 #pragma endregion 
@@ -486,47 +573,6 @@ void AArmament::SetArmamentInformation(const F_ArmamentInformation& Information)
 void AArmament::SetArmamentEquipSlot(EEquipSlot Slot)
 {
 	EquipSlot = Slot;
-}
-
-
-void AArmament::OnRep_CreatedArmament()
-{
-	if (!GetOwner())
-	{
-		// Initial replication happens before the component retrieves the owner, and causes problems. // TODO: add logging that checks against GetOwner() being valid, and handles the extra arguments
-		return;
-	}
-	
-	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
-	if (!Character)
-	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while retrieving the combat component!!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
-	
-	UCombatComponent* CombatComponent = GetCombatComponent();
-	if (!CombatComponent)
-	{
-		
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} tried to add the armament information on the client after creation and failed!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return;
-	}
-	
-	// Retrieve the armament information
-	Execute_SetItem(this, CombatComponent->GetArmamentInventoryInformation(EquipSlot));
-	if (!Item.ItemName.IsNone())
-	{
-		SetArmamentInformation(CombatComponent->GetArmamentInformationFromDatabase(Item.ItemName));
-		SetArmamentMontagesFromDB(CombatComponent->GetArmamentMontageTable(), Character->GetCharacterSkeletonMapping());
-		
-		if (!Item.IsValid() || !ArmamentInformation.IsValid())
-		{
-			UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2}  tried to add the armament information on the client after creation and something happened!",
-				UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		}
-	}
 }
 
 

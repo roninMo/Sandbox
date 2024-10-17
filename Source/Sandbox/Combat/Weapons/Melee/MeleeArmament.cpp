@@ -166,8 +166,22 @@ bool AMeleeArmament::DeconstructArmament()
 
 bool AMeleeArmament::IsValidArmanent()
 {
-	// Check if montages are valid for this specific valid
+	if (!Super::IsValidArmanent())
+	{
+		return false;
+	}
+
 	// For melee armaments, check if the overlap component is valid
+	if (GetArmamentHitboxes().IsEmpty())
+	{
+		return false;
+	}
+
+	// Check if montages are valid for this specific valid
+	if (MeleeMontages_OneHand.IsEmpty() && MeleeMontages_TwoHand.IsEmpty() && MeleeMontages_DualWield.IsEmpty() && Montages.IsEmpty())
+	{
+		return false;
+	}
 	
 	return true;
 }

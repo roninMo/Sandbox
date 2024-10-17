@@ -115,7 +115,9 @@ protected:
 	
 	/** Returns the properties used for network replication, this needs to be overridden by all actor classes with native replicated properties */
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-	
+
+	virtual void Tick(float DeltaSeconds) override;
+
 	/** Overridable native event for when play begins for this actor. */
 	virtual void BeginPlay() override;
 	
@@ -127,6 +129,20 @@ public:
 	/** Function for unequipping the armament. Add setup and teardown logic specific to this armament's configuration. */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Init") virtual bool DeconstructArmament();
 	
+	/** Logic that should be handled once the item has been replicated to the client */
+	virtual void OnRep_Item() override;
+
+	/** Logic that happens on the client after the armament was created */
+	UFUNCTION() virtual void OnRep_CreatedArmament();
+
+	/**
+	 * Handles retrieving the armament's information when it's values have been replicated. \n\n
+	 *
+	 * There's a race condition between armament creation's OnRep, and when the item information is replicated to the client, so this is handled at both locations to retrieve the information
+	 * We only really need combat information, and we don't need to wait to retrieve it
+	 */
+	UFUNCTION() virtual void RetrieveArmamentInformationOnClient();
+
 	/** Function that checks whether the armament is valid to equip */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Init") virtual bool IsValidArmanent();
 
@@ -262,9 +278,6 @@ public:
 	
 	/** Set the slot this armament was equipped in. */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual void SetArmamentEquipSlot(EEquipSlot Slot);
-
-	/** Logic that happens on the client after the armament was created */
-	UFUNCTION() virtual void OnRep_CreatedArmament();
 	
 	/** Retrieves the combat component from the character */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual UCombatComponent* GetCombatComponent(ACharacterBase* Character = nullptr) const;

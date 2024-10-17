@@ -34,25 +34,13 @@ AItem::AItem()
 void AItem::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-	DOREPLIFETIME_CONDITION(AItem, Item, COND_InitialOrOwner);
-}
-
-
-void AItem::InitializeItemGlobals()
-{
-	// Ex item globals function.
-	if (!Item.GlobalInformation) return;
-	F_Item GlobalItem;
-	
-	// const UData_DefaultItemInformation* Information = Cast<UData_CharacterGlobals>(Data);
-	// ItemHighlightColor = Information->ItemHighlightColor;
+	DOREPLIFETIME_CONDITION_NOTIFY(AItem, Item, COND_Custom, REPNOTIFY_OnChanged);
 }
 
 
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
-	InitializeItemGlobals();
 
 	// Handle this during spawn
 	// if (ItemInformationTable && !Item.IsValid())
@@ -61,6 +49,13 @@ void AItem::BeginPlay()
 	// }
 	
 	// CreateIdIfNull();
+}
+
+
+void AItem::OnRep_Item()
+{
+	// UE_LOGFMT(LogTemp, Log, "{0}::{1}() {2} replicated information to the client!",
+	// 	*UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
 }
 
 

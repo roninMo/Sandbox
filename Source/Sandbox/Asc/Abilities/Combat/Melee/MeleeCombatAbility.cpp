@@ -146,7 +146,7 @@ bool UMeleeCombatAbility::SetArmamentInformation_Implementation()
 		OffhandEquipSlot = OffhandArmament ? OffhandArmament->GetEquipSlot() : EEquipSlot::None;
 	}
 	
-	ensure(!ComboAttacks.ComboAttacks.IsEmpty());
+	// ensure(!ComboAttacks.ComboAttacks.IsEmpty());
 	return false;
 }
 

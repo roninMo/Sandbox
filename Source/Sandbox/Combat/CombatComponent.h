@@ -7,6 +7,7 @@
 #include "GameplayTagContainer.h"
 #include "Components/ActorComponent.h"
 #include "Sandbox/Data/Enums/ArmamentTypes.h"
+#include "Sandbox/Data/Enums/EquipSlot.h"
 #include "Sandbox/Data/Structs/ArmorInformation.h"
 #include "Sandbox/Data/Structs/InventoryInformation.h"
 #include "CombatComponent.generated.h"
@@ -60,8 +61,8 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_FiveParams(FCombatPoiseBrokenSignature, AChar
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FArmamentEquippedSignature, AArmament*, Armament, EEquipSlot, EquipSlot);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmamentUnequippedSignature, FName, Armament, FGuid, Id, EEquipSlot, EquipSlot);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorEquippedSignature, F_Item, Information, F_Information_Armor, Abilities, EArmorSlot, EquipSlot);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item, Information, F_Information_Armor, Abilities, EArmorSlot, EquipSlot);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorEquippedSignature, F_Item, Item, F_Information_Armor, Armor, EArmorSlot, EquipSlot);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item, Item, F_Information_Armor, Armor, EArmorSlot, EquipSlot);
 
 
 
