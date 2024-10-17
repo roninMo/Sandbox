@@ -42,23 +42,22 @@ bool UArmorData::AddToCharacter(ACharacterBase* Character, FText* ErrorText) con
 
 
 	// Add / Retrieve item information from the inventory
-	F_Item Information_Gauntlets;
-	F_Item Information_Leggings;
-	F_Item Information_Helm;
-	F_Item Information_Chest;
-
-	// Retrieve the information to construct the armor
-	Inventory->Execute_GetDataBaseItem(Inventory, Gauntlets, Information_Gauntlets);
-	Inventory->Execute_GetDataBaseItem(Inventory, Leggings, Information_Leggings);
-	Inventory->Execute_GetDataBaseItem(Inventory, Helm, Information_Helm);
-	Inventory->Execute_GetDataBaseItem(Inventory, Chest, Information_Chest);
+	F_Item Information_Gauntlets(FGuid::NewGuid(), Gauntlets);
+	F_Item Information_Leggings(FGuid::NewGuid(), Leggings);
+	F_Item Information_Helm(FGuid::NewGuid(), Helm);
+	F_Item Information_Chest(FGuid::NewGuid(), Chest);
 
 	// Add the armor to the player's inventory
-	Inventory->Execute_TryAddItem(Inventory, Gauntlets, nullptr, EItemType::Inv_Armor);
-	Inventory->Execute_TryAddItem(Inventory, Leggings, nullptr, EItemType::Inv_Armor);
-	Inventory->Execute_TryAddItem(Inventory, Helm, nullptr, EItemType::Inv_Armor);
-	Inventory->Execute_TryAddItem(Inventory, Chest, nullptr, EItemType::Inv_Armor);
+	Inventory->Execute_TryAddItem(Inventory, Information_Gauntlets.Id, Gauntlets, nullptr, EItemType::Inv_Armor);
+	Inventory->Execute_TryAddItem(Inventory, Information_Leggings.Id, Leggings, nullptr, EItemType::Inv_Armor);
+	Inventory->Execute_TryAddItem(Inventory, Information_Helm.Id, Helm, nullptr, EItemType::Inv_Armor);
+	Inventory->Execute_TryAddItem(Inventory, Information_Chest.Id, Chest, nullptr, EItemType::Inv_Armor);
 
+	// Retrieve the information to construct the armor
+	Inventory->Execute_GetItem(Inventory, Information_Gauntlets, Information_Gauntlets.Id, EItemType::Inv_Armor);
+	Inventory->Execute_GetItem(Inventory, Information_Leggings, Information_Leggings.Id, EItemType::Inv_Armor);
+	Inventory->Execute_GetItem(Inventory, Information_Helm, Information_Helm.Id, EItemType::Inv_Armor);
+	Inventory->Execute_GetItem(Inventory, Information_Chest, Information_Chest.Id, EItemType::Inv_Armor);
 	
 	bool bArmorEquipped = true;
 	const TArray Armors = {Information_Gauntlets, Information_Leggings, Information_Helm, Information_Chest};

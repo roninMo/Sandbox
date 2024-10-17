@@ -161,7 +161,7 @@ FName ANpc::GetId() const
 void ANpc::AddSavedItemToInventory(FS_Item Information)
 {
 	if (!Inventory || !Information.IsValid()) return;
-	Inventory->TryAddItem(Information.ItemName, nullptr, EItemType::Inv_None);
+	Inventory->Execute_TryAddItem(Inventory, FGuid::NewGuid(), Information.ItemName, nullptr, EItemType::Inv_None);
 }
 
 

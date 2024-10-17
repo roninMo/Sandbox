@@ -21,9 +21,9 @@ struct F_Item
 {
 	GENERATED_USTRUCT_BODY()
 		F_Item(
-            FGuid Id = FGuid(),
-            int32 SortOrder = -1,
+			const FGuid Id = FGuid(),
 			const FName ItemName = "",
+            const int32 SortOrder = -1,
 			const FString& DisplayName = "",
             
 			const FString& Description = "",
@@ -36,8 +36,8 @@ struct F_Item
 		) :
 	
 		Id(Id),
-		SortOrder(SortOrder),
 		ItemName(ItemName),
+		SortOrder(SortOrder),
 		DisplayName(DisplayName),
 	
 		Description(Description),
@@ -54,12 +54,12 @@ public:
 	
 	/** The unique id for this item. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite) FGuid Id;
-	
-	/** The sort order for the inventory item. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) int SortOrder;
 
 	/** The database name reference of the item. This is used for retrieving the item from the database */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FName ItemName;
+	
+	/** The sort order for the inventory item. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) int SortOrder;
 
 	/** The display name of the item */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString DisplayName;

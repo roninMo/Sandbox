@@ -4,7 +4,7 @@
 #include "Sandbox/Data/Interfaces/Inventory/InventoryInterface.h"
 
 // Add default functionality here for any IInventoryInterface functions that are not pure virtual.
-bool IInventoryInterface::TryAddItem_Implementation(const FName DatabaseId, UObject* InventoryItemInterface, const EItemType Type)
+bool IInventoryInterface::TryAddItem_Implementation(const FGuid& Id, const FName DatabaseId, UObject* InventoryItemInterface, const EItemType Type)
 {
 	return false;
 }

@@ -7,6 +7,7 @@
 #include "InputAction.h"
 #include "AbilitySystemGlobals.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/AI/Characters/Npc.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Data/ArmorData.h"
 #include "Sandbox/Data/EquipmentData.h"
@@ -86,6 +87,12 @@ UAbilitySystem* UGameplayAbilityUtilities::GetAbilitySystem(const AActor* Actor)
 	UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Actor);
 	if (!ASC)
 	{
+		const ANpc* NpcCharacter = Cast<ANpc>(Actor);
+		if (NpcCharacter && !NpcCharacter->HasAuthority())
+		{
+			return nullptr;
+		}
+
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1} Did not find {2}'s Ability System!", *UEnum::GetValueAsString(Actor->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Actor));
 		return nullptr;
 	}

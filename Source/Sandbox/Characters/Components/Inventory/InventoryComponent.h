@@ -92,7 +92,8 @@ public:
 	 *				- HandleItemAdditionFail
 	 *				- HandleItemAdditionSuccess
 	 * 
-	 * @param DatabaseId								The id for this item in the inventory
+	 * @param Id										The id for this item in the inventory
+	 * @param DatabaseId								The database id for this item in the inventory
 	 * @param InventoryItemInterface					The reference to the actor spawned in the world, if there is one (and you want it to be deleted upon completion).
 	 * @param Type										The item type (used for item allocation)
 	 * @returns		True if the item was found in the database and successfully added to the inventory.
@@ -100,7 +101,7 @@ public:
 	 * @note For handling the ui, I'd add delegates on the response functions for update notifications on the player's inventory
 	 * @remarks Blueprints do not need to handle this logic unless they want to override the logic already in place
 	 */
-	virtual bool TryAddItem_Implementation(const FName DatabaseId, UObject* InventoryItemInterface, const EItemType Type) override;
+	virtual bool TryAddItem_Implementation(const FGuid& Id, FName DatabaseId, UObject* InventoryItemInterface, const EItemType Type) override;
 
 	
 protected:

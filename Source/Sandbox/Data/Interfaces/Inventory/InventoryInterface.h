@@ -42,8 +42,9 @@ public:
 	 *			- Client_AddItemResponse
 	 *				- HandleItemAdditionFail
 	 *				- HandleItemAdditionSuccess
-	 * 
-	 * @param DatabaseId								The id for this item in the inventory
+	* 
+	 * @param Id										The id for this item in the inventory
+	 * @param DatabaseId								The database id for this item in the inventory
 	 * @param InventoryItemInterface					The reference to the actor spawned in the world, if there is one (and you want it to be deleted upon completion).
 	 * @param Type										The item type (used for item allocation)
 	 * @returns		True if the item was found in the database and successfully added to the inventory.
@@ -52,8 +53,8 @@ public:
 	 * @remarks Blueprints do not need to handle this logic unless they want to override the logic already in place
 	 */
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Inventory", meta = (DisplayName = "Try Add Item"))
-	bool TryAddItem(const FName DatabaseId, UObject* InventoryItemInterface, const EItemType Type);
-	virtual bool TryAddItem_Implementation(const FName DatabaseId, UObject* InventoryItemInterface, const EItemType Type);
+	bool TryAddItem(const FGuid& Id, const FName DatabaseId, UObject* InventoryItemInterface, const EItemType Type);
+	virtual bool TryAddItem_Implementation(const FGuid& Id, const FName DatabaseId, UObject* InventoryItemInterface, const EItemType Type);
 
 	
 protected:

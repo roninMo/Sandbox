@@ -39,16 +39,19 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 
 #pragma region Inventory retrieval logic
 #pragma region Add Item
-bool UInventoryComponent::TryAddItem_Implementation(const FName DatabaseId, UObject* InventoryItemInterface, const EItemType Type)
+bool UInventoryComponent::TryAddItem_Implementation(const FGuid& Id, const FName DatabaseId, UObject* InventoryItemInterface, const EItemType Type)
 {
 	if (!GetCharacter() || DatabaseId.IsNone()) return false;
 
-	// TODO: check if this is valid in production. If not, add logic to refactor distributing this from the server - Unable to resolve default guid from client: ObjectName: BaseItem_0, ObjOuter: /Game/UEDPIE_0_Level.Level:PersistentLevel 
-	FGuid Id = FGuid::NewGuid();
 	const TScriptInterface<IInventoryItemInterface> InventoryItem = InventoryItemInterface;
 	if (InventoryItem.GetInterface() && InventoryItem->Execute_GetId(InventoryItem.GetObject()).IsValid())
 	{
-		Id = InventoryItem->Execute_GetId(InventoryItem.GetObject());
+		if (Id != InventoryItem->Execute_GetId(InventoryItem.GetObject()))
+		{
+			UE_LOGFMT(InventoryLog, Error, "{0}::{1}() {2}'s adding an item with a different id than what's on the object. Using the new id: {3}, {4}({5})",
+				*UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character),
+				*Id.ToString(), *GetNameSafe(InventoryItemInterface), *InventoryItem->Execute_GetId(InventoryItem.GetObject()).ToString());
+		}
 	}
 
 	// If the server calls the function, just handle it and send the updated information to the client. Otherwise handle sending the information to the server and then back to the client
