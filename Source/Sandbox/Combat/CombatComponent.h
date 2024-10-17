@@ -147,6 +147,15 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item
 		- AttributeLogic handles adjusting attributes
 
 
+
+		// TODO: Fix unreal's OnReplicated functions that were working without any problems earlier this week. The enemy character's health functions, and now some of the combat component's functions
+						- There actually shouldn't be any errors here, which is really strange and depressing, I don't want to build for single player, but I'm about to start working two jobs so it's whatever
+						- The armament attack pattern / wielding needs to be replicated to the client, once that is fixed combat is good
+
+					- If you're serious about development and not obsessed with learning through guides and talking over everything, I'd suggest just taking from this to help you on your journey
+					- The only thing you really need is motion capture for creating good attack patterns, once you get the foundation down. If I have time I'll probably just stick to single player logic after this
+					- Having overhead logic that takes over everything is kind of disenchanting, but it doesn't ever really stop, or let interaction be natural
+
  
 */
 UCLASS( ClassGroup=(Custom), Blueprintable, BlueprintType, meta=(BlueprintSpawnableComponent) )
@@ -323,7 +332,7 @@ public:
 	
 	/** OnRep function for handling updating the current stance */
 	UFUNCTION() virtual void OnRep_CurrentStance();
-	UFUNCTION(Client, Reliable) virtual void Client_SetCurrentStance(EArmamentStance PreviousStance);
+	UFUNCTION(Client, Reliable, BlueprintCallable) virtual void Client_SetCurrentStance(EArmamentStance PreviousStance);
 	
 	/**
 	 * Retrieves the armament from one of the player's hands

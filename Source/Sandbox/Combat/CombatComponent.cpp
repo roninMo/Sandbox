@@ -351,11 +351,6 @@ void UCombatComponent::SetArmamentStance(const EArmamentStance Stance)
 		CurrentStance = Stance;
 		UpdateArmamentCombatAbilities(PreviousStance);
 	}
-
-	if (GetOwner() && GetOwner()->HasAuthority())
-	{
-		Client_SetCurrentStance_Implementation(Stance);
-	}
 }
 
 
