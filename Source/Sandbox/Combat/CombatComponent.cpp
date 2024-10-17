@@ -131,9 +131,17 @@ void UCombatComponent::AddArmamentToEquipSlot(const F_Item& ArmamentInventoryInf
 	else if (EquipSlot == EEquipSlot::RightHandSlotThree) RightHandEquipSlot_Three = ArmamentInventoryInformation;
 	
 	// Equip the new armament if you've updated one of the currently equipped slots
-	if (Character->HasAuthority() && (EquipSlot == PrimaryArmament->GetEquipSlot() || EquipSlot == SecondaryArmament->GetEquipSlot()))
+	if (Character->HasAuthority())
 	{
-		CreateArmament(EquipSlot);
+		if (PrimaryArmament && EquipSlot == PrimaryArmament->GetEquipSlot())
+		{
+			CreateArmament(EquipSlot);
+		}
+		
+		if (SecondaryArmament && EquipSlot == SecondaryArmament->GetEquipSlot())
+		{
+			CreateArmament(EquipSlot);
+		}
 	}
 }
 

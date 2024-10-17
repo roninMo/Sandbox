@@ -322,7 +322,7 @@ struct F_ArmamentInformation
 	/** There needs to be a valid reference to retrieve the armament/item */
 	virtual bool IsValid() const
 	{
-		return Id.IsValid();
+		return !Id.IsNone();
 	}
 };
 

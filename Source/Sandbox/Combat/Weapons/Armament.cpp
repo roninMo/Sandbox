@@ -249,7 +249,7 @@ bool AArmament::IsValidArmanent()
 {
 	// Check if montages are valid for this specific valid
 	// For melee armaments, check if the overlap component is valid
-	return !ArmamentInformation.IsValid();
+	return ArmamentInformation.IsValid();
 }
 
 #pragma endregion 
