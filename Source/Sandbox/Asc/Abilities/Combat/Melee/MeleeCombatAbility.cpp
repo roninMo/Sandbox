@@ -168,11 +168,11 @@ void UMeleeCombatAbility::InitCombatInformation_Implementation()
 	SetMontageStartSection(); // montage start section (customization for different types of attacks
 	CalculateAttributeModifications(); // Damage and attribute calculations
 
-	UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} {3}::{4}{5}, ComboIndex: {6}, Montage: {7}({8})",
-		UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()),
-		bRunningAttack ? FString("(RunningAttack)") : bCrouchingAttack ? FString("(CrouchAttack)") : FString(""),
-		*GetNameSafe(Armament), *UEnum::GetValueAsString(AttackPattern), ComboIndex, *GetNameSafe(GetCurrentMontage()), MontageStartSection
-	);
+	// UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} {3}::{4}{5}, ComboIndex: {6}, Montage: {7}({8})",
+	// 	UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()),
+	// 	bRunningAttack ? FString("(RunningAttack)") : bCrouchingAttack ? FString("(CrouchAttack)") : FString(""),
+	// 	*GetNameSafe(Armament), *UEnum::GetValueAsString(AttackPattern), ComboIndex, *GetNameSafe(GetCurrentMontage()), MontageStartSection
+	// );
 }
 
 
@@ -550,8 +550,14 @@ void UMeleeCombatAbility::OnEndAttackFrames_Implementation(bool bRightHand)
 }
 
 
-void UMeleeCombatAbility::OnOverlappedTarget_Implementation(const FGameplayAbilityTargetDataHandle& TargetData, AArmament* OverlappedArmament, UAbilitySystem* TargetAsc)
+void UMeleeCombatAbility::OnOverlappedTarget_Implementation(const FGameplayAbilityTargetDataHandle& TargetData, UAbilitySystem* TargetAsc)
 {
+	const FGameplayAbilityActivationInfo ActivationInfo = GetCurrentActivationInfo();
+	if (!(IsPredictingClient() || HasAuthority(&ActivationInfo)))
+	{
+		return;
+	}
+
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
@@ -559,14 +565,61 @@ void UMeleeCombatAbility::OnOverlappedTarget_Implementation(const FGameplayAbili
 			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 	}
 
+	// Retrieve the target information the familiar way
+	TArray<TWeakObjectPtr<AActor>> TargetInformation;
+	for (TSharedPtr<FGameplayAbilityTargetData> Data : TargetData.Data)
+	{
+		if (!Data.IsValid()) continue;
+		TargetInformation = Data->GetActors();
+	}
+
+	if (TargetInformation.IsEmpty())
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2}'s Replicated weapon overlap target data was sent without any information!",
+			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
+		return;
+	}
+
+	// The problem with sending the information this way is everything gets tangled, there's lots of extra components and functionality to handle, and you get to have lots of fun handling events and taking care of lots of other logic
+	// There really isn't any drawbacks to it other than that, and the amount of benefits it has for multiplayer is wild
+
+	// Retrieve the character and the weapon
+	AArmament* OverlappedWeapon = nullptr;
+	ACharacterBase* TargetCharacter = nullptr;
+	for (TWeakObjectPtr<AActor> Actor : TargetInformation)
+	{
+		if (!Actor.Get()) continue;
+
+		// Check if this is the target we attacked
+		if (Cast<ACharacterBase>(Actor.Get())) TargetCharacter = Cast<ACharacterBase>(Actor.Get());
+
+		// Check if this is the weapon we attacked with
+		if (Cast<AArmament>(Actor.Get())) OverlappedWeapon = Cast<AArmament>(Actor.Get());
+	}
+
+	TargetAsc = TargetAsc ? TargetAsc : UGameplayAbilityUtilities::GetAbilitySystem(TargetCharacter);
+	if (!TargetCharacter || !TargetAsc)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the enemy information from the target data during an overlap event!",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
+		return;
+	}
+	
+	if (!OverlappedWeapon)
+	{
+		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the armament from the target data during an overlap event!",
+			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
+		return;
+	}
+
 	if (bDebug)
 	{
 		UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} OnOverlapped event, checking if they've already attacked the player!",
-			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(OverlappedArmament));
+			*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(OverlappedWeapon));
 	}
-
+	
 	// Overlap logic
-	const bool bRightHandArmament = CombatComponent && OverlappedArmament == CombatComponent->GetArmament(false) ? false : true;
+	const bool bRightHandArmament = CombatComponent && OverlappedWeapon == CombatComponent->GetArmament(false) ? false : true;
 	TArray<AActor*>& ArmamentHitActors = !bRightHandArmament ? SecondaryHitActors : PrimaryHitActors;
 	if (CurrentStance == EArmamentStance::DualWielding || CurrentStance == EArmamentStance::TwoWeapons)
 	{
@@ -579,7 +632,7 @@ void UMeleeCombatAbility::OnOverlappedTarget_Implementation(const FGameplayAbili
 			{
 				if (bDebug)
 				{
-					UE_LOGFMT(AbilityLog, Log, "{0} already overlapping with {1}", *GetNameSafe(OverlappedArmament), *GetNameSafe(TargetAsc->GetAvatarActor()));
+					UE_LOGFMT(AbilityLog, Log, "{0} already overlapping with {1}", *GetNameSafe(OverlappedWeapon), *GetNameSafe(TargetAsc->GetAvatarActor()));
 				}
 				
 				return;
@@ -589,12 +642,12 @@ void UMeleeCombatAbility::OnOverlappedTarget_Implementation(const FGameplayAbili
 			if (TargetAsc->GetAvatarActor())
 			{
 				ArmamentHitActors.AddUnique(TargetAsc->GetAvatarActor());
-				HandleMeleeAttack(TargetData, OverlappedArmament, TargetAsc, ComboAttacks.DamageEffectClass);
+				HandleMeleeAttack(TargetData, OverlappedWeapon, TargetAsc, ComboAttacks.DamageEffectClass);
 			}
 		}
 		else if (bDebug)
 		{
-			UE_LOGFMT(AbilityLog, Log, "{0} invalid attack frame state: {1}, rightHandArmament({2}): {3}", *GetNameSafe(OverlappedArmament),
+			UE_LOGFMT(AbilityLog, Log, "{0} invalid attack frame state: {1}, rightHandArmament({2}): {3}", *GetNameSafe(OverlappedWeapon),
 				*UEnum::GetValueAsString(AttackFramesState), bRightHandArmament ? *FString("true") : *FString("false"), GetNameSafe(CombatComponent->GetArmament(bRightHandArmament)));
 		}
 	}
@@ -610,7 +663,7 @@ void UMeleeCombatAbility::OnOverlappedTarget_Implementation(const FGameplayAbili
 		if (TargetAsc->GetAvatarActor())
 		{
 			ArmamentHitActors.AddUnique(TargetAsc->GetAvatarActor());
-			HandleMeleeAttack(TargetData, OverlappedArmament, TargetAsc, ComboAttacks.DamageEffectClass);
+			HandleMeleeAttack(TargetData, OverlappedWeapon, TargetAsc, ComboAttacks.DamageEffectClass);
 		}
 	}
 }

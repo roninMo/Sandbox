@@ -26,9 +26,11 @@ bool UArmorData::AddToCharacter(ACharacterBase* Character, FText* ErrorText) con
 
 	UCombatComponent* CombatComponent = Character->GetCombatComponent();
 	UInventoryComponent* Inventory = Character->GetInventory<UInventoryComponent>();
-	if (!IsValid(CombatComponent))
+	if (!IsValid(CombatComponent) || !IsValid(Inventory))
 	{
-		const FText ErrorMessage = LOCTEXT("Invalid_CombatComponent", "The Combat Component is nullptr or invalid (pending kill)");
+		FText ErrorMessage;
+		if (!IsValid(CombatComponent)) ErrorMessage = LOCTEXT("Invalid_CombatComponent", "The Combat Component is nullptr or invalid (pending kill)");
+		else ErrorMessage = LOCTEXT("Invalid_InventoryComponent", "The Inventory Component is nullptr or invalid (pending kill)");
 		if (ErrorText)
 		{
 			*ErrorText = ErrorMessage;
@@ -44,21 +46,18 @@ bool UArmorData::AddToCharacter(ACharacterBase* Character, FText* ErrorText) con
 	F_Item Information_Leggings;
 	F_Item Information_Helm;
 	F_Item Information_Chest;
-	if (Inventory)
-	{
-		Inventory->Execute_TryAddItem(Inventory, Gauntlets, nullptr, EItemType::Inv_Armor);
-		Inventory->Execute_TryAddItem(Inventory, Leggings, nullptr, EItemType::Inv_Armor);
-		Inventory->Execute_TryAddItem(Inventory, Helm, nullptr, EItemType::Inv_Armor);
-		Inventory->Execute_TryAddItem(Inventory, Chest, nullptr, EItemType::Inv_Armor);
-	}
-	// else
-	// Only do this for characters that don't use/need inventory components
-	// {
-		Information_Gauntlets = F_Item(FGuid::NewGuid(), -1, Gauntlets);
-		Information_Leggings = F_Item(FGuid::NewGuid(), -1, Leggings);
-		Information_Helm = F_Item(FGuid::NewGuid(), -1, Helm);
-		Information_Chest = F_Item(FGuid::NewGuid(), -1, Chest);
-	// }
+
+	// Retrieve the information to construct the armor
+	Inventory->Execute_GetDataBaseItem(Inventory, Gauntlets, Information_Gauntlets);
+	Inventory->Execute_GetDataBaseItem(Inventory, Leggings, Information_Leggings);
+	Inventory->Execute_GetDataBaseItem(Inventory, Helm, Information_Helm);
+	Inventory->Execute_GetDataBaseItem(Inventory, Chest, Information_Chest);
+
+	// Add the armor to the player's inventory
+	Inventory->Execute_TryAddItem(Inventory, Gauntlets, nullptr, EItemType::Inv_Armor);
+	Inventory->Execute_TryAddItem(Inventory, Leggings, nullptr, EItemType::Inv_Armor);
+	Inventory->Execute_TryAddItem(Inventory, Helm, nullptr, EItemType::Inv_Armor);
+	Inventory->Execute_TryAddItem(Inventory, Chest, nullptr, EItemType::Inv_Armor);
 
 	
 	bool bArmorEquipped = true;

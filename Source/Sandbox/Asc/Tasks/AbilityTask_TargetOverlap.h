@@ -9,7 +9,7 @@
 class UAbilitySystem;
 class AArmament;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FAbilityTask_TargetOverlapDataSignature, const FGameplayAbilityTargetDataHandle&, DataHandle, AArmament*, Weapon, UAbilitySystem*, TargetAsc);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FAbilityTask_TargetOverlapDataSignature, const FGameplayAbilityTargetDataHandle&, DataHandle, UAbilitySystem*, TargetAsc);
 
 
 /**

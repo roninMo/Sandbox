@@ -238,11 +238,10 @@ protected:
 	 * 
 	 * @remarks By default this handles both weapons, so you shouldn't need to subclass this function
 	 * @param TargetData						The weapon overlap target data
-	 * @param OverlappedArmament				The armament that the player attacked with
 	 * @param TargetAsc							The target's ability system component
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Attack Frames") void OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& TargetData, AArmament* OverlappedArmament, UAbilitySystem* TargetAsc);
-	virtual void OnOverlappedTarget_Implementation(const FGameplayAbilityTargetDataHandle& TargetData, AArmament* OverlappedArmament, UAbilitySystem* TargetAsc);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ability|Combat|Attack Frames") void OnOverlappedTarget(const FGameplayAbilityTargetDataHandle& TargetData, UAbilitySystem* TargetAsc);
+	virtual void OnOverlappedTarget_Implementation(const FGameplayAbilityTargetDataHandle& TargetData, UAbilitySystem* TargetAsc);
 	
 
 //--------------------------------------------------------------------------------------//

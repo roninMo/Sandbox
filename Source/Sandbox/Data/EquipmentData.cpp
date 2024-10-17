@@ -26,9 +26,11 @@ bool UEquipmentData::AddToCharacter(ACharacterBase* Character, FText* ErrorText)
 
 	UCombatComponent* CombatComponent = Character->GetCombatComponent();
 	UInventoryComponent* Inventory = Character->GetInventory<UInventoryComponent>();
-	if (!IsValid(CombatComponent))
+	if (!IsValid(CombatComponent) || !IsValid(Inventory))
 	{
-		const FText ErrorMessage = LOCTEXT("Invalid_CombatComponent", "The Combat Component is nullptr or invalid (pending kill)");
+		FText ErrorMessage;
+		if (!IsValid(CombatComponent)) ErrorMessage = LOCTEXT("Invalid_CombatComponent", "The Combat Component is nullptr or invalid (pending kill)");
+		else ErrorMessage = LOCTEXT("Invalid_Inventory", "The Inventory Component is nullptr or invalid (pending kill)");
 		if (ErrorText)
 		{
 			*ErrorText = ErrorMessage;
@@ -46,26 +48,22 @@ bool UEquipmentData::AddToCharacter(ACharacterBase* Character, FText* ErrorText)
 	F_Item RightHandArmament_SlotOne;
 	F_Item RightHandArmament_SlotTwo;
 	F_Item RightHandArmament_SlotThree;
-	if (Inventory)
-	{
-		Inventory->Execute_TryAddItem(Inventory, Armament_LeftHandSlotOne, nullptr, EItemType::Inv_Weapon);
-		Inventory->Execute_TryAddItem(Inventory, Armament_LeftHandSlotTwo, nullptr, EItemType::Inv_Weapon);
-		Inventory->Execute_TryAddItem(Inventory, Armament_LeftHandSlotThree, nullptr, EItemType::Inv_Weapon);
-		Inventory->Execute_TryAddItem(Inventory, Armament_RightHandSlotOne, nullptr, EItemType::Inv_Weapon);
-		Inventory->Execute_TryAddItem(Inventory, Armament_RightHandSlotTwo, nullptr, EItemType::Inv_Weapon);
-		Inventory->Execute_TryAddItem(Inventory, Armament_RightHandSlotThree, nullptr, EItemType::Inv_Weapon);
-	}
-	// else
-	// Only do this for characters that don't use/need inventory components
-	// {
 	
-		LeftHandArmament_SlotOne = F_Item(FGuid::NewGuid(), -1, Armament_LeftHandSlotOne);
-		LeftHandArmament_SlotTwo = F_Item(FGuid::NewGuid(), -1, Armament_LeftHandSlotTwo);
-		LeftHandArmament_SlotThree = F_Item(FGuid::NewGuid(), -1, Armament_LeftHandSlotThree);
-		RightHandArmament_SlotOne = F_Item(FGuid::NewGuid(), -1, Armament_RightHandSlotOne);
-		RightHandArmament_SlotTwo = F_Item(FGuid::NewGuid(), -1, Armament_RightHandSlotTwo);
-		RightHandArmament_SlotThree = F_Item(FGuid::NewGuid(), -1, Armament_RightHandSlotThree);
-	// }
+	// Retrieve the information to build the armament
+	Inventory->Execute_GetDataBaseItem(Inventory, Armament_LeftHandSlotOne, LeftHandArmament_SlotOne);
+	Inventory->Execute_GetDataBaseItem(Inventory, Armament_LeftHandSlotTwo, LeftHandArmament_SlotTwo);
+	Inventory->Execute_GetDataBaseItem(Inventory, Armament_LeftHandSlotThree, LeftHandArmament_SlotThree);
+	Inventory->Execute_GetDataBaseItem(Inventory, Armament_RightHandSlotOne, RightHandArmament_SlotOne);
+	Inventory->Execute_GetDataBaseItem(Inventory, Armament_RightHandSlotTwo, RightHandArmament_SlotTwo);
+	Inventory->Execute_GetDataBaseItem(Inventory, Armament_RightHandSlotThree, RightHandArmament_SlotThree);
+
+	// Add the item information to the inventory
+	Inventory->Execute_TryAddItem(Inventory, Armament_LeftHandSlotOne, nullptr, EItemType::Inv_Weapon);
+	Inventory->Execute_TryAddItem(Inventory, Armament_LeftHandSlotTwo, nullptr, EItemType::Inv_Weapon);
+	Inventory->Execute_TryAddItem(Inventory, Armament_LeftHandSlotThree, nullptr, EItemType::Inv_Weapon);
+	Inventory->Execute_TryAddItem(Inventory, Armament_RightHandSlotOne, nullptr, EItemType::Inv_Weapon);
+	Inventory->Execute_TryAddItem(Inventory, Armament_RightHandSlotTwo, nullptr, EItemType::Inv_Weapon);
+	Inventory->Execute_TryAddItem(Inventory, Armament_RightHandSlotThree, nullptr, EItemType::Inv_Weapon);
 
 	
 	bool bEquippedArmaments = true;

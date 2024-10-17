@@ -118,13 +118,13 @@ protected:
 	UPROPERTY(Transient, BlueprintReadWrite) UAbilityData* AbilityData;
 	
 	/** The character's attributes */
-	UPROPERTY(Transient, BlueprintReadWrite) UAttributeData* Stats;
+	UPROPERTY(Transient, BlueprintReadWrite) UAttributeData* StatsData;
 
 	/** The character's equipment */
-	UPROPERTY(Transient, BlueprintReadWrite) UEquipmentData* Equipment;
+	UPROPERTY(Transient, BlueprintReadWrite) UEquipmentData* EquipmentData;
 	
 	/** The character's armor */
-	UPROPERTY(Transient, BlueprintReadWrite) UArmorData* Armor;
+	UPROPERTY(Transient, BlueprintReadWrite) UArmorData* ArmorData;
 
 
 	/** The handle for the character's abilities */
@@ -133,14 +133,6 @@ protected:
 	/** The handle for the character's attributes */
 	UPROPERTY(Transient, BlueprintReadWrite) FAttributeDataHandle AttributeDataHandle;
 
-
-
-	//
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) UDataTable* CombatInformationTable;
-	UPROPERTY(Transient, BlueprintReadWrite) UCharacterAbilityDataSet* AbilitiesAndStats;
-	UPROPERTY(Transient, BlueprintReadWrite) UEnemyEquipmentDataSet* EquipmentAndArmor;
-	UPROPERTY(Transient, BlueprintReadWrite) FCharacterAbilityDataSetHandle AbilitiesAndStatsHandle;
-
 	
 	// TODO: Refactor this into individual components to quickly test combat with different enemies.
 	//			- I want variation with equipment, attributes, and attack patterns (and to easily be able to add/remove to multiple enemies with no problems)
@@ -148,6 +140,8 @@ protected:
 	// Diverge combat characters into two different variations, and build for both. One with specific attack patterns, and one who's combat uses the weapon's attack patterns
 	// Level and area information and adjustments
 
+
+	
 
 	/**** Other ****/
 	/** The player controlled character */
@@ -265,9 +259,6 @@ public:
 	
 	/** Retrieves the ability data from the data table */
 	UFUNCTION(BlueprintCallable) virtual UAbilityData* GetAbilityInformationFromTable(FName AbilityId);
-
-	/** Gets the npc character information from the data table */
-	UFUNCTION(BlueprintCallable) virtual void GetCombatInformationFromTable(FName EquipmentId);
 	
 	
 };

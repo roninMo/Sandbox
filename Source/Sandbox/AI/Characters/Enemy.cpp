@@ -10,7 +10,6 @@
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
 #include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
-#include "Sandbox/Asc/Information/EnemyEquipmentDataSet.h"
 #include "Sandbox/Combat/CombatComponent.h"
 #include "Sandbox/Data/Structs/CharacterInformation.h"
 #include "Sandbox/Hud/Widgets/WidgetBase.h"
@@ -89,9 +88,9 @@ void AEnemy::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 
 	/**** Attribute, Equipment, Ability, and Armor information ****/
 	AbilityData = GetAbilityInformationFromTable(AbilityDataId);
-	Stats = GetAttributeInformationFromTable(AttributeInformationId);
-	Equipment = GetEquipmentInformationFromTable(EquipmentInformationId);
-	Armor = GetArmorInformationFromTable(ArmorInformationId);
+	StatsData = GetAttributeInformationFromTable(AttributeInformationId);
+	EquipmentData = GetEquipmentInformationFromTable(EquipmentInformationId);
+	ArmorData = GetArmorInformationFromTable(ArmorInformationId);
 
 	
 	/**** Character components ****/
@@ -331,22 +330,6 @@ void AEnemy::OnRep_MaxStaminaUpdated() { OnMaxStaminaUpdated.Broadcast(MaxStamin
 
 
 #pragma region Utility
-void AEnemy::GetCombatInformationFromTable(FName EquipmentId)
-{
-	if (CombatInformationTable)
-	{
-		const F_Table_NpcCombatInformation* Information = CombatInformationTable->FindRow<F_Table_NpcCombatInformation>(EquipmentId, TEXT("Npc Combat Data Context"), false);
-		if (Information)
-		{
-			EquipmentAndArmor = Information->Equipment;
-			AbilitiesAndStats = Information->AttributeAndAbilityData;
-		}
-		
-		// UE_LOGFMT(LogTemp, Error, "{0} did not find {1} within the Npc combat information table!", *GetNameSafe(CombatInformationTable), EquipmentId);
-	}
-}
-
-
 UAttributeData* AEnemy::GetAttributeInformationFromTable(FName AttributeId)
 {
 	if (!AttributeInformationTable)

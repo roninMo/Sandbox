@@ -302,6 +302,16 @@ class SANDBOX_API ACharacterBase : public ACharacter, public IAbilitySystemInter
 	GENERATED_BODY()
 
 protected:
+	/** The combat component. Used for handling armor and equipment, with combat functionality */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	TObjectPtr<UCombatComponent> CombatComponent;
+	
+	/** The character's inventory component. Stores their items, materials, equipment, armor, etc.  */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	TObjectPtr<UInventoryComponent> Inventory;
+
+	/** A stored reference to the character's ability system component */
+	UPROPERTY(BlueprintReadWrite, Category = "Ability System Component") TObjectPtr<UAbilitySystem> AbilitySystemComponent;
 
 
 public:
@@ -376,10 +386,10 @@ protected:
 // Peripheries																		   //
 //-------------------------------------------------------------------------------------//
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Periphery") FVector AISightTraceOffset = FVector(0, 0, 34);
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Peripheries")
 	TObjectPtr<UPlayerPeripheriesComponent> Peripheries;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Peripheries") FVector AISightTraceOffset = FVector(0, 0, 34);
 	
 
 protected:
@@ -393,11 +403,6 @@ protected:
 //-------------------------------------------------------------------------------------//
 // Ability System Component															   //
 //-------------------------------------------------------------------------------------//
-protected:
-	/** A stored reference to the player's ability system component */
-	UPROPERTY(BlueprintReadWrite, Category = "Ability System Component") TObjectPtr<UAbilitySystem> AbilitySystemComponent;
-	
-
 public:
 	/** Templated convenience version for retrieving the ability system component. */
 	template<class T> T* GetAbilitySystem(void) const { return Cast<T>(GetAbilitySystemComponent()); }
@@ -474,11 +479,6 @@ public:
 //-------------------------------------------------------------------------------------//
 // Combat																			   //
 //-------------------------------------------------------------------------------------//
-protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-	TObjectPtr<UCombatComponent> CombatComponent;
-
-	
 public:
 	/** Templated convenience version for retrieving the combat component. */
 	template<class T> T* GetCombatComponent(void) const { return Cast<T>(GetCombatComponent()); }
@@ -491,11 +491,6 @@ public:
 //----------------------------------------------------------------------------------//
 // Inventory																		//
 //----------------------------------------------------------------------------------//
-protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-	TObjectPtr<UInventoryComponent> Inventory;
-
-	
 public:
 	/** Templated convenience version for retrieving the inventory component. */
 	template<class T> T* GetInventory(void) const { return Cast<T>(GetInventoryComponent()); }

@@ -26,13 +26,12 @@ ANpc::ANpc(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitialize
 	PeripheryRadius->SetupAttachment(RootComponent);
 	PeripheryRadius->InitSphereRadius(1340.0f);
 	PeripheryRadius->SetHiddenInGame(true);
-
+	
 	PeripheryRadius->SetGenerateOverlapEvents(true);
 	PeripheryRadius->SetCollisionResponseToAllChannels(ECR_Ignore);
 	PeripheryRadius->SetCollisionObjectType(ECC_PeripheryComponents);
 	PeripheryRadius->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	PeripheryRadius->SetCollisionResponseToChannel(ECC_Pawn, ECollisionResponse::ECR_Overlap);
-	
 	
 	// Inventory
 	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));

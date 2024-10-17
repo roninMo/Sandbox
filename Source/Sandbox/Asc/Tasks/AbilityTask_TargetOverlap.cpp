@@ -7,6 +7,7 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/AI/Characters/Enemy.h"
 #include "Sandbox/Combat/Weapons/Armament.h"
 
 UAbilityTask_TargetOverlap* UAbilityTask_TargetOverlap::CreateOverlapDataTask(UGameplayAbility* OwningAbility, const TArray<AArmament*> Armaments, const bool bDebug)
@@ -105,8 +106,10 @@ void UAbilityTask_TargetOverlap::OnTraceOverlap(UPrimitiveComponent* OverlappedC
 	ACharacterBase* Target = Cast<ACharacterBase>(OtherActor);
 	if (!Target) return;
 
+
+	AEnemy* AITarget = Cast<AEnemy>(OtherActor);
 	UAbilitySystem* TargetAsc = Target->GetAbilitySystem<UAbilitySystem>();
-	if (!TargetAsc)
+	if (!TargetAsc && !AITarget)
 	{
 		UE_LOGFMT(AbilityLog, Log, "{0}::{1}() {2} Attacked a character with an invalid ability system component! Target: {3}",
 			*UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character), *GetNameSafe(Target)
@@ -175,7 +178,7 @@ void UAbilityTask_TargetOverlap::OnTraceOverlap(UPrimitiveComponent* OverlappedC
 					if (OnValidOverlap.IsBound())
 					{
 						if (bDebugTask) UE_LOGFMT(AbilityLog, Log, "{0} sending attack information from weapon {1}", *GetNameSafe(Character), *GetNameSafe(Armament));
-						OnValidOverlap.Broadcast(TargetData, Armament, TargetAsc);
+						OnValidOverlap.Broadcast(TargetData, TargetAsc);
 					}
 					else if (bDebugTask)
 					{
@@ -246,7 +249,7 @@ void UAbilityTask_TargetOverlap::OnTargetDataReplicatedCallback(const FGameplayA
 	if (ShouldBroadcastAbilityTaskDelegates())
 	{
 		AbilitySystemComponent->ConsumeClientReplicatedTargetData(GetAbilitySpecHandle(), GetActivationPredictionKey());
-		OnValidOverlap.Broadcast(DataHandle, OverlappedWeapon, TargetAsc);
+		OnValidOverlap.Broadcast(DataHandle, TargetAsc);
 	}
 }
 
