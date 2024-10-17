@@ -106,12 +106,9 @@ void APlayerCharacter::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAv
 			Hud->InitializeHud(this, PlayerController, AscPlayerState, AbilitySystemComponent, Attributes);
 		}
 
-		// Add the ability input bindings
-		if (IsLocallyControlled())
-		{
-			UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
-			AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
-		}
+		// Add the ability input bindings on the client (the ability system isn't ready when the input is normally configured)
+		UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
+		AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
 	}
 
 	
@@ -138,9 +135,12 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 		if (!AbilitySystemComponent) return;
 	}
 	
-	// Add the ability input bindings
-	// UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent);
-	// AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
+	// Add the ability input bindings on the server (the input isn't ready on init actor info, (and it's vice versa on the client)
+	if (HasAuthority())
+	{
+		UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent);
+		AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
+	}
 }
 
 

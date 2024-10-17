@@ -30,13 +30,13 @@ protected:
 	
 	/**** The stats and equipment of the npc ****/
 	/** The id of this npc character */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Stats") FName Id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Attributes, Equipment, Abilities and Armor") FName Id;
 
 	/** The data table containing the information on every npc character */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Data Tables") UDataTable* NPCInformationTable;
 
 	/** The information specific to an npc character */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|Stats") F_NpcInformation CharacterInformation;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character|Attributes, Equipment, Abilities and Armor") F_NpcInformation CharacterInformation;
 	
 	
 	/**** Movement values ****/

@@ -65,7 +65,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGameplayAttributeUpdated, float, 
 
 
 /**
- * 
+ * Enemy character's attributes, equipment, abilities, and armor is divided into multiple categories for handling logic easily
  */
 UCLASS()
 class SANDBOX_API AEnemy : public ANpc
@@ -81,20 +81,20 @@ protected:
 protected:
 	/**** Combat information ****/
 	/** The id of the attribute adjustments */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Stats") FName AttributeInformationId;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Attributes, Equipment, Abilities and Armor") FName AttributeInformationId;
 
 	// Add ng+ leveling attribute adjustments
 
 	// Add new region attribute adjustments
 
 	/** The id of the equipment set to use */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Stats") FName EquipmentInformationId;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Attributes, Equipment, Abilities and Armor") FName EquipmentInformationId;
 	
 	/** The id of the armor set to use */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Stats") FName ArmorInformationId;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Attributes, Equipment, Abilities and Armor") FName ArmorInformationId;
 
 	/** The id of the armor set to use */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Stats") FName AbilityDataId;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Attributes, Equipment, Abilities and Armor") FName AbilityDataId;
 
 	// Add attack patterns
 

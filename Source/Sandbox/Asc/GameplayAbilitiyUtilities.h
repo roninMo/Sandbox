@@ -4,9 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "Sandbox/Data/AbilityData.h"
+#include "Sandbox/Data/AttributeData.h"
 #include "GameplayAbilitiyUtilities.generated.h"
 
-struct FCharacterAbilityDataSetHandle;
+class UArmorData;
+class UEquipmentData;
 class UInputAction;
 class UGameplayEffect;
 class UGameplayAbility;
@@ -15,6 +18,7 @@ class UAttributeSet;
 class UAbilitySystem;
 class UCharacterAbilityDataSet;
 enum class ETriggerEvent : uint8;
+struct FCharacterAbilityDataSetHandle;
 struct FGameplayTagContainer;
 struct FGameplayTag;
 struct FGameplayAbilitySpec;
@@ -49,6 +53,56 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Attribute Set")
 	static void GetAllAttributes(TSubclassOf<UAttributeSet> AttributeSetClass, TArray<FGameplayAttribute>& OutAttributes);
 
+
+	// There's a mix of blueprint library logic and primary data logic that's mixed together, this needs to be fixed!
+	/**
+	 * Adds attribute information to the character.
+	 * AttributeData sets are game/player specific data that's used to initialize the attributes
+	 *
+	 * @param InAbilitySystemComponent		The ability system component of the character we're adding the attributes to
+	 * @param AttributeData					The character's attribute information stored in gameplay effects
+	 * @param OutAttributeDataHandle		The handle of the attribute data
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ability|Attribtes, Equipment, Ability, and Armor Data")
+	static bool TryAddAttributeData(UAbilitySystemComponent* InAbilitySystemComponent, const UAttributeData* AttributeData, FAttributeDataHandle& OutAttributeDataHandle, bool bPrintErrorMessages = false);
+	
+	/**
+	 * Adds equipment to the character's combat component, and the equipment to the inventory if they have one.
+	 * AttributeData sets are game/player specific data that's used to initialize the attributes
+	 *
+	 * @param InAbilitySystemComponent		The ability system component of the character we're adding the attributes to
+	 * @param EquipmentData					The character's equipment information
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ability|Attribtes, Equipment, Ability, and Armor Data")
+	static bool TryAddEquipmentData(UAbilitySystemComponent* InAbilitySystemComponent, const UEquipmentData* EquipmentData, bool bPrintErrorMessages = false);
+
+
+	/**
+	 * Adds abilities and passive effects to the character.
+	 * AttributeData sets are game/player specific data that's used to initialize the attributes
+	 *
+	 * @param InAbilitySystemComponent		The ability system component of the character we're adding the attributes to
+	 * @param AbilityData					The character's equipment information
+	 * @param OutAbilityDataHandle			The handle of the ability data
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ability|Attribtes, Equipment, Ability, and Armor Data")
+	static bool TryAddAbilityData(UAbilitySystemComponent* InAbilitySystemComponent, const UAbilityData* AbilityData, FAbilityDataHandle& OutAbilityDataHandle, bool bPrintErrorMessages = false);
+
+
+	/**
+	 * Adds equipment to the character's combat component, and the equipment to the inventory if they have one.
+	 * AttributeData sets are game/player specific data that's used to initialize the attributes
+	 *
+	 * @param InAbilitySystemComponent		The ability system component of the character we're adding the attributes to
+	 * @param ArmorData						The character's armor information
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ability|Attribtes, Equipment, Ability, and Armor Data")
+	static bool TryAddArmorData(UAbilitySystemComponent* InAbilitySystemComponent, const UArmorData* ArmorData, bool bPrintErrorMessages = false);
+
+
+
+
+
 	/**
 	 * Adds abilities, attributes, and gameplay effects to a player.
 	 * Ability Sets are game/player specific data that's used to initialize the character's attributes, abilities, passives, and any gameplay information specific to the game or the character
@@ -60,11 +114,20 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ability|Adding and Clearing")
 	static bool TryAddAbilitySet(UAbilitySystemComponent* AbilitySystemComponent, const UCharacterAbilityDataSet* InAbilitySet, FCharacterAbilityDataSetHandle& OutAbilitySetHandle);
 
+	
+	/** Tries to add an ability using the UAbilitySystem's AddAbility function */
 	static void TryAddAbility(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayAbilityInfo& InAbilityMapping, FGameplayAbilitySpecHandle& OutAbilityHandle, FGameplayAbilitySpec& OutAbilitySpec);
+	
+	/** Tries to add an AttributeSet and it's information with data tables. Be careful because this loosely creates an attribute set, and it's tough to reference specific attribute sets for effect calculations from this */
 	static void TryAddAttributes(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayAttributeInfo& InAttributeSetMapping, UAttributeSet*& OutAttributeSet);
+	
+	/** Tries to add attribute information with gameplay effects. Returns the handles for the applied effects */
 	static void TryAddAttributes(UAbilitySystemComponent* AbilitySystemComponent, const TSubclassOf<UGameplayEffect> InEffectType, const float InLevel, TArray<FActiveGameplayEffectHandle>& OutEffectHandles);
+
+	/** Tries to add gameplay effects. Returns the handles for the applied effects */
 	static void TryAddGameplayEffect(UAbilitySystemComponent* AbilitySystemComponent, const TSubclassOf<UGameplayEffect> InEffectType, const float InLevel, TArray<FActiveGameplayEffectHandle>& OutEffectHandles);
 
+	
 	/** Helper to return the AttributeSet UObject as a non const pointer, if the passed in ASC has it granted */
 	UFUNCTION(BlueprintCallable, Category = "Attributes")
 	static UAttributeSet* GetAttributeSet(const UAbilitySystemComponent* InASC, const TSubclassOf<UAttributeSet> InAttributeSet);

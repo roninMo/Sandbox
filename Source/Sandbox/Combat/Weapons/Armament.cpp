@@ -535,8 +535,14 @@ UCombatComponent* AArmament::GetCombatComponent(ACharacterBase* Character) const
 	Character = Character ? Character : Cast<ACharacterBase>(GetOwner());
 	if (!Character)
 	{
-		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while retrieving the combat component!!",
-			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		// Construction script sanity check
+		if (GetOwner())
+		{
+			UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while retrieving the combat component!!",
+				UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		}
+		else UE_LOGFMT(ArmamentLog, Error, "{0}() {1} Failed to retrieve the character while retrieving the combat component!!", *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		
 		return nullptr;
 	}
 

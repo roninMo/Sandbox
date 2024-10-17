@@ -8,6 +8,9 @@
 #include "AbilitySystemGlobals.h"
 #include "Information/CharacterAbilityDataSet.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Characters/CharacterBase.h"
+#include "Sandbox/Data/ArmorData.h"
+#include "Sandbox/Data/EquipmentData.h"
 
 
 UAbilitySystem* UGameplayAbilityUtilities::GetAbilitySystem(const AActor* Actor)
@@ -43,6 +46,68 @@ void UGameplayAbilityUtilities::GetAllAttributes(TSubclassOf<UAttributeSet> Attr
 			OutAttributes.Push(FGameplayAttribute(*It));
 		}
 	}
+}
+
+
+bool UGameplayAbilityUtilities::TryAddAttributeData(UAbilitySystemComponent* InAbilitySystemComponent, const UAttributeData* AttributeData, FAttributeDataHandle& OutAttributeDataHandle, bool bPrintErrorMessages)
+{
+	check(InAbilitySystemComponent);
+	if (!AttributeData)
+	{
+		return false;
+	}
+
+	return AttributeData->AddAttributesToCharacter(InAbilitySystemComponent, OutAttributeDataHandle);
+}
+
+
+bool UGameplayAbilityUtilities::TryAddEquipmentData(UAbilitySystemComponent* InAbilitySystemComponent, const UEquipmentData* EquipmentData, bool bPrintErrorMessages)
+{
+	check(InAbilitySystemComponent);
+	if (!EquipmentData)
+	{
+		return false;
+	}
+
+	ACharacterBase* Character = Cast<ACharacterBase>(InAbilitySystemComponent->GetAvatarActor());
+	if (!Character)
+	{
+		UE_LOGFMT(LogTemp, Error, "{0} tried to add equipment when the character wasn't valid! Equipment: {1}", *GetNameSafe(InAbilitySystemComponent), *GetNameSafe(EquipmentData));
+		return false;
+	}
+
+	return EquipmentData->AddToCharacter(Character);
+}
+
+
+bool UGameplayAbilityUtilities::TryAddAbilityData(UAbilitySystemComponent* InAbilitySystemComponent, const UAbilityData* AbilityData, FAbilityDataHandle& OutAbilityDataHandle, bool bPrintErrorMessages)
+{
+	check(InAbilitySystemComponent);
+	if (!AbilityData)
+	{
+		return false;
+	}
+
+	return AbilityData->AddAbilityDataToCharacter(InAbilitySystemComponent, OutAbilityDataHandle);
+}
+
+
+bool UGameplayAbilityUtilities::TryAddArmorData(UAbilitySystemComponent* InAbilitySystemComponent, const UArmorData* ArmorData, bool bPrintErrorMessages)
+{
+	check(InAbilitySystemComponent);
+	if (!ArmorData)
+	{
+		return false;
+	}
+
+	ACharacterBase* Character = Cast<ACharacterBase>(InAbilitySystemComponent->GetAvatarActor());
+	if (!Character)
+	{
+		UE_LOGFMT(LogTemp, Error, "{0} tried to add armor when the character wasn't valid! Armor: {1}", *GetNameSafe(InAbilitySystemComponent), *GetNameSafe(ArmorData));
+		return false;
+	}
+
+	return ArmorData->AddToCharacter(Character);
 }
 
 

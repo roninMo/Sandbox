@@ -798,6 +798,7 @@ bool UInventoryComponent::GetDataBaseItem_Implementation(const FName Id, F_Item&
 	{
 		Item = ItemData->ItemInformation;
 		Item.Id = FGuid::NewGuid();
+		return true;
 	}
 
 	return false;
