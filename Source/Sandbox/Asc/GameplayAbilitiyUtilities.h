@@ -18,7 +18,6 @@ class UAttributeSet;
 class UAbilitySystem;
 class UCharacterAbilityDataSet;
 enum class ETriggerEvent : uint8;
-struct FCharacterAbilityDataSetHandle;
 struct FGameplayTagContainer;
 struct FGameplayTag;
 struct FGameplayAbilitySpec;

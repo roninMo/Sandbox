@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Sandbox/AI/Characters/Npc.h"
-#include "Sandbox/Asc/Information/CharacterAbilityDataSet.h"
 #include "Sandbox/Data/AbilityData.h"
 #include "Sandbox/Data/AttributeData.h"
 #include "Enemy.generated.h"

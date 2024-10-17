@@ -6,7 +6,6 @@
 #include "AbilitySystem.h"
 #include "InputAction.h"
 #include "AbilitySystemGlobals.h"
-#include "Information/CharacterAbilityDataSet.h"
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Data/ArmorData.h"

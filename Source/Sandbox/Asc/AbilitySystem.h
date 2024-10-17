@@ -12,7 +12,6 @@
 
 class UInputAction;
 class AAbilitySystemController;
-struct FCharacterAbilityDataSetHandle;
 
 
 DECLARE_LOG_CATEGORY_EXTERN(AbilityLog, Log, All);
@@ -107,8 +106,8 @@ protected:
 	TArray<FActiveGameplayEffectHandle> AddedEffects;
 	
 	/** Cached granted Ability Sets */
-	UPROPERTY(Transient)
-	TArray<FCharacterAbilityDataSetHandle> AddedAbilitySets;
+	// UPROPERTY(Transient)
+	// TArray<FCharacterAbilityDataSetHandle> AddedAbilitySets;
 	
 	// Cached input actions linked to abilities using Input bind handle and input id
 	TArray<FInputActionBindingAbilityMap> AbilityInputActions_Old;

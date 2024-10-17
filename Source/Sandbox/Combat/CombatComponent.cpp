@@ -956,7 +956,7 @@ void UCombatComponent::HandleDeath(ACharacterBase* Enemy, AActor* Source, FName 
 
 void UCombatComponent::HandleRespawn(ACharacterBase* Enemy, AActor* Source)
 {
-	if (!RespawnInformation)
+	// if (!RespawnInformation)
 	{
 		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Tried to respawn when the character's respawn information wasn't valid!",
 			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));

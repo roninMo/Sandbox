@@ -218,7 +218,7 @@ void UAbilityTask_TargetOverlap::OnTargetDataReplicatedCallback(const FGameplayA
 	}
 	
 	// Retrieve the character and the weapon
-	AArmament* OverlappedWeapon = nullptr;
+	AArmament* OverlappedArmament = nullptr;
 	ACharacterBase* TargetCharacter = nullptr;
 	for (TWeakObjectPtr<AActor> Actor : TargetInformation)
 	{
@@ -228,13 +228,13 @@ void UAbilityTask_TargetOverlap::OnTargetDataReplicatedCallback(const FGameplayA
 		if (Cast<ACharacterBase>(Actor.Get())) TargetCharacter = Cast<ACharacterBase>(Actor.Get());
 
 		// Check if this is the weapon we attacked with
-		if (Cast<AArmament>(Actor.Get())) OverlappedWeapon = Cast<AArmament>(Actor.Get());
+		if (Cast<AArmament>(Actor.Get())) OverlappedArmament = Cast<AArmament>(Actor.Get());
 	}
 
-	if (!OverlappedWeapon || !TargetCharacter)
+	if (!OverlappedArmament || !TargetCharacter)
 	{
 		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2}'s Replicated weapon overlap target data is missing information! Weapon: {3}, Target: {4}",
-			*UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character), *GetNameSafe(OverlappedWeapon), *GetNameSafe(TargetCharacter));
+			*UEnum::GetValueAsString(Character->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(Character), *GetNameSafe(OverlappedArmament), *GetNameSafe(TargetCharacter));
 	}
 
 	UAbilitySystem* TargetAsc = TargetCharacter->GetAbilitySystem<UAbilitySystem>();
