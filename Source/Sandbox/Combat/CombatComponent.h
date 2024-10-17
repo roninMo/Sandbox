@@ -381,7 +381,7 @@ public:
 
 protected:
 	/**** Synchronization RPC's ****/
-	UFUNCTION(Server, Reliable) virtual void Server_AddArmamentToEquipSlot(const F_Item& ArmamentData, const EEquipSlot EquipSlot);
+	UFUNCTION(Server, Reliable) virtual void Server_AddArmamentToEquipSlot(const FGuid& ArmamentId, const EEquipSlot EquipSlot);
 	UFUNCTION(Server, Reliable) virtual void Server_RemoveArmamentFromEquipSlot(const EEquipSlot EquipSlot);
 	UFUNCTION(Server, Reliable) virtual void Server_CreateArmament(const EEquipSlot EquipSlot);
 	

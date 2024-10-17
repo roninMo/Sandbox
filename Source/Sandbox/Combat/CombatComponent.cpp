@@ -16,6 +16,7 @@
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Asc/Attributes/MMOAttributeSet.h"
 #include "Sandbox/Asc/AbilitySystem.h"
+#include "Sandbox/Characters/Components/Inventory/InventoryComponent.h"
 #include "Sandbox/Data/Enums/HitDirection.h"
 #include "Weapons/Armament.h"
 
@@ -118,7 +119,7 @@ void UCombatComponent::AddArmamentToEquipSlot(const F_Item& ArmamentInventoryInf
 	if (Character->IsLocallyControlled() && !Character->HasAuthority())
 	{
 		// TODO: Only send the id across the network, handle retrieving the information from the inventory
-		Server_AddArmamentToEquipSlot(ArmamentInventoryInformation, EquipSlot);
+		Server_AddArmamentToEquipSlot(ArmamentInventoryInformation.Id, EquipSlot);
 	}
 
 	
@@ -656,9 +657,37 @@ F_ArmamentInformation UCombatComponent::GetArmamentInformationFromDatabase(const
 }
 
 
-void UCombatComponent::Server_AddArmamentToEquipSlot_Implementation(const F_Item& ArmamentData, const EEquipSlot EquipSlot)
+void UCombatComponent::Server_AddArmamentToEquipSlot_Implementation(const FGuid& ArmamentId, const EEquipSlot EquipSlot)
 {
-	AddArmamentToEquipSlot(ArmamentData, EquipSlot);
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (!Character)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the character on the server while adding an armament to it's equip slot!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+	
+	UInventoryComponent* InventoryComponent = Character->GetInventoryComponent();
+	if (!InventoryComponent)
+	{
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the inventory on the server while adding an armament to it's equip slot!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+		return;
+	}
+	
+	F_Item ArmamentInformation;
+	InventoryComponent->Execute_GetItem(InventoryComponent, ArmamentInformation, ArmamentId, EItemType::Inv_Weapon);
+	if (!ArmamentInformation.IsValid())
+	{
+		// Server validation, the player shouldn't be in possession of an item that isn't in it's inventory.
+		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} The player tried to equip a weapon that it doesn't have in it's inventory!",
+			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
+
+		return;
+	}
+
+	// Add the armament to the equip slot
+	AddArmamentToEquipSlot(ArmamentInformation, EquipSlot);
 }
 
 
