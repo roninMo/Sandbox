@@ -127,6 +127,7 @@ void UMovementAbility_Roll::ActivateAbility(const FGameplayAbilitySpecHandle Han
 	{
 		Character->SetRotationToMovement();
 		RotateCharacterTowardsMovement(Input, Character);
+		MontageSection = Montage_Section_Roll_Forward;
 	}
 	
 	// Attack montage

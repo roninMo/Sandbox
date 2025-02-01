@@ -63,6 +63,7 @@ public:
 //--------------------------------------------------------------------------------------------------------------//
 public:
 	// TODO: Find out if you can use curve tables to multiply based on level for an easier visualization -> (lvl 1 == +1), (lvl 10 == +4), instead of (lvl 1 == 1), (lvl 10 == 10) 
+	//	- this works, and you should use it for attribute adjustments/scaling for different stats
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Vitality) FGameplayAttributeData Vitality;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Endurance) FGameplayAttributeData Endurance;
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Stats", ReplicatedUsing = OnRep_Mind) FGameplayAttributeData Mind;

@@ -52,6 +52,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnGameplayTagStackChange, FGamepla
 
 /**
  * An object for the ability system to handle retrieving multiple abilities and adding/removing an ability without it affecting gameplay.  
+ * TODO: There's a strange way of handling multiple abilities of the same kind that's level based and needs to be fixed specific to the current weapon
  */
 USTRUCT()
 struct F_MultiAbilityHandle

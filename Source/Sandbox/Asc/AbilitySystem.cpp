@@ -216,6 +216,7 @@ FGameplayAbilitySpecHandle UAbilitySystem::AddAbility(const FGameplayAbilityInfo
 	{
 		if (AbilityClass != CurrentAbility) continue;
 			
+		// TODO: There should be infrastructure and blueprint code for handling this differently for each game
 		// Add the ability to the ability handle, if we don't have this instance of the ability added
 		if (!Map.GrantedAbilities.Contains(NewAbility.Id))
 		{

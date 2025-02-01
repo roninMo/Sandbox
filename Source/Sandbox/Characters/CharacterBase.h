@@ -317,8 +317,145 @@ protected:
 public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	ACharacterBase(const FObjectInitializer& ObjectInitializer);
-	
-	
+
+	///** Make this actor tick after PrerequisiteActor. This only applies to this actor's tick function; dependencies for owned components must be set up separately if desired. */
+	//UFUNCTION(BlueprintCallable, Category = "Actor|Tick", meta = (Keywords = "dependency"))
+	//	virtual void AddTickPrerequisiteActor(AActor* PrerequisiteActor);
+
+	///** Make this actor tick after PrerequisiteComponent. This only applies to this actor's tick function; dependencies for owned components must be set up separately if desired. */
+	//UFUNCTION(BlueprintCallable, Category = "Actor|Tick", meta = (Keywords = "dependency"))
+	//	virtual void AddTickPrerequisiteComponent(UActorComponent* PrerequisiteComponent);
+
+
+	///** Called after the actor is spawned in the world.  Responsible for setting up actor for play. */
+	//void PostSpawnInitialize(FTransform const& SpawnTransform, AActor* InOwner, APawn* InInstigator, bool bRemoteOwned, bool bNoFail, bool bDeferConstruction, ESpawnActorScaleMethod TransformScaleMethod = ESpawnActorScaleMethod::MultiplyWithRoot);
+
+	///** Called to finish the spawning process, generally in the case of deferred spawning */
+	//void FinishSpawning(const FTransform& Transform, bool bIsDefaultTransform = false, const FComponentInstanceDataCache* InstanceDataCache = nullptr, ESpawnActorScaleMethod TransformScaleMethod = ESpawnActorScaleMethod::OverrideRootScale);
+
+
+	/**** Initialization ****/
+	///**
+	// * Called after all the components in the Components array are registered, called both in editor and during gameplay.
+	// * bHasRegisteredAllComponents must be set true prior to calling this function.
+	// */
+	//virtual void PostRegisterAllComponents();
+
+	///** Reset actor to initial state - used when restarting level without reloading. */
+	//virtual void Reset();
+
+
+	/**** Networking ****/
+	///** Called right before receiving a bunch */
+	//virtual void PreNetReceive();
+
+	///** Called right after receiving a bunch */
+	//virtual void PostNetReceive();
+
+	///** Called right after calling all OnRep notifies (called even when there are no notifies) */
+	//virtual void PostRepNotifies() {}
+
+	// NetDriver.h !!!
+	// CharacterMovementComponent networking logic -> INetworkPredictionInterface.h
+	// The different networking models for client / server logic
+
+	///**
+	// * Function used to prioritize actors when deciding which to replicate
+	// * @param ViewPos		Position of the viewer
+	// * @param ViewDir		Vector direction of viewer
+	// * @param Viewer		"net object" owned by the client for whom net priority is being determined (typically player controller)
+	// * @param ViewTarget	The actor that is currently being viewed/controlled by Viewer, usually a pawn
+	// * @param InChannel		Channel on which this actor is being replicated.
+	// * @param Time			Time since actor was last replicated
+	// * @param bLowBandwidth True if low bandwidth of viewer
+	// * @return				Priority of this actor for replication, higher is more important
+	// */
+	//virtual float GetNetPriority(const FVector& ViewPos, const FVector& ViewDir, class AActor* Viewer, AActor* ViewTarget, UActorChannel* InChannel, float Time, bool bLowBandwidth);
+
+	///**
+	// * Allows for a specific response from the actor when the actor channel is opened (client side)
+	// * @param InBunch Bunch received at time of open
+	// * @param Connection the connection associated with this actor
+	// */
+	//virtual void OnActorChannelOpen(class FInBunch& InBunch, class UNetConnection* Connection) {};
+
+	///** Force actor to be updated to clients/demo net drivers */
+	//UFUNCTION(BlueprintCallable, Category = "Networking")
+	//	virtual void ForceNetUpdate();
+
+	///**
+	// * SerializeNewActor has just been called on the actor before network replication (server side)
+	// * @param OutBunch Bunch containing serialized contents of actor prior to replication
+	// */
+	//virtual void OnSerializeNewActor(class FOutBunch& OutBunch) {};
+
+	///**
+	// * Handles cleaning up the associated Actor when killing the connection
+	// * @param Connection the connection associated with this actor
+	// */
+	//virtual void OnNetCleanup(class UNetConnection* Connection) {};
+
+	///**
+	// * Determines whether or not the distance between the given SrcLocation and the Actor's location
+	// * is within the net relevancy distance. Actors outside relevancy distance may not be replicated.
+	// *
+	// * @param SrcLocation	Location to test against.
+	// * @return True if the actor is within net relevancy distance, false otherwise.
+	// */
+	//bool IsWithinNetRelevancyDistance(const FVector& SrcLocation) const;
+
+
+	/**** Movement ****/
+	///** ReplicatedMovement struct replication event */
+	//UFUNCTION()
+	//	virtual void OnRep_ReplicatedMovement();
+
+	///** Update location and rotation from ReplicatedMovement. Not called for simulated physics! */
+	//virtual void PostNetReceiveLocationAndRotation();
+
+	///** Update velocity - typically from ReplicatedMovement, not called for simulated physics! */
+	//virtual void PostNetReceiveVelocity(const FVector& NewVelocity);
+
+	///** Update and smooth simulated physic state, replaces PostNetReceiveLocation() and PostNetReceiveVelocity() */
+	//virtual void PostNetReceivePhysicState();
+
+
+	/**** Camera ****/
+	///** Called when this actor becomes the given PlayerController's ViewTarget. Triggers the Blueprint event K2_OnBecomeViewTarget. */
+	//virtual void BecomeViewTarget(class APlayerController* PC);
+
+	///** Called when this actor is no longer the given PlayerController's ViewTarget. Also triggers the Blueprint event K2_OnEndViewTarget. */
+	//virtual void EndViewTarget(class APlayerController* PC);
+
+	///**
+	// * Hook to allow actors to render HUD overlays for themselves.  Called from AHUD::DrawActorOverlays().
+	// * @param PC is the PlayerController on whose view this overlay is rendered
+	// * @param Canvas is the Canvas on which to draw the overlay
+	// * @param CameraPosition Position of Camera
+	// * @param CameraDir direction camera is pointing in.
+	// */
+	//virtual void PostRenderFor(class APlayerController* PC, class UCanvas* Canvas, FVector CameraPosition, FVector CameraDir);
+
+
+	/**** Utility ****/
+	///** Getter for the cached world pointer, will return null if the actor is not actually spawned in a level */
+	//virtual UWorld* GetWorld() const override final;
+
+	///** Get the timer instance from the actors world */
+	//class FTimerManager& GetWorldTimerManager() const;
+
+	///** Gets the GameInstance that ultimately contains this actor. */
+	//class UGameInstance* GetGameInstance() const;
+
+
+	/**** Combat ****/
+	///**
+	// * Returns the optimal location to fire weapons at this actor
+	// * @param RequestedBy - the Actor requesting the target location
+	// */
+	//virtual FVector GetTargetLocation(AActor* RequestedBy = nullptr) const;
+
+
 //----------------------------------------------------------------------//
 // Initialization functions and components								//
 //----------------------------------------------------------------------//
@@ -345,7 +482,7 @@ protected:
 	 *		- Once for Client after replication of owning actor (Once more for Player State OnRep_PlayerState)
 	 * 
 	 * @param InOwnerActor			Is the actor that logically owns this component.
-	 * @param InAvatarActor			Is what physical actor in the world we are acting on. Usually a Pawn but it could be a Tower, Building, Turret, etc, may be the same as Owner
+	 * @param InAvatarActor			Is what physical actor in the world we are acting on. Usually a Pawn but it could be a Tower, Building, etc, may be the same as Owner
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ability") virtual void OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor);
 	UFUNCTION(BlueprintImplementableEvent, Category = "Ability", DisplayName = "On Init Ability Actor Info") void BP_OnInitAbilityActorInfo();

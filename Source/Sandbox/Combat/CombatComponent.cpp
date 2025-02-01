@@ -315,14 +315,14 @@ bool UCombatComponent::DeleteEquippedArmament(AArmament* Armament)
 	{
 		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Failed to retrieve the character while deleting the armament!",
 			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return nullptr;
+		return false;
 	}
 
 	if (!Character->HasAuthority())
 	{
 		UE_LOGFMT(CombatComponentLog, Error, "{0}::{1}() {2} Only delete the armament on the server!",
 			UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
-		return nullptr;
+		return false;
 	}
 
 	// Deconstruct the armament and remove the armament abilities before deleting the armament
@@ -351,6 +351,8 @@ void UCombatComponent::SetArmamentStance(const EArmamentStance Stance)
 		CurrentStance = Stance;
 		UpdateArmamentCombatAbilities(PreviousStance);
 	}
+
+	// TODO: This just needs to be fixed to replicate to clients, everything else is working 
 }
 
 
@@ -1220,7 +1222,7 @@ void UCombatComponent::StatusProc(ACharacterBase* Enemy, AActor* Source, const F
 	}
 
 	
-	// Add the GE for handling death state and information
+	// Add the GE for handling status proc state
 	AActor* Instigator = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetOwnerActor() : Enemy;
 	AActor* EffectCauser = Enemy && Enemy->GetAbilitySystemComponent() ? Enemy->GetAbilitySystemComponent()->GetAvatarActor() : Enemy;
 

@@ -73,16 +73,16 @@ void UCharacterGameplayAbility::ActivateAbility(const FGameplayAbilitySpecHandle
 		}
 
 		// This is for instanced abilities, store the handle effect to the array
-		for (auto gameplayEffect : OngoingEffectsToRemoveOnEnd)
+		for (auto GameplayEffect : OngoingEffectsToRemoveOnEnd)
 		{
-			if (!gameplayEffect.Get()) continue;
+			if (!GameplayEffect.Get()) continue;
 
-			FGameplayEffectSpecHandle SpecHandle = Asc->MakeOutgoingSpec(gameplayEffect, GetAbilityLevel(), EffectContext);
+			FGameplayEffectSpecHandle SpecHandle = Asc->MakeOutgoingSpec(GameplayEffect, GetAbilityLevel(), EffectContext);
 			if (SpecHandle.IsValid())
 			{
 				FActiveGameplayEffectHandle ActiveGEHandle = ApplyGameplayEffectSpecToOwner(Handle, ActorInfo, ActivationInfo, SpecHandle);
 				if (ActiveGEHandle.WasSuccessfullyApplied()) RemoveOnEndEffectHandles.Add(ActiveGEHandle);
-				if (!ActiveGEHandle.WasSuccessfullyApplied()) ABILITY_LOG(Log, TEXT("Instanced Ability %s failed to apply startup effect %s"), *GetName(), *GetNameSafe(gameplayEffect));
+				if (!ActiveGEHandle.WasSuccessfullyApplied()) ABILITY_LOG(Log, TEXT("Instanced Ability %s failed to apply startup effect %s"), *GetName(), *GetNameSafe(GameplayEffect));
 			}
 		}
 	}
