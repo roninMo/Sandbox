@@ -81,6 +81,7 @@ Plugins/*
 !Plugins/PeripherySystemComponent/PeripherySystemComponent.uplugin
 
 # Content
+Content/Imports/*
 Content/_Imports/Hud/*
 Content/_Imports/LevelDesign/*
 Content/_Imports/Scifi_Outline_Creater/*
