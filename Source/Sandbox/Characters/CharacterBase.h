@@ -326,6 +326,7 @@ public:
 	//UFUNCTION(BlueprintCallable, Category = "Actor|Tick", meta = (Keywords = "dependency"))
 	//	virtual void AddTickPrerequisiteComponent(UActorComponent* PrerequisiteComponent);
 
+	// Actor component functions for frame dependent logic -> OnEndOfFrameUpdateDuringTick() and OnPreEndOfFrameSync()
 
 	///** Called after the actor is spawned in the world.  Responsible for setting up actor for play. */
 	//void PostSpawnInitialize(FTransform const& SpawnTransform, AActor* InOwner, APawn* InInstigator, bool bRemoteOwned, bool bNoFail, bool bDeferConstruction, ESpawnActorScaleMethod TransformScaleMethod = ESpawnActorScaleMethod::MultiplyWithRoot);
@@ -358,6 +359,27 @@ public:
 	// NetDriver.h !!!
 	// CharacterMovementComponent networking logic -> INetworkPredictionInterface.h
 	// The different networking models for client / server logic
+	//  - ActorChannel, DataReplication, NetDriver, ReplicationDriver, ActorReplicationBridge, etc.
+	//	- FGuidReferences -> INetSerializeCB -> FRepState
+
+	// void FPacketSimulationSettings::LoadConfig(const TCHAR* OptionalQualifier)
+
+	// /** The main function that will actually replicate actors. Called every server tick. */
+	// virtual int32 ServerReplicateActors(float DeltaSeconds) PURE_VIRTUAL(UReplicationDriver::ServerReplicateActors, return 0; );
+	//		- Optionally add custom logic here for network acknowledge updates / fixes
+
+	// /** Logic that handles replication and prioritization on what replicates during each frame budget */
+	// void ReplicateActorListsForConnections_Default(UNetReplicationGraphConnection* ConnectionManager, FGatheredReplicationActorLists& GatheredReplicationListsForConnection, FNetViewerArray& Viewers);
+	//		- Custom logic for what gets prioritized when (not necessary because the current system has plenty of benefits
+	//		- Check some of unreal's custom projects for how they create custom logic for net replicated stuff
+
+	// /** Actual replication logic ( Actor-> pre-replication/replication variable preparations -> ActorChannel replication logic / handling */
+	//virtual void ReplicateActorsForConnection(UNetConnection* NetConnection, FPerConnectionActorInfoMap& ConnectionActorInfoMap, UNetReplicationGraphConnection* ConnectionManager, const uint32 FrameNum);
+	
+	// /** Replicate this channel's actor differences. Returns how many bits were replicated (does not include non-bunch packet overhead) */
+	// int64 ReplicateActor();
+	//		- Unreal handles the bunches / packet serialization and object mapping logic during replication, and queues for latent serialization based on the object information, what needs to be updated, and replication priority in the actor channel logic
+
 
 	///**
 	// * Function used to prioritize actors when deciding which to replicate
@@ -405,6 +427,13 @@ public:
 	//bool IsWithinNetRelevancyDistance(const FVector& SrcLocation) const;
 
 
+	// Information pertaining to replication stored at UNetReplicationGraphConnection
+	/** A map of all of our per-actor data */
+	// FPerConnectionActorInfoMap ActorInfoMap;
+	// FOnPostReplicatePrioritizedLists OnPostReplicatePrioritizeLists;
+	// UReplicationGraph::PostServerReplicateStats(const FFrameReplicationStats& Stats)
+
+
 	/**** Movement ****/
 	///** ReplicatedMovement struct replication event */
 	//UFUNCTION()
@@ -447,6 +476,8 @@ public:
 	///** Gets the GameInstance that ultimately contains this actor. */
 	//class UGameInstance* GetGameInstance() const;
 
+	// FGameplayAbilitiesModule::StartupModule() -> AHUD::OnShowDebugInfo.AddStatic(&UAbilitySystemComponent::OnShowDebugInfo);
+
 
 	/**** Combat ****/
 	///**
@@ -454,6 +485,8 @@ public:
 	// * @param RequestedBy - the Actor requesting the target location
 	// */
 	//virtual FVector GetTargetLocation(AActor* RequestedBy = nullptr) const;
+
+	// FWorldAsyncTraceState
 
 
 //----------------------------------------------------------------------//

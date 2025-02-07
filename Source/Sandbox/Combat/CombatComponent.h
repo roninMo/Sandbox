@@ -149,7 +149,6 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item
 
 
 		// TODO: Fix unreal's OnReplicated functions that were working without any problems earlier this week. The enemy character's health functions, and now some of the combat component's functions
-					- If you're serious about development and not obsessed with learning through guides and talking over everything, I'd suggest just taking from this to help you on your journey
 
  
 */
