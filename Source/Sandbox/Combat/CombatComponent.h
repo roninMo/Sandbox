@@ -149,7 +149,24 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArmorUnequippedSignature, F_Item
 
 
 		// TODO: Fix unreal's OnReplicated functions that were working without any problems earlier this week. The enemy character's health functions, and now some of the combat component's functions
+		//		- latent object creation can cause replication problems if you don't add the newly created object to the actor channel's subobject replication list
 
+
+
+
+		Weapon
+			- Level
+			- Ability
+
+		Combat
+			- Equipped Weapons
+			- Weapon Orientation
+			- Combo Index
+			
+
+
+
+		
  
 */
 UCLASS( ClassGroup=(Custom), Blueprintable, BlueprintType, meta=(BlueprintSpawnableComponent) )

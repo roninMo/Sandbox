@@ -605,9 +605,9 @@ void UMeleeCombatAbility::OnOverlappedTarget_Implementation(const FGameplayAbili
 	}
 
 	TargetAsc = TargetAsc ? TargetAsc : UGameplayAbilityUtilities::GetAbilitySystem(TargetCharacter);
-	if (bDebug && (!TargetCharacter || !TargetAsc))
+	if (!TargetCharacter || !TargetAsc)
 	{
-		UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the enemy information from the target data during an overlap event!",
+		if (bDebug) UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2} Failed to retrieve the enemy information from the target data during an overlap event!",
 			UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));
 		return;
 	}
