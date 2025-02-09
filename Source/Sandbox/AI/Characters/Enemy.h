@@ -38,7 +38,9 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGameplayAttributeUpdated, float, 
 			->> Attack combos
 
 
-		
+
+	We need both thrilling and gimmick combat -> try honing it towards elden ring kind of combat and play with the combat / movement mchanics for this
+
 
 	Squad Attack Logic
 		- When squad combat starts 

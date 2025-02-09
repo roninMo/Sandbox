@@ -19,10 +19,6 @@ enum class EEquipSlot : uint8;
  *	Games like elden ring have hit detection sent from the client and validated on the server, however I think they only actually handle damage calculations on both, and apply "phantom hits" on
  *	characters when the client lands a hit that wasn't valid on the server. This is what causes bleed and other effects to build up even when you aren't actually hit. This is the premise of client side prediction with validation
  *
- *	AI characters only exist on the client. Any character logic that happens is replicated to instances of the ai and clients need a way of handling interaction on their side without actually interacting with the server
- *	This is why there's lots of problems and everything is interesting and fun and it's easy to build without complications in single player. When you get into multiplayer, sometimes it's not even worth it because of this
- *	Plus nobody wants to deal with handling every scenario you have to build for, and it gets pretty interesting sometimes
- *
  *	Handle combat logic on the client and the server, store the information on the server for when the client sends an event. Where we stray from gameplay abilities is with how we send valid information to the server
  *	That should fix client logic, however we need to do something like store a reference of the client and send the attacking character's combat logic instead of handling everything through the combat component
  *

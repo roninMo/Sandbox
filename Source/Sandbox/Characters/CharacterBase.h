@@ -26,6 +26,7 @@
 // Player interaction																//
 //----------------------------------------------------------------------------------//
 	- The player peripheries already gives us a construct for handling and updating information within the player's range and is probably how we'll handle the player interaction
+	- Customizable Interaction Plugin handles event driven logic for players and ai to handle certain logic while interacting with the world
 	- There needs to be some construct in place for handling player and npc interaction with precedence between different situations (whether it's during a quest or passing by)
 
 
@@ -93,6 +94,9 @@
 			- SlowArms
 
 
+	The current anim blueprint logic handles all movement and combat animation with layered blending for both montages and custom anim curve logic that can be blended seamlessly
+		and built in inverse kinematics for hands/feet movement, and customization for equipped / different character states
+
 		
 
 
@@ -140,6 +144,7 @@
 	- Singleplayer / Multiplayer / Custom / Cooperative gameplay
 		- Quests -> individual / specific to one player / all players
 
+	- Logic for handling character settings
 
 	Quest logic
 		-> Is quest unlocked (requirements)?
@@ -356,6 +361,8 @@ public:
 	// Networking																															//
 	//--------------------------------------------------------------------------------------------------------------------------------------//
 		/**
+					Depending on the game, you might want to utilize replication for handling networking / player logic differently, and here's a breakdown of how it's handled in unreal
+
 
 			Actor specific functions
 				- OnSerializeNewActor
@@ -385,23 +392,6 @@ public:
 			There's state for data replication to handle what objects are replicated and additional logic for handling filtering based on other conditions (NetPriority, NetRelevancy, etc.)
 
 		*/
-	
-	///** Called right before receiving a bunch */
-	//virtual void PreNetReceive();
-
-	///** Called right after receiving a bunch */
-	//virtual void PostNetReceive();
-
-	///** Called right after calling all OnRep notifies (called even when there are no notifies) */
-	//virtual void PostRepNotifies() {}
-
-	// NetDriver.h !!!
-	// CharacterMovementComponent networking logic -> INetworkPredictionInterface.h
-	// The different networking models for client / server logic
-	//  - ActorChannel, DataReplication, NetDriver, ReplicationDriver, ActorReplicationBridge, etc.
-	//	- FGuidReferences -> INetSerializeCB -> FRepState
-
-	// void FPacketSimulationSettings::LoadConfig(const TCHAR* OptionalQualifier)
 
 
 	/**** Actor channel sub object replication list logic ****/
@@ -426,6 +416,26 @@ public:
 	//				based on the object information, what needs to be updated, and replication priority in the actor channel logic
 
 
+	// NetDriver.h !!!
+	// CharacterMovementComponent networking logic -> INetworkPredictionInterface.h
+	// The different networking models for client / server logic
+	//  - ActorChannel, DataReplication, NetDriver, ReplicationDriver, ActorReplicationBridge, etc.
+	//	- FGuidReferences -> INetSerializeCB -> FRepState
+
+	/**** NetDriver / Data Replication / ActorChannel ****/
+	// void FPacketSimulationSettings::LoadConfig(const TCHAR* OptionalQualifier)
+
+	
+	/**** Actor.h ****/
+	///** Called right before receiving a bunch */
+	//virtual void PreNetReceive();
+
+	///** Called right after receiving a bunch */
+	//virtual void PostNetReceive();
+
+	///** Called right after calling all OnRep notifies (called even when there are no notifies) */
+	//virtual void PostRepNotifies() {}
+	
 	///**
 	// * Function used to prioritize actors when deciding which to replicate
 	// * @param ViewPos		Position of the viewer
@@ -472,7 +482,10 @@ public:
 	//bool IsWithinNetRelevancyDistance(const FVector& SrcLocation) const;
 
 
-	// Information pertaining to replication stored at UNetReplicationGraphConnection
+	/**** Debugging Information pertaining to replication stored at UNetReplicationGraphConnection ****/
+	// Use Pre/Post Net receive functions for understanding how packets are sent across the net
+	// Check net update logic for how it handles net updates for debugging a specific actor
+
 	/** A map of all of our per-actor data */
 	// FPerConnectionActorInfoMap ActorInfoMap;
 	// FOnPostReplicatePrioritizedLists OnPostReplicatePrioritizeLists;
@@ -483,7 +496,7 @@ public:
 	///** ReplicatedMovement struct replication event */
 	//UFUNCTION()
 	//	virtual void OnRep_ReplicatedMovement();
-
+	
 	///** Update location and rotation from ReplicatedMovement. Not called for simulated physics! */
 	//virtual void PostNetReceiveLocationAndRotation();
 
@@ -534,6 +547,8 @@ public:
 	// FWorldAsyncTraceState
 
 
+
+	
 //----------------------------------------------------------------------//
 // Initialization functions and components								//
 //----------------------------------------------------------------------//
