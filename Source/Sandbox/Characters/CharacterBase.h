@@ -279,6 +279,9 @@
 		- Create a way of quickly creating logic and scenarios for combat instead of actually building characters. Handle this early so it's easy to build upon and add combat
 
 
+
+	I think the current version of unreal prevents some replication functionality / plugin logic, however we need to add debug logic for combat and perhaps movement
+
 */
 
 
@@ -334,7 +337,9 @@ public:
 	///** Called to finish the spawning process, generally in the case of deferred spawning */
 	//void FinishSpawning(const FTransform& Transform, bool bIsDefaultTransform = false, const FComponentInstanceDataCache* InstanceDataCache = nullptr, ESpawnActorScaleMethod TransformScaleMethod = ESpawnActorScaleMethod::OverrideRootScale);
 
+	// multiplayer notify logic that can occuring before / after spawning randomly
 
+	
 	/**** Initialization ****/
 	///**
 	// * Called after all the components in the Components array are registered, called both in editor and during gameplay.
@@ -344,9 +349,43 @@ public:
 
 	///** Reset actor to initial state - used when restarting level without reloading. */
 	//virtual void Reset();
+	
 
 
-	/**** Networking ****/
+	//--------------------------------------------------------------------------------------------------------------------------------------//
+	// Networking																															//
+	//--------------------------------------------------------------------------------------------------------------------------------------//
+		/**
+
+			Actor specific functions
+				- OnSerializeNewActor
+				- OnActorChannelOpen
+
+				- PreNetReceive
+				- PostNetReceive
+				- PostRepNotifies
+				- NetUpdateLogic
+
+				- IsWithinNetRelevancyDistance
+
+				- OnNetCleanUp
+				- GetNetPriority
+
+			Replication Driver / Connection / Actor Channel logic
+				- Actor Channel functions for storing / saving / serializing for mapping and sending packets from client to server 
+				- ServerReplicateActors
+				- ReplicateActorListsForConnections_Default
+				- ReplicateActorsForConnection
+				- ReplicateActor
+
+			Replication Nodes aren't used by default, and that's all good. For arena based games that aren't open world where net relevancy comes into play, and this is a priority for another time
+				- Subclassing replication nodes for custom logic and handling is beneficial, since net relevancy is only used for handling replication event logic,
+				- Having objects that are specific to a player need to be replication with spatialization nodes separately for performances and efficiency
+
+			There's state for data replication to handle what objects are replicated and additional logic for handling filtering based on other conditions (NetPriority, NetRelevancy, etc.)
+
+		*/
+	
 	///** Called right before receiving a bunch */
 	//virtual void PreNetReceive();
 
@@ -364,21 +403,27 @@ public:
 
 	// void FPacketSimulationSettings::LoadConfig(const TCHAR* OptionalQualifier)
 
+
+	/**** Actor channel sub object replication list logic ****/
+	// Adding / Removing objects to the replicated subobject list queues the objects and their values to be replicated based on their configuration accordingly
+	//		- Check that this happens when objects are spawned within the game
+	// AbilitySystem logic -> Everytime an ability is created / invoked, an instance created and replicated for multiplayer, and the actor channel's net replication logic handles everything else
+	
 	// /** The main function that will actually replicate actors. Called every server tick. */
 	// virtual int32 ServerReplicateActors(float DeltaSeconds) PURE_VIRTUAL(UReplicationDriver::ServerReplicateActors, return 0; );
-	//		- Optionally add custom logic here for network acknowledge updates / fixes
+	//		- Optionally add custom logic here for network acknowledge fixes / updates
 
 	// /** Logic that handles replication and prioritization on what replicates during each frame budget */
 	// void ReplicateActorListsForConnections_Default(UNetReplicationGraphConnection* ConnectionManager, FGatheredReplicationActorLists& GatheredReplicationListsForConnection, FNetViewerArray& Viewers);
-	//		- Custom logic for what gets prioritized when (not necessary because the current system has plenty of benefits
-	//		- Check some of unreal's custom projects for how they create custom logic for net replicated stuff
+	//		- Custom logic for what gets prioritized when (not necessary because the current system has plenty of benefits)
 
 	// /** Actual replication logic ( Actor-> pre-replication/replication variable preparations -> ActorChannel replication logic / handling */
 	//virtual void ReplicateActorsForConnection(UNetConnection* NetConnection, FPerConnectionActorInfoMap& ConnectionActorInfoMap, UNetReplicationGraphConnection* ConnectionManager, const uint32 FrameNum);
 	
 	// /** Replicate this channel's actor differences. Returns how many bits were replicated (does not include non-bunch packet overhead) */
 	// int64 ReplicateActor();
-	//		- Unreal handles the bunches / packet serialization and object mapping logic during replication, and queues for latent serialization based on the object information, what needs to be updated, and replication priority in the actor channel logic
+	//		- Unreal handles the bunches / packet serialization and object mapping logic during replication, and queues for latent serialization
+	//				based on the object information, what needs to be updated, and replication priority in the actor channel logic
 
 
 	///**
@@ -404,7 +449,7 @@ public:
 	///** Force actor to be updated to clients/demo net drivers */
 	//UFUNCTION(BlueprintCallable, Category = "Networking")
 	//	virtual void ForceNetUpdate();
-
+	
 	///**
 	// * SerializeNewActor has just been called on the actor before network replication (server side)
 	// * @param OutBunch Bunch containing serialized contents of actor prior to replication
