@@ -623,6 +623,29 @@ EEquipSlot UCombatComponent::GetNextEquipSlot(const bool bRightHand)
 }
 
 
+EEquipSlot UCombatComponent::GetPrevEquipSlot(const bool bRightHand)
+{
+	int32& Index = bRightHand ? ArmamentIndex : OffhandArmamentIndex;
+	Index = Index - 1 < 0 ? 2 : Index - 1;
+	EEquipSlot EquipSlot;
+
+	if (!bRightHand)
+	{
+		if (Index == 1 && LeftHandEquipSlot_Two.IsValid()) EquipSlot = EEquipSlot::LeftHandSlotTwo;
+		else if (Index == 2) EquipSlot = EEquipSlot::LeftHandSlotThree;
+		else EquipSlot = EEquipSlot::LeftHandSlotOne;
+	}
+	else
+	{
+		if (Index == 1 && RightHandEquipSlot_Two.IsValid()) EquipSlot = EEquipSlot::RightHandSlotTwo;
+		else if (Index == 2) EquipSlot = EEquipSlot::RightHandSlotThree;
+		else EquipSlot = EEquipSlot::RightHandSlotOne;
+	}
+	
+	return  EquipSlot;
+}
+
+
 F_Item UCombatComponent::GetArmamentInventoryInformation(const EEquipSlot Slot)
 {
 	if (Slot == EEquipSlot::LeftHandSlotOne)    return LeftHandEquipSlot_One;

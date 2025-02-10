@@ -20,13 +20,13 @@
 			},
 			"MeleeAbilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"InputId": "PrimaryAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
 						"TwoHanding"
@@ -34,13 +34,13 @@
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SpecialAttack.GA_SpecialAttack_C'",
 					"InputId": "SpecialAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_StrongAttack.GA_StrongAttack_C'",
 					"InputId": "StrongAttack",
 					"InvalidStances": [],
 					"Level": 1
@@ -48,7 +48,7 @@
 			],
 			"Abilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_UnequipArmament.GA_UnequipArmament_C'",
 					"Level": 1,
 					"InputId": "Reload",
 					"ObjectInformation": "None",
@@ -61,7 +61,7 @@
 					}
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_EquipArmament.GA_EquipArmament_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
 					"ObjectInformation": "None",
@@ -98,13 +98,13 @@
 			},
 			"MeleeAbilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"InputId": "PrimaryAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
 						"TwoHanding"
@@ -112,13 +112,13 @@
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SpecialAttack.GA_SpecialAttack_C'",
 					"InputId": "SpecialAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_StrongAttack.GA_StrongAttack_C'",
 					"InputId": "StrongAttack",
 					"InvalidStances": [],
 					"Level": 1
@@ -126,7 +126,7 @@
 			],
 			"Abilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_UnequipArmament.GA_UnequipArmament_C'",
 					"Level": 1,
 					"InputId": "Reload",
 					"ObjectInformation": "None",
@@ -139,7 +139,7 @@
 					}
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_EquipArmament.GA_EquipArmament_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
 					"ObjectInformation": "None",
@@ -177,7 +177,7 @@
 			"MeleeAbilities": [],
 			"Abilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_UnequipArmament.GA_UnequipArmament_C'",
 					"Level": 1,
 					"InputId": "Reload",
 					"ObjectInformation": "None",
@@ -190,7 +190,7 @@
 					}
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_EquipArmament.GA_EquipArmament_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
 					"ObjectInformation": "None",
@@ -228,7 +228,7 @@
 			"MeleeAbilities": [],
 			"Abilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_UnequipArmament.GA_UnequipArmament_C'",
 					"Level": 1,
 					"InputId": "Reload",
 					"ObjectInformation": "None",
@@ -241,7 +241,7 @@
 					}
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_EquipArmament.GA_EquipArmament_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
 					"ObjectInformation": "None",
@@ -278,13 +278,13 @@
 			},
 			"MeleeAbilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"InputId": "PrimaryAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
 						"TwoHanding"
@@ -292,13 +292,13 @@
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SpecialAttack.GA_SpecialAttack_C'",
 					"InputId": "SpecialAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_StrongAttack.GA_StrongAttack_C'",
 					"InputId": "StrongAttack",
 					"InvalidStances": [],
 					"Level": 1
@@ -306,7 +306,7 @@
 			],
 			"Abilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_UnequipArmament.GA_UnequipArmament_C'",
 					"Level": 1,
 					"InputId": "Reload",
 					"ObjectInformation": "None",
@@ -319,7 +319,7 @@
 					}
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_EquipArmament.GA_EquipArmament_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
 					"ObjectInformation": "None",
@@ -356,13 +356,13 @@
 			},
 			"MeleeAbilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_PrimaryAttack_BP.GA_PrimaryAttack_BP_C'",
 					"InputId": "PrimaryAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
 						"TwoHanding"
@@ -370,13 +370,13 @@
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SpecialAttack_Sword.GA_SpecialAttack_Sword_C'",
 					"InputId": "SpecialAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_StrongAttack.GA_StrongAttack_C'",
 					"InputId": "StrongAttack",
 					"InvalidStances": [],
 					"Level": 1
@@ -384,7 +384,7 @@
 			],
 			"Abilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_UnequipArmament.GA_UnequipArmament_C'",
 					"Level": 1,
 					"InputId": "Reload",
 					"ObjectInformation": "None",
@@ -397,7 +397,7 @@
 					}
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_EquipArmament.GA_EquipArmament_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
 					"ObjectInformation": "None",
@@ -434,13 +434,13 @@
 			},
 			"MeleeAbilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_PrimaryAttack_BP.GA_PrimaryAttack_BP_C'",
 					"InputId": "PrimaryAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
 						"TwoHanding"
@@ -448,13 +448,13 @@
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SpecialAttack.GA_SpecialAttack_C'",
 					"InputId": "SpecialAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_StrongAttack.GA_StrongAttack_C'",
 					"InputId": "StrongAttack",
 					"InvalidStances": [],
 					"Level": 1
@@ -462,7 +462,7 @@
 			],
 			"Abilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_UnequipArmament.GA_UnequipArmament_C'",
 					"Level": 1,
 					"InputId": "Reload",
 					"ObjectInformation": "None",
@@ -475,7 +475,7 @@
 					}
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_EquipArmament.GA_EquipArmament_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
 					"ObjectInformation": "None",
@@ -512,13 +512,13 @@
 			},
 			"MeleeAbilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"InputId": "PrimaryAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
 						"TwoHanding"
@@ -526,13 +526,13 @@
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SpecialAttack.GA_SpecialAttack_C'",
 					"InputId": "SpecialAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_StrongAttack.GA_StrongAttack_C'",
 					"InputId": "StrongAttack",
 					"InvalidStances": [],
 					"Level": 1
@@ -540,7 +540,7 @@
 			],
 			"Abilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_UnequipArmament.GA_UnequipArmament_C'",
 					"Level": 1,
 					"InputId": "Reload",
 					"ObjectInformation": "None",
@@ -553,7 +553,7 @@
 					}
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_EquipArmament.GA_EquipArmament_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
 					"ObjectInformation": "None",
@@ -590,13 +590,13 @@
 			},
 			"MeleeAbilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"InputId": "PrimaryAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
 						"TwoHanding"
@@ -604,13 +604,13 @@
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SpecialAttack.GA_SpecialAttack_C'",
 					"InputId": "SpecialAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_StrongAttack.GA_StrongAttack_C'",
 					"InputId": "StrongAttack",
 					"InvalidStances": [],
 					"Level": 1
@@ -618,7 +618,7 @@
 			],
 			"Abilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_UnequipArmament.GA_UnequipArmament_C'",
 					"Level": 1,
 					"InputId": "Reload",
 					"ObjectInformation": "None",
@@ -631,7 +631,7 @@
 					}
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_EquipArmament.GA_EquipArmament_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
 					"ObjectInformation": "None",
@@ -668,13 +668,13 @@
 			},
 			"MeleeAbilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"InputId": "PrimaryAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
 						"TwoHanding"
@@ -682,13 +682,13 @@
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SpecialAttack.GA_SpecialAttack_C'",
 					"InputId": "SpecialAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_StrongAttack.GA_StrongAttack_C'",
 					"InputId": "StrongAttack",
 					"InvalidStances": [],
 					"Level": 1
@@ -696,7 +696,7 @@
 			],
 			"Abilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_UnequipArmament.GA_UnequipArmament_C'",
 					"Level": 1,
 					"InputId": "Reload",
 					"ObjectInformation": "None",
@@ -709,7 +709,7 @@
 					}
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_EquipArmament.GA_EquipArmament_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
 					"ObjectInformation": "None",
@@ -746,13 +746,13 @@
 			},
 			"MeleeAbilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"InputId": "PrimaryAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
 						"TwoHanding"
@@ -760,13 +760,13 @@
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SpecialAttack.GA_SpecialAttack_C'",
 					"InputId": "SpecialAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_StrongAttack.GA_StrongAttack_C'",
 					"InputId": "StrongAttack",
 					"InvalidStances": [],
 					"Level": 1
@@ -774,7 +774,7 @@
 			],
 			"Abilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_UnequipArmament.GA_UnequipArmament_C'",
 					"Level": 1,
 					"InputId": "Reload",
 					"ObjectInformation": "None",
@@ -787,7 +787,7 @@
 					}
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_EquipArmament.GA_EquipArmament_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
 					"ObjectInformation": "None",
@@ -824,13 +824,13 @@
 			},
 			"MeleeAbilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_PrimaryAttack.GA_PrimaryAttack_C'",
 					"InputId": "PrimaryAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SecondaryAttack.GA_SecondaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
 						"TwoHanding"
@@ -838,13 +838,13 @@
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SpecialAttack.GA_SpecialAttack_C'",
 					"InputId": "SpecialAttack",
 					"InvalidStances": [],
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_StrongAttack.GA_StrongAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_StrongAttack.GA_StrongAttack_C'",
 					"InputId": "StrongAttack",
 					"InvalidStances": [],
 					"Level": 1
@@ -852,7 +852,7 @@
 			],
 			"Abilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_UnequipArmament.GA_UnequipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_UnequipArmament.GA_UnequipArmament_C'",
 					"Level": 1,
 					"InputId": "Reload",
 					"ObjectInformation": "None",
@@ -865,7 +865,7 @@
 					}
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Attacks/Abilities/GA_EquipArmament.GA_EquipArmament_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_EquipArmament.GA_EquipArmament_C'",
 					"Level": 1,
 					"InputId": "PrimaryAttack",
 					"ObjectInformation": "None",

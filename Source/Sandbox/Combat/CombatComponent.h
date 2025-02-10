@@ -382,6 +382,15 @@ public:
 	virtual EEquipSlot GetNextEquipSlot(bool bRightHand = true);
 	
 	/**
+	 * Retrieves the previous equipped slot for a specific hand
+	 * 
+	 * @param bRightHand						Whether we're retrieving the previous equip slot of the right or left hand
+	 * @returns									The previous equip slot for a specified hand
+	 */ 
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils")
+	virtual EEquipSlot GetPrevEquipSlot(bool bRightHand = true);
+	
+	/**
 	 * Retrieves the inventory information of a specific armament slot
 	 *
 	 * @param Slot								The armament's equip slot
