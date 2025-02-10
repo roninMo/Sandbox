@@ -52,7 +52,7 @@ public:
 public:
 	/** Retrieves a reference to the character's base class for combat */
 	UFUNCTION(BlueprintCallable, Category="PlayerController|Combat|Utility")
-	virtual APlayerCharacter* GetPlayer();
+	virtual APlayerCharacter* GetPlayer() const;
 
 	
 };

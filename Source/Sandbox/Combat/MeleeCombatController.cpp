@@ -48,7 +48,11 @@ void AMeleeCombatController::Server_EquipWeapon_Implementation(const bool bPrevW
 		
 	}
 
-	EEquipSlot WeaponSlot = CombatComponent->GetNextEquipSlot(bRightHand);
+	EEquipSlot WeaponSlot;
+	if (bPrevWeapon) WeaponSlot = CombatComponent->GetPrevEquipSlot(bRightHand);
+	else WeaponSlot = CombatComponent->GetNextEquipSlot(bRightHand);
+	UE_LOGFMT(LogTemp, Log, "{0} WeaponSlot: {1}", bPrevWeapon ? *FString("Prev") : *FString("Next"), *UEnum::GetValueAsString(WeaponSlot));
+
 	CombatComponent->CreateArmament(WeaponSlot);
 	// CombatComponent->UpdateArmamentStanceAndAbilities();
 }
@@ -78,7 +82,7 @@ void AMeleeCombatController::Server_SetArmamentStance_Implementation(const EArma
 
 
 
-APlayerCharacter* AMeleeCombatController::GetPlayer()
+APlayerCharacter* AMeleeCombatController::GetPlayer() const
 {
 	return Cast<APlayerCharacter>(GetCharacter());
 }

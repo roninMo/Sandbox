@@ -24,10 +24,10 @@ enum class EArmamentStance : uint8
 	DualWielding			UMETA(DisplayName = "Dual Wielding"),
 
 	/** The player is two handing the left hand weapon */
-	TwoHanding_L			UMETA(DisplayName = "Two Handing"),
+	TwoHanding_L			UMETA(DisplayName = "Two Handing (Secondary)"),
 	
 	/** The player is two handing the right hand weapon */
-	TwoHanding_R			UMETA(DisplayName = "Two Handing"),
+	TwoHanding_R			UMETA(DisplayName = "Two Handing (Primary)"),
 };
 
 
