@@ -27,21 +27,9 @@ protected:
 // Multiplayer functions for handling combat logic														//
 //------------------------------------------------------------------------------------------------------//
 public:
-	/** Equips the next left hand weapon from the current left hand weapons */
+	/** Equips the prev or next weapon from the list for a certain hand */
 	UFUNCTION(BlueprintCallable, Category = "PlayerController|Combat")
-	virtual void EquipNextWeapon_LeftHand();
-
-	/** Equips the previous left hand weapon from the current left hand weapons */
-	UFUNCTION(BlueprintCallable, Category = "PlayerController|Combat")
-	virtual void EquipPrevWeapon_LeftHand();
-	
-	/** Equips the next right hand weapon from the current right hand weapons */
-	UFUNCTION(BlueprintCallable, Category = "PlayerController|Combat")
-	virtual void EquipNextWeapon_RightHand();
-	
-	/** Equips the previous right hand weapon from the current right hand weapons */
-	UFUNCTION(BlueprintCallable, Category = "PlayerController|Combat")
-	virtual void EquipPrevWeapon_RightHand();
+	virtual void EquipWeapon(const bool bPrevWeapon = true, const bool bRightHand = false);
 
 	/** Updates the player's current armament stance */
 	UFUNCTION(BlueprintCallable, Category = "PlayerController|Combat")

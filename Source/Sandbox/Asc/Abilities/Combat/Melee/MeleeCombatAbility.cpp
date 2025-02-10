@@ -432,7 +432,7 @@ void UMeleeCombatAbility::OnAttackFrameEvent_Implementation(FGameplayEventData E
 	*/
 		
 
-	if (CurrentStance == EArmamentStance::OneHanding || CurrentStance == EArmamentStance::TwoHanding)
+	if (CurrentStance == EArmamentStance::OneHanding || CurrentStance == EArmamentStance::TwoHanding_R || CurrentStance == EArmamentStance::TwoHanding_L)
 	{
 		if (EventData.EventTag.MatchesTag(AttackFramesEndTag))
 		{

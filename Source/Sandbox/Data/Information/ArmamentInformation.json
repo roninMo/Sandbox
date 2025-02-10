@@ -29,7 +29,8 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
-						"TwoHanding"
+						"TwoHanding_L",
+						"TwoHanding_R"
 					],
 					"Level": 1
 				},
@@ -107,7 +108,8 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
-						"TwoHanding"
+						"TwoHanding_L",
+						"TwoHanding_R"
 					],
 					"Level": 1
 				},
@@ -287,7 +289,8 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
-						"TwoHanding"
+						"TwoHanding_L",
+						"TwoHanding_R"
 					],
 					"Level": 1
 				},
@@ -365,7 +368,8 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
-						"TwoHanding"
+						"TwoHanding_L",
+						"TwoHanding_R"
 					],
 					"Level": 1
 				},
@@ -443,7 +447,8 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
-						"TwoHanding"
+						"TwoHanding_L",
+						"TwoHanding_R"
 					],
 					"Level": 1
 				},
@@ -521,7 +526,8 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
-						"TwoHanding"
+						"TwoHanding_L",
+						"TwoHanding_R"
 					],
 					"Level": 1
 				},
@@ -599,7 +605,8 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
-						"TwoHanding"
+						"TwoHanding_L",
+						"TwoHanding_R"
 					],
 					"Level": 1
 				},
@@ -677,7 +684,8 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
-						"TwoHanding"
+						"TwoHanding_L",
+						"TwoHanding_R"
 					],
 					"Level": 1
 				},
@@ -755,7 +763,8 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
-						"TwoHanding"
+						"TwoHanding_L",
+						"TwoHanding_R"
 					],
 					"Level": 1
 				},
@@ -833,7 +842,8 @@
 					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SecondaryAttack.GA_SecondaryAttack_C'",
 					"InputId": "SecondaryAttack",
 					"InvalidStances": [
-						"TwoHanding"
+						"TwoHanding_L",
+						"TwoHanding_R"
 					],
 					"Level": 1
 				},

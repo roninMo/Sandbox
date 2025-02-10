@@ -367,9 +367,9 @@ const F_ComboAttacks& AArmament::GetComboAttacks(const EInputAbilities AttackPat
 
 	EArmamentStance Stance = CombatComponent->GetCurrentStance();
 	if (Stance == EArmamentStance::OneHanding && MeleeMontages_OneHand.Contains(AttackPattern)) return MeleeMontages_OneHand[AttackPattern].Combo;
-	if (Stance == EArmamentStance::TwoHanding && MeleeMontages_TwoHand.Contains(AttackPattern)) return MeleeMontages_TwoHand[AttackPattern].Combo;
 	if (Stance == EArmamentStance::TwoWeapons && MeleeMontages_OneHand.Contains(AttackPattern)) return MeleeMontages_OneHand[AttackPattern].Combo;
 	if (Stance == EArmamentStance::DualWielding && MeleeMontages_DualWield.Contains(AttackPattern)) return MeleeMontages_DualWield[AttackPattern].Combo;
+	if ((Stance == EArmamentStance::TwoHanding_L || Stance == EArmamentStance::TwoHanding_R) && MeleeMontages_TwoHand.Contains(AttackPattern)) return MeleeMontages_TwoHand[AttackPattern].Combo;
 	return DummyMeleeComboInformation;
 }
 

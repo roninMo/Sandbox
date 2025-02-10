@@ -11,10 +11,10 @@
 DEFINE_LOG_CATEGORY(ControllerLog);
 
 
-void AMeleeCombatController::EquipNextWeapon_LeftHand() { Server_EquipWeapon(false, false); }
-void AMeleeCombatController::EquipPrevWeapon_LeftHand() { Server_EquipWeapon(true, false); }
-void AMeleeCombatController::EquipNextWeapon_RightHand() { Server_EquipWeapon(false, true); }
-void AMeleeCombatController::EquipPrevWeapon_RightHand() { Server_EquipWeapon(true, true); }
+void AMeleeCombatController::EquipWeapon(const bool bPrevWeapon, const bool bRightHand)
+{
+	Server_EquipWeapon(bPrevWeapon, bRightHand);
+}
 
 
 void AMeleeCombatController::SetArmamentStance(const EArmamentStance NextStance)

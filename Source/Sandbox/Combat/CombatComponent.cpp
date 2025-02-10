@@ -434,7 +434,7 @@ void UCombatComponent::UpdateArmamentCombatAbilities(EArmamentStance PreviousSta
 			// Only use the secondary attack (Block or alt primary attack) for two handing or dual wielding
 			else if (CombatAbility.InputId == EInputAbilities::SecondaryAttack)
 			{
-				if (CurrentStance == EArmamentStance::DualWielding || CurrentStance == EArmamentStance::TwoWeapons || CurrentStance == EArmamentStance::TwoHanding)
+				if (CurrentStance == EArmamentStance::DualWielding || CurrentStance == EArmamentStance::TwoWeapons || CurrentStance == EArmamentStance::TwoHanding_R)
 				{
 					AddCombatAbilityIfValidStance(CombatAbilities, CombatAbility);
 				}
@@ -450,7 +450,7 @@ void UCombatComponent::UpdateArmamentCombatAbilities(EArmamentStance PreviousSta
 		for (const F_ArmamentAbilityInformation& CombatAbility : Abilities)
 		{
 			// If we're two handing the weapon, retrieve every ability, otherwise retrieve the offhand ability
-			if (CurrentStance == EArmamentStance::TwoHanding)
+			if (CurrentStance == EArmamentStance::TwoHanding_L)
 			{
 				AddCombatAbilityIfValidStance(CombatAbilities, CombatAbility);
 			}
@@ -502,8 +502,8 @@ void UCombatComponent::UpdateArmamentCombatAbilities(EArmamentStance PreviousSta
 			if (EInputAbilities::SpecialAttack == AttackPattern) Id = PrimaryId;
 			if (EInputAbilities::StrongAttack == AttackPattern) Id = PrimaryId;
 		}
-		else if (CurrentStance == EArmamentStance::TwoHanding && SecondaryArmament && SecondaryArmament->GetEquipStatus() == EEquipStatus::Equipped) Id = SecondaryId;
-		else if (CurrentStance == EArmamentStance::TwoHanding && PrimaryArmament && PrimaryArmament->GetEquipStatus() == EEquipStatus::Equipped) Id = PrimaryId;
+		else if (CurrentStance == EArmamentStance::TwoHanding_L && SecondaryArmament) Id = SecondaryId;
+		else if (CurrentStance == EArmamentStance::TwoHanding_R && PrimaryArmament) Id = PrimaryId;
 
 		// Add the ability
 		CombatAbilityHandles.Add(Asc->AddAbility(FGameplayAbilityInfo(CombatAbility.Ability, CombatAbility.Level, CombatAbility.InputId, nullptr, Id)));
@@ -567,9 +567,9 @@ void UCombatComponent::OnRep_CurrentStance()
 	UE_LOGFMT(LogTemp, Log, "OnRepCurrentStance() new stance: {0}", *UEnum::GetValueAsString(CurrentStance));
 }
 
-void UCombatComponent::Client_SetCurrentStance_Implementation(EArmamentStance PreviousStance)
+void UCombatComponent::Client_SetCurrentStance_Implementation(EArmamentStance NextStance)
 {
-	SetArmamentStance(PreviousStance);
+	SetArmamentStance(NextStance);
 }
 
 

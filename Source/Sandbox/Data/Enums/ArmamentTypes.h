@@ -23,8 +23,11 @@ enum class EArmamentStance : uint8
 	/** The player is dual wielding and needs to use the montages for dual wielding */
 	DualWielding			UMETA(DisplayName = "Dual Wielding"),
 
-	/** The player is two handing the primary weapon */
-	TwoHanding		UMETA(DisplayName = "Two Handing"),
+	/** The player is two handing the left hand weapon */
+	TwoHanding_L			UMETA(DisplayName = "Two Handing"),
+	
+	/** The player is two handing the right hand weapon */
+	TwoHanding_R			UMETA(DisplayName = "Two Handing"),
 };
 
 
