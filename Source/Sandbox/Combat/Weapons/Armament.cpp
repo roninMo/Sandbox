@@ -182,6 +182,7 @@ void AArmament::OnRep_Item()
 }
 
 
+// Once we create the armament, we update the armament's equip slot on the client with an onReplicated function for latent synchronization. i.e. for when people join after it's been created
 void AArmament::OnRep_CreatedArmament()
 {
 	if (!GetOwner())
@@ -200,7 +201,6 @@ void AArmament::OnRep_CreatedArmament()
 	UCombatComponent* CombatComponent = GetCombatComponent();
 	if (!CombatComponent)
 	{
-		
 		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2} tried to add the armament information on the client after creation and failed!",
 			*UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()));
 		return;
@@ -230,6 +230,8 @@ void AArmament::RetrieveArmamentInformationOnClient()
 
 	// Item information is universal, just retrieve the inventory id
 	FGuid Id = CombatComponent->GetArmamentInventoryInformation(EquipSlot).Id;
+	// TODO: An armament should never be retrieved / created before it's been stored and replicated in the inventory, however we should research if there's a better solution
+	//			- Adding initial serialization for things like the item's id shouldn't be a problem
 	if (Id.IsValid())
 	{
 		// Execute_SetItem(this, CombatComponent->GetArmamentInventoryInformation(EquipSlot));
@@ -604,9 +606,11 @@ UCombatComponent* AArmament::GetCombatComponent(ACharacterBase* Character) const
 
 void AArmament::PrintItemInformation()
 {
-	UE_LOGFMT(ItemLog, Log, "{0}({1}) Print Armament Information({2}): {3} EquipSlot: {4}, EquipStatus: {5}",
-		*Item.Id.ToString(), *Item.DisplayName, *UEnum::GetValueAsString(GetOwner()->GetLocalRole()),
-		*StaticClass()->GetName(), *UEnum::GetValueAsString(EquipSlot), *UEnum::GetValueAsString(EquipStatus)
+	UE_LOGFMT(ItemLog, Log, "Print Armament Information of {0}({1}) ->  {1}({2}): EquipSlot: {4}, EquipStatus: {5}",
+		*StaticClass()->GetName(),
+		*UEnum::GetValueAsString(GetOwner()->GetLocalRole()),
+		*Item.Id.ToString(), *Item.DisplayName,
+		*UEnum::GetValueAsString(EquipSlot), *UEnum::GetValueAsString(EquipStatus)
 	);
 }
 

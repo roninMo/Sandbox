@@ -110,8 +110,12 @@ bool AItem::RetrieveItemFromDataTable(const FName Id, F_Item& ItemData)
 
 void AItem::PrintItemInformation()
 {
-	// DisplayName, Id, StaticClass
-	UE_LOGFMT(ItemLog, Log, "{0}({1}) Print Item Information({2}): {3}", *Item.Id.ToString(), *Item.DisplayName, *UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *StaticClass()->GetName());
+	UE_LOGFMT(ItemLog, Log, "Print Item Information of {0}({1}) ->  {1}({2}): ItemType: {4}, SortOrder: {5}",
+		*StaticClass()->GetName(),
+		*UEnum::GetValueAsString(GetOwner()->GetLocalRole()),
+		*Item.Id.ToString(), *Item.DisplayName,
+		*UEnum::GetValueAsString(GetItemType()), Item.SortOrder
+	);
 }
 #pragma endregion 
 
