@@ -191,7 +191,7 @@ protected:
 	/** The current combat ability handles that are specific to the player's combat stance */
 	UPROPERTY(Transient, BlueprintReadWrite) TArray<FGameplayAbilitySpecHandle> CombatAbilityHandles;
 	
-	/** The current combo index the player is on */
+	/** The current combo index the player is on */ // TODO: Net serialize this to avoid issues with client / server replication when transition between different attack pattern combo lengths
 	UPROPERTY(BlueprintReadWrite, Replicated, Category = "Combat Component|Armaments") int32 ComboIndex = 0;
 
 	// TODO: Should these be replicated, or should we just use the inventory events to handle this?
@@ -752,6 +752,17 @@ public:
 	
 	/** Retrieves the armament's montage table */
 	UFUNCTION(BlueprintCallable) virtual UDataTable* GetArmamentMontageTable() const;
+
+	/** Prints the current combat component's information on the server and client. Used to check if everything's being replicated properly */
+	UFUNCTION(BlueprintCallable) virtual void CombatComponentInformation();
+
+	
+protected:
+	UFUNCTION(Reliable, Server) virtual void Server_CombatComponentInformation();
+	UFUNCTION(Reliable, Client) virtual void Client_CombatComponentInformation();
+	UFUNCTION() virtual void HandleCombatComponentInformation();
+	UFUNCTION() virtual void PrintItemInformation(const F_Item& Item, const FString& Prefix);
+
 	
 };
 

@@ -3,6 +3,7 @@
 
 #include "Sandbox/Combat/CombatComponent.h"
 
+#include "Engine/PackageMapClient.h"
 #include "Sandbox/Data/Enums/HitReacts.h"
 #include "Sandbox/Data/Enums/EquipSlot.h"
 #include "Sandbox/Data/Enums/ArmorTypes.h"
@@ -1563,5 +1564,80 @@ int32 UCombatComponent::GetComboIndex() const
 UDataTable* UCombatComponent::GetArmamentMontageTable() const
 {
 	return MontageInformationTable;
+}
+
+
+void UCombatComponent::CombatComponentInformation()
+{
+	HandleCombatComponentInformation();
+
+	if (GetOwner())
+	{
+		if (GetOwner()->HasAuthority())
+		{
+			Client_CombatComponentInformation();
+		}
+		else
+		{
+			Server_CombatComponentInformation();
+		}
+	}
+}
+
+void UCombatComponent::Server_CombatComponentInformation_Implementation() { HandleCombatComponentInformation(); }
+void UCombatComponent::Client_CombatComponentInformation_Implementation() { HandleCombatComponentInformation(); }
+void UCombatComponent::HandleCombatComponentInformation()
+{
+	int32 NetId = 0;
+	FString PlatformId = FGenericPlatformMisc::GetLoginId();
+	const UNetDriver* NetDriver = GetWorld()->GetNetDriver();
+	if (NetDriver && NetDriver->GuidCache.Get())
+	{
+		FNetGUIDCache* NetworkGuids = NetDriver->GuidCache.Get();
+		if (NetworkGuids->NetGUIDLookup.Contains(this)) NetId = NetworkGuids->NetGUIDLookup[this].Value;
+	}
+	
+	UE_LOGFMT(CombatComponentLog, Log, "//----------------------------------------------------------------------------------------------------/");
+	UE_LOGFMT(CombatComponentLog, Log, "// {0}::CombatComponentInformation() [{1}][{2}] {3}'s Inventory", GetOwner()->HasAuthority() ? "Server" : "Client", NetId, PlatformId, *GetNameSafe(GetOwner()));
+	UE_LOGFMT(CombatComponentLog, Log, "//----------------------------------------------------------------------------------------------------/");
+
+	if (PrimaryArmament) PrintItemInformation(GetArmamentInventoryInformation(GetCurrentlyEquippedSlot()), FString("Primary Armament"));
+	else  UE_LOGFMT(CombatComponentLog, Log, "// PrimaryArmament -> NULL");
+
+	if (SecondaryArmament) PrintItemInformation(GetArmamentInventoryInformation(GetCurrentlyEquippedSlot()), FString("Secondary Armament"));
+	else  UE_LOGFMT(CombatComponentLog, Log, "// SecondaryArmament -> NULL");
+	
+	// Current stance, Combo index, EquipSlot indexes for primary and offhand
+	UE_LOGFMT(CombatComponentLog, Log, "// Player Combat Info -> CurrentStance: {0}, Combo Index: {1}, PrimarySlotIndex: {2}, OffhandSlotIndex: {3}",
+		*UEnum::GetValueAsString(CurrentStance), ComboIndex, ArmamentIndex, OffhandArmamentIndex
+	);
+
+	// Armor and Equipped weapon slots (Id, DisplayName, SortOrder)
+	UE_LOGFMT(CombatComponentLog, Log, "// ");
+	UE_LOGFMT(CombatComponentLog, Log, "// Weapon Slots: ");
+	PrintItemInformation(RightHandEquipSlot_One, FString("RightHand Slot One"));
+	PrintItemInformation(RightHandEquipSlot_Two, FString("RightHand Slot Two"));
+	PrintItemInformation(RightHandEquipSlot_Three, FString("RightHand Slot Three"));
+	
+	PrintItemInformation(LeftHandEquipSlot_One, FString("LeftHand Slot One"));
+	PrintItemInformation(LeftHandEquipSlot_Two, FString("LeftHand Slot Two"));
+	PrintItemInformation(LeftHandEquipSlot_Three, FString("LeftHand Slot Three"));
+
+	UE_LOGFMT(CombatComponentLog, Log, "// ");
+	UE_LOGFMT(CombatComponentLog, Log, "// Armors: ");
+	PrintItemInformation(Gauntlets, FString("Gauntlets"));
+	PrintItemInformation(Leggings, FString("Leggings"));
+	PrintItemInformation(Helm, FString("Helm"));
+	PrintItemInformation(Chest, FString("Chest"));
+
+	UE_LOGFMT(CombatComponentLog, Log, "//---------------------------------------------------------------------------/");
+	UE_LOGFMT(CombatComponentLog, Log, " ");
+}
+
+
+void UCombatComponent::PrintItemInformation(const F_Item& Item, const FString& Prefix)
+{
+	if (!Item.IsValid()) return;
+	UE_LOGFMT(CombatComponentLog, Log, "// {0} -> Id: {1}({2}), SortOrder: {3}", *Prefix, Item.Id.ToString(), *Item.DisplayName, Item.SortOrder);
 }
 #pragma endregion
