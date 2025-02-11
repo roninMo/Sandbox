@@ -282,6 +282,16 @@ public:
 	/** Retrieves the combat component from the character */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual UCombatComponent* GetCombatComponent(ACharacterBase* Character = nullptr) const;
 	
+	/**
+	 * Print's this item's information on both server and client. \n\n
+	 *
+	 * This is intended to print both the CDO and the saved information pertaining to the player's instance of the object
+	 *
+	 * @note		you need to invoke this on both server and client
+	 * @remarks		Override this function to add custom functionality specific to each item
+	 */
+	virtual void PrintItemInformation() override;
+	
 	/** Retrieves the armament's current ability handles */
 	UFUNCTION(BlueprintCallable, Category = "Armament|Utils") virtual const TArray<FGameplayAbilitySpecHandle>& GetAbilityHandles() const;
 	

@@ -7,6 +7,9 @@
 #include "Logging/StructuredLog.h"
 #include "Net/UnrealNetwork.h"
 
+DEFINE_LOG_CATEGORY(ItemLog);
+
+
 // Sets default values
 AItem::AItem()
 {
@@ -104,5 +107,11 @@ bool AItem::RetrieveItemFromDataTable(const FName Id, F_Item& ItemData)
 	return false;
 }
 
+
+void AItem::PrintItemInformation()
+{
+	// DisplayName, Id, StaticClass
+	UE_LOGFMT(ItemLog, Log, "{0}({1}) Print Item Information({2}): {3}", *Item.Id.ToString(), *Item.DisplayName, *UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *StaticClass()->GetName());
+}
 #pragma endregion 
 

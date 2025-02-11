@@ -7,6 +7,9 @@
 #include "Sandbox/Data/Interfaces/InventoryItem/InventoryItemInterface.h"
 #include "Item.generated.h"
 
+DECLARE_LOG_CATEGORY_EXTERN(ItemLog, Log, All);
+
+
 /*
  * The base class for inventory items that are spawned in the world
  */
@@ -93,6 +96,17 @@ public:
 	
 	/** Retrieves an item from the data table. Returns null if the item was not found */
 	UFUNCTION(BlueprintCallable) virtual bool RetrieveItemFromDataTable(FName Id, F_Item& ItemData);
+
+	/**
+	 * Print's this item's information on both server and client. \n\n
+	 *
+	 * This is intended to print both the CDO and the saved information pertaining to the player's instance of the object
+	 *
+	 * @note		you need to invoke this on both server and client
+	 * @remarks		Override this function to add custom functionality specific to each item
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Inventory Item|Utilities")
+	virtual void PrintItemInformation();
 	
 	
 protected:	

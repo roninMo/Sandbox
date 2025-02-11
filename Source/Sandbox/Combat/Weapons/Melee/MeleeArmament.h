@@ -79,4 +79,15 @@ public:
 	/** Returns the armament's overlap components for their armament. */
 	virtual TArray<UPrimitiveComponent*> GetArmamentHitboxes() const override;
 	
+	/**
+	 * Print's this item's information on both server and client. \n\n
+	 *
+	 * This is intended to print both the CDO and the saved information pertaining to the player's instance of the object
+	 *
+	 * @note		you need to invoke this on both server and client
+	 * @remarks		Override this function to add custom functionality specific to each item
+	 */
+	virtual void PrintItemInformation() override;
+
+	
 };

@@ -244,3 +244,10 @@ TArray<UPrimitiveComponent*> AMeleeArmament::GetArmamentHitboxes() const
 	return Hitboxes;
 }
 
+void AMeleeArmament::PrintItemInformation()
+{
+	Super::PrintItemInformation();
+
+	// TODO: add weapon leveling / saved information
+}
+

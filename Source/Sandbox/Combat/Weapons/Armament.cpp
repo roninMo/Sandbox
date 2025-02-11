@@ -602,6 +602,15 @@ UCombatComponent* AArmament::GetCombatComponent(ACharacterBase* Character) const
 }
 
 
+void AArmament::PrintItemInformation()
+{
+	UE_LOGFMT(ItemLog, Log, "{0}({1}) Print Armament Information({2}): {3} EquipSlot: {4}, EquipStatus: {5}",
+		*Item.Id.ToString(), *Item.DisplayName, *UEnum::GetValueAsString(GetOwner()->GetLocalRole()),
+		*StaticClass()->GetName(), *UEnum::GetValueAsString(EquipSlot), *UEnum::GetValueAsString(EquipStatus)
+	);
+}
+
+
 const TArray<FGameplayAbilitySpecHandle>& AArmament::GetAbilityHandles() const
 {
 	return AbilityHandles;
