@@ -754,7 +754,7 @@ public:
 	UFUNCTION(BlueprintCallable) virtual UDataTable* GetArmamentMontageTable() const;
 
 	/** Prints the current combat component's information on the server and client. Used to check if everything's being replicated properly */
-	UFUNCTION(BlueprintCallable) virtual void CombatComponentInformation();
+	UFUNCTION(BlueprintCallable, Category = "Combat|Utils") virtual void PrintCombatComponentInformation();
 
 	
 protected:

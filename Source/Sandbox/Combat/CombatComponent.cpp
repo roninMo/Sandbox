@@ -1567,7 +1567,7 @@ UDataTable* UCombatComponent::GetArmamentMontageTable() const
 }
 
 
-void UCombatComponent::CombatComponentInformation()
+void UCombatComponent::PrintCombatComponentInformation()
 {
 	HandleCombatComponentInformation();
 
@@ -1597,6 +1597,7 @@ void UCombatComponent::HandleCombatComponentInformation()
 		if (NetworkGuids->NetGUIDLookup.Contains(this)) NetId = NetworkGuids->NetGUIDLookup[this].Value;
 	}
 	
+	UE_LOGFMT(CombatComponentLog, Log, " ");
 	UE_LOGFMT(CombatComponentLog, Log, "//----------------------------------------------------------------------------------------------------/");
 	UE_LOGFMT(CombatComponentLog, Log, "// {0}::CombatComponentInformation() [{1}][{2}] {3}'s Inventory", GetOwner()->HasAuthority() ? "Server" : "Client", NetId, PlatformId, *GetNameSafe(GetOwner()));
 	UE_LOGFMT(CombatComponentLog, Log, "//----------------------------------------------------------------------------------------------------/");
