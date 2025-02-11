@@ -53,8 +53,19 @@ void AMeleeCombatController::Server_EquipWeapon_Implementation(const bool bPrevW
 	else WeaponSlot = CombatComponent->GetNextEquipSlot(bRightHand);
 	UE_LOGFMT(LogTemp, Log, "{0} WeaponSlot: {1}", bPrevWeapon ? *FString("Prev") : *FString("Next"), *UEnum::GetValueAsString(WeaponSlot));
 
-	CombatComponent->CreateArmament(WeaponSlot);
-	// CombatComponent->UpdateArmamentStanceAndAbilities();
+	// Remove the currently equipped armament if we transition to an empty slot
+	if (!CombatComponent->IsValidSlot(WeaponSlot))
+	{
+		CombatComponent->DeleteEquippedArmament(CombatComponent->GetArmament(bRightHand));
+	}
+
+	// TODO: Add logic per game to either skip this or only allow it to happen once
+
+	else
+	{
+		CombatComponent->CreateArmament(WeaponSlot);
+		// CombatComponent->UpdateArmamentStanceAndAbilities();
+	}
 }
 
 

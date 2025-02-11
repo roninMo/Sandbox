@@ -391,6 +391,15 @@ public:
 	virtual EEquipSlot GetPrevEquipSlot(bool bRightHand = true);
 	
 	/**
+	 * Returns whether there's a weapon in the specified slot
+	 * 
+	 * @param Slot								The specified slot to check
+	 * @returns									Whether we have a weapon in the slot
+	 */ 
+	UFUNCTION(BlueprintCallable, Category = "Combat Component|Utils")
+	virtual bool IsValidSlot(const EEquipSlot Slot) const;
+
+	/**
 	 * Retrieves the inventory information of a specific armament slot
 	 *
 	 * @param Slot								The armament's equip slot

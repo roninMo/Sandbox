@@ -281,6 +281,10 @@ AArmament* UCombatComponent::CreateArmament(const EEquipSlot EquipSlot)
 			{
 				PrimaryArmament = Armament;
 			}
+
+			// On weapon creation we need to update the internal count for the equipped weapon slot
+			if (!bRightHand) OffhandArmamentIndex = EquipSlot == EEquipSlot::LeftHandSlotOne ? 0 : EquipSlot == EEquipSlot::LeftHandSlotTwo ? 1 : 2;
+			else ArmamentIndex = EquipSlot == EEquipSlot::RightHandSlotOne ? 0 : EquipSlot == EEquipSlot::RightHandSlotTwo ? 1 : 2;
 			
 			// Update the armament stance and combat abilities
 			UpdateArmamentStanceAndAbilities();
@@ -643,6 +647,18 @@ EEquipSlot UCombatComponent::GetPrevEquipSlot(const bool bRightHand)
 	}
 	
 	return  EquipSlot;
+}
+
+
+bool UCombatComponent::IsValidSlot(const EEquipSlot Slot) const
+{
+	if (Slot == EEquipSlot::LeftHandSlotOne)    return LeftHandEquipSlot_One.IsValid();
+	if (Slot == EEquipSlot::LeftHandSlotTwo)    return LeftHandEquipSlot_Two.IsValid();
+	if (Slot == EEquipSlot::LeftHandSlotThree)  return LeftHandEquipSlot_Three.IsValid();
+	if (Slot == EEquipSlot::RightHandSlotOne)   return RightHandEquipSlot_One.IsValid();
+	if (Slot == EEquipSlot::RightHandSlotTwo)   return RightHandEquipSlot_Two.IsValid();
+	if (Slot == EEquipSlot::RightHandSlotThree) return RightHandEquipSlot_Three.IsValid();
+	return false;
 }
 
 
