@@ -285,7 +285,17 @@
 
 
 
-	I think the current version of unreal prevents some replication functionality / plugin logic, however we need to add debug logic for combat and perhaps movement
+
+	- Fix hit stun reactions to be precise for proper combat
+	- Finish combat / respawn logic
+	- Add logic to net serialize timestamps when players are attacked to avoid hit react durations to be inaccurate. This bases reaction time off of ping, and avoids replication delays for durations
+		- Benefits -> delayed attacks that land don't add to hit stun duration, preventing chained lag
+		- Drawbacks -> the usual lag above 400 ping will cause hit stun to not work properly.
+	- So long as attack reactions aren't quick, the elapsed duration can be calculated on the client safely without relying on the server's response from the duration being finished, allowing the client to predict durations in real time
+
+
+	- After finishing the initial combat logic add advanced ai state trees and squad combat logic
+	
 
 */
 
