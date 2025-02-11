@@ -608,7 +608,7 @@ void AArmament::PrintItemInformation()
 {
 	UE_LOGFMT(ItemLog, Log, "Print Armament Information of {0}({1}) ->  {1}({2}): EquipSlot: {4}, EquipStatus: {5}",
 		*StaticClass()->GetName(),
-		*UEnum::GetValueAsString(GetOwner()->GetLocalRole()),
+		GetOwner()->HasAuthority() ? *FString("Server") : *FString("Client"),
 		*Item.Id.ToString(), *Item.DisplayName,
 		*UEnum::GetValueAsString(EquipSlot), *UEnum::GetValueAsString(EquipStatus)
 	);

@@ -280,7 +280,7 @@
 			},
 			"MeleeAbilities": [
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_PrimaryAttack.GA_PrimaryAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_PrimaryAttack_BP.GA_PrimaryAttack_BP_C'",
 					"InputId": "PrimaryAttack",
 					"InvalidStances": [],
 					"Level": 1
@@ -295,7 +295,7 @@
 					"Level": 1
 				},
 				{
-					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SpecialAttack.GA_SpecialAttack_C'",
+					"Ability": "/Script/Engine.BlueprintGeneratedClass'/Game/AbilitySystem/Abilities/Attacks/GA_SpecialAttack_Sword.GA_SpecialAttack_Sword_C'",
 					"InputId": "SpecialAttack",
 					"InvalidStances": [],
 					"Level": 1

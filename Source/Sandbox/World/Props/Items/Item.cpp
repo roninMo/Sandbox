@@ -112,7 +112,7 @@ void AItem::PrintItemInformation()
 {
 	UE_LOGFMT(ItemLog, Log, "Print Item Information of {0}({1}) ->  {1}({2}): ItemType: {4}, SortOrder: {5}",
 		*StaticClass()->GetName(),
-		*UEnum::GetValueAsString(GetOwner()->GetLocalRole()),
+		GetOwner()->HasAuthority() ? *FString("Server") : *FString("Client"),
 		*Item.Id.ToString(), *Item.DisplayName,
 		*UEnum::GetValueAsString(GetItemType()), Item.SortOrder
 	);

@@ -351,13 +351,17 @@ bool UCombatComponent::DeleteEquippedArmament(AArmament* Armament)
 void UCombatComponent::SetArmamentStance(const EArmamentStance Stance)
 {
 	const EArmamentStance PreviousStance = CurrentStance;
-	if (CurrentStance != Stance)
+
+	// Allows for us to automatically handle the stance from the player's currently equipped weapons
+	if (Stance == EArmamentStance::None)
+	{
+		UpdateArmamentStanceAndAbilities();
+	}
+	else if (CurrentStance != Stance)
 	{
 		CurrentStance = Stance;
 		UpdateArmamentCombatAbilities(PreviousStance);
 	}
-
-	// TODO: This just needs to be fixed to replicate to clients, everything else is working 
 }
 
 
@@ -1573,13 +1577,18 @@ void UCombatComponent::PrintCombatComponentInformation()
 
 	if (GetOwner())
 	{
-		if (GetOwner()->HasAuthority())
+		if (!GetOwner()->HasAuthority())
 		{
-			Client_CombatComponentInformation();
+			Server_CombatComponentInformation();
 		}
 		else
 		{
-			Server_CombatComponentInformation();
+			// Print client information if there's an autonomous proxy (dedicated server invocation)
+			ACharacter* Character = Cast<ACharacter>(GetOwner());
+			if (Character && !Character->IsLocallyControlled())
+			{
+				Client_CombatComponentInformation();
+			}
 		}
 	}
 }
@@ -1599,13 +1608,13 @@ void UCombatComponent::HandleCombatComponentInformation()
 	
 	UE_LOGFMT(CombatComponentLog, Log, " ");
 	UE_LOGFMT(CombatComponentLog, Log, "//----------------------------------------------------------------------------------------------------/");
-	UE_LOGFMT(CombatComponentLog, Log, "// {0}::CombatComponentInformation() [{1}][{2}] {3}'s Inventory", GetOwner()->HasAuthority() ? "Server" : "Client", NetId, PlatformId, *GetNameSafe(GetOwner()));
+	UE_LOGFMT(CombatComponentLog, Log, "// {0}::CombatComponentInformation() {1} [{2}][{3}]", GetOwner()->HasAuthority() ? "Server" : "Client", *GetNameSafe(GetOwner()), NetId, PlatformId);
 	UE_LOGFMT(CombatComponentLog, Log, "//----------------------------------------------------------------------------------------------------/");
 
 	if (PrimaryArmament) PrintItemInformation(GetArmamentInventoryInformation(GetCurrentlyEquippedSlot()), FString("Primary Armament"));
 	else  UE_LOGFMT(CombatComponentLog, Log, "// PrimaryArmament -> NULL");
 
-	if (SecondaryArmament) PrintItemInformation(GetArmamentInventoryInformation(GetCurrentlyEquippedSlot()), FString("Secondary Armament"));
+	if (SecondaryArmament) PrintItemInformation(GetArmamentInventoryInformation(GetCurrentlyEquippedSlot(false)), FString("Secondary Armament"));
 	else  UE_LOGFMT(CombatComponentLog, Log, "// SecondaryArmament -> NULL");
 	
 	// Current stance, Combo index, EquipSlot indexes for primary and offhand
@@ -1616,13 +1625,13 @@ void UCombatComponent::HandleCombatComponentInformation()
 	// Armor and Equipped weapon slots (Id, DisplayName, SortOrder)
 	UE_LOGFMT(CombatComponentLog, Log, "// ");
 	UE_LOGFMT(CombatComponentLog, Log, "// Weapon Slots: ");
-	PrintItemInformation(RightHandEquipSlot_One, FString("RightHand Slot One"));
-	PrintItemInformation(RightHandEquipSlot_Two, FString("RightHand Slot Two"));
-	PrintItemInformation(RightHandEquipSlot_Three, FString("RightHand Slot Three"));
+	PrintItemInformation(RightHandEquipSlot_One, FString("RightHand Slot One		"));
+	PrintItemInformation(RightHandEquipSlot_Two, FString("RightHand Slot Two		"));
+	PrintItemInformation(RightHandEquipSlot_Three, FString("RightHand Slot Three		"));
 	
-	PrintItemInformation(LeftHandEquipSlot_One, FString("LeftHand Slot One"));
-	PrintItemInformation(LeftHandEquipSlot_Two, FString("LeftHand Slot Two"));
-	PrintItemInformation(LeftHandEquipSlot_Three, FString("LeftHand Slot Three"));
+	PrintItemInformation(LeftHandEquipSlot_One, FString("LeftHand Slot One		"));
+	PrintItemInformation(LeftHandEquipSlot_Two, FString("LeftHand Slot Two		"));
+	PrintItemInformation(LeftHandEquipSlot_Three, FString("LeftHand Slot Three	"));
 
 	UE_LOGFMT(CombatComponentLog, Log, "// ");
 	UE_LOGFMT(CombatComponentLog, Log, "// Armors: ");
