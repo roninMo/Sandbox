@@ -13,13 +13,11 @@
 
 /*
 //----------------------------------------------------------------------------------//
-// Combat																			//
+// Movement																			//
 //----------------------------------------------------------------------------------//
-	- Stephen Ulibarri has content on combat for fps and melee combat, and teaches you a lot of different things and how to handle multiplayer
-		- Check that client side prediction helps with combat and all melee attacks except for a few edge case scenarios
-
-	- Finally let's start learning AI in depth and how to go about this. A lot of this is already done (with some configuration that's been cleared away) this is going to be fun
-		- Refactor ai combat for multiplayer for handling calculations for all types of combat, different enemies with gimmicks and let's play with attack patterns
+	- Add a cover system for both standing and crouching for specific objects
+	- Fix ledge mantling detection for proper mantle to climb up to a proper ledge / prevent clipping
+	- Perhaps add logic for wall climbing on angled walls, and logic settings for either valid object based wall climbing, or wall climbing at specific angles with a valid accepted angle
 
 
 //----------------------------------------------------------------------------------//
@@ -185,6 +183,16 @@
 
 
 //----------------------------------------------------------------------------------//
+// Combat																			//
+//----------------------------------------------------------------------------------//
+	- Stephen Ulibarri has content on combat for fps and melee combat, and teaches you a lot of different things and how to handle multiplayer
+		- Check that client side prediction helps with combat and all melee attacks except for a few edge case scenarios
+
+	- Finally let's start learning AI in depth and how to go about this. A lot of this is already done (with some configuration that's been cleared away) this is going to be fun
+		- Refactor ai combat for multiplayer for handling calculations for all types of combat, different enemies with gimmicks and let's play with attack patterns
+
+
+//----------------------------------------------------------------------------------//
 // Level Design																		//
 //----------------------------------------------------------------------------------//
 
@@ -206,6 +214,8 @@
 
 /*
 
+
+Completed Stuff
 
 	Ability System Component
 		- Ability Retrieval and Activation
@@ -256,7 +266,6 @@
 		- Handle multiple instances being added/removed without it affecting gameplay
 		- Have multiple objects for ability/input binding, and attribute/allocation information
 
-
 		- On (Activated/Failed/Ended)
 			- TArray<FGSCMappedAbility> AddedAbilityHandles;
 			- TArray<TObjectPtr<UAttributeSet>> AddedAttributes;
@@ -264,12 +273,7 @@
 			- TArray<FGSCAbilitySetHandle> AddedAbilitySets;
 			- TArray<FDelegateHandle> InputBindingDelegateHandles;
 
-
 		Ability Handling, Attribute Handling, Input Handling
-
-
-	Add combat logic, and information for displaying status, Everything else is already done except for the fun stuff and complex combat abilities
-	I hadn't thought about how to handle this yet
 
 
 	Abilities should be retrieved for each game, and added/removed based on the player's current equipment
@@ -279,22 +283,56 @@
 
 
 
-		- Add multiple different combat abilities and combo attacks
-		- Add character's with different attacks and learn how to handle combat, respawning, etc.
-		- Create a way of quickly creating logic and scenarios for combat instead of actually building characters. Handle this early so it's easy to build upon and add combat
+
+Current Todo
 
 
-
+	- Add multiple different combat abilities and combo attacks
+	- Add character's with different attacks and learn how to handle combat, respawning, etc.
+	- Create a way of quickly creating logic and scenarios for combat instead of actually building characters. Handle this early so it's easy to build upon and add combat
+	- Add actor channel logic for custom replication for different game modes. Players should always be replicated,
+		- and the focus on replication should be the character and it's values for story, coop, and combat, instead of the standard replication from the client / server channel
+		- Add logic / guidelines for net relevancy to get an edge on performance without any of the drawbacks / bottlenecks, however this probably isn't optimal (and rather leisure) compared to other ways of actor replication, perhaps more for the player
+			
 
 	- Fix hit stun reactions to be precise for proper combat
 	- Finish combat / respawn logic
-	- Add logic to net serialize timestamps when players are attacked to avoid hit react durations to be inaccurate. This bases reaction time off of ping, and avoids replication delays for durations
-		- Benefits -> delayed attacks that land don't add to hit stun duration, preventing chained lag
-		- Drawbacks -> the usual lag above 400 ping will cause hit stun to not work properly.
-	- So long as attack reactions aren't quick, the elapsed duration can be calculated on the client safely without relying on the server's response from the duration being finished, allowing the client to predict durations in real time
 
 
-	- After finishing the initial combat logic add advanced ai state trees and squad combat logic
+
+	- Respawning
+		- Player respawn logic
+			- Respawn logic added to the gamestate to handle events and the actual respawning specific to the gamemode
+				- GameMode -> Respawn Events to character and inventory components -> Subclassed Respawn logic i.e. TDM, Singleplayer / Co op / etc.
+			- Events on the player for handling respawning, saving, and any other logic before the player respawns
+		- AI respawn logic
+			- Respawn logic specific to the game mode, and distribution of loot / experience handled on the server
+
+
+	- Combat
+		- Handle sending imperative logic across the net to prevent replication problems
+		- Fix hit stun to create proper hit reactions for smooth combat, and then adjust how hit stun durations are sent across the net to prevent replication causing delayed / chained lag
+		- Players and enemies, We need both thrilling and gimmick combat -> try honing it towards elden ring kind of combat and play with the combat / movement mechanics for this
+		- Add advanced ai combat using squads -> chained attacks, enemy behavior (phlanx, formations, reactions/rotations in enemies being hurt, ambushes, or other weird or random behaviors, and create a system to transition between each)
+
+
+	- HitStun
+		- Add logic to net serialize timestamps when players are attacked to avoid hit react durations to be inaccurate. This bases reaction time off of ping, and avoids replication delays for durations
+			- Benefits -> delayed attacks that land don't add to hit stun duration, preventing chained lag
+			- Drawbacks -> the usual lag above 400 ping will cause hit stun to not work properly.
+		- So long as attack reactions aren't quick, the elapsed duration can be calculated on the client safely without relying on the server's response from the duration being finished, allowing the client to predict durations in real time
+
+
+	- Saving logic
+		- Infrastructure for saving during events that's easily incorporated into different game modes, or during play.
+			- Net efficient for saving player state and item's added, adjusted, removed, or updated during the game
+
+
+	- Advanced AI logic
+		- After finishing the initial combat logic add advanced ai state trees and squad combat logic
+			- Default ai behavior for different npc's and enemy types, or a transition for each individual behavior
+			- Linked logic for squads, and autonomous behavior for specific interactions
+			- Other logic / events for enemies / allies logic, and add a framework for idle behavior and interaction for both story and random stuff
 	
 
 */
