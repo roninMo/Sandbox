@@ -32,7 +32,7 @@ bool USave_CombatData::SaveData_Implementation()
 	}
 
 	// CombatSaveData = CombatComponent->GetSaveInformation;
-	FName CharacterCombatSaveId = SaveComponent->GetSaveTypeIdReference(SaveState);
+	FName CharacterCombatSaveId = SaveComponent->GetSaveTypeIdReference(SaveType);
 	// UGameplayStatics::SaveGameToSlot(InventorySaveData, CharacterCombatSaveId, SplitScreenIndexReference);
 
 	return true;

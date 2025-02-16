@@ -33,7 +33,7 @@ protected:
 
 	/** The current save states for each of the categories we're saving. This prevents saving information that hasn't been replicated yet */
 	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="Saving") TMap<ESaveType, ESaveState> SaveStates;
-	// TODO: This might not be needed because this class is specific to the server, and the individual classes should handle retrieving / updating the server instnace
+	// TODO: This might not be needed because this class is specific to the server, and the individual classes should handle retrieving / updating the server instance
 
 	
 public:	

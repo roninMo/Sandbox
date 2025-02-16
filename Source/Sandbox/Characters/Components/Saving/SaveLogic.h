@@ -30,7 +30,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bAutoSave;
 
 	/** What this class is saving */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) ESaveType SaveState;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) ESaveType SaveType;
 	
 public:
 	USaveLogic();
@@ -55,11 +55,19 @@ public:
 	/** Retrieves a reference to the Save Component and the Character */
 	virtual bool GetCharacterAndSaveComponent(USaveComponent*& OutSaveComponent, ACharacterBase*& OutCharacter);
 
+	/**
+	 * Called during saving to determine the load flags to save with the object.
+	 * If false, this object will be discarded on clients
+	 *
+	 * @return	true if this object should be loaded on clients
+	 */
+	virtual bool NeedsLoadForClient() const override;
+	
 	/** Retrieves the id of this SaveLogic class */
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving|Utility") FGuid GetId() const;
 	virtual FGuid GetId_Implementation() const;
 
-	/** Retrieves the display name */
+	/** Retrieves the name */
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving|Utility") FName GetDisplayName() const;
 	virtual FName GetDisplayName_Implementation() const;
 
@@ -70,5 +78,6 @@ public:
 	/** Retrieves a reference to the type of information this class saves */
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving|Utility") ESaveType GetSaveType() const;
 	virtual ESaveType GetSaveType_Implementation() const;
+	
 	
 };

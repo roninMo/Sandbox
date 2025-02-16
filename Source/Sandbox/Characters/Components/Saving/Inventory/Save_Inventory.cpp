@@ -32,7 +32,7 @@ bool USave_Inventory::SaveData_Implementation()
 	}
 
 	F_InventorySaveInformation InventoryData = InventoryComponent->GetInventorySaveInformation();
-	FName CharacterInventorySaveId = SaveComponent->GetSaveTypeIdReference(SaveState);
+	FName CharacterInventorySaveId = SaveComponent->GetSaveTypeIdReference(SaveType);
 	// UGameplayStatics::SaveGameToSlot(InventorySaveData, CharacterInventorySaveId, SplitScreenIndexReference);
 
 	return true;

@@ -6,11 +6,15 @@
 #include "SaveComponent.h"
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Characters/CharacterBase.h"
+#include "Sandbox/Data/Enums/ESaveType.h"
 
 
 USaveLogic::USaveLogic()
 {
-	
+	Id = FGuid();
+	DisplayName = FName("Save_Information");
+	bAutoSave = false;
+	SaveType = ESaveType::MAX;
 }
 
 
@@ -19,13 +23,14 @@ bool USaveLogic::SaveData_Implementation()
 	return true;
 }
 
+
 bool USaveLogic::GetSaveComponent(USaveComponent*& OutSaveComponent)
 {
 	OutSaveComponent = Cast<USaveComponent>(GetOuter());
 	if (!OutSaveComponent)
 	{
 		UE_LOGFMT(SaveComponentLog, Error, "{0}() {1} failed to retrieve the save component while saving the {2}!",
-			*FString(__FUNCTION__), GetNameSafe(GetOuter()), *UEnum::GetValueAsString(SaveState)
+			*FString(__FUNCTION__), GetNameSafe(GetOuter()), *UEnum::GetValueAsString(SaveType)
 		);
 		return false;
 	}
@@ -33,13 +38,14 @@ bool USaveLogic::GetSaveComponent(USaveComponent*& OutSaveComponent)
 	return true;
 }
 
+
 bool USaveLogic::GetCharacterAndSaveComponent(USaveComponent*& OutSaveComponent, ACharacterBase*& OutCharacter)
 {
 	OutSaveComponent = Cast<USaveComponent>(GetOuter());
 	if (!OutSaveComponent)
 	{
 		UE_LOGFMT(SaveComponentLog, Error, "{0}() {1} failed to retrieve the save component while saving the {2}!",
-			*FString(__FUNCTION__), GetNameSafe(GetOuter()), *UEnum::GetValueAsString(SaveState)
+			*FString(__FUNCTION__), GetNameSafe(GetOuter()), *UEnum::GetValueAsString(SaveType)
 		);
 		return false;
 	}
@@ -60,4 +66,5 @@ bool USaveLogic::GetCharacterAndSaveComponent(USaveComponent*& OutSaveComponent,
 FGuid USaveLogic::GetId_Implementation() const { return Id; }
 FName USaveLogic::GetDisplayName_Implementation() const { return DisplayName; }
 bool USaveLogic::IsValidAutoSave_Implementation() const { return bAutoSave; }
-ESaveType USaveLogic::GetSaveType_Implementation() const { return SaveState; }
+ESaveType USaveLogic::GetSaveType_Implementation() const { return SaveType; }
+bool USaveLogic::NeedsLoadForClient() const { return false; }

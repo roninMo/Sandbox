@@ -27,7 +27,7 @@ bool USave_CameraSettings::SaveData_Implementation()
 	}
 
 	// CameraSettings = Character->GetCameraSettings;
-	FName CharacterCameraSettingsId = SaveComponent->GetSaveTypeIdReference(SaveState);
+	FName CharacterCameraSettingsId = SaveComponent->GetSaveTypeIdReference(SaveType);
 	// UGameplayStatics::SaveGameToSlot(CameraSettings, CharacterCameraSettingsId, SplitScreenIndexReference);
 
 	return true;
