@@ -33,7 +33,7 @@ struct F_QuestObjective
 	/** Just checks if the quest objective has been created */
 	virtual bool IsValid() const
 	{
-		return this->Name.IsNone();
+		return !this->Name.IsNone();
 	}
 
 	

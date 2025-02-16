@@ -338,6 +338,7 @@ Current Todo
 */
 
 
+class USaveComponent;
 enum class EHitStun : uint8;
 enum class EHitDirection : uint8;
 enum class EArmorSlot : uint8;
@@ -392,6 +393,8 @@ public:
 
 	// multiplayer notify logic that can occuring before / after spawning randomly
 
+
+	
 	
 	/**** Initialization ****/
 	///**
@@ -405,6 +408,7 @@ public:
 	
 
 
+	
 	//--------------------------------------------------------------------------------------------------------------------------------------//
 	// Networking																															//
 	//--------------------------------------------------------------------------------------------------------------------------------------//
@@ -473,6 +477,8 @@ public:
 	/**** NetDriver / Data Replication / ActorChannel ****/
 	// void FPacketSimulationSettings::LoadConfig(const TCHAR* OptionalQualifier)
 
+
+	
 	
 	/**** Actor.h ****/
 	///** Called right before receiving a bunch */
@@ -540,6 +546,8 @@ public:
 	// UReplicationGraph::PostServerReplicateStats(const FFrameReplicationStats& Stats)
 
 
+	
+
 	/**** Movement ****/
 	///** ReplicatedMovement struct replication event */
 	//UFUNCTION()
@@ -555,6 +563,8 @@ public:
 	//virtual void PostNetReceivePhysicState();
 
 
+
+	
 	/**** Camera ****/
 	///** Called when this actor becomes the given PlayerController's ViewTarget. Triggers the Blueprint event K2_OnBecomeViewTarget. */
 	//virtual void BecomeViewTarget(class APlayerController* PC);
@@ -572,6 +582,8 @@ public:
 	//virtual void PostRenderFor(class APlayerController* PC, class UCanvas* Canvas, FVector CameraPosition, FVector CameraDir);
 
 
+
+	
 	/**** Utility ****/
 	///** Getter for the cached world pointer, will return null if the actor is not actually spawned in a level */
 	//virtual UWorld* GetWorld() const override final;
@@ -778,7 +790,15 @@ public:
 	virtual UInventoryComponent* GetInventoryComponent() const;
 
 
+
 	
+//----------------------------------------------------------------------------------//
+// Movement																			//
+//----------------------------------------------------------------------------------//
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") TObjectPtr<USaveComponent> SaveComponent;
+
+
 	
 //-------------------------------------------------------------------------------------//
 // Montages																			   //
