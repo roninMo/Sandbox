@@ -6,6 +6,7 @@
 #include "SaveLogic.h"
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Characters/CharacterBase.h"
+#include "Sandbox/Characters/Components/Camera/CharacterCameraLogic.h"
 
 DEFINE_LOG_CATEGORY(SaveComponentLog);
 
@@ -164,13 +165,32 @@ void USaveComponent::LoadPlayerInformation()
 	if (Character)
 	{
 		// Attributes (if valid, send the ability system the saved stats)
+		UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
+		if (AbilitySystemComponent)
+		{
+			
+		}
 
 		// Combat
+		UCombatComponent* CombatComponent = Character->GetCombatComponent();
+		if (CombatComponent)
+		{
+			
+		}
 
 		// CameraSettings
+		ACharacterCameraLogic* CameraCharacter = Cast<ACharacterCameraLogic>(Character);
+		if (CameraCharacter)
+		{
+			
+		}
 
 		// Inventory
-
+		UInventoryComponent* InventoryComponent = Character->GetInventoryComponent();
+		if (InventoryComponent)
+		{
+			
+		}
 	}
 
 	// TODO: Add proper loading of the world / level on the server based on the owner of the lobby / game mode, and settings when the player opens / updates the settings

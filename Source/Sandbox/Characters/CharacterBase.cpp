@@ -19,6 +19,7 @@
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
 #include "Net/UnrealNetwork.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Game/MultiplayerGameMode.h"
 
 
 ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Super(
@@ -156,7 +157,7 @@ void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvat
 	// Blueprint function event
 	BP_OnInitAbilityActorInfo();
 	
-	UE_LOGFMT(LogTemp, Warning, "{0}::{1}() {2} OnInitAbilityActorInfo", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
+	UE_LOGFMT(GameModeLog, Warning, "{0}::{1}() {2} OnInitAbilityActorInfo", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
 }
 #pragma endregion 
 

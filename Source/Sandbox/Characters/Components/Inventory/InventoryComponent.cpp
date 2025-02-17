@@ -561,9 +561,12 @@ F_InventorySaveInformation UInventoryComponent::GetInventorySaveInformation()
 	if (!Armors.IsEmpty()) for (auto &[Id, Item] : Armors) InventoryItems.Add(CreateSavedItem(Item));
 	if (!Materials.IsEmpty()) for (auto &[Id, Item] : Materials) InventoryItems.Add(CreateSavedItem(Item));
 	if (!Notes.IsEmpty()) for (auto &[Id, Item] : Notes) InventoryItems.Add(CreateSavedItem(Item));
-	
+
+	// 
 	F_InventorySaveInformation SaveInformation;
 	SaveInformation.InventoryItems = InventoryItems;
+	SaveInformation.NetId = NetId;
+	SaveInformation.PlatformId = PlatformId;
 
 	return SaveInformation;
 }

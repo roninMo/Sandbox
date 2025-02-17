@@ -4,10 +4,20 @@
 #include "MultiplayerGameMode.h"
 
 #include "Logging/StructuredLog.h"
-#include "Sandbox/Characters/CharacterBase.h"
-#include "Sandbox/Characters/Components/Saving/SaveComponent.h"
 
 DEFINE_LOG_CATEGORY(GameModeLog);
+
+
+void AMultiplayerGameMode::RestartPlayer(AController* NewPlayer)
+{
+	Super::RestartPlayer(NewPlayer);
+}
+
+
+void AMultiplayerGameMode::RestartPlayerAtPlayerStart(AController* NewPlayer, AActor* StartSpot)
+{
+	Super::RestartPlayerAtPlayerStart(NewPlayer, StartSpot);
+}
 
 
 void AMultiplayerGameMode::PostLogin(APlayerController* NewPlayer)
