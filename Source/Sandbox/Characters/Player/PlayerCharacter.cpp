@@ -130,11 +130,11 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	// InputComponent = PlayerInputComponent;
 	
 	
-	if (!AbilitySystemComponent)
-	{
-		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(this);
-		if (!AbilitySystemComponent) return;
-	}
+	// if (!AbilitySystemComponent)
+	// {
+	// 	AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(this);
+	// 	if (!AbilitySystemComponent) return;
+	// }
 	
 	// Add the ability input bindings on the server (the input isn't ready on init actor info, (and it's vice versa on the client)
 	if (HasAuthority())

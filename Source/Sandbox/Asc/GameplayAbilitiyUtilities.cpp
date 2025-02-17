@@ -6,6 +6,7 @@
 #include "AbilitySystem.h"
 #include "InputAction.h"
 #include "AbilitySystemGlobals.h"
+#include "Characters/AbilitySystemPlayerState.h"
 #include "Logging/StructuredLog.h"
 #include "Sandbox/AI/Characters/Npc.h"
 #include "Sandbox/Characters/CharacterBase.h"
@@ -85,6 +86,22 @@ bool UGameplayAbilityUtilities::TryAddArmorData(UAbilitySystemComponent* InAbili
 UAbilitySystem* UGameplayAbilityUtilities::GetAbilitySystem(const AActor* Actor)
 {
 	UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Actor);
+
+	// Players with ability systems on the player state
+	if (!ASC && Cast<APawn>(Actor))
+	{
+		APawn* Pawn = Cast<APawn>(ASC);
+		AAbilitySystemPlayerState* PS = Cast<AAbilitySystemPlayerState>(Pawn->GetPlayerState());
+		ASC = PS ? PS->GetAbilitySystemComponent() : ASC;
+	}
+
+	// AI characters
+	if (!ASC && Cast<ANpc>(Actor))
+	{
+		ANpc* Npc = Cast<ANpc>(ASC);
+		ASC = Npc->GetAbilitySystem<UAbilitySystem>();
+	}
+
 	if (!ASC)
 	{
 		const ANpc* NpcCharacter = Cast<ANpc>(Actor);

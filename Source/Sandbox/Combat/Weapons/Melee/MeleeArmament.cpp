@@ -21,7 +21,7 @@ AMeleeArmament::AMeleeArmament()
 	ArmamentMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	ArmamentMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
 	ArmamentMesh->SetCollisionObjectType(ECC_Armaments);
-	// SetRootComponent(ArmamentMesh);
+	SetRootComponent(ArmamentMesh);
 
 	// Collision
 	ArmamentCollision = CreateDefaultSubobject<UCapsuleComponent>("Armament Collision");

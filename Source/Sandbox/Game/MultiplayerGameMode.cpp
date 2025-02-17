@@ -4,6 +4,8 @@
 #include "MultiplayerGameMode.h"
 
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Characters/CharacterBase.h"
+#include "Sandbox/Characters/Components/Saving/SaveComponent.h"
 
 DEFINE_LOG_CATEGORY(GameModeLog);
 
@@ -24,7 +26,24 @@ void AMultiplayerGameMode::HandleMatchIsWaitingToStart()
 
 void AMultiplayerGameMode::HandleMatchHasStarted()
 {
+	/* // Initialize the save component before begin play
+	for( FConstPlayerControllerIterator Iterator = GetWorld()->GetPlayerControllerIterator(); Iterator; ++Iterator )
+	{
+		if (const APlayerController* PlayerController = Iterator->Get())
+		{
+			ACharacterBase* Character = Cast<ACharacterBase>(PlayerController->GetCharacter());
+			if (!Character || !Character->GetSaveComponent()) continue;
+
+			// Initialize the save logic and retrieve the saved information on the server for replication
+			Character->GetSaveComponent()->InitializeSavingLogic();
+		}
+	}
+	*/
+	
 	Super::HandleMatchHasStarted();
+
+	// TODO: race condition with OnInitAbilityActorInfo and both adjust the settings / saved information of the character, we need to use ClientJoinSession for initializing server information at the beginning of games
+	//			- until then just use OnInitAbilityActorInfo()
 	PrintMessage("Handling MatchHasStarted");
 }
 
@@ -56,7 +75,7 @@ void AMultiplayerGameMode::PrintMessage(const FString& Message)
 	{
 		if (const APlayerController* PlayerController = Iterator->Get())
 		{
-			UE_LOGFMT(GameModeLog, Log, "{0}::{1}() {2} ->  {3}", *UEnum::GetValueAsString(PlayerController->GetLocalRole()), *FString(__FUNCTION__), GetNameSafe(PlayerController), Message);
+			UE_LOGFMT(GameModeLog, Warning, "{0}::{1}() {2} ->  {3}", *UEnum::GetValueAsString(PlayerController->GetLocalRole()), *FString(__FUNCTION__), GetNameSafe(PlayerController), Message);
 		}
 	}
 }

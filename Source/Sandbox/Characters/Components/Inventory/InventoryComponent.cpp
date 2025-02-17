@@ -625,7 +625,11 @@ void UInventoryComponent::Client_LoadSomeInventoryData_Implementation(const TArr
 }
 void UInventoryComponent::Client_LoadSaveDataCompleted_Implementation()
 {
-	if (GetCharacter()) UE_LOGFMT(InventoryLog, Warning, "LoadSaveData finished on the {0}, inventory items: {1}", *UEnum::GetValueAsString(Character->GetLocalRole()), ClientInventorySaveData.InventoryItems.Num());
+	if (!GetCharacter()) return;
+	if (bDebugSaveInformation || bDebugInventory_Client)
+	{
+		UE_LOGFMT(InventoryLog, Warning, "LoadSaveData finished on the {0}, inventory items: {1}", *UEnum::GetValueAsString(Character->GetLocalRole()), ClientInventorySaveData.InventoryItems.Num());
+	}
 	
 	// Update the CurrentInventorySaveData value in preparation for when the inventory is updated
 	CurrentInventorySaveData = ClientInventorySaveData;

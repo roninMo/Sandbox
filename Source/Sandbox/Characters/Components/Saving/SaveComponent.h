@@ -60,7 +60,7 @@ protected:
 	 * 
 	 * @note There still needs to be a duration between autosaving, not to be mistaken with events that automatically cause the game to save
 	 */
-	UFUNCTION(BlueprintCallable, Category="Saving") virtual void AutoSaveLogic();
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual void AutoSaveLogic();
 	
 	/**
 	 * Function called every frame on this ActorComponent. Override this function to implement custom logic to be executed every frame.
@@ -88,15 +88,16 @@ public:
 	 * Retrieves and initializes each of the classes for saving information on the server once the player has been spawned
 	 * 
 	 * @returns		true if all of the specified classes have been successfully created.
+	 * @note		Called when the match has began for replication during BeginPlay. Can also be called on client join with Online subsystems, and once the information has been replicated to AbilitySystems OnInitActorInfo()
 	 */
-	UFUNCTION(BlueprintCallable, Category="Saving|Initialization") virtual bool InitializeSavingLogic();
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Initialization") virtual bool InitializeSavingLogic();
 
 	/**
 	 * Handles the logic for tearing down the save states before deleting this component
 	 *
 	 * @note TODO: Check that EndPlay works when this component's actor is destroyed 
 	 */
-	UFUNCTION(BlueprintCallable, Category="Saving|Initialization") virtual void DeleteSaveStates();
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Initialization") virtual void DeleteSaveStates();
 
 	/**
 	 * Saves the actor's information using it's save configuration to capture relevant data, storing it specific to each actor's required way of saving information
@@ -104,16 +105,15 @@ public:
 	 * @param Saving					The type of information that's being saved		"the vibes you're killing todays"
 	 * @returns							True if the information has been successfully saved 
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Saving") virtual bool SaveData(const ESaveType Saving);
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual bool SaveData(const ESaveType Saving);
 
 	/**
 	 * Blueprint function for adding save functionality for specific events when saving information.
 	 *
-	 * @param Saving					The type of information that's being saved
+	 * @param SaveType					The type of information that's being saved
 	 * @param bSuccessfullySaved		True if the save function successfully saved the information
 	 */
-	UFUNCTION(BlueprintImplementableEvent, Category = "Saving", DisplayName = "On Save Data") void BP_SaveData(const ESaveType Saving, bool bSuccessfullySaved);
-
+	UFUNCTION(BlueprintImplementableEvent, Category = "Saving and Loading", DisplayName = "On Save Data") void BP_SaveData(const ESaveType SaveType, bool bSuccessfullySaved);
 	
 	/**
 	 * Returns whether it's valid to save specific information for a character. This prevents saving logic before it's been replicated
@@ -121,7 +121,7 @@ public:
 	 * @param InformationType			The type of information that we want to save
 	 * @returns							True if it's okay to save the information
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Saving") virtual bool IsValidToSave(const ESaveType InformationType);
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual bool IsValidToSave(const ESaveType InformationType);
 
 
 
@@ -130,7 +130,10 @@ public:
 // Loading																			//
 //----------------------------------------------------------------------------------//
 	/** Loads the player's saved information on the client once the client has joined the game and the player has spawned */
-	UFUNCTION(BlueprintCallable, Category = "Loading") virtual void LoadPlayerInformation();
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual void LoadPlayerInformation();
+
+	/** Blueprint function to load the player's saved information on the client once the client has joined the game and the player has spawned */
+	UFUNCTION(BlueprintImplementableEvent, Category = "Saving and Loading", DisplayName = "On Save Data") void BP_LoadPlayerInformation();
 
 
 
@@ -149,12 +152,12 @@ public:
 	 * @param Saving					The type of information we're saving
 	 * @returns							The id used for saving information to a specific slot
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Saving") virtual FName GetSaveTypeIdReference(const ESaveType Saving);
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual FName GetSaveTypeIdReference(const ESaveType Saving);
 	
 
 protected:
 	/** Retrieves the player's save slot id specific to their steam/console platform account for saving purposes */
-	UFUNCTION(BlueprintCallable, Category = "Saving|Utility") virtual FName GetPlayerNetId() const;
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual FName GetPlayerNetId() const;
 	
 		
 };

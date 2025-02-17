@@ -14,6 +14,7 @@
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "GameFramework/PlayerState.h"
 #include "Components/AnimInstance/AnimInstanceBase.h"
+#include "Components/Saving/SaveComponent.h"
 
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
 #include "Net/UnrealNetwork.h"
@@ -115,19 +116,26 @@ void ACharacterBase::OnRep_PlayerState()
 void ACharacterBase::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-
-	UE_LOGFMT(LogTemp, Log, "{0}::{1}() {2} PostInitializeComponents", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
+	// if (HasAuthority())
+	// {
+	// 	UE_LOGFMT(LogTemp, Warning, "{0}::{1}() {2} PostInitializeComponents on server, ready for replication", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
+	// }
 }
 
 
 void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 {
-	UE_LOGFMT(LogTemp, Log, "{0}::{1}() {2} OnInitAbilityActorInfo", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
-	
 	if (!AbilitySystemComponent)
 	{
 		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(this);
 		if (!AbilitySystemComponent) return;
+	}
+	
+	// Save component initialization
+	if (SaveComponent && HasAuthority())
+	{
+		SaveComponent->InitializeSavingLogic();
+		SaveComponent->LoadPlayerInformation();
 	}
 
 	// Add ability system state to the anim instance
@@ -143,9 +151,12 @@ void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvat
 	{
 		Inventory->SetPlayerId();
 	}
+
 	
 	// Blueprint function event
 	BP_OnInitAbilityActorInfo();
+	
+	UE_LOGFMT(LogTemp, Warning, "{0}::{1}() {2} OnInitAbilityActorInfo", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
 }
 #pragma endregion 
 

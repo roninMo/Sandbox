@@ -17,6 +17,22 @@ class SANDBOX_API AMultiplayerGameMode : public AGameMode
 	GENERATED_BODY()
 
 protected:
+
+	// Respawn logic
+
+	// Adventure / TDM / FoF -> subclassed infrastructure
+	
+	
+protected:
+	// Respawning
+	virtual void RestartPlayer(AController* NewPlayer) override;
+
+	virtual void RestartPlayerAtPlayerStart(AController* NewPlayer, AActor* StartSpot) override;
+
+//----------------------------------------------------------------------------------//
+// Match State Functions															//
+//----------------------------------------------------------------------------------//
+protected:
 	/** Called after a successful login.  This is the first place it is safe to call replicated functions on the PlayerController. */
 	virtual void PostLogin(APlayerController* NewPlayer) override;
 	

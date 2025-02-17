@@ -5,6 +5,7 @@
 
 #include "SaveLogic.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Characters/CharacterBase.h"
 
 DEFINE_LOG_CATEGORY(SaveComponentLog);
 
@@ -157,6 +158,24 @@ bool USaveComponent::IsValidToSave(const ESaveType InformationType)
 void USaveComponent::LoadPlayerInformation()
 {
 	// Notify components to load the player information once the player has initialized and is ready to save and load it's information
+
+	// Default Character logic -> TODO: prevent dependency problems
+	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	if (Character)
+	{
+		// Attributes (if valid, send the ability system the saved stats)
+
+		// Combat
+
+		// CameraSettings
+
+		// Inventory
+
+	}
+
+	// TODO: Add proper loading of the world / level on the server based on the owner of the lobby / game mode, and settings when the player opens / updates the settings
+
+	BP_LoadPlayerInformation();
 }
 
 
