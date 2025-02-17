@@ -44,6 +44,14 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving") bool SaveData();
 	virtual bool SaveData_Implementation();
 
+	/**
+	 * Returns whether it's valid to save specific information for a character. This allows for saving under certain conditions, and preventing saving information before it's been replicated
+	 *
+	 * @returns	True if it's okay to save the information
+	 */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving") bool IsValidToSave();
+	bool IsValidToSave_Implementation();
+
 
 //----------------------------------------------------------------------------------//
 // Utility																			//

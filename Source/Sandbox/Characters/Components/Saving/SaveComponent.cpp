@@ -5,7 +5,6 @@
 
 #include "SaveLogic.h"
 #include "Logging/StructuredLog.h"
-#include "Sandbox/Characters/CharacterBase.h"
 
 DEFINE_LOG_CATEGORY(SaveComponentLog);
 
@@ -125,7 +124,7 @@ void USaveComponent::DeleteSaveStates()
 }
 
 
-bool USaveComponent::Save(const ESaveType Saving)
+bool USaveComponent::SaveData(const ESaveType Saving)
 {
 	// Only save on the server
 	if (!GetOwner()->HasAuthority())
@@ -146,9 +145,18 @@ bool USaveComponent::Save(const ESaveType Saving)
 }
 
 
+bool USaveComponent::IsValidToSave(const ESaveType InformationType)
+{
+	if (!SavingLogic.Contains(InformationType)) return true;
+	if (!SavingLogic[InformationType]->IsValidToSave()) return false;
+
+	return true;
+}
+
+
 void USaveComponent::LoadPlayerInformation()
 {
-	// Notify components to load the player information once the player has initialized it's save logic and is ready to save and load it's information
+	// Notify components to load the player information once the player has initialized and is ready to save and load it's information
 }
 
 

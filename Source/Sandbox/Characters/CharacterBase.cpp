@@ -112,9 +112,18 @@ void ACharacterBase::OnRep_PlayerState()
 	}
 }
 
+void ACharacterBase::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	UE_LOGFMT(LogTemp, Log, "{0}::{1}() {2} PostInitializeComponents", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
+}
+
 
 void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 {
+	UE_LOGFMT(LogTemp, Log, "{0}::{1}() {2} OnInitAbilityActorInfo", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
+	
 	if (!AbilitySystemComponent)
 	{
 		AbilitySystemComponent = UGameplayAbilityUtilities::GetAbilitySystem(this);
@@ -247,6 +256,12 @@ void ACharacterBase::ConstructArmorInformation(USkeletalMeshComponent* MeshCompo
 
 		MeshComponent->SetLeaderPoseComponent(GetMesh());
 	}
+}
+
+
+USaveComponent* ACharacterBase::GetSaveComponent() const
+{
+	return SaveComponent;
 }
 
 

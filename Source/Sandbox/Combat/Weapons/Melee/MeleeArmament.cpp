@@ -17,11 +17,11 @@
 AMeleeArmament::AMeleeArmament()
 {
 	ArmamentMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("ArmamentMesh"));
-	// SetRootComponent(ArmamentMesh);
 	ArmamentMesh->SetGenerateOverlapEvents(false);
 	ArmamentMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	ArmamentMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
 	ArmamentMesh->SetCollisionObjectType(ECC_Armaments);
+	// SetRootComponent(ArmamentMesh);
 
 	// Collision
 	ArmamentCollision = CreateDefaultSubobject<UCapsuleComponent>("Armament Collision");

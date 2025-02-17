@@ -7,12 +7,14 @@
 #include "Sandbox/Data/Structs/SaveInformation.h"
 #include "SaveComponent.generated.h"
 
-class USaveLogic;
-enum class ESaveType : uint8;
-enum class ESaveState : uint8;
 DECLARE_LOG_CATEGORY_EXTERN(SaveComponentLog, Log, All);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSaveData, const ESaveType, Saving);
+
+class USaveLogic;
+enum class ESaveType : uint8;
+enum class ESaveState : uint8;
+
 
 
 
@@ -30,10 +32,6 @@ protected:
 
 	/** The current logic for saving the actor's information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="Saving") TMap<ESaveType, TObjectPtr<USaveLogic>> SavingLogic;
-
-	/** The current save states for each of the categories we're saving. This prevents saving information that hasn't been replicated yet */
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="Saving") TMap<ESaveType, ESaveState> SaveStates;
-	// TODO: This might not be needed because this class is specific to the server, and the individual classes should handle retrieving / updating the server instance
 
 	
 public:	
@@ -103,10 +101,10 @@ public:
 	/**
 	 * Saves the actor's information using it's save configuration to capture relevant data, storing it specific to each actor's required way of saving information
 	 *
-	 * @param Saving					The type of information that's being saved		~the vibes you're killing todays~
+	 * @param Saving					The type of information that's being saved		"the vibes you're killing todays"
 	 * @returns							True if the information has been successfully saved 
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Saving") virtual bool Save(const ESaveType Saving);
+	UFUNCTION(BlueprintCallable, Category = "Saving") virtual bool SaveData(const ESaveType Saving);
 
 	/**
 	 * Blueprint function for adding save functionality for specific events when saving information.
@@ -115,6 +113,15 @@ public:
 	 * @param bSuccessfullySaved		True if the save function successfully saved the information
 	 */
 	UFUNCTION(BlueprintImplementableEvent, Category = "Saving", DisplayName = "On Save Data") void BP_SaveData(const ESaveType Saving, bool bSuccessfullySaved);
+
+	
+	/**
+	 * Returns whether it's valid to save specific information for a character. This prevents saving logic before it's been replicated
+	 *
+	 * @param InformationType			The type of information that we want to save
+	 * @returns							True if it's okay to save the information
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Saving") virtual bool IsValidToSave(const ESaveType InformationType);
 
 
 

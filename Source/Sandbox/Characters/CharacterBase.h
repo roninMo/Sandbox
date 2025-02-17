@@ -300,6 +300,13 @@ Current Todo
 
 
 
+
+	Add logic to the game state for handling respawning, quest logic, and for initializing save logic for components during play
+
+	
+
+
+
 	- Respawning
 		- Player respawn logic
 			- Respawn logic added to the gamestate to handle events and the actual respawning specific to the gamemode
@@ -370,6 +377,10 @@ protected:
 	/** A stored reference to the character's ability system component */
 	UPROPERTY(BlueprintReadWrite, Category = "Ability System Component") TObjectPtr<UAbilitySystem> AbilitySystemComponent;
 
+	/** The character's save component. Saves information specific to each character in their own way */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving")
+	TObjectPtr<USaveComponent> SaveComponent;
+	
 
 public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
@@ -450,6 +461,7 @@ public:
 	// Adding / Removing objects to the replicated subobject list queues the objects and their values to be replicated based on their configuration accordingly
 	//		- Check that this happens when objects are spawned within the game
 	// AbilitySystem logic -> Everytime an ability is created / invoked, an instance created and replicated for multiplayer, and the actor channel's net replication logic handles everything else
+
 	
 	// /** The main function that will actually replicate actors. Called every server tick. */
 	// virtual int32 ServerReplicateActors(float DeltaSeconds) PURE_VIRTUAL(UReplicationDriver::ServerReplicateActors, return 0; );
@@ -460,7 +472,7 @@ public:
 	//		- Custom logic for what gets prioritized when (not necessary because the current system has plenty of benefits)
 
 	// /** Actual replication logic ( Actor-> pre-replication/replication variable preparations -> ActorChannel replication logic / handling */
-	//virtual void ReplicateActorsForConnection(UNetConnection* NetConnection, FPerConnectionActorInfoMap& ConnectionActorInfoMap, UNetReplicationGraphConnection* ConnectionManager, const uint32 FrameNum);
+	// virtual void ReplicateActorsForConnection(UNetConnection* NetConnection, FPerConnectionActorInfoMap& ConnectionActorInfoMap, UNetReplicationGraphConnection* ConnectionManager, const uint32 FrameNum);
 	
 	// /** Replicate this channel's actor differences. Returns how many bits were replicated (does not include non-bunch packet overhead) */
 	// int64 ReplicateActor();
@@ -625,6 +637,9 @@ protected:
 	/** PlayerState Replication Notification Callback */
 	virtual void OnRep_PlayerState() override;
 
+	/** Allow actors to initialize themselves on the C++ side after all of their components have been initialized, only called during gameplay */
+	virtual void PostInitializeComponents() override;
+
 	/**
 	 * Initialized the Abilities' ActorInfo - the structure that holds information about who we are acting on and who controls us. \n\n
 	 * 
@@ -762,7 +777,7 @@ public:
 public:
 	/** Retrieves the character to montage mapping. Used for retrieving the proper animations for different character skeletons */
 	UFUNCTION(BlueprintCallable, Category = "Animation|Utilities") virtual ECharacterSkeletonMapping GetCharacterSkeletonMapping() const;
-
+	
 
 	
 	
@@ -793,10 +808,15 @@ public:
 
 	
 //----------------------------------------------------------------------------------//
-// Movement																			//
+// Saving																			//
 //----------------------------------------------------------------------------------//
-protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") TObjectPtr<USaveComponent> SaveComponent;
+public:
+	/** Templated convenience version for retrieving the save component. */
+	template<class T> T* GetSaveComponent(void) const { return Cast<T>(GetSaveComponent()); }
+
+	/** Retrieves the save component */
+	UFUNCTION(BlueprintCallable, Category = "Saving", DisplayName = "Get Save Component")
+	virtual USaveComponent* GetSaveComponent() const;
 
 
 	

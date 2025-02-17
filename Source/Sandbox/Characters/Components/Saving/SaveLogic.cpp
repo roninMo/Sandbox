@@ -24,6 +24,15 @@ bool USaveLogic::SaveData_Implementation()
 }
 
 
+bool USaveLogic::IsValidToSave_Implementation()
+{
+	USaveComponent* SaveComponent;
+	if (!GetSaveComponent(SaveComponent)) return false;
+	
+	return true;
+}
+
+
 bool USaveLogic::GetSaveComponent(USaveComponent*& OutSaveComponent)
 {
 	OutSaveComponent = Cast<USaveComponent>(GetOuter());
