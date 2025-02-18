@@ -161,7 +161,7 @@ void USaveComponent::LoadPlayerInformation()
 {
 	// Notify components to load the player information once the player has initialized and is ready to save / load it's information
 
-	// Default Character logic -> TODO: prevent dependency problems
+	// TODO: Add singleplayer / multiplayer logic for handling saving and loading information from servers/subsystems
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
 	if (Character)
 	{
