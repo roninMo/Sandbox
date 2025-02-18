@@ -90,7 +90,7 @@ UAbilitySystem* UGameplayAbilityUtilities::GetAbilitySystem(const AActor* Actor)
 	// Players with ability systems on the player state
 	if (!ASC && Cast<APawn>(Actor))
 	{
-		APawn* Pawn = Cast<APawn>(ASC);
+		const APawn* Pawn = Cast<APawn>(Actor);
 		AAbilitySystemPlayerState* PS = Cast<AAbilitySystemPlayerState>(Pawn->GetPlayerState());
 		ASC = PS ? PS->GetAbilitySystemComponent() : ASC;
 	}
@@ -98,7 +98,7 @@ UAbilitySystem* UGameplayAbilityUtilities::GetAbilitySystem(const AActor* Actor)
 	// AI characters
 	if (!ASC && Cast<ANpc>(Actor))
 	{
-		ANpc* Npc = Cast<ANpc>(ASC);
+		const ANpc* Npc = Cast<ANpc>(Actor);
 		ASC = Npc->GetAbilitySystem<UAbilitySystem>();
 	}
 

@@ -1640,10 +1640,10 @@ void UCombatComponent::HandleCombatComponentInformation()
 
 	UE_LOGFMT(CombatComponentLog, Log, "// ");
 	UE_LOGFMT(CombatComponentLog, Log, "// Armors: ");
-	PrintItemInformation(Gauntlets, FString("Gauntlets"));
-	PrintItemInformation(Leggings, FString("Leggings"));
-	PrintItemInformation(Helm, FString("Helm"));
-	PrintItemInformation(Chest, FString("Chest"));
+	PrintItemInformation(Gauntlets, FString("Gauntlets			"));
+	PrintItemInformation(Leggings, FString("Leggings			"));
+	PrintItemInformation(Helm, FString("Helm				"));
+	PrintItemInformation(Chest, FString("Chest			"));
 
 	UE_LOGFMT(CombatComponentLog, Log, "//---------------------------------------------------------------------------/");
 	UE_LOGFMT(CombatComponentLog, Log, " ");
@@ -1652,7 +1652,7 @@ void UCombatComponent::HandleCombatComponentInformation()
 
 void UCombatComponent::PrintItemInformation(const F_Item& Item, const FString& Prefix)
 {
-	if (!Item.IsValid()) return;
+	// if (!Item.IsValid()) return;
 	UE_LOGFMT(CombatComponentLog, Log, "// {0} -> Id: {1}({2}), SortOrder: {3}", *Prefix, Item.Id.ToString(), *Item.DisplayName, Item.SortOrder);
 }
 #pragma endregion

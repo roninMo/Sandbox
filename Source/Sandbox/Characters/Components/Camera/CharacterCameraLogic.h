@@ -11,6 +11,8 @@ DECLARE_LOG_CATEGORY_EXTERN(CameraLog, Log, All);
 
 class UCameraComponent;
 class UTargetLockSpringArm;
+enum class ECameraOrientation : uint8;
+
 
 /**
  * First and Third person camera logic for players in the game. With blueprint and events for handling transitions and target locking
@@ -68,6 +70,12 @@ protected:
 
 	/** This is a handle for camera transition delay for remote procedure calls, to prevent network issues. This helps the server camera rotations be in sync with the client. */
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "Camera|Networking") FTimerHandle CameraTransitionDelayHandle;
+
+	/** This is true if the player has recently tried to orientation between cameras, only edit this during the camera orientation handles */
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "Camera|Networking") bool bCameraOrientationDelay;
+
+	/** This is a handle for camera orientation delay for remote procedure calls, to prevent network issues. This helps the server camera rotations be in sync with the client. */
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "Camera|Networking") FTimerHandle CameraOrientationDelayHandle;
 
 	/** The current camera offset, updated by TargetCameraOffset value during camera orientation transitions. Don't edit this directly, just let it do it's own thing */
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "Camera|Networking") FVector CurrentCameraOffset;
@@ -205,7 +213,7 @@ protected:
 	 * It also handles target locking, but not necessarily sorting and updating the targets.
 	 * @remarks There's handles to prevent this from constantly being invoked, the purpose is to keep the camera rotation on the server in sync with the character
 	 */
-	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Camera|Style") virtual void Server_SetCameraStyle(FName Style);
+	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Camera|Style") virtual void Server_SetCameraStyle(const FName Style);
 	// TODO: First/Third person values should be sent to the server when a character becomes net relevant, I don't know if this still holds true for characters who join late (OnRep_Notify fixes this)
 	
 	/** Sets Camera transition delay to false to allow you to transition between camera styles */
@@ -229,6 +237,26 @@ public:
 	void BP_OnCameraOrientationSet();
 
 	
+protected:
+	/** Returns true if there's no input replication delay for transitioning between different camera orientations */
+	UFUNCTION(BlueprintCallable, Category = "Camera|Orientation") virtual bool IsAbleToActivateCameraOrientation();
+	
+	/** Blueprint function for preventing the player from adjusting the camera orientation during specific events */
+	UFUNCTION(BlueprintImplementableEvent, Category="Camera|Orientation", meta = (DisplayName = "Should Prevent Camera Orientation Adjustments"))
+	bool BP_ShouldPreventCameraOrientationAdjustments();
+	
+	/**
+	 * This function is called on the server to update the camera state of the character based on the Camera orientation.
+	 * It also handles target locking, but not necessarily sorting and updating the targets.
+	 * @remarks There's handles to prevent this from constantly being invoked, the purpose is to keep the camera rotation on the server in sync with the character
+	 */
+	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Camera|Orientation") virtual void Server_SetCameraOrientation(const ECameraOrientation Orientation);
+	
+	/** Sets Camera transition delay to false to allow you to transition between camera styles */
+	UFUNCTION(BlueprintCallable, Category = "Camera|Orientation") virtual void ResetCameraOrientationDelay();
+
+
+public:
 	/**
 	 * Third person style movement where the character turns specific to where they're walking (bOrientRotationToMovement && !bUseControllerRotationYaw)
 	 * @remarks If you update the character's rotation based on the player movement or the camera, you also need to update the movement component on whether it should allow air strafing

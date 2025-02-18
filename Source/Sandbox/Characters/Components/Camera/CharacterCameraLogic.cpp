@@ -157,7 +157,7 @@ bool ACharacterCameraLogic::IsAbleToActivateCameraTransition()
 }
 
 
-void ACharacterCameraLogic::OnRep_CameraStyle() { OnCameraStyleSet(); }
+void ACharacterCameraLogic::OnRep_CameraStyle() { /* Just for initial replication */ OnCameraStyleSet(); /**/ }
 void ACharacterCameraLogic::OnCameraStyleSet()
 {
 	// Camera rotations
@@ -197,8 +197,37 @@ void ACharacterCameraLogic::OnCameraStyleSet()
 
 void ACharacterCameraLogic::SetCameraOrientation_Implementation(const ECameraOrientation Orientation)
 {
+	if (IsAbleToActivateCameraTransition())
+	{
+		CameraOrientation = Orientation;
+		Server_SetCameraOrientation(CameraOrientation);
+		OnCameraOrientationSet();
+	}
+}
+
+
+void ACharacterCameraLogic::Server_SetCameraOrientation_Implementation(const ECameraOrientation Orientation)
+{
 	CameraOrientation = Orientation;
 	OnCameraOrientationSet();
+}
+
+
+void ACharacterCameraLogic::ResetCameraOrientationDelay() { bCameraOrientationDelay = false; }
+bool ACharacterCameraLogic::IsAbleToActivateCameraOrientation()
+{
+	if (bCameraOrientationDelay) return false;
+	if (BP_ShouldPreventCameraOrientationAdjustments()) return false;
+		
+	GetWorldTimerManager().SetTimer(
+		CameraOrientationDelayHandle,
+		this,
+		&ACharacterCameraLogic::ResetCameraOrientationDelay,
+		FMath::Clamp(InputPressed_ReplicationInterval, 0.2, 1.0),
+		false
+	);
+	bCameraOrientationDelay = true;
+	return true;
 }
 
 

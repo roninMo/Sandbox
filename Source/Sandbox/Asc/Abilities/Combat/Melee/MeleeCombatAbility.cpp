@@ -560,7 +560,7 @@ void UMeleeCombatAbility::OnEndAttackFrames_Implementation(bool bRightHand)
 void UMeleeCombatAbility::OnOverlappedTarget_Implementation(const FGameplayAbilityTargetDataHandle& TargetData, UAbilitySystem* TargetAsc)
 {
 	const FGameplayAbilityActivationInfo ActivationInfo = GetCurrentActivationInfo();
-	if (!(IsPredictingClient() || HasAuthority(&ActivationInfo)))
+	if (!(IsPredictingClient() || HasAuthority(&ActivationInfo))) // TODO: This is still happening for simulated proxies
 	{
 		return;
 	}
