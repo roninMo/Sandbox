@@ -197,7 +197,7 @@ void ACharacterCameraLogic::OnCameraStyleSet()
 
 void ACharacterCameraLogic::SetCameraOrientation_Implementation(const ECameraOrientation Orientation)
 {
-	if (IsAbleToActivateCameraTransition())
+	if (IsAbleToActivateCameraOrientation())
 	{
 		CameraOrientation = Orientation;
 		Server_SetCameraOrientation(CameraOrientation);
