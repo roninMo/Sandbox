@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Sandbox/Data/Enums/ESaveType.h"
 #include "Sandbox/Data/Structs/SaveInformation.h"
 #include "SaveComponent.generated.h"
 
@@ -166,6 +167,9 @@ public:
 protected:
 	/** Retrieves the player's save slot id specific to their steam/console platform account for saving purposes */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual FName GetPlayerNetId() const;
+
+	/** Returns the save section for the player's save information */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual FString GetSaveTypeName(const ESaveType SaveType) const;
 	
 		
 };

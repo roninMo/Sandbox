@@ -62,14 +62,17 @@ void APlayerCharacter::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAv
 	/**** Character base attributes and abilities ****/
 	AbilityData = GetAbilityInformationFromTable(AbilityDataId);
 	AttributeData = GetAttributeInformationFromTable(AttributeInformationId);
-	
-	if (AbilityData)
+
+	if (HasAuthority())
 	{
-		AbilityData->AddAbilityDataToCharacter(AbilitySystemComponent, AbilityDataHandle);
-	}
-	if (AttributeData)
-	{
-		AttributeData->AddAttributesToCharacter(AbilitySystemComponent, AttributeDataHandle);
+		if (AbilityData)
+		{
+			AbilityData->AddAbilityDataToCharacter(AbilitySystemComponent, AbilityDataHandle);
+		}
+		if (AttributeData)
+		{
+			AttributeData->AddAttributesToCharacter(AbilitySystemComponent, AttributeDataHandle);
+		}
 	}
 
 

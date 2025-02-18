@@ -10,13 +10,13 @@ void USaved_CameraSettings::SaveFromCameraCharacter(ACharacter* Character)
 	ACharacterCameraLogic* CameraCharacter = Cast<ACharacterCameraLogic>(Character);
 	if (!CameraCharacter) return;
 
-	CameraStyle = CameraCharacter->GetCameraStyle();
-	CameraOrientation = CameraCharacter->GetCameraOrientation();
+	CameraStyle = CameraCharacter->Execute_GetCameraStyle(CameraCharacter);
+	CameraOrientation = CameraCharacter->Execute_GetCameraOrientation(CameraCharacter);
 
 	// Retrieve the CDO
 	if (CameraStyle == CameraStyle_TargetLocking)
 	{
-		CameraStyle = ACharacterCameraLogic::StaticClass()->GetDefaultObject<ACharacterCameraLogic>()->GetCameraStyle();
+		CameraStyle = ACharacterCameraLogic::StaticClass()->GetDefaultObject<ACharacterCameraLogic>()->GetCameraStyle(); // TODO: Retrieve the blueprint's default CDO values
 	}
 
 	// TODO: add other custom camera settings

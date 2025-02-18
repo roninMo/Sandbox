@@ -42,7 +42,7 @@ public:
 
 	/**
 	 * Handles saving the data specific to the owning actor. \n\n
-	 * Subclass this logic for saving information specific to a npc, character, and their varying game modes etc.
+	 * Subclass this logic for saving information specific to a npc, character, and their varying game modes and subsystems etc.
 	 *
 	 * @returns	True if it successfully saved the information for the npc / player
 	 */

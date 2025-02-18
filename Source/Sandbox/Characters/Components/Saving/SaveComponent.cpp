@@ -4,11 +4,8 @@
 #include "SaveComponent.h"
 
 #include "SaveLogic.h"
-#include "Kismet/GameplayStatics.h"
 #include "Logging/StructuredLog.h"
-#include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Characters/CharacterBase.h"
-#include "Sandbox/Characters/Components/Camera/CharacterCameraLogic.h"
 #include "Sandbox/Data/Enums/ESaveType.h"
 
 DEFINE_LOG_CATEGORY(SaveComponentLog);
@@ -114,6 +111,7 @@ bool USaveComponent::InitializeSaveLogic()
 	return true;
 }
 
+
 void USaveComponent::DeleteSaveStates()
 {
 	// TODO: Check that it's safe to save while pending construction!
@@ -165,42 +163,36 @@ void USaveComponent::LoadPlayerInformation()
 
 	// Default Character logic -> TODO: prevent dependency problems
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
+	USaveLogic* SaveLogic = nullptr;
 	if (Character)
 	{
+
 		// Attributes (if valid, send the ability system the saved stats)
-		UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
-		if (SaveLogicComponents.Contains(ESaveType::Attributes)
-			&& !PreventingLoadingFor(ESaveType::Attributes)
-			&& AbilitySystemComponent)
+		if (SaveLogicComponents.Contains(ESaveType::Attributes) && !PreventingLoadingFor(ESaveType::Attributes))
 		{
-			SaveLogicComponents[ESaveType::Attributes]->LoadData();
+			SaveLogic = SaveLogicComponents[ESaveType::Attributes];
+			SaveLogic->LoadData();
 		}
 
 		// Inventory (load the inventory and send the information to the clients)
-		UInventoryComponent* InventoryComponent = Character->GetInventoryComponent();
-		if (SaveLogicComponents.Contains(ESaveType::Inventory)
-			&& !PreventingLoadingFor(ESaveType::Inventory)
-			&& InventoryComponent)
+		if (SaveLogicComponents.Contains(ESaveType::Inventory) && !PreventingLoadingFor(ESaveType::Inventory))
 		{
-			SaveLogicComponents[ESaveType::Inventory]->LoadData();
+			SaveLogic = SaveLogicComponents[ESaveType::Inventory];
+			SaveLogic->LoadData();
 		}
 		
 		// Combat Component (equip weapons and armor)
-		UCombatComponent* CombatComponent = Character->GetCombatComponent();
-		if (SaveLogicComponents.Contains(ESaveType::Combat)
-			&& !PreventingLoadingFor(ESaveType::Combat)
-			&& CombatComponent)
+		if (SaveLogicComponents.Contains(ESaveType::Combat) && !PreventingLoadingFor(ESaveType::Combat))
 		{
-			SaveLogicComponents[ESaveType::Combat]->LoadData();
+			SaveLogic = SaveLogicComponents[ESaveType::Combat];
+			SaveLogic->LoadData();
 		}
 
 		// Camera Settings (adjust camera settings on server, allow character to handle replication)
-		ACharacterCameraLogic* CameraCharacter = Cast<ACharacterCameraLogic>(Character);
-		if (SaveLogicComponents.Contains(ESaveType::CameraSettings)
-			&& !PreventingLoadingFor(ESaveType::CameraSettings)
-			&& CameraCharacter)
+		if (SaveLogicComponents.Contains(ESaveType::CameraSettings) && !PreventingLoadingFor(ESaveType::CameraSettings))
 		{
-			SaveLogicComponents[ESaveType::CameraSettings]->LoadData();
+			SaveLogic = SaveLogicComponents[ESaveType::CameraSettings];
+			SaveLogic->LoadData();
 		}
 	}
 
@@ -230,4 +222,15 @@ FName USaveComponent::GetPlayerNetId() const
 	 *		and we shouldn't really factor in the network id for saving, and still need another unique reference to each player that's on their console, and perhaps factor out the platform id
 	 */
 	return FName();
+}
+
+
+FString USaveComponent::GetSaveTypeName(const ESaveType SaveType) const
+{
+	if (SaveType == ESaveType::World) return "World";
+	if (SaveType == ESaveType::Inventory) return "Inventory";
+	if (SaveType == ESaveType::Combat) return "Combat";
+	if (SaveType == ESaveType::Settings) return "Settings";
+	if (SaveType == ESaveType::CameraSettings) return "CameraSettings";
+	return "SaveType";
 }

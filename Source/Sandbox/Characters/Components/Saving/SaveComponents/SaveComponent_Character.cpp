@@ -9,7 +9,7 @@ FString USaveComponent_Character::GetSaveSlotIdReference(const ESaveType Saving)
 	// return Super::GetSaveIdReference(Saving);
 	return GetPlayerNetId().ToString()
 		.Append(FString("_"))
-		.Append(*UEnum::GetValueAsString(Saving)
+		.Append(GetSaveTypeName(Saving)
 	);
 }
 
