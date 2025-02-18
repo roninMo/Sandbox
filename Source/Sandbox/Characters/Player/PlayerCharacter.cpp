@@ -34,7 +34,7 @@ APlayerCharacter::APlayerCharacter(const FObjectInitializer& ObjectInitializer) 
 
 	// Inventory Component
 	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
-
+s
 	// Inventory Component
 	SaveComponent = CreateDefaultSubobject<USaveComponent_Character>(TEXT("Save Component"));
 
@@ -107,6 +107,7 @@ void APlayerCharacter::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAv
 	
 	// Camera
 	InitCameraSettings();
+	Execute_SetCameraStyle(this, Execute_GetCameraStyle(this)); // Server / Client camera location discrepancy lag fix
 
 	
 	/**** Controller specific logic ****/
