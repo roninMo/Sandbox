@@ -62,7 +62,7 @@ void USaveComponent::AutoSaveLogic()
 void USaveComponent::TickComponent(const float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	AutoSaveLogic();
+	// AutoSaveLogic();
 }
 
 
@@ -104,7 +104,7 @@ bool USaveComponent::InitializeSaveLogic()
 
 		USaveLogic* SaveLogic = NewObject<USaveLogic>(this, Configuration.SaveLogicClass, Configuration.DisplayName);
 		check(SaveLogic);
-
+		SaveLogic->SetSaveLogicInformation(Configuration);
 		SaveLogicComponents.Add(SaveState, SaveLogic);
 
 	}
@@ -122,7 +122,7 @@ void USaveComponent::DeleteSaveStates()
 	{
 		if (!SaveLogic) continue;
 		SaveLogic->SaveData();
-		SaveLogic->BeginDestroy();
+		SaveLogic->ConditionalBeginDestroy();
 	}
 
 	SaveLogicComponents.Empty();

@@ -52,7 +52,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bSaveDuringEndPlay = true;
 
 	/** What this class is saving */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) ESaveType ESaveType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) ESaveType SaveType;
 	
 	/** Whether the save information should be saved during autosaving */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bAutoSave = true;

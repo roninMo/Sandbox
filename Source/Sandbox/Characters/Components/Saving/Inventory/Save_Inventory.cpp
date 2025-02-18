@@ -41,8 +41,7 @@ bool USave_Inventory::SaveData_Implementation()
 	
 	SaveInformation->SaveInformation = InventoryComponent->GetInventorySaveInformation();
 	FString InventorySaveSlot = SaveComponent->GetSaveSlotIdReference(SaveType);
-	UGameplayStatics::SaveGameToSlot(SaveInformation, InventorySaveSlot, 0);
-	return true;
+	return UGameplayStatics::SaveGameToSlot(SaveInformation, InventorySaveSlot, 0);
 }
 
 bool USave_Inventory::LoadData_Implementation()

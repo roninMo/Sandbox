@@ -78,6 +78,18 @@ bool USaveLogic::GetCharacterAndSaveComponent(USaveComponent*& OutSaveComponent,
 }
 
 
+void USaveLogic::SetSaveLogicInformation(const F_SaveLogicConfiguration& Data)
+{
+	if (!Data.IsValid()) return;
+	
+	Id = Data.Id;
+	DisplayName = Data.DisplayName;
+	bSaveDuringEndPlay = Data.bSaveDuringEndPlay;
+	SaveType = Data.SaveType;
+	bAutoSave = Data.bAutoSave;
+}
+
+
 FGuid USaveLogic::GetId_Implementation() const { return Id; }
 FName USaveLogic::GetDisplayName_Implementation() const { return DisplayName; }
 bool USaveLogic::IsValidAutoSave_Implementation() const { return bAutoSave; }

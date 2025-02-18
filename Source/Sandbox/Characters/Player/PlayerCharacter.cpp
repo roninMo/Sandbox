@@ -17,7 +17,7 @@
 #include "Sandbox/Characters/Components/Inventory/InventoryComponent.h"
 #include "Sandbox/Characters/Components/Periphery/PeripheryComponent.h"
 #include "Sandbox/Characters/Components/Camera/TargetLockSpringArm.h"
-#include "Sandbox/Characters/Components/Saving/SaveComponent.h"
+#include "Sandbox/Characters/Components/Saving/SaveComponents/SaveComponent_Character.h"
 #include "Sandbox/Hud/Hud/PlayerHud.h"
 
 
@@ -36,7 +36,7 @@ APlayerCharacter::APlayerCharacter(const FObjectInitializer& ObjectInitializer) 
 	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
 
 	// Inventory Component
-	SaveComponent = CreateDefaultSubobject<USaveComponent>(TEXT("Save Component"));
+	SaveComponent = CreateDefaultSubobject<USaveComponent_Character>(TEXT("Save Component"));
 
 	// Combat Component
 	CombatComponent = CreateDefaultSubobject<UCombatComponent>(TEXT("Combat Component"));
@@ -63,28 +63,36 @@ void APlayerCharacter::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAv
 	AbilityData = GetAbilityInformationFromTable(AbilityDataId);
 	AttributeData = GetAttributeInformationFromTable(AttributeInformationId);
 	
-	// if (AbilityData)
-	// {
-	// 	AbilityData->AddAbilityDataToCharacter(AbilitySystemComponent, AbilityDataHandle);
-	// }
-	// if (AttributeData)
-	// {
-	// 	AttributeData->AddAttributesToCharacter(AbilitySystemComponent, AttributeDataHandle);
-	// }
+	if (AbilityData)
+	{
+		AbilityData->AddAbilityDataToCharacter(AbilitySystemComponent, AbilityDataHandle);
+	}
+	if (AttributeData)
+	{
+		AttributeData->AddAttributesToCharacter(AbilitySystemComponent, AttributeDataHandle);
+	}
 
 
 	/**** Character Component logic ****/
+	// Inventory component initialization
+	if (Inventory)
+	{
+		Inventory->SetPlayerId();
+	}
+	
 	// Periphery component initialization
 	if (Peripheries)
 	{
 		Peripheries->InitPeripheryInformation();
 	}
 
-	// Inventory component initialization
-	if (Inventory)
+	// Save component initialization
+	if (SaveComponent && HasAuthority())
 	{
-		Inventory->SetPlayerId();
+		SaveComponent->InitializeSaveLogic();
+		SaveComponent->LoadPlayerInformation();
 	}
+
 	
 	// Add ability system state to the anim instance
 	SetCharacterMontages();
@@ -99,23 +107,25 @@ void APlayerCharacter::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAv
 
 	
 	/**** Controller specific logic ****/
-	APlayerController* PlayerController = GetController<APlayerController>();
-	if (IsLocallyControlled() && PlayerController)
+	if (IsLocallyControlled())
 	{
-		// Initialize the player hud
-		APlayerHud* Hud = PlayerController->GetHUD<APlayerHud>();
-		if (Hud)
-		{
-			AAbilitySystemPlayerState* AscPlayerState = GetPlayerState<AAbilitySystemPlayerState>();
-			UMMOAttributeSet* Attributes = AscPlayerState ? AscPlayerState->GetAttributeSet<UMMOAttributeSet>() : nullptr;
-			Hud->InitializeHud(this, PlayerController, AscPlayerState, AbilitySystemComponent, Attributes);
-		}
-
 		// Add the ability input bindings on the client (the ability system isn't ready when the input is normally configured)
 		UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
 		AbilitySystemComponent->BindAbilityActivationToEnhancedInput(EnhancedInputComponent, AbilityInputActions);
+		
+		APlayerController* PlayerController = GetController<APlayerController>();
+		if (PlayerController)
+		{
+			// Initialize the player hud
+			APlayerHud* Hud = PlayerController->GetHUD<APlayerHud>();
+			if (Hud)
+			{
+				AAbilitySystemPlayerState* AscPlayerState = GetPlayerState<AAbilitySystemPlayerState>();
+				UMMOAttributeSet* Attributes = AscPlayerState ? AscPlayerState->GetAttributeSet<UMMOAttributeSet>() : nullptr;
+				Hud->InitializeHud(this, PlayerController, AscPlayerState, AbilitySystemComponent, Attributes);
+			}
+		}
 	}
-
 	
 	// Blueprint function event
 	BP_OnInitAbilityActorInfo();

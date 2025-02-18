@@ -53,7 +53,7 @@ protected:
 	
 	/**** References and stored information ****/
 	/** The client's Net Id */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Inventory") int32 NetId;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Inventory") int32 NetId = -1;
 
 	/** The Id of the current machine of the player  */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Inventory") FString PlatformId;

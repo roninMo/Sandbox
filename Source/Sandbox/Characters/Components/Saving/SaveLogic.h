@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Sandbox/Data/Structs/SaveInformation.h"
 #include "UObject/NoExportTypes.h"
 #include "SaveLogic.generated.h"
 
@@ -85,7 +86,10 @@ public:
 	 * @return	true if this object should be loaded on clients
 	 */
 	virtual bool NeedsLoadForClient() const override;
-	
+
+	/** Sets the SaveLogic's information from a F_SaveLogicConfiguration */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual void SetSaveLogicInformation(const F_SaveLogicConfiguration& Data);
+
 	/** Retrieves the id of this SaveLogic class */
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading|Utility") FGuid GetId() const;
 	virtual FGuid GetId_Implementation() const;

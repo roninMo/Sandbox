@@ -582,6 +582,12 @@ void UInventoryComponent::LoadInventoryInformation(const F_InventorySaveInformat
 			);
 		ListSavedInventory(SaveInformation);
 	}
+
+	// If we haven't initialized the inventory yet, retrieve it's network id
+	if (NetId == -1 || PlatformId.IsEmpty())
+	{
+		SetPlayerId();
+	}
 	
 	// Server logic
 	CurrentInventorySaveData = SaveInformation;

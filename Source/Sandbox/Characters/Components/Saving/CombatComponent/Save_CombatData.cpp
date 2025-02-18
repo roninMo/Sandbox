@@ -40,8 +40,7 @@ bool USave_CombatData::SaveData_Implementation()
 	// Save the character's camera settings
 	SaveInformation->SaveFromCombatComponent(CombatComponent);
 	FString CombatSaveSlot = SaveComponent->GetSaveSlotIdReference(SaveType);
-	UGameplayStatics::SaveGameToSlot(SaveInformation, CombatSaveSlot, 0);
-	return true;
+	return UGameplayStatics::SaveGameToSlot(SaveInformation, CombatSaveSlot, 0);
 }
 
 bool USave_CombatData::LoadData_Implementation()
