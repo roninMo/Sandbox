@@ -34,19 +34,19 @@ void USaveComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 void USaveComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	// InitializeSavingLogic should be called during the game mode's PostLogin() function. The player state and controller is valid then, however it won't allow for remote procedure calls yet
+	// InitializeSaveLogic should be called during the game mode's PostLogin() function. The player state and controller is valid then, however it won't allow for remote procedure calls yet
 	//		That's okay because we just want the save information valid before/during when the player joins the game 
 }
 
 
 void USaveComponent::AutoSaveLogic()
 {
-	if (SavingLogic.IsEmpty())
+	if (SaveLogicComponents.IsEmpty())
 	{
 		return;
 	}
 
-	for (auto &[SaveState, SaveLogic] : SavingLogic)
+	for (auto &[SaveState, SaveLogic] : SaveLogicComponents)
 	{
 		if (!SaveLogic) continue;
 
@@ -66,7 +66,7 @@ void USaveComponent::TickComponent(const float DeltaTime, ELevelTick TickType, F
 }
 
 
-bool USaveComponent::InitializeSavingLogic()
+bool USaveComponent::InitializeSaveLogic()
 {
 	// Sanity checks
 	if (!GetOwner())
@@ -84,7 +84,7 @@ bool USaveComponent::InitializeSavingLogic()
 	}
 
 	// Initialization has already been called
-	if (!SavingLogic.IsEmpty())
+	if (!SaveLogicComponents.IsEmpty())
 	{
 		return true;
 	}
@@ -102,10 +102,10 @@ bool USaveComponent::InitializeSavingLogic()
 			continue; // return false;
 		}
 
-		USaveLogic* SaveLogic = NewObject<USaveLogic>(this, Configuration.SaveLogicClass, Configuration.Name);
+		USaveLogic* SaveLogic = NewObject<USaveLogic>(this, Configuration.SaveLogicClass, Configuration.DisplayName);
 		check(SaveLogic);
 
-		SavingLogic.Add(SaveState, SaveLogic);
+		SaveLogicComponents.Add(SaveState, SaveLogic);
 
 	}
 	// TODO: Handle loading information or state to prevent saving until the stored information has been properly replicated to the clients
@@ -118,14 +118,14 @@ void USaveComponent::DeleteSaveStates()
 {
 	// TODO: Check that it's safe to save while pending construction!
 	// Save and delete the save data
-	for (auto &[SaveState, SaveLogic] : SavingLogic)
+	for (auto &[SaveState, SaveLogic] : SaveLogicComponents)
 	{
 		if (!SaveLogic) continue;
 		SaveLogic->SaveData();
 		SaveLogic->BeginDestroy();
 	}
 
-	SavingLogic.Empty();
+	SaveLogicComponents.Empty();
 }
 
 
@@ -138,13 +138,13 @@ bool USaveComponent::SaveData(const ESaveType Saving)
 	}
 
 	// If this actor has logic for saving this information
-	if (!SavingLogic.Contains(Saving))
+	if (!SaveLogicComponents.Contains(Saving))
 	{
 		return false;
 	}
 
 	// Save the information, handle additional logic in blueprint
-	bool bSuccessfullySaved = SavingLogic[Saving]->SaveData();
+	bool bSuccessfullySaved = SaveLogicComponents[Saving]->SaveData();
 	BP_SaveData(Saving, bSuccessfullySaved);
 	return bSuccessfullySaved;
 }
@@ -152,8 +152,8 @@ bool USaveComponent::SaveData(const ESaveType Saving)
 
 bool USaveComponent::IsValidToSave(const ESaveType InformationType)
 {
-	if (!SavingLogic.Contains(InformationType) || PreventSaving.Contains(InformationType)) return false;
-	if (!SavingLogic[InformationType]->IsValidToSave()) return false;
+	if (!SaveLogicComponents.Contains(InformationType)) return false;
+	if (!SaveLogicComponents[InformationType]->IsValidToSave()) return false;
 
 	return true;
 }
@@ -169,44 +169,51 @@ void USaveComponent::LoadPlayerInformation()
 	{
 		// Attributes (if valid, send the ability system the saved stats)
 		UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
-		if (SavingLogic.Contains(ESaveType::Attributes)
-			&& !PreventLoading.Contains(ESaveType::Attributes)
+		if (SaveLogicComponents.Contains(ESaveType::Attributes)
+			&& !PreventingLoadingFor(ESaveType::Attributes)
 			&& AbilitySystemComponent)
 		{
-			SavingLogic[ESaveType::Attributes]->LoadData();
+			SaveLogicComponents[ESaveType::Attributes]->LoadData();
 		}
 
-		// Inventory
+		// Inventory (load the inventory and send the information to the clients)
 		UInventoryComponent* InventoryComponent = Character->GetInventoryComponent();
-		if (SavingLogic.Contains(ESaveType::Inventory)
-			&& !PreventLoading.Contains(ESaveType::Inventory)
+		if (SaveLogicComponents.Contains(ESaveType::Inventory)
+			&& !PreventingLoadingFor(ESaveType::Inventory)
 			&& InventoryComponent)
 		{
-			SavingLogic[ESaveType::Inventory]->LoadData();
+			SaveLogicComponents[ESaveType::Inventory]->LoadData();
 		}
 		
-		// Combat Component
+		// Combat Component (equip weapons and armor)
 		UCombatComponent* CombatComponent = Character->GetCombatComponent();
-		if (SavingLogic.Contains(ESaveType::Combat)
-			&& !PreventLoading.Contains(ESaveType::Combat)
+		if (SaveLogicComponents.Contains(ESaveType::Combat)
+			&& !PreventingLoadingFor(ESaveType::Combat)
 			&& CombatComponent)
 		{
-			SavingLogic[ESaveType::Combat]->LoadData();
+			SaveLogicComponents[ESaveType::Combat]->LoadData();
 		}
 
-		// Camera Settings
+		// Camera Settings (adjust camera settings on server, allow character to handle replication)
 		ACharacterCameraLogic* CameraCharacter = Cast<ACharacterCameraLogic>(Character);
-		if (SavingLogic.Contains(ESaveType::CameraSettings)
-			&& !PreventLoading.Contains(ESaveType::CameraSettings)
+		if (SaveLogicComponents.Contains(ESaveType::CameraSettings)
+			&& !PreventingLoadingFor(ESaveType::CameraSettings)
 			&& CameraCharacter)
 		{
-			SavingLogic[ESaveType::CameraSettings]->LoadData();
+			SaveLogicComponents[ESaveType::CameraSettings]->LoadData();
 		}
 	}
 
 	// TODO: Add proper loading of the world / level on the server based on the owner of the lobby / game mode, and settings when the player opens / updates the settings
 
 	BP_LoadPlayerInformation();
+}
+
+
+bool USaveComponent::PreventingLoadingFor(const ESaveType SaveType) const
+{
+	if (!PreventLoading.Contains(SaveType)) return false;
+	return PreventLoading[SaveType];
 }
 
 

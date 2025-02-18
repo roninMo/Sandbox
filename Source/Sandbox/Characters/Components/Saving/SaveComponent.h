@@ -31,7 +31,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") TMap<ESaveType, F_SaveLogicConfiguration> SaveConfigurations;
 
 	/** The current logic for saving the actor's information */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") TMap<ESaveType, TObjectPtr<USaveLogic>> SavingLogic;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") TMap<ESaveType, TObjectPtr<USaveLogic>> SaveLogicComponents;
 	
 	
 public:	
@@ -90,7 +90,7 @@ public:
 	 * @returns		true if all of the specified classes have been successfully created.
 	 * @note		Called when the match has began for replication during BeginPlay. Can also be called on client join with Online subsystems, and once the information has been replicated to AbilitySystems OnInitActorInfo()
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Initialization") virtual bool InitializeSavingLogic();
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Initialization") virtual bool InitializeSaveLogic();
 
 	/**
 	 * Handles the logic for tearing down the save states before deleting this component
@@ -143,10 +143,10 @@ public:
 //----------------------------------------------------------------------------------//
 protected:
 	/** Handle for preventing certain information from being saved during gameplay. Useful for in game debugging */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Debugging") TMap<ESaveType, bool> PreventSaving;
-	
-	/** Handle for preventing certain information from being saved during gameplay. Useful for in game debugging */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Debugging") TMap<ESaveType, bool> PreventLoading;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving|Debugging") TMap<ESaveType, bool> PreventLoading;
+
+	/** Whether this component is currently preventing loading specific information for debugging purposes */
+	virtual bool PreventingLoadingFor(const ESaveType SaveType) const;
 
 	
 public:

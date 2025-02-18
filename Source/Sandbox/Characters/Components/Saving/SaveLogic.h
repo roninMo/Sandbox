@@ -26,14 +26,14 @@ protected:
 	/** The display name of the save logic. I.E. (CharacterInventory_SaveLogic, EnemyInventory_SaveLogic, etc.) */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FName DisplayName;
 
-	/** Whether the save information should be saved during autosaving */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bAutoSave;
-
 	/** What this class is saving */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) ESaveType SaveType;
 
 	/** Whether we should save the information during EndPlay() */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bSaveDuringEndPlay;
+
+	/** Whether the save information should be saved during autosaving */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bAutoSave;
 	
 	
 public:

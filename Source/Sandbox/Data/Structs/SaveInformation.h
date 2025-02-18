@@ -38,7 +38,7 @@ struct F_SaveLogicConfiguration
 	/** Just checks if the configuration has been created */
 	virtual bool IsValid() const
 	{
-		return this->Id.IsValid() && !this->Name.IsNone();
+		return this->Id.IsValid() && !this->DisplayName.IsNone();
 	}
 	
 public:
@@ -46,13 +46,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGuid Id;
 
 	/** The display name of the save logic. I.E. (CharacterInventory_SaveLogic, EnemyInventory_SaveLogic, etc.) */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FName Name;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FName DisplayName;
 
-	/** Whether the save information should be saved during autosaving */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bAutoSave;
+	/** Whether the component should save this information during EndPlay() */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bSaveDuringEndPlay = true;
 
 	/** What this class is saving */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) ESaveType ESaveType;
+	
+	/** Whether the save information should be saved during autosaving */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bAutoSave = true;
 
 	/** A reference to the save logic class */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TSubclassOf<USaveLogic> SaveLogicClass;

@@ -135,7 +135,7 @@ void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvat
 	// Save component initialization
 	if (SaveComponent && HasAuthority())
 	{
-		SaveComponent->InitializeSavingLogic();
+		SaveComponent->InitializeSaveLogic();
 		SaveComponent->LoadPlayerInformation();
 	}
 
