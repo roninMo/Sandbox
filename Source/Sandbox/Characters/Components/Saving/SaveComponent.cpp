@@ -163,36 +163,30 @@ void USaveComponent::LoadPlayerInformation()
 
 	// Default Character logic -> TODO: prevent dependency problems
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
-	USaveLogic* SaveLogic = nullptr;
 	if (Character)
 	{
-
 		// Attributes (if valid, send the ability system the saved stats)
 		if (SaveLogicComponents.Contains(ESaveType::Attributes) && !PreventingLoadingFor(ESaveType::Attributes))
 		{
-			SaveLogic = SaveLogicComponents[ESaveType::Attributes];
-			SaveLogic->LoadData();
+			SaveLogicComponents[ESaveType::Attributes]->LoadData();
 		}
 
 		// Inventory (load the inventory and send the information to the clients)
 		if (SaveLogicComponents.Contains(ESaveType::Inventory) && !PreventingLoadingFor(ESaveType::Inventory))
 		{
-			SaveLogic = SaveLogicComponents[ESaveType::Inventory];
-			SaveLogic->LoadData();
+			SaveLogicComponents[ESaveType::Inventory]->LoadData();
 		}
 		
 		// Combat Component (equip weapons and armor)
 		if (SaveLogicComponents.Contains(ESaveType::Combat) && !PreventingLoadingFor(ESaveType::Combat))
 		{
-			SaveLogic = SaveLogicComponents[ESaveType::Combat];
-			SaveLogic->LoadData();
+			SaveLogicComponents[ESaveType::Combat]->LoadData();
 		}
 
 		// Camera Settings (adjust camera settings on server, allow character to handle replication)
 		if (SaveLogicComponents.Contains(ESaveType::CameraSettings) && !PreventingLoadingFor(ESaveType::CameraSettings))
 		{
-			SaveLogic = SaveLogicComponents[ESaveType::CameraSettings];
-			SaveLogic->LoadData();
+			SaveLogicComponents[ESaveType::CameraSettings]->LoadData();
 		}
 	}
 
