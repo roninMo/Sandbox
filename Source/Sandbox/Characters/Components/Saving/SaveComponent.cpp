@@ -4,9 +4,12 @@
 #include "SaveComponent.h"
 
 #include "SaveLogic.h"
+#include "Kismet/GameplayStatics.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Asc/AbilitySystem.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Characters/Components/Camera/CharacterCameraLogic.h"
+#include "Sandbox/Data/Enums/ESaveType.h"
 
 DEFINE_LOG_CATEGORY(SaveComponentLog);
 
@@ -149,7 +152,7 @@ bool USaveComponent::SaveData(const ESaveType Saving)
 
 bool USaveComponent::IsValidToSave(const ESaveType InformationType)
 {
-	if (!SavingLogic.Contains(InformationType)) return true;
+	if (!SavingLogic.Contains(InformationType) || PreventSaving.Contains(InformationType)) return false;
 	if (!SavingLogic[InformationType]->IsValidToSave()) return false;
 
 	return true;
@@ -158,7 +161,7 @@ bool USaveComponent::IsValidToSave(const ESaveType InformationType)
 
 void USaveComponent::LoadPlayerInformation()
 {
-	// Notify components to load the player information once the player has initialized and is ready to save and load it's information
+	// Notify components to load the player information once the player has initialized and is ready to save / load it's information
 
 	// Default Character logic -> TODO: prevent dependency problems
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
@@ -166,30 +169,38 @@ void USaveComponent::LoadPlayerInformation()
 	{
 		// Attributes (if valid, send the ability system the saved stats)
 		UAbilitySystem* AbilitySystemComponent = Character->GetAbilitySystem<UAbilitySystem>();
-		if (AbilitySystemComponent)
+		if (SavingLogic.Contains(ESaveType::Attributes)
+			&& !PreventLoading.Contains(ESaveType::Attributes)
+			&& AbilitySystemComponent)
 		{
-			
-		}
-
-		// Combat
-		UCombatComponent* CombatComponent = Character->GetCombatComponent();
-		if (CombatComponent)
-		{
-			
-		}
-
-		// CameraSettings
-		ACharacterCameraLogic* CameraCharacter = Cast<ACharacterCameraLogic>(Character);
-		if (CameraCharacter)
-		{
-			
+			SavingLogic[ESaveType::Attributes]->LoadData();
 		}
 
 		// Inventory
 		UInventoryComponent* InventoryComponent = Character->GetInventoryComponent();
-		if (InventoryComponent)
+		if (SavingLogic.Contains(ESaveType::Inventory)
+			&& !PreventLoading.Contains(ESaveType::Inventory)
+			&& InventoryComponent)
 		{
-			
+			SavingLogic[ESaveType::Inventory]->LoadData();
+		}
+		
+		// Combat Component
+		UCombatComponent* CombatComponent = Character->GetCombatComponent();
+		if (SavingLogic.Contains(ESaveType::Combat)
+			&& !PreventLoading.Contains(ESaveType::Combat)
+			&& CombatComponent)
+		{
+			SavingLogic[ESaveType::Combat]->LoadData();
+		}
+
+		// Camera Settings
+		ACharacterCameraLogic* CameraCharacter = Cast<ACharacterCameraLogic>(Character);
+		if (SavingLogic.Contains(ESaveType::CameraSettings)
+			&& !PreventLoading.Contains(ESaveType::CameraSettings)
+			&& CameraCharacter)
+		{
+			SavingLogic[ESaveType::CameraSettings]->LoadData();
 		}
 	}
 
@@ -199,9 +210,9 @@ void USaveComponent::LoadPlayerInformation()
 }
 
 
-FName USaveComponent::GetSaveTypeIdReference(const ESaveType Saving)
+FString USaveComponent::GetSaveSlotIdReference(const ESaveType Saving) const
 {
-	return FName();
+	return FString();
 }
 
 

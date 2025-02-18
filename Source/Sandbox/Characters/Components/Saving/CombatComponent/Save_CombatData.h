@@ -23,5 +23,13 @@ public:
 	 */
 	virtual bool SaveData_Implementation() override;
 
+	/**
+	 * Handles loading the data specific to the owning actor. \n\n
+	 * Subclass this logic for saving information specific to a npc, character, and their varying game modes etc.
+	 *
+	 * @returns	True if it successfully loaded the information for the npc / player
+	 */
+	virtual bool LoadData_Implementation() override;
+
 	
 };

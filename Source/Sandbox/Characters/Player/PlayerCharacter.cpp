@@ -17,6 +17,7 @@
 #include "Sandbox/Characters/Components/Inventory/InventoryComponent.h"
 #include "Sandbox/Characters/Components/Periphery/PeripheryComponent.h"
 #include "Sandbox/Characters/Components/Camera/TargetLockSpringArm.h"
+#include "Sandbox/Characters/Components/Saving/SaveComponent.h"
 #include "Sandbox/Hud/Hud/PlayerHud.h"
 
 
@@ -33,8 +34,11 @@ APlayerCharacter::APlayerCharacter(const FObjectInitializer& ObjectInitializer) 
 
 	// Inventory Component
 	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
-	
+
 	// Inventory Component
+	SaveComponent = CreateDefaultSubobject<USaveComponent>(TEXT("Save Component"));
+
+	// Combat Component
 	CombatComponent = CreateDefaultSubobject<UCombatComponent>(TEXT("Combat Component"));
 	CombatComponent->SetIsReplicated(true);
 }

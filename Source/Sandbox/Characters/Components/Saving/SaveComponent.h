@@ -21,18 +21,18 @@ enum class ESaveState : uint8;
 /**
  * 
  */
-UCLASS( Blueprintable, ClassGroup=(Inventory), meta=(BlueprintSpawnableComponent) )
+UCLASS( Blueprintable, ClassGroup=(Saving), meta=(BlueprintSpawnableComponent) )
 class SANDBOX_API USaveComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 protected:
 	/** The save configuration for the actor we're attached to */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="Saving") TMap<ESaveType, F_SaveLogicConfiguration> SaveConfigurations;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") TMap<ESaveType, F_SaveLogicConfiguration> SaveConfigurations;
 
 	/** The current logic for saving the actor's information */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="Saving") TMap<ESaveType, TObjectPtr<USaveLogic>> SavingLogic;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") TMap<ESaveType, TObjectPtr<USaveLogic>> SavingLogic;
+	
 	
 public:	
 	USaveComponent(const FObjectInitializer& ObjectInitializer);
@@ -141,6 +141,14 @@ public:
 //----------------------------------------------------------------------------------//
 // Utility																			//
 //----------------------------------------------------------------------------------//
+protected:
+	/** Handle for preventing certain information from being saved during gameplay. Useful for in game debugging */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Debugging") TMap<ESaveType, bool> PreventSaving;
+	
+	/** Handle for preventing certain information from being saved during gameplay. Useful for in game debugging */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Debugging") TMap<ESaveType, bool> PreventLoading;
+
+	
 public:
 	/**
 	 * Retrieves the save's reference for specific save states using the save state and actor's information. This should vary between players and enemies spawned in the world \n\n 
@@ -152,7 +160,7 @@ public:
 	 * @param Saving					The type of information we're saving
 	 * @returns							The id used for saving information to a specific slot
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual FName GetSaveTypeIdReference(const ESaveType Saving);
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual FString GetSaveSlotIdReference(const ESaveType Saving) const;
 	
 
 protected:

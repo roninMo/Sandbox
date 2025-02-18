@@ -25,7 +25,7 @@ public:
 	 * @param Saving					The type of information we're saving
 	 * @returns							The id used for saving information to a specific slot
 	 */
-	virtual FName GetSaveTypeIdReference(const ESaveType Saving) override;
+	virtual FString GetSaveSlotIdReference(const ESaveType Saving) const override;
 	
 
 protected:

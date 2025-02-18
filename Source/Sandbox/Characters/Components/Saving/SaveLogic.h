@@ -14,7 +14,7 @@ enum class ESaveType : uint8;
 /**
  * The save logic specific to what and how we're saving information. This varies between different actors and gamemodes on how we want to handle the logic
  */
-UCLASS()
+UCLASS( Blueprintable, ClassGroup=(Saving), meta=(BlueprintSpawnableComponent, ShortTooltip="Logic for handling Saving / Loading information for different actors in the game") )
 class SANDBOX_API USaveLogic : public UObject
 {
 	GENERATED_BODY()
@@ -31,6 +31,10 @@ protected:
 
 	/** What this class is saving */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) ESaveType SaveType;
+
+	/** Whether we should save the information during EndPlay() */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bSaveDuringEndPlay;
+	
 	
 public:
 	USaveLogic();
@@ -41,7 +45,7 @@ public:
 	 *
 	 * @returns	True if it successfully saved the information for the npc / player
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving") bool SaveData();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool SaveData();
 	virtual bool SaveData_Implementation();
 
 	/**
@@ -49,9 +53,20 @@ public:
 	 *
 	 * @returns	True if it's okay to save the information
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving") bool IsValidToSave();
-	bool IsValidToSave_Implementation();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool IsValidToSave();
+	virtual bool IsValidToSave_Implementation();
 
+	/**
+	 * Handles loading the data specific to the owning actor. \n\n
+	 * Subclass this logic for saving information specific to a npc, character, and their varying game modes etc.
+	 *
+	 * @returns	True if it successfully loaded the information for the npc / player
+	 */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool LoadData();
+	virtual bool LoadData_Implementation();
+
+
+	
 
 //----------------------------------------------------------------------------------//
 // Utility																			//
@@ -72,19 +87,19 @@ public:
 	virtual bool NeedsLoadForClient() const override;
 	
 	/** Retrieves the id of this SaveLogic class */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving|Utility") FGuid GetId() const;
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading|Utility") FGuid GetId() const;
 	virtual FGuid GetId_Implementation() const;
 
 	/** Retrieves the name */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving|Utility") FName GetDisplayName() const;
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading|Utility") FName GetDisplayName() const;
 	virtual FName GetDisplayName_Implementation() const;
 
 	/** Whether this information should be saved while auto saving */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving|Utility")bool IsValidAutoSave() const;
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading|Utility")bool IsValidAutoSave() const;
 	virtual bool IsValidAutoSave_Implementation() const;
 
 	/** Retrieves a reference to the type of information this class saves */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving|Utility") ESaveType GetSaveType() const;
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading|Utility") ESaveType GetSaveType() const;
 	virtual ESaveType GetSaveType_Implementation() const;
 	
 	

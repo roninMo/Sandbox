@@ -4,12 +4,12 @@
 #include "SaveComponent_Character.h"
 
 
-FName USaveComponent_Character::GetSaveTypeIdReference(const ESaveType Saving)
+FString USaveComponent_Character::GetSaveSlotIdReference(const ESaveType Saving) const
 {
 	// return Super::GetSaveIdReference(Saving);
-	return FName(GetPlayerNetId().ToString()
+	return GetPlayerNetId().ToString()
 		.Append(FString("_"))
-		.Append(*UEnum::GetValueAsString(Saving))
+		.Append(*UEnum::GetValueAsString(Saving)
 	);
 }
 

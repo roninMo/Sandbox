@@ -3,10 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AttributeSet.h"
+#include "GameplayEffect.h"
 #include "GameFramework/SaveGame.h"
 #include "Saved_Attributes.generated.h"
 
+class UGameplayEffect;
 class UAttributeSet;
+
+
 /**
  * Saved attributes pertaining to the player's current health, stamina, mana, experience, etc.
  * TODO: Add a statuses save, to save any of the buffs/debuffs (and durations) from when the player previously saved
@@ -36,7 +41,14 @@ public:
 public:
 	/** Save information from player's current attribute set */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading")
-	virtual void SaveFromAttributeSet(UAttributeSet* AttributeSet);
+	virtual void RetrieveAttributesFromAttributeSet(UAttributeSet* AttributeSet);
+
+	/** Creates a gameplay effect to add the player's current attributes */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading")
+	virtual UGameplayEffect* GetCurrentAttributes(UAttributeSet* AttributeSet);
+
+	/** Creates a modifier op for an instant effect */
+	virtual FGameplayModifierInfo CreateModifierAttribute(const FGameplayAttribute& Attribute, const float Value);
 
 	
 };

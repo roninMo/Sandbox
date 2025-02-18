@@ -5,8 +5,9 @@
 
 #include "Sandbox/Characters/Components/Camera/CharacterCameraLogic.h"
 
-void USaved_CameraSettings::SaveFromCameraCharacter(ACharacterCameraLogic* CameraCharacter)
+void USaved_CameraSettings::SaveFromCameraCharacter(ACharacter* Character)
 {
+	ACharacterCameraLogic* CameraCharacter = Cast<ACharacterCameraLogic>(Character);
 	if (!CameraCharacter) return;
 
 	CameraStyle = CameraCharacter->GetCameraStyle();

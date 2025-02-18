@@ -194,6 +194,11 @@ void UCombatComponent::RemoveArmamentFromEquipSlot(const EEquipSlot EquipSlot)
 AArmament* UCombatComponent::CreateArmament(const EEquipSlot EquipSlot)
 {
 	// Sanity checks
+	if (EquipSlot == EEquipSlot::None)
+	{
+		return nullptr;
+	}
+	
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
 	if (!Character)
 	{

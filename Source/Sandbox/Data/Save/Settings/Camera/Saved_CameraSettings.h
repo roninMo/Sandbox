@@ -6,7 +6,6 @@
 #include "GameFramework/SaveGame.h"
 #include "Saved_CameraSettings.generated.h"
 
-class ACharacterCameraLogic;
 enum class ECameraOrientation : uint8;
 
 
@@ -26,7 +25,7 @@ public:
 public:
 	/** Retrieves the camera settings from the character */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading")
-	virtual void SaveFromCameraCharacter(ACharacterCameraLogic* CameraCharacter);
+	virtual void SaveFromCameraCharacter(ACharacter* Character);
 
 	
 };

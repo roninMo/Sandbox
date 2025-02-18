@@ -121,6 +121,11 @@ protected:
 
 	
 public:
+	/** A reference to the player's saved attribute information */
+	UPROPERTY(Transient) TObjectPtr<UGameplayEffect> SavedAttributes;
+
+	
+public:
 	//~ End UActorComponent interface
 	virtual void BeginPlay() override;
 	//~ End UActorComponent interface

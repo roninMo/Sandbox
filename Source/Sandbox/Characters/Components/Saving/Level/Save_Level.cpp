@@ -21,3 +21,8 @@ bool USave_Level::SaveData_Implementation()
 	// Save level specific information pertaining to the character's game mode / level
 	return Level->SaveLevelInformation(Cast<USaveComponent>(GetOuter()), this);
 }
+
+bool USave_Level::LoadData_Implementation()
+{
+	return Super::LoadData_Implementation();
+}
