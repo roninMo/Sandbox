@@ -3,6 +3,8 @@
 
 #include "Sandbox/World/Props/WorldItem.h"
 
+#include "Kismet/GameplayStatics.h"
+#include "Logging/StructuredLog.h"
 #include "Sandbox/Data/Enums/CollisionChannels.h"
 
 AWorldItem::AWorldItem()
@@ -30,6 +32,18 @@ AWorldItem::AWorldItem()
 void AWorldItem::BeginPlay()
 {
 	Super::BeginPlay();
+	OnSpawnedInWorld();
+}
+
+
+void AWorldItem::OnSpawnedInWorld()
+{
+	// Retrieve the item's information if this was an item that was placed in the level
+	if (!Item.Id.IsValid())
+	{
+		RetrieveItemFromDataTable(TableId, Item);
+		CreateIdIfNull();
+	}
 }
 
 
@@ -54,4 +68,37 @@ void AWorldItem::WithinPlayerConePeriphery_Implementation(AActor* SourceCharacte
 void AWorldItem::OutsideOfConePeriphery_Implementation(AActor* SourceCharacter, EPeripheryType PeripheryType)
 {
 	
+}
+
+
+F_LevelSaveInformation_Actor AWorldItem::SaveToLevel_Implementation()
+{
+	F_LevelSaveInformation_Actor SavedInformation;
+	SavedInformation.Id = Item.Id;
+	SavedInformation.Location = GetActorLocation();
+	SavedInformation.Rotation = GetActorRotation();
+	
+	OnSaveToLevel(SavedInformation);
+	return SavedInformation;
+}
+
+
+bool AWorldItem::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave)
+{
+	bool bSuccessfullyLoaded = true;
+	if (!PreviousSave.Location.IsNearlyZero())
+	{
+		bSuccessfullyLoaded = TeleportTo(PreviousSave.Location, PreviousSave.Rotation);
+	}
+	
+	// Handle any other state that's specific to the character's level specific save state
+
+	OnLoadFromLevel(PreviousSave, bSuccessfullyLoaded);
+	return bSuccessfullyLoaded;
+}
+
+
+FGuid AWorldItem::GetActorLevelId_Implementation() const
+{
+	return Item.Id;
 }

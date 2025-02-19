@@ -16,6 +16,7 @@ class SANDBOX_API USaved_Inventory : public USaveGame
 	GENERATED_BODY()
 
 public:
+	/** The character's saved inventory information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_InventorySaveInformation SaveInformation;
 
 	

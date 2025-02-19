@@ -50,8 +50,6 @@ void AItem::BeginPlay()
 	// {
 	// 	RetrieveItemFromDataTable(TableId, Item);
 	// }
-	
-	// CreateIdIfNull();
 }
 
 

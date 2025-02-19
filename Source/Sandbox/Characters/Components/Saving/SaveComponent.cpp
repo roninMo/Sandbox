@@ -159,6 +159,7 @@ bool USaveComponent::IsValidToSave(const ESaveType InformationType)
 
 void USaveComponent::LoadPlayerInformation()
 {
+	if (!bUseSaveInformation) return;
 	// Notify components to load the player information once the player has initialized and is ready to save / load it's information
 
 	// TODO: Add singleplayer / multiplayer logic for handling saving and loading information from servers/subsystems

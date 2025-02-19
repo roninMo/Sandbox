@@ -277,6 +277,25 @@ USaveComponent* ACharacterBase::GetSaveComponent() const
 }
 
 
+F_LevelSaveInformation_Actor ACharacterBase::SaveToLevel_Implementation()
+{
+	return ILevelSaveInformationInterface::SaveToLevel_Implementation();
+}
+
+
+bool ACharacterBase::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave)
+{
+	return ILevelSaveInformationInterface::LoadFromLevel_Implementation(PreviousSave);
+}
+
+
+FGuid ACharacterBase::GetActorLevelId_Implementation() const
+{
+	// return ILevelSaveInformationInterface::GetActorLevelId_Implementation();
+	return FGuid::NewGuid();
+}
+
+
 UCombatComponent* ACharacterBase::GetCombatComponent() const
 {
 	return CombatComponent;

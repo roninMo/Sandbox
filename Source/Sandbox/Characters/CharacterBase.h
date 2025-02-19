@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "Perception/AISightTargetInterface.h"
 #include "Sandbox/Data/Interfaces/PeripheryObject/PeripheryObjectInterface.h"
+#include "Sandbox/Data/Interfaces/Save/LevelSaveInformationInterface.h"
 #include "Sandbox/Data/Structs/AbilityInformation.h"
 #include "Sandbox/Data/Structs/CharacterMontages.h"
 #include "CharacterBase.generated.h"
@@ -361,7 +362,7 @@ class UAdvancedMovementComponent;
  * The universal class for characters, npc's, and enemies in the game
  */
 UCLASS()
-class SANDBOX_API ACharacterBase : public ACharacter, public IAbilitySystemInterface, public IAISightTargetInterface, public IPeripheryObjectInterface
+class SANDBOX_API ACharacterBase : public ACharacter, public IAbilitySystemInterface, public IAISightTargetInterface, public IPeripheryObjectInterface, public ILevelSaveInformationInterface
 {
 	GENERATED_BODY()
 
@@ -818,6 +819,24 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Saving", DisplayName = "Get Save Component")
 	virtual USaveComponent* GetSaveComponent() const;
 
+	/**
+	 * Returns the current save state of the actor level during play
+	 * @note							This is only specific to spawned and placed actors within the level, utilize their save components to save specific information   
+	 */
+	virtual F_LevelSaveInformation_Actor SaveToLevel_Implementation() override;
+
+	/**
+	 * Retrieves the level's currently saved state for this actor, and loads the saved information
+	 * @note							This is only specific to spawned and placed actors within the level, utilize their save components to save specific information   
+	 */
+	virtual bool LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave) override;
+	
+	/**
+	 * Retrieves the id of the actor. This is used for retrieving the proper save information for actors placed and spawned in the world
+	 *
+	 * @returns							The id of the actor   
+	 */
+	virtual FGuid GetActorLevelId_Implementation() const override;
 
 	
 //-------------------------------------------------------------------------------------//

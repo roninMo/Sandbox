@@ -28,6 +28,9 @@ class SANDBOX_API USaveComponent : public UActorComponent
 	GENERATED_BODY()
 
 protected:
+	/** Whether to use the save configurations. Used for debugging */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") bool bUseSaveInformation;
+	
 	/** The save configuration for the actor we're attached to */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") TMap<ESaveType, F_SaveLogicConfiguration> SaveConfigurations;
 
