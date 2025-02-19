@@ -13,6 +13,31 @@
 
 
 /**
+ * Config for what to save on the actor
+ */
+USTRUCT(Blueprintable, BlueprintType)
+struct F_SaveActorConfig
+{
+	GENERATED_USTRUCT_BODY()
+	
+	virtual ~F_SaveActorConfig() = default;
+	F_SaveActorConfig() = default;
+	
+	/** Whether to save the character's attributes */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bSaveAttributes;
+	
+	/** Whether to save the character's level information */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bSaveWorldInformation;
+	
+	/** Whether to save the character's inventory data */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bSaveInventory;
+	
+	/** Whether to save the character's combat information */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bSaveCombat;
+};
+
+
+/**
  * Information specific to an item for displaying in the inventory and spawning them in the world
  * Also contains the information to access and construct actors that have been spawned in the world
  */
@@ -21,21 +46,34 @@ struct F_LevelSaveInformation_Actor
 {
 	GENERATED_USTRUCT_BODY()
 		F_LevelSaveInformation_Actor(
-			const FGuid& Id = FGuid(),
+			const FString& Id = FString(),
 			const FVector& Location = FVector(),
 			const FRotator& Rotation = FRotator(),
-			const TSubclassOf<AActor> Class = AActor::StaticClass()
+			const F_SaveActorConfig& Config = F_SaveActorConfig(),
+			const TSubclassOf<AActor> Class = AActor::StaticClass(),
+			const TWeakObjectPtr<AActor> Actor = nullptr
 		) :
 		Id(Id),
 		Location(Location),
 		Rotation(Rotation),
-		Class(Class)
+		Config(Config),
+		Class(Class),
+		Actor(Actor)
 	{}
 
 	virtual ~F_LevelSaveInformation_Actor() {}
 
-	/** The id of the item that's spawned in the world */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGuid Id;
+	/**
+	 * The Id that's used to retrieve the actor's save information 
+	 * 
+	 * This is going to generic for handling multiple use cases for different scenarios, and might be adjusted later because this is kind of hacky
+	 *	- Players:									The character's subsystem account / platform id
+	 *	- Items Placed in Level:					The name of the object based on the level's construction
+	 *	- Items Spawned in Level during Play:		The inventory's id. Uses the class reference to construct and spawn the item once the game begins
+	 *	
+	 * 
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString Id;
 
 	/** The location of the actor that's spawned in the world */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FVector Location;
@@ -43,20 +81,59 @@ struct F_LevelSaveInformation_Actor
 	/** The rotation of the actor that's spawned in the world */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FRotator Rotation;
 
+	/** The save config for the actor's component. Used when saving level information */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_SaveActorConfig Config;
+
 	/** A reference to the class of the object spawned in the world */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TSubclassOf<AActor> Class;
+
+	/** A stored weak reference to the actor spawned in the world */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TWeakObjectPtr<AActor> Actor;
 	
 
 public:
 	/** Convenience function to access the id without creating another value */
-	virtual FGuid GetId() const
+	virtual FString GetId() const
 	{
 		return this->Id;
+	}
+
+	/** Convenience function to update the actor's save config */
+	virtual void UpdateConfig(bool bAttributes = true, bool bWorld = true, bool bInventory = true, bool bCombat = true)
+	{
+		this->Config.bSaveAttributes = bAttributes;
+		this->Config.bSaveWorldInformation = bWorld;
+		this->Config.bSaveInventory = bInventory;
+		this->Config.bSaveCombat = bCombat;
+	}
+
+	/** Retrieves whether we should save the attributes */
+	virtual bool ShouldSaveAttributes() const
+	{
+		return this->Config.bSaveAttributes;
+	}
+
+	/** Retrieves whether we should save the world information  */
+	virtual bool ShouldSaveWorldInformation() const
+	{
+		return this->Config.bSaveWorldInformation;
+	}
+	
+	/** Retrieves whether we should save the inventory  */
+	virtual bool ShouldSaveInventory() const
+	{
+		return this->Config.bSaveInventory;
+	}
+	
+	/** Retrieves whether we should save the combat information  */
+	virtual bool ShouldSaveCombatInformation() const
+	{
+		return this->Config.bSaveCombat;
 	}
 
 	/** Is this a valid item? */
 	virtual bool IsValid() const
 	{
-		return this->Id.IsValid();
+		return !this->Id.IsEmpty();
 	}
 };

@@ -210,13 +210,19 @@ FString USaveComponent::GetSaveSlotIdReference(const ESaveType Saving) const
 }
 
 
-FName USaveComponent::GetPlayerNetId() const
+bool USaveComponent::HandlesSaving(const ESaveType SaveType) const
+{
+	return SaveConfigurations.Contains(SaveType);
+}
+
+
+FString USaveComponent::GetPlayerNetId() const
 {
 	// TODO: Fix net id reference retrieval to be a blueprint library function so we can safely handle juggling networking and steam / console references for retrieving the network id
 	/** The platform id returns the console, and the network id is tricky and specific to the current session. We also need access to the player's account for multiplayer,
 	 *		and we shouldn't really factor in the network id for saving, and still need another unique reference to each player that's on their console, and perhaps factor out the platform id
 	 */
-	return FName();
+	return GetName();
 }
 
 

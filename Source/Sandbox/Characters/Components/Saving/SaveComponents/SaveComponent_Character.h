@@ -30,7 +30,7 @@ public:
 
 protected:
 	/** Retrieves the player's save slot id specific to their steam/console platform account for saving purposes */
-	virtual FName GetPlayerNetId() const override;
+	virtual FString GetPlayerNetId() const override;
 
 	
 };

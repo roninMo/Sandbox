@@ -277,23 +277,79 @@ USaveComponent* ACharacterBase::GetSaveComponent() const
 }
 
 
+
+
+#pragma region Save Logic
 F_LevelSaveInformation_Actor ACharacterBase::SaveToLevel_Implementation()
 {
-	return ILevelSaveInformationInterface::SaveToLevel_Implementation();
+	if (!SaveComponent) return F_LevelSaveInformation_Actor();
+	
+	F_LevelSaveInformation_Actor SaveConfig;
+	SaveConfig.Id = Execute_GetActorLevelId(this);
+	SaveConfig.Location = GetActorLocation();
+	SaveConfig.Actor = this;
+	SaveConfig.Rotation = GetActorRotation();
+	SaveConfig.Class = GetClass()->StaticClass();
+	
+	SaveConfig.UpdateConfig(
+	SaveComponent->HandlesSaving(ESaveType::Attributes), 
+		SaveComponent->HandlesSaving(ESaveType::World), 
+	SaveComponent->HandlesSaving(ESaveType::Inventory),
+	SaveComponent->HandlesSaving(ESaveType::Combat)
+	);
+
+	OnSaveToLevel(SaveConfig);
+	return SaveConfig;
+}
+
+
+bool ACharacterBase::SaveActorData_Implementation(const F_LevelSaveInformation_Actor& SaveConfig)
+{
+	if (!SaveComponent) return true;
+
+	// Save the actor data accordingly
+	bool bSuccessfullySavedInformation = true;
+	if (SaveComponent->HandlesSaving(ESaveType::Attributes))
+	{
+		if (!SaveComponent->SaveData(ESaveType::Attributes)) bSuccessfullySavedInformation = false;
+	}
+	if (SaveComponent->HandlesSaving(ESaveType::Combat))
+	{
+		if (!SaveComponent->SaveData(ESaveType::Combat)) bSuccessfullySavedInformation = false;
+	}
+	if (SaveComponent->HandlesSaving(ESaveType::Inventory))
+	{
+		if (!SaveComponent->SaveData(ESaveType::Inventory)) bSuccessfullySavedInformation = false;
+	}
+
+	Execute_OnSaveActorData(this, SaveConfig);
+	return bSuccessfullySavedInformation;
 }
 
 
 bool ACharacterBase::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave)
 {
-	return ILevelSaveInformationInterface::LoadFromLevel_Implementation(PreviousSave);
+	// TODO: I don't know if we should handle the level state logic here
+	bool bSuccessfullyLoaded = true;
+	if (!PreviousSave.Location.IsNearlyZero())
+	{
+		bSuccessfullyLoaded = TeleportTo(PreviousSave.Location, PreviousSave.Rotation);
+	}
+	
+	// Handle any other state that's specific to the character's level specific save state
+
+	Execute_OnLoadFromLevel(this, PreviousSave, bSuccessfullyLoaded);
+	return bSuccessfullyLoaded;
 }
 
 
-FGuid ACharacterBase::GetActorLevelId_Implementation() const
+FString ACharacterBase::GetActorLevelId_Implementation() const
 {
-	// return ILevelSaveInformationInterface::GetActorLevelId_Implementation();
-	return FGuid::NewGuid();
+	return FGenericPlatformMisc::GetLoginId();
 }
+#pragma endregion
+
+
 
 
 UCombatComponent* ACharacterBase::GetCombatComponent() const

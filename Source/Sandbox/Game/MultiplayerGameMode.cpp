@@ -4,11 +4,45 @@
 #include "MultiplayerGameMode.h"
 
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Characters/Components/Saving/Level/LevelSaveComponent.h"
+#include "Sandbox/Data/Enums/GameModeTypes.h"
 #include "Sandbox/World/Props/WorldItem.h"
 
 DEFINE_LOG_CATEGORY(GameModeLog);
 
 
+
+#pragma region Constructors
+AMultiplayerGameMode::AMultiplayerGameMode(const FObjectInitializer& ObjectInitializer): Super(ObjectInitializer)
+{
+	LevelSaveComponentClass = ULevelSaveComponent::StaticClass();
+
+	// The game mode's classification
+	GameModeType = EGameModeType::None;
+}
+
+
+void AMultiplayerGameMode::PreInitializeComponents()
+{
+	Super::PreInitializeComponents();
+	
+	// Spawn the Level's save component
+	if (LevelSaveComponentClass)
+	{
+		FActorSpawnParameters SpawnInfo;
+		SpawnInfo.Instigator = GetInstigator();
+		SpawnInfo.ObjectFlags |= RF_Transient;	// Server only!				
+
+		UWorld* World = GetWorld();
+		LevelSaveComponent = World->SpawnActor<ULevelSaveComponent>(LevelSaveComponentClass, SpawnInfo);
+	}
+}
+#pragma endregion
+
+
+
+
+#pragma region Match State Functions
 void AMultiplayerGameMode::RestartPlayer(AController* NewPlayer)
 {
 	Super::RestartPlayer(NewPlayer);
@@ -37,23 +71,20 @@ void AMultiplayerGameMode::HandleMatchIsWaitingToStart()
 
 void AMultiplayerGameMode::HandleMatchHasStarted()
 {
-	/* // Initialize the save component before begin play
-	for( FConstPlayerControllerIterator Iterator = GetWorld()->GetPlayerControllerIterator(); Iterator; ++Iterator )
-	{
-		if (const APlayerController* PlayerController = Iterator->Get())
-		{
-			ACharacterBase* Character = Cast<ACharacterBase>(PlayerController->GetCharacter());
-			if (!Character || !Character->GetSaveComponent()) continue;
-
-			// Initialize the save logic and retrieve the saved information on the server for replication
-			Character->GetSaveComponent()->InitializeSavingLogic();
-		}
-	}
-	*/
-	
+	PrintActorsInLevel(false);
 	Super::HandleMatchHasStarted(); // BeginPlay
 
-	PrintActorsInLevel(false);
+	// TODO: With the understanding that the level saves and creates it's objects in the list and creates an identifier based on the object and the order it's created (on client or server)
+	//				while not creating internal logic that persists between when it's registered and removed, we're just going to trust that the save system doesn't sway from that until other problems occur
+	//				going through the engine code to edit how it's packaged would edit the engine / world code and we're not doing that right now, since it's all hoisted on separate production deployments and stages
+	// Retrieve the saved information for the objects spawned in the game
+	if (LevelSaveComponent)
+	{
+		
+	}
+	
+	
+
 
 	// TODO: Figure out what to do for clients that are joining games during play
 	// TODO: race condition with OnInitAbilityActorInfo and both adjust the settings / saved information of the character, we need to use ClientJoinSession for initializing server information at the beginning of games
@@ -83,6 +114,16 @@ void AMultiplayerGameMode::HandleMatchAborted()
 }
 
 
+EGameModeType AMultiplayerGameMode::GetGameModeType()
+{
+	return GameModeType;
+}
+#pragma endregion
+
+
+
+
+#pragma region Utility
 void AMultiplayerGameMode::PrintMessage(const FString& Message)
 {
 	for( FConstPlayerControllerIterator Iterator = GetWorld()->GetPlayerControllerIterator(); Iterator; ++Iterator )
@@ -95,8 +136,10 @@ void AMultiplayerGameMode::PrintMessage(const FString& Message)
 }
 
 
-void AMultiplayerGameMode::PrintActorsInLevel(bool bSavedActors)
+void AMultiplayerGameMode::PrintActorsInLevel(bool bSavedAndLevelActors)
 {
+	UWorld* World = GetWorld();
+
 	// Update actors in level with saved state information
 	TArray<AActor*> LevelActors;
 	TArray<ILevelSaveInformationInterface*> SavedActors;
@@ -121,11 +164,11 @@ void AMultiplayerGameMode::PrintActorsInLevel(bool bSavedActors)
 		AActor* Actor = Cast<AActor>(SavedActor);
 		if (!Actor) continue;
 
-		UE_LOGFMT(LogTemp, Log, "// Saved: {0}, Id: {1}", *GetNameSafe(Actor), *SavedActor->Execute_GetActorLevelId(Actor).ToString());
+		UE_LOGFMT(LogTemp, Log, "// Id: {0}, Saved: {1}, uniqueId: {2}", *SavedActor->Execute_GetActorLevelId(Actor), *GetNameSafe(Actor), Actor->GetUniqueID());
 	}
 	UE_LOGFMT(LogTemp, Log, "//----------------------------------------//");
 
-	if (bSavedActors)
+	if (bSavedAndLevelActors)
 	{
 		UE_LOGFMT(LogTemp, Log, " ");
 		UE_LOGFMT(LogTemp, Log, "//----------------------------------------------//");
@@ -137,4 +180,6 @@ void AMultiplayerGameMode::PrintActorsInLevel(bool bSavedActors)
 		}
 		UE_LOGFMT(LogTemp, Log, "//----------------------------------------//");
 	}
+	
 }
+#pragma endregion 

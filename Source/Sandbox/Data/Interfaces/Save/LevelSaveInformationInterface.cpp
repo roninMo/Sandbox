@@ -5,21 +5,22 @@
 
 F_LevelSaveInformation_Actor ILevelSaveInformationInterface::SaveToLevel_Implementation()
 {
-	F_LevelSaveInformation_Actor SavedInformation;
-	
-	OnSaveToLevel(SavedInformation);
-	return SavedInformation;
+	return F_LevelSaveInformation_Actor();
+}
+
+bool ILevelSaveInformationInterface::SaveActorData_Implementation(const F_LevelSaveInformation_Actor& SaveConfig)
+{
+	return true;
 }
 
 
 bool ILevelSaveInformationInterface::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave)
 {
-	OnLoadFromLevel(PreviousSave, true);
 	return true;
 }
 
 
-FGuid ILevelSaveInformationInterface::GetActorLevelId_Implementation() const
+FString ILevelSaveInformationInterface::GetActorLevelId_Implementation() const
 {
-	return FGuid();
+	return FString();
 }

@@ -3,8 +3,6 @@
 
 #include "Sandbox/World/Props/WorldItem.h"
 
-#include "Kismet/GameplayStatics.h"
-#include "Logging/StructuredLog.h"
 #include "Sandbox/Data/Enums/CollisionChannels.h"
 
 AWorldItem::AWorldItem()
@@ -71,20 +69,34 @@ void AWorldItem::OutsideOfConePeriphery_Implementation(AActor* SourceCharacter, 
 }
 
 
+
+
+#pragma region Save Logic
 F_LevelSaveInformation_Actor AWorldItem::SaveToLevel_Implementation()
 {
 	F_LevelSaveInformation_Actor SavedInformation;
-	SavedInformation.Id = Item.Id;
+	SavedInformation.Id = Item.Id.ToString();
 	SavedInformation.Location = GetActorLocation();
+	SavedInformation.Actor = this;
 	SavedInformation.Rotation = GetActorRotation();
-	
-	OnSaveToLevel(SavedInformation);
+	SavedInformation.Class = GetClass()->StaticClass();
+	SavedInformation.UpdateConfig(false, true, false, false);
+
+	Execute_OnSaveToLevel(this, SavedInformation);
 	return SavedInformation;
+}
+
+
+bool AWorldItem::SaveActorData_Implementation(const F_LevelSaveInformation_Actor& SaveConfig)
+{
+	Execute_OnSaveActorData(this, SaveConfig);
+	return true;
 }
 
 
 bool AWorldItem::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave)
 {
+	// TODO: I don't know if we should handle the level state logic here
 	bool bSuccessfullyLoaded = true;
 	if (!PreviousSave.Location.IsNearlyZero())
 	{
@@ -93,12 +105,26 @@ bool AWorldItem::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor
 	
 	// Handle any other state that's specific to the character's level specific save state
 
-	OnLoadFromLevel(PreviousSave, bSuccessfullyLoaded);
+	Execute_OnLoadFromLevel(this, PreviousSave, bSuccessfullyLoaded);
 	return bSuccessfullyLoaded;
 }
 
 
-FGuid AWorldItem::GetActorLevelId_Implementation() const
+FString AWorldItem::GetActorLevelId_Implementation() const
 {
-	return Item.Id;
+	// If this inventory item was spawned in the world during play, it's going to use it's inventory id as reference for proper saving, otherwise items placed in level just use GetName()
+	if (!ActorSaveLevelId.IsEmpty())
+	{
+		return ActorSaveLevelId;
+	}
+	
+	return GetName(); // Item.Id;
 }
+
+
+void AWorldItem::SetActorSaveLevelId(const FString& Id)
+{
+	ActorSaveLevelId = Id;
+}
+#pragma endregion
+

@@ -165,11 +165,13 @@ public:
 	 * @returns							The id used for saving information to a specific slot
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual FString GetSaveSlotIdReference(const ESaveType Saving) const;
-	
+
+	/** Returns whether the save component handles saving information for a specific save type */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual bool HandlesSaving(const ESaveType SaveType) const;
 
 protected:
 	/** Retrieves the player's save slot id specific to their steam/console platform account for saving purposes */
-	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual FName GetPlayerNetId() const;
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual FString GetPlayerNetId() const;
 
 	/** Returns the save section for the player's save information */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual FString GetSaveTypeName(const ESaveType SaveType) const;

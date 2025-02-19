@@ -21,6 +21,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	TObjectPtr <UStaticMeshComponent> WorldItem;
 
+	/** The level save's reference id for actors spawned in the world. If this is null, the save system use default saving logic (for item's placed in the level by designers) */
+	UPROPERTY(BlueprintReadWrite) FString ActorSaveLevelId;
 	
 public:
 	AWorldItem();
@@ -69,17 +71,39 @@ public:
 	virtual F_LevelSaveInformation_Actor SaveToLevel_Implementation() override;
 
 	/**
+	 * Saves the actors information using the SaveComponent interface
+	 * returns							Whether it successfully saved the actor information
+	 */
+	virtual bool SaveActorData_Implementation(const F_LevelSaveInformation_Actor& SaveConfig) override;
+
+	/**
 	 * Retrieves the level's currently saved state for this actor, and loads the saved information
 	 * @note							This is only specific to spawned and placed actors within the level, utilize their save components to save specific information   
 	 */
 	virtual bool LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave) override;
 	
 	/**
-	 * Retrieves the id of the actor. This is used for retrieving the proper save information for actors placed and spawned in the world
+	 * Retrieves the id of the actor. This is used for retrieving the proper save information for actors placed and spawned in the world \n
+	 *
+	 * This is going to generic for handling multiple use cases for different scenarios, and might be adjusted later because this is kind of hacky
+	 *	- Players:									The character's subsystem account / platform id
+	 *	- Items Placed in Level:					The name of the object based on the level's construction
+	 *	- Items Spawned in Level during Play:		The inventory's id. Uses the class reference to construct and spawn the item once the game begins
+	 *	
+	 * TODO: unreal's GetName naming convention varies between server and client and is based on what's placed in the world. Anything spawned will be respawned,
+	 *		and we still need a convention for mapping the saved name to the actor's stored FGuid id for reference
 	 *
 	 * @returns							The id of the actor   
 	 */
-	virtual FGuid GetActorLevelId_Implementation() const override;
+	virtual FString GetActorLevelId_Implementation() const override;
+
+	/**
+	 * Utility function for setting the ActorSaveLevelId when the inventory item is spawned in the world.
+	 *
+	 * This should be called when you spawn an actor during play that needs to be saved
+	 * @note TODO: This is hacky
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Level|Saving") virtual void SetActorSaveLevelId(const FString& Id); 
 
 	
 };

@@ -6,10 +6,15 @@
 #include "GameFramework/GameMode.h"
 #include "MultiplayerGameMode.generated.h"
 
+enum class EGameModeType : uint8;
+class ULevelSaveComponent;
+class USaveLogic;
 DECLARE_LOG_CATEGORY_EXTERN(GameModeLog, Log, All);
 
+
 /**
- * 
+ * https://docs.unrealengine.com/latest/INT/Engine/Blueprints/UserGuide/Types/LevelBlueprint/index.html
+ *
  */
 UCLASS()
 class SANDBOX_API AMultiplayerGameMode : public AGameMode
@@ -17,11 +22,28 @@ class SANDBOX_API AMultiplayerGameMode : public AGameMode
 	GENERATED_BODY()
 
 protected:
+	/** Class of the level's SaveLogic, which handles save information and state for actors during play */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Classes)
+	TSubclassOf<ULevelSaveComponent> LevelSaveComponentClass;
 
+	/** The Game Mode's classification */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
+	EGameModeType GameModeType;
+
+	/** A stored reference to the save logic component */
+	UPROPERTY(BlueprintReadWrite) TObjectPtr<ULevelSaveComponent> LevelSaveComponent;
+	
 	// Respawn logic
 
 	// Adventure / TDM / FoF -> subclassed infrastructure
+
 	
+public:
+	AMultiplayerGameMode(const FObjectInitializer& ObjectInitializer);
+	
+	/** Called right before components are initialized, only called during gameplay */
+	virtual void PreInitializeComponents() override;
+
 	
 protected:
 	// Respawning
@@ -29,6 +51,9 @@ protected:
 
 	virtual void RestartPlayerAtPlayerStart(AController* NewPlayer, AActor* StartSpot) override;
 
+
+
+	
 //----------------------------------------------------------------------------------//
 // Match State Functions															//
 //----------------------------------------------------------------------------------//
@@ -52,12 +77,20 @@ protected:
 	virtual void HandleMatchAborted() override;
 
 
+
+	
+//----------------------------------------------------------------------------------//
+// Utility																			//
+//----------------------------------------------------------------------------------//
 public:
+	/** Retrieves the GameMode's classification */
+	UFUNCTION(BlueprintCallable, Category = "Game") virtual EGameModeType GetGameModeType();
+
 	/** Prints a message with a reference to the player controller */
 	UFUNCTION() virtual void PrintMessage(const FString& Message);
 
 	/** Prints a list of the actors within the level */
-	UFUNCTION(BlueprintCallable) virtual void PrintActorsInLevel(bool bSavedActors = true);
+	UFUNCTION(BlueprintCallable) virtual void PrintActorsInLevel(bool bSavedActors = false);
 
 	
 };

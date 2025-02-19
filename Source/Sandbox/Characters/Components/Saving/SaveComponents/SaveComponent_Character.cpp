@@ -7,14 +7,14 @@
 FString USaveComponent_Character::GetSaveSlotIdReference(const ESaveType Saving) const
 {
 	// return Super::GetSaveIdReference(Saving);
-	return GetPlayerNetId().ToString()
+	return FName(GetPlayerNetId()).ToString()
 		.Append(FString("_"))
 		.Append(GetSaveTypeName(Saving)
 	);
 }
 
 
-FName USaveComponent_Character::GetPlayerNetId() const
+FString USaveComponent_Character::GetPlayerNetId() const
 {
 	// Super::GetPlayerNetId(); // TODO: Retrieve steam / console account references for the player's Network id
 	FString PlatformId = FGenericPlatformMisc::GetLoginId();
@@ -28,5 +28,5 @@ FName USaveComponent_Character::GetPlayerNetId() const
 	// 	// UE_LOGFMT(LogTemp, Log, "{0} network guid: {1}, net id: {2}", *GetName(), *NetworkGuids->NetGUIDLookup[this].ToString(), SaveData.NetId);
 	// }
 
-	return FName(PlatformId);
+	return PlatformId;
 }

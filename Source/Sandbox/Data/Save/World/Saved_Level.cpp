@@ -3,41 +3,57 @@
 
 #include "Saved_Level.h"
 
-#include "EngineUtils.h"
+#include "Kismet/KismetGuidLibrary.h"
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Data/Interfaces/Save/LevelSaveInformationInterface.h"
 #include "Sandbox/Game/MultiplayerGameMode.h"
 
 
-void USaved_Level::GetSavedAndSpawnedActors(UWorld* World, TArray<AActor*>& OutLevelActors, TArray<AActor*>& OutSpawnedActors)
+void USaved_Level::GetSavedAndSpawnedActors(ULevel* Level, TArray<AActor*>& OutLevelActors, TArray<F_LevelSaveInformation_Actor>& OutSpawnedActors)
 {
-	if (!World)
+	if (!Level)
 	{
-		UE_LOGFMT(GameModeLog, Error, "{0}::{1}() Failed to retrieve the actors in the level, the world wasn't valid!", *GetOuter()->GetName(), *FString(__FUNCTION__));
+		UE_LOGFMT(GameModeLog, Error, "{0}::{1}() Failed to retrieve the actors in the level, the Level wasn't valid!", *GetOuter()->GetName(), *FString(__FUNCTION__));
 		return;
 	}
+	
+	// Always loop through the list for map updates (while working on levels?)
 
-	// Loop through the actors in the level and find the ones that have been spawned
-	TMap<FGuid, bool> LevelActors;
-	for (FActorIterator Actor(World); Actor; ++Actor)
+	// Loop through the saved actors
+	//		- find actors placed in level
+	//		- send actors saved that were spawned in world
+	TMap<FString, bool> LevelActors;
+	for (AActor* Actor : Level->Actors)
 	{
-		FGuid ActorLevelId;
-		AActor* LevelActor = *Actor;
-		if (!LevelActor) continue; // We NeEd a VaLiD ReFeReNcE tO tHe AcTor
+		FString ActorLevelId;
+		if (!Actor) continue;
 
+		// Is it a saved item
 		const bool bLevelSaveInterface = Actor->GetClass()->ImplementsInterface(ULevelSaveInformationInterface::StaticClass());
 		if (bLevelSaveInterface)
 		{
-			ActorLevelId = ILevelSaveInformationInterface::Execute_GetActorLevelId(LevelActor);
-		}
+			ActorLevelId = ILevelSaveInformationInterface::Execute_GetActorLevelId(Actor);
 
-		// Is it a saved item
-		if (!ActorLevelId.IsValid())
+			// Items placed in the level
+			LevelActors.Add(ActorLevelId, true); // Spawned actors
+			OutLevelActors.Add(Actor);
+		}
+	}
+
+	// Find and send the spawned actors
+	for (auto &[Id, SavedInformation] : SavedActors)
+	{
+		// Does the object exist in the level actor list?
+		if (!LevelActors.Contains(Id))
 		{
-			continue;
+			// Check if the string is an inventory id reference, otherwise it's a newly placed save object in the world
+			FGuid InventoryId;
+			bool bIsSpawnedActor = false;
+			UKismetGuidLibrary::Parse_StringToGuid(Id, InventoryId, bIsSpawnedActor);
+			if (bIsSpawnedActor)
+			{
+				OutSpawnedActors.Add(SavedInformation);
+			}
 		}
-
-		// Check if the actor has been saved the level's actor list
-		LevelActors.Add(ActorLevelId, !SavedActors.Contains(ActorLevelId));
 	}
 }
