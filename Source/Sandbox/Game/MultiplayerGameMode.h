@@ -55,5 +55,9 @@ protected:
 public:
 	/** Prints a message with a reference to the player controller */
 	UFUNCTION() virtual void PrintMessage(const FString& Message);
+
+	/** Prints a list of the actors within the level */
+	UFUNCTION(BlueprintCallable) virtual void PrintActorsInLevel(bool bSavedActors = true);
+
 	
 };

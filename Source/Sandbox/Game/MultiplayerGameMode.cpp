@@ -53,44 +53,7 @@ void AMultiplayerGameMode::HandleMatchHasStarted()
 	
 	Super::HandleMatchHasStarted(); // BeginPlay
 
-	// Update actors in level with saved state information
-	TArray<AActor*> LevelActors;
-	TArray<ILevelSaveInformationInterface*> SavedActors;
-	TArray<AActor*> Actors = GetLevel()->Actors;
-	UE_LOGFMT(LogTemp, Log, " ");
-	UE_LOGFMT(LogTemp, Log, "//--------------------------------------------------------------------------------------------//");
-	UE_LOGFMT(LogTemp, Log, "// Printing the actors of the level");
-	UE_LOGFMT(LogTemp, Log, "//--------------------------------------------------------------------------------------------//");
-	for (AActor* Actor : Actors)
-	{
-		ILevelSaveInformationInterface* SavedActor = Cast<ILevelSaveInformationInterface>(Actor);
-		if (SavedActor) SavedActors.Add(SavedActor);
-		else LevelActors.Add(Actor);
-	}
-
-	UE_LOGFMT(LogTemp, Log, " ");
-	UE_LOGFMT(LogTemp, Log, "//----------------------------------------------//");
-	UE_LOGFMT(LogTemp, Log, "// Saved actors list");
-	UE_LOGFMT(LogTemp, Log, "//----------------------------------------------//");
-	for (ILevelSaveInformationInterface* SavedActor : SavedActors)
-	{
-		AActor* Actor = Cast<AActor>(SavedActor);
-		if (!Actor) continue;
-
-		UE_LOGFMT(LogTemp, Log, "// Saved: {0}, Id: {1}", *GetNameSafe(Actor), *SavedActor->Execute_GetActorLevelId(Actor).ToString());
-	}
-	UE_LOGFMT(LogTemp, Log, "//----------------------------------------//");
-	
-	// UE_LOGFMT(LogTemp, Log, " ");
-	// UE_LOGFMT(LogTemp, Log, "//----------------------------------------------//");
-	// UE_LOGFMT(LogTemp, Log, "// Level actors list");
-	// UE_LOGFMT(LogTemp, Log, "//----------------------------------------------//");
-	// for (AActor* LevelActor : LevelActors)
-	// {
-	// 	UE_LOGFMT(LogTemp, Log, "// Level: {0}", *GetNameSafe(LevelActor));
-	// }
-	// UE_LOGFMT(LogTemp, Log, "//----------------------------------------//");
-		
+	PrintActorsInLevel(false);
 
 	// TODO: Figure out what to do for clients that are joining games during play
 	// TODO: race condition with OnInitAbilityActorInfo and both adjust the settings / saved information of the character, we need to use ClientJoinSession for initializing server information at the beginning of games
@@ -128,5 +91,50 @@ void AMultiplayerGameMode::PrintMessage(const FString& Message)
 		{
 			UE_LOGFMT(GameModeLog, Warning, "{0}::{1}() {2} ->  {3}", *UEnum::GetValueAsString(PlayerController->GetLocalRole()), *FString(__FUNCTION__), GetNameSafe(PlayerController), Message);
 		}
+	}
+}
+
+
+void AMultiplayerGameMode::PrintActorsInLevel(bool bSavedActors)
+{
+	// Update actors in level with saved state information
+	TArray<AActor*> LevelActors;
+	TArray<ILevelSaveInformationInterface*> SavedActors;
+	TArray<AActor*> Actors = GetLevel()->Actors;
+	UE_LOGFMT(LogTemp, Log, " ");
+	UE_LOGFMT(LogTemp, Log, "//--------------------------------------------------------------------------------------------//");
+	UE_LOGFMT(LogTemp, Log, "// Printing the actors of the level");
+	UE_LOGFMT(LogTemp, Log, "//--------------------------------------------------------------------------------------------//");
+	for (AActor* Actor : Actors)
+	{
+		ILevelSaveInformationInterface* SavedActor = Cast<ILevelSaveInformationInterface>(Actor);
+		if (SavedActor) SavedActors.Add(SavedActor);
+		else LevelActors.Add(Actor);
+	}
+
+	UE_LOGFMT(LogTemp, Log, " ");
+	UE_LOGFMT(LogTemp, Log, "//----------------------------------------------//");
+	UE_LOGFMT(LogTemp, Log, "// Saved actors list");
+	UE_LOGFMT(LogTemp, Log, "//----------------------------------------------//");
+	for (ILevelSaveInformationInterface* SavedActor : SavedActors)
+	{
+		AActor* Actor = Cast<AActor>(SavedActor);
+		if (!Actor) continue;
+
+		UE_LOGFMT(LogTemp, Log, "// Saved: {0}, Id: {1}", *GetNameSafe(Actor), *SavedActor->Execute_GetActorLevelId(Actor).ToString());
+	}
+	UE_LOGFMT(LogTemp, Log, "//----------------------------------------//");
+
+	if (bSavedActors)
+	{
+		UE_LOGFMT(LogTemp, Log, " ");
+		UE_LOGFMT(LogTemp, Log, "//----------------------------------------------//");
+		UE_LOGFMT(LogTemp, Log, "// Level actors list");
+		UE_LOGFMT(LogTemp, Log, "//----------------------------------------------//");
+		for (AActor* LevelActor : LevelActors)
+		{
+			UE_LOGFMT(LogTemp, Log, "// Level: {0}", *GetNameSafe(LevelActor));
+		}
+		UE_LOGFMT(LogTemp, Log, "//----------------------------------------//");
 	}
 }
