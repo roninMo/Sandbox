@@ -56,6 +56,7 @@ void ACharacterCameraLogic::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME_CONDITION_NOTIFY(ACharacterCameraLogic, CameraStyle, COND_None, REPNOTIFY_OnChanged);
+	DOREPLIFETIME_CONDITION_NOTIFY(ACharacterCameraLogic, CameraOrientation, COND_None, REPNOTIFY_OnChanged);
 	DOREPLIFETIME_CONDITION(ACharacterCameraLogic, AimRotation, COND_SimulatedOnly);
 }
 
@@ -231,6 +232,7 @@ bool ACharacterCameraLogic::IsAbleToActivateCameraOrientation()
 }
 
 
+void ACharacterCameraLogic::OnRep_CameraOrientation() { OnCameraOrientationSet(); }
 void ACharacterCameraLogic::OnCameraOrientationSet()
 {
 	FVector CameraLocation = CameraOffset_FirstPerson;

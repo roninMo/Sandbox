@@ -31,7 +31,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, ReplicatedUsing=OnRep_CameraStyle, Category = "Camera") FName CameraStyle;
 
 	/** These are based on the client, but need to be replicated for late joining clients, so we're using both RPC's and replication to achieve this */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera") ECameraOrientation CameraOrientation;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, ReplicatedUsing=OnRep_CameraOrientation, Category = "Camera") ECameraOrientation CameraOrientation;
 
 	/** The target camera location that we interp to during transitions between different camera orientations */
 	UPROPERTY(BlueprintReadWrite, Category = "Camera") FVector TargetOffset;
@@ -240,6 +240,9 @@ public:
 protected:
 	/** Returns true if there's no input replication delay for transitioning between different camera orientations */
 	UFUNCTION(BlueprintCallable, Category = "Camera|Orientation") virtual bool IsAbleToActivateCameraOrientation();
+	
+	/** Latent replication update function for replicated clients to get updates based on the camera orientation. Use this for a variety of different things with OnCameraOrientationSet() */
+	UFUNCTION() virtual void OnRep_CameraOrientation();
 	
 	/** Blueprint function for preventing the player from adjusting the camera orientation during specific events */
 	UFUNCTION(BlueprintImplementableEvent, Category="Camera|Orientation", meta = (DisplayName = "Should Prevent Camera Orientation Adjustments"))

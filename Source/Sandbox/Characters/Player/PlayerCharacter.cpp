@@ -18,6 +18,7 @@
 #include "Sandbox/Characters/Components/Periphery/PeripheryComponent.h"
 #include "Sandbox/Characters/Components/Camera/TargetLockSpringArm.h"
 #include "Sandbox/Characters/Components/Saving/SaveComponents/SaveComponent_Character.h"
+#include "Sandbox/Game/MultiplayerGameMode.h"
 #include "Sandbox/Hud/Hud/PlayerHud.h"
 
 
@@ -47,6 +48,7 @@ APlayerCharacter::APlayerCharacter(const FObjectInitializer& ObjectInitializer) 
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	UE_LOGFMT(GameModeLog, Warning, "{0}::{1}() {2} BeginPlay", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
 }
 
 
@@ -132,6 +134,8 @@ void APlayerCharacter::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAv
 	
 	// Blueprint function event
 	BP_OnInitAbilityActorInfo();
+	
+	UE_LOGFMT(GameModeLog, Warning, "{0}::{1}() {2} OnInitAbilityActorInfo", *UEnum::GetValueAsString(GetLocalRole()), *FString(__FUNCTION__), *GetName());
 }
 
 
