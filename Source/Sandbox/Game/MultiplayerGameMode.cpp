@@ -29,12 +29,7 @@ void AMultiplayerGameMode::PreInitializeComponents()
 	// Spawn the Level's save component
 	if (LevelSaveComponentClass)
 	{
-		FActorSpawnParameters SpawnInfo;
-		SpawnInfo.Instigator = GetInstigator();
-		SpawnInfo.ObjectFlags |= RF_Transient;	// Server only!				
-
-		UWorld* World = GetWorld();
-		LevelSaveComponent = World->SpawnActor<ULevelSaveComponent>(LevelSaveComponentClass, SpawnInfo);
+		LevelSaveComponent = NewObject<ULevelSaveComponent>(this, LevelSaveComponentClass);
 	}
 }
 #pragma endregion
@@ -101,15 +96,15 @@ void AMultiplayerGameMode::HandleMatchHasStarted()
 
 void AMultiplayerGameMode::HandleMatchHasEnded()
 {
-	Super::HandleMatchHasEnded();
-
 	// Save level and character information
 	if (LevelSaveComponent)
 	{
-		// LevelSaveComponent->SaveCurrentState(true);
+		LevelSaveComponent->SaveCurrentState(true);
 	}
 
 	PrintMessage("Handling MatchHasEnded");
+
+	Super::HandleMatchHasEnded();
 }
 
 
