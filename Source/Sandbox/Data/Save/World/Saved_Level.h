@@ -28,9 +28,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FString, F_LevelSaveInformation_Actor> SavedActors;
 
 public:
-	/** Retrieves the saved actors that have been placed in the level, and the ones that have been spawned in the world */
+	/** Retrieves the saved actors that have been placed in the level, and the ones that were spawned in the world */
 	UFUNCTION(BlueprintCallable, Category = "Level|Saving")
-	virtual void GetSavedAndSpawnedActors(ULevel* Level, TArray<AActor*>& OutLevelActors, TArray<F_LevelSaveInformation_Actor>& OutSpawnedActors);
+	virtual void GetSavedAndSpawnedActors(ULevel* Level, TArray<FString>& OutSpawnedActors, TArray<AActor*>& OutLevelActors, TArray<FString>& OutPlayers);
+
+	// ResetSave
+	//		-> Remove spawned actors and player information
+
+	// LoadSave
+	//		-> Logic / Blueprint customization for creating saves with certain spawned logic / player information
 	
 	
 };

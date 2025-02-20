@@ -94,7 +94,7 @@ bool AWorldItem::SaveActorData_Implementation(const F_LevelSaveInformation_Actor
 }
 
 
-bool AWorldItem::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave)
+bool AWorldItem::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave, bool bRetrieveActorSave)
 {
 	// TODO: I don't know if we should handle the level state logic here
 	bool bSuccessfullyLoaded = true;
@@ -104,6 +104,10 @@ bool AWorldItem::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor
 	}
 	
 	// Handle any other state that's specific to the character's level specific save state
+	if (bRetrieveActorSave)
+	{
+		
+	}
 
 	Execute_OnLoadFromLevel(this, PreviousSave, bSuccessfullyLoaded);
 	return bSuccessfullyLoaded;

@@ -4,6 +4,9 @@
 #include "LevelSaveComponent.h"
 
 #include "Kismet/GameplayStatics.h"
+#include "Logging/StructuredLog.h"
+#include "Sandbox/Characters/CharacterBase.h"
+#include "Sandbox/Data/Enums/ESaveType.h"
 #include "Sandbox/Data/Enums/GameModeTypes.h"
 #include "Sandbox/Data/Interfaces/Save/LevelSaveInformationInterface.h"
 #include "Sandbox/Data/Save/World/Saved_Level.h"
@@ -57,6 +60,90 @@ bool ULevelSaveComponent::SaveCurrentState_Implementation(bool bSaveActorData)
 }
 
 
+bool ULevelSaveComponent::LoadCurrentState_Implementation(bool bRetrieveActorData)
+{
+	if (!GetGameMode() || !GetLevel())
+	{
+		return false;
+	}
+	
+	SaveState = GetSaveGameRef();
+	if (!SaveState)
+	{
+		return true;
+	}
+
+	const TMap<FString, F_LevelSaveInformation_Actor>& SavedActors = SaveState->SavedActors;
+	TArray<ACharacterBase*> Characters;
+	TArray<FString> SpawnedActors;
+	TArray<FString> Players;
+	TArray<AActor*> LevelActors;
+
+	// Load level information and the spawned actors, and the actor information
+	// TODO: Refactor this for proper structure for handling level/spawned actors and player information dynamically, and with efficient retrieving of the references
+	SaveState->GetSavedAndSpawnedActors(GetLevel(), SpawnedActors, LevelActors, Players);
+
+	// Search through the level for actors with save logic, and find players with save state
+	for (AActor* Actor : LevelActors)
+	{
+		if (!Actor) continue;
+		if (!Actor->GetClass()->ImplementsInterface(ULevelSaveInformationInterface::StaticClass())) continue;
+
+		FString Id = ILevelSaveInformationInterface::Execute_GetActorLevelId(Actor);
+		if (SavedActors.Contains(Id))
+		{
+			// Load the level actor / current player's saved information
+			const F_LevelSaveInformation_Actor& SaveData = SavedActors[Id]; // don't update references until we save information
+			if (SaveData.SaveType == ESaveIdType::LevelActor)
+			{
+				
+			}
+			else if (SaveData.SaveType == ESaveIdType::Player)
+			{
+				
+			}
+
+			// Load the actor's information
+			ILevelSaveInformationInterface::Execute_LoadFromLevel(Actor, SavedActors[Id], bRetrieveActorData);
+		}
+
+		// TODO: Logic for handling level actors that don't have save information?
+		
+	}
+	
+	// Spawn actors that were previously spawned in the world
+	for (FString Id : SpawnedActors)
+	{
+		if (!SavedActors.Contains(Id)) continue;
+		if (!SavedActors[Id].IsValidForSpawning()) continue;
+
+		// Spawn and place the actor in the level
+		const F_LevelSaveInformation_Actor& SaveData = SavedActors[Id];
+		FActorSpawnParameters SpawnInfo;
+		SpawnInfo.OverrideLevel = GetLevel();
+		FTransform SpawnTransform = FTransform(SaveData.Rotation, SaveData.Location, FVector(0));
+
+		AActor* SpawnedActor = GetWorld()->SpawnActor<AActor>(SaveData.Class, SpawnTransform, SpawnInfo);
+		if (!SpawnedActor)
+		{
+			UE_LOGFMT(GameModeLog, Error, "{0}() {1} Failed to spawn actor {2}!", *FString(__FUNCTION__), *GetName(), *SaveData.Class->GetName());
+		}
+		else
+		{
+			// Load the actor's save information
+			if (SpawnedActor->GetClass()->ImplementsInterface(ULevelSaveInformationInterface::StaticClass()))
+			{
+				ILevelSaveInformationInterface::Execute_LoadFromLevel(SpawnedActor, SaveData, bRetrieveActorData);
+				
+				// TODO: Init logic for when we spawn actors that were saved to the level
+			}
+		}
+	}
+
+	return true;
+}
+
+
 void ULevelSaveComponent::AddPendingActor_Implementation(const F_LevelSaveInformation_Actor& SaveInformation)
 {
 	if (!SaveInformation.IsValid()) return;
@@ -94,6 +181,11 @@ USaved_Level* ULevelSaveComponent::GetSaveGameRef()
 	return Cast<USaved_Level>(UGameplayStatics::LoadGameFromSlot(LevelSaveSlot, 0));
 }
 
+
+bool ULevelSaveComponent::IsValidToCurrentlySave_Implementation() const
+{
+	return true;
+}
 
 
 FString ULevelSaveComponent::GetSaveGameSlot(const FString& LevelName, EGameModeType GameModeType) const

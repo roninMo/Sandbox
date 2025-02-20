@@ -30,6 +30,9 @@ class SANDBOX_API USaveComponent : public UActorComponent
 protected:
 	/** Whether to use the save configurations. Used for debugging */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") bool bUseSaveInformation;
+
+	/** Whether we save on EndPlay */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") bool bSaveOnEndPlay;
 	
 	/** The save configuration for the actor we're attached to */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") TMap<ESaveType, F_SaveLogicConfiguration> SaveConfigurations;
@@ -176,6 +179,10 @@ public:
 
 	/** Returns whether the save component handles saving information for a specific save type */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual bool HandlesSaving(const ESaveType SaveType) const;
+
+	/** Returns an array of the save types this component saves */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual TArray<ESaveType> GetSaveTypes() const;
+
 
 protected:
 	/** Retrieves the player's save slot id specific to their steam/console platform account for saving purposes */

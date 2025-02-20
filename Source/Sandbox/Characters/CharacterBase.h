@@ -835,7 +835,7 @@ public:
 	 * Retrieves the level's currently saved state for this actor, and loads the saved information
 	 * @note							This is only specific to spawned and placed actors within the level, utilize their save components to save specific information   
 	 */
-	virtual bool LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave) override;
+	virtual bool LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave, bool bRetrieveActorSave) override;
 	
 	/**
 	 * Retrieves the id of the actor. This is used for retrieving the proper save information for actors placed and spawned in the world \n

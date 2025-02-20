@@ -5,11 +5,12 @@
 
 #include "Kismet/KismetGuidLibrary.h"
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Data/Enums/ESaveType.h"
 #include "Sandbox/Data/Interfaces/Save/LevelSaveInformationInterface.h"
 #include "Sandbox/Game/MultiplayerGameMode.h"
 
 
-void USaved_Level::GetSavedAndSpawnedActors(ULevel* Level, TArray<AActor*>& OutLevelActors, TArray<F_LevelSaveInformation_Actor>& OutSpawnedActors)
+void USaved_Level::GetSavedAndSpawnedActors(ULevel* Level, TArray<FString>& OutSpawnedActors, TArray<AActor*>& OutLevelActors, TArray<FString>& OutPlayers)
 {
 	if (!Level)
 	{
@@ -40,20 +41,19 @@ void USaved_Level::GetSavedAndSpawnedActors(ULevel* Level, TArray<AActor*>& OutL
 		}
 	}
 
-	// Find and send the spawned actors
+	// Find and send the spawned actors and player references
 	for (auto &[Id, SavedInformation] : SavedActors)
 	{
-		// Does the object exist in the level actor list?
-		if (!LevelActors.Contains(Id))
+		// Actors spawned in the world
+		if (SavedInformation.SaveType == ESaveIdType::SpawnedActor)
 		{
-			// Check if the string is an inventory id reference, otherwise it's a newly placed save object in the world
-			FGuid InventoryId;
-			bool bIsSpawnedActor = false;
-			UKismetGuidLibrary::Parse_StringToGuid(Id, InventoryId, bIsSpawnedActor);
-			if (bIsSpawnedActor)
-			{
-				OutSpawnedActors.Add(SavedInformation);
-			}
+			OutSpawnedActors.Add(Id);
+		}
+
+		// Player save information
+		if (SavedInformation.SaveType == ESaveIdType::Player)
+		{
+			OutPlayers.Add(Id);
 		}
 	}
 }

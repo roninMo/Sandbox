@@ -23,11 +23,11 @@ class SANDBOX_API AMultiplayerGameMode : public AGameMode
 
 protected:
 	/** Class of the level's SaveLogic, which handles save information and state for actors during play */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Classes)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Classes|Level")
 	TSubclassOf<ULevelSaveComponent> LevelSaveComponentClass;
 
 	/** The Game Mode's classification */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=GameMode)
 	EGameModeType GameModeType;
 
 	/** A stored reference to the save logic component */

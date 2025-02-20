@@ -308,17 +308,9 @@ bool ACharacterBase::SaveActorData_Implementation(const F_LevelSaveInformation_A
 
 	// Save the actor data accordingly
 	bool bSuccessfullySavedInformation = true;
-	if (SaveComponent->HandlesSaving(ESaveType::Attributes))
+	for (const ESaveType SaveType : SaveComponent->GetSaveTypes())
 	{
-		if (!SaveComponent->SaveData(ESaveType::Attributes)) bSuccessfullySavedInformation = false;
-	}
-	if (SaveComponent->HandlesSaving(ESaveType::Combat))
-	{
-		if (!SaveComponent->SaveData(ESaveType::Combat)) bSuccessfullySavedInformation = false;
-	}
-	if (SaveComponent->HandlesSaving(ESaveType::Inventory))
-	{
-		if (!SaveComponent->SaveData(ESaveType::Inventory)) bSuccessfullySavedInformation = false;
+		if (!SaveComponent->SaveData(SaveType)) bSuccessfullySavedInformation = false;
 	}
 
 	Execute_OnSaveActorData(this, SaveConfig);
@@ -326,7 +318,7 @@ bool ACharacterBase::SaveActorData_Implementation(const F_LevelSaveInformation_A
 }
 
 
-bool ACharacterBase::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave)
+bool ACharacterBase::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave, bool bRetrieveActorSave)
 {
 	// TODO: I don't know if we should handle the level state logic here
 	bool bSuccessfullyLoaded = true;
@@ -336,6 +328,13 @@ bool ACharacterBase::LoadFromLevel_Implementation(const F_LevelSaveInformation_A
 	}
 	
 	// Handle any other state that's specific to the character's level specific save state
+	if (SaveComponent && bRetrieveActorSave)
+	{
+		for (const ESaveType SaveType : SaveComponent->GetSaveTypes())
+		{
+			if (!SaveComponent->LoadData(SaveType)) bSuccessfullyLoaded = false;
+		}
+	}
 
 	Execute_OnLoadFromLevel(this, PreviousSave, bSuccessfullyLoaded);
 	return bSuccessfullyLoaded;

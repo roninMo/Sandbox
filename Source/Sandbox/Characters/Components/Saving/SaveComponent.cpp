@@ -18,11 +18,24 @@ USaveComponent::USaveComponent(const FObjectInitializer& ObjectInitializer) : Su
 	PrimaryComponentTick.bCanEverTick = true;
 	PrimaryComponentTick.TickGroup = TG_EndPhysics;
 	PrimaryComponentTick.bStartWithTickEnabled = true;
+
+	bUseSaveInformation = true;
+	bSaveOnEndPlay = true;
 }
 
 
 void USaveComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+	// Save and delete the save data
+	if (bSaveOnEndPlay)
+	{
+		for (auto &[SaveState, SaveLogic] : SaveLogicComponents)
+		{
+			if (!SaveLogic) continue;
+			SaveLogic->SaveData();
+		}
+	}
+
 	DeleteSaveStates();
 	Super::EndPlay(EndPlayReason);
 }
@@ -115,12 +128,15 @@ bool USaveComponent::InitializeSaveLogic()
 void USaveComponent::DeleteSaveStates()
 {
 	// TODO: Check that it's safe to save while pending construction!
-	// Save and delete the save data
-	for (auto &[SaveState, SaveLogic] : SaveLogicComponents)
+	// delete the save components
+	if (bSaveOnEndPlay)
 	{
-		if (!SaveLogic) continue;
-		SaveLogic->SaveData();
-		SaveLogic->ConditionalBeginDestroy();
+		for (auto &[SaveState, SaveLogic] : SaveLogicComponents)
+		{
+			if (!SaveLogic) continue;
+			SaveLogic->ConditionalBeginDestroy();
+		}
+		
 	}
 
 	SaveLogicComponents.Empty();
@@ -219,6 +235,18 @@ FString USaveComponent::GetSaveSlotIdReference(const ESaveType Saving) const
 bool USaveComponent::HandlesSaving(const ESaveType SaveType) const
 {
 	return SaveConfigurations.Contains(SaveType);
+}
+
+
+TArray<ESaveType> USaveComponent::GetSaveTypes() const
+{
+	TArray<ESaveType> SaveTypes;
+	for (auto &[SaveType, SaveLogic] : SaveLogicComponents)
+	{
+		SaveTypes.Add(SaveType);
+	}
+
+	return SaveTypes;
 }
 
 

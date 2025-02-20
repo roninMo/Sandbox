@@ -18,7 +18,7 @@ class USaved_Level;
  *
  * TODO: Add asynchronous save logic. Errors that happen while abruptly stopping save functionality rarely corrupt save logic, however we don't want problems with performance
  */
-UCLASS()
+UCLASS( Blueprintable, ClassGroup=(Saving), meta=(BlueprintSpawnableComponent) )
 class SANDBOX_API ULevelSaveComponent : public UObject
 {
 	GENERATED_BODY()
@@ -36,7 +36,7 @@ public:
 	 * Updates the save information with the current list of pending actors that need to be saved
 	 *
 	 * @note TODO: Add custom functionality for saving individual information outside of level logic if necessary
-	 * @param						bSaveActorData Whether to save the actors combat / inventory information
+	 * @param bSaveActorData		Whether to save the actors combat / inventory information
 	 * @returns						Whether the current state information was successfully saved
 	 */
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool SaveCurrentState(bool bSaveActorData = false);
@@ -50,9 +50,18 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") void AddPendingActor(const F_LevelSaveInformation_Actor& SaveInformation);
 	virtual void AddPendingActor_Implementation(const F_LevelSaveInformation_Actor& SaveInformation);
 
-	// IsValidToCurrentlySave
-	// LoadSave
-	// AddActorToPendingSave
+	/** Returns whether we're able to currently save the level's state information */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool IsValidToCurrentlySave() const;
+	virtual bool IsValidToCurrentlySave_Implementation() const;
+
+	/**
+	 * Loads the level's save state information and updates the actors within the level. Optionally handles additionally loading the actor's save information
+	 *
+	 * @param bRetrieveActorData	Whether to load the actor's saved information
+	 * @returns						Whether the save information was successfully retrieved
+	 */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool LoadCurrentState(bool bRetrieveActorData = false);
+	virtual bool LoadCurrentState_Implementation(bool bRetrieveActorData = false);
 
 
 	

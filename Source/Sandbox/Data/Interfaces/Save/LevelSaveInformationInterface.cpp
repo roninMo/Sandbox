@@ -14,7 +14,7 @@ bool ILevelSaveInformationInterface::SaveActorData_Implementation(const F_LevelS
 }
 
 
-bool ILevelSaveInformationInterface::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave)
+bool ILevelSaveInformationInterface::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave, bool bRetrieveActorSave)
 {
 	return true;
 }

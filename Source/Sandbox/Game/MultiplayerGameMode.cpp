@@ -78,12 +78,17 @@ void AMultiplayerGameMode::HandleMatchHasStarted()
 	//				while not creating internal logic that persists between when it's registered and removed, we're just going to trust that the save system doesn't sway from that until other problems occur
 	//				going through the engine code to edit how it's packaged would edit the engine / world code and we're not doing that right now, since it's all hoisted on separate production deployments and stages
 
-	// Retrieve the saved information for the objects spawned in the game
+	// Load the level's current save state to be replicated to clients that joined
 	if (LevelSaveComponent)
+	{
+		LevelSaveComponent->LoadCurrentState(true);
+	}
+
+	ULevel* Level = GetLevel();
+	if (!Level)
 	{
 		
 	}
-	
 	
 
 
@@ -97,6 +102,13 @@ void AMultiplayerGameMode::HandleMatchHasStarted()
 void AMultiplayerGameMode::HandleMatchHasEnded()
 {
 	Super::HandleMatchHasEnded();
+
+	// Save level and character information
+	if (LevelSaveComponent)
+	{
+		// LevelSaveComponent->SaveCurrentState(true);
+	}
+
 	PrintMessage("Handling MatchHasEnded");
 }
 
@@ -111,13 +123,14 @@ void AMultiplayerGameMode::HandleLeavingMap()
 void AMultiplayerGameMode::HandleMatchAborted()
 {
 	Super::HandleMatchAborted();
+	
+	// Save level and character information
+	if (LevelSaveComponent)
+	{
+		
+	}
+
 	PrintMessage("Handling MatchAborted");
-}
-
-
-EGameModeType AMultiplayerGameMode::GetGameModeType()
-{
-	return GameModeType;
 }
 #pragma endregion
 
@@ -125,6 +138,12 @@ EGameModeType AMultiplayerGameMode::GetGameModeType()
 
 
 #pragma region Utility
+EGameModeType AMultiplayerGameMode::GetGameModeType()
+{
+	return GameModeType;
+}
+
+
 void AMultiplayerGameMode::PrintMessage(const FString& Message)
 {
 	for( FConstPlayerControllerIterator Iterator = GetWorld()->GetPlayerControllerIterator(); Iterator; ++Iterator )

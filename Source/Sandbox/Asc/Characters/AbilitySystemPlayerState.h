@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
-#include "GameFramework/PlayerState.h"
+#include "Sandbox/Characters/Player/BasePlayerState.h"
 #include "AbilitySystemPlayerState.generated.h"
 
 class UAbilitySystem;
@@ -15,7 +15,7 @@ class UAttributeLogic;
  * 
  */
 UCLASS()
-class SANDBOX_API AAbilitySystemPlayerState : public APlayerState, public IAbilitySystemInterface
+class SANDBOX_API AAbilitySystemPlayerState : public ABasePlayerState, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 

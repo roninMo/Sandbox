@@ -34,3 +34,25 @@ enum class ESaveType : uint8
 };
 
 
+
+
+/**
+ *	What kind of actor is the save information referencing?
+ */
+UENUM(BlueprintType)
+enum class ESaveIdType : uint8
+{
+	/** The save id reference hasn't been created yet! */
+	None				UMETA(DisplayName = "None"),
+
+	/** An actor that isn't specific to the level and was spawned in the world. Their id is the item / inventory id reference */
+	SpawnedActor		UMETA(DisplayName = "Spawned Actor"),
+	
+	/** A player's save information. Their id is their steam / console account id or their platform id */
+	Player				UMETA(DisplayName = "Player"),
+	
+	/** A level actor that's spawned initially in the world, where the GetName() reference is somewhat safe to use as an id */
+	LevelActor			UMETA(DisplayName = "Level Actor"),
+	
+	MAX					UMETA(DisplayName = "MAX")
+};

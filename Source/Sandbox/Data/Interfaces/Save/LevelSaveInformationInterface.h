@@ -89,20 +89,23 @@ public:
 
 	/**
 	 * Retrieves the level's currently saved state for this actor, and loads the saved information
+	 * 
+	 * @params PreviousSave				The information that's sent to the level blueprint for loading
+	 * @params bRetrieveActorSave		Whether to load the actor's save information (not specific to the level)
 	 * @note							This is only specific to spawned and placed actors within the level, utilize their save components to save specific information   
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Level|Saving", DisplayName = "Load From Level") bool LoadFromLevel(const F_LevelSaveInformation_Actor& PreviousSave);
-	virtual bool LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Level|Saving", DisplayName = "Load From Level") bool LoadFromLevel(const F_LevelSaveInformation_Actor& PreviousSave, bool bRetrieveActorSave);
+	virtual bool LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave, bool bRetrieveActorSave);
 
 	/**
-	 * Blueprint event for when the actor's save information has been sent to the level for saving
+	 * Blueprint event for when the actor's save information has been sent to the level for loading
 	 *
-	 * @params PreviousSave				The information that's sent to the level blueprint for saving
+	 * @params PreviousSave				The information that's sent to the level blueprint for loading
 	 * @note							This is only specific to spawned and placed actors within the level, utilize their save components to save specific information   
 	 */
 	UFUNCTION(BlueprintImplementableEvent, Category = "Level|Saving", DisplayName = "On Load From Level")
 	void OnLoadFromLevel(const F_LevelSaveInformation_Actor& PreviousSave, bool bSuccessfullyLoaded);
-
+	
 	
 	/**
 	 * Retrieves the id of the actor. This is used for retrieving the proper save information for actors placed and spawned in the world \n

@@ -12,6 +12,9 @@
 // LevelSave_Quests
 
 
+enum class ESaveIdType : uint8;
+
+
 /**
  * Config for what to save on the actor
  */
@@ -115,12 +118,14 @@ struct F_LevelSaveInformation_Actor
 			const TWeakObjectPtr<AActor> Actor = nullptr
 		) :
 		Id(Id),
+		SaveType(),
 		Location(Location),
 		Rotation(Rotation),
 		Config(Config),
 		Class(Class),
 		Actor(Actor)
-	{}
+	{
+	}
 
 	virtual ~F_LevelSaveInformation_Actor() {}
 
@@ -135,6 +140,9 @@ struct F_LevelSaveInformation_Actor
 	 * 
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString Id;
+
+	/** How the save id was constructed. This is based on whether it's a player, level actor, or was spawned in the level */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) ESaveIdType SaveType;
 
 	/** The location of the actor that's spawned in the world */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FVector Location;
@@ -159,24 +167,22 @@ public:
 		return this->Id;
 	}
 
-	/** Convenience function to update the actor's save config */
-	virtual void UpdateConfig(bool bAttributes = true, bool bInventory = true, bool bCombat = true)
+	/** Is this a valid item? */
+	virtual bool IsValid() const
 	{
-		this->Config.bSaveAttributes = bAttributes;
-		this->Config.bSaveInventory = bInventory;
-		this->Config.bSaveCombat = bCombat;
+		return !this->Id.IsEmpty();
+	}
+	
+	/** Is this valid information for spawning in the level? */
+	virtual bool IsValidForSpawning() const
+	{
+		return this->Class && this->Location != FVector::ZeroVector && this->Rotation != FRotator::ZeroRotator;
 	}
 
 	/** Retrieves whether we should save the attributes */
 	virtual bool ShouldSaveAttributes() const
 	{
 		return this->Config.bSaveAttributes;
-	}
-
-	/** Retrieves whether we should save the inventory  */
-	virtual bool ShouldSaveInventory() const
-	{
-		return this->Config.bSaveInventory;
 	}
 	
 	/** Retrieves whether we should save the combat information  */
@@ -185,9 +191,17 @@ public:
 		return this->Config.bSaveCombat;
 	}
 
-	/** Is this a valid item? */
-	virtual bool IsValid() const
+	/** Retrieves whether we should save the inventory  */
+	virtual bool ShouldSaveInventory() const
 	{
-		return !this->Id.IsEmpty();
+		return this->Config.bSaveInventory;
+	}
+	
+	/** Convenience function to update the actor's save config */
+	virtual void UpdateConfig(bool bAttributes = true, bool bInventory = true, bool bCombat = true)
+	{
+		this->Config.bSaveAttributes = bAttributes;
+		this->Config.bSaveInventory = bInventory;
+		this->Config.bSaveCombat = bCombat;
 	}
 };
