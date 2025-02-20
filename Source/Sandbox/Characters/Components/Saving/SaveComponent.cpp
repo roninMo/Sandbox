@@ -189,7 +189,12 @@ void USaveComponent::LoadPlayerInformation()
 
 bool USaveComponent::LoadData(const ESaveType InformationType)
 {
-	if (!SaveLogicComponents.Contains(InformationType) || PreventingLoadingFor(InformationType))
+	if (!SaveLogicComponents.Contains(InformationType))
+	{
+		return false;
+	}
+
+	if (PreventingLoadingFor(InformationType))
 	{
 		return false;
 	}
