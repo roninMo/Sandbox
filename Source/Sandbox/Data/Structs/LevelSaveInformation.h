@@ -26,9 +26,6 @@ struct F_SaveActorConfig
 	/** Whether to save the character's attributes */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bSaveAttributes;
 	
-	/** Whether to save the character's level information */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bSaveWorldInformation;
-	
 	/** Whether to save the character's inventory data */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bSaveInventory;
 	
@@ -38,8 +35,72 @@ struct F_SaveActorConfig
 
 
 /**
- * Information specific to an item for displaying in the inventory and spawning them in the world
- * Also contains the information to access and construct actors that have been spawned in the world
+ * Save information pertaining to an actor's state specific to a level. Subclassed versions cover the actor's saved information
+ */
+USTRUCT(BlueprintType)
+struct F_LevelSaveInformation
+{
+	GENERATED_USTRUCT_BODY()
+		F_LevelSaveInformation(
+			const FString& Id = FString(),
+			const FVector& Location = FVector(),
+			const FRotator& Rotation = FRotator(),
+			const TSubclassOf<AActor> Class = AActor::StaticClass(),
+			const TWeakObjectPtr<AActor> Actor = nullptr
+		) :
+		Id(Id),
+		Location(Location),
+		Rotation(Rotation),
+		Class(Class),
+		Actor(Actor)
+	{}
+
+	virtual ~F_LevelSaveInformation() {}
+
+	/**
+	 * The Id that's used to retrieve the actor's save information 
+	 * 
+	 * This is going to generic for handling multiple use cases for different scenarios, and might be adjusted later because this is kind of hacky
+	 *	- Players:									The character's subsystem account / platform id
+	 *	- Items Placed in Level:					The name of the object based on the level's construction
+	 *	- Items Spawned in Level during Play:		The inventory's id. Uses the class reference to construct and spawn the item once the game begins
+	 *	
+	 * 
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString Id;
+
+	/** The location of the actor that's spawned in the world */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FVector Location;
+
+	/** The rotation of the actor that's spawned in the world */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FRotator Rotation;
+
+	/** A reference to the class of the object spawned in the world */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TSubclassOf<AActor> Class;
+
+	/** A stored weak reference to the actor spawned in the world */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TWeakObjectPtr<AActor> Actor;
+	
+
+public:
+	/** Convenience function to access the id without creating another value */
+	virtual FString GetId() const
+	{
+		return this->Id;
+	}
+	
+	/** Is this a valid actor? */
+	virtual bool IsValid() const
+	{
+		return !this->Id.IsEmpty();
+	}
+};
+
+
+
+
+/**
+ * Save information pertaining to an actor's state specific to a level, and configuration for saving it's own information
  */
 USTRUCT(BlueprintType)
 struct F_LevelSaveInformation_Actor
@@ -99,10 +160,9 @@ public:
 	}
 
 	/** Convenience function to update the actor's save config */
-	virtual void UpdateConfig(bool bAttributes = true, bool bWorld = true, bool bInventory = true, bool bCombat = true)
+	virtual void UpdateConfig(bool bAttributes = true, bool bInventory = true, bool bCombat = true)
 	{
 		this->Config.bSaveAttributes = bAttributes;
-		this->Config.bSaveWorldInformation = bWorld;
 		this->Config.bSaveInventory = bInventory;
 		this->Config.bSaveCombat = bCombat;
 	}
@@ -113,12 +173,6 @@ public:
 		return this->Config.bSaveAttributes;
 	}
 
-	/** Retrieves whether we should save the world information  */
-	virtual bool ShouldSaveWorldInformation() const
-	{
-		return this->Config.bSaveWorldInformation;
-	}
-	
 	/** Retrieves whether we should save the inventory  */
 	virtual bool ShouldSaveInventory() const
 	{

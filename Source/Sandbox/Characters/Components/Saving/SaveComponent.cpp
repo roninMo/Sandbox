@@ -162,38 +162,39 @@ void USaveComponent::LoadPlayerInformation()
 	if (!bUseSaveInformation) return;
 	// Notify components to load the player information once the player has initialized and is ready to save / load it's information
 
-	// TODO: Add singleplayer / multiplayer logic for handling saving and loading information from servers/subsystems
+	// TODO: Add singleplayer / multiplayer logic for handling saving and loading information from servers/subsystems @ref USaveLogic
 	ACharacterBase* Character = Cast<ACharacterBase>(GetOwner());
 	if (Character)
 	{
 		// Attributes (if valid, send the ability system the saved stats)
-		if (SaveLogicComponents.Contains(ESaveType::Attributes) && !PreventingLoadingFor(ESaveType::Attributes))
-		{
-			SaveLogicComponents[ESaveType::Attributes]->LoadData();
-		}
+		LoadData(ESaveType::Attributes);
 
+		// World information (Location and rotation, etc)
+		// LoadData(ESaveType::World);
+		
 		// Inventory (load the inventory and send the information to the clients)
-		if (SaveLogicComponents.Contains(ESaveType::Inventory) && !PreventingLoadingFor(ESaveType::Inventory))
-		{
-			SaveLogicComponents[ESaveType::Inventory]->LoadData();
-		}
+		LoadData(ESaveType::Inventory);
 		
 		// Combat Component (equip weapons and armor)
-		if (SaveLogicComponents.Contains(ESaveType::Combat) && !PreventingLoadingFor(ESaveType::Combat))
-		{
-			SaveLogicComponents[ESaveType::Combat]->LoadData();
-		}
+		LoadData(ESaveType::Combat);
 
 		// Camera Settings (adjust camera settings on server, allow character to handle replication)
-		if (SaveLogicComponents.Contains(ESaveType::CameraSettings) && !PreventingLoadingFor(ESaveType::CameraSettings))
-		{
-			SaveLogicComponents[ESaveType::CameraSettings]->LoadData();
-		}
+		LoadData(ESaveType::CameraSettings);
 	}
 
 	// TODO: Add proper loading of the world / level on the server based on the owner of the lobby / game mode, and settings when the player opens / updates the settings
 
 	BP_LoadPlayerInformation();
+}
+
+bool USaveComponent::LoadData(const ESaveType InformationType)
+{
+	if (!SaveLogicComponents.Contains(InformationType) || PreventingLoadingFor(InformationType))
+	{
+		return false;
+	}
+	
+	return SaveLogicComponents[InformationType]->LoadData();
 }
 
 

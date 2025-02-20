@@ -77,6 +77,7 @@ void AMultiplayerGameMode::HandleMatchHasStarted()
 	// TODO: With the understanding that the level saves and creates it's objects in the list and creates an identifier based on the object and the order it's created (on client or server)
 	//				while not creating internal logic that persists between when it's registered and removed, we're just going to trust that the save system doesn't sway from that until other problems occur
 	//				going through the engine code to edit how it's packaged would edit the engine / world code and we're not doing that right now, since it's all hoisted on separate production deployments and stages
+
 	// Retrieve the saved information for the objects spawned in the game
 	if (LevelSaveComponent)
 	{

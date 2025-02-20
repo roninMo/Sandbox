@@ -80,7 +80,7 @@ F_LevelSaveInformation_Actor AWorldItem::SaveToLevel_Implementation()
 	SavedInformation.Actor = this;
 	SavedInformation.Rotation = GetActorRotation();
 	SavedInformation.Class = GetClass()->StaticClass();
-	SavedInformation.UpdateConfig(false, true, false, false);
+	SavedInformation.UpdateConfig(false, false, false);
 
 	Execute_OnSaveToLevel(this, SavedInformation);
 	return SavedInformation;

@@ -133,8 +133,16 @@ public:
 //----------------------------------------------------------------------------------//
 // Loading																			//
 //----------------------------------------------------------------------------------//
-	/** Loads the player's saved information on the client once the client has joined the game and the player has spawned */
+	/** Loads the player's saved information once the client has joined the game and the player has spawned */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual void LoadPlayerInformation();
+
+	/**
+	 * Loads specific saved information for the player
+	 *
+	 * @param InformationType			The type of information that's being loading
+	 * @returns							True if the information has been successfully loaded 
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual bool LoadData(const ESaveType InformationType);
 
 	/** Blueprint function to load the player's saved information on the client once the client has joined the game and the player has spawned */
 	UFUNCTION(BlueprintImplementableEvent, Category = "Saving and Loading", DisplayName = "On Save Data") void BP_LoadPlayerInformation();

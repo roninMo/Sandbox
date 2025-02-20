@@ -293,12 +293,11 @@ F_LevelSaveInformation_Actor ACharacterBase::SaveToLevel_Implementation()
 	
 	SaveConfig.UpdateConfig(
 	SaveComponent->HandlesSaving(ESaveType::Attributes), 
-		SaveComponent->HandlesSaving(ESaveType::World), 
 	SaveComponent->HandlesSaving(ESaveType::Inventory),
 	SaveComponent->HandlesSaving(ESaveType::Combat)
 	);
 
-	OnSaveToLevel(SaveConfig);
+	Execute_OnSaveToLevel(this, SaveConfig);
 	return SaveConfig;
 }
 

@@ -19,7 +19,10 @@ class ULevelSaveInformationInterface : public UInterface
 };
 
 /**
- * Interface for actors spawned in the world that are saved during play \n
+ * Interface for saving actor's information dynamically during play. @ref USaveComponent, @ref USaveLogic, @ref ULevelSaveComponent
+ * 
+ * Allows developers to use blueprint logic for handling Loading/Saving logic and customization for single player and multiplayer games.
+ * 
  *
  * Level Save Component (GameMode / GameState)  Functions
  *		- Save Level

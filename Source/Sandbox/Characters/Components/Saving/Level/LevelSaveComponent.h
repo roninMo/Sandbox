@@ -13,7 +13,7 @@ class USaved_Level;
 
 
 /**
- * The GameMode's save component for saving actors and their information within levels.
+ * The GameMode's save component for saving actors and their information within levels. @ref USaveComponent, @ref USaveLogic, @ref ULevelSaveComponent
  * Handles both saving level information, and referencing actor's SaveComponents for information, and is intended for adding custom classes for Singleplayer/Multiplayer/Api custom functionality
  *
  * TODO: Add asynchronous save logic. Errors that happen while abruptly stopping save functionality rarely corrupt save logic, however we don't want problems with performance
@@ -50,10 +50,12 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") void AddPendingActor(const F_LevelSaveInformation_Actor& SaveInformation);
 	virtual void AddPendingActor_Implementation(const F_LevelSaveInformation_Actor& SaveInformation);
 
+	// IsValidToCurrentlySave
+	// LoadSave
+	// AddActorToPendingSave
 
 
-	// Save actor information
-
+	
 	
 //----------------------------------------------------------------------------------//
 // Utility																			//
@@ -70,38 +72,6 @@ public:
 
 	/** Retrieves the SaveGame's slot using the level name and game mode classification */
 	UFUNCTION(BlueprintCallable) virtual FString GetSaveGameSlot(const FString& LevelName, EGameModeType GameModeType) const;
-
-
-	// IsValidToCurrentlySave
-	// LoadSave
-	// AddActorToPendingSave
-
 	
-	/**
-	 * Handles saving the data specific to the owning actor. \n\n
-	 * Subclass this logic for saving information specific to a npc, character, and their varying game modes and subsystems etc.
-	 *
-	 * @returns	True if it successfully saved the information for the npc / player
-	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool SaveData();
-	virtual bool SaveData_Implementation();
-
-	/**
-	 * Returns whether it's valid to save specific information for a character. This allows for saving under certain conditions, and preventing saving information before it's been replicated
-	 *
-	 * @returns	True if it's okay to save the information
-	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool IsValidToSave();
-	virtual bool IsValidToSave_Implementation();
-
-	/**
-	 * Handles loading the data specific to the owning actor. \n\n
-	 * Subclass this logic for saving information specific to a npc, character, and their varying game modes etc.
-	 *
-	 * @returns	True if it successfully loaded the information for the npc / player
-	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool LoadData();
-	virtual bool LoadData_Implementation();
-
 	
 };

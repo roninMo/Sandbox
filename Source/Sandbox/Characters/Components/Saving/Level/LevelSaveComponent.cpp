@@ -5,6 +5,7 @@
 
 #include "Kismet/GameplayStatics.h"
 #include "Sandbox/Data/Enums/GameModeTypes.h"
+#include "Sandbox/Data/Interfaces/Save/LevelSaveInformationInterface.h"
 #include "Sandbox/Data/Save/World/Saved_Level.h"
 #include "Sandbox/Game/MultiplayerGameMode.h"
 
@@ -41,9 +42,9 @@ bool ULevelSaveComponent::SaveCurrentState_Implementation(bool bSaveActorData)
 		else SaveData.Add(Id, Data);
 
 		// If we're saving actor state, update based on the save configurations
-		if (bSaveActorData && Data.Actor.Get())
+		if (bSaveActorData && Data.Actor.Get() && Data.Actor.Get()->GetClass()->ImplementsInterface(ULevelSaveInformationInterface::StaticClass()))
 		{
-			// Data.Actor
+			ILevelSaveInformationInterface::Execute_SaveActorData(Data.Actor.Get(), Data);
 		}
 	}
 
