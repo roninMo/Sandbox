@@ -77,6 +77,11 @@ bool USaveLogic::GetCharacterAndSaveComponent(USaveComponent*& OutSaveComponent,
 	return true;
 }
 
+FString USaveLogic::FormattedSaveInformation(const FString Slot) const
+{
+	return FString();
+}
+
 
 void USaveLogic::SetSaveLogicInformation(const F_SaveLogicConfiguration& Data)
 {

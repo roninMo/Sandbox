@@ -269,3 +269,12 @@ FString USaveComponent::GetSaveTypeName(const ESaveType SaveType) const
 	if (SaveType == ESaveType::CameraSettings) return "CameraSettings";
 	return "SaveType";
 }
+
+
+FString USaveComponent::PrintSaveState(const ESaveType SaveType, const FString Slot) const
+{
+	if (!SaveLogicComponents.Contains(SaveType)) return FString();
+	const USaveLogic* SaveLogic = SaveLogicComponents[SaveType];
+
+	return SaveLogic->FormattedSaveInformation(Slot);
+}

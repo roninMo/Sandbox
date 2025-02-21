@@ -172,14 +172,18 @@ bool AMeleeArmament::IsValidArmanent()
 	}
 
 	// For melee armaments, check if the overlap component is valid
-	if (GetArmamentHitboxes().IsEmpty())
-	{
-		return false;
-	}
+	// if (GetArmamentHitboxes().IsEmpty())
+	// {
+	// 	UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2}'s {3} hitboxes are invalid!",
+	// 		*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), *Item.DisplayName);
+	// 	return false;
+	// }
 
 	// Check if montages are valid for this specific valid
 	if (MeleeMontages_OneHand.IsEmpty() && MeleeMontages_TwoHand.IsEmpty() && MeleeMontages_DualWield.IsEmpty() && Montages.IsEmpty())
 	{
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2}'s {3} montages are invalid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), *Item.DisplayName);
 		return false;
 	}
 	

@@ -75,3 +75,36 @@ bool USave_Inventory::LoadData_Implementation()
 	InventoryComponent->LoadInventoryInformation(InventoryData->SaveInformation);
 	return true;
 }
+
+
+FString USave_Inventory::FormattedSaveInformation(const FString Slot) const
+{
+	// Retrieve the saved inventory
+	USaved_Inventory* InventoryData = Cast<USaved_Inventory>(UGameplayStatics::LoadGameFromSlot(Slot, 0));
+	if (!InventoryData)
+	{
+		return FString();
+	}
+
+	if (InventoryData->SaveInformation.InventoryItems.IsEmpty())
+	{
+		return FString();
+	}
+	
+	return InventoryData->SaveInformation.Print();
+}
+
+/*
+{
+	NetId: 0,
+	PlatformId: dfgjdsfgkjldsfg,
+
+	Items: [
+		Id: 0000, ItemName: Name, SortOrder: 0,
+		Id: 0000, ItemName: Name, SortOrder: 0,
+		Id: 0000, ItemName: Name, SortOrder: 0,
+		Id: 0000, ItemName: Name, SortOrder: 0,
+	]
+	
+}
+*/

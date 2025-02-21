@@ -168,6 +168,11 @@ struct FS_Item
 		SortOrder(SortOrder)
 	{}
 
+	virtual FString Print() const
+	{
+		return FString::Printf(TEXT("Id: %s, Name: %s, SortOrder: %d"), *Id.ToString(), *ItemName.ToString(), SortOrder);
+	}
+
 	virtual bool IsValid() const
 	{
 		return !this->ItemName.IsNone();
@@ -207,4 +212,47 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 NetId;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString PlatformId;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FS_Item> InventoryItems;
+
+	
+	virtual FString Print() const
+	{
+		TArray<FString> Results;
+
+		
+		Results.Add(FString::Printf(TEXT("{")));
+		Results.Add(FString::Printf(TEXT("{")));
+		Results.Add(FString::Printf(TEXT("\tNetId: %d"), NetId));
+		Results.Add(FString::Printf(TEXT("\tPlatformId: %s"), *PlatformId));
+		Results.Add(FString::Printf(TEXT(" ")));
+		Results.Add(FString::Printf(TEXT("\tItems: [")));
+		for (const FS_Item& Item : InventoryItems)
+		{
+			Results.Add(
+				FString::Printf(TEXT("\t\t"))
+					.Append(Item.Print())
+					.Append(TEXT(","))
+			);
+		}
+		Results.Add(FString::Printf(TEXT("\t]")));
+		Results.Add(FString::Printf(TEXT("}")));
+		
+		return FString::Join(Results, TEXT(",\n"));
+	}
+	
 };
+
+
+/*
+{
+	NetId: 0,
+	PlatformId: dfgjdsfgkjldsfg,
+
+	Items: [
+		Id: 0000, ItemName: Name, SortOrder: 0,
+		Id: 0000, ItemName: Name, SortOrder: 0,
+		Id: 0000, ItemName: Name, SortOrder: 0,
+		Id: 0000, ItemName: Name, SortOrder: 0,
+	]
+	
+}
+*/

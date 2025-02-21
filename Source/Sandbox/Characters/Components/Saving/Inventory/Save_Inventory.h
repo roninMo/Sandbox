@@ -31,5 +31,8 @@ public:
 	 */
 	virtual bool LoadData_Implementation() override;
 
+	/** Utility logic for blueprint save state printing. Helpful with debugging save information */
+	virtual FString FormattedSaveInformation(const FString Slot) const override;
+
 	
 };

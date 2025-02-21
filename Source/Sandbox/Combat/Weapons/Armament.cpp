@@ -257,7 +257,15 @@ bool AArmament::IsValidArmanent()
 {
 	// Check if montages are valid for this specific valid
 	// For melee armaments, check if the overlap component is valid
-	return ArmamentInformation.IsValid();
+
+	if (!ArmamentInformation.IsValid())
+	{
+		UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2}'s {3} information is invalid!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwner()), *Item.DisplayName);
+		return false;
+	}
+
+	return true;
 }
 
 #pragma endregion 

@@ -190,6 +190,9 @@ protected:
 
 	/** Returns the save section for the player's save information */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual FString GetSaveTypeName(const ESaveType SaveType) const;
-	
+
+
+	/** Utility logic for returning formatted save state for blueprint display. Helpful with debugging save information */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual FString PrintSaveState(const ESaveType SaveType, const FString Slot) const;
 		
 };

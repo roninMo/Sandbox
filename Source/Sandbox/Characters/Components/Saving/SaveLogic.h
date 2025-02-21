@@ -78,6 +78,9 @@ public:
 
 	/** Retrieves a reference to the Save Component and the Character */
 	virtual bool GetCharacterAndSaveComponent(USaveComponent*& OutSaveComponent, ACharacterBase*& OutCharacter);
+	
+	/** Utility logic for blueprint save state printing. Helpful with debugging save information */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual FString FormattedSaveInformation(const FString Slot) const;
 
 	/**
 	 * Called during saving to determine the load flags to save with the object.
