@@ -244,9 +244,9 @@ FString USaveComponent::GetCurrentSaveSlot(const ESaveType Saving, const int32 S
 
 FString USaveComponent::ConstructSaveSlot(int32 NetDriverId, FString AccountPlatformId, FString SaveCategory, int32 SlotIndex, int32 SaveIteration) const
 {
-	return AccountPlatformId
-		.Append(SaveCategory)
-		.Append(FString::FromInt(SlotIndex))
+	return AccountPlatformId.Append("_")
+		.Append(SaveCategory).Append("_")
+		.Append(FString::FromInt(SlotIndex)).Append("_")
 		.Append(FString::FromInt(SaveIteration));
 }
 

@@ -175,54 +175,54 @@ void UInformationComponent::GetStateInformation(EStateType StateType)
 #pragma region Information Retrieval Getters
 FInfo_Movement UInformationComponent::GetMovementInformation(ACharacterBase* Character)
 {
-	FInfo_Movement Movement;
+	FInfo_Movement MovementInformation;
 	UAdvancedMovementComponent* MovementComponent = Character ? Character->GetAdvancedMovementComp() : nullptr;
 	if (!MovementComponent)
 	{
-		return Movement;
+		return MovementInformation;
 	}
 
 	// state
-	Movement.MovementMode = MovementComponent->GetMovementMode();
-	Movement.bAiming = MovementComponent->IsAiming();
-	Movement.bCrouching = MovementComponent->IsCrouching();
-	Movement.bAcceling = MovementComponent->Velocity.Size() > 0;
-	Movement.Input = MovementComponent->GetPlayerInput();
-	Movement.Acceleration = MovementComponent->GetCurrentAcceleration();
-	Movement.Velocity = MovementComponent->GetLastUpdateVelocity();
-	Movement.Speed = MovementComponent->Velocity.Size();
-	Movement.Rotation = Character->GetActorRotation();
-	Movement.DirectionalVelocity = UKismetMathLibrary::Quat_UnrotateVector(Movement.Rotation.Quaternion(), Movement.Velocity);
-	Movement.AimRotation = Movement.DirectionalVelocity.ToOrientationRotator();;
+	MovementInformation.MovementMode = MovementComponent->GetMovementMode();
+	MovementInformation.bAiming = MovementComponent->IsAiming();
+	MovementInformation.bCrouching = MovementComponent->IsCrouching();
+	MovementInformation.bAcceling = MovementComponent->Velocity.Size() > 0;
+	MovementInformation.Input = MovementComponent->GetPlayerInput();
+	MovementInformation.Acceleration = MovementComponent->GetCurrentAcceleration();
+	MovementInformation.Velocity = MovementComponent->GetLastUpdateVelocity();
+	MovementInformation.Speed = MovementComponent->Velocity.Size();
+	MovementInformation.Rotation = Character->GetActorRotation();
+	MovementInformation.DirectionalVelocity = UKismetMathLibrary::Quat_UnrotateVector(MovementInformation.Rotation.Quaternion(), MovementInformation.Velocity);
+	MovementInformation.AimRotation = MovementInformation.DirectionalVelocity.ToOrientationRotator();;
 
 	// bhop
-	Movement.AirStrafe_MaxAcceleration = MovementComponent->StrafingMaxAcceleration;
-	Movement.AirStrafe_SpeedGainMultiplier = MovementComponent->AirStrafeSpeedGainMultiplier;
-	Movement.AirStrafe_RotationRate = MovementComponent->AirStrafeRotationRate;
-	Movement.StrafeSway_Duration = MovementComponent->StrafeSwayDuration;
-	Movement.StrafeSway_SpeedGainMultiplier = MovementComponent->StrafeSwaySpeedGainMultiplier;
-	Movement.StrafeSway_RotationRate = MovementComponent->StrafeSwayRotationRate;
-	Movement.StrafeLurch_Duration = MovementComponent->StrafeLurchDuration;
-	Movement.StrafeLurch_FullStrengthDuration = MovementComponent->StrafeLurchFullStrengthDuration;
-	Movement.StrafeLurch_Strength = MovementComponent->StrafeLurchStrength;
-	Movement.StrafeLurch_Friction = MovementComponent->StrafeLurchFriction;
+	MovementInformation.AirStrafe_MaxAcceleration = MovementComponent->StrafingMaxAcceleration;
+	MovementInformation.AirStrafe_SpeedGainMultiplier = MovementComponent->AirStrafeSpeedGainMultiplier;
+	MovementInformation.AirStrafe_RotationRate = MovementComponent->AirStrafeRotationRate;
+	MovementInformation.StrafeSway_Duration = MovementComponent->StrafeSwayDuration;
+	MovementInformation.StrafeSway_SpeedGainMultiplier = MovementComponent->StrafeSwaySpeedGainMultiplier;
+	MovementInformation.StrafeSway_RotationRate = MovementComponent->StrafeSwayRotationRate;
+	MovementInformation.StrafeLurch_Duration = MovementComponent->StrafeLurchDuration;
+	MovementInformation.StrafeLurch_FullStrengthDuration = MovementComponent->StrafeLurchFullStrengthDuration;
+	MovementInformation.StrafeLurch_Strength = MovementComponent->StrafeLurchStrength;
+	MovementInformation.StrafeLurch_Friction = MovementComponent->StrafeLurchFriction;
 
 	// config
-	Movement.bUseBhopping = MovementComponent->bUseBhopping;
-	Movement.bUseWallJumping = MovementComponent->bUseWallJumping;
-	Movement.bUseMantleJumping = MovementComponent->bUseMantleJumping;
-	Movement.bUseWallClimbing = MovementComponent->bUseWallClimbing;
-	Movement.bUseMAntling = MovementComponent->bUseMantling;
-	Movement.bUseLedgeClimbing = MovementComponent->bUseLedgeClimbing;
-	Movement.bUseWallRunning = MovementComponent->bUseWallRunning;
-	Movement.bUseSliding = MovementComponent->bUseSliding;
-	Movement.MoveSpeed = MovementComponent->Velocity.Size();
-	Movement.JumpHeight = MovementComponent->JumpZVelocity;
-	Movement.AirBrakingDeceleration = MovementComponent->BrakingDecelerationFalling;
-	Movement.WalkingBrakingDeceleration = MovementComponent->BrakingDecelerationWalking;
-	Movement.Gravity = MovementComponent->GravityScale;
+	MovementInformation.bUseBhopping = MovementComponent->bUseBhopping;
+	MovementInformation.bUseWallJumping = MovementComponent->bUseWallJumping;
+	MovementInformation.bUseMantleJumping = MovementComponent->bUseMantleJumping;
+	MovementInformation.bUseWallClimbing = MovementComponent->bUseWallClimbing;
+	MovementInformation.bUseMAntling = MovementComponent->bUseMantling;
+	MovementInformation.bUseLedgeClimbing = MovementComponent->bUseLedgeClimbing;
+	MovementInformation.bUseWallRunning = MovementComponent->bUseWallRunning;
+	MovementInformation.bUseSliding = MovementComponent->bUseSliding;
+	MovementInformation.MoveSpeed = MovementComponent->Velocity.Size();
+	MovementInformation.JumpHeight = MovementComponent->JumpZVelocity;
+	MovementInformation.AirBrakingDeceleration = MovementComponent->BrakingDecelerationFalling;
+	MovementInformation.WalkingBrakingDeceleration = MovementComponent->BrakingDecelerationWalking;
+	MovementInformation.Gravity = MovementComponent->GravityScale;
 
-	return Movement;
+	return MovementInformation;
 }
 
 
@@ -310,26 +310,26 @@ FInfo_Camera UInformationComponent::GetCameraInformation(ACharacterBase* Charact
 
 FInfo_SaveState UInformationComponent::GetSaveStateInformation(ACharacterBase* Character)
 {
-	FInfo_SaveState SaveState = FInfo_SaveState();
+	FInfo_SaveState SaveInformation = FInfo_SaveState();
 	USaveComponent* SC = Character ? Character->GetSaveComponent() : nullptr;
 	if (!SC)
 	{
 		return SaveState;
 	}
 
-	SaveState.NetId = SC->GetNetId();
-	SaveState.PlatformId = SC->GetPlatformId();
-	SaveState.SlotIndex = SC->GetSaveSlotIndex();
-	SaveState.SlotIteration = SC->GetSaveIteration();
-	SaveState.CharacterName = Character->GetName();
+	SaveInformation.NetId = SC->GetNetId();
+	SaveInformation.PlatformId = SC->GetPlatformId();
+	SaveInformation.SlotIndex = SC->GetSaveSlotIndex();
+	SaveInformation.SlotIteration = SC->GetSaveIteration();
+	SaveInformation.CharacterName = Character->GetName();
 
-	SaveState.AttributeSaveState = SC->PrintSaveState(ESaveType::Attributes, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::Attributes), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
-	SaveState.CombaSaveState = SC->PrintSaveState(ESaveType::Combat, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::Combat), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
-	SaveState.CameraSettingSaveState = SC->PrintSaveState(ESaveType::CameraSettings, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::CameraSettings), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
-	SaveState.InventorSaveState = SC->PrintSaveState(ESaveType::Inventory, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::Inventory), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
-	SaveState.SettingSaveState = SC->PrintSaveState(ESaveType::Settings, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::Settings), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
-	SaveState.WorlSaveState = SC->PrintSaveState(ESaveType::World, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::World), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
-	return SaveState;
+	SaveInformation.AttributeSaveState = SC->PrintSaveState(ESaveType::Attributes, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::Attributes), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
+	SaveInformation.CombaSaveState = SC->PrintSaveState(ESaveType::Combat, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::Combat), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
+	SaveInformation.CameraSettingSaveState = SC->PrintSaveState(ESaveType::CameraSettings, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::CameraSettings), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
+	SaveInformation.InventorSaveState = SC->PrintSaveState(ESaveType::Inventory, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::Inventory), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
+	SaveInformation.SettingSaveState = SC->PrintSaveState(ESaveType::Settings, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::Settings), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
+	SaveInformation.WorlSaveState = SC->PrintSaveState(ESaveType::World, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::World), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
+	return SaveInformation;
 }
 #pragma endregion 
 

@@ -7,6 +7,7 @@
 #include "Sandbox/Data/Structs/InventoryInformation.h"
 #include "InformationComponent.generated.h"
 
+enum class EHandlePeripheryLogic : uint8;
 DECLARE_LOG_CATEGORY_EXTERN(InformationLog, Log, All);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRetrievedInformationSignature, UInformationComponent*, InformationComponent);
@@ -247,27 +248,9 @@ class SANDBOX_API UInformationComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-protected:
-	/** The class of the character's widget used for handling / displaying character information */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Information") TSubclassOf<UUserWidget> InformationWidgetClass;
-
-	/** A stored reference to the character's information widget. Used for displaying / adjusting the character's component information, configuration, and other character information on both client and server */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Information") TObjectPtr<UUserWidget> InformationWidget;
-
-
-public:	
-	UInformationComponent();
-
-	
-protected:
-	virtual void BeginPlay() override;
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-	
-//----------------------------------------------------------------------------------------------------------//
-// Client / Server Information																				//
-//----------------------------------------------------------------------------------------------------------//
 public:
+	UInformationComponent();
+	
 	/** What instance of the character are we retrieving the information from */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") EInfoRetrieval InfoRetrieval;
 	
@@ -278,34 +261,56 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "Progress") TArray<ACharacterBase*> CharacterList;
 
 
+	/**** State Information ****/
 	/** The logical state of the movement component information we're retrieving from the client / server.  */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") FInfo_Movement MovementState;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") ELoadProgress MovementProgress;
 	
 	/** The logical state of the combat component information we're retrieving from the client / server.  */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") FInfo_Combat CombatInfoState;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") ELoadProgress CombatInfoProgress;
 	
 	/** The logical state of the inventory information we're retrieving from the client / server.  */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") FInfo_Inventory InventoryState;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") ELoadProgress InventoryProgress;
 	
 	/** The logical state of the periphery component information we're retrieving from the client / server.  */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") FInfo_Periphery PeripheryState;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") ELoadProgress PeripheryProgress;
 
 	/** The logical state of the camera component information we're retrieving from the client / server.  */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") FInfo_Camera CameraState;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") ELoadProgress CameraProgress;
 	
 	/** The logical state of the save component information we're retrieving from the client / server.  */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") FInfo_SaveState SaveState;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") ELoadProgress SaveProgress;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") ELoadProgress MovementProgress;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") ELoadProgress CombatInfoProgress;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") ELoadProgress InventoryProgress;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") ELoadProgress PeripheryProgress;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") ELoadProgress CameraProgress;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") ELoadProgress SaveProgress;
+
+	/**** Information display ****/
+	/** The class of the character's widget used for handling / displaying character information */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Information") TSubclassOf<UUserWidget> InformationWidgetClass;
+
+	/** A stored reference to the character's information widget. Used for displaying / adjusting the character's component information, configuration, and other character information on both client and server */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Information") TObjectPtr<UUserWidget> InformationWidget;
+
 
 //----------------------------------------------------------------------//
-// Default information													//
+// Information Retrieval												//
 //----------------------------------------------------------------------//
+protected:
+	/**
+	 * Begins Play for the component. 
+	 * Called when the owning Actor begins play or when the component is created if the Actor has already begun play.
+	 * Actor BeginPlay normally happens right after PostInitializeComponents but can be delayed for networked or child actors.
+	 * Requires component to be registered and initialized.
+	 */
+	virtual void BeginPlay() override;
+	
+	/** Function called every frame on this ActorComponent. Override this function to implement custom logic to be executed every frame. */
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	
 public:
 	// TODO: widget's should automatically be deleted, check that this logic isn't storing extra references
 	/** Event for when the information has been retrieved from the server/client */

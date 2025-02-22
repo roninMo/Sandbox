@@ -349,6 +349,11 @@ bool ACharacterBase::LoadFromLevel_Implementation(const F_LevelSaveInformation_A
 
 FString ACharacterBase::GetActorLevelId_Implementation() const
 {
+	if (SaveComponent)
+	{
+		return SaveComponent->GetPlatformId();
+	}
+
 	return FGenericPlatformMisc::GetLoginId();
 }
 #pragma endregion
