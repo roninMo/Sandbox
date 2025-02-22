@@ -220,7 +220,6 @@ public:
 
 		
 		Results.Add(FString::Printf(TEXT("{")));
-		Results.Add(FString::Printf(TEXT("{")));
 		Results.Add(FString::Printf(TEXT("\tNetId: %d"), NetId));
 		Results.Add(FString::Printf(TEXT("\tPlatformId: %s"), *PlatformId));
 		Results.Add(FString::Printf(TEXT(" ")));
@@ -236,7 +235,7 @@ public:
 		Results.Add(FString::Printf(TEXT("\t]")));
 		Results.Add(FString::Printf(TEXT("}")));
 		
-		return FString::Join(Results, TEXT(",\n"));
+		return FString::Join(Results, TEXT("\n"));
 	}
 	
 };
