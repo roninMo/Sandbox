@@ -35,7 +35,7 @@ bool USave_CameraSettings::SaveData_Implementation()
 	
 	// Save the character's camera settings
 	SaveInformation->SaveFromCameraCharacter(Character);
-	FString CameraSaveSlot = SaveComponent->GetSaveSlotIdReference(SaveType);
+	FString CameraSaveSlot = SaveComponent->GetSaveSlot(SaveType);
 	return UGameplayStatics::SaveGameToSlot(SaveInformation, CameraSaveSlot, 0);
 }
 
@@ -64,7 +64,7 @@ bool USave_CameraSettings::LoadData_Implementation()
 	}
 	
 	// Retrieve the camera settings
-	FString CameraSettingsSaveSlot = SaveComponent->GetSaveSlotIdReference(SaveType);
+	FString CameraSettingsSaveSlot = SaveComponent->GetSaveSlotReference(SaveType);
 	USaved_CameraSettings* CameraSettings = Cast<USaved_CameraSettings>(UGameplayStatics::LoadGameFromSlot(CameraSettingsSaveSlot, 0));
 	if (!CameraSettings)
 	{

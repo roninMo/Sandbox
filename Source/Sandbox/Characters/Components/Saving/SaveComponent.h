@@ -35,7 +35,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") FString PlatformId;
 	
 	/** The save slot index the player is currently using */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") int32 SaveSlotId;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") int32 SaveSlotIndex;
 
 	/** The current logic for saving the actor's information */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") TMap<ESaveType, TObjectPtr<USaveLogic>> SaveLogicComponents;
@@ -163,6 +163,56 @@ public:
 
 	
 //----------------------------------------------------------------------------------//
+// SaveSlot Config																	//
+//----------------------------------------------------------------------------------//
+public:
+	/** Initializes all the default save logic to retrieve save information for the character */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual void InitializeSaveSlotConfig();
+	
+	/**
+	 * Retrieves the save's reference for specific save states using the save state and actor's information. This should vary between players and enemies spawned in the world \n\n 
+	 * Default logic just returns FName. Subclassed versions should return the actor's unique network or npc id followed by a reference to the type of information they're saving 
+	 *
+	 * SaveSlot reference
+	 *	- Net/Platform/Actor reference
+	 *	- Save Category (SaveType)
+	 *	- Slot Index
+	 *	- Save Iteration (auto / manual save)
+	 *
+	 *	Example: CharacterId_SaveCategory_SaveSlotIndex_IterationAndAutoSaveIndex
+	 *		
+	 * @param Saving					The type of information we're saving
+	 * @param SlotIndex					The save index for this specific character's individual saves
+	 * @returns							The id used for saving information to a specific slot
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual FString GetSaveSlotReference(const ESaveType Saving, const int32 SlotIndex = 0) const;
+
+	// TODO: This should be a blueprint library function to prevent duplication with save state / game logic
+	/** Retrieves the character's save slot id specific to their steam/console platform account for saving purposes */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual int32 GetNetId() const;
+	
+	/** Retrieves the character's platform id. Online games should use the subsystem account, character's should use platform id, and npc's and ai should use the name reference */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual FString GetPlatformId() const;
+	
+	/** Retrieves the character's save category id (the save type) */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual FString GetSaveCategory(const ESaveType SaveType) const;
+	
+	/** Retrieves the character's save slot index to retrieve saves from */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual int32 GetSaveSlotIndex() const;
+
+	/** Retrieves the next save iteration based on the number of saves for this specific save slot */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual int32 GetSaveIteration() const;
+
+	/** Sets the character's Net and Platform Id based on whether it's a player, and if it's single / multiplayer games with subsystems */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual void SetNetAndPlatformId();
+
+	/** Sets the current slot index. This should be invoked in the main menu and retrieved from the game mode / game instance */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual void SetSaveSlotIndex(const int32 Index);
+
+
+
+	
+//----------------------------------------------------------------------------------//
 // Utility																			//
 //----------------------------------------------------------------------------------//
 protected:
@@ -174,42 +224,14 @@ protected:
 
 	
 public:
-	// GetSaveSlot
-	
-	// GetNetId
-	// GetPlatformId
-	// GetSaveCategoryId
-	// GetSaveSlotIndex
-
-
-	/**
-	 * Retrieves the save's reference for specific save states using the save state and actor's information. This should vary between players and enemies spawned in the world \n\n 
-	 * Default logic just returns FName. Subclassed versions should return the actor's unique network or npc id followed by a reference to the type of information they're saving \n
-	 *		Something like this:
-	 *			- Enemies: SpawnedEnemy_0_Inventory
-	 *			- Players: Player_0_Inventory
-	 *
-	 * @param Saving					The type of information we're saving
-	 * @returns							The id used for saving information to a specific slot
-	 */
-	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual FString GetSaveSlotIdReference(const ESaveType Saving) const;
-
 	/** Returns whether the save component handles saving information for a specific save type */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual bool HandlesSaving(const ESaveType SaveType) const;
 
 	/** Returns an array of the save types this component saves */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual TArray<ESaveType> GetSaveTypes() const;
 
-
-protected:
-	/** Retrieves the player's save slot id specific to their steam/console platform account for saving purposes */
-	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual FString GetPlayerNetId() const;
-
-	/** Returns the save section for the player's save information */
-	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual FString GetSaveTypeName(const ESaveType SaveType) const;
-
-
 	/** Utility logic for returning formatted save state for blueprint display. Helpful with debugging save information */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual FString PrintSaveState(const ESaveType SaveType, const FString Slot) const;
-		
+	
+	
 };

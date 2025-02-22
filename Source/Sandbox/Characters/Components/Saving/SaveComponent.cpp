@@ -99,6 +99,9 @@ bool USaveComponent::InitializeSaveLogic()
 		return true;
 	}
 
+	// Initialize the save config for proper saving / loading
+	InitializeSaveSlotConfig();
+	
 	// Check that the save configuration is valid and create the classes for saving the actor's logic
 	for (auto &[SaveState, Configuration] : SaveConfigurations)
 	{
@@ -226,9 +229,68 @@ bool USaveComponent::PreventingLoadingFor(const ESaveType SaveType) const
 }
 
 
-FString USaveComponent::GetSaveSlotIdReference(const ESaveType Saving) const
+void USaveComponent::InitializeSaveSlotConfig()
 {
-	return FString();
+	SetNetAndPlatformId();
+	SetSaveSlotIndex(0);
+}
+
+
+FString USaveComponent::GetSaveSlotReference(const ESaveType Saving, const int32 SlotIndex) const
+{
+	// FString("CharacterId_SaveCategory_SaveSlotIndex_IterationAndAutoSaveIndex");
+	return GetPlatformId()
+			.Append(GetSaveCategory(Saving))
+			.Append(FString::FromInt(GetSaveSlotIndex()))
+			.Append(FString::FromInt(SlotIndex));
+}
+
+
+int32 USaveComponent::GetNetId() const
+{
+	return NetId;
+}
+
+
+FString USaveComponent::GetPlatformId() const
+{
+	return PlatformId;
+}
+
+
+FString USaveComponent::GetSaveCategory(const ESaveType SaveType) const
+{
+	if (SaveType == ESaveType::World) return "World";
+	if (SaveType == ESaveType::Inventory) return "Inventory";
+	if (SaveType == ESaveType::Combat) return "Combat";
+	if (SaveType == ESaveType::Settings) return "Settings";
+	if (SaveType == ESaveType::CameraSettings) return "CameraSettings";
+	return "None";
+}
+
+
+int32 USaveComponent::GetSaveSlotIndex() const
+{
+	return SaveSlotIndex;
+}
+
+
+int32 USaveComponent::GetSaveIteration() const
+{
+	return 0;
+}
+
+
+void USaveComponent::SetNetAndPlatformId()
+{
+	NetId = -1;
+	PlatformId = GetOwner() ? GetOwner()->GetName() : "Null";
+}
+
+
+void USaveComponent::SetSaveSlotIndex(const int32 Index)
+{
+	SaveSlotIndex = Index;
 }
 
 
@@ -247,27 +309,6 @@ TArray<ESaveType> USaveComponent::GetSaveTypes() const
 	}
 
 	return SaveTypes;
-}
-
-
-FString USaveComponent::GetPlayerNetId() const
-{
-	// TODO: Fix net id reference retrieval to be a blueprint library function so we can safely handle juggling networking and steam / console references for retrieving the network id
-	/** The platform id returns the console, and the network id is tricky and specific to the current session. We also need access to the player's account for multiplayer,
-	 *		and we shouldn't really factor in the network id for saving, and still need another unique reference to each player that's on their console, and perhaps factor out the platform id
-	 */
-	return GetName();
-}
-
-
-FString USaveComponent::GetSaveTypeName(const ESaveType SaveType) const
-{
-	if (SaveType == ESaveType::World) return "World";
-	if (SaveType == ESaveType::Inventory) return "Inventory";
-	if (SaveType == ESaveType::Combat) return "Combat";
-	if (SaveType == ESaveType::Settings) return "Settings";
-	if (SaveType == ESaveType::CameraSettings) return "CameraSettings";
-	return "SaveType";
 }
 
 
