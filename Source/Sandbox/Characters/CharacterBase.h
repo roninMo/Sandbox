@@ -896,6 +896,16 @@ public:
 public:
 	/** Returns player's camera location */
 	UFUNCTION(BlueprintCallable, Category = "Camera|Utilities") virtual FVector GetCameraLocation() const;
+
+	/** Templated convenience function for retrieving the player controller */
+	template<class T> T* GetPlayerController(void) const { return Cast<T>(Controller); }
+
+	/** Templated convenience version for retrieving the periphery component. */
+	template<class T> T* GetPeripheryComponent(void) const { return Cast<T>(GetPeripheryComponent()); }
+
+	/** Retrieves the inventory component */
+	UFUNCTION(BlueprintCallable, Category="Inventory", DisplayName="Get Periphery Component")
+	virtual UPlayerPeripheriesComponent* GetPeripheryComponent() const;
 	
 	
 };

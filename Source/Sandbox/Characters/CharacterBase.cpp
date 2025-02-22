@@ -435,6 +435,11 @@ FVector ACharacterBase::GetCameraLocation() const
 	return GetActorLocation();
 }
 
+UPlayerPeripheriesComponent* ACharacterBase::GetPeripheryComponent() const
+{
+	return Peripheries;
+}
+
 bool ACharacterBase::CanJumpInternal_Implementation() const
 {
 	return JumpIsAllowedInternal();
