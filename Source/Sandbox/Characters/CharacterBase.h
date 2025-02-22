@@ -346,6 +346,7 @@ Current Todo
 */
 
 
+class UInformationComponent;
 class USaveComponent;
 enum class EHitStun : uint8;
 enum class EHitDirection : uint8;
@@ -894,12 +895,26 @@ public:
 // Utility																			   //
 //-------------------------------------------------------------------------------------//
 public:
+	/** The character's save component. Saves information specific to each character in their own way */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Utilities")
+	TObjectPtr<UInformationComponent> InformationComponent;
+	
+	
+public:
 	/** Returns player's camera location */
 	UFUNCTION(BlueprintCallable, Category = "Camera|Utilities") virtual FVector GetCameraLocation() const;
 
 	/** Templated convenience function for retrieving the player controller */
 	template<class T> T* GetPlayerController(void) const { return Cast<T>(Controller); }
 
+	/** Templated convenience function for retrieving the information component for network info */
+	template<class T> T* GetInformationComponent(void) const { return Cast<T>(InformationComponent); }
+
+	/** Retrieves the information component for network info */
+	UFUNCTION(BlueprintCallable, Category="Utilities", DisplayName="Get Client/Server Information")
+	virtual UInformationComponent* GetInformationComponent() const;
+
+	
 	/** Templated convenience version for retrieving the periphery component. */
 	template<class T> T* GetPeripheryComponent(void) const { return Cast<T>(GetPeripheryComponent()); }
 

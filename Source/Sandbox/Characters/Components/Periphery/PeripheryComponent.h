@@ -296,6 +296,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Peripheries|Utilities") virtual UStaticMeshComponent* GetPeripheryCone();
 	UFUNCTION(BlueprintCallable, Category = "Peripheries|Utilities") virtual USphereComponent* GetItemDetection();
 
+	/** Retrieves the current periphery component configuration */
+	UFUNCTION(BlueprintCallable, Category = "Peripheries|Utilities")
+	virtual void GetPeripheryConfig(bool& OutbUseCone, bool& OutbUseTrace, bool& OutbUseRadius, bool& OutbUseItemDetection, EHandlePeripheryLogic& OutActivationPhase);
+
 	/** Utility functions for checking if playing in editor */
 	UFUNCTION(BlueprintCallable, Category = "Utilities|Platform") bool IsPlayingInEditor(UObject* WorldContextObject) const;
 	

@@ -28,17 +28,26 @@ class SANDBOX_API USaveComponent : public UActorComponent
 	GENERATED_BODY()
 
 protected:
+	/** The player's current Net Id */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") int32 NetId = 0;
+
+	/** The player's platform Id */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") FString PlatformId;
+	
+	/** The save slot index the player is currently using */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") int32 SaveSlotId;
+
+	/** The current logic for saving the actor's information */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") TMap<ESaveType, TObjectPtr<USaveLogic>> SaveLogicComponents;
+	
+	/** The save configuration for the actor we're attached to */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") TMap<ESaveType, F_SaveLogicConfiguration> SaveConfigurations;
+
 	/** Whether to use the save configurations. Used for debugging */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") bool bUseSaveInformation;
 
 	/** Whether we save on EndPlay */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") bool bSaveOnEndPlay;
-	
-	/** The save configuration for the actor we're attached to */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") TMap<ESaveType, F_SaveLogicConfiguration> SaveConfigurations;
-
-	/** The current logic for saving the actor's information */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving") TMap<ESaveType, TObjectPtr<USaveLogic>> SaveLogicComponents;
 	
 	
 public:	
@@ -165,6 +174,14 @@ protected:
 
 	
 public:
+	// GetSaveSlot
+	
+	// GetNetId
+	// GetPlatformId
+	// GetSaveCategoryId
+	// GetSaveSlotIndex
+
+
 	/**
 	 * Retrieves the save's reference for specific save states using the save state and actor's information. This should vary between players and enemies spawned in the world \n\n 
 	 * Default logic just returns FName. Subclassed versions should return the actor's unique network or npc id followed by a reference to the type of information they're saving \n

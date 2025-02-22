@@ -404,6 +404,9 @@ public:
 	
 	
 public:
+	/** Allow the information component access to this component's variables */
+	friend class UInformationComponent;
+	
 	/** Returns the Item Id from a specific item in the inventory  */
 	UFUNCTION() virtual FName GetItemId(const FGuid& Id, EItemType Type, UObject* OtherInventory = nullptr);
 	

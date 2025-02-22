@@ -14,6 +14,7 @@
 #include "Sandbox/Asc/AbilitySystem.h"
 #include "GameFramework/PlayerState.h"
 #include "Components/AnimInstance/AnimInstanceBase.h"
+#include "Components/Information/InformationComponent.h"
 #include "Components/Saving/SaveComponent.h"
 
 #include "Sandbox/Asc/GameplayAbilitiyUtilities.h"
@@ -57,6 +58,11 @@ ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Su
 	
 	// For handling animations on the server
 	GetMesh()->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
+
+	// Utility while in development for retrieving replicated client / server character information
+	#if WITH_EDITOR
+	InformationComponent = CreateDefaultSubobject<UInformationComponent>(TEXT("Client/Server Information"));
+	#endif
 }
 
 
@@ -433,6 +439,11 @@ void ACharacterBase::Client_PlayMontage_Implementation(UAnimMontage* Montage, FN
 FVector ACharacterBase::GetCameraLocation() const
 {
 	return GetActorLocation();
+}
+
+UInformationComponent* ACharacterBase::GetInformationComponent() const
+{
+	return InformationComponent;
 }
 
 UPlayerPeripheriesComponent* ACharacterBase::GetPeripheryComponent() const

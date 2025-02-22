@@ -535,6 +535,15 @@ USphereComponent* UPlayerPeripheriesComponent::GetItemDetection()
 	return ItemDetectionRadius;
 }
 
+void UPlayerPeripheriesComponent::GetPeripheryConfig(bool& OutbUseCone, bool& OutbUseTrace, bool& OutbUseRadius, bool& OutbUseItemDetection, EHandlePeripheryLogic& OutActivationPhase)
+{
+	OutbUseCone = bCone;
+	OutbUseTrace = bTrace;
+	OutbUseRadius = bRadius;
+	OutbUseItemDetection = bItemDetection;
+	OutActivationPhase = ActivationPhase;
+}
+
 bool UPlayerPeripheriesComponent::IsPlayingInEditor(UObject* WorldContextObject) const
 {
 	if (!WorldContextObject || !WorldContextObject->GetWorld()) return false;

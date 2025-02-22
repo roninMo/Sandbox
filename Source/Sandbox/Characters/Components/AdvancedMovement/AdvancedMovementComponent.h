@@ -1299,6 +1299,10 @@ public:
 // Utility																		//
 //------------------------------------------------------------------------------//
 public:
+	/** Allow the information component access to this component's variables */
+	friend class UInformationComponent;
+
+	
 	/**
 	 * Calculate slide vector along a surface.
 	 * Has special treatment when falling, to avoid boosting up slopes (calling HandleSlopeBoosting() in this case).
