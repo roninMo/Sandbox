@@ -185,7 +185,11 @@ public:
 	 * @param SlotIndex					The save index for this specific character's individual saves
 	 * @returns							The id used for saving information to a specific slot
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual FString GetSaveSlotReference(const ESaveType Saving, const int32 SlotIndex = 0) const;
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual FString GetCurrentSaveSlot(const ESaveType Saving, const int32 SlotIndex = 0) const;
+
+	/** Utility function to construct a custom Save Slot Reference using the current functionality in place for saving */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading")
+	virtual FString ConstructSaveSlot(int32 NetDriverId, FString AccountPlatformId, FString SaveCategory, int32 SlotIndex, int32 SaveIteration) const;
 
 	// TODO: This should be a blueprint library function to prevent duplication with save state / game logic
 	/** Retrieves the character's save slot id specific to their steam/console platform account for saving purposes */

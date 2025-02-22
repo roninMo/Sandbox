@@ -7,9 +7,15 @@
 #include "Sandbox/Data/Structs/InventoryInformation.h"
 #include "InformationComponent.generated.h"
 
+DECLARE_LOG_CATEGORY_EXTERN(InformationLog, Log, All);
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRetrievedInformationSignature, UInformationComponent*, InformationComponent);
+
+
+enum class EArmamentStance : uint8;
+enum class ESaveType : uint8;
 enum class ECameraOrientation : uint8;
 class AArmament;
-enum class EArmamentStance : uint8;
 class UAbilitySystem;
 class UAttributeSet;
 class ACharacterCameraLogic;
@@ -19,7 +25,6 @@ class UAdvancedMovementComponent;
 class UInventoryComponent;
 class ACharacterBase;
 class USaveComponent;
-DECLARE_LOG_CATEGORY_EXTERN(InformationLog, Log, All);
 
 
 /**
@@ -51,6 +56,29 @@ enum class ELoadProgress : uint8
 	
 	/** The information has been retrieved */
 	Ready							UMETA(DisplayName = "Ready")
+};
+
+
+/**
+ *	The type of information we're dealing with. 
+ */
+UENUM(BlueprintType)
+enum class EStateType : uint8
+{
+	/** None */
+	None							UMETA(DisplayName = "None"),
+	/** The character's Movement information */
+	Movement							UMETA(DisplayName = "Movement"),
+	/** The character's CombatInfo information */
+	CombatInfo							UMETA(DisplayName = "CombatInfo"),
+	/** The character's Inventory information */
+	Inventory							UMETA(DisplayName = "Inventory"),
+	/** The character's Periphery information */
+	Periphery							UMETA(DisplayName = "Periphery"),
+	/** The character's Camera information */
+	Camera							UMETA(DisplayName = "Camera"),
+	/** The character's Save information */
+	Save							UMETA(DisplayName = "Save"),
 };
 
 
@@ -194,10 +222,16 @@ struct FInfo_SaveState
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 NetId;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString PlatformId;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString SaveSlot;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 SlotIndex;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 SlotIteration;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString CharacterName;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString SaveState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString AttributeSaveState;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString CombaSaveState;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString CameraSettingSaveState;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString InventorSaveState;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString SettingSaveState;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString WorlSaveState;
 };
 
 
@@ -259,6 +293,10 @@ public:
 	/** The logical state of the periphery component information we're retrieving from the client / server.  */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") FInfo_Periphery PeripheryState;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") ELoadProgress PeripheryProgress;
+
+	/** The logical state of the camera component information we're retrieving from the client / server.  */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") FInfo_Camera CameraState;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") ELoadProgress CameraProgress;
 	
 	/** The logical state of the save component information we're retrieving from the client / server.  */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Progress") FInfo_SaveState SaveState;
@@ -269,15 +307,60 @@ public:
 // Default information													//
 //----------------------------------------------------------------------//
 public:
-	UFUNCTION(BlueprintCallable, Category = "Player|State") virtual FInfo_Movement GetMovementInformation(ACharacterBase* Character);
-	UFUNCTION(BlueprintCallable, Category = "Player|State") virtual FInfo_Combat GetCombatInformation(ACharacterBase* Character);
-	UFUNCTION(BlueprintCallable, Category = "Player|State") virtual FInfo_Inventory GetInventoryInformation(ACharacterBase* Character);
-	UFUNCTION(BlueprintCallable, Category = "Player|State") virtual FInfo_Periphery GetPeripheryInformation(ACharacterBase* Character);
-	UFUNCTION(BlueprintCallable, Category = "Player|State") virtual FInfo_Camera GetCameraInformation(ACharacterBase* Character);
-	UFUNCTION(BlueprintCallable, Category = "Player|State") virtual FInfo_SaveState GetSaveStateInformation(ACharacterBase* Character);
+	// TODO: widget's should automatically be deleted, check that this logic isn't storing extra references
+	/** Event for when the information has been retrieved from the server/client */
+	UPROPERTY(BlueprintAssignable) FRetrievedInformationSignature OnRetrievedMovementInformation;
 
+	/** Event for when the information has been retrieved from the server/client */
+	UPROPERTY(BlueprintAssignable) FRetrievedInformationSignature OnRetrievedCombatInformation;
+	
+	/** Event for when the information has been retrieved from the server/client */
+	UPROPERTY(BlueprintAssignable) FRetrievedInformationSignature OnRetrievedInventoryInformation;
+	
+	/** Event for when the information has been retrieved from the server/client */
+	UPROPERTY(BlueprintAssignable) FRetrievedInformationSignature OnRetrievedPeripheryInformation;
+	
+	/** Event for when the information has been retrieved from the server/client */
+	UPROPERTY(BlueprintAssignable) FRetrievedInformationSignature OnRetrievedCameraInformation;
+	
+	/** Event for when the information has been retrieved from the server/client */
+	UPROPERTY(BlueprintAssignable) FRetrievedInformationSignature OnRetrievedSaveStateInformation;
 
 	
+	/**
+	 * Retrieve the current character's movement information. The information retrieved is based on @ref InfoRetrieval for whether it's the server, client, or controlled reference.
+	 *
+	 * Once the information has been retrieved, the event function will broadcast that it's state has been updated for each information state category
+	 *
+	 * @param StateType					The category of information we're retrieving
+	 * @param LoadProgress				Whether the information is still pending, or ready to be retrieved
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player|State") virtual void RetrieveStateFromCharacter(EStateType StateType, ELoadProgress& LoadProgress);
+	
+	
+protected:
+	/** Utility function to retrieve information based on the state we're retrieving from */
+	UFUNCTION(BlueprintCallable, Category = "Player|State|Utility") virtual void GetStateInformation(EStateType StateType);
+
+	/** Utility for retrieving the state from the character's movement component */
+	UFUNCTION(BlueprintCallable, Category = "Player|State|Utility") virtual FInfo_Movement GetMovementInformation(ACharacterBase* Character);
+	
+	/** Utility for retrieving the state from the character's combat component */
+	UFUNCTION(BlueprintCallable, Category = "Player|State|Utility") virtual FInfo_Combat GetCombatInformation(ACharacterBase* Character);
+	
+	/** Utility for retrieving the state from the character's inventory component */
+	UFUNCTION(BlueprintCallable, Category = "Player|State|Utility") virtual FInfo_Inventory GetInventoryInformation(ACharacterBase* Character);
+	
+	/** Utility for retrieving the state from the character's periphery component */
+	UFUNCTION(BlueprintCallable, Category = "Player|State|Utility") virtual FInfo_Periphery GetPeripheryInformation(ACharacterBase* Character);
+	
+	/** Utility for retrieving the state from the character's camera component */
+	UFUNCTION(BlueprintCallable, Category = "Player|State|Utility") virtual FInfo_Camera GetCameraInformation(ACharacterBase* Character);
+	
+	/** Utility for retrieving the state from the character's save component */
+	UFUNCTION(BlueprintCallable, Category = "Player|State|Utility") virtual FInfo_SaveState GetSaveStateInformation(ACharacterBase* Character);
+
+
 
 	
 //----------------------------------------------------------------------//
@@ -304,6 +387,23 @@ public:
 	// Server_SendSaveComponentInformationToClient();
 	// Client_RetrieveSaveComponentInformation();
 
+
+	// Current character information
+	//		-> Open information panel
+	//		-> Retrieve information from component
+	//		-> update display
+
+	// Client/Server character information reference
+	//		-> Open information panel
+	//		-> Bind to information update delegate
+	//		-> Update the progress state and route the Client/Server functions to retrieve and send back the information
+	//		-> Once the information has been retrieved, broadcast the event and update the display
+
+	
+	//  - Check Info Retrieval State
+	//	- Bind to delegate function
+	//		- On current character, immediately broadcast and update state
+	//		- On Client/Server character logic, handle remote procedure call logic to retrieve their server/client instance
 
 
 	

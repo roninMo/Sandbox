@@ -64,7 +64,7 @@ bool USave_CameraSettings::LoadData_Implementation()
 	}
 	
 	// Retrieve the camera settings
-	FString CameraSettingsSaveSlot = SaveComponent->GetSaveSlotReference(SaveType);
+	FString CameraSettingsSaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType);
 	USaved_CameraSettings* CameraSettings = Cast<USaved_CameraSettings>(UGameplayStatics::LoadGameFromSlot(CameraSettingsSaveSlot, 0));
 	if (!CameraSettings)
 	{

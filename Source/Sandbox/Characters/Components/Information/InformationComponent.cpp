@@ -58,6 +58,13 @@ void UInformationComponent::BeginPlay()
 			InformationWidget = CreateWidget(Character->GetPlayerController<APlayerController>(), InformationWidgetClass, FName("Client/Server Information Widget"));
 
 			// Initialize the character's state logic
+			CurrentCharacter = Character;
+			GetMovementInformation(CurrentCharacter);
+			GetCombatInformation(CurrentCharacter);
+			GetInventoryInformation(CurrentCharacter);
+			GetPeripheryInformation(CurrentCharacter);
+			GetCameraInformation(CurrentCharacter);
+			GetSaveStateInformation(CurrentCharacter);
 		}
 	}
 
@@ -74,10 +81,102 @@ void UInformationComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 }
 
 
+
+
+void UInformationComponent::RetrieveStateFromCharacter(EStateType StateType, ELoadProgress& LoadProgress)
+{
+	// We need a proper character reference to retrieve information from
+	if (!CurrentCharacter)
+	{
+		return;
+	}
+
+	// We need to retrieve information from something first
+	if (StateType == EStateType::None)
+	{
+		return;
+	}
+
+	// Retrieve the proper event delegate for when the information has been retrieved
+	FRetrievedInformationSignature& OnRetrievedEvent = 
+		StateType == EStateType::Movement ? OnRetrievedMovementInformation :
+		StateType == EStateType::CombatInfo ? OnRetrievedCombatInformation :
+		StateType == EStateType::Inventory ? OnRetrievedInventoryInformation :
+		StateType == EStateType::Periphery ? OnRetrievedPeripheryInformation :
+		StateType == EStateType::Camera ? OnRetrievedCameraInformation :
+		OnRetrievedSaveStateInformation;
+
+	ELoadProgress& Progress = 
+		StateType == EStateType::Movement ? MovementProgress :
+		StateType == EStateType::CombatInfo ? CombatInfoProgress :
+		StateType == EStateType::Inventory ? InventoryProgress :
+		StateType == EStateType::Periphery ? PeripheryProgress :
+		StateType == EStateType::Camera ? CameraProgress :
+		SaveProgress;
+	
+	// Default logic
+	ENetRole Role = CurrentCharacter->GetLocalRole();
+	if (InfoRetrieval == EInfoRetrieval::Default)
+	{
+		GetStateInformation(StateType);
+		Progress = ELoadProgress::Ready;
+		OnRetrievedEvent.Broadcast(this);
+	}
+
+	// Retrieving information from the client
+	if (InfoRetrieval == EInfoRetrieval::Client)
+	{
+		// If this is already the client instance of the character
+		if (Role != ROLE_Authority)
+		{
+			GetStateInformation(StateType);
+			Progress = ELoadProgress::Ready;
+			OnRetrievedEvent.Broadcast(this);
+		}
+		else
+		{
+			// Server_SendInformationToClient
+			Progress = ELoadProgress::Pending;
+		}
+	}
+		
+	// Retrieving information from the server
+	if (InfoRetrieval == EInfoRetrieval::Server)
+	{
+		// If this is already the server instance of the character
+		if (Role != ROLE_Authority)
+		{
+			// Client_SendInformationToServer
+			Progress = ELoadProgress::Pending;
+		}
+		else
+		{
+			GetStateInformation(StateType);
+			Progress = ELoadProgress::Ready;
+			OnRetrievedEvent.Broadcast(this);
+		}
+	}
+}
+
+
+void UInformationComponent::GetStateInformation(EStateType StateType)
+{
+	if (!CurrentCharacter) return;
+	if (StateType == EStateType::None) return;
+	if (StateType == EStateType::Movement) MovementState = GetMovementInformation(CurrentCharacter);
+	if (StateType == EStateType::CombatInfo) CombatInfoState = GetCombatInformation(CurrentCharacter);
+	if (StateType == EStateType::Inventory) InventoryState = GetInventoryInformation(CurrentCharacter);
+	if (StateType == EStateType::Periphery) PeripheryState = GetPeripheryInformation(CurrentCharacter);
+	if (StateType == EStateType::Camera) CameraState = GetCameraInformation(CurrentCharacter);
+	if (StateType == EStateType::Save) SaveState = GetSaveStateInformation(CurrentCharacter);
+}
+
+
+#pragma region Information Retrieval Getters
 FInfo_Movement UInformationComponent::GetMovementInformation(ACharacterBase* Character)
 {
 	FInfo_Movement Movement;
-	UAdvancedMovementComponent* MovementComponent = Character->GetAdvancedMovementComp();
+	UAdvancedMovementComponent* MovementComponent = Character ? Character->GetAdvancedMovementComp() : nullptr;
 	if (!MovementComponent)
 	{
 		return Movement;
@@ -130,7 +229,7 @@ FInfo_Movement UInformationComponent::GetMovementInformation(ACharacterBase* Cha
 FInfo_Combat UInformationComponent::GetCombatInformation(ACharacterBase* Character)
 {
 	FInfo_Combat CombatInformation = FInfo_Combat();
-	UCombatComponent* CombatComponent = Character->GetCombatComponent();
+	UCombatComponent* CombatComponent = Character ? Character->GetCombatComponent() : nullptr;
 	if (CombatComponent)
 	{
 		return CombatInformation;
@@ -157,7 +256,7 @@ FInfo_Combat UInformationComponent::GetCombatInformation(ACharacterBase* Charact
 FInfo_Inventory UInformationComponent::GetInventoryInformation(ACharacterBase* Character)
 {
 	FInfo_Inventory InventoryInformation = FInfo_Inventory();
-	UInventoryComponent* InventoryComponent = Character->GetInventoryComponent();
+	UInventoryComponent* InventoryComponent = Character ? Character->GetInventoryComponent() : nullptr;
 	if (!InventoryComponent)
 	{
 		return InventoryInformation;
@@ -176,7 +275,7 @@ FInfo_Inventory UInformationComponent::GetInventoryInformation(ACharacterBase* C
 FInfo_Periphery UInformationComponent::GetPeripheryInformation(ACharacterBase* Character)
 {
 	FInfo_Periphery PeripheryInformation = FInfo_Periphery();
-	UPlayerPeripheriesComponent* PeripheriesComponent = Character->GetPeripheryComponent();
+	UPlayerPeripheriesComponent* PeripheriesComponent = Character ? Character->GetPeripheryComponent() : nullptr;
 	if (!PeripheriesComponent)
 	{
 		return PeripheryInformation;
@@ -212,14 +311,27 @@ FInfo_Camera UInformationComponent::GetCameraInformation(ACharacterBase* Charact
 FInfo_SaveState UInformationComponent::GetSaveStateInformation(ACharacterBase* Character)
 {
 	FInfo_SaveState SaveState = FInfo_SaveState();
-	USaveComponent* SaveComponent = Character->GetSaveComponent();
-	if (!SaveComponent)
+	USaveComponent* SC = Character ? Character->GetSaveComponent() : nullptr;
+	if (!SC)
 	{
 		return SaveState;
 	}
 
+	SaveState.NetId = SC->GetNetId();
+	SaveState.PlatformId = SC->GetPlatformId();
+	SaveState.SlotIndex = SC->GetSaveSlotIndex();
+	SaveState.SlotIteration = SC->GetSaveIteration();
+	SaveState.CharacterName = Character->GetName();
+
+	SaveState.AttributeSaveState = SC->PrintSaveState(ESaveType::Attributes, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::Attributes), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
+	SaveState.CombaSaveState = SC->PrintSaveState(ESaveType::Combat, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::Combat), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
+	SaveState.CameraSettingSaveState = SC->PrintSaveState(ESaveType::CameraSettings, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::CameraSettings), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
+	SaveState.InventorSaveState = SC->PrintSaveState(ESaveType::Inventory, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::Inventory), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
+	SaveState.SettingSaveState = SC->PrintSaveState(ESaveType::Settings, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::Settings), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
+	SaveState.WorlSaveState = SC->PrintSaveState(ESaveType::World, SC->ConstructSaveSlot(SC->GetNetId(), SC->GetPlatformId(), SC->GetSaveCategory(ESaveType::World), SC->GetSaveSlotIndex(), SC->GetSaveIteration()));
 	return SaveState;
 }
+#pragma endregion 
 
 
 

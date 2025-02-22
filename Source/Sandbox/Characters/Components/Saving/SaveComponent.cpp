@@ -236,13 +236,18 @@ void USaveComponent::InitializeSaveSlotConfig()
 }
 
 
-FString USaveComponent::GetSaveSlotReference(const ESaveType Saving, const int32 SlotIndex) const
+FString USaveComponent::GetCurrentSaveSlot(const ESaveType Saving, const int32 SlotIndex) const
 {
 	// FString("CharacterId_SaveCategory_SaveSlotIndex_IterationAndAutoSaveIndex");
-	return GetPlatformId()
-			.Append(GetSaveCategory(Saving))
-			.Append(FString::FromInt(GetSaveSlotIndex()))
-			.Append(FString::FromInt(SlotIndex));
+	return ConstructSaveSlot(GetNetId(), GetPlatformId(), GetSaveCategory(Saving), SlotIndex, GetSaveIteration());
+}
+
+FString USaveComponent::ConstructSaveSlot(int32 NetDriverId, FString AccountPlatformId, FString SaveCategory, int32 SlotIndex, int32 SaveIteration) const
+{
+	return AccountPlatformId
+		.Append(SaveCategory)
+		.Append(FString::FromInt(SlotIndex))
+		.Append(FString::FromInt(SaveIteration));
 }
 
 

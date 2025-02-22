@@ -65,7 +65,7 @@ bool USave_Inventory::LoadData_Implementation()
 	
 	
 	// Retrieve the saved inventory
-	FString InventorySaveSlot = SaveComponent->GetSaveSlotReference(SaveType);
+	FString InventorySaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType);
 	USaved_Inventory* InventoryData = Cast<USaved_Inventory>(UGameplayStatics::LoadGameFromSlot(InventorySaveSlot, 0));
 	if (!InventoryData)
 	{
