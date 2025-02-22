@@ -60,9 +60,9 @@ ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer) : Su
 	GetMesh()->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
 
 	// Utility while in development for retrieving replicated client / server character information
-	#if WITH_EDITOR
+	// #if WITH_EDITOR
 	InformationComponent = CreateDefaultSubobject<UInformationComponent>(TEXT("Client/Server Information"));
-	#endif
+	// #endif
 }
 
 

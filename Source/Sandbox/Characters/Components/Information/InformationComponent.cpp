@@ -3,7 +3,6 @@
 
 #include "InformationComponent.h"
 
-#include "Blueprint/UserWidget.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Logging/StructuredLog.h"
@@ -40,6 +39,9 @@ UInformationComponent::UInformationComponent()
 	PeripheryState = FInfo_Periphery();
 	PeripheryProgress = ELoadProgress::Ready;
 	
+	CameraState = FInfo_Camera();
+	CameraProgress = ELoadProgress::Ready;
+	
 	SaveState = FInfo_SaveState();
 	SaveProgress = ELoadProgress::Ready;
 }
@@ -48,29 +50,6 @@ UInformationComponent::UInformationComponent()
 void UInformationComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// Construct the controlled player's information widget
-	ACharacterBase* Character;
-	if (GetCharacter(Character))
-	{
-		if (Character->IsLocallyControlled() && InformationWidgetClass && !InformationWidget)
-		{
-			InformationWidget = CreateWidget(Character->GetPlayerController<APlayerController>(), InformationWidgetClass, FName("Client/Server Information Widget"));
-
-			// Initialize the character's state logic
-			CurrentCharacter = Character;
-			GetMovementInformation(CurrentCharacter);
-			GetCombatInformation(CurrentCharacter);
-			GetInventoryInformation(CurrentCharacter);
-			GetPeripheryInformation(CurrentCharacter);
-			GetCameraInformation(CurrentCharacter);
-			GetSaveStateInformation(CurrentCharacter);
-		}
-	}
-
-	// Retrieve a list of the characters currently in the game!
-	CharacterList.Empty();
-	CharacterList = GetAllCharacters();
 }
 
 
@@ -81,6 +60,26 @@ void UInformationComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 }
 
 
+void UInformationComponent::InitInformationComponent(ACharacterBase* Character)
+{
+	if (!Character || !GetCharacter(Character))
+	{
+		return;
+	}
+	
+	// Initialize the character's state logic
+	CurrentCharacter = Character;
+	GetMovementInformation(CurrentCharacter);
+	GetCombatInformation(CurrentCharacter);
+	GetInventoryInformation(CurrentCharacter);
+	GetPeripheryInformation(CurrentCharacter);
+	GetCameraInformation(CurrentCharacter);
+	GetSaveStateInformation(CurrentCharacter);
+
+	// Retrieve a list of the characters currently in the game!
+	CharacterList.Empty();
+	CharacterList = GetAllCharacters();
+}
 
 
 void UInformationComponent::RetrieveStateFromCharacter(EStateType StateType, ELoadProgress& LoadProgress)
@@ -135,7 +134,7 @@ void UInformationComponent::RetrieveStateFromCharacter(EStateType StateType, ELo
 		}
 		else
 		{
-			// Server_SendInformationToClient
+			// Server_SendInformationToClient()
 			Progress = ELoadProgress::Pending;
 		}
 	}
@@ -146,7 +145,7 @@ void UInformationComponent::RetrieveStateFromCharacter(EStateType StateType, ELo
 		// If this is already the server instance of the character
 		if (Role != ROLE_Authority)
 		{
-			// Client_SendInformationToServer
+			// Client_SendInformationToServer()
 			Progress = ELoadProgress::Pending;
 		}
 		else
@@ -230,7 +229,7 @@ FInfo_Combat UInformationComponent::GetCombatInformation(ACharacterBase* Charact
 {
 	FInfo_Combat CombatInformation = FInfo_Combat();
 	UCombatComponent* CombatComponent = Character ? Character->GetCombatComponent() : nullptr;
-	if (CombatComponent)
+	if (!CombatComponent)
 	{
 		return CombatInformation;
 	}
