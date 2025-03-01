@@ -19,7 +19,7 @@
 	- Add a cover system for both standing and crouching for specific objects
 	- Fix ledge mantling detection for proper mantle to climb up to a proper ledge / prevent clipping
 	- Perhaps add logic for wall climbing on angled walls, and logic settings for either valid object based wall climbing, or wall climbing at specific angles with a valid accepted angle
-
+	- And add additional custom movement logic for stuff
 
 //----------------------------------------------------------------------------------//
 // Player interaction																//
@@ -96,6 +96,13 @@
 	The current anim blueprint logic handles all movement and combat animation with layered blending for both montages and custom anim curve logic that can be blended seamlessly
 		and built in inverse kinematics for hands/feet movement, and customization for equipped / different character states
 
+
+	- For adding modular characters, the quickest way is with Marvelous Designer -> Character Creator -> to Unreal Engine
+		- https://www.fab.com/listings/209e82f6-ad40-4253-b565-d2f65b12efe7 -> for creating custom characters/skeletal mesh customization from scratch.
+		- If you want custom logic, there might be a way to handle adjusting poses based on each character using the same skeleton, otherwise you'll need a reference to link each object to the character when referencing
+
+	- Customize IK logic for learning clothing physics and adding additional physics
+		- There's built in kinetic cloth physics for clothing - https://www.youtube.com/watch?v=QW7LEY5JA88
 		
 
 
@@ -130,6 +137,9 @@
 	- We need skill trees, I want abilities that affect the player and their armaments tied to tags.
 	-		Thinking about this is if I activate a armor or a weapon buff, I want that to add a tag through an effect that is registered by my armaments and my character individually
 					(say to do more damage, or help the player block more regardless of the source) -> This makes things less complex and easier to implement
+
+	- We need autonomous logic that isn't tied to a reference, (which prevents unnatural behavior that's playtested against (I'm literally going to ignore handling this until there's a real need for it)
+		- Like say an interaction system for example
 
 
 //----------------------------------------------------------------------------------//
@@ -286,7 +296,6 @@ Completed Stuff
 
 
 Current Todo
-
 
 	- Add multiple different combat abilities and combo attacks
 	- Add character's with different attacks and learn how to handle combat, respawning, etc.
