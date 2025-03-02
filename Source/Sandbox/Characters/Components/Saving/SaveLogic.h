@@ -44,10 +44,11 @@ public:
 	 * Handles saving the data specific to the owning actor. \n\n
 	 * Subclass this logic for saving information specific to a npc, character, and their varying game modes and subsystems etc.
 	 *
-	 * @returns	True if it successfully saved the information for the npc / player
+	 * @param Index			The save iteration that you want to save to. Leave it as null to save to the current save slot
+	 * @returns				True if it successfully saved the information for the npc / player
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool SaveData();
-	virtual bool SaveData_Implementation();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool SaveData(int32 Index = -1);
+	virtual bool SaveData_Implementation(int32 Index = -1);
 
 	/**
 	 * Returns whether it's valid to save specific information for a character. This allows for saving under certain conditions, and preventing saving information before it's been replicated
@@ -63,8 +64,8 @@ public:
 	 *
 	 * @returns	True if it successfully loaded the information for the npc / player
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool LoadData();
-	virtual bool LoadData_Implementation();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool LoadData(int32 Index = -1);
+	virtual bool LoadData_Implementation(int32 Index = -1);
 
 
 	

@@ -11,7 +11,7 @@
 #include "Sandbox/Data/Save/Attributes/Saved_Attributes.h"
 #include "Sandbox/Characters/Components/Saving/SaveComponent.h"
 
-bool USaving_Attributes::SaveData_Implementation()
+bool USaving_Attributes::SaveData_Implementation(int32 Index)
 {
 	ACharacterBase* Character;
 	USaveComponent* SaveComponent;
@@ -35,13 +35,13 @@ bool USaving_Attributes::SaveData_Implementation()
 	
 	// Save the character's current attributes
 	SaveInformation->RetrieveAttributesFromAttributeSet(AttributeSet);
-	FString AttributeSaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType);
-	UGameplayStatics::SaveGameToSlot(SaveInformation, AttributeSaveSlot, 0);
+	FString AttributeSaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType, Index);
+	UGameplayStatics::SaveGameToSlot(SaveInformation, AttributeSaveSlot, SaveComponent->GetUserIndex());
 	return true;
 }
 
 
-bool USaving_Attributes::LoadData_Implementation()
+bool USaving_Attributes::LoadData_Implementation(int32 Index)
 {
 	ACharacterBase* Character;
 	USaveComponent* SaveComponent;
@@ -59,8 +59,8 @@ bool USaving_Attributes::LoadData_Implementation()
 	}
 
 	// Retrieve the attribute information
-	FString AttributeSaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType);
-	USaved_Attributes* SavedAttributes = Cast<USaved_Attributes>(UGameplayStatics::LoadGameFromSlot(AttributeSaveSlot, 0));
+	FString AttributeSaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType, Index);
+	USaved_Attributes* SavedAttributes = Cast<USaved_Attributes>(UGameplayStatics::LoadGameFromSlot(AttributeSaveSlot, SaveComponent->GetUserIndex()));
 	if (!SavedAttributes)
 	{
 		return false;

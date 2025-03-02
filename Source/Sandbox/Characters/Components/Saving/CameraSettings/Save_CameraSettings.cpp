@@ -10,7 +10,7 @@
 #include "Sandbox/Data/Save/Settings/Camera/Saved_CameraSettings.h"
 
 
-bool USave_CameraSettings::SaveData_Implementation()
+bool USave_CameraSettings::SaveData_Implementation(int32 Index)
 {
 	USaveComponent* SaveComponent;
 	if (!GetSaveComponent(SaveComponent))
@@ -35,12 +35,12 @@ bool USave_CameraSettings::SaveData_Implementation()
 	
 	// Save the character's camera settings
 	SaveInformation->SaveFromCameraCharacter(Character);
-	FString CameraSaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType);
-	return UGameplayStatics::SaveGameToSlot(SaveInformation, CameraSaveSlot, 0);
+	FString CameraSaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType, Index);
+	return UGameplayStatics::SaveGameToSlot(SaveInformation, CameraSaveSlot, SaveComponent->GetUserIndex());
 }
 
 
-bool USave_CameraSettings::LoadData_Implementation()
+bool USave_CameraSettings::LoadData_Implementation(int32 Index)
 {
 	USaveComponent* SaveComponent;
 	if (!GetSaveComponent(SaveComponent))
@@ -64,8 +64,8 @@ bool USave_CameraSettings::LoadData_Implementation()
 	}
 	
 	// Retrieve the camera settings
-	FString CameraSettingsSaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType);
-	USaved_CameraSettings* CameraSettings = Cast<USaved_CameraSettings>(UGameplayStatics::LoadGameFromSlot(CameraSettingsSaveSlot, 0));
+	FString CameraSettingsSaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType, Index);
+	USaved_CameraSettings* CameraSettings = Cast<USaved_CameraSettings>(UGameplayStatics::LoadGameFromSlot(CameraSettingsSaveSlot, SaveComponent->GetUserIndex()));
 	if (!CameraSettings)
 	{
 		return false;

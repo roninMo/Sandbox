@@ -23,7 +23,7 @@ public:
 	 *
 	 * @returns	True if it successfully saved the information for the npc / player
 	 */
-	virtual bool SaveData_Implementation() override;
+	virtual bool SaveData_Implementation(int32 Index = -1) override;
 
 	/**
 	 * Handles loading the data specific to the owning actor. \n\n
@@ -31,7 +31,7 @@ public:
 	 *
 	 * @returns	True if it successfully loaded the information for the npc / player
 	 */
-	virtual bool LoadData_Implementation() override;
+	virtual bool LoadData_Implementation(int32 Index = -1) override;
 
 	
 };

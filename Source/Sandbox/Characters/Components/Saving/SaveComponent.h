@@ -165,6 +165,14 @@ public:
 //----------------------------------------------------------------------------------//
 // SaveSlot Config																	//
 //----------------------------------------------------------------------------------//
+protected:
+	/** The actual save slot iteration is based on the world's current save iteration. Everything that happens during that moment is stored here with a timestamp */
+	UPROPERTY(BlueprintReadWrite) int32 CurrentSaveIteration = 0;
+
+	/** If it's current split screen we need to retrieve the player controller's split screen reference, and use it for the user index */
+	UPROPERTY(BlueprintReadWrite) int32 SplitScreenIndex = 0;
+
+
 public:
 	/** Initializes all the default save logic to retrieve save information for the character */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual void InitializeSaveSlotConfig();
@@ -182,10 +190,10 @@ public:
 	 *	Example: CharacterId_SaveCategory_SaveSlotIndex_IterationAndAutoSaveIndex
 	 *		
 	 * @param Saving					The type of information we're saving
-	 * @param SlotIndex					The save index for this specific character's individual saves
+	 * @param Iteration				The save index for this specific character's individual saves. Retrieves the current iteration if one isn't provided
 	 * @returns							The id used for saving information to a specific slot
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual FString GetCurrentSaveSlot(const ESaveType Saving, const int32 SlotIndex = 0) const;
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading") virtual FString GetCurrentSaveSlot(const ESaveType Saving, const int32 Iteration = -1) const;
 
 	/** Utility function to construct a custom Save Slot Reference using the current functionality in place for saving */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading")
@@ -204,8 +212,18 @@ public:
 	/** Retrieves the character's save slot index to retrieve saves from */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual int32 GetSaveSlotIndex() const;
 
-	/** Retrieves the next save iteration based on the number of saves for this specific save slot */
+	/** Retrieves the index of the player during split screen for handling save information */ // TODO: Should account information just be used?
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual int32 GetUserIndex() const;
+
+	/**
+	 * Retrieves the next save iteration based on the number of saves for this specific save slot.
+	 * The actual save slot iteration is based on the world's current save iteration. Everything that happens during that moment is stored here with a timestamp
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual int32 GetSaveIteration() const;
+
+	// TODO: Is there a more efficient way that prevents this from not being safe?
+	/** Finds the player's last save iteration, and set's the current save iteration to it. This is used for retrieving current saves and help with the list of saved information */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual int32 FindSaveIteration() const;
 
 	/** Sets the character's Net and Platform Id based on whether it's a player, and if it's single / multiplayer games with subsystems */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual void SetNetAndPlatformId();

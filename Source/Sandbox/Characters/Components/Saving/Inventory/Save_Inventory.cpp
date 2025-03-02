@@ -11,7 +11,7 @@
 #include "Sandbox/Data/Save/Inventory/Saved_Inventory.h"
 
 
-bool USave_Inventory::SaveData_Implementation()
+bool USave_Inventory::SaveData_Implementation(int32 Index)
 {
 	// Inventory components are specific to character classes (npc's and players)
 	ACharacterBase* Character;
@@ -40,11 +40,11 @@ bool USave_Inventory::SaveData_Implementation()
 	}
 	
 	SaveInformation->SaveInformation = InventoryComponent->GetInventorySaveInformation();
-	FString InventorySaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType);
-	return UGameplayStatics::SaveGameToSlot(SaveInformation, InventorySaveSlot, 0);
+	FString InventorySaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType, Index);
+	return UGameplayStatics::SaveGameToSlot(SaveInformation, InventorySaveSlot, SaveComponent->GetUserIndex());
 }
 
-bool USave_Inventory::LoadData_Implementation()
+bool USave_Inventory::LoadData_Implementation(int32 Index)
 {
 	ACharacterBase* Character;
 	USaveComponent* SaveComponent;
@@ -65,8 +65,8 @@ bool USave_Inventory::LoadData_Implementation()
 	
 	
 	// Retrieve the saved inventory
-	FString InventorySaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType);
-	USaved_Inventory* InventoryData = Cast<USaved_Inventory>(UGameplayStatics::LoadGameFromSlot(InventorySaveSlot, 0));
+	FString InventorySaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType, Index);
+	USaved_Inventory* InventoryData = Cast<USaved_Inventory>(UGameplayStatics::LoadGameFromSlot(InventorySaveSlot, SaveComponent->GetUserIndex()));
 	if (!InventoryData)
 	{
 		return false;

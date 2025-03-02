@@ -18,7 +18,7 @@ USaveLogic::USaveLogic()
 }
 
 
-bool USaveLogic::SaveData_Implementation()
+bool USaveLogic::SaveData_Implementation(const int32 Index)
 {
 	return true;
 }
@@ -33,7 +33,7 @@ bool USaveLogic::IsValidToSave_Implementation()
 }
 
 
-bool USaveLogic::LoadData_Implementation()
+bool USaveLogic::LoadData_Implementation(const int32 Index)
 {
 	return true;
 }

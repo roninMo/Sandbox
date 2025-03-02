@@ -11,7 +11,7 @@
 #include "Sandbox/Data/Save/Combat/Saved_CombatInfo.h"
 
 
-bool USave_CombatData::SaveData_Implementation()
+bool USave_CombatData::SaveData_Implementation(int32 Index)
 {
 	// Inventory components are specific to character classes (npc's and players)
 	ACharacterBase* Character;
@@ -39,11 +39,11 @@ bool USave_CombatData::SaveData_Implementation()
 	
 	// Save the character's camera settings
 	SaveInformation->SaveFromCombatComponent(CombatComponent);
-	FString CombatSaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType);
-	return UGameplayStatics::SaveGameToSlot(SaveInformation, CombatSaveSlot, 0);
+	FString CombatSaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType, Index);
+	return UGameplayStatics::SaveGameToSlot(SaveInformation, CombatSaveSlot, SaveComponent->GetUserIndex());
 }
 
-bool USave_CombatData::LoadData_Implementation()
+bool USave_CombatData::LoadData_Implementation(int32 Index)
 {
 	// Inventory components are specific to character classes (npc's and players)
 	ACharacterBase* Character;
@@ -74,8 +74,8 @@ bool USave_CombatData::LoadData_Implementation()
 	
 	
 	// Retrieve the combat info
-	FString CombatInfoSaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType);
-	USaved_CombatInfo* CombatInfo = Cast<USaved_CombatInfo>(UGameplayStatics::LoadGameFromSlot(CombatInfoSaveSlot, 0));
+	FString CombatInfoSaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType, Index);
+	USaved_CombatInfo* CombatInfo = Cast<USaved_CombatInfo>(UGameplayStatics::LoadGameFromSlot(CombatInfoSaveSlot, SaveComponent->GetUserIndex()));
 	if (!CombatInfo)
 	{
 		return false;
