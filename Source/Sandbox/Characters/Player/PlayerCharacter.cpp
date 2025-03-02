@@ -17,7 +17,6 @@
 #include "Sandbox/Characters/Components/Inventory/InventoryComponent.h"
 #include "Sandbox/Characters/Components/Periphery/PeripheryComponent.h"
 #include "Sandbox/Characters/Components/Camera/TargetLockSpringArm.h"
-#include "Sandbox/Characters/Components/Information/InformationComponent.h"
 #include "Sandbox/Characters/Components/Saving/SaveComponents/SaveComponent_Character.h"
 #include "Sandbox/Game/MultiplayerGameMode.h"
 #include "Sandbox/Hud/Hud/PlayerHud.h"
@@ -132,14 +131,6 @@ void APlayerCharacter::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAv
 			}
 		}
 	}
-
-	// Create the character's information widget
-	// #if WITH_EDITOR
-	if (InformationComponent)
-	{
-		InformationComponent->InitInformationComponent(this);
-	}
-	// #endif
 	
 	// Blueprint function event
 	BP_OnInitAbilityActorInfo();
