@@ -12,6 +12,9 @@
 UENUM(BlueprintType)
 enum class ESaveType : uint8
 {
+	/** For retrieving all of the player's save state information */
+	All					UMETA(DisplayName = "All"),
+
 	/** The player's health, stamina, experience, and mana save logic */
 	Attributes			UMETA(DisplayName = "Attributes"),
 	
