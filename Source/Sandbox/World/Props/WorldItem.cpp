@@ -42,6 +42,30 @@ void AWorldItem::OnSpawnedInWorld()
 		RetrieveItemFromDataTable(TableId, Item);
 		CreateIdIfNull();
 	}
+
+	if (HasAuthority())
+	{
+		UWorld* World = GetWorld();
+		if (World)
+		{
+			if (AGameModeBase* GameMode = World->GetAuthGameMode())
+			{
+				// GameMode->GetSaveGameRef
+				// GameMode->GetSaveIndex
+
+				// RetrieveSaveActorInformation()
+					// Route to Save Component logic for complex character / ai save logic -> api subsystem connection logic
+					// For actors placed in world that are connected to the inventory, create a function for custom logic specific to it
+				
+				// Save_RetrieveActorLevelInformation() -> Save current character transform / level information for the game
+				
+				// LoadActorFromSave() -> Update player location / spawn and init actors from a save 
+				
+				// GetActorSaveId() -> Retrieve the id reference for actors saved. For characters it's the platform id, actors placed in level their original name, and spawned actors have their own custom id for retrieval
+				
+			}
+		}
+	}
 }
 
 

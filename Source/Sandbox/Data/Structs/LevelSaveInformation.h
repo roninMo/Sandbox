@@ -41,7 +41,7 @@ struct F_SaveActorConfig
  * Save information pertaining to an actor's state specific to a level. Subclassed versions cover the actor's saved information
  */
 USTRUCT(BlueprintType)
-struct F_LevelSaveInformation
+struct F_LevelSaveInformation // TODO: add subclass logic
 {
 	GENERATED_USTRUCT_BODY()
 		F_LevelSaveInformation(

@@ -6,12 +6,15 @@
 #include "SaveLogic.h"
 #include "Kismet/GameplayStatics.h"
 #include "Logging/StructuredLog.h"
+#include "Net/UnrealNetwork.h"
 #include "Sandbox/Characters/CharacterBase.h"
+#include "Sandbox/Characters/Player/BasePlayerState.h"
 #include "Sandbox/Data/Enums/ESaveType.h"
 
 DEFINE_LOG_CATEGORY(SaveComponentLog);
 
 
+#pragma region Constructors
 USaveComponent::USaveComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	SetIsReplicatedByDefault(false);
@@ -47,6 +50,15 @@ void USaveComponent::BeginPlay()
 	Super::BeginPlay();
 	// InitializeSaveLogic should be called during the game mode's PostLogin() function. The player state and controller is valid then, however it won't allow for remote procedure calls yet
 	//		That's okay because we just want the save information valid before/during when the player joins the game 
+}
+
+
+bool USaveComponent::IsReadyToSave() const
+{
+	if (GetSaveGameRef() == FString()) return false;
+	if (GetSaveIndex() == -1) return false;
+
+	return true;
 }
 
 
@@ -101,7 +113,7 @@ bool USaveComponent::InitializeSaveLogic()
 	}
 
 	// Initialize the save config for proper saving / loading
-	InitializeSaveSlotConfig();
+	InitializeSaveSlotDetails();
 	
 	// Check that the save configuration is valid and create the classes for saving the actor's logic
 	for (auto &[SaveState, Configuration] : SaveConfigurations)
@@ -122,7 +134,8 @@ bool USaveComponent::InitializeSaveLogic()
 		SaveLogicComponents.Add(SaveState, SaveLogic);
 
 	}
-	// TODO: Handle loading information or state to prevent saving until the stored information has been properly replicated to the clients
+	
+	// TODO: Handle loading information and character initialization at the same time to prevent random latency problems
 
 
 	return true;
@@ -145,6 +158,9 @@ void USaveComponent::DeleteSaveStates()
 
 	SaveLogicComponents.Empty();
 }
+#pragma endregion
+
+
 
 
 bool USaveComponent::SaveData(const ESaveType Saving)
@@ -156,7 +172,7 @@ bool USaveComponent::SaveData(const ESaveType Saving)
 	}
 
 	// If this actor has logic for saving this information
-	if (!SaveLogicComponents.Contains(Saving))
+	if (!IsValidToSave(Saving))
 	{
 		return false;
 	}
@@ -230,27 +246,98 @@ bool USaveComponent::PreventingLoadingFor(const ESaveType SaveType) const
 }
 
 
-void USaveComponent::InitializeSaveSlotConfig()
+void USaveComponent::InitializeSaveSlotDetails()
 {
 	SetNetAndPlatformId();
-	// CurrentSaveIteration = FindSaveIteration(); 
-	SetSaveSlotIndex(0); // TODO: Retrieve from game mode
 }
 
 
-FString USaveComponent::GetCurrentSaveSlot(const ESaveType Saving, const int32 Iteration) const
+FString USaveComponent::GetSaveGameRef() const
 {
-	// CharacterId_SaveCategory_SaveSlotIndex_IterationAndAutoSaveIndex"
-	int32 SaveIteration = Iteration == -1 ? GetSaveIteration() : Iteration;
-	return ConstructSaveSlot(GetNetId(), GetPlatformId(), GetSaveCategory(Saving), GetSaveSlotIndex(), SaveIteration);
+	ACharacter* Character = Cast<ACharacter>(GetOwner());
+	if (ABasePlayerState* PlayerState = Character->GetPlayerState<ABasePlayerState>())
+	{
+		return PlayerState->GetSaveGameRef();
+	}
+
+	return FString();
 }
 
-FString USaveComponent::ConstructSaveSlot(int32 NetDriverId, FString AccountPlatformId, FString SaveCategory, int32 SlotIndex, int32 SaveIteration) const
+
+int32 USaveComponent::GetSaveIndex() const
 {
-	return AccountPlatformId.Append("_")
-		.Append(SaveCategory).Append("_")
-		.Append(FString::FromInt(SlotIndex)).Append("_")
-		.Append(FString::FromInt(SaveIteration));
+	ACharacter* Character = Cast<ACharacter>(GetOwner());
+	if (ABasePlayerState* PlayerState = Character->GetPlayerState<ABasePlayerState>())
+	{
+		return PlayerState->GetSaveIndex();
+	}
+
+	return -1;
+}
+
+
+FString USaveComponent::GetActorSaveId() const
+{
+	ACharacterBase* CharacterBase = Cast<ACharacterBase>(GetOwner());
+	if (!CharacterBase) return FString();
+
+	return CharacterBase->Execute_GetActorLevelId(CharacterBase);
+}
+
+
+FString USaveComponent::GetSaveUrl(const ESaveType SaveCategory) const
+{
+	if (!IsReadyToSave())
+	{
+		UE_LOGFMT(SaveComponentLog, Error, "{0}::{1}() The save index was invalid! {2} failed to construct the save url's component reference ({3}!",
+			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), GetNameSafe(GetOwner()), *UEnum::GetValueAsString(SaveCategory)
+		);
+		return FString();
+	}
+
+	// SaveGameRef: (GameMode + PlatformId + SlotId + SaveIndex ++ additional SaveComponent logic for each actor)
+	// SaveGameRef -> Adventure_Character1_S1_54, MP_CustomLevel1, etc.
+	
+	// For characters, we're just adding the actor, and the save category
+	// 		- Adventure_Character1_S1_54 + _Character1 + _SaveComponents
+	// 		- Adventure_Character1_S1_54 + _Character2 + _SaveComponents
+	// 		- Adventure_Character1_S1_54_Level + _Prop1
+	// 		- Adventure_Character1_S1_54_Level + _Actor0
+	return GetSaveGameRef()
+			.Append("_")
+			.Append(GetActorSaveId())
+			.Append("_")
+			.Append(GetSaveCategory(SaveCategory));
+}
+
+
+
+
+#pragma region Utility
+bool USaveComponent::HandlesSaving(const ESaveType SaveType) const
+{
+	return SaveConfigurations.Contains(SaveType);
+}
+
+
+TArray<ESaveType> USaveComponent::GetSaveTypes() const
+{
+	TArray<ESaveType> SaveTypes;
+	for (auto &[SaveType, SaveLogic] : SaveLogicComponents)
+	{
+		SaveTypes.Add(SaveType);
+	}
+
+	return SaveTypes;
+}
+
+
+FString USaveComponent::PrintSaveState(const ESaveType SaveType, const FString SaveRef) const
+{
+	if (!SaveLogicComponents.Contains(SaveType)) return FString();
+	const USaveLogic* SaveLogic = SaveLogicComponents[SaveType];
+
+	return SaveLogic->FormattedSaveInformation(SaveRef);
 }
 
 
@@ -277,21 +364,9 @@ FString USaveComponent::GetSaveCategory(const ESaveType SaveType) const
 }
 
 
-int32 USaveComponent::GetSaveSlotIndex() const
-{
-	return SaveSlotIndex;
-}
-
-
 int32 USaveComponent::GetUserIndex() const
 {
 	return SplitScreenIndex;
-}
-
-
-int32 USaveComponent::GetSaveIteration() const
-{
-	return CurrentSaveIteration;
 }
 
 
@@ -300,36 +375,4 @@ void USaveComponent::SetNetAndPlatformId()
 	NetId = -1;
 	PlatformId = GetOwner() ? GetOwner()->GetName() : "Null";
 }
-
-
-void USaveComponent::SetSaveSlotIndex(const int32 Index)
-{
-	SaveSlotIndex = Index;
-}
-
-
-bool USaveComponent::HandlesSaving(const ESaveType SaveType) const
-{
-	return SaveConfigurations.Contains(SaveType);
-}
-
-
-TArray<ESaveType> USaveComponent::GetSaveTypes() const
-{
-	TArray<ESaveType> SaveTypes;
-	for (auto &[SaveType, SaveLogic] : SaveLogicComponents)
-	{
-		SaveTypes.Add(SaveType);
-	}
-
-	return SaveTypes;
-}
-
-
-FString USaveComponent::PrintSaveState(const ESaveType SaveType, const FString Slot) const
-{
-	if (!SaveLogicComponents.Contains(SaveType)) return FString();
-	const USaveLogic* SaveLogic = SaveLogicComponents[SaveType];
-
-	return SaveLogic->FormattedSaveInformation(Slot);
-}
+#pragma endregion

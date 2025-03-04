@@ -5,11 +5,11 @@
 
 #include "MultiplayerGameMode.h"
 
-void AMultiplayerGameState::SaveGameState(const int32 Iteration)
+void AMultiplayerGameState::SaveGameState(const FString& SaveGameRef, const int32 Index)
 {
 	AMultiplayerGameMode* GameMode = Cast<AMultiplayerGameMode>(GetWorld()->GetAuthGameMode());
 	if (GameMode)
 	{
-		GameMode->SaveGame(Iteration);
+		GameMode->SaveGame(SaveGameRef, Index);
 	}
 }

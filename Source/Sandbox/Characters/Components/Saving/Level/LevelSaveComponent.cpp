@@ -221,18 +221,66 @@ FString ULevelSaveComponent::GetSaveGameSlot(const FString& LevelName, EGameMode
 	Lobby
 		- GameMode, Level, CustomSaveState/Level Information, GameMode logic for the type of game ->  ready for play
 
-	// SaveGameBase + "_" + Individual Save Component References
+	// SaveGameBase: (GameMode + PlatformId + SlotId + SaveIndex ++ additional SaveComponent logic for each actor)
+	// Retrieve the Save Iteration individually for fallbacks in case certain save components didn't save properly
+		// SaveGameBase + "_" Iteration + "_" + Individual Save Component References
+		// SaveGameBase + "_" Iteration + "_" + Level + Prop / Object References -> Individual Save Component
 
 	Singleplayer
-		- Adventure_Level_Character1_S1_54
-			->  Adventure_Level_Character1_S1_54_Combat
-			->  Adventure_Level_Character1_S1_54_Inventory
-			->  Adventure_Level_Character1_S1_54_CameraSettings
-			->  Adventure_Level_Character1_S1_54_Attributes
+		- Adventure_Character1_S1_54
+			Character:
+				->  Adventure_Character1_S1_54_Combat
+				->  Adventure_Character1_S1_54_Inventory
+				->  Adventure_Character1_S1_54_CameraSettings
+				->  Adventure_Character1_S1_54_Attributes
+				->  Adventure_Character1_S1_54_Level
+					->  Adventure_Character1_S1_54_Level_Actor0
+						->  Adventure_Character1_S1_54_Level_Actor0_etc
+				
+		Actors placed in the level with save information:
+				-> Adventure_Character1_S1_54_Level + _Actor0
+					-> Adventure_Character1_S1_54_Level + _Actor0_Inventory
+					-> Adventure_Character1_S1_54_Level + _Actor0_Level
+				-> Adventure_Character1_S1_54_Level + _Actor1
+					-> Adventure_Character1_S1_54_Level + _Actor1_Inventory
+					-> Adventure_Character1_S1_54_Level + _Actor1_Level
 
-	Multiplayer
+		Actors spawned in the world with save logic:
+			-> Adventure_Character1_S1_54_Level + _ActorSpawnRef_Level
+			-> Adventure_Character1_S1_54_Level + _ActorSpawnRef_Combat
+			-> Adventure_Character1_S1_54_Level + _ActorSpawnRef_Inventory
+
+	Cooperative
+		- When players join the lobby, online subsystems would retrieve character information individually from the server
+			- If we're still using SaveGame state on the server, it would be retrieved in reference to the host's character reference, and what he saved for each character (using their Account/Platform Id)
+				- Adventure_Character1_S1_54
+				- Adventure_Character2_S1_54 -> and this breaks the logic
+					- If it's a player and it isn't the host, the save logic will treat it as a player, and save and load it's information the same way, let's just add it to the save like this:
+					- Adventure_Character1_S1_54 + _Character2 -> and use this as the save game reference
+				- So we use the owner's Account/PlatformId for the Save Reference, and additionally for their own save information
+					- Adventure_Character1_S1_54_Character1
+					- Adventure_Character1_S1_54_Character2
+					- Adventure_Character1_S1_54_Character3
+					
+
+
+	Multiplayer (for save state, we're probably just not going to use a character reference, unless it's a custom game mode. we'll figure out how to handle this later)
 		- MP_CustomLevel1
 		- MP_CustomLevel2
+			Props, Actors, Enemies, Weapons, GameMode Objects, Vehicles, etc spawned in the world should be handled separately here before we handle character logic, on client / server, retrieved from the specified level, spawn presets, etc.
+				-> MP_CustomLevel1_Props_Ramp (The level's custom components probably won't be spawned on the client automatically)
+				-> MP_CustomLevel1_Props_Object1
+				-> MP_CustomLevel1_Actors_ShieldPickup_1
+					-> MP_CustomLevel1_Actors_ShieldPickup_1_Level (Transform)
+				-> MP_CustomLevel1_Actors_WeaponCrate_0
+					-> MP_CustomLevel1_Actors_WeaponCrate_0_Level
+					-> MP_CustomLevel1_Actors_WeaponCrate_0_Inventory
+
+		// The benefit of saving this way is effecient retrieving of information individually, and that doesn't necessarily mean that this is correct. Finding a way to save each level in their own folder should help make sense of it.
+		//		However with online subsystem logic, the information would be saved and retrieved asynchronously from the server while the level information works this way
+		//			So you'd just have to add that logic to the save component for properly saving / retrieving the information
+
+
 
 
 	->  SaveGame Reference for retrieving Level / Character information

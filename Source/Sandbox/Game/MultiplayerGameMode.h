@@ -6,11 +6,12 @@
 #include "GameFramework/GameMode.h"
 #include "MultiplayerGameMode.generated.h"
 
-class USaveGameConfig;
+DECLARE_LOG_CATEGORY_EXTERN(GameModeLog, Log, All);
+
 enum class EGameModeType : uint8;
+class USave;
 class ULevelSaveComponent;
 class USaveLogic;
-DECLARE_LOG_CATEGORY_EXTERN(GameModeLog, Log, All);
 
 
 /**
@@ -31,8 +32,20 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=GameMode)
 	EGameModeType GameModeType; // TODO: If the game mode isn't recreated on server travel, add infrastructure here for lobby -> to single / multi / custom games here instead of the GameInstance
 
-	/** The current save iteration for a specific save slot. This is used for game modes that have save state, and is required before the match begins for each game */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GameMode|Save State") USaveGameConfig* SaveGameConfig;
+	/**
+	 * The base save information for any gamemode or custom level with save information.
+	 * This is used to create the save game reference for saving / retrieving in singleplayer / multiplayer games with servers that use SaveGame state
+	 *
+	 * @note This design pattern is like an abstract factory, but it's just like a hierarchy of save components that use this to properly save and retrieve information, and should be easy to use with asynchronous APIs 
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GameMode|Save State") USave* CurrentSave;
+
+	/** The save game reference, used for saving and retrieving save information for a specific save */
+	UPROPERTY(BlueprintReadWrite, Transient) FString SaveGameUrl;
+
+	/** The most recent save index for a specific save slot. ie. if it's the 100th save, and we load / save to a previous save, this shouldn't be affected */
+	UPROPERTY(BlueprintReadWrite, Transient) int32 SaveIndex;
+	
 
 	/** A stored reference to the save logic component. Only spawned on the server; handle's the loading and spawning of save state for a Singleplayer/Multiplayer custom game state. */
 	UPROPERTY(BlueprintReadWrite) TObjectPtr<ULevelSaveComponent> LevelSaveComponent;
@@ -49,6 +62,11 @@ public:
 	
 	/** Called right before components are initialized, only called during gameplay */
 	virtual void PreInitializeComponents() override;
+
+	/** Reset actor to initial state - used when restarting level without reloading. */
+	virtual void Reset() override;
+
+	
 
 	
 protected:
@@ -68,20 +86,38 @@ public:
 	 * Saves the current game to a save slot.
 	 * If there was a specified Save Index, it will overwrite the previous save with the current level information; otherwise, it saves to the current iteration and increments to begin the next save state
 	 * 
-	 * @param Iteration	The specific index we're saving to. Whether it's an autosave or a specific save is up to the player. Leave as -1 for it to save to the current Save Iteration
+	 * @param SaveGameRef The specific slot we're saving to
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool SaveGame(const int32 Iteration = -1);
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool SaveGame(const FString& SaveGameRef, const int32 Index);
 
 	/**
 	 * Loads the current save state from a save slot.
 	 * 
-	 * @param Iteration	The specific index we're saving to. Whether it's an autosave or a specific save is up to the player. Leave as -1 for it to save to the current Save Iteration
+	 * @param SaveGameRef The specific slot we're saving to
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool LoadSave(const int32 Iteration);
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool LoadSave(const FString& SaveGameRef, const int32 Index);
 
+	/** Initializes the SaveGameReference and Save Index from the current SaveGameConfig, and updates the CurrentSave */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Init") virtual bool UpdateCurrentSave(USave* Save);
+	
 	// TODO: Is there a more efficient way that prevents this from not being safe?
-	/** Finds the player's last save iteration, and set's the current save iteration to it. This is used for retrieving current saves and help with the list of saved information */
-	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual int32 FindSaveIteration() const;
+	/** Finds the player's last save index, and set's the current save index to it. This is used for retrieving current saves and help with the list of saved information */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Init") virtual bool FindCurrentSave() const;
+
+
+protected:
+	/**
+	 * Creates another save state, and updates the save reference and index on both the current save, here, and the player states. \n\n
+	 * This refers to the current index, and not a specified index during a save
+	 * @note Objects in the world should retrieve the SaveGameRef and Index from the game mode on the server
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Init") virtual bool CreateNextSave();
+
+	/** Retrieves a reference to the current save game root information */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual USave* GetSaveGameBase();
+	
+	/** Sets the save game root information */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual void SetSaveGameBase(USave* Save);
 
 	
 
@@ -117,6 +153,9 @@ protected:
 public:
 	/** Retrieves the GameMode's classification */
 	UFUNCTION(BlueprintCallable, Category = "Game") virtual EGameModeType GetGameModeType();
+
+	/** Retrieves a list of the player controllers */
+	UFUNCTION(BlueprintCallable, Category = "Game") virtual TArray<APlayerController*> GetPlayers() const;
 
 	/** Prints a message with a reference to the player controller */
 	UFUNCTION() virtual void PrintMessage(const FString& Message);

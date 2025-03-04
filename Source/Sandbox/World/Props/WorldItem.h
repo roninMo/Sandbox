@@ -24,6 +24,12 @@ protected:
 	/** The level save's reference id for actors spawned in the world. If this is null, the save system use default saving logic (for item's placed in the level by designers) */
 	UPROPERTY(BlueprintReadWrite) FString ActorSaveLevelId;
 	
+	/** The current SaveGame Reference for saving information specific to the actor on the server */
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Item|Information") FString SaveGameRef;
+
+	/** The current save index for a specific save slot */
+	UPROPERTY(Transient, BlueprintReadWrite, Category = "Item|Information") int32 SaveIndex;
+	
 public:
 	AWorldItem();
 

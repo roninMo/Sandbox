@@ -35,7 +35,7 @@ bool USaving_Attributes::SaveData_Implementation(int32 Index)
 	
 	// Save the character's current attributes
 	SaveInformation->RetrieveAttributesFromAttributeSet(AttributeSet);
-	FString AttributeSaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType, Index);
+	FString AttributeSaveSlot = SaveComponent->GetSaveUrl(SaveType);
 	UGameplayStatics::SaveGameToSlot(SaveInformation, AttributeSaveSlot, SaveComponent->GetUserIndex());
 	return true;
 }
@@ -59,7 +59,7 @@ bool USaving_Attributes::LoadData_Implementation(int32 Index)
 	}
 
 	// Retrieve the attribute information
-	FString AttributeSaveSlot = SaveComponent->GetCurrentSaveSlot(SaveType, Index);
+	FString AttributeSaveSlot = SaveComponent->GetSaveUrl(SaveType);
 	USaved_Attributes* SavedAttributes = Cast<USaved_Attributes>(UGameplayStatics::LoadGameFromSlot(AttributeSaveSlot, SaveComponent->GetUserIndex()));
 	if (!SavedAttributes)
 	{

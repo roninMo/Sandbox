@@ -12,7 +12,7 @@ class AMultiplayerGameMode;
 
 
 // This class does not need to be modified.
-UINTERFACE(MinimalAPI)
+UINTERFACE(Blueprintable, BlueprintType)
 class ULevelSaveInformationInterface : public UInterface
 {
 	GENERATED_BODY()
@@ -57,7 +57,8 @@ public:
 	 * Returns the current save state and config of the actor level during play
 	 * @note							This is only specific to spawned and placed actors within the level, utilize their save components to save specific information   
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Level|Saving", DisplayName = "Save To Level") F_LevelSaveInformation_Actor SaveToLevel();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Level|Saving", DisplayName = "Save To Level")
+	F_LevelSaveInformation_Actor SaveToLevel();
 	virtual F_LevelSaveInformation_Actor SaveToLevel_Implementation();
 
 	/**
@@ -74,7 +75,8 @@ public:
 	 * Saves the actors information using the SaveComponent interface
 	 * returns							Whether it successfully saved the actor information
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Level|Saving", DisplayName = "Save To Level") bool SaveActorData(const F_LevelSaveInformation_Actor& SaveConfig);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Level|Saving", DisplayName = "Save To Level") bool
+	SaveActorData(const F_LevelSaveInformation_Actor& SaveConfig);
 	virtual bool SaveActorData_Implementation(const F_LevelSaveInformation_Actor& SaveConfig);
 
 	/**
@@ -94,7 +96,8 @@ public:
 	 * @params bRetrieveActorSave		Whether to load the actor's save information (not specific to the level)
 	 * @note							This is only specific to spawned and placed actors within the level, utilize their save components to save specific information   
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Level|Saving", DisplayName = "Load From Level") bool LoadFromLevel(const F_LevelSaveInformation_Actor& PreviousSave, bool bRetrieveActorSave);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Level|Saving", DisplayName = "Load From Level") bool
+	LoadFromLevel(const F_LevelSaveInformation_Actor& PreviousSave, bool bRetrieveActorSave);
 	virtual bool LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave, bool bRetrieveActorSave);
 
 	/**
@@ -120,7 +123,8 @@ public:
 	 *
 	 * @returns							The id of the actor   
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Level|Saving|Utility", DisplayName = "Get Actor Level Id") FString GetActorLevelId() const;
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Level|Saving|Utility", DisplayName = "Get Actor Level Id")
+	FString GetActorLevelId() const;
 	virtual FString GetActorLevelId_Implementation() const;
 
 	
