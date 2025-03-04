@@ -129,22 +129,25 @@ FString USave_CombatData::FormattedSaveInformation(const FString Slot) const
 	// Primary and Secondary Weapons
 	Results.Add(FString::Printf(TEXT("Combat Info")));
 	Results.Add(FString::Printf(TEXT("{")));
-	Results.Add(FString::Printf(TEXT("\tPrimary:   %s,"), *PrimaryWeapon.Print()));
-	Results.Add(FString::Printf(TEXT("\tSecondary: %s,"), *SecondaryWeapon.Print()));
+	Results.Add(FString::Printf(TEXT("\tPrimary:      %s,"), *PrimaryWeapon.Print()));
+	Results.Add(FString::Printf(TEXT("\tSecondary:  %s,"), *SecondaryWeapon.Print()));
 
-	// Combat Info ->  CurrentStance, ComboIndex, PrimaryEquipSlot, SecondaryEquipSlot
-	Results.Add(FString::Printf(TEXT("\tPlayer Combat Info ->  CurrentStance: '%s', Combo Index: '%d', PrimarySlotIndex: '%s', OffhandSlotIndex: '%s',"),
-		*UEnum::GetValueAsString(CombatInfo->CurrentStance), CombatInfo->ComboIndex, *UEnum::GetValueAsString(CombatInfo->PrimaryEquipSlot), *UEnum::GetValueAsString(CombatInfo->SecondaryEquipSlot)
-	));
+	// Combat Info
+	Results.Add(TEXT("\tCombat Info: {"));
+	Results.Add(FString::Printf(TEXT("\t\tCurrentStance: %s,"), *UEnum::GetValueAsString(CombatInfo->CurrentStance)));
+	Results.Add(FString::Printf(TEXT("\t\tComboIndex: %d,"), CombatInfo->ComboIndex));
+	Results.Add(FString::Printf(TEXT("\t\tPrimaryEquipSlot: %s,"), *UEnum::GetValueAsString(CombatInfo->PrimaryEquipSlot)));
+	Results.Add(FString::Printf(TEXT("\t\tSecondaryEquipSlot: %s,"), *UEnum::GetValueAsString(CombatInfo->SecondaryEquipSlot)));
+	Results.Add(TEXT("\t},"));
 	
 	// Weapon Slots
 	Results.Add(TEXT("\t"));
 	Results.Add(TEXT("\tWeapons: {"));
-	Results.Add(FString::Printf(TEXT("\t\tLeftHandSlotOne:    %s,"), *CombatInfo->LeftHandEquipSlot_One.Print()));
-	Results.Add(FString::Printf(TEXT("\t\tLeftHandSlotTwo:    %s,"), *CombatInfo->LeftHandEquipSlot_Two.Print()));
-	Results.Add(FString::Printf(TEXT("\t\tLeftHandSlotThree:  %s,"), *CombatInfo->LeftHandEquipSlot_Three.Print()));
-	Results.Add(FString::Printf(TEXT("\t\tRightHandSlotOne:   %s,"), *CombatInfo->RightHandEquipSlot_One.Print()));
-	Results.Add(FString::Printf(TEXT("\t\tRightHandSlotTwo:   %s,"), *CombatInfo->RightHandEquipSlot_Two.Print()));
+	Results.Add(FString::Printf(TEXT("\t\tLeftHandSlotOne:       %s,"), *CombatInfo->LeftHandEquipSlot_One.Print()));
+	Results.Add(FString::Printf(TEXT("\t\tLeftHandSlotTwo:      %s,"), *CombatInfo->LeftHandEquipSlot_Two.Print()));
+	Results.Add(FString::Printf(TEXT("\t\tLeftHandSlotThree:    %s,"), *CombatInfo->LeftHandEquipSlot_Three.Print()));
+	Results.Add(FString::Printf(TEXT("\t\tRightHandSlotOne:    %s,"), *CombatInfo->RightHandEquipSlot_One.Print()));
+	Results.Add(FString::Printf(TEXT("\t\tRightHandSlotTwo:    %s,"), *CombatInfo->RightHandEquipSlot_Two.Print()));
 	Results.Add(FString::Printf(TEXT("\t\tRightHandSlotThree: %s,"), *CombatInfo->RightHandEquipSlot_Three.Print()));
 	Results.Add(TEXT("\t},"));
 	
@@ -152,9 +155,9 @@ FString USave_CombatData::FormattedSaveInformation(const FString Slot) const
 	Results.Add(TEXT("\t"));
 	Results.Add(TEXT("\tArmors: {"));
 	Results.Add(FString::Printf(TEXT("\t\tGauntlets:  %s,"), *CombatInfo->Gauntlets.Print()));
-	Results.Add(FString::Printf(TEXT("\t\tLeggings:   %s,"), *CombatInfo->Leggings.Print()));
-	Results.Add(FString::Printf(TEXT("\t\tHelm:       %s,"), *CombatInfo->Helm.Print()));
-	Results.Add(FString::Printf(TEXT("\t\tChest:      %s,"), *CombatInfo->Chest.Print()));
+	Results.Add(FString::Printf(TEXT("\t\tLeggings:  %s,"), *CombatInfo->Leggings.Print()));
+	Results.Add(FString::Printf(TEXT("\t\tHelm:         %s,"), *CombatInfo->Helm.Print()));
+	Results.Add(FString::Printf(TEXT("\t\tChest:        %s,"), *CombatInfo->Chest.Print()));
 	Results.Add(TEXT("\t}"));
 
 	Results.Add(TEXT("}"));

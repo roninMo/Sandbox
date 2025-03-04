@@ -231,7 +231,7 @@ public:
 		Results.Add(FString::Printf(TEXT("{")));
 		Results.Add(FString::Printf(TEXT("\tNetId: %d"), NetId));
 		Results.Add(FString::Printf(TEXT("\tInventory Items: 'Inventory Items'")));
-		Results.Add(FString::Printf(TEXT("\tPlatformId: %s"), *PlatformId));
+		Results.Add(FString::Printf(TEXT("\tPlatformId: '%s'"), *PlatformId));
 		Results.Add(FString::Printf(TEXT(" ")));
 		Results.Add(FString::Printf(TEXT("\tItems: [")));
 		for (const FS_Item& Item : InventoryItems)

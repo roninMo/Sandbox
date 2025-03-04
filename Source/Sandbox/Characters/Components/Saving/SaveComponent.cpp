@@ -233,15 +233,15 @@ bool USaveComponent::PreventingLoadingFor(const ESaveType SaveType) const
 void USaveComponent::InitializeSaveSlotConfig()
 {
 	SetNetAndPlatformId();
-	// CurrentSaveIteration = FindSaveIteration();
+	// CurrentSaveIteration = FindSaveIteration(); 
 	SetSaveSlotIndex(0); // TODO: Retrieve from game mode
 }
 
 
 FString USaveComponent::GetCurrentSaveSlot(const ESaveType Saving, const int32 Iteration) const
 {
+	// CharacterId_SaveCategory_SaveSlotIndex_IterationAndAutoSaveIndex"
 	int32 SaveIteration = Iteration == -1 ? GetSaveIteration() : Iteration;
-	// FString("CharacterId_SaveCategory_SaveSlotIndex_IterationAndAutoSaveIndex");
 	return ConstructSaveSlot(GetNetId(), GetPlatformId(), GetSaveCategory(Saving), GetSaveSlotIndex(), SaveIteration);
 }
 

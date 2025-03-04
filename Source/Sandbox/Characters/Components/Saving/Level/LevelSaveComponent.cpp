@@ -221,9 +221,14 @@ FString ULevelSaveComponent::GetSaveGameSlot(const FString& LevelName, EGameMode
 	Lobby
 		- GameMode, Level, CustomSaveState/Level Information, GameMode logic for the type of game ->  ready for play
 
+	// SaveGameBase + "_" + Individual Save Component References
 
 	Singleplayer
 		- Adventure_Level_Character1_S1_54
+			->  Adventure_Level_Character1_S1_54_Combat
+			->  Adventure_Level_Character1_S1_54_Inventory
+			->  Adventure_Level_Character1_S1_54_CameraSettings
+			->  Adventure_Level_Character1_S1_54_Attributes
 
 	Multiplayer
 		- MP_CustomLevel1
@@ -232,6 +237,9 @@ FString ULevelSaveComponent::GetSaveGameSlot(const FString& LevelName, EGameMode
 
 	->  SaveGame Reference for retrieving Level / Character information
 		- OnMatchBegin build the level, character / spawned information on server, and spawned level objects on both Client and Server 
+
+
+
 
 
 	 */
