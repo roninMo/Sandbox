@@ -6,6 +6,7 @@
 #include "GameFramework/GameMode.h"
 #include "MultiplayerGameMode.generated.h"
 
+class USaveGameConfig;
 enum class EGameModeType : uint8;
 class ULevelSaveComponent;
 class USaveLogic;
@@ -28,11 +29,16 @@ protected:
 
 	/** The Game Mode's classification */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=GameMode)
-	EGameModeType GameModeType;
+	EGameModeType GameModeType; // TODO: If the game mode isn't recreated on server travel, add infrastructure here for lobby -> to single / multi / custom games here instead of the GameInstance
 
-	/** A stored reference to the save logic component */
+	/** The current save iteration for a specific save slot. This is used for game modes that have save state, and is required before the match begins for each game */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GameMode|Save State") USaveGameConfig* SaveGameConfig;
+
+	/** A stored reference to the save logic component. Only spawned on the server; handle's the loading and spawning of save state for a Singleplayer/Multiplayer custom game state. */
 	UPROPERTY(BlueprintReadWrite) TObjectPtr<ULevelSaveComponent> LevelSaveComponent;
-	
+	// TODO: client replication will be required for creating level specific stuff. And we need classifications for objects saved / created. ->  Players / Actors that have save information in level / Actor (Spawned) / Props / etc.  
+
+
 	// Respawn logic
 
 	// Adventure / TDM / FoF -> subclassed infrastructure
@@ -52,6 +58,32 @@ protected:
 	virtual void RestartPlayerAtPlayerStart(AController* NewPlayer, AActor* StartSpot) override;
 
 
+
+	
+//----------------------------------------------------------------------------------//
+// Save State Functions																//
+//----------------------------------------------------------------------------------//
+public:
+	/**
+	 * Saves the current game to a save slot.
+	 * If there was a specified Save Index, it will overwrite the previous save with the current level information; otherwise, it saves to the current iteration and increments to begin the next save state
+	 * 
+	 * @param Iteration	The specific index we're saving to. Whether it's an autosave or a specific save is up to the player. Leave as -1 for it to save to the current Save Iteration
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool SaveGame(const int32 Iteration = -1);
+
+	/**
+	 * Loads the current save state from a save slot.
+	 * 
+	 * @param Iteration	The specific index we're saving to. Whether it's an autosave or a specific save is up to the player. Leave as -1 for it to save to the current Save Iteration
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool LoadSave(const int32 Iteration);
+
+	// TODO: Is there a more efficient way that prevents this from not being safe?
+	/** Finds the player's last save iteration, and set's the current save iteration to it. This is used for retrieving current saves and help with the list of saved information */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual int32 FindSaveIteration() const;
+
+	
 
 	
 //----------------------------------------------------------------------------------//

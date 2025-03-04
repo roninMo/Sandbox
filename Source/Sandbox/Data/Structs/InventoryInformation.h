@@ -85,7 +85,8 @@ public:
 	/** Global data for items that's added to the object from the blueprint */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UDataAsset* GlobalInformation;
 
-	
+
+public:
 	/** Convenience function to access the item type without creating another value */
 	virtual EItemType GetItemType() const
 	{
@@ -108,6 +109,14 @@ public:
 	virtual bool IsValid() const
 	{
 		return this->Id.IsValid() && this->GetDatabaseId().IsValid();
+	}
+
+	/** Print the item's information */
+	virtual FString Print() const
+	{
+		FString Result = FString::Printf(TEXT("Id: %s, Name: '%s', SortOrder: %d"), *Id.ToString(), *ItemName.ToString(), SortOrder);
+		if (ActualClass) Result.Append(FString::Printf(TEXT(", Class: '%s'"), *ActualClass->GetName()));
+		return Result;
 	}
 };
 
@@ -170,7 +179,7 @@ struct FS_Item
 
 	virtual FString Print() const
 	{
-		return FString::Printf(TEXT("Id: %s, Name: %s, SortOrder: %d"), *Id.ToString(), *ItemName.ToString(), SortOrder);
+		return FString::Printf(TEXT("Id: %s, Name: '%s', SortOrder: %d"), *Id.ToString(), *ItemName.ToString(), SortOrder);
 	}
 
 	virtual bool IsValid() const
@@ -213,14 +222,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString PlatformId;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<FS_Item> InventoryItems;
 
-	
+
+public:
 	virtual FString Print() const
 	{
 		TArray<FString> Results;
-
 		
 		Results.Add(FString::Printf(TEXT("{")));
 		Results.Add(FString::Printf(TEXT("\tNetId: %d"), NetId));
+		Results.Add(FString::Printf(TEXT("\tInventory Items: 'Inventory Items'")));
 		Results.Add(FString::Printf(TEXT("\tPlatformId: %s"), *PlatformId));
 		Results.Add(FString::Printf(TEXT(" ")));
 		Results.Add(FString::Printf(TEXT("\tItems: [")));
@@ -237,7 +247,6 @@ public:
 		
 		return FString::Join(Results, TEXT("\n"));
 	}
-	
 };
 
 

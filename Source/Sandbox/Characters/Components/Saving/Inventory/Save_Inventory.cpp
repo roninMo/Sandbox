@@ -90,8 +90,11 @@ FString USave_Inventory::FormattedSaveInformation(const FString Slot) const
 	{
 		return FString();
 	}
-	
-	return InventoryData->SaveInformation.Print();
+
+	TArray<FString> Results;
+	Results.Add(TEXT("Inventory"));
+	Results.Add(InventoryData->SaveInformation.Print());
+	return FString::Join(Results, TEXT("\n"));
 }
 
 /*

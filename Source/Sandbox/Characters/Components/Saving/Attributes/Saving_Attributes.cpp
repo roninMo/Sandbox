@@ -70,3 +70,61 @@ bool USaving_Attributes::LoadData_Implementation(int32 Index)
 	Character->GetAbilitySystem<UAbilitySystem>()->SavedAttributes = SavedAttributes->GetCurrentAttributes(AttributeSet);
 	return true;
 }
+
+
+FString USaving_Attributes::FormattedSaveInformation(const FString Slot) const
+{
+	// Retrieve Saved Combat Info
+	USaved_Attributes* Attributes = Cast<USaved_Attributes>(UGameplayStatics::LoadGameFromSlot(Slot, 0));
+	if (!Attributes)
+	{
+		return FString();
+	}
+
+	// Retrieve the primary and secondary weapon information
+	TArray<FString> Results;
+	Results.Add(FString::Printf(TEXT("Current Attributes")));
+	Results.Add(FString::Printf(TEXT("{")));
+
+	Results.Add(FString::Printf(TEXT("\tHealth: %f,"), Attributes->Health));
+	Results.Add(FString::Printf(TEXT("\tStamina: %f,"), Attributes->Stamina));
+	Results.Add(FString::Printf(TEXT("\tPoise: %f,"), Attributes->Poise));
+	Results.Add(FString::Printf(TEXT("\tMana: %f,"), Attributes->Mana));
+	
+	Results.Add(FString::Printf(TEXT("")));
+	Results.Add(FString::Printf(TEXT("\tStatuses: {")));
+	Results.Add(FString::Printf(TEXT("\t\tExperience: %f,"), Attributes->Experience));
+	Results.Add(FString::Printf(TEXT("\t\tBleedBuildup: %f,"), Attributes->BleedBuildup));
+	Results.Add(FString::Printf(TEXT("\t\tFrostbiteBuildup: %f,"), Attributes->FrostbiteBuildup));
+	Results.Add(FString::Printf(TEXT("\t\tPoisonBuildup: %f,"), Attributes->PoisonBuildup));
+	Results.Add(FString::Printf(TEXT("\t\tMadnessBuildup: %f,"), Attributes->MadnessBuildup));
+	Results.Add(FString::Printf(TEXT("\t\tCurseBuildup: %f,"), Attributes->CurseBuildup));
+	Results.Add(FString::Printf(TEXT("\t\tSleepBuildup: %f,"), Attributes->SleepBuildup));
+	Results.Add(TEXT("\t}"));
+	
+	Results.Add(FString::Printf(TEXT("}")));
+	return FString::Join(Results, TEXT("\n"));
+}
+
+/*
+
+{
+	Health:	 0,
+	Stamina: 0,
+	Poise:	 0,
+	Mana:	 0,
+	
+	Statuses: {
+		Experience: 0,
+		BleedBuildup: 0,
+		FrostbiteBuildup: 0,
+		PoisonBuildup: 0,
+		MadnessBuildup: 0,
+		CurseBuildup: 0,
+		SleepBuildup: 0,
+	}
+}
+
+
+
+*/

@@ -3,6 +3,8 @@
 
 #include "BasePlayerState.h"
 
+#include "Sandbox/Game/MultiplayerGameState.h"
+
 ABasePlayerState::ABasePlayerState(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	//////////////////////// Replication stuff (Server/Client rendering) 
@@ -10,4 +12,15 @@ ABasePlayerState::ABasePlayerState(const FObjectInitializer& ObjectInitializer) 
 	MinNetUpdateFrequency = 33.f; // To help with bandwidth and lagginess, allow a minNetUpdateFrequency, which is generally 33 in fps games
 	// The other value is the server config tick rate, which is in the project defaultEngine.ini -> [/Script/OnlineSubsystemUtils.IpNetDriver] NetServerMaxTickRate = 60
 	// also this which is especially crucial for implementing the gameplay ability system defaultEngine.ini -> [SystemSettings] net.UseAdaptiveNetUpdateFrequency = 1
+}
+
+void ABasePlayerState::Server_SaveGame_Implementation(const int32 Iteration)
+{
+	// UGameInstance* GameInstance = GetGameInstance();
+	// AGameModeBase* GameMode = GetWorld()->GetAuthGameMode();
+	AMultiplayerGameState* GameState = Cast<AMultiplayerGameState>(GetWorld()->GetGameState());
+	if (GameState)
+	{
+		GameState->SaveGameState(Iteration);
+	}
 }

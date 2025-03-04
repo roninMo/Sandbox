@@ -36,20 +36,64 @@ void AMultiplayerGameMode::PreInitializeComponents()
 
 
 
+#pragma region Save State Functions
+bool AMultiplayerGameMode::SaveGame(const int32 Iteration)
+{
+	if (!LevelSaveComponent) return false;
+
+	
+	return true;
+}
+
+
+bool AMultiplayerGameMode::LoadSave(const int32 Iteration)
+{
+	return true;
+}
+
+
+int32 AMultiplayerGameMode::FindSaveIteration() const
+{
+	if (!LevelSaveComponent) return 0;
+
+	// LevelSaveComponent->GetSaveGameRef()
+	// // Retrieve from current save configuration -> or search through previous saves. Saving should be specific to the game state, and everything should save / retrieve their information from each save.
+	// // TODO: Check that when the player saves it's handled properly when the level saves, and add logic to retrieve the proper save then
+	//
+	//
+	// // The game hasn't been saved yet
+	// FString SaveSlot = ConstructSaveSlot(GetNetId(), GetPlatformId(), "Config", GetSaveSlotIndex(), 0);
+	// if (UGameplayStatics::DoesSaveGameExist(SaveSlot, SplitScreenIndex))
+	// {
+	// 	return 0;
+	// }
+	//
+	// // If there is already a save
+	// // Check if the current save iteration is valid, otherwise start from the beginning
+	// int32 SaveIteration = GetSaveIteration();
+	// SaveSlot = ConstructSaveSlot(GetNetId(), GetPlatformId(), "Config", GetSaveSlotIndex(), SaveIteration);
+	// if (!UGameplayStatics::DoesSaveGameExist(SaveSlot, SplitScreenIndex))
+	// {
+	// 	SaveIteration = 0;
+	// }
+	//
+	// bool bValidSaveIteration = true;
+	// while (bValidSaveIteration)
+	// {
+	// 	SaveIteration++;
+	// 	SaveSlot = ConstructSaveSlot(GetNetId(), GetPlatformId(), "Config", GetSaveSlotIndex(), SaveIteration);
+	// 	if (!UGameplayStatics::DoesSaveGameExist(SaveSlot, SplitScreenIndex)) bValidSaveIteration = false;
+	// }
+	//
+	// return SaveIteration;
+	return 0;
+}
+#pragma endregion
+
+
+
 
 #pragma region Match State Functions
-void AMultiplayerGameMode::RestartPlayer(AController* NewPlayer)
-{
-	Super::RestartPlayer(NewPlayer);
-}
-
-
-void AMultiplayerGameMode::RestartPlayerAtPlayerStart(AController* NewPlayer, AActor* StartSpot)
-{
-	Super::RestartPlayerAtPlayerStart(NewPlayer, StartSpot);
-}
-
-
 void AMultiplayerGameMode::PostLogin(APlayerController* NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
@@ -126,6 +170,22 @@ void AMultiplayerGameMode::HandleMatchAborted()
 	}
 
 	PrintMessage("Handling MatchAborted");
+}
+#pragma endregion
+
+
+
+
+#pragma region Respawning
+void AMultiplayerGameMode::RestartPlayer(AController* NewPlayer)
+{
+	Super::RestartPlayer(NewPlayer);
+}
+
+
+void AMultiplayerGameMode::RestartPlayerAtPlayerStart(AController* NewPlayer, AActor* StartSpot)
+{
+	Super::RestartPlayerAtPlayerStart(NewPlayer, StartSpot);
 }
 #pragma endregion
 

@@ -296,6 +296,12 @@ Completed Stuff
 
 
 Current Todo
+	- Finish save state logic for the ui 
+	- Latent task handling for both save state and init ability actor info
+	- Handle creating save state for levels, and a menu to save / load a level ->  test game mode behavior during server travel
+	- Add logic for save state -> finish logic for routing to singleplayer/multiplayer save logic
+		- Find whether the game state has access to the game instance, and how the player state should route to the game mode for retrieving save information
+	- Add saving / loading logic on the game mode for singleplayer / multiplayer stuff, and replication for handling saving / loading on clients 
 
 	- Add multiple different combat abilities and combo attacks
 	- Add character's with different attacks and learn how to handle combat, respawning, etc.

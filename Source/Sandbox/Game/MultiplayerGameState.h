@@ -18,5 +18,15 @@ UCLASS()
 class SANDBOX_API AMultiplayerGameState : public AGameState
 {
 	GENERATED_BODY()
+
+public:
+	/**
+	 * Sends a notification to the game mode to save the current game state.
+	 * If there's valid save logic for the game mode, it saves the current state and updates the save iteration for save information to be handled dynamically 
+	 *
+	 * @param Iteration	The specific index we're saving to. Whether it's an autosave or a specific save is up to the player. Leave as -1 for it to save to the current Save Iteration
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual void SaveGameState(const int32 Iteration = -1);
+
 	
 };

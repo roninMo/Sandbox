@@ -112,6 +112,7 @@ bool ULevelSaveComponent::LoadCurrentState_Implementation(bool bRetrieveActorDat
 	}
 	
 	// Spawn actors that were previously spawned in the world
+	// TODO: Add logic for multiple variations of actors, or after handling singleplayer Level and Spawned actors / Characters, handle custom information like Forge specific stuff from an object (Weapons / Characters / World design / etc. )
 	for (FString Id : SpawnedActors)
 	{
 		if (!SavedActors.Contains(Id)) continue;
@@ -205,6 +206,36 @@ FString ULevelSaveComponent::GetSaveGameSlot(const FString& LevelName, EGameMode
 		default: FString();
 	}
 
-	return LevelName + "_" + Classification;
+	/**
+
+	 SinglePlayer
+		- Adventure
+			- Specific levels, and save game state for each game
+
+	 Multiplayer
+		- Team Deathmatch, Free for All, etc.
+		- Custom Games
+			- Both could have a custom level, normal multiplayer would just have traditional logic
+
+
+	Lobby
+		- GameMode, Level, CustomSaveState/Level Information, GameMode logic for the type of game ->  ready for play
+
+
+	Singleplayer
+		- Adventure_Level_Character1_S1_54
+
+	Multiplayer
+		- MP_CustomLevel1
+		- MP_CustomLevel2
+
+
+	->  SaveGame Reference for retrieving Level / Character information
+		- OnMatchBegin build the level, character / spawned information on server, and spawned level objects on both Client and Server 
+
+
+	 */
+
+	return Classification + "_" + LevelName;
 }
 #pragma endregion

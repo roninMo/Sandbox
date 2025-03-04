@@ -297,14 +297,6 @@ struct F_ArmamentInformation
 	
 	/** The base attack information of the armament */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FGameplayAttribute, float> BaseDamageStats;
-
-	/**
-		For influencing weapon damage and costs during one handing, two handing, or dual wielding, there's base damage stats and attribute modifications for each attack during each stance in combat
-		Sometimes this can be really confusing if you want to adjust each combo attack, and have it tied to attributes, at the end of the day you're still creating adjustments during each combat attack
-		So this is the base damage for reference, you'll probably have to create a way to add a combo attack and it's combat details together, especially if you want combat for different armament stances
-
-	 */
-
 	// TODO: Add attribute damage scaling
 	
 	/** The armament's passives */

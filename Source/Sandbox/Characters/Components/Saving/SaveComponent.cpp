@@ -233,7 +233,7 @@ bool USaveComponent::PreventingLoadingFor(const ESaveType SaveType) const
 void USaveComponent::InitializeSaveSlotConfig()
 {
 	SetNetAndPlatformId();
-	CurrentSaveIteration = FindSaveIteration();
+	// CurrentSaveIteration = FindSaveIteration();
 	SetSaveSlotIndex(0); // TODO: Retrieve from game mode
 }
 
@@ -292,36 +292,6 @@ int32 USaveComponent::GetUserIndex() const
 int32 USaveComponent::GetSaveIteration() const
 {
 	return CurrentSaveIteration;
-}
-
-
-int32 USaveComponent::FindSaveIteration() const
-{
-	// The game hasn't been saved yet
-	FString SaveSlot = ConstructSaveSlot(GetNetId(), GetPlatformId(), GetSaveCategory(ESaveType::World), GetSaveSlotIndex(), 0);
-	if (UGameplayStatics::DoesSaveGameExist(SaveSlot, SplitScreenIndex))
-	{
-		return 0;
-	}
-	
-	// If there is already a save
-	// Check if the current save iteration is valid, otherwise start from the beginning
-	int32 SaveIteration = GetSaveIteration();
-	SaveSlot = ConstructSaveSlot(GetNetId(), GetPlatformId(), GetSaveCategory(ESaveType::World), GetSaveSlotIndex(), SaveIteration);
-	if (!UGameplayStatics::DoesSaveGameExist(SaveSlot, SplitScreenIndex))
-	{
-		SaveIteration = 0;
-	}
-	
-	bool bValidSaveIteration = true;
-	while (bValidSaveIteration)
-	{
-		SaveIteration++;
-		SaveSlot = ConstructSaveSlot(GetNetId(), GetPlatformId(), GetSaveCategory(ESaveType::World), GetSaveSlotIndex(), SaveIteration);
-		if (!UGameplayStatics::DoesSaveGameExist(SaveSlot, SplitScreenIndex)) bValidSaveIteration = false;
-	}
-
-	return SaveIteration;
 }
 
 

@@ -1623,24 +1623,24 @@ void UCombatComponent::HandleCombatComponentInformation()
 	else  UE_LOGFMT(CombatComponentLog, Log, "// SecondaryArmament -> NULL");
 	
 	// Current stance, Combo index, EquipSlot indexes for primary and offhand
-	UE_LOGFMT(CombatComponentLog, Log, "// Player Combat Info -> CurrentStance: {0}, Combo Index: {1}, PrimarySlotIndex: {2}, OffhandSlotIndex: {3}",
+	UE_LOGFMT(CombatComponentLog, Log, "// Player Combat Info -> CurrentStance: {0}, Combo Index: {1}, PrimaryEquipSlot: {2}, SecondaryEquipSlot: {3}",
 		*UEnum::GetValueAsString(CurrentStance), ComboIndex, ArmamentIndex, OffhandArmamentIndex
 	);
 
 	// Armor and Equipped weapon slots (Id, DisplayName, SortOrder)
 	UE_LOGFMT(CombatComponentLog, Log, "// ");
 	UE_LOGFMT(CombatComponentLog, Log, "// Weapon Slots: ");
+	PrintItemInformation(LeftHandEquipSlot_One, FString("LeftHand Slot One		"));
+	PrintItemInformation(LeftHandEquipSlot_Two, FString("LeftHand Slot Two		"));
+	PrintItemInformation(LeftHandEquipSlot_Three, FString("LeftHand Slot Three		"));
+	
 	PrintItemInformation(RightHandEquipSlot_One, FString("RightHand Slot One		"));
 	PrintItemInformation(RightHandEquipSlot_Two, FString("RightHand Slot Two		"));
 	PrintItemInformation(RightHandEquipSlot_Three, FString("RightHand Slot Three		"));
-	
-	PrintItemInformation(LeftHandEquipSlot_One, FString("LeftHand Slot One		"));
-	PrintItemInformation(LeftHandEquipSlot_Two, FString("LeftHand Slot Two		"));
-	PrintItemInformation(LeftHandEquipSlot_Three, FString("LeftHand Slot Three	"));
 
 	UE_LOGFMT(CombatComponentLog, Log, "// ");
 	UE_LOGFMT(CombatComponentLog, Log, "// Armors: ");
-	PrintItemInformation(Gauntlets, FString("Gauntlets			"));
+	PrintItemInformation(Gauntlets, FString("Gauntlets		"));
 	PrintItemInformation(Leggings, FString("Leggings			"));
 	PrintItemInformation(Helm, FString("Helm				"));
 	PrintItemInformation(Chest, FString("Chest			"));

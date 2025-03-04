@@ -221,10 +221,6 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual int32 GetSaveIteration() const;
 
-	// TODO: Is there a more efficient way that prevents this from not being safe?
-	/** Finds the player's last save iteration, and set's the current save iteration to it. This is used for retrieving current saves and help with the list of saved information */
-	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual int32 FindSaveIteration() const;
-
 	/** Sets the character's Net and Platform Id based on whether it's a player, and if it's single / multiplayer games with subsystems */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual void SetNetAndPlatformId();
 

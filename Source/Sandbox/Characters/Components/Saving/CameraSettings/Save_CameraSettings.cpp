@@ -76,3 +76,23 @@ bool USave_CameraSettings::LoadData_Implementation(int32 Index)
 	Character->Execute_SetCameraStyle(Character, CameraSettings->CameraStyle);
 	return true;
 }
+
+
+FString USave_CameraSettings::FormattedSaveInformation(const FString Slot) const
+{
+	// Retrieve Saved Combat Info
+	USaved_CameraSettings* CameraSettings = Cast<USaved_CameraSettings>(UGameplayStatics::LoadGameFromSlot(Slot, 0));
+	if (!CameraSettings)
+	{
+		return FString();
+	}
+
+	// Retrieve the primary and secondary weapon information
+	TArray<FString> Results;
+	Results.Add(FString::Printf(TEXT("Camera Settings")));
+	Results.Add(FString::Printf(TEXT("{")));
+	Results.Add(FString::Printf(TEXT("\tCameraStyle:		 '%s',"), *CameraSettings->CameraStyle.ToString()));
+	Results.Add(FString::Printf(TEXT("\tCameraOrientation: '%s'"), *UEnum::GetValueAsString(CameraSettings->CameraOrientation)));
+	Results.Add(FString::Printf(TEXT("}")));
+	return FString::Join(Results, TEXT("\n"));
+}
