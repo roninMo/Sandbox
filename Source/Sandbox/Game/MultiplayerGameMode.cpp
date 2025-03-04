@@ -281,6 +281,7 @@ bool AMultiplayerGameMode::CreateNextSave()
 		{
 			PlayerState->SetSaveGameRef(SaveGameUrl);
 			PlayerState->SetSaveIndex(SaveIndex);
+			PlayerState->SetSaveSlot(CurrentSave->SaveSlot);
 		}
 	}
 

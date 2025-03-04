@@ -18,8 +18,11 @@ protected:
 	/** The current save game reference for saving the game */
 	UPROPERTY(Replicated, BlueprintReadWrite, Category = "PlayerState|Saving and Loading") FString SaveGameRef;
 	
-	/** The current save game reference for saving the game */
+	/** The current save index of a specific save slot */
 	UPROPERTY(Replicated, BlueprintReadWrite, Category = "PlayerState|Saving and Loading") int32 SaveIndex = -1;
+
+	/** The current save slot for a specific character's saves */
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "PlayerState|Saving and Loading") int32 SaveSlot = -1;
 
 	/** A list of save game references for this specific Save slot. Beginning from the current save game to the previous saves */
 
@@ -50,10 +53,17 @@ public:
 	/** Retrieves the current SaveIndex */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving and Loading|Utility") virtual int32 GetSaveIndex() const;
 
+	/** Retrieves the current SaveSlot */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving and Loading|Utility") virtual int32 GetSaveSlot() const;
+
 	/** Utility for setting SaveGameRef, only call on server */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving and Loading|Utility") virtual void SetSaveGameRef(FString& Ref);
 	
 	/** Utility for setting SaveIndex, only call on server */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving and Loading|Utility") virtual void SetSaveIndex(int32 Index);
+	
+	/** Utility for setting Slot, only call on server */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving and Loading|Utility") virtual void SetSaveSlot(int32 Slot);
+
 	
 };

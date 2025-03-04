@@ -23,7 +23,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") FString Description;
 
 	/** Level Reference */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") ULevel* Level; // TODO: Update this to an object that has custom level logic
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") ALevelScriptActor* Level; // TODO: Update this to an object that has custom level logic
 
 	/** Image  */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") UTexture2D* Thumbnail;

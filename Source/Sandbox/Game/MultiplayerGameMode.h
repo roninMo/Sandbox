@@ -38,7 +38,7 @@ protected:
 	 *
 	 * @note This design pattern is like an abstract factory, but it's just like a hierarchy of save components that use this to properly save and retrieve information, and should be easy to use with asynchronous APIs 
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GameMode|Save State") USave* CurrentSave;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GameMode|Save State") TObjectPtr<USave> CurrentSave;
 
 	/** The save game reference, used for saving and retrieving save information for a specific save */
 	UPROPERTY(BlueprintReadWrite, Transient) FString SaveGameUrl;

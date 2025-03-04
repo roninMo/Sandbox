@@ -12,6 +12,7 @@ void ABasePlayerState::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME_CONDITION(ABasePlayerState, SaveGameRef, COND_AutonomousOnly);
+	DOREPLIFETIME_CONDITION(ABasePlayerState, SaveSlot, COND_AutonomousOnly);
 	DOREPLIFETIME_CONDITION(ABasePlayerState, SaveIndex, COND_AutonomousOnly);
 }
 
@@ -47,18 +48,25 @@ FString ABasePlayerState::GetSaveGameRef() const
 	return SaveGameRef;
 }
 
-
 int32 ABasePlayerState::GetSaveIndex() const
 {
 	return SaveIndex;
 }
 
+int32 ABasePlayerState::GetSaveSlot() const
+{
+	return SaveSlot;
+}
+
+void ABasePlayerState::SetSaveSlot(const int32 Slot)
+{
+	SaveSlot = Slot;
+}
 
 void ABasePlayerState::SetSaveGameRef(FString& Ref)
 {
 	SaveGameRef = Ref;
 }
-
 
 void ABasePlayerState::SetSaveIndex(const int32 Index)
 {

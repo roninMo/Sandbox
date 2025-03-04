@@ -224,7 +224,10 @@ public:
 	
 	/** Retrieves the character's save category id (the save type) */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual FString GetSaveCategory(const ESaveType SaveType) const;
-
+	
+	/** Retrieves the character's save slot  */
+	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual int32 GetSaveSlot() const;
+	
 	/** Retrieves the index of the player during split screen for handling save information */ // TODO: Should account information just be used?
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Utility") virtual int32 GetUserIndex() const;
 	
