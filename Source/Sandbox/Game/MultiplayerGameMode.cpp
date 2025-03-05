@@ -111,7 +111,8 @@ void AMultiplayerGameMode::HandleMatchHasStarted()
 
 
 void AMultiplayerGameMode::HandleMatchHasEnded()
-{ 
+{
+	
 	// Save level and character information
 	if (CurrentSave)
 	{
@@ -157,6 +158,8 @@ bool AMultiplayerGameMode::Travel(FString Map)
 #pragma region Save State Functions
 bool AMultiplayerGameMode::SaveGame(const FString& SaveUrl, const int32 Index)
 {
+	// TODO: Check if we're saving to the proper level
+
 	// Handle save information specific to multiplayer game state here (Quests, objectives, etc.)
 	//	- Games with save information that persists across multiple games, or from singleplayer / multiplayer should have custom save logic for save / retrieving that information 
 
@@ -213,7 +216,7 @@ bool AMultiplayerGameMode::LoadSave(const FString& SaveUrl, const int32 Index)
 
 
 	// Level save logic
-	if (LevelSaveComponent)
+	if (LevelSaveComponent) // TODO: Check if this is valid immediately after ServerTravel, or if there's a function we're able to bind to for loading a save before it's ready
 	{
 		// TODO: Update save state to be two separate things based on whether the information is persistent
 		//			- Actor->SaveToLevel() saves level information, and optionally additionally save character specific information

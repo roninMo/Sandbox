@@ -19,6 +19,7 @@
 	- Add a cover system for both standing and crouching for specific objects
 	- Fix ledge mantling detection for proper mantle to climb up to a proper ledge / prevent clipping
 	- Perhaps add logic for wall climbing on angled walls, and logic settings for either valid object based wall climbing, or wall climbing at specific angles with a valid accepted angle
+	- Slower movement with less gravity, needs to be handled when you build actual combat 
 	- And add additional custom movement logic for stuff
 
 //----------------------------------------------------------------------------------//

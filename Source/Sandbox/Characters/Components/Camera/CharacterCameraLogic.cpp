@@ -79,6 +79,7 @@ void ACharacterCameraLogic::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor*
 
 void ACharacterCameraLogic::InitCameraSettings()
 {
+	Server_SetCameraStyle(Execute_GetCameraStyle(this));
 	OnCameraStyleSet();
 	OnCameraOrientationSet();
 	SetTargetLockTransitionSpeed(TargetLockTransitionSpeed);

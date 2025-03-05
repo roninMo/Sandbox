@@ -129,6 +129,10 @@ void APlayerCharacter::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAv
 				UMMOAttributeSet* Attributes = AscPlayerState ? AscPlayerState->GetAttributeSet<UMMOAttributeSet>() : nullptr;
 				Hud->InitializeHud(this, PlayerController, AscPlayerState, AbilitySystemComponent, Attributes);
 			}
+
+			// Important for after server travel, sometimes the controller's input mode hasn't been initialized yet
+			FInputModeGameOnly InputMode;
+			PlayerController->SetInputMode(InputMode);
 		}
 	}
 	
