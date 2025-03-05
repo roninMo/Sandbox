@@ -194,12 +194,6 @@ public:
 						-> MP_CustomLevel1_Actors_WeaponCrate_0_Level
 						-> MP_CustomLevel1_Actors_WeaponCrate_0_Inventory
 
-
-	
- 
-
-
-
 */
 
 	
@@ -227,7 +221,7 @@ protected:
 	virtual void HandleMatchAborted() override;
 
 	/** Handles server travel */
-	UFUNCTION(BlueprintCallable, Category = "Server Travel") virtual void Travel(FString Map);
+	UFUNCTION(BlueprintCallable, Category = "Server Travel") virtual bool Travel(FString Map);
 
 
 	

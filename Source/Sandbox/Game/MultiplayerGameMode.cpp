@@ -73,7 +73,7 @@ void AMultiplayerGameMode::PostLogin(APlayerController* NewPlayer)
 	{
 		PlayerState->SetSaveUrl(GetCurrentSaveGameUrl());
 		PlayerState->SetSaveIndex(SaveIndex);
-		PlayerState->SetSaveSlot(CurrentSave->SaveSlot);
+		if (CurrentSave) PlayerState->SetSaveSlot(CurrentSave->SaveSlot);
 	}
 }
 
@@ -93,7 +93,6 @@ void AMultiplayerGameMode::HandleMatchHasStarted()
 
 	// Load the game's current save data. Level, Characters, and custom actor save data for client replication
 	PrintActorsInLevel(false);
-	LoadSave(GetCurrentSaveGameUrl(), CurrentSave->SaveIndex);
 
 	// Custom level save logic
 	ULevel* Level = GetLevel();
@@ -112,9 +111,12 @@ void AMultiplayerGameMode::HandleMatchHasStarted()
 
 
 void AMultiplayerGameMode::HandleMatchHasEnded()
-{
+{ 
 	// Save level and character information
-	SaveGame(GetCurrentSaveGameUrl(), CurrentSave->SaveIndex);
+	if (CurrentSave)
+	{
+		SaveGame(GetCurrentSaveGameUrl(), CurrentSave->SaveIndex);
+	}
 
 	PrintMessage("Handling MatchHasEnded");
 
@@ -142,10 +144,10 @@ void AMultiplayerGameMode::HandleMatchAborted()
 	PrintMessage("Handling MatchAborted");
 }
 
-void AMultiplayerGameMode::Travel(FString Map)
+bool AMultiplayerGameMode::Travel(FString Map)
 {
-	if (!GetWorld()) return;
-	GetWorld()->ServerTravel(Map);
+	if (!GetWorld()) return false;
+	return GetWorld()->ServerTravel(Map);
 }
 #pragma endregion
 
@@ -185,6 +187,27 @@ bool AMultiplayerGameMode::SaveGame(const FString& SaveUrl, const int32 Index)
 
 bool AMultiplayerGameMode::LoadSave(const FString& SaveUrl, const int32 Index)
 {
+	// Safety precautions
+	if (!GetWorld()) return false;
+
+	// Check if it's a valid save
+	USave* Save = Cast<USave>(UGameplayStatics::LoadGameFromSlot(SaveUrl, 0));
+	if (!Save)
+	{
+		UE_LOGFMT(GameModeLog, Error, "{0}() SaveUrl {1} is invalid, GameMode: {2}", *FString(__FUNCTION__), *SaveUrl, *GetName());
+		return false;
+	}
+
+	// Travel to the level
+	if (!GetWorld()->ServerTravel(Save->LevelUrl))
+	{
+		UE_LOGFMT(GameModeLog, Error, "{0}() Failed to travel to the world while trying to load a game save! {2}", *FString(__FUNCTION__), *SaveUrl, *GetName());
+
+		// TODO: Add logic for handling server travel errors
+		return false;
+	}
+
+
 	// Handle save information specific to multiplayer game state here (Quests, objectives, etc.)
 	//	- Games with save information that persists across multiple games, or from singleplayer / multiplayer should have custom save logic for save / retrieving that information
 
