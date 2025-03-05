@@ -23,7 +23,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") FString Description;
 
 	/** Level Reference */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") ALevelScriptActor* Level; // TODO: Update this to an object that has custom level logic
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") FString LevelUrl; // TODO: Update this to an object that has custom level logic
 
 	/** Image  */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") UTexture2D* Thumbnail;
@@ -49,6 +49,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "SaveGame") virtual bool IsValidSaveState() const;
 
 	/** Save's the player's information for saving / retrieving save information for individual characters/components */
-	UFUNCTION(BlueprintCallable, Category = "SaveGame") virtual void SaveInformation(FString& Name, FString& SaveDescription, int32 NetworkId, FString& AccountPlatformId, int32 Slot, int32 Index);
+	UFUNCTION(BlueprintCallable, Category = "SaveGame") virtual void SaveInformation(FString Name, FString SaveDescription, int32 NetworkId, FString AccountPlatformId, int32 Slot, int32 Index);
 	
 };

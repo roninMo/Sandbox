@@ -287,11 +287,11 @@ FString USaveComponent::GetActorSaveId() const
 
 FString USaveComponent::GetSaveUrl(const ESaveType SaveCategory) const
 {
-	if (!IsReadyToSave())
+	if (!IsReadyToSave()) // TODO: Check if there's save information during LoadSave at notify begin play
 	{
-		UE_LOGFMT(SaveComponentLog, Error, "{0}::{1}() The save index was invalid! {2} failed to construct the save url's component reference ({3})!",
-			*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), GetNameSafe(GetOwner()), *UEnum::GetValueAsString(SaveCategory)
-		);
+		// UE_LOGFMT(SaveComponentLog, Error, "{0}::{1}() The save index was invalid! {2} failed to construct the save url's component reference ({3})!",
+		// 	*UEnum::GetValueAsString(GetOwner()->GetLocalRole()), *FString(__FUNCTION__), GetNameSafe(GetOwner()), *UEnum::GetValueAsString(SaveCategory)
+		// );
 		return FString();
 	}
 

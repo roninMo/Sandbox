@@ -16,7 +16,7 @@ class USaveLogic;
 
 /**
  * https://docs.unrealengine.com/latest/INT/Engine/Blueprints/UserGuide/Types/LevelBlueprint/index.html
- *
+ * - Epic Online Subsystem example logic for handling lobby events (probably from a player controller's remote procedure calls -> @ref EOSGO_API UGoMenu
  */
 UCLASS()
 class SANDBOX_API AMultiplayerGameMode : public AGameMode
@@ -45,7 +45,9 @@ protected:
 
 	/** The most recent save index for a specific save slot. ie. if it's the 100th save, and we load / save to a previous save, this shouldn't be affected */
 	UPROPERTY(BlueprintReadWrite, Transient) int32 SaveIndex;
-	
+
+	/** The host's Platform Id. For singleplayer this is their Console/Account id, and for multiplayer it's their online subsystem account id that's retrieved when the server owner's game begins  */
+	UPROPERTY(BlueprintReadWrite, Transient) FString SavePlatformId; // TODO: This is just the singleplayer's reference for retrieving the platform id, find a better way at beginplay to retrieve the save state
 
 	/** A stored reference to the save logic component. Only spawned on the server; handle's the loading and spawning of save state for a Singleplayer/Multiplayer custom game state. */
 	UPROPERTY(BlueprintReadWrite) TObjectPtr<ULevelSaveComponent> LevelSaveComponent;
@@ -55,6 +57,12 @@ protected:
 	// Respawn logic
 
 	// Adventure / TDM / FoF -> subclassed infrastructure
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GameMode|Save State|Levels") FString LobbyLevel;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GameMode|Save State|Levels") FString SingleplayerLevel;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GameMode|Save State|Levels") FString CustomLevel;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GameMode|Save State|Levels") TArray<FString> MultiplayerLevels;
+	
 
 	
 public:
@@ -86,39 +94,54 @@ public:
 	 * Saves the current game to a save slot.
 	 * If there was a specified Save Index, it will overwrite the previous save with the current level information; otherwise, it saves to the current iteration and increments to begin the next save state
 	 * 
-	 * @param SaveGameRef The specific slot we're saving to
+	 * @param SaveUrl The specific slot we're saving to
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool SaveGame(const FString& SaveGameRef, const int32 Index);
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool SaveGame(const FString& SaveUrl, const int32 Index);
 
 	/**
 	 * Loads the current save state from a save slot.
 	 * 
-	 * @param SaveGameRef The specific slot we're saving to
+	 * @param SaveUrl The specific slot we're saving to
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool LoadSave(const FString& SaveGameRef, const int32 Index);
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool LoadSave(const FString& SaveUrl, const int32 Index);
 
-	/** Initializes the SaveGameReference and Save Index from the current SaveGameConfig, and updates the CurrentSave */
-	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Init") virtual bool UpdateCurrentSave(USave* Save);
+	/** Initializes the SaveUrlerence and Save Index from the current SaveGameConfig, and updates the CurrentSave */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool SetCurrentSave(USave* Save);
 	
-	// TODO: Is there a more efficient way that prevents this from not being safe?
-	/** Finds the player's last save index, and set's the current save index to it. This is used for retrieving current saves and help with the list of saved information */
-	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Init") virtual bool FindCurrentSave() const;
-
-
-protected:
 	/**
 	 * Creates another save state, and updates the save reference and index on both the current save, here, and the player states. \n\n
 	 * This refers to the current index, and not a specified index during a save
-	 * @note Objects in the world should retrieve the SaveGameRef and Index from the game mode on the server
+	 * @note Objects in the world should retrieve the SaveUrl and Index from the game mode on the server
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Init") virtual bool CreateNextSave();
+	
+	/** Finds the player's current save index for a specific save slot */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Init") virtual bool FindCurrentSave(const FString& AccountId, int32 SaveSlot, UPARAM(ref) FString& OutSaveUrl, int32& OutSaveIndex) const;
 
-	/** Retrieves a reference to the current save game root information */
+	/** Retrieves a list of the previous saves using the current save */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Init") virtual TArray<FString> FindPreviousSaves(const FString& AccountId, int32 SaveSlot, int32 CurrentSaveIndex, int32 SavesToRetrieve = 10) const;
+	
+	/** Removes one of the save slots, including all of the saves connected to the slot */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool DeleteSaveSlot(const FString& AccountId, int32 SaveSlot);
+	
+	/** Creates a new save using the Owner's platform id and a specified save slot. Used when creating a new save */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual USave* NewSaveSlot(const FString& AccountId, int32 SaveSlot);
+
+	
+protected:
+	/** Construct the SaveGameUrl from the save information */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual FString ConstructSaveGameUrl(const FString& PlatformId, int32 Slot, int32 Index) const;
+
+	/** Retrieves a reference to the current save game base information */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual USave* GetSaveGameBase();
 	
-	/** Sets the save game root information */
+	/** Sets the save game base information */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual void SetSaveGameBase(USave* Save);
 
+
+public:
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Utility") virtual FString GetSavePlatformId() const;
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Utility") virtual void RetrieveSavePlatformId();
 	
 
 	
@@ -144,6 +167,8 @@ protected:
 	/** Called when the match transitions to Aborted */
 	virtual void HandleMatchAborted() override;
 
+	/** Handles server travel */
+	UFUNCTION(BlueprintCallable, Category = "Server Travel") virtual void Travel(FString Map);
 
 
 	

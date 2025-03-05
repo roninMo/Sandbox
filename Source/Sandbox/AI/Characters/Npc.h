@@ -140,7 +140,9 @@ public:
 
 	/** Returns the id of the npc character */
 	UFUNCTION(Blueprintable) virtual FName GetId() const;
-	
+
+	virtual FString GetActorLevelId_Implementation() const override;
+
 	
 protected:
 	/** Finds an inventory item and stores it in the player's inventory */

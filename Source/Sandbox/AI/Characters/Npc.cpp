@@ -158,6 +158,12 @@ FName ANpc::GetId() const
 }
 
 
+FString ANpc::GetActorLevelId_Implementation() const
+{
+	return GetName();
+}
+
+
 void ANpc::AddSavedItemToInventory(FS_Item Information)
 {
 	if (!Inventory || !Information.IsValid()) return;

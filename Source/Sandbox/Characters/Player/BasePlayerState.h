@@ -16,7 +16,7 @@ class SANDBOX_API ABasePlayerState : public APlayerState
 
 protected:
 	/** The current save game reference for saving the game */
-	UPROPERTY(Replicated, BlueprintReadWrite, Category = "PlayerState|Saving and Loading") FString SaveGameRef;
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "PlayerState|Saving and Loading") FString SaveUrl;
 	
 	/** The current save index of a specific save slot */
 	UPROPERTY(Replicated, BlueprintReadWrite, Category = "PlayerState|Saving and Loading") int32 SaveIndex = -1;
@@ -57,7 +57,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving and Loading|Utility") virtual int32 GetSaveSlot() const;
 
 	/** Utility for setting SaveGameRef, only call on server */
-	UFUNCTION(BlueprintCallable, Category = "Player State|Saving and Loading|Utility") virtual void SetSaveGameRef(FString& Ref);
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving and Loading|Utility") virtual void SetSaveUrl(FString& Ref);
 	
 	/** Utility for setting SaveIndex, only call on server */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving and Loading|Utility") virtual void SetSaveIndex(int32 Index);

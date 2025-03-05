@@ -11,7 +11,7 @@ bool USave::IsValidSaveState() const
 }
 
 
-void USave::SaveInformation(FString& Name, FString& SaveDescription, int32 NetworkId, FString& AccountPlatformId, int32 Slot, int32 Index)
+void USave::SaveInformation(FString Name, FString SaveDescription, int32 NetworkId, FString AccountPlatformId, int32 Slot, int32 Index)
 {
 	SaveName = Name;
 	Description = SaveDescription;

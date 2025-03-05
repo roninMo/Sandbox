@@ -11,7 +11,7 @@
 void ABasePlayerState::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-	DOREPLIFETIME_CONDITION(ABasePlayerState, SaveGameRef, COND_AutonomousOnly);
+	DOREPLIFETIME_CONDITION(ABasePlayerState, SaveUrl, COND_AutonomousOnly);
 	DOREPLIFETIME_CONDITION(ABasePlayerState, SaveSlot, COND_AutonomousOnly);
 	DOREPLIFETIME_CONDITION(ABasePlayerState, SaveIndex, COND_AutonomousOnly);
 }
@@ -35,7 +35,7 @@ void ABasePlayerState::Server_SaveGame_Implementation(const FString& Ref, const 
 	AMultiplayerGameState* GameState = Cast<AMultiplayerGameState>(GetWorld()->GetGameState());
 	if (GameState)
 	{
-		SaveGameRef = Ref;
+		SaveUrl = Ref;
 		GameState->SaveGameState(Ref, Index);
 	}
 }
@@ -45,7 +45,7 @@ void ABasePlayerState::Server_SaveGame_Implementation(const FString& Ref, const 
 #pragma region Utility
 FString ABasePlayerState::GetSaveGameRef() const
 {
-	return SaveGameRef;
+	return SaveUrl;
 }
 
 int32 ABasePlayerState::GetSaveIndex() const
@@ -63,9 +63,9 @@ void ABasePlayerState::SetSaveSlot(const int32 Slot)
 	SaveSlot = Slot;
 }
 
-void ABasePlayerState::SetSaveGameRef(FString& Ref)
+void ABasePlayerState::SetSaveUrl(FString& Url)
 {
-	SaveGameRef = Ref;
+	SaveUrl = Url;
 }
 
 void ABasePlayerState::SetSaveIndex(const int32 Index)
