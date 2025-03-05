@@ -41,7 +41,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GameMode|Save State") TObjectPtr<USave> CurrentSave;
 
 	/** The save game reference, used for saving and retrieving save information for a specific save */
-	UPROPERTY(BlueprintReadWrite, Transient) FString SaveGameUrl;
+	// UPROPERTY(BlueprintReadWrite, Transient) FString SaveGameUrl;
 
 	/** The most recent save index for a specific save slot. ie. if it's the 100th save, and we load / save to a previous save, this shouldn't be affected */
 	UPROPERTY(BlueprintReadWrite, Transient) int32 SaveIndex;
@@ -129,9 +129,6 @@ public:
 
 	
 protected:
-	/** Construct the SaveGameUrl from the save information */
-	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual FString ConstructSaveGameUrl(const FString& PlatformId, int32 Slot, int32 Index) const;
-
 	/** Retrieves a reference to the current save game base information */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual USave* GetSaveGameBase();
 	
@@ -142,8 +139,70 @@ protected:
 public:
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Utility") virtual FString GetSavePlatformId() const;
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Utility") virtual void RetrieveSavePlatformId();
-	
 
+
+public:
+	/** Retrieve the current SaveGameUrl reference for saving information to the level */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Utility") virtual FString GetCurrentSaveGameUrl(bool bLevel = false) const;
+	
+	/** Construct the SaveGameUrl from the save information */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual FString ConstructSaveGameUrl(const FString& PlatformId, int32 Slot, int32 Index, bool bLevel = false) const;
+
+
+	// GetBaseSaveUrl
+
+
+	// Load Character
+	// Save Character
+	// Load Level
+	// Save Level
+
+
+	
+	
+/**
+
+		Character Saving (should be able to switch between singleplayer saves and an account save that is accessed in other games in multiplayer with ease) // SaveComponent
+		Level Saving (State of world) // LevelSaveComponent
+		Custom Level Saving (objects added to a specific level) - multiplayer specific // -> Create a new component to handle spawning on client / server for different objects
+
+	- LevelSaveUrl
+		- SP -> Adventure_Character1_S1_54_Level_
+		- MP -> MP_CustomLevel1_
+	- CharacterSaveUrl
+		- SP -> Adventure_Character1_S1_54_Character1_
+		- MP -> retrieved from an api during join (there isn't a way of handling this right now with the editor using the account / platform id) 
+
+
+
+	- Adventure_Character1_S1_54
+				Character:
+					->  Adventure_Character1_S1_54_Combat
+					->  Adventure_Character1_S1_54_Inventory
+					->  Adventure_Character1_S1_54_CameraSettings
+					->  Adventure_Character1_S1_54_Attributes
+					->  Adventure_Character1_S1_54_Level
+
+	- MP_CustomLevel1
+			- MP_CustomLevel2
+				Props, Actors, Enemies, Weapons, GameMode Objects, Vehicles, etc spawned in the world should be handled separately here before we handle character logic, on client / server, retrieved from the specified level, spawn presets, etc.
+					-> MP_CustomLevel1_Props_Ramp (The level's custom components probably won't be spawned on the client automatically)
+					-> MP_CustomLevel1_Props_Object1
+					-> MP_CustomLevel1_Actors_ShieldPickup_1
+						-> MP_CustomLevel1_Actors_ShieldPickup_1_Level (Transform)
+					-> MP_CustomLevel1_Actors_WeaponCrate_0
+						-> MP_CustomLevel1_Actors_WeaponCrate_0_Level
+						-> MP_CustomLevel1_Actors_WeaponCrate_0_Inventory
+
+
+	
+ 
+
+
+
+*/
+
+	
 	
 //----------------------------------------------------------------------------------//
 // Match State Functions															//

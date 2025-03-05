@@ -164,6 +164,82 @@ void ACharacterBase::OnInitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvat
 
 
 
+#pragma region Save Logic
+F_LevelSaveInformation_Actor ACharacterBase::SaveToLevel_Implementation()
+{
+	if (!SaveComponent) return F_LevelSaveInformation_Actor();
+	
+	F_LevelSaveInformation_Actor SaveConfig;
+	SaveConfig.Id = Execute_GetActorLevelId(this);
+	SaveConfig.Location = GetActorLocation();
+	SaveConfig.Actor = this;
+	SaveConfig.Rotation = GetActorRotation();
+	SaveConfig.Class = GetClass()->StaticClass();
+	
+	SaveConfig.UpdateConfig(
+	SaveComponent->HandlesSaving(ESaveType::Attributes), 
+	SaveComponent->HandlesSaving(ESaveType::Inventory),
+	SaveComponent->HandlesSaving(ESaveType::Combat)
+	);
+
+	Execute_OnSaveToLevel(this, SaveConfig);
+	return SaveConfig;
+}
+
+
+bool ACharacterBase::SaveActorData_Implementation(const F_LevelSaveInformation_Actor& SaveConfig)
+{
+	if (!SaveComponent) return true;
+
+	// Save the actor data accordingly
+	bool bSuccessfullySavedInformation = true;
+	for (const ESaveType SaveType : SaveComponent->GetSaveTypes())
+	{
+		if (!SaveComponent->SaveData(SaveType)) bSuccessfullySavedInformation = false;
+	}
+
+	Execute_OnSaveActorData(this, SaveConfig);
+	return bSuccessfullySavedInformation;
+}
+
+
+bool ACharacterBase::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave, bool bRetrieveActorSave)
+{
+	// TODO: I don't know if we should handle the level state logic here
+	bool bSuccessfullyLoaded = true;
+	if (!PreviousSave.Location.IsNearlyZero())
+	{
+		bSuccessfullyLoaded = TeleportTo(PreviousSave.Location, PreviousSave.Rotation);
+	}
+	
+	// Handle any other state that's specific to the character's level specific save state
+	if (SaveComponent && bRetrieveActorSave)
+	{
+		for (const ESaveType SaveType : SaveComponent->GetSaveTypes())
+		{
+			if (!SaveComponent->LoadData(SaveType)) bSuccessfullyLoaded = false;
+		}
+	}
+
+	Execute_OnLoadFromLevel(this, PreviousSave, bSuccessfullyLoaded);
+	return bSuccessfullyLoaded;
+}
+
+
+FString ACharacterBase::GetActorLevelId_Implementation() const
+{
+	if (SaveComponent)
+	{
+		return SaveComponent->GetPlatformId();
+	}
+
+	return FGenericPlatformMisc::GetLoginId();
+}
+#pragma endregion
+
+
+
+
 #pragma region Utility
 UAISense_Sight::EVisibilityResult ACharacterBase::CanBeSeenFrom(const FCanBeSeenFromContext& Context,
 	FVector& OutSeenLocation, int32& OutNumberOfLoSChecksPerformed, int32& OutNumberOfAsyncLosCheckRequested,
@@ -275,84 +351,6 @@ USaveComponent* ACharacterBase::GetSaveComponent() const
 {
 	return SaveComponent;
 }
-
-
-
-
-#pragma region Save Logic
-F_LevelSaveInformation_Actor ACharacterBase::SaveToLevel_Implementation()
-{
-	if (!SaveComponent) return F_LevelSaveInformation_Actor();
-	
-	F_LevelSaveInformation_Actor SaveConfig;
-	SaveConfig.Id = Execute_GetActorLevelId(this);
-	SaveConfig.Location = GetActorLocation();
-	SaveConfig.Actor = this;
-	SaveConfig.Rotation = GetActorRotation();
-	SaveConfig.Class = GetClass()->StaticClass();
-	
-	SaveConfig.UpdateConfig(
-	SaveComponent->HandlesSaving(ESaveType::Attributes), 
-	SaveComponent->HandlesSaving(ESaveType::Inventory),
-	SaveComponent->HandlesSaving(ESaveType::Combat)
-	);
-
-	Execute_OnSaveToLevel(this, SaveConfig);
-	return SaveConfig;
-}
-
-
-bool ACharacterBase::SaveActorData_Implementation(const F_LevelSaveInformation_Actor& SaveConfig)
-{
-	if (!SaveComponent) return true;
-
-	// Save the actor data accordingly
-	bool bSuccessfullySavedInformation = true;
-	for (const ESaveType SaveType : SaveComponent->GetSaveTypes())
-	{
-		if (!SaveComponent->SaveData(SaveType)) bSuccessfullySavedInformation = false;
-	}
-
-	Execute_OnSaveActorData(this, SaveConfig);
-	return bSuccessfullySavedInformation;
-}
-
-
-bool ACharacterBase::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave, bool bRetrieveActorSave)
-{
-	// TODO: I don't know if we should handle the level state logic here
-	bool bSuccessfullyLoaded = true;
-	if (!PreviousSave.Location.IsNearlyZero())
-	{
-		bSuccessfullyLoaded = TeleportTo(PreviousSave.Location, PreviousSave.Rotation);
-	}
-	
-	// Handle any other state that's specific to the character's level specific save state
-	if (SaveComponent && bRetrieveActorSave)
-	{
-		for (const ESaveType SaveType : SaveComponent->GetSaveTypes())
-		{
-			if (!SaveComponent->LoadData(SaveType)) bSuccessfullyLoaded = false;
-		}
-	}
-
-	Execute_OnLoadFromLevel(this, PreviousSave, bSuccessfullyLoaded);
-	return bSuccessfullyLoaded;
-}
-
-
-FString ACharacterBase::GetActorLevelId_Implementation() const
-{
-	if (SaveComponent)
-	{
-		return SaveComponent->GetPlatformId();
-	}
-
-	return FGenericPlatformMisc::GetLoginId();
-}
-#pragma endregion
-
-
 
 
 UCombatComponent* ACharacterBase::GetCombatComponent() const

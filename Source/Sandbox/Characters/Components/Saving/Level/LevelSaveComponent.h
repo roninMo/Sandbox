@@ -39,8 +39,21 @@ public:
 	 * @param bSaveActorData		Whether to save the actors combat / inventory information
 	 * @returns						Whether the current state information was successfully saved
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool SaveCurrentState(bool bSaveActorData = false);
-	virtual bool SaveCurrentState_Implementation(bool bSaveActorData = false);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool SaveLevel(const FString& SaveUrl, bool bSaveActorData = false);
+	virtual bool SaveLevel_Implementation(const FString& SaveUrl, bool bSaveActorData = false);
+
+	/**
+	 * Loads the level's save state information and updates the actors within the level. Optionally handles additionally loading the actor's save information
+	 *
+	 * @param bRetrieveActorData	Whether to load the actor's saved information
+	 * @returns						Whether the save information was successfully retrieved
+	 */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool LoadLevelSave(const FString& SaveUrl, bool bRetrieveActorData = false);
+	virtual bool LoadLevelSave_Implementation(const FString& SaveUrl, bool bRetrieveActorData = false);
+
+	/** Autosave logic for saving components efficiently to prevent performance issues */
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool AutoSaveHandling();
+	virtual bool AutoSaveHandling_Implementation();
 
 	/**
 	 * Adds save information to the PendingActorsToSave array
@@ -54,16 +67,7 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool IsValidToCurrentlySave() const;
 	virtual bool IsValidToCurrentlySave_Implementation() const;
 
-	/**
-	 * Loads the level's save state information and updates the actors within the level. Optionally handles additionally loading the actor's save information
-	 *
-	 * @param bRetrieveActorData	Whether to load the actor's saved information
-	 * @returns						Whether the save information was successfully retrieved
-	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Saving and Loading") bool LoadCurrentState(bool bRetrieveActorData = false);
-	virtual bool LoadCurrentState_Implementation(bool bRetrieveActorData = false);
-
-
+	
 	
 	
 //----------------------------------------------------------------------------------//
@@ -76,11 +80,11 @@ public:
 	/** Retrieves the Level from the GameMode */
 	UFUNCTION(BlueprintCallable) virtual ULevel* GetLevel();
 
-	/** Retrieves the level's SaveGameSlot base on the Level and GameMode */
-	UFUNCTION(BlueprintCallable) virtual USaved_Level* GetSaveGameRef();
+	/** Resets Level Component's state. Helpful during level transitions */
+	UFUNCTION(BlueprintCallable) virtual void ResetLevelSaveComponentState();
 
-	/** Retrieves the SaveGame's slot using the level name and game mode classification */
-	UFUNCTION(BlueprintCallable) virtual FString GetSaveGameSlot(const FString& LevelName, EGameModeType GameModeType) const;
+	/** Retrieves the level's SaveGameSlot base on the Level and GameMode */
+	UFUNCTION(BlueprintCallable) virtual USaved_Level* GetSaveGameRef(const FString SaveUrl);
 	
 	
 };

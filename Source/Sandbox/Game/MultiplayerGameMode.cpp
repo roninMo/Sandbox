@@ -27,11 +27,10 @@ AMultiplayerGameMode::AMultiplayerGameMode(const FObjectInitializer& ObjectIniti
 	// Save information pertaining to each Game Mode
 	CurrentSave = nullptr;
 	SaveIndex = 0;
-	SaveGameUrl = "";
 
 	// Levels
-	LobbyLevel = "/Game/Maps/Lobby/Lobby.umap";
-	SingleplayerLevel = "/Game/Maps/BhopMap/Maps/UEDPIE_1_Demo.Demo";
+	LobbyLevel = "/Game/Maps/Lobby/Lobby";
+	SingleplayerLevel = "/Game/Maps/BhopMap/Maps/UEDPIE_1_Demo";
 }
 
 
@@ -64,7 +63,18 @@ void AMultiplayerGameMode::PostLogin(APlayerController* NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
 	PrintMessage("PostLogin");
+	
+	// TODO: Once the level / GameMode has been initialized, search for the owner, and retrieve the save information
 	RetrieveSavePlatformId();
+	
+	// Init the player's save information (Save components won't save / retrieve save information until the save references are ready
+	ABasePlayerState* PlayerState = NewPlayer->GetPlayerState<ABasePlayerState>(); // TODO: Dry
+	if (PlayerState)
+	{
+		PlayerState->SetSaveUrl(GetCurrentSaveGameUrl());
+		PlayerState->SetSaveIndex(SaveIndex);
+		PlayerState->SetSaveSlot(CurrentSave->SaveSlot);
+	}
 }
 
 
@@ -77,58 +87,17 @@ void AMultiplayerGameMode::HandleMatchIsWaitingToStart()
 
 void AMultiplayerGameMode::HandleMatchHasStarted()
 {
-	PrintActorsInLevel(false);
-
-	// TODO: Once the level / GameMode has been initialized, search for the owner, and retrieve the save information
-	UE_LOGFMT(GameModeLog, Warning, "{0}() Printing current players: ", *FString(__FUNCTION__));
-	for (APlayerController* PlayerController : GetPlayers())
-	{
-		UE_LOGFMT(GameModeLog, Log, "Player: {0}", *GetNameSafe(PlayerController));
-	}
-	UE_LOGFMT(GameModeLog, Warning, " ");
-
-	
-	// Init the player's save information (Save components won't save / retrieve save information until the save references are ready
-	for (APlayerController* PlayerController : GetPlayers())
-	{
-		ABasePlayerState* PlayerState = PlayerController->GetPlayerState<ABasePlayerState>();
-		if (PlayerState)
-		{
-			PlayerState->SetSaveUrl(SaveGameUrl);
-			PlayerState->SetSaveIndex(SaveIndex);
-		}
-	}
-	
 	// BeginPlay ->	(RestartPlayers, BuildLevel, NotifyBeginPlay)  -> -> InitAbilityActorInfo
 	Super::HandleMatchHasStarted();
-
 	
 
-	// Print the level's reference, you'll probably have to create an object for levels
-	ULevel* CurrentLevel = GetLevel();
-	UE_LOGFMT(GameModeLog, Warning, "Level Information");
-	if (CurrentLevel)
-	{
-		if (GetWorld()) UE_LOGFMT(GameModeLog, Log, "Map Name: {0}", *GetWorld()->GetMapName());
-		UE_LOGFMT(GameModeLog, Log, "Level->GetName(): {0}", *CurrentLevel->GetName());
-		UE_LOGFMT(GameModeLog, Log, "Level->GetPathName(): {0}", *CurrentLevel->GetPathName());
-		UE_LOGFMT(GameModeLog, Log, "Level->GetFullName(): {0}", *CurrentLevel->GetFullName());
-	}
-	
+	// Load the game's current save data. Level, Characters, and custom actor save data for client replication
+	PrintActorsInLevel(false);
+	LoadSave(GetCurrentSaveGameUrl(), CurrentSave->SaveIndex);
 
-	// Load the game's current save data. Level, Characters, and custom actor save data
-
-	
-
-
-	// Load the level's current save state to be replicated to clients that joined
-	if (LevelSaveComponent)
-	{
-		LevelSaveComponent->LoadCurrentState(true);
-	}
-
+	// Custom level save logic
 	ULevel* Level = GetLevel();
-	if (!Level)
+	if (Level)
 	{
 		
 	}
@@ -145,10 +114,7 @@ void AMultiplayerGameMode::HandleMatchHasStarted()
 void AMultiplayerGameMode::HandleMatchHasEnded()
 {
 	// Save level and character information
-	if (LevelSaveComponent)
-	{
-		LevelSaveComponent->SaveCurrentState(true);
-	}
+	SaveGame(GetCurrentSaveGameUrl(), CurrentSave->SaveIndex);
 
 	PrintMessage("Handling MatchHasEnded");
 
@@ -179,8 +145,6 @@ void AMultiplayerGameMode::HandleMatchAborted()
 void AMultiplayerGameMode::Travel(FString Map)
 {
 	if (!GetWorld()) return;
-	// /Game/Maps/BhopMap/Maps/Demo.Demo
-	
 	GetWorld()->ServerTravel(Map);
 }
 #pragma endregion
@@ -191,12 +155,60 @@ void AMultiplayerGameMode::Travel(FString Map)
 #pragma region Save State Functions
 bool AMultiplayerGameMode::SaveGame(const FString& SaveUrl, const int32 Index)
 {
+	// Handle save information specific to multiplayer game state here (Quests, objectives, etc.)
+	//	- Games with save information that persists across multiple games, or from singleplayer / multiplayer should have custom save logic for save / retrieving that information 
+
+	
+	// Level save logic
+	if (LevelSaveComponent)
+	{
+		// TODO: Update save state to be two separate things based on whether the information is persistent
+		//			- Actor->SaveToLevel() saves level information, and optionally additionally save character specific information
+		//			- Actor->SaveActorData() saves character specific information
+		//			- Having a function that binds to the level save component to update latent information (like inventory updates, weapon equips, etc. should be handled at all times)
+		LevelSaveComponent->SaveLevel(SaveUrl, true);
+	}
+
+	// Character save logic (Multiplayer logic that isn't specific to the world)
+	for (APlayerController* Player : GetPlayers())
+	{
+		if (!Player->GetPawn()) continue;
+
+		// SaveLevel handles saving actor data for singleplayer / multiplayer already. Additional save state can be handled here
+		
+	}
+
+	
 	return true;
 }
 
 
 bool AMultiplayerGameMode::LoadSave(const FString& SaveUrl, const int32 Index)
 {
+	// Handle save information specific to multiplayer game state here (Quests, objectives, etc.)
+	//	- Games with save information that persists across multiple games, or from singleplayer / multiplayer should have custom save logic for save / retrieving that information
+
+
+	// Level save logic
+	if (LevelSaveComponent)
+	{
+		// TODO: Update save state to be two separate things based on whether the information is persistent
+		//			- Actor->SaveToLevel() saves level information, and optionally additionally save character specific information
+		//			- Actor->SaveActorData() saves character specific information
+		//			- Having a function that binds to the level save component to update latent information (like inventory updates, weapon equips, etc. should be handled at all times)
+		LevelSaveComponent->LoadLevelSave(SaveUrl, true);
+	}
+
+	// Character save logic (Multiplayer logic that isn't specific to the world)
+	for (APlayerController* Player : GetPlayers())
+	{
+		if (!Player->GetPawn()) continue;
+
+		// SaveLevel handles saving actor data for singleplayer / multiplayer already. Additional save state can be handled here
+		
+	}
+
+	
 	return true;
 }
 
@@ -211,7 +223,19 @@ bool AMultiplayerGameMode::SetCurrentSave(USave* Save)
 	
 	CurrentSave = Save;
 	SaveIndex = CurrentSave->SaveIndex;
-	SaveGameUrl = ConstructSaveGameUrl(SavePlatformId, CurrentSave->SaveSlot, CurrentSave->SaveIndex);
+	
+	// Player States
+	for (APlayerController* PlayerController : GetPlayers())
+	{
+		ABasePlayerState* PlayerState = PlayerController->GetPlayerState<ABasePlayerState>();
+		if (PlayerState)
+		{
+			PlayerState->SetSaveUrl(GetCurrentSaveGameUrl());
+			PlayerState->SetSaveIndex(SaveIndex);
+			PlayerState->SetSaveSlot(CurrentSave->SaveSlot);
+		}
+	}
+
 	return true;
 }
 
@@ -249,18 +273,6 @@ bool AMultiplayerGameMode::CreateNextSave()
 		return false;
 	}
 
-	// Player States
-	for (APlayerController* PlayerController : GetPlayers())
-	{
-		ABasePlayerState* PlayerState = PlayerController->GetPlayerState<ABasePlayerState>();
-		if (PlayerState)
-		{
-			PlayerState->SetSaveUrl(SaveGameUrl);
-			PlayerState->SetSaveIndex(SaveIndex);
-			PlayerState->SetSaveSlot(CurrentSave->SaveSlot);
-		}
-	}
-
 	return true;
 }
 
@@ -272,7 +284,7 @@ bool AMultiplayerGameMode::FindCurrentSave(const FString& AccountId, int32 SaveS
 	FString SaveUrl = ConstructSaveGameUrl(AccountId, SaveSlot, Index);
 	
 	// Check if there's save information for this slot
-	if (!UGameplayStatics::DoesSaveGameExist(SaveUrl, Index))
+	if (!UGameplayStatics::DoesSaveGameExist(SaveUrl, 0))
 	{
 		UE_LOGFMT(GameModeLog, Error, "!{0}() wasn't save information in slot {1}, SaveUrl: {2}", *FString(__FUNCTION__), SaveSlot, *SaveUrl);
 		return false;
@@ -359,7 +371,7 @@ bool AMultiplayerGameMode::DeleteSaveSlot(const FString& AccountId, int32 SaveSl
 	FString SaveUrl = ConstructSaveGameUrl(AccountId, SaveSlot, Index);
 
 	// Check if there's save information for this slot
-	if (!UGameplayStatics::DoesSaveGameExist(SaveUrl, Index))
+	if (!UGameplayStatics::DoesSaveGameExist(SaveUrl, 0))
 	{
 		UE_LOGFMT(GameModeLog, Error, "!{0}() wasn't save information in slot {1}, SaveUrl: {2}", *FString(__FUNCTION__), SaveSlot, *SaveUrl);
 		return true;
@@ -408,22 +420,141 @@ USave* AMultiplayerGameMode::NewSaveSlot(const FString& AccountId, int32 SaveSlo
 }
 
 
-FString AMultiplayerGameMode::ConstructSaveGameUrl(const FString& PlatformId, int32 Slot, int32 Index) const
+FString AMultiplayerGameMode::GetCurrentSaveGameUrl(const bool bLevel) const
 {
-	// (GameMode + PlatformId + SlotId + SaveIndex ++ additional SaveComponent logic for each actor)
-	// SaveUrl -> Adventure_Character1_S1_54, MP_CustomLevel1, etc.
-	// Adventure_Character1_S1_54 + _Character1 + _SaveComponents
-	// Adventure_Character1_S1_54 + _Character2 + _SaveComponents
-	// Adventure_Character1_S1_54_Level + _Prop1
-	// Adventure_Character1_S1_54_Level + _Actor0
+	if (!CurrentSave)
+	{
+		return FString();
+	}
+
+	return ConstructSaveGameUrl(CurrentSave->PlatformId, CurrentSave->SaveSlot, CurrentSave->SaveIndex, bLevel);
+}
+
+
+FString AMultiplayerGameMode::ConstructSaveGameUrl(const FString& PlatformId, const int32 Slot, const int32 Index, bool bLevel) const
+{
+	// - LevelSaveUrl
+	// 	- SP -> Adventure_Character1_S1_54_Level_
+	// 	- MP -> MP_CustomLevel1_
 	
-	return UGameModeLibrary::GameModeTypeToString(GameModeType)
-		.Append("_")
-		.Append(PlatformId) // TODO: Dedicated multiplayer servers need logic for retrieving the host, or separate functionality for multiplayer
-		.Append("_")
-		.Append("S").Append(FString::FromInt(Slot))
-		.Append("_")
-		.Append(FString::FromInt(Index));
+	// - CharacterSaveUrl
+	// 	- SP -> Adventure_Character1_S1_54_Character1_
+	// 	- MP -> retrieved from an api during join (there isn't a way of handling this right now with the editor using the account / platform id) 
+
+	// (GameMode + PlatformId + SlotId + SaveIndex ++ additional SaveComponent logic for each actor)
+	FString SaveUrl = UGameModeLibrary::GameModeTypeToString(GameModeType)
+			.Append("_")
+			.Append(PlatformId) // TODO: Dedicated multiplayer servers need logic for retrieving the host, or separate functionality for multiplayer
+			.Append("_")
+			.Append("S").Append(FString::FromInt(Slot))
+			.Append("_")
+			.Append(FString::FromInt(Index));
+
+	// If this isn't a save specific to a character, and should be saved on the level
+	if (bLevel) SaveUrl += "_Level";
+	
+	ENetMode NetMode = GetNetMode();
+	if (GameModeType == EGameModeType::Adventure)
+	{
+		// Multiplayer
+		if (NetMode != NM_Standalone)
+		{
+			// Subclass this for multiplayer saves that aren't specific to a level, and add character save logic additionally
+		}
+		else // Singleplayer
+		{
+			
+		}
+	}
+	else // All other modes are multiplayer
+	{
+		// TODO: Retrieve from level information, if there is any save data
+		// 	Characters -> retrieved from an api during join (there isn't a way of handling this right now with the editor using the account / platform id) 
+		// 	Level -> MP_CustomLevel1_
+	}
+	
+	return SaveUrl;
+	
+	/**
+
+	 SinglePlayer
+		- Adventure
+			- Specific levels, and save game state for each game
+
+	 Multiplayer
+		- Team Deathmatch, Free for All, etc.
+		- Custom Games
+			- Both could have a custom level, normal multiplayer would just have traditional logic
+
+
+	Lobby
+		- GameMode, Level, CustomSaveState/Level Information, GameMode logic for the type of game ->  ready for play
+
+	// SaveGameBase: (GameMode + PlatformId + SlotId + SaveIndex ++ additional SaveComponent logic for each actor)
+	// Retrieve the Save Iteration individually for fallbacks in case certain save components didn't save properly
+		// SaveGameBase + "_" Iteration + "_" + Individual Save Component References
+		// SaveGameBase + "_" Iteration + "_" + Level + Prop / Object References -> Individual Save Component
+
+	Singleplayer
+		- Adventure_Character1_S1_54
+			Character:
+				->  Adventure_Character1_S1_54_Character1_Combat
+				->  Adventure_Character1_S1_54_Character1_Inventory
+				->  Adventure_Character1_S1_54_Character1_CameraSettings
+				->  Adventure_Character1_S1_54_Character1_Attributes
+
+			Actor: 
+				->  Adventure_Character1_S1_54_Level
+					->  Adventure_Character1_S1_54_Level_Actor0
+						->  Adventure_Character1_S1_54_Level_Actor0_etc
+
+		Actors placed in the level with save information: (SaveComponent)
+				-> Adventure_Character1_S1_54_Level + _Actor0
+					-> Adventure_Character1_S1_54_Level + _Actor0_Combat
+					-> Adventure_Character1_S1_54_Level + _Actor0_Inventory
+				-> Adventure_Character1_S1_54_Level + _Actor1
+					-> Adventure_Character1_S1_54_Level + _Actor1_Combat
+					-> Adventure_Character1_S1_54_Level + _Actor1_Inventory
+
+		Actors spawned in the world with save logic:
+			-> Adventure_Character1_S1_54_Level + _ActorSpawnRef_Combat
+			-> Adventure_Character1_S1_54_Level + _ActorSpawnRef_Inventory
+
+	Cooperative
+		- When players join the lobby, online subsystems would retrieve character information individually from the server
+			- If we're still using SaveGame state on the server, it would be retrieved in reference to the host's character reference, and what he saved for each character (using their Account/Platform Id)
+				- Adventure_Character1_S1_54
+				- Adventure_Character2_S1_54 -> and this breaks the logic
+					- If it's a player and it isn't the host, the save logic will treat it as a player, and save and load it's information the same way, let's just add it to the save like this:
+					- Adventure_Character1_S1_54 + _Character2 -> and use this as the save game reference
+				- So we use the owner's Account/PlatformId for the Save Reference, and additionally for their own save information
+					- Adventure_Character1_S1_54_Character1
+					- Adventure_Character1_S1_54_Character2
+					- Adventure_Character1_S1_54_Character3
+					
+
+
+	Multiplayer (for save state, we're probably just not going to use a character reference, unless it's a custom game mode. we'll figure out how to handle this later)
+		- MP_CustomLevel1
+		- MP_CustomLevel2
+			Props, Actors, Enemies, Weapons, GameMode Objects, Vehicles, etc spawned in the world should be handled separately here before we handle character logic, on client / server, retrieved from the specified level, spawn presets, etc.
+				-> MP_CustomLevel1_Props_Ramp (The level's custom components probably won't be spawned on the client automatically)
+				-> MP_CustomLevel1_Props_Object1
+				-> MP_CustomLevel1_Actors_ShieldPickup_1
+					-> MP_CustomLevel1_Actors_ShieldPickup_1_Level (Transform)
+				-> MP_CustomLevel1_Actors_WeaponCrate_0
+					-> MP_CustomLevel1_Actors_WeaponCrate_0_Level
+					-> MP_CustomLevel1_Actors_WeaponCrate_0_Inventory
+
+		// The benefit of saving this way is effecient retrieving of information individually, and that doesn't necessarily mean that this is correct. Finding a way to save each level in their own folder should help make sense of it.
+		//		However with online subsystem logic, the information would be saved and retrieved asynchronously from the server while the level information works this way
+		//			So you'd just have to add that logic to the save component for properly saving / retrieving the information
+
+
+	->  SaveGame Reference for retrieving Level / Character information
+		- OnMatchBegin build the level, character / spawned information on server, and spawned level objects on both Client and Server 
+
+	 */
 }
 
 

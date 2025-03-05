@@ -63,7 +63,7 @@ void ABasePlayerState::SetSaveSlot(const int32 Slot)
 	SaveSlot = Slot;
 }
 
-void ABasePlayerState::SetSaveUrl(FString& Url)
+void ABasePlayerState::SetSaveUrl(FString Url)
 {
 	SaveUrl = Url;
 }

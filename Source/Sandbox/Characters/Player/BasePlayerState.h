@@ -57,7 +57,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving and Loading|Utility") virtual int32 GetSaveSlot() const;
 
 	/** Utility for setting SaveGameRef, only call on server */
-	UFUNCTION(BlueprintCallable, Category = "Player State|Saving and Loading|Utility") virtual void SetSaveUrl(FString& Ref);
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving and Loading|Utility") virtual void SetSaveUrl(FString Ref);
 	
 	/** Utility for setting SaveIndex, only call on server */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving and Loading|Utility") virtual void SetSaveIndex(int32 Index);
