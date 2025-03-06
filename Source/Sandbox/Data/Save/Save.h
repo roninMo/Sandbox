@@ -54,5 +54,7 @@ public:
 
 	/** Save's the player's information for saving / retrieving save information for individual characters/components */
 	UFUNCTION(BlueprintCallable, Category = "SaveGame") virtual void SaveInformation(FString Name, FString SaveDescription, int32 NetworkId, FString AccountPlatformId, int32 Slot, int32 Index);
-	
+
+	/** Add's the level's Map name to the save information */
+	UFUNCTION(BlueprintCallable, Category = "SaveGame") virtual void SetLevelMapName();
 };
