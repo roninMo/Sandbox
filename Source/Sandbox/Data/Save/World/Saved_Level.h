@@ -10,7 +10,7 @@
 
 /**
  * Save game logic for persistent level save information
- * Subclass this for custom save logic @ref ULevelSaveComponent
+ * Subclass this for custom save logic @ref AGameModeSaveLogic
  */
 UCLASS()
 class SANDBOX_API USaved_Level : public USaveGame

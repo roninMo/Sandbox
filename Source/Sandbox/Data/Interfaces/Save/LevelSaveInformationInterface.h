@@ -19,7 +19,7 @@ class ULevelSaveInformationInterface : public UInterface
 };
 
 /**
- * Interface for saving actor's information dynamically during play. @ref USaveComponent, @ref USaveLogic, @ref ULevelSaveComponent
+ * Interface for saving actor's information dynamically during play. @ref USaveComponent, @ref USaveLogic, @ref AGameModeSaveLogic
  * 
  * Allows developers to use blueprint logic for handling Loading/Saving logic and customization for single player and multiplayer games.
  * 

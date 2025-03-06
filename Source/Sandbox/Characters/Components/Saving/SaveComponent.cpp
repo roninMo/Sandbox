@@ -171,14 +171,27 @@ bool USaveComponent::SaveData(const ESaveType Saving)
 		return false;
 	}
 
-	// If this actor has logic for saving this information
-	if (!IsValidToSave(Saving))
-	{
-		return false;
-	}
-
 	// Save the information, handle additional logic in blueprint
-	bool bSuccessfullySaved = SaveLogicComponents[Saving]->SaveData();
+	bool bSuccessfullySaved = true;
+	if (Saving == ESaveType::All)
+	{
+		for (ESaveType SaveType : GetSaveTypes())
+		{
+			if (!IsValidToSave(SaveType)) continue;
+			if (!SaveLogicComponents[Saving]->SaveData()) bSuccessfullySaved = false;
+		}
+	}
+	else // Individual save
+	{
+		// If this actor has logic for saving this information
+		if (!IsValidToSave(Saving))
+		{
+			return false;
+		}
+		
+		bSuccessfullySaved = SaveLogicComponents[Saving]->SaveData();
+	}
+	
 	BP_SaveData(Saving, bSuccessfullySaved);
 	return bSuccessfullySaved;
 }
@@ -196,6 +209,7 @@ bool USaveComponent::IsValidToSave(const ESaveType InformationType)
 void USaveComponent::LoadPlayerInformation()
 {
 	if (!bUseSaveInformation) return;
+	if (!IsReadyToSave()) return;
 	// Notify components to load the player information once the player has initialized and is ready to save / load it's information
 
 	// TODO: Add singleplayer / multiplayer logic for handling saving and loading information from servers/subsystems @ref USaveLogic
@@ -223,18 +237,12 @@ void USaveComponent::LoadPlayerInformation()
 	BP_LoadPlayerInformation();
 }
 
+
 bool USaveComponent::LoadData(const ESaveType InformationType)
 {
-	if (!SaveLogicComponents.Contains(InformationType))
-	{
-		return false;
-	}
-
-	if (PreventingLoadingFor(InformationType))
-	{
-		return false;
-	}
-	
+	if (!IsReadyToSave()) return false;
+	if (!SaveLogicComponents.Contains(InformationType)) return false;
+	if (PreventingLoadingFor(InformationType)) return false;
 	return SaveLogicComponents[InformationType]->LoadData();
 }
 

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
+#include "Sandbox/Data/Structs/LevelInformation.h"
 #include "Save.generated.h"
 
 
@@ -23,7 +24,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") FString Description;
 
 	/** Level Reference */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") FString LevelUrl; // TODO: Update this to an object that has custom level logic
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") F_LevelInformation LevelInformation; // TODO: Update this to an object that has custom level logic
 
 	/** Image  */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") UTexture2D* Thumbnail;
