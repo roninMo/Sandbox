@@ -37,6 +37,9 @@ public:
 	/** Save Slot */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") int32 SaveSlot;
 
+	/** The base url used for saving / loading the current save, and it's information */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") FString SaveUrl;
+
 	/** Current Save Index */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") int32 SaveIndex;
 
