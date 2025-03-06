@@ -3,6 +3,7 @@
 
 #include "MultiplayerGameMode.h"
 
+#include "Logging/StructuredLog.h"
 #include "Sandbox/Characters/Player/BasePlayerState.h"
 #include "Sandbox/Data/Save/Save.h"
 
@@ -78,7 +79,8 @@ void AMultiplayerGameMode::HandleMatchHasStarted()
 {
 	// BeginPlay ->	(RestartPlayers, BuildLevel, NotifyBeginPlay)  -> -> InitAbilityActorInfo
 	Super::HandleMatchHasStarted();
-	
+
+	UE_LOGFMT(LogTemp, Log, "Map: {0}", GetWorld()->GetMapName());
 
 	// Load the game's current save data. Level, Characters, and custom actor save data for client replication
 	PrintActorsInLevel(false);
