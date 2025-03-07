@@ -21,7 +21,10 @@ class USaved_Level;
  *
  * - Epic Online Subsystem example logic for handling lobby events (probably from a player controller's remote procedure calls -> @ref EOSGO_API UGoMenu
  * 
+ * TODO: This needs to be refactored in favor of another way of saving multiple indices of a slot.
+ *			- I wanted fallbacks for saving while dividing the save, level, and player information, however with the choice of saving to specific instances it just makes for messy code
  * TODO: Add asynchronous save logic. Errors that happen while abruptly stopping save functionality rarely corrupt save logic, however we don't want problems with performance
+ *
  */
 UCLASS()
 class SANDBOX_API AGameModeSaveLogic : public AGameMode
@@ -39,7 +42,7 @@ protected:
 	 *
 	 * @note This design pattern is like an abstract factory, but it's just like a hierarchy of save components that use this to properly save and retrieve information, and should be easy to use with asynchronous APIs 
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GameMode|Save State") TObjectPtr<USave> CurrentSave;
+	UPROPERTY(BlueprintReadWrite, Category="GameMode|Save State") TObjectPtr<USave> CurrentSave;
 
 	/** The host's Platform Id. For singleplayer this is their Console/Account id, and for multiplayer it's their online subsystem account id that's retrieved when the server owner's game begins  */
 	UPROPERTY(BlueprintReadWrite, Transient) FString SavePlatformId; // TODO: This is just the singleplayer's reference for retrieving the platform id, find a better way at beginplay to retrieve the save state
@@ -116,6 +119,17 @@ public:
 	 * @returns A list of the previous saves, beginning from the current save to index 0
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Search") virtual TArray<FString> FindPreviousSaves(const FString& SaveUrl, int32 CurrentSaveIndex, int32 SavesToRetrieve = 10) const;
+	
+	/**
+	 * Retrieves a list of the previous saves's indexes using the current save. This works for actual saves, or player and level saves for a specific save slot. \n\n
+	 * Helps with retrieving save information and searching for save fallbacks for levels and other stuff (In the event there's an error, or multiple levels in one game)
+	 * 
+	 * @param SaveUrl The account id of the player that we're finding saves for
+	 * @param CurrentSaveIndex The current save's index we're backtracking from
+	 * @param SavesToRetrieve How many previous saves we want to retrieve
+	 * @returns A list of the previous saves, beginning from the current save to index 0
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Search") virtual TArray<int32> FindPreviousSaveIndexes(const FString& SaveUrl, int32 CurrentSaveIndex, int32 SavesToRetrieve = 10) const;
 	
 	/**
 	 * Creates another save state, and updates the save reference and index on both the current save, here, and the player states. \n\n

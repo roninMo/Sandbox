@@ -5,15 +5,11 @@
 
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Characters/CharacterBase.h"
-#include "Sandbox/Characters/Player/BasePlayerState.h"
 #include "Sandbox/Data/Save/Save.h"
 
 
 AMultiplayerGameMode::AMultiplayerGameMode(const FObjectInitializer& ObjectInitializer): Super(ObjectInitializer)
 {
-	// Levels
-	LobbyLevel = "/Game/Maps/Lobby/Lobby";
-	SingleplayerLevel = "/Game/Maps/BhopMap/Maps/UEDPIE_1_Demo";
 }
 
 

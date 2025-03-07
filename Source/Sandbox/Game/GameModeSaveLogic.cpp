@@ -146,12 +146,12 @@ bool AGameModeSaveLogic::LoadSave(const FString& BaseSaveUrl, const int32 Index)
 	//	- Games with save information that persists across multiple games, or from singleplayer / multiplayer should have custom save logic for save / retrieving that information
 
 	// Player save logic
-	FString PlayerUrl = ConstructPlayerSaveUrl(BaseSaveUrl, SavePlatformId, Save->SaveIndex);
+	FString PlayerUrl = ConstructPlayerSaveUrl(BaseSaveUrl, SavePlatformId);
 	LoadPlayers(PlayerUrl, Index);
 
 	// Level save logic
-	FString LevelUrl = ConstructLevelSaveUrl(BaseSaveUrl, Save->LevelInformation.Id, Save->SaveIndex); // TODO: we need to create an object reference to the levels in the game. And save references to custom levels
-	LoadLevel(SaveUrl, Index);
+	FString LevelUrl = ConstructLevelSaveUrl(BaseSaveUrl, Save->LevelInformation.Id); // TODO: we need to create an object reference to the levels in the game. And save references to custom levels
+	LoadLevel(LevelUrl, Index);
 	
 	return true;
 }
@@ -230,15 +230,22 @@ TArray<FString> AGameModeSaveLogic::FindPreviousSaves(const FString& SaveUrl, in
 	{
 		// Check if it's a valid save
 		FString CurrentSaveUrl = SaveUrl + AppendSaveIndex(Index);
-		if (UGameplayStatics::DoesSaveGameExist(SaveUrl, 0))
-		{
-			PreviousSaves.AddUnique(SaveUrl);
-		}
+		if (UGameplayStatics::DoesSaveGameExist(CurrentSaveUrl, 0)) PreviousSaves.AddUnique(CurrentSaveUrl);
+		if (PreviousSaves.Num() >= SavesToRetrieve) return PreviousSaves;
+	}
 
-		if (PreviousSaves.Num() >= SavesToRetrieve)
-		{
-			return PreviousSaves; 
-		}
+	return PreviousSaves;
+}
+
+TArray<int32> AGameModeSaveLogic::FindPreviousSaveIndexes(const FString& SaveUrl, int32 CurrentSaveIndex, int32 SavesToRetrieve) const
+{
+	TArray<int32> PreviousSaves;
+	for (int32 Index = CurrentSaveIndex - 1; Index >= 0; Index--)
+	{
+		// Check if it's a valid save
+		FString CurrentSaveUrl = SaveUrl + AppendSaveIndex(Index);
+		if (UGameplayStatics::DoesSaveGameExist(CurrentSaveUrl, 0)) PreviousSaves.AddUnique(Index);
+		if (PreviousSaves.Num() >= SavesToRetrieve) return PreviousSaves;
 	}
 
 	return PreviousSaves;
@@ -731,6 +738,7 @@ FString AGameModeSaveLogic::ConstructSaveUrl(FString PlatformId, int32 Slot) con
 
 FString AGameModeSaveLogic::ConstructLevelSaveUrl(FString BaseUrl, FString LevelName, int32 OptionalIndex) const
 {
+	if (LevelName.IsEmpty()) return FString();
 	FString SaveUrl = BaseUrl.Append("_").Append(LevelName);
 	if (OptionalIndex >= 0) SaveUrl += "_" + FString::FromInt(OptionalIndex);
 	return SaveUrl;
@@ -738,6 +746,7 @@ FString AGameModeSaveLogic::ConstructLevelSaveUrl(FString BaseUrl, FString Level
 
 FString AGameModeSaveLogic::ConstructPlayerSaveUrl(FString BaseUrl, FString PlayerAccountId, int32 OptionalIndex) const
 {
+	if (PlayerAccountId.IsEmpty()) return FString();
 	FString SaveUrl = BaseUrl.Append("_").Append(PlayerAccountId);
 	if (OptionalIndex >= 0) SaveUrl += "_" + FString::FromInt(OptionalIndex);
 	return SaveUrl;

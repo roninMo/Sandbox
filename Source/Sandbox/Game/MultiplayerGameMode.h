@@ -28,12 +28,6 @@ class SANDBOX_API AMultiplayerGameMode : public AGameModeSaveLogic
 public:
 	// Adventure / TDM / FoF -> subclassed infrastructure
 
-	/** Level urls */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GameMode|Levels") FString LobbyLevel;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GameMode|Levels") FString SingleplayerLevel;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GameMode|Levels") FString CustomLevel;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GameMode|Levels") TArray<FString> MultiplayerLevels;
-
 	
 public:
 	AMultiplayerGameMode(const FObjectInitializer& ObjectInitializer);
