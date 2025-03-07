@@ -4,6 +4,7 @@
 #include "MultiplayerGameMode.h"
 
 #include "Logging/StructuredLog.h"
+#include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Characters/Player/BasePlayerState.h"
 #include "Sandbox/Data/Save/Save.h"
 
@@ -44,13 +45,7 @@ void AMultiplayerGameMode::PostLogin(APlayerController* NewPlayer)
 	// Init the player's save information (Save components won't save / retrieve save information until the save references are ready
 	if (CurrentSave)
 	{
-		ABasePlayerState* PlayerState = NewPlayer->GetPlayerState<ABasePlayerState>();
-		if (PlayerState)
-		{
-			PlayerState->SetSaveUrl(GetCurrentSaveUrl());
-			if (CurrentSave) PlayerState->SetSaveIndex(CurrentSave->SaveIndex);
-			if (CurrentSave) PlayerState->SetSaveSlot(CurrentSave->SaveSlot);
-		}
+		UpdatePlayerWithSaveReferences(NewPlayer);
 	}
 }
 
@@ -61,9 +56,11 @@ void AMultiplayerGameMode::Logout(AController* Exiting)
 	PrintMessage("Logout");
 
 	// Save player information // TODO: check if the character components are still valid here
-	if (Cast<APlayerController>(Exiting))
+	ACharacterBase* Character = Cast<ACharacterBase>(Exiting->GetPawn());
+	if (CurrentSave && Character && Cast<APlayerController>(Exiting))
 	{
-		SavePlayer(Cast<APlayerController>(Exiting));
+		FString SavePlayerUrl = ConstructPlayerSaveUrl(GetCurrentSaveUrl(), Character->Execute_GetActorLevelId(Character));
+		SavePlayer(Cast<APlayerController>(Exiting), SavePlayerUrl, CurrentSave->SaveIndex);
 	}
 }
 

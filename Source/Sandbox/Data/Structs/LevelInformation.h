@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/DataTable.h"
 #include "LevelInformation.generated.h"
 
 
@@ -37,4 +38,24 @@ struct F_LevelInformation
 
 	
 };
+
+
+
+/**
+ * A data table for storing references to all the levels in the game
+ */
+USTRUCT(BlueprintType)
+struct F_LevelDatabase : public FTableRowBase
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_LevelInformation Information;
+
+	
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString DevDescription;
+};
+
+
 

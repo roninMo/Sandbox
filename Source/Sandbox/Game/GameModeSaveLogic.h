@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameMode.h"
+#include "Sandbox/Data/Structs/LevelInformation.h"
 #include "Sandbox/Data/Structs/LevelSaveInformation.h"
 #include "GameModeSaveLogic.generated.h"
 
@@ -44,11 +45,17 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Transient) FString SavePlatformId; // TODO: This is just the singleplayer's reference for retrieving the platform id, find a better way at beginplay to retrieve the save state
 
 	/** A stored reference to the save game slot for the current level */
-	UPROPERTY(BlueprintReadWrite, Category= "Saving and Loading") TObjectPtr<USaved_Level> CurrentLevelSave;
+	UPROPERTY(BlueprintReadWrite, Category= "GameMode|Saving State") TObjectPtr<USaved_Level> CurrentLevelSave;
 
 	/** Hash table of the saved actors that we need to update in the save slot */ // We're just going to store the updated information here, and remove it once saved for batching
-	UPROPERTY(BlueprintReadWrite, Category = "Saving and Loading") TMap<FString, F_LevelSaveInformation_Actor> PendingSaves;
+	UPROPERTY(BlueprintReadWrite, Category = "GameMode|Saving State") TMap<FString, F_LevelSaveInformation_Actor> PendingSaves;
 
+	/** A list of the levels in this game */
+	UPROPERTY(BlueprintReadWrite, Category = "GameMode|Saving State") TMap<FString, F_LevelInformation> Levels;
+
+	/** A stored reference to the data table that contains all the base level information */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameMode|Levels") TObjectPtr<UDataTable> LevelInformationTable;
+	
 	
 public:
 	AGameModeSaveLogic(const FObjectInitializer& ObjectInitializer);
@@ -78,7 +85,7 @@ public:
 	 * @param Index The index we're saving to. If left unset, it will save to the current save index
 	 * @returns true if it successfully saved the game
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool SaveGame(const FString& SaveUrl, const int32 Index = -1);
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool SaveGame(const FString& BaseSaveUrl, const int32 Index = -1);
 
 	/**
 	 * Loads the current save state from a save slot.
@@ -87,29 +94,28 @@ public:
 	 * @param Index The index we're retrieving save information from
 	 * @returns true if it successfully loaded the save
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool LoadSave(const FString& SaveUrl, const int32 Index);
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool LoadSave(const FString& BaseSaveUrl, const int32 Index);
 
 	/**
 	 * Finds the player's most recent save index for a specific save slot
 	 *
-	 * @param AccountId The account id of the player that we're finding saves for
-	 * @param SaveSlot The save slot
+	 * @param BaseUrl The base save url used for a specific character / slot for saving
 	 * @param OutSaveUrl The save url of the current save
 	 * @param OutSaveIndex The save index of the current save
 	 * @returns true if it found a valid save
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Search") virtual bool FindCurrentSave(const FString& AccountId, int32 SaveSlot, UPARAM(ref) FString& OutSaveUrl, int32& OutSaveIndex) const;
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Search") virtual bool FindCurrentSave(const FString& BaseUrl, UPARAM(ref) FString& OutSaveUrl, int32& OutSaveIndex) const;
 
 	/**
-	 * Retrieves a list of the previous saves using the current save
+	 * Retrieves a list of the previous saves using the current save. This works for actual saves, or player and level saves for a specific save slot. \n\n
+	 * Helps with retrieving save information and searching for save fallbacks for levels and other stuff (In the event there's an error, or multiple levels in one game)
 	 * 
-	 * @param AccountId The account id of the player that we're finding saves for
-	 * @param SaveSlot The save slot
+	 * @param SaveUrl The account id of the player that we're finding saves for
 	 * @param CurrentSaveIndex The current save's index we're backtracking from
 	 * @param SavesToRetrieve How many previous saves we want to retrieve
 	 * @returns A list of the previous saves, beginning from the current save to index 0
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Search") virtual TArray<FString> FindPreviousSaves(const FString& AccountId, int32 SaveSlot, int32 CurrentSaveIndex, int32 SavesToRetrieve = 10) const;
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Search") virtual TArray<FString> FindPreviousSaves(const FString& SaveUrl, int32 CurrentSaveIndex, int32 SavesToRetrieve = 10) const;
 	
 	/**
 	 * Creates another save state, and updates the save reference and index on both the current save, here, and the player states. \n\n
@@ -157,25 +163,23 @@ public:
 	 * Constructs the save url for levels using the Account/Platform Id and the Save slot. Subclass for custom logic based on game mode, singleplayer, multiplayer, etc.
 	 * - SaveLevelUrl: GameModeType + OwnerAccountId + SaveSlot + LevelName + SaveIndex ->  Adventure_Character1_Level1_45
 	 *
-	 * @param PlatformId The Account or Platform Id of the server owner
-	 * @param Slot The current slot used for saving character information
+	 * @param BaseUrl The base url of the specific save (Owner Platform Id + Save Slot)
 	 * @param LevelName The name of level
-	 * @param SaveIndex The current index of the save
+	 * @param OptionalIndex If you need the base level save url, or a specified save index
 	 * @returns The base url for creating a save instance
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Url") virtual FString ConstructLevelSaveUrl(FString PlatformId, int32 Slot, FString LevelName, int32 SaveIndex) const;
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Url") virtual FString ConstructLevelSaveUrl(FString BaseUrl, FString LevelName, int32 OptionalIndex = -1) const;
 	
 	/**
 	 * Constructs the save url for players using the Account/Platform Id and the Save slot. Subclass for custom logic based on game mode, singleplayer, multiplayer, etc.
 	 * - SavePlayerUrl: GameModeType + OwnerAccountId + SaveSlot + PlayerAccountId + SaveIndex ->  Adventure_Character1_Character1_45
 	 *
-	 * @param PlatformId The Account or Platform Id of the server owner
-	 * @param Slot The current slot used for saving character information
+	 * @param BaseUrl The base url of the specific save (Owner Platform Id + Save Slot)
 	 * @param PlayerAccountId The Account or Platform Id of the server owner
-	 * @param SaveIndex The current index of the save
+	 * @param OptionalIndex If you need the base player save url, or a specified save index
 	 * @returns The base url for creating a save instance
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Url") virtual FString ConstructPlayerSaveUrl(FString PlatformId, int32 Slot, FString PlayerAccountId, int32 SaveIndex) const;
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Url") virtual FString ConstructPlayerSaveUrl(FString BaseUrl, FString PlayerAccountId, int32 OptionalIndex = -1) const;
 
 	/** Utility to append formatted save indexes to the end of save urls */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Utility") virtual FString AppendSaveIndex(int32 Index) const;
@@ -257,8 +261,8 @@ public:
 	 * @param bSaveActorData		Whether to save the actors combat / inventory information
 	 * @returns						Whether the current state information was successfully saved
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Player State|Saving|Level") bool SaveLevel(const FString& SaveLevelUrl, bool bSaveActorData = false);
-	virtual bool SaveLevel_Implementation(const FString& SaveLevelUrl, bool bSaveActorData = false);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Player State|Saving|Level") bool SaveLevel(const FString& SaveLevelUrl, int32 Index, bool bSaveActorData = false);
+	virtual bool SaveLevel_Implementation(const FString& SaveLevelUrl, int32 Index, bool bSaveActorData = false);
 
 	/**
 	 * Loads the level's save state information and updates the actors within the level. Optionally handles additionally loading the actor's save information
@@ -268,8 +272,8 @@ public:
 	 * @param bRetrieveActorData	Whether to retrieve the actor's save information additionally from the level  
 	 * @returns						Whether the save information was successfully retrieved
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Player State|Saving|Level") bool LoadLevel(const FString& SaveLevelUrl, bool bRetrieveActorData = true);
-	virtual bool LoadLevel_Implementation(const FString& SaveLevelUrl, bool bRetrieveActorData = true);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Player State|Saving|Level") bool LoadLevel(const FString& SaveLevelUrl, int32 Index, bool bRetrieveActorData = true);
+	virtual bool LoadLevel_Implementation(const FString& SaveLevelUrl, int32 Index, bool bRetrieveActorData = true);
 
 	/** Autosave logic for saving components efficiently to prevent performance issues */
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Player State|Saving|Level") bool AutoSaveHandling();
@@ -300,30 +304,33 @@ public:
 	 * Saves all player's information using their own save logic (Save Component reference -> Default / EOS / Etc.)
 	 * @returns						Whether the current state information was successfully saved
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Player State|Saving|Players") bool SavePlayers();
-	virtual bool SavePlayers_Implementation();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Player State|Saving|Players") bool SavePlayers(const FString& BaseSaveUrl, int32 Index);
+	virtual bool SavePlayers_Implementation(const FString& BaseSaveUrl, int32 Index);
 
 	/**
 	 * Loads all player's information using their own save logic (Save Component reference -> Default / EOS / Etc.)
 	 * @returns						Whether the current state information was successfully retrieved
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Player State|Saving|Players") bool LoadPlayers();
-	virtual bool LoadPlayers_Implementation();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Player State|Saving|Players") bool LoadPlayers(const FString& BaseSaveUrl, int32 Index);
+	virtual bool LoadPlayers_Implementation(const FString& BaseSaveUrl, int32 Index);
 
 	/**
 	 * Saves the player's information using their own save logic (Save Component reference -> Default / EOS / Etc.)
 	 * @returns						Whether the current state information was successfully saved
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Player State|Saving|Players") bool SavePlayer(APlayerController* PlayerController);
-	virtual bool SavePlayer_Implementation(APlayerController* Player);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Player State|Saving|Players") bool SavePlayer(APlayerController* PlayerController, const FString& PlayerSaveUrl, int32 Index);
+	virtual bool SavePlayer_Implementation(APlayerController* Player, const FString& PlayerSaveUrl, int32 Index);
 
 	/**
 	 * Loads the player's information using their own save logic (Save Component reference -> Default / EOS / Etc.)
 	 * @returns						Whether the current state information was successfully retrieved
 	 */
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Player State|Saving|Players") bool LoadPlayer(APlayerController* PlayerController);
-	virtual bool LoadPlayer_Implementation(APlayerController* Player);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Player State|Saving|Players") bool LoadPlayer(APlayerController* PlayerController, const FString& PlayerSaveUrl, int32 Index);
+	virtual bool LoadPlayer_Implementation(APlayerController* Player, const FString& PlayerSaveUrl, int32 Index);
 
+
+protected:
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Players") virtual void UpdatePlayerWithSaveReferences(APlayerController* PlayerController) const;
 	
 
 	
