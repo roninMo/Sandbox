@@ -23,7 +23,7 @@ public:
 	/** Description */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") FString Description;
 
-	/** Level Reference */
+	/** The Current Level Reference */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") F_LevelInformation LevelInformation; // TODO: Update this to an object that has custom level logic
 
 	/** Image  */
@@ -55,6 +55,5 @@ public:
 	/** Save's the player's information for saving / retrieving save information for individual characters/components */
 	UFUNCTION(BlueprintCallable, Category = "SaveGame") virtual void SaveInformation(FString Name, FString SaveDescription, int32 NetworkId, FString AccountPlatformId, int32 Slot, int32 Index);
 
-	/** Add's the level's Map name to the save information */
-	UFUNCTION(BlueprintCallable, Category = "SaveGame") virtual void SetLevelMapName();
+	
 };

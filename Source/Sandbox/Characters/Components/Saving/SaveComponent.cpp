@@ -8,6 +8,10 @@
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Characters/Player/BasePlayerState.h"
 #include "Sandbox/Data/Enums/ESaveType.h"
+#include "Sandbox/Data/Save/Save.h"
+#include "Sandbox/Data/Save/World/Saved_Level.h"
+#include "Sandbox/Data/Structs/LevelInformation.h"
+#include "Sandbox/Game/MultiplayerGameMode.h"
 
 DEFINE_LOG_CATEGORY(SaveComponentLog);
 
@@ -337,10 +341,68 @@ TArray<ESaveType> USaveComponent::GetSaveTypes() const
 
 FString USaveComponent::PrintSaveState(const ESaveType SaveType, const FString SaveRef) const
 {
+	if (SaveType == ESaveType::World) return PrintLevelSaveState();
 	if (!SaveLogicComponents.Contains(SaveType)) return FString();
-	const USaveLogic* SaveLogic = SaveLogicComponents[SaveType];
 
+	const USaveLogic* SaveLogic = SaveLogicComponents[SaveType];
 	return SaveLogic->FormattedSaveInformation(SaveRef);
+}
+
+
+FString USaveComponent::PrintLevelSaveState() const
+{
+	AMultiplayerGameMode* GameMode = Cast<AMultiplayerGameMode>(GetWorld()->GetAuthGameMode());
+	if (!GameMode) return FString();
+	
+	USaved_Level* Level = GameMode->GetLevelSaveInformation();
+	if (!Level) return FString();
+
+	TArray<F_LevelSaveInformation_Actor> SpawnedActors;
+	TArray<F_LevelSaveInformation_Actor> Players;
+	TArray<F_LevelSaveInformation_Actor> LevelActors;
+	for (auto &[Id, Data] : Level->SavedActors)
+	{
+		if (Data.SaveType == ESaveIdType::SpawnedActor) SpawnedActors.Add(Data);
+		if (Data.SaveType == ESaveIdType::Player) Players.Add(Data);
+		if (Data.SaveType == ESaveIdType::LevelActor) LevelActors.Add(Data);
+	}
+
+	
+	TArray<FString> Results;
+	Results.Add(FString::Printf(TEXT("Level Save Information")));
+	Results.Add(FString::Printf(TEXT("{")));
+
+	
+	if (GameMode->GetCurrentSave())
+	{
+		F_LevelInformation LevelInformation = GameMode->GetCurrentSave()->LevelInformation;
+		Results.Add(FString::Printf(TEXT("\tLevel Name: %s"), *LevelInformation.LevelName));
+		Results.Add(FString::Printf(TEXT("\tId: %s"), *LevelInformation.Id));
+		Results.Add(FString::Printf(TEXT("\t:Level Url: %s"), *LevelInformation.LevelUrl));
+		Results.Add(FString::Printf(TEXT("\tDescription: %s"), *LevelInformation.Description));
+		Results.Add(FString::Printf(TEXT("\tTimeStamp: %s"), *LevelInformation.CreationDate.ToString()));
+		Results.Add(TEXT("\t"));
+	}
+
+	// Players
+	Results.Add(FString::Printf(TEXT("\tPlayers: {")));
+	for (const F_LevelSaveInformation_Actor& Player: Players) Results.Add(FString::Printf(TEXT("\t")).Append(Player.Print()).Append(","));
+	Results.Add(FString::Printf(TEXT("\t},")));
+
+	// Spawned Actors
+	Results.Add(TEXT("\t"));
+	Results.Add(FString::Printf(TEXT("\tSpawned Actors: {")));
+	for (const F_LevelSaveInformation_Actor& SpawnedActor: SpawnedActors) Results.Add(FString::Printf(TEXT("\t")).Append(SpawnedActor.Print()).Append(","));
+	Results.Add(FString::Printf(TEXT("\t},")));
+
+	// Level Actors
+	Results.Add(TEXT("\t"));
+	Results.Add(FString::Printf(TEXT("\tLevel Actors: {")));
+	for (const F_LevelSaveInformation_Actor& LevelActor: LevelActors) Results.Add(FString::Printf(TEXT("\t")).Append(LevelActor.Print()).Append(","));
+	Results.Add(FString::Printf(TEXT("\t},")));
+
+	Results.Add(FString::Printf(TEXT("}")));
+	return FString::Join(Results, TEXT("\n"));
 }
 
 

@@ -59,6 +59,13 @@ public:
 	/** Called when the game mode is first created, and once the game travels to another level and resets world information, only player controllers remain */
 	virtual void BeginPlay() override;
 
+	// TODO: find out how to handle the race condition of player's being initialized during level travel, and game mode's begin play, or handle it with match state
+	/** Stores the current game mode information on the game instance (for server travel) */
+	UFUNCTION(BlueprintCallable) virtual void StoreGameModeInformation();
+
+	/** Retrieves the current game mode information on the game instance (after server travel) */
+	UFUNCTION(BlueprintCallable) virtual void RetrieveGameModeInformation();
+
 	
 //----------------------------------------------------------------------------------//
 // Save State																		//
@@ -332,6 +339,9 @@ public:
 
 	/** Retrieves the save platform id */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Utility") virtual FString GetSavePlatformId() const;
+
+	/** Retrieves the current level save information */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Utility") virtual USaved_Level* GetLevelSaveInformation() const;
 
 	/** Prints a message with a reference to the player controller */
 	UFUNCTION() virtual void PrintMessage(const FString& Message);

@@ -21,9 +21,3 @@ void USave::SaveInformation(FString Name, FString SaveDescription, int32 Network
 	SaveIndex = Index;
 	Timestamp = FDateTime::Now();
 }
-
-void USave::SetLevelMapName()
-{
-	if (!GetWorld()) return;
-	LevelInformation.LevelMapName = GetWorld()->GetMapName();
-}

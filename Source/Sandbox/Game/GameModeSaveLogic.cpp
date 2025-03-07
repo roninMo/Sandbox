@@ -28,28 +28,45 @@ AGameModeSaveLogic::AGameModeSaveLogic(const FObjectInitializer& ObjectInitializ
 	// Save information pertaining to each Game Mode
 	CurrentSave = nullptr;
 	CurrentLevelSave = nullptr;
+
+	AGameModeSaveLogic::RetrieveGameModeInformation();
 }
 
 void AGameModeSaveLogic::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	UMultiplayerGameInstance* GameInstance = Cast<UMultiplayerGameInstance>(GetGameInstance());
-	if (GameInstance)
-	{
-		GameInstance->SetCurrentSave(CurrentSave);
-	}
-
+	StoreGameModeInformation();
+	PrintMessage("EndPlay");
 	Super::EndPlay(EndPlayReason);
 }
 
 void AGameModeSaveLogic::BeginPlay()
 {
 	Super::BeginPlay();
+	PrintMessage("BeginPlay");
 
+	RetrieveGameModeInformation();
+}
+
+void AGameModeSaveLogic::StoreGameModeInformation()
+{
+	if (!GetWorld()) return;
 	UMultiplayerGameInstance* GameInstance = Cast<UMultiplayerGameInstance>(GetGameInstance());
-	if (!CurrentSave && GameInstance)
-	{
-		SetCurrentSave(GameInstance->GetCurrentSave());
-	}
+	if (!GameInstance) return;
+
+	GameInstance->SetGameModeType(GameModeType);
+	GameInstance->SetCurrentSave(CurrentSave);
+	GameInstance->SetCurrentLevelSave(CurrentLevelSave);
+}
+
+void AGameModeSaveLogic::RetrieveGameModeInformation()
+{
+	if (!GetWorld()) return;
+	UMultiplayerGameInstance* GameInstance = Cast<UMultiplayerGameInstance>(GetGameInstance());
+	if (!GameInstance) return;
+
+	GameModeType = GameInstance->GetGameModeType();
+	if (!CurrentSave) CurrentSave = GameInstance->GetCurrentSave();
+	if (!CurrentLevelSave) CurrentLevelSave = GameInstance->GetCurrentLevelSave();
 }
 
 
@@ -88,6 +105,10 @@ bool AGameModeSaveLogic::LoadSave(const FString& SaveUrl, const int32 Index)
 		return false;
 	}
 
+	FString BaseUrl = ConstructSaveUrl(SavePlatformId, Save->SaveSlot);
+	FString PlayerUrl = ConstructPlayerSaveUrl(SavePlatformId, Save->SaveSlot, SavePlatformId, Save->SaveIndex);
+	FString LevelUrl = ConstructLevelSaveUrl(SavePlatformId, Save->SaveSlot, Save->LevelInformation.Id, Save->SaveIndex); // TODO: we need to create an object reference to the levels in the game. And save references to custom levels
+
 	// Update the current save before loading the level information
 	if (!SetCurrentSave(Save))
 	{
@@ -104,6 +125,7 @@ bool AGameModeSaveLogic::LoadSave(const FString& SaveUrl, const int32 Index)
 		return false;
 	}
 
+	
 
 	// Handle save information specific to multiplayer game state here (Quests, objectives, etc.)
 	//	- Games with save information that persists across multiple games, or from singleplayer / multiplayer should have custom save logic for save / retrieving that information
@@ -328,6 +350,7 @@ bool AGameModeSaveLogic::SaveLevel_Implementation(const FString& SaveLevelUrl, b
 		if (!Actor->GetClass()->ImplementsInterface(ULevelSaveInformationInterface::StaticClass())) continue;
 		if (APlayerCharacter* Player = Cast<APlayerCharacter>(Actor)) continue;
 
+		// Retrieve save information
 		FString Id = ILevelSaveInformationInterface::Execute_GetActorLevelId(Actor);
 		F_LevelSaveInformation_Actor SaveInformation = ILevelSaveInformationInterface::Execute_SaveToLevel(Actor);
 		if (SaveInformation.IsValid())
@@ -667,6 +690,11 @@ void AGameModeSaveLogic::InitOwnerSavePlatformId()
 FString AGameModeSaveLogic::GetSavePlatformId() const
 {
 	return SavePlatformId;
+}
+
+USaved_Level* AGameModeSaveLogic::GetLevelSaveInformation() const
+{
+	return CurrentLevelSave;
 }
 
 

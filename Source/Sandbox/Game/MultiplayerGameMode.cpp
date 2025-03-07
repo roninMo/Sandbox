@@ -48,7 +48,7 @@ void AMultiplayerGameMode::PostLogin(APlayerController* NewPlayer)
 		if (PlayerState)
 		{
 			PlayerState->SetSaveUrl(GetCurrentSaveUrl());
-			PlayerState->SetSaveIndex(CurrentSave->SaveIndex);
+			if (CurrentSave) PlayerState->SetSaveIndex(CurrentSave->SaveIndex);
 			if (CurrentSave) PlayerState->SetSaveSlot(CurrentSave->SaveSlot);
 		}
 	}

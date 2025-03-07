@@ -18,20 +18,17 @@ struct F_LevelInformation
 	F_LevelInformation() = default;
 
 	/** Custom level save Id used for retrieving custom levels for a specific account  */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString SaveUrl;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString Id;
 	
 	/** Level Name */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString LevelName;
 	
-	/** Level Description */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString Description;
-	
 	/** The url used to travel to this level */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString LevelUrl;
 
-	/** Level Map name. Used for checking against whether we're saving to the correct level */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString LevelMapName;
-
+	/** Level Description */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString Description;
+	
 	/** Custom Level Information containing spawn information for Props, Actors, Enemies, Weapons, GameMode Objects, Vehicles, etc */
 	// UPROPERTY(EditAnywhere, BlueprintReadWrite) CustomInformation;
 	
