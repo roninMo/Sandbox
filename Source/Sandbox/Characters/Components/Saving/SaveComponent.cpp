@@ -4,9 +4,7 @@
 #include "SaveComponent.h"
 
 #include "SaveLogic.h"
-#include "Kismet/GameplayStatics.h"
 #include "Logging/StructuredLog.h"
-#include "Net/UnrealNetwork.h"
 #include "Sandbox/Characters/CharacterBase.h"
 #include "Sandbox/Characters/Player/BasePlayerState.h"
 #include "Sandbox/Data/Enums/ESaveType.h"
@@ -171,6 +169,11 @@ bool USaveComponent::SaveData(const ESaveType Saving)
 		return false;
 	}
 
+	if (!IsReadyToSave())
+	{
+		return false;
+	}
+
 	// Save the information, handle additional logic in blueprint
 	bool bSuccessfullySaved = true;
 	if (Saving == ESaveType::All)
@@ -178,7 +181,7 @@ bool USaveComponent::SaveData(const ESaveType Saving)
 		for (ESaveType SaveType : GetSaveTypes())
 		{
 			if (!IsValidToSave(SaveType)) continue;
-			if (!SaveLogicComponents[Saving]->SaveData()) bSuccessfullySaved = false;
+			if (!SaveLogicComponents[SaveType]->SaveData()) bSuccessfullySaved = false;
 		}
 	}
 	else // Individual save
@@ -303,19 +306,11 @@ FString USaveComponent::GetSaveUrl(const ESaveType SaveCategory) const
 		return FString();
 	}
 
-	// SaveGameRef: (GameMode + PlatformId + SlotId + SaveIndex ++ additional SaveComponent logic for each actor)
-	// SaveGameRef -> Adventure_Character1_S1_54, MP_CustomLevel1, etc.
-	
-	// For characters, we're just adding the actor, and the save category
-	// 		- Adventure_Character1_S1_54 + _Character1 + _SaveComponents
-	// 		- Adventure_Character1_S1_54 + _Character2 + _SaveComponents
-	// 		- Adventure_Character1_S1_54_Level + _Prop1
-	// 		- Adventure_Character1_S1_54_Level + _Actor0
-	return GetSaveGameRef()
-			.Append("_")
-			.Append(GetActorSaveId())
-			.Append("_")
-			.Append(GetSaveCategory(SaveCategory));
+	FString BaseUrl = GetSaveGameRef();
+	FString PlayerId = GetActorSaveId();
+	FString SaveIndex = FString::FromInt(GetSaveIndex());
+	FString Category = GetSaveCategory(SaveCategory);
+	return BaseUrl + "_" + PlayerId + "_" + SaveIndex + "_" + Category;
 }
 
 

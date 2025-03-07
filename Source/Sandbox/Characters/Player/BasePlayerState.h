@@ -20,7 +20,7 @@ protected:
 	
 	/** The current save index of a specific save slot */
 	UPROPERTY(Replicated, BlueprintReadWrite, Category = "PlayerState|Saving and Loading") int32 SaveIndex = -1;
-
+	
 	/** The current save slot for a specific character's saves */
 	UPROPERTY(Replicated, BlueprintReadWrite, Category = "PlayerState|Saving and Loading") int32 SaveSlot = -1;
 
@@ -64,6 +64,6 @@ public:
 	
 	/** Utility for setting Slot, only call on server */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving and Loading|Utility") virtual void SetSaveSlot(int32 Slot);
-
+	
 	
 };

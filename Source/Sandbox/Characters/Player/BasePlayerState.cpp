@@ -11,9 +11,9 @@
 void ABasePlayerState::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-	DOREPLIFETIME_CONDITION(ABasePlayerState, SaveUrl, COND_AutonomousOnly);
-	DOREPLIFETIME_CONDITION(ABasePlayerState, SaveSlot, COND_AutonomousOnly);
-	DOREPLIFETIME_CONDITION(ABasePlayerState, SaveIndex, COND_AutonomousOnly);
+	DOREPLIFETIME_CONDITION(ABasePlayerState, SaveUrl, COND_None);
+	DOREPLIFETIME_CONDITION(ABasePlayerState, SaveSlot, COND_None);
+	DOREPLIFETIME_CONDITION(ABasePlayerState, SaveIndex, COND_None);
 }
 
 

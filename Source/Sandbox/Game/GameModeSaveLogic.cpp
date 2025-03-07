@@ -4,6 +4,7 @@
 #include "GameModeSaveLogic.h"
 
 #include "GameModeLibrary.h"
+#include "Instances/MultiplayerGameInstance.h"
 #include "Kismet/GameplayStatics.h"
 #include "Logging/StructuredLog.h"
 #include "Sandbox/Characters/Components/Saving/SaveComponent.h"
@@ -29,7 +30,27 @@ AGameModeSaveLogic::AGameModeSaveLogic(const FObjectInitializer& ObjectInitializ
 	CurrentLevelSave = nullptr;
 }
 
+void AGameModeSaveLogic::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	UMultiplayerGameInstance* GameInstance = Cast<UMultiplayerGameInstance>(GetGameInstance());
+	if (GameInstance)
+	{
+		GameInstance->SetCurrentSave(CurrentSave);
+	}
 
+	Super::EndPlay(EndPlayReason);
+}
+
+void AGameModeSaveLogic::BeginPlay()
+{
+	Super::BeginPlay();
+
+	UMultiplayerGameInstance* GameInstance = Cast<UMultiplayerGameInstance>(GetGameInstance());
+	if (!CurrentSave && GameInstance)
+	{
+		SetCurrentSave(GameInstance->GetCurrentSave());
+	}
+}
 
 
 #pragma region Saving and Loading
@@ -63,14 +84,21 @@ bool AGameModeSaveLogic::LoadSave(const FString& SaveUrl, const int32 Index)
 	USave* Save = Cast<USave>(UGameplayStatics::LoadGameFromSlot(SaveUrl, 0));
 	if (!Save)
 	{
-		UE_LOGFMT(GameModeLog, Error, "{0}() SaveUrl {1} is invalid, GameMode: {2}", *FString(__FUNCTION__), *SaveUrl, *GetName());
+		UE_LOGFMT(GameModeLog, Error, "{0}() SaveUrl {1} is invalid", *FString(__FUNCTION__), *SaveUrl);
+		return false;
+	}
+
+	// Update the current save before loading the level information
+	if (!SetCurrentSave(Save))
+	{
+		UE_LOGFMT(GameModeLog, Error, "{0}() An error occurred while trying to set the current save to {1}, {2}", *FString(__FUNCTION__), *GetNameSafe(Save), *SaveUrl);
 		return false;
 	}
 
 	// Travel to the level
 	if (!GetWorld()->ServerTravel(Save->LevelInformation.LevelUrl))
 	{
-		UE_LOGFMT(GameModeLog, Error, "{0}() Failed to travel to the world while trying to load a game save! {2}", *FString(__FUNCTION__), *SaveUrl, *GetName());
+		UE_LOGFMT(GameModeLog, Error, "{0}() Failed to travel to the world while trying to load a game save!", *FString(__FUNCTION__));
 
 		// TODO: Add logic for handling server travel errors
 		return false;
@@ -661,7 +689,7 @@ void AGameModeSaveLogic::PrintMessage(const FString& Message)
 {
 	for(APlayerController* PlayerController : GetPlayers())
 	{
-		UE_LOGFMT(GameModeLog, Warning, "{0}::{1}() {2}({3}) ->  {4}", *UEnum::GetValueAsString(PlayerController->GetLocalRole()), *FString(__FUNCTION__), GetNameSafe(PlayerController), GetName(), Message);
+		UE_LOGFMT(GameModeLog, Warning, "{0}::{1}() {2}({3}), id: {4} ->  {5}", *UEnum::GetValueAsString(PlayerController->GetLocalRole()), *FString(__FUNCTION__), GetNameSafe(PlayerController), GetName(), GetUniqueID(), Message);
 	}
 }
 

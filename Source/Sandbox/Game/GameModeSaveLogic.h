@@ -52,6 +52,12 @@ protected:
 	
 public:
 	AGameModeSaveLogic(const FObjectInitializer& ObjectInitializer);
+	
+	/** Store current save state on the game instance for server travel */
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	/** Called when the game mode is first created, and once the game travels to another level and resets world information, only player controllers remain */
+	virtual void BeginPlay() override;
 
 	
 //----------------------------------------------------------------------------------//
