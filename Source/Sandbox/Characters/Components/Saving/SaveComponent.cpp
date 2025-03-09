@@ -57,8 +57,10 @@ void USaveComponent::BeginPlay()
 
 bool USaveComponent::IsReadyToSave() const
 {
-	if (GetSaveGameRef() == FString()) return false;
-	if (GetSaveIndex() == -1) return false;
+	FString SaveGameRef = GetSaveGameRef();
+	int32 SaveIndex = GetSaveIndex();
+	if (SaveGameRef == FString()) return false;
+	if (SaveIndex == -1) return false;
 
 	return true;
 }

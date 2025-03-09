@@ -20,7 +20,6 @@ class SANDBOX_API UMultiplayerGameInstance : public UGameInstance
 	GENERATED_BODY()
 
 protected:
-	/** The  */
 	/** The Game Mode's classification */
 	UPROPERTY(BlueprintReadWrite, Category="Game Instance|Save State") EGameModeType GameModeType;
 

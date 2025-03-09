@@ -20,5 +20,7 @@ struct F_CustomLevelInformation
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FName CustomLevelName;
 
 	/** A stored reference to the actual level's information */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString OriginalLevelId;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString LevelId;
+
+	
 };

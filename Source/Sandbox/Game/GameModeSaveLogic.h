@@ -53,6 +53,9 @@ protected:
 	/** Hash table of the saved actors that we need to update in the save slot */ // We're just going to store the updated information here, and remove it once saved for batching
 	UPROPERTY(BlueprintReadWrite, Category = "GameMode|Saving State") TMap<FString, F_LevelSaveInformation_Actor> PendingSaves;
 
+	/** The name of the current level */
+	UPROPERTY(BlueprintReadWrite, Category = "GameMode|Saving State") FString CurrentLevel;
+
 	/** A list of the levels in this game */
 	UPROPERTY(BlueprintReadWrite, Category = "GameMode|Saving State") TMap<FString, F_LevelInformation> Levels;
 
@@ -154,8 +157,11 @@ public:
 // Save Url																			//
 //----------------------------------------------------------------------------------//
 public:
-	/** Initializes the SaveUrlerence and Save Index from the current SaveGameConfig, and updates the CurrentSave */
+	/** Initializes the SaveUrl reference and Save Index from the current SaveGameConfig, and updates the CurrentSave */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool SetCurrentSave(USave* Save);
+
+	/** Initializes the Level Save and level information on the game mode */
+	UFUNCTION(BlueprintCallable, Category = "Player State|Saving") virtual bool SetCurrentLevelSave(USaved_Level* Save);
 
 	/** Retrieves the current save */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Utility") virtual USave* GetCurrentSave() const;
@@ -354,7 +360,10 @@ protected:
 public:
 	/** Retrieves the GameMode's classification */
 	UFUNCTION(BlueprintCallable, Category = "Game") virtual EGameModeType GetGameModeType();
-	
+
+	/** Initializes the game's levels */
+	UFUNCTION(BlueprintCallable, Category = "Game") virtual bool RetrieveLevels();
+
 	/** Initializes the player's account/platform information and uses it for handling save references. */
 	UFUNCTION(BlueprintCallable, Category = "Player State|Saving|Utility") virtual void InitOwnerSavePlatformId();
 

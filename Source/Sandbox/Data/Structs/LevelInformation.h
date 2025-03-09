@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CustomLevelInformation.h"
 #include "Engine/DataTable.h"
 #include "LevelInformation.generated.h"
 
@@ -40,6 +41,9 @@ struct F_LevelInformation
 	
 	/** Timestamp */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FDateTime CreationDate;
+
+	/** Custom Level information */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) F_CustomLevelInformation CustomLevelInformation;
 
 	
 };

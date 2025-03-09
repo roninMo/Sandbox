@@ -135,7 +135,6 @@ void ACharacterCameraLogic::SetCameraStyle_Implementation(const FName Style)
 
 void ACharacterCameraLogic::Server_SetCameraStyle_Implementation(const FName Style)
 {
-	// TODO: add logic to prevent spamming
 	CameraStyle = Style;
 	OnCameraStyleSet();
 }

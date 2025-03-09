@@ -30,21 +30,7 @@ AGameModeSaveLogic::AGameModeSaveLogic(const FObjectInitializer& ObjectInitializ
 	CurrentLevelSave = nullptr;
 
 	// Retrieve this game's levels
-	if (LevelInformationTable)
-	{
-		TArray<F_LevelInformation*> DatabaseLevels;
-		LevelInformationTable->GetAllRows(TEXT("Retrieve Levels"), DatabaseLevels);
-		const FString RowContext(TEXT("Item Information Context"));
-		// if (const F_LevelInformation* Data = ItemInformationTable->FindRow<FInventory_ItemDatabase>(Id, RowContext))
-
-		for (F_LevelInformation* LevelInformation : DatabaseLevels)
-		{
-			if (!LevelInformation) continue;
-			// if (!LevelInformation->IsValid()) continue;
-
-			Levels.Add(LevelInformation->LevelName, *LevelInformation);
-		}
-	}
+	AGameModeSaveLogic::RetrieveLevels();
 
 	// Retrieve saved information when traveling between levels (On game resets)
 	AGameModeSaveLogic::RetrieveGameModeInformation();
@@ -79,12 +65,21 @@ void AGameModeSaveLogic::StoreGameModeInformation()
 void AGameModeSaveLogic::RetrieveGameModeInformation()
 {
 	if (!GetWorld()) return;
+
+	// Levels
+	RetrieveLevels();
+
+	// Level persistence information
 	UMultiplayerGameInstance* GameInstance = Cast<UMultiplayerGameInstance>(GetGameInstance());
 	if (!GameInstance) return;
 
 	GameModeType = GameInstance->GetGameModeType();
 	if (!CurrentSave) CurrentSave = GameInstance->GetCurrentSave();
-	if (!CurrentLevelSave) CurrentLevelSave = GameInstance->GetCurrentLevelSave();
+	if (!CurrentLevelSave)
+	{
+		CurrentLevelSave = GameInstance->GetCurrentLevelSave();
+		CurrentLevel = CurrentSave ? CurrentSave->LevelInformation.LevelName : "";
+	}
 }
 
 
@@ -151,9 +146,12 @@ bool AGameModeSaveLogic::LoadSave(const FString& BaseSaveUrl, const int32 Index)
 	LoadPlayers(PlayerUrl, Index);
 
 	// Level save logic
-	FString LevelUrl = ConstructLevelSaveUrl(BaseSaveUrl, Save->LevelInformation.LevelName); // TODO: we need to create an object reference to the levels in the game. And save references to custom levels
-	if (LevelUrl.IsEmpty()) return false;
-	LoadLevel(LevelUrl, Index);
+	if (CurrentLevel == Save->LevelInformation.LevelName)
+	{
+		FString LevelUrl = ConstructLevelSaveUrl(BaseSaveUrl, Save->LevelInformation.LevelName); // TODO: we need to create an object reference to the levels in the game. And save references to custom levels
+		if (LevelUrl.IsEmpty()) return false;
+		LoadLevel(LevelUrl, Index);
+	}
 	
 	return true;
 }
@@ -265,16 +263,6 @@ bool AGameModeSaveLogic::ReadyNextSave()
 		return false;
 	}
 
-	Save->SaveUrl = ConstructSaveUrl(CurrentSave->PlatformId, CurrentSave->SaveSlot);
-	Save->SaveInformation(
-		CurrentSave->SaveName,
-		CurrentSave->Description,
-		CurrentSave->NetId,
-		CurrentSave->PlatformId,
-		CurrentSave->SaveSlot,
-		CurrentSave->SaveIndex
-	);
-
 	// Check if the next save index is empty, if not increment until we find an empty slot
 	FString Url;
 	int32 CurrentIndex;
@@ -285,7 +273,25 @@ bool AGameModeSaveLogic::ReadyNextSave()
 		UE_LOGFMT(GameModeLog, Warning, "!{0}() Failed to find the next save index while readying the next save! Url: {1}, Index: {2}", *FString(__FUNCTION__), Url, CurrentIndex + 1);
 		return false;
 	}
+
+	// Save 
+	Save->SaveUrl = ConstructSaveUrl(CurrentSave->PlatformId, CurrentSave->SaveSlot);
+	Save->SaveInformation(
+		CurrentSave->SaveName,
+		CurrentSave->Description,
+		CurrentSave->NetId,
+		CurrentSave->PlatformId,
+		CurrentSave->SaveSlot,
+		CurrentIndex + 1
+	);
+
+	// Level Save
+	FString LevelSaveUrl = ConstructLevelSaveUrl(Save->SaveUrl, Save->LevelInformation.LevelName, Save->SaveIndex);
+
+	// Player Save
+	FString PlayerSaveUrl = ConstructPlayerSaveUrl(Save->SaveUrl, Save->LevelInformation.LevelName, Save->SaveIndex);
 	
+
 	// Additional save state here
 	
 
@@ -324,10 +330,10 @@ bool AGameModeSaveLogic::DeleteSaveSlot(const FString& AccountId, int32 SaveSlot
 	}
 
 	// Delete all the previous saves
-	USave* SaveToDelete = Cast<USave>(UGameplayStatics::LoadGameFromSlot(BaseSaveUrl.Append(AppendSaveIndex(CurrentSaveIndex)), 0));
+	USave* SaveToDelete = Cast<USave>(UGameplayStatics::LoadGameFromSlot(CurrentSaveUrl, 0));
 	if (SaveToDelete)
 	{
-		for (int32 i = CurrentSaveIndex; CurrentSaveIndex >= 0; i--)
+		for (int32 i = CurrentSaveIndex; CurrentSaveIndex > 0; i--)
 		{
 			// Actual Saves
 			CurrentSaveUrl = ConstructSaveUrl(AccountId, SaveSlot).Append(AppendSaveIndex(i));
@@ -370,6 +376,9 @@ USave* AGameModeSaveLogic::NewSaveSlot(const FString& AccountId, int32 SaveSlot)
 	if (Save)
 	{
 		Save->SaveInformation(AccountId, "", -1, AccountId, SaveSlot, 0);
+
+		FString BaseUrl = ConstructSaveUrl(AccountId, SaveSlot);
+		Save->SaveUrl = BaseUrl;
 	}
 
 	return Save;
@@ -387,16 +396,19 @@ bool AGameModeSaveLogic::SaveLevel_Implementation(const FString& SaveLevelUrl, i
 	if (!GetLevel()) return false;
 
 	// Check if we have a valid save game slot, otherwise create one
-	if (!CurrentLevelSave)
+	USaved_Level* LevelSave = Cast<USaved_Level>(UGameplayStatics::LoadGameFromSlot(SaveLevelUrl + AppendSaveIndex(Index), 0));
+	if (!LevelSave)
 	{
-		CurrentLevelSave = NewObject<USaved_Level>(this, USaved_Level::StaticClass());
-		if (!CurrentLevelSave) return false;
+		LevelSave = NewObject<USaved_Level>(this, USaved_Level::StaticClass());
+		if (!LevelSave) return false;
 	}
+	
 	
 	// Retrieve actors in the level, players, and spawned actors
 	TArray<FString> SpawnedActors;
 	TArray<FString> Players;
 	TArray<AActor*> LevelActors;
+	CurrentLevelSave = LevelSave;
 	CurrentLevelSave->GetSavedAndSpawnedActors(GetLevel(), SpawnedActors, LevelActors, Players);
 
 	// Search through the level for actors with save logic, and find the actors that have save state
@@ -431,6 +443,8 @@ bool AGameModeSaveLogic::SaveLevel_Implementation(const FString& SaveLevelUrl, i
 		}
 	}
 
+	// TODO: Add to saved levels list
+	
 	// Save the level information to the game slot // TODO: This should be asynchronous
 	return UGameplayStatics::SaveGameToSlot(CurrentLevelSave, SaveLevelUrl + AppendSaveIndex(Index), 0);
 }
@@ -649,6 +663,7 @@ bool AGameModeSaveLogic::SavePlayer_Implementation(APlayerController* PlayerCont
 	if (Player->GetSaveComponent())
 	{
 		UpdatePlayerWithSaveReferences(PlayerController);
+		// TODO: Add to saved players list
 		Player->GetSaveComponent()->SaveData(ESaveType::All);
 	}
 
@@ -683,7 +698,7 @@ bool AGameModeSaveLogic::LoadPlayer_Implementation(APlayerController* PlayerCont
 void AGameModeSaveLogic::UpdatePlayerWithSaveReferences(APlayerController* PlayerController) const
 {
 	ABasePlayerState* PlayerState = PlayerController->GetPlayerState<ABasePlayerState>();
-	if (PlayerState)
+	if (PlayerState && CurrentSave)
 	{
 		PlayerState->SetSaveUrl(GetCurrentSaveUrl());
 		PlayerState->SetSaveIndex(CurrentSave->SaveIndex);
@@ -716,6 +731,20 @@ bool AGameModeSaveLogic::SetCurrentSave(USave* Save)
 
 	return true;
 }
+
+bool AGameModeSaveLogic::SetCurrentLevelSave(USaved_Level* Save)
+{
+	if (!Save || !CurrentSave)
+	{
+		UE_LOGFMT(GameModeLog, Warning, "!{0}() Failed to update the game's level save state, the save game provided was null", *FString(__FUNCTION__));
+		return false;
+	}
+
+	CurrentLevelSave = Save;
+	CurrentLevel = CurrentSave->LevelInformation.LevelName;
+	return true;
+}
+
 
 USave* AGameModeSaveLogic::GetCurrentSave() const
 {
@@ -767,6 +796,27 @@ FString AGameModeSaveLogic::AppendSaveIndex(int32 Index) const
 EGameModeType AGameModeSaveLogic::GetGameModeType()
 {
 	return GameModeType;
+}
+
+bool AGameModeSaveLogic::RetrieveLevels()
+{
+	if (!LevelInformationTable) return false;
+	
+	// Retrieve this game's levels
+	TArray<F_LevelInformation*> DatabaseLevels;
+	LevelInformationTable->GetAllRows(TEXT("Retrieve Levels"), DatabaseLevels);
+	const FString RowContext(TEXT("Item Information Context"));
+	// if (const F_LevelInformation* Data = ItemInformationTable->FindRow<FInventory_ItemDatabase>(Id, RowContext))
+
+	for (F_LevelInformation* LevelInformation : DatabaseLevels)
+	{
+		if (!LevelInformation) continue;
+		// if (!LevelInformation->IsValid()) continue;
+
+		Levels.Add(LevelInformation->LevelName, *LevelInformation);
+	}
+
+	return true;
 }
 
 
