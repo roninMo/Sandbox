@@ -6,7 +6,7 @@
 #include "CustomLevelInformation.generated.h"
 
 /**
- * Config for what to save on the actor // TODO: We should probably use 
+ * Config for what to save on the actor
  */
 USTRUCT(Blueprintable, BlueprintType)
 struct F_CustomLevelInformation

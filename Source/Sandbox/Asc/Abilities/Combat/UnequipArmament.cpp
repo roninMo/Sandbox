@@ -181,7 +181,6 @@ bool UUnequipArmament::GetUnequipMontage()
 		return false;
 	}
 
-	// TODO: add logic for both armaments
 	if (AArmament* EquippedArmament = CombatComponent->GetArmament())
 	{
 		SetCurrentMontage(EquippedArmament->GetMontage(Montage_Unequip));

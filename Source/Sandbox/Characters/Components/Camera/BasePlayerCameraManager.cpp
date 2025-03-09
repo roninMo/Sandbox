@@ -12,7 +12,7 @@
 
 ABasePlayerCameraManager::ABasePlayerCameraManager(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
-	bAlwaysApplyModifiers = true; // TODO: Investigate this
+	bAlwaysApplyModifiers = true;
 	PivotLagSpeed = FVector(3.4);
 
 	// Camera values
@@ -113,7 +113,7 @@ void ABasePlayerCameraManager::UpdateViewTarget(FTViewTarget& OutVT, float Delta
 		ApplyCameraModifiers(DeltaTime, OutVT.POV);
 	}
 
-	// Synchronize the actor with the view target results // TODO: Why is the camera affecting the actor location, and is this causing net corrections?
+	// Synchronize the actor with the view target results
 	SetActorLocationAndRotation(OutVT.POV.Location, OutVT.POV.Rotation, false);
 
 	UpdateCameraLensEffects(OutVT);

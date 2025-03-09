@@ -54,9 +54,7 @@ protected:
 	UPROPERTY(BlueprintReadWrite) FName _SpawnRotation = FName("SpawnRotation");
 	UPROPERTY(BlueprintReadWrite) FName _TargetActor = FName("TargetActor");
 
-	// TODO: Add behavior for senses
-	// TODO: Add complex ai behavior, and different ways to handle some of the behavior logic
-	// TODO: Add sense buildup instead of events (or both)
+	// TODO: Add behavior for senses, complex ai behavior, and different ways to handle some of the behavior logic. And add sense buildup instead of events (or both)
 	
 	/** Other */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Debug") bool bDebugAIPerception;

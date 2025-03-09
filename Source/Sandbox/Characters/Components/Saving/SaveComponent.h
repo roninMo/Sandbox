@@ -110,8 +110,6 @@ public:
 
 	/**
 	 * Handles the logic for tearing down the save states before deleting this component
-	 *
-	 * @note TODO: Check that EndPlay works when this component's actor is destroyed 
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Saving and Loading|Initialization") virtual void DeleteSaveStates();
 

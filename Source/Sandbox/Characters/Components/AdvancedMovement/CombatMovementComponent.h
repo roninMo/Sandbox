@@ -79,7 +79,6 @@ protected:
 // Adjusted functions to add movement state tags								//
 //------------------------------------------------------------------------------//
 protected:
-	// TODO: Non instanced abilities don't handle state tags, and for movement, abilities shouldn't handle tagging
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|State Tags") FGameplayTag AttackingTag;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|State Tags") FGameplayTag CrouchingTag;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement (General Settings)|State Tags") FGameplayTag SlidingTag;

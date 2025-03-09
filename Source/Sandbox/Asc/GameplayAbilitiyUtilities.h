@@ -33,7 +33,7 @@ struct FGameplayEffectContextHandle;
 
 
 /**
- * TODO: Refactor adding abilities to use the ability system for storing abilities correctly
+ * 
  */
 UCLASS()
 class SANDBOX_API UGameplayAbilityUtilities : public UBlueprintFunctionLibrary
@@ -101,6 +101,7 @@ public:
 	
 	/** Tries to add an AttributeSet and it's information with data tables. Be careful because this loosely creates an attribute set, and it's tough to reference specific attribute sets for effect calculations from this */
 	static void TryAddAttributes(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayAttributeInfo& InAttributeSetMapping, UAttributeSet*& OutAttributeSet);
+	// TODO: opt to not use attribute sets, it loosely adds one to the player, and different characters store it at different locations, with unique stats and attribute allocation
 	
 	/** Tries to add attribute information with gameplay effects. Returns the handles for the applied effects */
 	static void TryAddAttributes(UAbilitySystemComponent* AbilitySystemComponent, const TSubclassOf<UGameplayEffect> InEffectType, const float InLevel, TArray<FActiveGameplayEffectHandle>& OutEffectHandles);

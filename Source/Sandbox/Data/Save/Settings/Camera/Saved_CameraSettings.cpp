@@ -20,5 +20,5 @@ void USaved_CameraSettings::SaveFromCameraCharacter(ACharacter* Character)
 		CameraStyle = CameraStyle_ThirdPerson;
 	}
 
-	// TODO: add other custom camera settings
+	// Add other custom camera settings
 }

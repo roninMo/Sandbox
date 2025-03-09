@@ -22,7 +22,7 @@ class USaved_Level;
  * - Epic Online Subsystem example logic for handling lobby events (probably from a player controller's remote procedure calls -> @ref EOSGO_API UGoMenu
  * 
  * TODO: This needs to be refactored in favor of another way of saving multiple indices of a slot.
- *			- I wanted fallbacks for saving while dividing the save, level, and player information, however with the choice of saving to specific instances it just makes for messy code
+ *			- I wanted fallbacks for saving while dividing the save, level, and player information, however with the choice of saving to specific instances it just makes for messy code (forward indexing with a previous save reference saving logic) 1, 2, 3, 4, 5, 3, 4, 5, 6 -> 1-9
  * TODO: Add asynchronous save logic. Errors that happen while abruptly stopping save functionality rarely corrupt save logic, however we don't want problems with performance
  *
  */
@@ -45,7 +45,7 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Category="GameMode|Save State") TObjectPtr<USave> CurrentSave;
 
 	/** The host's Platform Id. For singleplayer this is their Console/Account id, and for multiplayer it's their online subsystem account id that's retrieved when the server owner's game begins  */
-	UPROPERTY(BlueprintReadWrite, Transient) FString SavePlatformId; // TODO: This is just the singleplayer's reference for retrieving the platform id, find a better way at beginplay to retrieve the save state
+	UPROPERTY(BlueprintReadWrite, Transient) FString SavePlatformId;
 
 	/** A stored reference to the save game slot for the current level */
 	UPROPERTY(BlueprintReadWrite, Category= "GameMode|Saving State") TObjectPtr<USaved_Level> CurrentLevelSave;
@@ -72,7 +72,6 @@ public:
 	/** Called when the game mode is first created, and once the game travels to another level and resets world information, only player controllers remain */
 	virtual void BeginPlay() override;
 
-	// TODO: find out how to handle the race condition of player's being initialized during level travel, and game mode's begin play, or handle it with match state
 	/** Stores the current game mode information on the game instance (for server travel) */
 	UFUNCTION(BlueprintCallable) virtual void StoreGameModeInformation();
 
@@ -319,7 +318,7 @@ public:
 // Save Players Logic																//
 //----------------------------------------------------------------------------------//
 public:
-	// TODO: We need valid save logic from the player controller while still saving actors within the level safely
+	// TODO: We need valid save logic from the player controller while still saving actors within the level safely -> add the save component to the player state
 	/**
 	 * Saves all player's information using their own save logic (Save Component reference -> Default / EOS / Etc.)
 	 * @returns						Whether the current state information was successfully saved

@@ -58,9 +58,6 @@ void AMeleeCombatController::Server_EquipWeapon_Implementation(const bool bPrevW
 	{
 		CombatComponent->DeleteEquippedArmament(CombatComponent->GetArmament(bRightHand));
 	}
-
-	// TODO: Add logic per game to either skip this or only allow it to happen once
-
 	else
 	{
 		CombatComponent->CreateArmament(WeaponSlot);

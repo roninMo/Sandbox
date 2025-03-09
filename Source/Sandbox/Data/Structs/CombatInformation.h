@@ -297,7 +297,6 @@ struct F_ArmamentInformation
 	
 	/** The base attack information of the armament */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TMap<FGameplayAttribute, float> BaseDamageStats;
-	// TODO: Add attribute damage scaling
 	
 	/** The armament's passives */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(TitleProperty=Effect)) TArray<FGameplayEffectInfo> Passives;

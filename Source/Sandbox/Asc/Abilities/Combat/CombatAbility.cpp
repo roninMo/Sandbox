@@ -199,7 +199,7 @@ void UCombatAbility::HandleMeleeAttack(const FGameplayAbilityTargetDataHandle& T
 	}
 	
 	// Validity Checks
-	if (!TargetData.IsValid(0)) // TODO: This is happening sometimes and it's either the client not attacking another client, or an addition trace when prediction isn't valid. Fix traces to always have valid prediction
+	if (!TargetData.IsValid(0)) // TODO: check that the proper client / server instances are accessing and invoking information that they need to invoke
 	{
 		// UE_LOGFMT(AbilityLog, Error, "{0}::{1}() {2}'s Target data is not valid! ",
 		// 	*UEnum::GetValueAsString(GetOwningActorFromActorInfo()->GetLocalRole()), *FString(__FUNCTION__), *GetNameSafe(GetOwningActorFromActorInfo()));

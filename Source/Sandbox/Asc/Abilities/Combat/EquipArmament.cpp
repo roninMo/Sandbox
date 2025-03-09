@@ -209,7 +209,7 @@ bool UEquipArmament::GetEquipMontage()
 		return false;
 	}
 
-	// TODO: add logic for both armaments
+	// TODO: add equip and unequip logic for both armaments
 	if (AArmament* EquippedArmament = CombatComponent->GetArmament())
 	{
 		SetCurrentMontage(EquippedArmament->GetMontage(Montage_Equip));

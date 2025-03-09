@@ -33,7 +33,6 @@ bool UAbilityData::AddAbilityDataToCharacter(UAbilitySystemComponent* InAbilityS
 		
 		if (!AbilityMapping.Ability)
 		{
-			// TODO: Add custom logging for handling logic
 			// UE_LOGFMT(AbilityLog, Error, "{0}::{1}'s GrantedAbilities Ability on ability set {2} is not valid at Index {3}",
 			// 	*UEnum::GetValueAsString(AbilitySystemComponent->GetOwnerActor()->GetLocalRole()), *GetNameSafe(AbilitySystemComponent->GetOwnerActor()), *GetNameSafe(InAbilitySet), AbilitiesIndex  - 1
 			// );

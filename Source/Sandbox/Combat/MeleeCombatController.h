@@ -35,7 +35,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "PlayerController|Combat")
 	virtual void SetArmamentStance(EArmamentStance NextStance);
 
-	// TODO: These should be unreliable, and only be updated on the client if it was successful (or handled through serialization
+	// TODO: These should be unreliable, and only be updated on the client if it was successful (or handled through serialization)
 	/** Handles weapon equipping logic on the server */
 	UFUNCTION(Server, Reliable)
 	virtual void Server_EquipWeapon(const bool bPrevWeapon = true, const bool bRightHand = false);

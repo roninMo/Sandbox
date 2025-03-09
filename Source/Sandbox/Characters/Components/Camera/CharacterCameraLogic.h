@@ -308,7 +308,6 @@ public:
 	 * @remarks There's also a blueprint event for adding logic to this
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Camera|Target Locking") virtual void OnTargetLockCharacterUpdated();
-	// TODO: Add logic on target transitions to clear invalid target handles
 
 	/** Blueprint function handling transitioning between different target lock characters */
 	UFUNCTION(BlueprintImplementableEvent, Category = "Camera|Target Locking", meta = (DisplayName = "On Target Lock Character Updated"))
@@ -386,7 +385,7 @@ public:
 	 * If we have a controller, by default we aim at the player's 'eyes' direction
 	 * that is by default the Pawn rotation for AI, and camera (crosshair) rotation for human players.
 	 *
-	 * Uses replicated aim rotation for client proxies // TODO: I don't know if this is performant
+	 * Uses replicated aim rotation for client proxies
 	 */
 	virtual FRotator GetBaseAimRotation() const override;
 	

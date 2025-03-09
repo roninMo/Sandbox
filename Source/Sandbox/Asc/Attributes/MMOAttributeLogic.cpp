@@ -116,8 +116,7 @@ void UMMOAttributeLogic::PostGameplayEffectExecute(const FGameplayEffectModCallb
 	UAbilitySystem* AbilitySystem = Props.TargetAbilitySystem;
 	UCombatComponent* CombatComponent = Props.TargetCombatComponent;
 
-	// TODO: Add attack pattern to effect context
-	// TODO: Add weapons/hitstun/hitLocation to effect context
+	// TODO: Add attack pattern to effect context, and weapons/hitstun/hitLocation to effect context
 	
 	
 

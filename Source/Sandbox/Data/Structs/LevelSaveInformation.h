@@ -136,7 +136,7 @@ struct F_LevelSaveInformation_Actor
 	 *	- Players:									The character's subsystem account / platform id
 	 *	- Items Placed in Level:					The name of the object based on the level's construction
 	 *	- Items Spawned in Level during Play:		The inventory's id. Uses the class reference to construct and spawn the item once the game begins
-	 *	- TODO: We need additional naming conventions for objects that are spawned for custom levels (Classify it with tables that we use for storing things 
+	 *	- TODO: We need additional naming conventions for objects that are spawned for custom levels (Classify it with tables that we use for storing things)
 	 *	
 	 * 
 	 */
@@ -209,7 +209,7 @@ public:
 	/** Print the actor's level save information */
 	virtual FString Print() const
 	{
-		FString Result = FString::Printf(TEXT("Type: %s, Id: %s"), *UEnum::GetValueAsString(this->SaveType), *Id); // TODO: dependency fix
+		FString Result = FString::Printf(TEXT("Type: %s, Id: %s"), *UEnum::GetValueAsString(this->SaveType), *Id); // TODO: SaveIdType dependency fix potential error
 		if (Class) Result.Append(FString::Printf(TEXT(", Class: '%s'"), *Class->GetName()));
 		Result.Append(FString::Printf(TEXT("Location: '%s', Rotation: %s,"), *Location.ToString(), *Rotation.ToString()));
 		return Result;

@@ -377,7 +377,7 @@ void UCombatComponent::UpdateArmamentStanceAndAbilities()
 	bool bPrimaryEquipped = PrimaryArmament && PrimaryArmament->GetEquipStatus() == EEquipStatus::Equipped;
 	bool bSecondaryEquipped = SecondaryArmament && SecondaryArmament->GetEquipStatus() == EEquipStatus::Equipped;
 	bool bDualWielding = bPrimaryEquipped && bSecondaryEquipped && PrimaryArmament->GetArmamentInformation().Classification == SecondaryArmament->GetArmamentInformation().Classification;
-	// bool bOnlyTwoHandPrimary = bPrimaryEquipped && PrimaryArmament->GetEquipRestrictions() == EEquipRestrictions::TwoHandOnly; // TODO: add this logic 
+	// bool bOnlyTwoHandPrimary = bPrimaryEquipped && PrimaryArmament->GetEquipRestrictions() == EEquipRestrictions::TwoHandOnly;
 	// bool bOnlyTwoHandSecondary = bSecondaryEquipped && SecondaryArmament->GetEquipRestrictions() == EEquipRestrictions::TwoHandOnly;
 
 	// Both weapons

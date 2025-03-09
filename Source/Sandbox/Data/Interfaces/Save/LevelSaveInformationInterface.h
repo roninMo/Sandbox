@@ -118,8 +118,8 @@ public:
 	 *	- Items Placed in Level:					The name of the object based on the level's construction
 	 *	- Items Spawned in Level during Play:		The inventory's id. Uses the class reference to construct and spawn the item once the game begins
 	 *
-	 * TODO: unreal's GetName naming convention varies between server and client and is based on what's placed in the world. Anything spawned will be respawned,
-	 *		and we still need a convention for mapping the saved name to the actor's stored FGuid id for reference
+	 * TODO: unreal's GetName naming convention varies between server and client and is based on what's placed in the world, in waht order, for the specific client (so names are elusively the same, however might reference different characters).
+	 *		Anything spawned will be respawned, and we still need a convention for mapping the saved name to the actor's stored FGuid id for reference -> and prevent mixups between save indexing!
 	 *
 	 * @returns							The id of the actor   
 	 */

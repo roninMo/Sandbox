@@ -86,15 +86,13 @@ void AGameModeSaveLogic::RetrieveGameModeInformation()
 #pragma region Saving and Loading
 bool AGameModeSaveLogic::SaveGame(const FString& BaseSaveUrl, const int32 Index)
 {
-	// TODO: Check if we're saving to the proper level
-
 	// Handle save information specific to multiplayer game state here (Quests, objectives, etc.)
 	//	- Games with save information that persists across multiple games, or from singleplayer / multiplayer should have custom save logic for save / retrieving that information 
 	
-	// Save the player information -> TODO: Check if we're on the proper level to save level information
+	// Save the player information
 	SavePlayers(BaseSaveUrl, Index);
 
-	// Save the level information
+	// Save the level information ->  TODO: Check if we're on the proper level to save level information
 	// TODO: Update save state to be two separate things based on whether the information is persistent
 	//			- Actor->SaveToLevel() saves level information, and optionally additionally save character specific information
 	//			- Actor->SaveActorData() saves character specific information
@@ -148,7 +146,7 @@ bool AGameModeSaveLogic::LoadSave(const FString& BaseSaveUrl, const int32 Index)
 	// Level save logic
 	if (CurrentLevel == Save->LevelInformation.LevelName)
 	{
-		FString LevelUrl = ConstructLevelSaveUrl(BaseSaveUrl, Save->LevelInformation.LevelName); // TODO: we need to create an object reference to the levels in the game. And save references to custom levels
+		FString LevelUrl = ConstructLevelSaveUrl(BaseSaveUrl, Save->LevelInformation.LevelName);
 		if (LevelUrl.IsEmpty()) return false;
 		LoadLevel(LevelUrl, Index);
 	}
@@ -171,7 +169,7 @@ bool AGameModeSaveLogic::FindCurrentSave(const FString& BaseUrl, FString& OutSav
 		return false;
 	}
 
-	// Find the most recent save, and delete the saves // TODO: we should keep a reference for a specific character, and have everything else be handled naturally
+	// Find the most recent save, and delete the saves
 	int32 SearchIndex = Index;
 	int32 SearchStep = 100;
 	bool bFoundCurrentSaveIndex = false;
@@ -445,7 +443,7 @@ bool AGameModeSaveLogic::SaveLevel_Implementation(const FString& SaveLevelUrl, i
 
 	// TODO: Add to saved levels list
 	
-	// Save the level information to the game slot // TODO: This should be asynchronous
+	// Save the level information to the game slot
 	return UGameplayStatics::SaveGameToSlot(CurrentLevelSave, SaveLevelUrl + AppendSaveIndex(Index), 0);
 }
 
@@ -460,7 +458,7 @@ bool AGameModeSaveLogic::LoadLevel_Implementation(const FString& SaveLevelUrl, i
 	if (!CurrentLevelSave)
 	{
 		// Try to find a previous save where the player was on this level
-		// if (!FindCurrentSave(SaveLevelUrl)) // TODO: this was a good idea however it isn't helpful with saving at random slots
+		// if (!FindCurrentSave(SaveLevelUrl))
 
 		UE_LOGFMT(GameModeLog, Error, "{0}() {1} Failed to retrieve save information from {2}!", *FString(__FUNCTION__), *GetName(), *SaveLevelUrl);
 		return false;
@@ -488,7 +486,7 @@ bool AGameModeSaveLogic::LoadLevel_Implementation(const FString& SaveLevelUrl, i
 			SavedActors[Id].Actor = Actor;
 			const F_LevelSaveInformation_Actor& SaveData = SavedActors[Id];
 
-			// Handle actor specific logic here TODO: Find out what should be loaded first in order to load the game safely
+			// Handle actor specific logic here
 			if (SaveData.SaveType == ESaveIdType::LevelActor)
 			{
 				
@@ -510,7 +508,6 @@ bool AGameModeSaveLogic::LoadLevel_Implementation(const FString& SaveLevelUrl, i
 	}
 	
 	// Spawn actors that were previously spawned in the world
-	// TODO: Add logic for multiple variations of actors, or after handling singleplayer Level and Spawned actors / Characters, handle custom information like Forge specific stuff from an object (Weapons / Characters / World design / etc. )
 	for (FString Id : SpawnedActors)
 	{
 		if (!SavedActors.Contains(Id)) continue;
@@ -534,7 +531,7 @@ bool AGameModeSaveLogic::LoadLevel_Implementation(const FString& SaveLevelUrl, i
 			{
 				ILevelSaveInformationInterface::Execute_LoadFromLevel(SpawnedActor, SaveData, bRetrieveActorData);
 				
-				// TODO: Init logic for when we spawn actors that were saved to the level
+				// Init logic for when we spawn actors that were saved to the level
 			}
 		}
 	}

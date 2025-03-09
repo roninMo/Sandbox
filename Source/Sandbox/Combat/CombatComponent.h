@@ -307,7 +307,7 @@ public:
 	 * Creates an armament from one of it's equip slots and equips it to one of the character's active armament hands. Only call on authority. \n\n
 	 *
 	 * Handles spawning the armament, calling @ref ConstructArmament() and if it successfully creates and constructs the armament, it equips and returns the armament. Otherwise, reverts the creation and returns nullptr
-	 * @note If you call this before unequipping the armament from the specified equip slot, it fails to equip the armament // TODO: Add validity checks with the player's inventory
+	 * @note If you call this before unequipping the armament from the specified equip slot, it fails to equip the armament
 	 *
 	 * @param EquipSlot							The equip slot to retrieve the armament information from.
 	 * @returns									The created armament

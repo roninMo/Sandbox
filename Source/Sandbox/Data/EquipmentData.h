@@ -46,7 +46,7 @@ public:
 	/** The currently equipped right hand armament */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Armaments") EEquipSlot EquippedRightHandArmament;
 	
-	// TODO: Equipment stats adjustments
+	// TODO: Equipment stats adjustments should be combined for readability in the console with a way of identifying received attributes
 
 	
 	/**

@@ -170,7 +170,7 @@ void AArmament::OnRep_Item()
 
 	if (!GetOwner())
 	{
-		// Initial replication happens before the component retrieves the owner, and causes problems. // TODO: add logging that checks against GetOwner() being valid, and handles the extra arguments
+		// Initial replication happens before the component retrieves the owner, and causes problems. // TODO: refactor multiplayer replication retrieval
 		return;
 	}
 	
@@ -187,7 +187,7 @@ void AArmament::OnRep_CreatedArmament()
 {
 	if (!GetOwner())
 	{
-		// Initial replication happens before the component retrieves the owner, and causes problems. // TODO: add logging that checks against GetOwner() being valid, and handles the extra arguments
+		// Initial replication happens before the component retrieves the owner, and causes problems.
 		return;
 	}
 	
@@ -258,7 +258,6 @@ bool AArmament::IsValidArmanent()
 	// Check if montages are valid for this specific valid
 	// For melee armaments, check if the overlap component is valid
 
-	// TODO: Check that the places the clients are invoking this is okay, we have replicated functions that retrieve inventory information once the item's reference has been sent to the client, and there's probably a better way to do this
 	if (!ArmamentInformation.IsValid())
 	{
 		// UE_LOGFMT(ArmamentLog, Error, "{0}::{1}() {2}'s {3} information is invalid!",

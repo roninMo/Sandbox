@@ -961,8 +961,7 @@ void UAdvancedMovementComponent::PhysMantling(float deltaTime, int32 Iterations)
 		}
 		else
 		{
-			// Replicated clients want updated movement in order to actually update the movement. Otherwise during nonmovement (outside of walking) they will just slide from the previous velocity calculation
-			// TODO: Find out where this is happening and fix it, I don't want to handle this right now, just adjust the character location 
+			// Replicated clients want updated movement in order to actually update the movement. Otherwise during nonmovement (outside of walking) they will just slide from the previous velocity calculation, which was fixed at the end of a climb
 			FVector WallRightVector = UKismetMathLibrary::RotateAngleAxis(LedgeClimbNormal, 90, FVector(0, 0, 1));
 			FVector TargetLocation = OldLocation.Equals(MantleLedgeLocation, .1) ? MantleLedgeLocation + (WallRightVector * 1): MantleLedgeLocation;
 			
@@ -1424,7 +1423,7 @@ void UAdvancedMovementComponent::FallingMovementPhysics(float deltaTime, float& 
 				if (WallAngle < 0.f)
 				{
 					// Allow movement parallel to the wall based on the character's current movements and their input, but not into it because that may push us up.
-					// TODO: this needs to factor in the character inputs to allow traversing slopes
+					// TODO: this needs to factor in the character inputs to allow traversing slopes (ledge friction with bhop surfing logic -> prevent wall climbing?)
 					FVector AirAndMovementAccel = Velocity.GetSafeNormal() + AirControlAccel.GetSafeNormal();
 					AirControlDeltaV = FVector::VectorPlaneProject(AirAndMovementAccel, Hit.Normal);
 				}
@@ -2221,7 +2220,7 @@ bool UAdvancedMovementComponent::CheckIfSafeToMantleLedge()
 	float CrouchDifference = CharacterHalfHeight - CrouchHalfHeight;
 	
 	TArray<AActor*> CharacterActors; 
-	CharacterOwner->GetAllChildActors(CharacterActors); // TODO: Investigate if this includes player spawned actors
+	CharacterOwner->GetAllChildActors(CharacterActors);
 	CharacterActors.AddUnique(CharacterOwner);
 	
 	// Search for a wall
@@ -2584,7 +2583,6 @@ bool UAdvancedMovementComponent::FMSavedMove::CanCombineWith(const FSavedMovePtr
 	if (SavedRequestToStartAiming != NewSavedMove->SavedRequestToStartAiming) return false;
 	if (SavedRequestToStartMantling != NewSavedMove->SavedRequestToStartMantling) return false;
 	if (SavedRequestToStartSprinting != NewSavedMove->SavedRequestToStartSprinting) return false;
-	// TODO: Investigate Combining moves with acceptable times
 	
 	return Super::CanCombineWith(NewMove, Character, MaxDelta);
 }
@@ -2597,7 +2595,7 @@ bool UAdvancedMovementComponent::FMCharacterNetworkMoveData::Serialize(UCharacte
 	bool bLocalSuccess = true;
 
 	// Save move values
-	MoveData_Input.NetSerialize(Ar, PackageMap, bLocalSuccess); // TODO: Learn how to serialize things
+	MoveData_Input.NetSerialize(Ar, PackageMap, bLocalSuccess);
 	SerializeOptionalValue<FVector_NetQuantize10>(bIsSaving, Ar, MoveData_LedgeClimbLocation, FVector_NetQuantize10::ZeroVector);
 	SerializeOptionalValue<FVector_NetQuantize10>(bIsSaving, Ar, MoveData_MantleLocation, FVector_NetQuantize10::ZeroVector);
 	

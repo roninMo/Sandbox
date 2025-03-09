@@ -19,7 +19,7 @@ void UGameplayTagState::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSeque
 	Super::NotifyBegin(MeshComp, Animation, TotalDuration, EventReference);
 	UAbilitySystem* AbilitySystem;
 	ACharacterBase* Character;
-	if (!GetCharacterAndAbilitySystem(MeshComp, Character, AbilitySystem)) // TODO: Find out if this is valid (technically this should be a const function, and this might cause problems)
+	if (!GetCharacterAndAbilitySystem(MeshComp, Character, AbilitySystem))
 	{
 		return;
 	}

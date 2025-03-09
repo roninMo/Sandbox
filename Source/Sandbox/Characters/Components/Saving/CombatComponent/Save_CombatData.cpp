@@ -81,7 +81,7 @@ bool USave_CombatData::LoadData_Implementation(int32 Index)
 		return false;
 	}
 	
-	// Update the combat component with it's information // TODO: eventually just use the inventory to retrieve the weapons and armor
+	// Update the combat component with it's information
 	CombatComponent->AddArmamentToEquipSlot(CombatInfo->LeftHandEquipSlot_One, EEquipSlot::LeftHandSlotOne);
 	CombatComponent->AddArmamentToEquipSlot(CombatInfo->LeftHandEquipSlot_Two, EEquipSlot::LeftHandSlotTwo);
 	CombatComponent->AddArmamentToEquipSlot(CombatInfo->LeftHandEquipSlot_Three, EEquipSlot::LeftHandSlotThree);

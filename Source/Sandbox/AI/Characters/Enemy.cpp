@@ -141,11 +141,7 @@ void AEnemy::BindAttributeValuesToAscDelegates()
 		return;
 	}
 
-	// TODO: Refactor this into a function that uses references to prevent DRY
 	// Bind to the attribute on change delegates (these delegates don't run on the client, and we're using delegates so that we don't have to update the values every frame)
-
-
-	// TODO: nothing is wrong with this, investigate why the functions aren't broadcasting, or more specifically why the replicated values OnReplicated functions aren't handling any logic
 	FOnGameplayAttributeValueChange& HealthAttributeUpdates = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Attributes->GetHealthAttribute());
 	HealthAttributeUpdates.AddLambda([this](const FOnAttributeChangeData& Data){ 
 		CurrentHealth = Data.NewValue;

@@ -18,7 +18,6 @@ class USaveLogic;
  *
  * - Epic Online Subsystem example logic for handling lobby events (probably from a player controller's remote procedure calls -> @ref EOSGO_API UGoMenu
  * 
- * TODO: Add asynchronous save logic. Errors that happen while abruptly stopping save functionality rarely corrupt save logic, however we don't want problems with performance
  */
 UCLASS()
 class SANDBOX_API AMultiplayerGameMode : public AGameModeSaveLogic

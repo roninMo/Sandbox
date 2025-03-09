@@ -85,7 +85,7 @@ void UAbilityTask_TargetOverlap::Activate()
 		if (!bCalledDelegate) SetWaitingOnRemotePlayerData();
 	}
 	
-	// TODO: Client side prediction
+	// TODO: add Client side prediction
 	for (auto &[Armament, Hitboxes] : ArmamentHitboxes)
 	{
 		for (UPrimitiveComponent* OverlapComponent : Hitboxes)

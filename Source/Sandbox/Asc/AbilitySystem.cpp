@@ -216,7 +216,6 @@ FGameplayAbilitySpecHandle UAbilitySystem::AddAbility(const FGameplayAbilityInfo
 	{
 		if (AbilityClass != CurrentAbility) continue;
 			
-		// TODO: There should be infrastructure and blueprint code for handling this differently for each game
 		// Add the ability to the ability handle, if we don't have this instance of the ability added
 		if (!Map.GrantedAbilities.Contains(NewAbility.Id))
 		{
@@ -253,8 +252,6 @@ FGameplayAbilitySpecHandle UAbilitySystem::AddAbility(const FGameplayAbilityInfo
 	{
 		// Build another ability handle and add the ability
 		F_MultiAbilityHandle NewAbilityHandle;
-
-		// Create the new ability specification
 		NewAbilityHandle.Ability = BuildAbilitySpecFromClass(AbilityClass, NewAbility.Level, static_cast<int32>(NewAbility.InputId));
 		
 		// Add the ability to the character, and update the handle

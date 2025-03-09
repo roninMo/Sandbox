@@ -21,7 +21,7 @@ class SANDBOX_API UMeleeAttack : public UMeleeCombatAbility
 {
 	GENERATED_BODY()
 
-protected: // TODO: Either adjust the ability task limit, or create additional tasks that handle everything together
+protected: // TODO: Either adjust the ability task limit, or create additional tasks that handle everything together -> Default task limit per game 1000 -> 10 for 100 characters / enemies
 	/** The attack montage handle */
 	UPROPERTY(BlueprintReadWrite) UAbilityTask_PlayMontageAndWait* AttackMontageHandle;
 

@@ -152,7 +152,7 @@ void UInventoryComponent::Client_AddItemResponse_Implementation(const bool bSucc
 	else
 	{
 		F_Item Item = F_Item();
-		if (ROLE_AutonomousProxy == GetOwner()->GetLocalRole()) // TODO: are extra checks on clients necessary?
+		if (ROLE_AutonomousProxy == GetOwner()->GetLocalRole())
 		{
 			Item = Execute_HandleAddItem(this, Id, DatabaseId, InventoryItemInterface, Type);
 		}

@@ -205,7 +205,6 @@ bool ACharacterBase::SaveActorData_Implementation(const F_LevelSaveInformation_A
 
 bool ACharacterBase::LoadFromLevel_Implementation(const F_LevelSaveInformation_Actor& PreviousSave, bool bRetrieveActorSave)
 {
-	// TODO: I don't know if we should handle the level state logic here
 	bool bSuccessfullyLoaded = true;
 	if (!PreviousSave.Location.IsNearlyZero())
 	{

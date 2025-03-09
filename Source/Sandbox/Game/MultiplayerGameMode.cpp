@@ -35,14 +35,11 @@ void AMultiplayerGameMode::PostLogin(APlayerController* NewPlayer)
 	Super::PostLogin(NewPlayer);
 	PrintMessage("PostLogin");
 	
-	// TODO: Once the level / GameMode has been initialized, search for the owner, and retrieve the save information
+	// Once the level / GameMode has been initialized, search for the owner, and retrieve the save information
 	InitOwnerSavePlatformId();
 	
-	// Init the player's save information (Save components won't save / retrieve save information until the save references are ready
-	if (CurrentSave)
-	{
-		UpdatePlayerWithSaveReferences(NewPlayer);
-	}
+	// Save components won't save / retrieve save information until the save references are ready
+	UpdatePlayerWithSaveReferences(NewPlayer);
 }
 
 

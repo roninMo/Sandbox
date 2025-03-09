@@ -238,7 +238,6 @@ void UGameplayAbilityUtilities::TryAddAttributes(UAbilitySystemComponent* Abilit
 	}
 	
 	// Prevent adding the same attribute set multiple times (if already registered by another GF or on Actor ASC directly)
-	// TODO: Check if this adds the subobject while saving the proper reference -> players should handle this in the player state, and everything else should be on the character
 	if (UAttributeSet* AttributeSet = GetAttributeSet(AbilitySystemComponent, AttributeSetType))
 	{
 		OutAttributeSet = AttributeSet;

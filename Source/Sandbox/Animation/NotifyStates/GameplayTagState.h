@@ -19,7 +19,7 @@ class SANDBOX_API UGameplayTagState : public UAnimNotifyStateBase
 {
 	GENERATED_BODY()
 
-protected: // TODO: Check if this is safe!
+protected: // TODO: Check if this is safe! This is used for begin and end frames on server overlap logic
 	UPROPERTY(EditAnywhere, meta = (ToolTip = "Send gameplay event to player actors (and server actors)"))
 	bool bNotifyBeginSendGameplayEventToActor;
 

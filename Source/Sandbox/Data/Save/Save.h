@@ -27,7 +27,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") FString Description;
 
 	/** The Current Level Reference */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") F_LevelInformation LevelInformation; // TODO: Update this to an object that has custom level logic
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") F_LevelInformation LevelInformation;
 
 	/** Image  */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") UTexture2D* Thumbnail;

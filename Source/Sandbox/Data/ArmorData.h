@@ -33,7 +33,7 @@ public:
 	/** The character's equipped chest */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Armor") FName Chest;
 
-	// TODO: Armor stats adjustments
+	// TODO: Armor stats adjustments should be combined for readability in the console with a way of identifying received attributes
 
 	
 	/** The combat component by default creates and stores the handles for weapons and equipment, so we're just going to prioritize that while building utility logic */

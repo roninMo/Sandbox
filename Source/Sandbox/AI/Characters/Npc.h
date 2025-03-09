@@ -96,7 +96,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Periphery")
 	TObjectPtr<USphereComponent> PeripheryRadius;
 
-	/** The periphery radius is used for handling networking information, and updates information for specific clients using the periphery */ // TODO: Use net relevancy to handle this
+	/** The periphery radius is used for handling networking information outside of net relevancy, and updates information for specific clients using the periphery */
 	UPROPERTY(BlueprintReadWrite, Category = "Periphery") TArray<ACharacterBase*> CharactersInPeriphery;
 
 public:

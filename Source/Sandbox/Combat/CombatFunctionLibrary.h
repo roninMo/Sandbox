@@ -24,11 +24,6 @@ public:
 // Armament Functionality															   //
 //-------------------------------------------------------------------------------------//
 public:
-	/** Retrieves the formatted string version of EArmamentStance */
-	UFUNCTION(BlueprintCallable, Category = "Combat Functions|Utils") static FString ArmamentStanceToString(const EArmamentStance Stance);
-
-	/** Retrieves the formatted string version of EEquipSlot */
-	UFUNCTION(BlueprintCallable, Category = "Combat Functions|Utils") static FString EquipSlotToString(const EEquipSlot Slot);
 
 	
 };
