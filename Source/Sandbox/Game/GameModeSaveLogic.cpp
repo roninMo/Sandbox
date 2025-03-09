@@ -42,7 +42,7 @@ AGameModeSaveLogic::AGameModeSaveLogic(const FObjectInitializer& ObjectInitializ
 			if (!LevelInformation) continue;
 			// if (!LevelInformation->IsValid()) continue;
 
-			Levels.Add(LevelInformation->Id, *LevelInformation);
+			Levels.Add(LevelInformation->LevelName, *LevelInformation);
 		}
 	}
 
@@ -147,10 +147,12 @@ bool AGameModeSaveLogic::LoadSave(const FString& BaseSaveUrl, const int32 Index)
 
 	// Player save logic
 	FString PlayerUrl = ConstructPlayerSaveUrl(BaseSaveUrl, SavePlatformId);
+	if (PlayerUrl.IsEmpty()) return false;
 	LoadPlayers(PlayerUrl, Index);
 
 	// Level save logic
-	FString LevelUrl = ConstructLevelSaveUrl(BaseSaveUrl, Save->LevelInformation.Id); // TODO: we need to create an object reference to the levels in the game. And save references to custom levels
+	FString LevelUrl = ConstructLevelSaveUrl(BaseSaveUrl, Save->LevelInformation.LevelName); // TODO: we need to create an object reference to the levels in the game. And save references to custom levels
+	if (LevelUrl.IsEmpty()) return false;
 	LoadLevel(LevelUrl, Index);
 	
 	return true;

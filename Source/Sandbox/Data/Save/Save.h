@@ -16,6 +16,9 @@ class SANDBOX_API USave : public USaveGame
 {
 	GENERATED_BODY()
 
+//--------------------------------------------------------------------------------------------------------------------------//
+// Save Information																											//
+//--------------------------------------------------------------------------------------------------------------------------//
 public:
 	/** Display Name */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") FString SaveName;
@@ -48,7 +51,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") FDateTime Timestamp;
 
 
-	/** Saved references for handling Client/Sever multiplayer logic that stores save information with USaveGame states */
+	
+
+//--------------------------------------------------------------------------------------------------------------------------//
+// Saved references for handling Client/Sever multiplayer logic that stores save information with USaveGame states			//
+//--------------------------------------------------------------------------------------------------------------------------//
 public:
 	/** A list of the players we've saved to this save slot */ 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Details") TArray<FString> SavedPlayers;
@@ -58,6 +65,9 @@ public:
 	
 
 
+//--------------------------------------------------------------------------------------------------------------------------//
+// Save Functions																											//
+//--------------------------------------------------------------------------------------------------------------------------//
 public:
 	/** Returns whether the current save information is valid */
 	UFUNCTION(BlueprintCallable, Category = "SaveGame") virtual bool IsValidSaveState() const;

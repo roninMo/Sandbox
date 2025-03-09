@@ -16,10 +16,18 @@ struct F_LevelInformation
 	GENERATED_USTRUCT_BODY()
 	
 	virtual ~F_LevelInformation() = default;
-	F_LevelInformation() = default;
+	F_LevelInformation()
+	{
+		Id = FGuid::NewGuid();
+		CreationDate = FDateTime::UtcNow();
+	}
 
+	
+//--------------------------------------------------------------//
+// Level Reference Information									//
+//--------------------------------------------------------------//
 	/** Custom level save Id used for retrieving custom levels for a specific account  */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString Id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FGuid Id;
 	
 	/** Level Name */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString LevelName;
@@ -29,9 +37,6 @@ struct F_LevelInformation
 
 	/** Level Description */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString Description;
-	
-	/** Custom Level Information containing spawn information for Props, Actors, Enemies, Weapons, GameMode Objects, Vehicles, etc */
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite) CustomInformation;
 	
 	/** Timestamp */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) FDateTime CreationDate;

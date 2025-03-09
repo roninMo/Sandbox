@@ -7,7 +7,7 @@
 
 
 /**
- *	The specific type of item
+ *	The specific type of inventory item
  */
 UENUM(BlueprintType)
 enum class EItemType : uint8
@@ -20,6 +20,18 @@ enum class EItemType : uint8
 	Inv_Material						UMETA(DisplayName = "Material"),
 	Inv_Custom							UMETA(DisplayName = "Custom"),
 	Inv_None                            UMETA(DisplayName = "None"),
+	
+	// None								UMETA(DisplayName = "None"),
+	// Prop								UMETA(DisplayName = "Prop"), // Building props 
+	// FabricatedProp						UMETA(DisplayName = "Fabricated Prop"), // Buildings
+	// Battlement							UMETA(DisplayName = "Battlement"), // anything weapon based that is a construct like a turret
+	// Enemy								UMETA(DisplayName = "Enemy"),
+	// Armor								UMETA(DisplayName = "Armor"),
+	// Weapon								UMETA(DisplayName = "Weapon"),
+	// Equipment							UMETA(DisplayName = "Equipment"),
+	// Vehicle								UMETA(DisplayName = "Vehicle"),
+	// GameMode							UMETA(DisplayName = "GameMode"), // GameMode / Spawn locations / etc.
+	// FX									UMETA(DisplayName = "Prop"), // visual fx / post process volume / etc.
 	Inv_MAX
 };
 

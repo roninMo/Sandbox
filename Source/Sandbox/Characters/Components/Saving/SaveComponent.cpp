@@ -377,7 +377,7 @@ FString USaveComponent::PrintLevelSaveState() const
 	{
 		F_LevelInformation LevelInformation = GameMode->GetCurrentSave()->LevelInformation;
 		Results.Add(FString::Printf(TEXT("\tLevel Name: %s"), *LevelInformation.LevelName));
-		Results.Add(FString::Printf(TEXT("\tId: %s"), *LevelInformation.Id));
+		Results.Add(FString::Printf(TEXT("\tId: %s"), *LevelInformation.Id.ToString()));
 		Results.Add(FString::Printf(TEXT("\t:Level Url: %s"), *LevelInformation.LevelUrl));
 		Results.Add(FString::Printf(TEXT("\tDescription: %s"), *LevelInformation.Description));
 		Results.Add(FString::Printf(TEXT("\tTimeStamp: %s"), *LevelInformation.CreationDate.ToString()));
