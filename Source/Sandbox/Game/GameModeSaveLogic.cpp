@@ -98,7 +98,9 @@ bool AGameModeSaveLogic::SaveGame(const FString& BaseSaveUrl, const int32 Index)
 	//			- Actor->SaveActorData() saves character specific information
 	//			- Having a function that binds to the level save component to update latent information (like inventory updates, weapon equips, etc. should be handled at all times)
 	SaveLevel(BaseSaveUrl, Index, true);
-	
+
+	// TODO: fix save references that work in code however are causing trouble in game. Check if values are being edited when the information is created on clients
+
 	return true;
 }
 
