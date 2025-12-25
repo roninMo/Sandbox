@@ -98,3 +98,6 @@ Content/_Imports/ThirdPerson/*
 
 # references to plugins used here; however the only thing that's is important (but not required, is the ik anim bp's animations, which are tied to the ue skeletons in the import/characters folder
 Content/_Imports/Characters/Mannequins/Animations/*
+
+# other animation paths
+Content/Characters/Traveler/Animations/* 
