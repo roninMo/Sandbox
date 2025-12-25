@@ -109,7 +109,11 @@ Content/_Imports/Characters/Mannequins/Meshes/*
 Content/_Imports/Characters/Mannequins/Modular/*
 # Content/_Imports/Characters/Mannequins/Rigs/*
 # Content/_Imports/Characters/Mannequins/Textures/*
-Content/_Imports/Characters/Mannequins/*
+
+#
+Content/_Imports/Characters/AnimationModifiers
+Content/_Imports/Characters/FirstPerson
+#
 
 # other animation paths
 Content/Characters/Traveler/Animations/* 
