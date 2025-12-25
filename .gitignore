@@ -82,10 +82,19 @@ Plugins/*
 
 # Content
 Content/Imports/*
-Content/_Imports/Hud/*
-Content/_Imports/LevelDesign/*
-Content/_Imports/Scifi_Outline_Creater/*
+Content/_Imports/AdvancedLocomotionV4/*
+# Content/_Imports/AnimationModifiers/* 
 Content/_Imports/Animations/*
+Content/_Imports/Calculations/*
+Content/_Imports/CharacterReferences/*
 Content/_Imports/ControlRig/*
 Content/_Imports/DankestThings_EnviroSense/*
+Content/_Imports/Hud/*
+Content/_Imports/LevelDesign/*
+Content/_Imports/LevelProtoTyping/*
+Content/_Imports/Materials/*
 Content/_Imports/Props/*
+Content/_Imports/ThirdPerson/*
+
+# references to plugins used here; however the only thing that's is important (but not required, is the ik anim bp's animations, which are tied to the ue skeletons in the import/characters folder
+Content/_Imports/Characters/Mannequins/Animations/*
